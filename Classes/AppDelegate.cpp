@@ -21,6 +21,7 @@ AppDelegate::AppDelegate() {
 */
 AppDelegate::AppDelegate() 
 {
+>>>>>>> 21acecd2a44d0818cb278044ed7e8d3c2066678f
 }
 
 AppDelegate::~AppDelegate() 
@@ -52,17 +53,25 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-
-        glview = GLViewImpl::createWithRect("X10_Project", Rect(0, 0, mediumResolutionSize.width, mediumResolutionSize.height));
+<<<<<<< HEAD
+        glview = GLViewImpl::createWithRect("SceneTest", Rect(0, 0, mediumResolutionSize.width, mediumResolutionSize.height));
 #else
-        glview = GLViewImpl::create("X10_Project");
-
+        glview = GLViewImpl::create("SceneTest");
+=======
+        glview = GLViewImpl::createWithRect("cocotest", Rect(0, 0, 480, 320));
+#else
+        glview = GLViewImpl::create("cocotest");
+>>>>>>> 21acecd2a44d0818cb278044ed7e8d3c2066678f
 #endif
         director->setOpenGLView(glview);
     }
 
     // turn on display FPS
+<<<<<<< HEAD
     director->setDisplayStats(true);
+=======
+    director->setDisplayStats(false);
+>>>>>>> 21acecd2a44d0818cb278044ed7e8d3c2066678f
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);

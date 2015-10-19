@@ -1,19 +1,17 @@
-#include "myScene.h"
+#include "Scene2.h"
 
 USING_NS_CC;
 
-Scene* myScene::scene()
+Scene* Scene2::scene()
 {
-	Scene* myscene = Scene::create();
-	myScene* layer = myScene::create();
-	myscene->addChild(layer);
-
-	auto scene = TransitionCrossFade::create(1.0, myscene);
+	auto scene = Scene::create();
+	auto layer = Scene2::create();
+	scene->addChild(layer);
 
 	return scene;
 }
 
-bool myScene::init()
+bool Scene2::init()
 {
 	if (!Layer::init())
 	{

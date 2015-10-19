@@ -1,9 +1,9 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __SCENE1_SCENE_H__
+#define __SCENE1_SCENE_H__
 
 #include "cocos2d.h"
 
-class HelloWorld : public cocos2d::Layer
+class Scene1 : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
@@ -12,7 +12,7 @@ public:
     
     void menuCloseCallback(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
-    CREATE_FUNC(HelloWorld);
+    CREATE_FUNC(Scene1);
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif // __Scene1_SCENE_H__

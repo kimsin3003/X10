@@ -9,7 +9,5 @@ public:
 	virtual bool init();
 	void menuCloseCallback(cocos2d::Ref* pSender);
 	CREATE_FUNC(Scene4);
-	MainScene();
-	~MainScene();
 };
 

@@ -1,5 +1,9 @@
 #include "Scene3.h"
+#include "Scene4.h"
 
+#include "ui/UIButton.h"
+#include <iostream>
+using namespace cocos2d::ui;
 USING_NS_CC;
 
 Scene* Scene3::createScene()
@@ -64,7 +68,7 @@ bool Scene3::init()
     this->addChild(label, 1);
 
     // add "Scene3" splash screen"
-    auto sprite = Sprite::create("Scene3.png");
+    auto sprite = Sprite::create("HelloWorld.png");
 
     // position the sprite on the center of the screen
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
@@ -72,6 +76,8 @@ bool Scene3::init()
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
 
+
+	Size size = Director::getInstance()->getVisibleSize();
 	Button* button = Button::create();
 	button->setTitleText("Go to Scene 4");
 	button->setPosition(Point(size.width / 2, size.height / 2));

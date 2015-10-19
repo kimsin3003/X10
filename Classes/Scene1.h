@@ -10,7 +10,7 @@ public:
 
     virtual bool init();
     
-    void menuCloseCallback(cocos2d::Ref* pSender);
+    void nextSceneCallback(cocos2d::Ref* pSender);
     // implement the "static create()" method manually
     CREATE_FUNC(Scene1);
 };

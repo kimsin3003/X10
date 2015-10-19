@@ -1,4 +1,5 @@
 #include "Scene4.h"
+#include "Scene5.h"
 #include "ui/UIButton.h"
 #include <iostream>
 USING_NS_CC;
@@ -45,11 +46,3 @@ void Scene4::menuCloseCallback(cocos2d::Ref * pSender)
 	Director::getInstance()->end();
 }
 
-Scene4::Scene4()
-{
-}
-
-
-Scene4::~Scene4()
-{
-}

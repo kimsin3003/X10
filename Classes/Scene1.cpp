@@ -39,7 +39,7 @@ bool Scene1::init()
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
-                                           CC_CALLBACK_1(Scene1::menuCloseCallback, this));
+                                           CC_CALLBACK_1(Scene1::nextSceneCallback, this));
     
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
@@ -69,7 +69,7 @@ bool Scene1::init()
 }
 
 
-void Scene1::menuCloseCallback(Ref* pSender)
+void Scene1::nextSceneCallback(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(Scene2::scene());
 		

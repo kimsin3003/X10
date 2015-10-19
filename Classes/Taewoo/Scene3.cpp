@@ -1,14 +1,14 @@
-#include "HelloWorldScene.h"
+#include "Scene3.h"
 
 USING_NS_CC;
 
-Scene* HelloWorld::createScene()
+Scene* Scene3::createScene()
 {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-    auto layer = HelloWorld::create();
+    auto layer = Scene3::create();
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -18,7 +18,7 @@ Scene* HelloWorld::createScene()
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool Scene3::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -38,7 +38,7 @@ bool HelloWorld::init()
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+                                           CC_CALLBACK_1(Scene3::menuCloseCallback, this));
     
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
@@ -63,20 +63,39 @@ bool HelloWorld::init()
     // add the label as a child to this layer
     this->addChild(label, 1);
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
+    // add "Scene3" splash screen"
+    auto sprite = Sprite::create("Scene3.png");
 
     // position the sprite on the center of the screen
     sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
     // add the sprite as a child to this layer
     this->addChild(sprite, 0);
+
+	Button* button = Button::create();
+	button->setTitleText("Go to Scene 4");
+	button->setPosition(Point(size.width / 2, size.height / 2));
+	button->addTouchEventListener([&](Ref* sender, Widget::TouchEventType type) {
+		switch (type)
+		{
+		case ui::Widget::TouchEventType::BEGAN:
+			Director::getInstance()->replaceScene(Scene4::createScene());
+			break;
+		case ui::Widget::TouchEventType::ENDED:
+			std::cout << "Button 1 clicked" << std::endl;
+			break;
+		default:
+			break;
+		}
+	});
+
+	this->addChild(button);
     
     return true;
 }
 
 
-void HelloWorld::menuCloseCallback(Ref* pSender)
+void Scene3::menuCloseCallback(Ref* pSender)
 {
     Director::getInstance()->end();
 

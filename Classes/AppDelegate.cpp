@@ -8,10 +8,7 @@ static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
 static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
 
-<<<<<<< HEAD
-AppDelegate::AppDelegate() {
 
-=======
 /*
 
 	작성자: 최진욱
@@ -21,7 +18,6 @@ AppDelegate::AppDelegate() {
 */
 AppDelegate::AppDelegate() 
 {
->>>>>>> 21acecd2a44d0818cb278044ed7e8d3c2066678f
 }
 
 AppDelegate::~AppDelegate() 
@@ -32,15 +28,12 @@ AppDelegate::~AppDelegate()
 //it will takes effect on all platforms
 void AppDelegate::initGLContextAttrs()
 {
-<<<<<<< HEAD
-	터져랏 터져라아아ㅏ아아아ㅏ아아서ㅓㅅㄴ마얼;ㅣㅏ미하미사ㅓ이ㅏㅠ히ㅏㅇ뮘퓨ㅚ쿺ㅊ
-=======
+
     //set OpenGL context attributions,now can only set six attributions:
     //red,green,blue,alpha,depth,stencil
     GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};
 
     GLView::setGLContextAttrs(glContextAttrs);
->>>>>>> 21acecd2a44d0818cb278044ed7e8d3c2066678f
 }
 
 // If you want to use packages manager to install more packages, 
@@ -56,25 +49,17 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-<<<<<<< HEAD
-        glview = GLViewImpl::createWithRect("SceneTest", Rect(0, 0, mediumResolutionSize.width, mediumResolutionSize.height));
+
+        glview = GLViewImpl::createWithRect("X10_Project", Rect(0, 0, mediumResolutionSize.width, mediumResolutionSize.height));
 #else
-        glview = GLViewImpl::create("SceneTest");
-=======
-        glview = GLViewImpl::createWithRect("cocotest", Rect(0, 0, 480, 320));
-#else
-        glview = GLViewImpl::create("cocotest");
->>>>>>> 21acecd2a44d0818cb278044ed7e8d3c2066678f
+        glview = GLViewImpl::create("X10_Project");
+
 #endif
         director->setOpenGLView(glview);
     }
 
     // turn on display FPS
-<<<<<<< HEAD
     director->setDisplayStats(true);
-=======
-    director->setDisplayStats(false);
->>>>>>> 21acecd2a44d0818cb278044ed7e8d3c2066678f
 
     // set FPS. the default value is 1.0/60 if you don't call this
     director->setAnimationInterval(1.0 / 60);

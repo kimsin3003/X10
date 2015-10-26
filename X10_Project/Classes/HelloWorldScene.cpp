@@ -51,30 +51,64 @@ bool HelloWorld::init()
     /////////////////////////////
     // 3. add your codes below...
 
-    // add a label shows "Hello World"
-    // create and initialize a label
-    
-    auto label = Label::createWithTTF("Hello World", "fonts/Marker Felt.ttf", 24);
-    
-    // position the label on the center of the screen
-    label->setPosition(Vec2(origin.x + visibleSize.width/2,
-                            origin.y + visibleSize.height - label->getContentSize().height));
+	//Paul's test Page
+	auto labelMC = MenuItemFont::create("Paul's Test page", CC_CALLBACK_1(HelloWorld::ChangeSceneToMC, this));
 
-    // add the label as a child to this layer
-    this->addChild(label, 1);
+	// position the label on the center of the screen
+	labelMC->setPosition(Vec2(origin.x + visibleSize.width / 2,
+		origin.y + visibleSize.height - labelMC->getContentSize().height ));
 
-    // add "HelloWorld" splash screen"
-    auto sprite = Sprite::create("HelloWorld.png");
+	auto textHeight = labelMC->getContentSize().height;
+	// add the label as a child to this layer
+	this->addChild(labelMC, 1);
 
-    // position the sprite on the center of the screen
-    sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
 
-    // add the sprite as a child to this layer
-    this->addChild(sprite, 0);
+	auto labelTW = MenuItemFont::create("Kimsin's Test page", CC_CALLBACK_1(HelloWorld::ChangeSceneToTW, this));
+
+	// position the label on the center of the screen
+	labelTW->setPosition(Vec2(origin.x + visibleSize.width / 2,
+		origin.y + visibleSize.height - textHeight * 3));
+
+	// add the label as a child to this layer
+	this->addChild(labelTW, 1);
+
+	auto labelJW = MenuItemFont::create("FeaterHub's Test page", CC_CALLBACK_1(HelloWorld::ChangeSceneToJW, this));
+
+	// position the label on the center of the screen
+	labelJW->setPosition(Vec2(origin.x + visibleSize.width / 2,
+		origin.y + visibleSize.height - textHeight * 5));
+
+	// add the label as a child to this layer
+	this->addChild(labelJW, 1);
+
+
+
+    //// add "HelloWorld" splash screen"
+    //auto sprite = Sprite::create("HelloWorld.png");
+
+    //// position the sprite on the center of the screen
+    //sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
+
+    //// add the sprite as a child to this layer
+    //this->addChild(sprite, 0);
     
     return true;
 }
 
+void HelloWorld::ChangeSceneToMC(Ref* pSender)
+{
+	return;
+}
+
+void HelloWorld::ChangeSceneToTW(Ref* pSender)
+{
+	return;
+}
+
+void HelloWorld::ChangeSceneToJW(Ref* pSender)
+{
+	return;
+}
 
 void HelloWorld::menuCloseCallback(Ref* pSender)
 {

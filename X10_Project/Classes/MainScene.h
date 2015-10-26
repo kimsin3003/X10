@@ -1,8 +1,8 @@
-#ifndef __HELLOWORLD_SCENE_H__
-#define __HELLOWORLD_SCENE_H__
+#ifndef __MAIN_SCENE_H__
+#define __MAIN_SCENE_H__
 
 
-class HelloWorld : public cocos2d::Layer
+class MainScene : public cocos2d::Layer
 {
 public:
     static cocos2d::Scene* createScene();
@@ -16,7 +16,7 @@ public:
 	void ChangeSceneToJW(Ref* pSender);
 
     // implement the "static create()" method manually
-    CREATE_FUNC(HelloWorld);
+    CREATE_FUNC(MainScene);
 };
 
-#endif // __HELLOWORLD_SCENE_H__
+#endif // __MainScene_SCENE_H__

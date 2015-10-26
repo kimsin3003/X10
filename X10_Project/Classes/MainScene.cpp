@@ -1,14 +1,14 @@
 #include "stdafx.h"
-#include "HelloWorldScene.h"
+#include "MainScene.h"
 
 
-Scene* HelloWorld::createScene()
+Scene* MainScene::createScene()
 {
     // 'scene' is an autorelease object
     auto scene = Scene::create();
     
     // 'layer' is an autorelease object
-    auto layer = HelloWorld::create();
+    auto layer = MainScene::create();
 
     // add layer as a child to scene
     scene->addChild(layer);
@@ -18,7 +18,7 @@ Scene* HelloWorld::createScene()
 }
 
 // on "init" you need to initialize your instance
-bool HelloWorld::init()
+bool MainScene::init()
 {
     //////////////////////////////
     // 1. super init first
@@ -38,7 +38,7 @@ bool HelloWorld::init()
     auto closeItem = MenuItemImage::create(
                                            "CloseNormal.png",
                                            "CloseSelected.png",
-                                           CC_CALLBACK_1(HelloWorld::menuCloseCallback, this));
+                                           CC_CALLBACK_1(MainScene::menuCloseCallback, this));
     
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width/2 ,
                                 origin.y + closeItem->getContentSize().height/2));
@@ -52,7 +52,7 @@ bool HelloWorld::init()
     // 3. add your codes below...
 
 	//Paul's test Page
-	auto labelMC = MenuItemFont::create("Paul's Test page", CC_CALLBACK_1(HelloWorld::ChangeSceneToMC, this));
+	auto labelMC = MenuItemFont::create("Paul's Test page", CC_CALLBACK_1(MainScene::ChangeSceneToMC, this));
 
 	// position the label on the center of the screen
 	labelMC->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -63,7 +63,7 @@ bool HelloWorld::init()
 	this->addChild(labelMC, 1);
 
 
-	auto labelTW = MenuItemFont::create("Kimsin's Test page", CC_CALLBACK_1(HelloWorld::ChangeSceneToTW, this));
+	auto labelTW = MenuItemFont::create("Kimsin's Test page", CC_CALLBACK_1(MainScene::ChangeSceneToTW, this));
 
 	// position the label on the center of the screen
 	labelTW->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -72,7 +72,7 @@ bool HelloWorld::init()
 	// add the label as a child to this layer
 	this->addChild(labelTW, 1);
 
-	auto labelJW = MenuItemFont::create("FeaterHub's Test page", CC_CALLBACK_1(HelloWorld::ChangeSceneToJW, this));
+	auto labelJW = MenuItemFont::create("FeaterHub's Test page", CC_CALLBACK_1(MainScene::ChangeSceneToJW, this));
 
 	// position the label on the center of the screen
 	labelJW->setPosition(Vec2(origin.x + visibleSize.width / 2,
@@ -83,8 +83,8 @@ bool HelloWorld::init()
 
 
 
-    //// add "HelloWorld" splash screen"
-    //auto sprite = Sprite::create("HelloWorld.png");
+    //// add "MainScene" splash screen"
+    //auto sprite = Sprite::create("MainScene.png");
 
     //// position the sprite on the center of the screen
     //sprite->setPosition(Vec2(visibleSize.width/2 + origin.x, visibleSize.height/2 + origin.y));
@@ -95,22 +95,22 @@ bool HelloWorld::init()
     return true;
 }
 
-void HelloWorld::ChangeSceneToMC(Ref* pSender)
+void MainScene::ChangeSceneToMC(Ref* pSender)
 {
 	return;
 }
 
-void HelloWorld::ChangeSceneToTW(Ref* pSender)
+void MainScene::ChangeSceneToTW(Ref* pSender)
 {
 	return;
 }
 
-void HelloWorld::ChangeSceneToJW(Ref* pSender)
+void MainScene::ChangeSceneToJW(Ref* pSender)
 {
 	return;
 }
 
-void HelloWorld::menuCloseCallback(Ref* pSender)
+void MainScene::menuCloseCallback(Ref* pSender)
 {
     Director::getInstance()->end();
 

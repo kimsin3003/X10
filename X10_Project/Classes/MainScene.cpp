@@ -66,8 +66,6 @@ bool MainScene::init()
 		origin.y + visibleSize.height - textHeight * 5));
 
 	this->addChild(menuJW);
-
-
     
     return true;
 }

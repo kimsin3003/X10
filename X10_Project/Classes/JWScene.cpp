@@ -26,11 +26,14 @@ bool JWScene::init()
 		return false;
 	}
 
-	Sling sling;
+	Sling sling; 
+	
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(JWScene::ChangeToMainScene, this));
 	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
 	GotoMainSceneMenu->setPosition(200, 200);
 	this->addChild(GotoMainSceneMenu);
+	this->addChild(sling.Stick);
+	this->addChild(sling.Shooter);
 
 	return true;
 }

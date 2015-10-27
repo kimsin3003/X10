@@ -7,7 +7,7 @@ public:
 	Sling();
 	void Shot();
 
-private:
+
 	Sprite* Stick;
 	Sprite* Shooter;
 	float angle;

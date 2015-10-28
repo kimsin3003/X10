@@ -10,6 +10,12 @@
     <Filter Include="src">
       <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\Scene">
+      <UniqueIdentifier>{aafd9fbc-4be9-48d9-a14d-0c7b810cdd87}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="src\Example">
+      <UniqueIdentifier>{22271af4-5ea8-4625-8d18-cab2ec7e1a5d}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -21,23 +27,23 @@
     <ClCompile Include="..\Classes\stdafx.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MainScene.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Sling.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Bullet.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\JWScene.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Example</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MCScene.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Example</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\TWScene.cpp">
-      <Filter>src</Filter>
+      <Filter>src\Example</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Bullet.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>src\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sling.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -50,23 +56,23 @@
     <ClInclude Include="..\Classes\stdafx.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MainScene.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Sling.h">
-      <Filter>src</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Bullet.h">
-      <Filter>src</Filter>
+      <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\JWScene.h">
-      <Filter>src</Filter>
+      <Filter>src\Example</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MCScene.h">
-      <Filter>src</Filter>
+      <Filter>src\Example</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\TWScene.h">
-      <Filter>src</Filter>
+      <Filter>src\Example</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>src\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sling.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

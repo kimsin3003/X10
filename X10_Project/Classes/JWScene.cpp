@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
 #include "JWScene.h"
-#include "Sling.h"
 
 Scene* JWScene::createScene()
 {
@@ -26,14 +25,35 @@ bool JWScene::init()
 		return false;
 	}
 
-	Sling sling; 
-	
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(JWScene::ChangeToMainScene, this));
 	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
 	GotoMainSceneMenu->setPosition(200, 200);
+	
 	this->addChild(GotoMainSceneMenu);
 	this->addChild(sling.Stick);
 	this->addChild(sling.Shooter);
+
+	auto Mouse = EventListenerMouse::create();
+	Mouse->onMouseDown = CC_CALLBACK_1(JWScene::onMouseDown, this);
+	Mouse->onMouseUp = CC_CALLBACK_1(JWScene::onMouseUp, this);
+	Mouse->onMouseMove = CC_CALLBACK_1(JWScene::onMouseMove, this);
+	Mouse->onMouseScroll = CC_CALLBACK_1(JWScene::onMouseScroll, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(Mouse, this);
+
+	auto ttffff = Label::createWithTTF("TTF", "fonts\arial.ttf", 24);
+	ttffff->setPosition(200, 200);
+
+	this->addChild(ttffff);
+
+	auto go_bottomRight = MoveTo::create(1, Point(300, 0));
+	auto go_topRight = MoveTo::create(1, Point(300, 300));
+	auto go_topLeft = MoveTo::create(1, Point(0, 300));
+	auto go_bottomleft = MoveTo::create(1, Point(0, 0));
+
+	auto action_set = Sequence::create(go_bottomRight, go_topRight, go_topLeft, go_bottomleft, NULL);
+	auto action_run = RepeatForever::create(action_set);
+
+	sling.Shooter->runAction(action_run);
 
 	return true;
 }
@@ -41,4 +61,36 @@ bool JWScene::init()
 void JWScene::ChangeToMainScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MainScene::createScene());
+}
+
+void JWScene::onMouseDown(cocos2d::Event* event)
+{
+	auto mouseEvent = static_cast<EventMouse*>(event);
+	Point ClickPoint = Point(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+	auto isRight = mouseEvent->getMouseButton();
+
+	auto rect = sling.Stick->getBoundingBox();
+	if (rect.containsPoint(ClickPoint))
+	{
+		sling.Stick->setVisible(false);
+	}
+}
+
+void JWScene::onMouseUp(cocos2d::Event* event)
+{
+	auto mouseEvent = static_cast<EventMouse*>(event);
+	Vec2 ClickPoint = Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+	auto isRight = mouseEvent->getMouseButton();
+	sling.Stick->setVisible(true);
+
+}
+void JWScene::onMouseMove(cocos2d::Event* event)
+{
+	auto mouseEvent = static_cast<EventMouse*>(event);
+	Vec2 ClickPoint = Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+}
+void JWScene::onMouseScroll(cocos2d::Event* event)
+{
+	auto mouseEvent = static_cast<EventMouse*>(event);
+	Vec2 ClickPoint = Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 }

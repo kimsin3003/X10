@@ -1,6 +1,8 @@
 #ifndef __JW_SCENE_H__
 #define __JW_SCENE_H__
 
+#include "Sling.h"
+
 class JWScene : public cocos2d::Layer
 {
 public:
@@ -13,6 +15,17 @@ public:
 
 	// implement the "static create()" method manually
 	CREATE_FUNC(JWScene);
+
+	//mouse listener
+	void onMouseDown(cocos2d::Event* event);
+	void onMouseUp(cocos2d::Event* event);
+	void onMouseMove(cocos2d::Event* event);
+	void onMouseScroll(cocos2d::Event* event);
+	bool isPressed = false;
+
+private:
+	Sling sling;
+
 };
 
 #endif // __JW_Scene_H__

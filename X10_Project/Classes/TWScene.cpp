@@ -20,11 +20,9 @@ bool TWScene::init()
 		return false;
 	}
 
-	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(TWScene::ChangeToMainScene, this));
-	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
-	GotoMainSceneMenu->setPosition(200, 200);
-	this->addChild(GotoMainSceneMenu);
-
+	auto mainTitle = Label::createWithTTF("Main Title\n fuck!!!!", "fonts/NanumGothic.ttf", 34);
+	mainTitle->setPosition(Point(160, 240));
+	this->addChild(mainTitle);
 	return true;
 }
 

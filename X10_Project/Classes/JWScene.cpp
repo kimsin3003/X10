@@ -34,7 +34,7 @@ bool JWScene::init()
 	myTTFLabel->setPosition(Point(200, 200));
 	this->addChild(myTTFLabel);
 
-	this->addChild(sling.Stick);
+	this->addChild(sling.Stick, 1, "LovelyStick");
 	this->addChild(sling.Shooter);
 
 	auto Mouse = EventListenerMouse::create();
@@ -69,9 +69,10 @@ void JWScene::onMouseDown(cocos2d::Event* event)
 	auto isRight = mouseEvent->getMouseButton();
 	isPressed = true;
 	auto rect = sling.Stick->getBoundingBox();
+	auto aoao = getChildByName("LovelyStick");
 	if (rect.containsPoint(ClickPoint))
 	{
-		sling.Stick->setPosition(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+		aoao->setPosition(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 	}
 }
 
@@ -82,6 +83,7 @@ void JWScene::onMouseUp(cocos2d::Event* event)
 	auto isRight = mouseEvent->getMouseButton();
 	isPressed = false;
 }
+
 void JWScene::onMouseMove(cocos2d::Event* event)
 {
 	auto mouseEvent = static_cast<EventMouse*>(event);
@@ -93,6 +95,7 @@ void JWScene::onMouseMove(cocos2d::Event* event)
 		sling.Stick->setPosition(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 	}
 }
+
 void JWScene::onMouseScroll(cocos2d::Event* event)
 {
 	auto mouseEvent = static_cast<EventMouse*>(event);

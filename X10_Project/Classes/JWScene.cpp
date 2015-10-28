@@ -28,8 +28,12 @@ bool JWScene::init()
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(JWScene::ChangeToMainScene, this));
 	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
 	GotoMainSceneMenu->setPosition(200, 200);
-	
 	this->addChild(GotoMainSceneMenu);
+	
+	auto myTTFLabel = Label::createWithTTF("This is my TTF", "fonts/arial.ttf", 24);
+	myTTFLabel->setPosition(Point(200, 200));
+	this->addChild(myTTFLabel);
+
 	this->addChild(sling.Stick);
 	this->addChild(sling.Shooter);
 
@@ -39,11 +43,6 @@ bool JWScene::init()
 	Mouse->onMouseMove = CC_CALLBACK_1(JWScene::onMouseMove, this);
 	Mouse->onMouseScroll = CC_CALLBACK_1(JWScene::onMouseScroll, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(Mouse, this);
-
-	auto ttffff = Label::createWithTTF("TTF", "fonts\arial.ttf", 24);
-	ttffff->setPosition(200, 200);
-
-	this->addChild(ttffff);
 
 	auto go_bottomRight = MoveTo::create(1, Point(300, 0));
 	auto go_topRight = MoveTo::create(1, Point(300, 300));
@@ -68,11 +67,11 @@ void JWScene::onMouseDown(cocos2d::Event* event)
 	auto mouseEvent = static_cast<EventMouse*>(event);
 	Point ClickPoint = Point(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 	auto isRight = mouseEvent->getMouseButton();
-
+	isPressed = true;
 	auto rect = sling.Stick->getBoundingBox();
 	if (rect.containsPoint(ClickPoint))
 	{
-		sling.Stick->setVisible(false);
+		sling.Stick->setPosition(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 	}
 }
 
@@ -81,13 +80,18 @@ void JWScene::onMouseUp(cocos2d::Event* event)
 	auto mouseEvent = static_cast<EventMouse*>(event);
 	Vec2 ClickPoint = Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 	auto isRight = mouseEvent->getMouseButton();
-	sling.Stick->setVisible(true);
-
+	isPressed = false;
 }
 void JWScene::onMouseMove(cocos2d::Event* event)
 {
 	auto mouseEvent = static_cast<EventMouse*>(event);
 	Vec2 ClickPoint = Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+
+	auto rect = sling.Stick->getBoundingBox();
+	if (rect.containsPoint(ClickPoint) && isPressed)
+	{
+		sling.Stick->setPosition(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+	}
 }
 void JWScene::onMouseScroll(cocos2d::Event* event)
 {

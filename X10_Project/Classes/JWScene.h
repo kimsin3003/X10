@@ -21,6 +21,7 @@ public:
 	void onMouseUp(cocos2d::Event* event);
 	void onMouseMove(cocos2d::Event* event);
 	void onMouseScroll(cocos2d::Event* event);
+	bool isPressed = false;
 
 private:
 	Sling sling;

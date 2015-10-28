@@ -1,6 +1,8 @@
+#include <string>
 #include "stdafx.h"
 #include "MainScene.h"
 #include "MCScene.h"
+
 
 Scene* MCScene::createScene()
 {
@@ -28,12 +30,31 @@ bool MCScene::init()
 
 	auto taewooMission1 = Label::createWithTTF("MC's test Page", "fonts/arial.ttf", 24);
 	taewooMission1->setPosition(Point(200, 150));
+	taewooMission1->setName("twMissionLabel");
+	taewooMission1->setVisible(false);
 	this->addChild(taewooMission1);
 
+	auto _mouseListener = EventListenerMouse::create();
+	_mouseListener->onMouseUp = CC_CALLBACK_1(MCScene::onMouseUp, this);
+	_mouseListener->onMouseDown = CC_CALLBACK_1(MCScene::onMouseDown, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
+	
 	return true;
 }
 
 void MCScene::ChangeToMainScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MainScene::createScene());
+}
+
+void MCScene::onMouseUp(Event *event)
+{
+	auto target = this->getChildByName("twMissionLabel");
+	target->setVisible(false);
+}
+
+void MCScene::onMouseDown(Event *event)
+{
+	auto target = this->getChildByName("twMissionLabel");
+	target->setVisible(true);
 }

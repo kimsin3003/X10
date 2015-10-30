@@ -32,7 +32,10 @@ bool MCScene::init()
 	backgroundGirl1->setAnchorPoint(Point::ZERO);
 	backgroundGirl1->setPosition(Point(backgroundGirl0->getContentSize().width, 0));
 
+
+
 	backgroundGirl0->addChild(backgroundGirl1);
+	backgroundGirl0->setScale(0.1);
 	this->addChild(backgroundGirl0);
 
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(MCScene::ChangeToMainScene, this));

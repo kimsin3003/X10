@@ -36,14 +36,17 @@ bool MCScene::init()
 	backgroundGirl0->setScale(scaleRatio);
 
 	auto backgroundGirl1 = Sprite::create("res/mc.jpg");
+
 	backgroundGirl1->setAnchorPoint(Point::ZERO);
 	backgroundGirl1->setPosition(Point(width, 0));
 
-	auto moveRight = MoveTo::create(screen.width / (scrollVelocity * scaleRatio), Point(-width, 0));
-	auto moveBack = MoveTo::create(0, Point::ZERO);
+	auto moveRight = MoveTo::create(screen.width / (scrollVelocity * scaleRatio), Point(-width * scaleRatio, 0));
+	auto moveBack = Place::create(Point(0,0));
 	auto scrollBG = RepeatForever::create(Sequence::create(moveRight, moveBack, NULL));
 	backgroundGirl0->runAction(scrollBG);
+
 	backgroundGirl0->addChild(backgroundGirl1);
+
 	this->addChild(backgroundGirl0);
 	
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(MCScene::ChangeToMainScene, this));

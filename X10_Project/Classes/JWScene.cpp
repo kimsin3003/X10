@@ -33,7 +33,7 @@ bool JWScene::init()
 	this->addChild(GotoMainSceneMenu);
 	
 	auto myTTFLabel = Label::createWithTTF("This is my TTF", "fonts/arial.ttf", 24);
-	myTTFLabel->setPosition(Point(200, 200));
+	myTTFLabel->setPosition(Point(300, 200));
 	this->addChild(myTTFLabel);
 
 	this->addChild(sling.Stick, 1, "LovelyStick");
@@ -74,6 +74,8 @@ bool JWScene::init()
 	
 	sling.Shooter->runAction(action);
 
+	this->schedule(schedule_selector(JWScene::changeLayerColor), 1.0);
+
 	return true;
 }
 
@@ -94,15 +96,16 @@ void JWScene::initBG()
 	auto spr02 = Sprite::create("sky.jpg");
 	spr02->setAnchorPoint(Point::ZERO);
 	spr02->setPosition(Point(500, 0));
+	spr02->setName("BG");
 	bgLayer->addChild(spr02, 1);
-	spr02->setTag(1111);
-	spr02->setColor(Color3B(111, 111, 111));
+
 	auto action_0 = MoveBy::create(3.0, Point(-500, 0));
 	auto action_1 = Place::create(Point::ZERO);
 	auto action_2 = Sequence::create(action_0, action_1, NULL);
 	auto action_3 = RepeatForever::create(action_2);
 
 	bgLayer->runAction(action_3);
+	
 }
 
 void JWScene::ChangeToMainScene(Ref* pSender)
@@ -117,8 +120,7 @@ void JWScene::onMouseDown(cocos2d::Event* event)
 	auto isRight = mouseEvent->getMouseButton();
 	isPressed = true;
 	auto rect = sling.Stick->getBoundingBox();
-	auto aoao = getChildByName("LovelyStick");
-
+	auto aoao = this->getChildByName("LovelyStick");
 
 	if (rect.containsPoint(ClickPoint))
 	{
@@ -154,12 +156,13 @@ void JWScene::onMouseScroll(cocos2d::Event* event)
 
 void JWScene::changeLayerColor(float delta)
 {
-	auto bgSpr = (Sprite*)getChildByTag(1111);
+	auto parent = (Layer*)this->getChildByTag(1010);
+	auto bgSpr = (Sprite*)parent->getChildByTag(1001);
 
 	int r = 0 + rand() % 256;
 	int g = 0 + rand() % 256;
 	int b = 0 + rand() % 256;
-
-	bgSpr->setColor(Color3B(r, g, b));
-
+	if (bgSpr != NULL) {
+		bgSpr->setColor(Color3B(r, g, b));
+	}
 }

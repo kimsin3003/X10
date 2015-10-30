@@ -2,7 +2,6 @@
 class Target
 {
 public:
-	S
 	Target();
 	~Target();
 };

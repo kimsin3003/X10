@@ -58,6 +58,33 @@ bool MCScene::init()
 	_mouseListener->onMouseDown = CC_CALLBACK_1(MCScene::onMouseDown, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 	
+	auto aniSprite = Sprite::create();
+	aniSprite->setPosition(100, 100);
+	this->addChild(aniSprite);
+
+
+	//애니매이션 프레임 추가
+	Vector<SpriteFrame*> animFrames;
+	const int frameCut = 3;//사용된 프레임 개수
+	const int AniCharheight = 70;
+	const int AniCharWidth = 32;
+
+	animFrames.reserve(frameCut);
+	for (int i = 0; i < frameCut; i++)
+		animFrames.pushBack(SpriteFrame::create("res/animSprite2.png", Rect(AniCharWidth * i*3, AniCharheight, AniCharWidth, AniCharheight)));
+
+
+	// create the animation out of the frameㄴ
+	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
+	Animate* animate = Animate::create(animation);
+
+	// run it and repeat it forever
+	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
+	auto jump = JumpBy::create(0.5, Point(0, 0), 20, 1);
+	RepeatForever *jumpForever = RepeatForever::create(jump);
+	aniSprite->runAction(aniAction); //스프라이트(spr)에 실행
+	aniSprite->runAction(jumpForever);
+
 	return true;
 }
 

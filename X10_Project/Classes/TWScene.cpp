@@ -21,7 +21,7 @@ bool TWScene::init()
 	}
 
 
-
+	//1회차 스터디
 	auto mainTitle = Label::createWithTTF("Main Title\n fuck!!!!", "fonts/NanumGothic.ttf", 34);
 	mainTitle->setPosition(Point(160, 240));
 	mainTitle->setName("MainTitle");
@@ -43,6 +43,21 @@ bool TWScene::init()
 	auto listener = EventListenerMouse::create();
 	listener->onMouseUp = CC_CALLBACK_1(TWScene::onMouseUP, this); 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(listener, this);
+
+
+	//2회차 스터디
+	Vector<SpriteFrame*> animFrames;
+	animFrames.reserve(12);
+	animFrames.pushBack(SpriteFrame::create("Blue_Front1.png", Rect(0, 0, 65, 81)));
+
+	// create the animation out of the frame
+	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
+	Animate* animate = Animate::create(animation);
+
+	// run it and repeat it forever
+	RepeatForever *action = RepeatForever::create(animate);
+	
+	return true;
 
 	return true;
 }

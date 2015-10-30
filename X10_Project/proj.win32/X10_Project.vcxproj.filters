@@ -45,6 +45,7 @@
     <ClCompile Include="..\Classes\Sling.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="Target.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -74,6 +75,7 @@
     <ClInclude Include="..\Classes\Sling.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Target.h" />
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

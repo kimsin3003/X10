@@ -23,6 +23,8 @@ public:
 	void onMouseScroll(cocos2d::Event* event);
 	bool isPressed = false;
 
+	//bg
+	void initBG();
 private:
 	Sling sling;
 

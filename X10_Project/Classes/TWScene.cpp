@@ -50,7 +50,7 @@ bool TWScene::init()
 	this->addChild(character);
 	character->setPosition(Point(winSize.width / 2, winSize.height / 2));
 	Vector<SpriteFrame*> animFrames;
-	animFrames.reserve(1);
+	animFrames.reserve(4);
 	for (int i = 0; i < 4; i++)
 		animFrames.pushBack(SpriteFrame::create("res/lisa.png", Rect(0, 48 * i, 27, 48)));
 
@@ -63,20 +63,22 @@ bool TWScene::init()
 	
 	character->runAction(action);
 
-	this->schedule(schedule_selector(TWScene::ChangeBackground), 1.0);`
+	this->schedule(schedule_selector(TWScene::ChangeBackground), 1.0);
 
-	auto bgLayer = Layer::create();
-	this->addchild(bgLayer);
+	Layer* bgLayer = Layer::create();
+	this->addChild(bgLayer, 1);
 
-	auto spr_0 = Sprite::create("bg1.png");
+	auto spr_0 = Sprite::create("res/mc.jpg");
+	spr_0->setScaleX(winSize.width);
+	spr_0->setScaleY(winSize.height);
 	spr_0->setAnchorPoint(Point::ZERO);
 	spr_0->setPosition(Point::ZERO);
 	bgLayer->addChild(spr_0);
 
-	auto action_0 = MoveBy::create(10.0, Rect(-2000, 0));
+	auto action_0 = MoveBy::create(10.0, Point(-2000, 0));
 	auto action_1 = Place::create(Point::ZERO);
 	auto action_2 = Sequence::create(action_0, action_1, NULL);
-	auto action_3 = RepeatForever::create(2);
+	auto action_3 = RepeatForever::create(action_2);
 	bgLayer->runAction(action_3);
 
 	return true;

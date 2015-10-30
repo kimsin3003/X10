@@ -3,7 +3,7 @@
 
 #include "Sling.h"
 
-class JWScene : public cocos2d::Layer
+class JWScene : public cocos2d::LayerColor
 {
 public:
 	static cocos2d::Scene* createScene();
@@ -25,6 +25,9 @@ public:
 
 	//bg
 	void initBG();
+	
+	//change Color with delta time
+	void changeLayerColor(float delta);
 private:
 	Sling sling;
 

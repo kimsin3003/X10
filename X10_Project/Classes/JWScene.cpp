@@ -20,7 +20,7 @@ Scene* JWScene::createScene()
 // on "init" you need to initialize your instance
 bool JWScene::init()
 {
-	if (!Layer::init())
+	if (!LayerColor::initWithColor(Color4B(255,255,255,25)))
 	{
 		return false;
 	}
@@ -29,7 +29,7 @@ bool JWScene::init()
 
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(JWScene::ChangeToMainScene, this));
 	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
-	GotoMainSceneMenu->setPosition(200, 200);
+	GotoMainSceneMenu->setPosition(100, 200);
 	this->addChild(GotoMainSceneMenu);
 	
 	auto myTTFLabel = Label::createWithTTF("This is my TTF", "fonts/arial.ttf", 24);
@@ -54,7 +54,25 @@ bool JWScene::init()
 	auto action_set = Sequence::create(go_bottomRight, go_topRight, go_topLeft, go_bottomleft, NULL);
 	auto action_run = RepeatForever::create(action_set);
 
-	sling.Shooter->runAction(action_run);
+	//애니매이션 프레임 추가
+	Vector<SpriteFrame*> animFrames;
+	animFrames.reserve(4);
+	for (int i = 0; i < 2; i++)
+	{
+		for (int j = 0; j < 2; j++)
+		{
+			animFrames.pushBack(SpriteFrame::create("res/animSprite1.png", Rect(i * 31, j * 49, 31, 49)));
+		}
+	}
+
+	// create the animation out of the frameㄴ
+	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
+	Animate* animate = Animate::create(animation);
+
+	// run it and repeat it forever
+	RepeatForever *action = RepeatForever::create(animate); //액션을 만들어서
+	
+	sling.Shooter->runAction(action);
 
 	return true;
 }
@@ -65,8 +83,10 @@ void JWScene::initBG()
 
 	auto bgLayer = Layer::create();
 	this->addChild(bgLayer);
+	bgLayer->setTag(1010);
 
 	auto spr01 = Sprite::create("sky.jpg");
+	spr01->setTag(1001);
 	spr01->setAnchorPoint(Point::ZERO);
 	spr01->setPosition(Point::ZERO);
 	bgLayer->addChild(spr01, 2);
@@ -75,7 +95,8 @@ void JWScene::initBG()
 	spr02->setAnchorPoint(Point::ZERO);
 	spr02->setPosition(Point(500, 0));
 	bgLayer->addChild(spr02, 1);
-
+	spr02->setTag(1111);
+	spr02->setColor(Color3B(111, 111, 111));
 	auto action_0 = MoveBy::create(3.0, Point(-500, 0));
 	auto action_1 = Place::create(Point::ZERO);
 	auto action_2 = Sequence::create(action_0, action_1, NULL);
@@ -97,6 +118,8 @@ void JWScene::onMouseDown(cocos2d::Event* event)
 	isPressed = true;
 	auto rect = sling.Stick->getBoundingBox();
 	auto aoao = getChildByName("LovelyStick");
+
+
 	if (rect.containsPoint(ClickPoint))
 	{
 		aoao->setPosition(mouseEvent->getCursorX(), mouseEvent->getCursorY());
@@ -127,4 +150,16 @@ void JWScene::onMouseScroll(cocos2d::Event* event)
 {
 	auto mouseEvent = static_cast<EventMouse*>(event);
 	Vec2 ClickPoint = Vec2(mouseEvent->getCursorX(), mouseEvent->getCursorY());
+}
+
+void JWScene::changeLayerColor(float delta)
+{
+	auto bgSpr = (Sprite*)getChildByTag(1111);
+
+	int r = 0 + rand() % 256;
+	int g = 0 + rand() % 256;
+	int b = 0 + rand() % 256;
+
+	bgSpr->setColor(Color3B(r, g, b));
+
 }

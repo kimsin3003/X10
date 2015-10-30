@@ -21,8 +21,30 @@ bool MCScene::init()
 	{
 		return false;
 	}
-
 	this->schedule(schedule_selector(MCScene::ChangeBackGroundColor), DELTA_TIME);
+	
+	auto dir = Director::getInstance();
+	auto screen = dir->getVisibleSize();
+
+	auto backgroundGirl0 = Sprite::create("res/mc.jpg");
+	backgroundGirl0->setAnchorPoint(Point::ZERO);
+	backgroundGirl0->setPosition(Point::ZERO);
+	int width = backgroundGirl0->getContentSize().width;
+	int height = backgroundGirl0->getContentSize().height;
+	float scrollVelocity = 100;
+	float scaleRatio = screen.height / height;
+	backgroundGirl0->setScale(scaleRatio);
+
+	auto backgroundGirl1 = Sprite::create("res/mc.jpg");
+	backgroundGirl1->setAnchorPoint(Point::ZERO);
+	backgroundGirl1->setPosition(Point(width, 0));
+
+	auto moveRight = MoveTo::create(screen.width / (scrollVelocity * scaleRatio), Point(-width, 0));
+	auto moveBack = MoveTo::create(0, Point::ZERO);
+	auto scrollBG = RepeatForever::create(Sequence::create(moveRight, moveBack, NULL));
+	backgroundGirl0->runAction(scrollBG);
+	backgroundGirl0->addChild(backgroundGirl1);
+	this->addChild(backgroundGirl0);
 	
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(MCScene::ChangeToMainScene, this));
 	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
@@ -34,9 +56,6 @@ bool MCScene::init()
 	taewooMission1->setName("twMissionLabel");
 	taewooMission1->setVisible(false);
 	this->addChild(taewooMission1);
-
-	auto dir = Director::getInstance();
-	auto screen = dir->getVisibleSize();
 
 	auto jinwookMission = Sprite::create("boy 31x40.png");
 	auto boysize = jinwookMission->getContentSize();

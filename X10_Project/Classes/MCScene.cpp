@@ -39,7 +39,7 @@ bool MCScene::init()
 	backgroundGirl1->setAnchorPoint(Point::ZERO);
 	backgroundGirl1->setPosition(Point(width, 0));
 
-	auto moveRight = MoveTo::create(screen.width / (scrollVelocity * scaleRatio), Point(-width, 0));
+	auto moveRight = MoveTo::create(screen.width / scrollVelocity , Point(-width * scaleRatio, 0));
 	auto moveBack = MoveTo::create(0, Point::ZERO);
 	auto scrollBG = RepeatForever::create(Sequence::create(moveRight, moveBack, NULL));
 	backgroundGirl0->runAction(scrollBG);

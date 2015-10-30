@@ -9,7 +9,7 @@ Scene* MCScene::createScene()
 	auto scene = Scene::create();
 
 	auto layer = MCScene::create();
-
+	
 	scene->addChild(layer);
 
 	return scene;
@@ -17,12 +17,13 @@ Scene* MCScene::createScene()
 
 bool MCScene::init()
 {
-	if (!Layer::init())
+	if (!CCLayerColor::initWithColor(Color4B(0, 0, 0, 255)))
 	{
 		return false;
 	}
 
-
+	this->schedule(schedule_selector(MCScene::ChangeBackGroundColor), DELTA_TIME);
+	
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(MCScene::ChangeToMainScene, this));
 	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
 	GotoMainSceneMenu->setPosition(200, 300);
@@ -107,4 +108,9 @@ void MCScene::onMouseDown(Event *event)
 	auto runningBoy = this->getChildByName("boy");
 	auto moveToMouse = JumpBy::create(0.3, Point(0, 0), 50, 1);
 	runningBoy->runAction(moveToMouse);
+}
+
+void MCScene::ChangeBackGroundColor(const float intervalTime)
+{
+	this->setColor(Color3B((random() % 255), (random() % 255), (random() % 255)));
 }

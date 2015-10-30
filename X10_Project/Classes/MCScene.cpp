@@ -33,8 +33,8 @@ bool MCScene::init()
 	int height = backgroundGirl0->getContentSize().height;
 	float scrollVelocity = 100;
 	float scaleRatio = screen.height / height;
-	backgroundGirl0->setScale(scaleRatio);
-
+	int opacityFactor = 128;
+	
 	auto backgroundGirl1 = Sprite::create("res/mc.jpg");
 	backgroundGirl1->setAnchorPoint(Point::ZERO);
 	backgroundGirl1->setPosition(Point(width, 0));
@@ -44,6 +44,10 @@ bool MCScene::init()
 	auto scrollBG = RepeatForever::create(Sequence::create(moveRight, moveBack, NULL));
 	backgroundGirl0->runAction(scrollBG);
 	backgroundGirl0->addChild(backgroundGirl1);
+	backgroundGirl0->setOpacity(opacityFactor);
+	backgroundGirl1->setOpacity(opacityFactor);
+	backgroundGirl0->setScale(scaleRatio);
+
 	this->addChild(backgroundGirl0);
 	
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(MCScene::ChangeToMainScene, this));

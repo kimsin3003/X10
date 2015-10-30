@@ -23,7 +23,18 @@ bool MCScene::init()
 	}
 
 	this->schedule(schedule_selector(MCScene::ChangeBackGroundColor), DELTA_TIME);
+
+	auto backgroundGirl0 = Sprite::create("res/mc.jpg");
+	backgroundGirl0->setAnchorPoint(Point::ZERO);
+	backgroundGirl0->setPosition(Point::ZERO);
 	
+	auto backgroundGirl1 = Sprite::create("res/mc.jpg");
+	backgroundGirl1->setAnchorPoint(Point::ZERO);
+	backgroundGirl1->setPosition(Point(backgroundGirl0->getContentSize().width, 0));
+
+	backgroundGirl0->addChild(backgroundGirl1);
+	this->addChild(backgroundGirl0);
+
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(MCScene::ChangeToMainScene, this));
 	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
 	GotoMainSceneMenu->setPosition(200, 300);

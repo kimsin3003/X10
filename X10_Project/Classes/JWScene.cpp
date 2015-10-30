@@ -25,6 +25,8 @@ bool JWScene::init()
 		return false;
 	}
 
+	initBG();
+
 	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(JWScene::ChangeToMainScene, this));
 	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
 	GotoMainSceneMenu->setPosition(200, 200);
@@ -55,6 +57,31 @@ bool JWScene::init()
 	sling.Shooter->runAction(action_run);
 
 	return true;
+}
+
+void JWScene::initBG()
+{
+	auto winSize = Director::getInstance()->getWinSize();
+
+	auto bgLayer = Layer::create();
+	this->addChild(bgLayer);
+
+	auto spr01 = Sprite::create("sky.jpg");
+	spr01->setAnchorPoint(Point::ZERO);
+	spr01->setPosition(Point::ZERO);
+	bgLayer->addChild(spr01, 2);
+
+	auto spr02 = Sprite::create("sky.jpg");
+	spr02->setAnchorPoint(Point::ZERO);
+	spr02->setPosition(Point(500, 0));
+	bgLayer->addChild(spr02, 1);
+
+	auto action_0 = MoveBy::create(3.0, Point(-500, 0));
+	auto action_1 = Place::create(Point::ZERO);
+	auto action_2 = Sequence::create(action_0, action_1, NULL);
+	auto action_3 = RepeatForever::create(action_2);
+
+	bgLayer->runAction(action_3);
 }
 
 void JWScene::ChangeToMainScene(Ref* pSender)

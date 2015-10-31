@@ -69,12 +69,19 @@ bool TWScene::init()
 	this->addChild(bgLayer, 1);
 
 	auto spr_0 = Sprite::create("res/mc.jpg");
-	spr_0->setScaleX(winSize.width);
-	spr_0->setScaleY(winSize.height);
+	spr_0->setScaleX(winSize.width / spr_0->getContentSize().width);
+	spr_0->setScaleY(winSize.height / spr_0->getContentSize().height);
 	spr_0->setAnchorPoint(Point::ZERO);
 	spr_0->setPosition(Point::ZERO);
 	bgLayer->addChild(spr_0);
 
+	auto spr_1 = Sprite::create("res/mc.jpg");
+	spr_1->setScaleX(winSize.width / spr_1->getContentSize().width);
+	spr_1->setScaleY(winSize.height / spr_1->getContentSize().height);
+	spr_1->setAnchorPoint(Point::ZERO);
+	spr_1->setPosition(Point(winSize.width, 0));
+	bgLayer->addChild(spr_1);
+	
 	auto action_0 = MoveBy::create(10.0, Point(-2000, 0));
 	auto action_1 = Place::create(Point::ZERO);
 	auto action_2 = Sequence::create(action_0, action_1, NULL);

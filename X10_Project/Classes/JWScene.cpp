@@ -33,8 +33,8 @@ bool JWScene::init()
 	GotoMainSceneMenu->setPosition(100, 200);
 	this->addChild(GotoMainSceneMenu);
 
-	this->addChild(sling.Stick);
 	this->addChild(sling.Shooter);
+	sling.Shooter->addChild(sling.Stick);
 
 	auto Mouse = EventListenerMouse::create();
 	Mouse->onMouseDown = CC_CALLBACK_1(JWScene::onMouseDown, this);

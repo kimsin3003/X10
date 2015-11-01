@@ -51,8 +51,8 @@
     <ClCompile Include="Target.cpp">
       <Filter>win32</Filter>
     </ClCompile>
-    <ClCompile Include="Explosion.cpp">
-      <Filter>src</Filter>
+    <ClCompile Include="..\Classes\Explosion.cpp">
+      <Filter>src\Scene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -89,8 +89,8 @@
     <ClInclude Include="Target.h">
       <Filter>win32</Filter>
     </ClInclude>
-    <ClInclude Include="Explosion.h">
-      <Filter>src</Filter>
+    <ClInclude Include="..\Classes\Explosion.h">
+      <Filter>src\Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

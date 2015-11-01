@@ -10,8 +10,11 @@ class Explosion : public Node
 private:
 	float mainDamage;
 public:
-	static cocos2d::Sprite* createExplosion(int dmg = EXPLOSION_CONST::DEFAULT_DAMAGE);
+	static Explosion* createExplosion(int dmg = EXPLOSION_CONST::DEFAULT_DAMAGE);
 	
 	virtual bool init();
-	void boom();
+	void boom(const float time);
+	void makeBigger(Node* body);
+
+	CREATE_FUNC(Explosion);
 };

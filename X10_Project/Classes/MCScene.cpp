@@ -3,6 +3,7 @@
 #include "MainScene.h"
 #include "MCScene.h"
 #include "Enemy.h"
+#include "Explosion.h"
 
 Scene* MCScene::createScene()
 {
@@ -121,7 +122,7 @@ bool MCScene::init()
 
 
 	/*Enemey*/
-	Sprite* enemy = Enemy::createEnemy();
+	auto enemy = Enemy::createEnemy();
 	enemy->setPosition(Point(300, 460));
 	this->addChild(enemy);
 
@@ -151,7 +152,12 @@ void MCScene::onMouseDown(Event *event)
 	auto runningBoy = this->getChildByName("boy");
 	auto moveToMouse = JumpBy::create(0.3, Point(0, 0), 50, 1);
 	runningBoy->runAction(moveToMouse);
-
+	
+	auto boom = Explosion::createExplosion();
+	boom->setName("boom");
+	boom->setPosition(Point(xPos, yPos));
+	boom->schedule(schedule_selector(Explosion::boom), 0.1);
+	this->addChild(boom);
 }
 
 void MCScene::ChangeBackGroundColor(const float intervalTime)

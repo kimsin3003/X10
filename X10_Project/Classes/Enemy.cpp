@@ -1,19 +1,23 @@
 #include "stdafx.h"
 #include "Enemy.h"
 
-Sprite* Enemy::createEnemy()
+Enemy* Enemy::createEnemy()
 {
-	auto enemy = Sprite::create();
-	auto bodySprite = Sprite::create("res/alien.png");
-	enemy->addChild(bodySprite);
+	auto enemy = Enemy::create();
+	auto body = Sprite::create("res/alien.png");
+	
+	enemy->addChild(body);
 
 	return enemy;
 }
 
 bool Enemy::init()
 {
-	if (Sprite::init() == false)
+	if (Node::init() == false)
 		return false;
+
+	this->maxHp = 1000;
+	this->hp = 1000;
 
 	return true;
 }

@@ -45,7 +45,15 @@
     <ClCompile Include="..\Classes\Sling.cpp">
       <Filter>src\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="Target.cpp" />
+    <ClCompile Include="..\Classes\Enemy.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
+    <ClCompile Include="Target.cpp">
+      <Filter>win32</Filter>
+    </ClCompile>
+    <ClCompile Include="Explosion.cpp">
+      <Filter>src</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="main.h">
@@ -75,7 +83,15 @@
     <ClInclude Include="..\Classes\Sling.h">
       <Filter>src\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Target.h" />
+    <ClInclude Include="..\Classes\Enemy.h">
+      <Filter>src</Filter>
+    </ClInclude>
+    <ClInclude Include="Target.h">
+      <Filter>win32</Filter>
+    </ClInclude>
+    <ClInclude Include="Explosion.h">
+      <Filter>src</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ResourceCompile Include="game.rc">

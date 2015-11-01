@@ -2,8 +2,8 @@
 #include "stdafx.h"
 #include "MainScene.h"
 #include "MCScene.h"
-#include "Enemy.h"
 #include "Explosion.h"
+#include "Enemy.h"
 
 Scene* MCScene::createScene()
 {
@@ -123,6 +123,7 @@ bool MCScene::init()
 
 	/*Enemey*/
 	auto enemy = Enemy::createEnemy();
+	enemy->setName("Enemy");
 	enemy->setPosition(Point(300, 460));
 	this->addChild(enemy);
 
@@ -158,6 +159,10 @@ void MCScene::onMouseDown(Event *event)
 	boom->setPosition(Point(xPos, yPos));
 	boom->schedule(schedule_selector(Explosion::boom), 0.1);
 	this->addChild(boom);
+
+	Enemy* enemy = (Enemy*)this->getChildByName("Enemy");
+	if (enemy->getPosition().distance(e->getLocation()) < 100)
+		enemy->hitByExplosion(boom);
 }
 
 void MCScene::ChangeBackGroundColor(const float intervalTime)

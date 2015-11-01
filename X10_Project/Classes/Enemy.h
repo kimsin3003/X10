@@ -13,6 +13,7 @@ public:
 	virtual bool init();
 	int getHp() const;
 	void hitByExplosion(Explosion* E);
+	void die();
 
 	CREATE_FUNC(Enemy);
 };

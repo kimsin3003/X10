@@ -14,6 +14,7 @@ public:
 	
 	virtual bool init();
 	void boom(const float time);
+	float calcDmg(float enemyX, float enemeyY);
 	void makeBigger(Node* body);
 
 	CREATE_FUNC(Explosion);

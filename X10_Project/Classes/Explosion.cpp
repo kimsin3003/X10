@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Explosion.h"
+#include "Enemy.h"
 
 Explosion* Explosion::createExplosion(int dmg)
 {
@@ -36,5 +37,15 @@ void Explosion::boom(const float dTime)
 
 void Explosion::makeBigger(Node* spr)
 {
-	spr->setScale(spr->getScale()+0.1);
+	spr->setScale(spr->getScale()+0.2);
+}
+
+float Explosion::calcDmg(float enemyX, float enemyY)
+{
+	float myX = this->getPositionX();
+	float myY = this->getPositionY();
+	float deltaX = myX - enemyX;
+	float deltaY = myY - enemyY;
+	float distance = sqrt(deltaX * deltaX + deltaY* deltaY);
+	return mainDamage / 30 * distance;
 }

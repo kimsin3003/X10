@@ -1,7 +1,6 @@
 #ifndef __MAIN_SCENE_H__
 #define __MAIN_SCENE_H__
 
-
 class MainScene : public cocos2d::Layer
 {
 public:

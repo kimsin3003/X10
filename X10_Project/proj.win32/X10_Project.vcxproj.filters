@@ -1,120 +1,38 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="win32">
-      <UniqueIdentifier>{84a8ebd7-7cf0-47f6-b75e-d441df67da40}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="resource">
-      <UniqueIdentifier>{715254bc-d70b-4ec5-bf29-467dd3ace079}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src">
-      <UniqueIdentifier>{bb6c862e-70e9-49d9-81b7-3829a6f50471}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Scene">
-      <UniqueIdentifier>{aafd9fbc-4be9-48d9-a14d-0c7b810cdd87}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\Example">
-      <UniqueIdentifier>{22271af4-5ea8-4625-8d18-cab2ec7e1a5d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="src\BulletScene">
-      <UniqueIdentifier>{16fa173f-634f-4823-83fa-1618c5322958}</UniqueIdentifier>
-    </Filter>
+    <ClCompile Include="..\Classes\AppDelegate.cpp" />
+    <ClCompile Include="..\Classes\Bullet.cpp" />
+    <ClCompile Include="..\Classes\Enemy.cpp" />
+    <ClCompile Include="..\Classes\Explosion.cpp" />
+    <ClCompile Include="..\Classes\BulletScene.cpp" />
+    <ClCompile Include="..\Classes\JWScene.cpp" />
+    <ClCompile Include="..\Classes\MainScene.cpp" />
+    <ClCompile Include="..\Classes\MCScene.cpp" />
+    <ClCompile Include="..\Classes\Mirror.cpp" />
+    <ClCompile Include="..\Classes\Sling.cpp" />
+    <ClCompile Include="..\Classes\stdafx.cpp" />
+    <ClCompile Include="..\Classes\Target.cpp" />
+    <ClCompile Include="..\Classes\TWScene.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\AppDelegate.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\stdafx.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\JWScene.cpp">
-      <Filter>src\Example</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MCScene.cpp">
-      <Filter>src\Example</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\TWScene.cpp">
-      <Filter>src\Example</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\MainScene.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Sling.cpp">
-      <Filter>src\Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Enemy.cpp">
-      <Filter>src</Filter>
-    </ClCompile>
-    <ClCompile Include="Target.cpp">
-      <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Explosion.cpp">
-      <Filter>src\Scene</Filter>
-    <ClCompile Include="..\Classes\Bullet.cpp">
-      <Filter>src\BulletScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BulletScene.cpp">
-      <Filter>src\BulletScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Mirror.cpp">
-      <Filter>src\BulletScene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Target.cpp">
-      <Filter>src\BulletScene</Filter>
-    </ClCompile>
+    <ClInclude Include="..\Classes\AppDelegate.h" />
+    <ClInclude Include="..\Classes\Bullet.h" />
+    <ClInclude Include="..\Classes\Enemy.h" />
+    <ClInclude Include="..\Classes\Explosion.h" />
+    <ClInclude Include="..\Classes\BulletScene.h" />
+    <ClInclude Include="..\Classes\JWScene.h" />
+    <ClInclude Include="..\Classes\MainScene.h" />
+    <ClInclude Include="..\Classes\MCScene.h" />
+    <ClInclude Include="..\Classes\Mirror.h" />
+    <ClInclude Include="..\Classes\Sling.h" />
+    <ClInclude Include="..\Classes\stdafx.h" />
+    <ClInclude Include="..\Classes\Target.h" />
+    <ClInclude Include="..\Classes\TWScene.h" />
+    <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="main.h">
-      <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\AppDelegate.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\stdafx.h">
-      <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\JWScene.h">
-      <Filter>src\Example</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MCScene.h">
-      <Filter>src\Example</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\TWScene.h">
-      <Filter>src\Example</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MainScene.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Sling.h">
-      <Filter>src\Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Enemy.h">
-      <Filter>src</Filter>
-    </ClInclude>
-    <ClInclude Include="Target.h">
-      <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Explosion.h">
-      <Filter>src\Scene</Filter>
-    <ClInclude Include="..\Classes\Bullet.h">
-      <Filter>src\BulletScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BulletScene.h">
-      <Filter>src\BulletScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Mirror.h">
-      <Filter>src\BulletScene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Target.h">
-      <Filter>src\BulletScene</Filter>
-    </ClInclude>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="game.rc">
-      <Filter>resource</Filter>
-    </ResourceCompile>
+    <ResourceCompile Include="game.rc" />
   </ItemGroup>
 </Project>

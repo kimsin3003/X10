@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
+#include "BulletScene.h"
 #include "JWScene.h"
 #include "TWScene.h"
 #include "MCScene.h"
@@ -77,7 +78,7 @@ void MainScene::ChangeSceneToMC(Ref* pSender)
 
 void MainScene::ChangeSceneToTW(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(TWScene::createScene());
+	Director::getInstance()->replaceScene(BulletScene::createScene());
 }
 
 void MainScene::ChangeSceneToJW(Ref* pSender)

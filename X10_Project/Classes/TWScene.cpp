@@ -82,7 +82,7 @@ bool TWScene::init()
 	spr_1->setPosition(Point(winSize.width, 0));
 	bgLayer->addChild(spr_1);
 	
-	auto action_0 = MoveBy::create(10.0, Point(-2000, 0));
+	auto action_0 = MoveBy::create(2.0, Point(-winSize.width, 0));
 	auto action_1 = Place::create(Point::ZERO);
 	auto action_2 = Sequence::create(action_0, action_1, NULL);
 	auto action_3 = RepeatForever::create(action_2);

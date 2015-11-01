@@ -16,6 +16,9 @@
     <Filter Include="src\Example">
       <UniqueIdentifier>{22271af4-5ea8-4625-8d18-cab2ec7e1a5d}</UniqueIdentifier>
     </Filter>
+    <Filter Include="src\BulletScene">
+      <UniqueIdentifier>{16fa173f-634f-4823-83fa-1618c5322958}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -26,9 +29,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\stdafx.cpp">
       <Filter>win32</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Bullet.cpp">
-      <Filter>src\Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\JWScene.cpp">
       <Filter>src\Example</Filter>
@@ -53,6 +53,17 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Explosion.cpp">
       <Filter>src\Scene</Filter>
+    <ClCompile Include="..\Classes\Bullet.cpp">
+      <Filter>src\BulletScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BulletScene.cpp">
+      <Filter>src\BulletScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Mirror.cpp">
+      <Filter>src\BulletScene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Target.cpp">
+      <Filter>src\BulletScene</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,9 +75,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\stdafx.h">
       <Filter>win32</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Bullet.h">
-      <Filter>src\Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\JWScene.h">
       <Filter>src\Example</Filter>
@@ -91,6 +99,17 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Explosion.h">
       <Filter>src\Scene</Filter>
+    <ClInclude Include="..\Classes\Bullet.h">
+      <Filter>src\BulletScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BulletScene.h">
+      <Filter>src\BulletScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Mirror.h">
+      <Filter>src\BulletScene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Target.h">
+      <Filter>src\BulletScene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

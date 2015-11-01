@@ -25,10 +25,7 @@ public:
 
 	//bg
 	void initBG();
-	
-	//change Color with delta time
-	void changeLayerColor(float delta);
-private:
+
 	Sling sling;
 
 };

@@ -116,7 +116,7 @@ void GameScene::onMouseUp(cocos2d::Event* event)
 		sling->isShooted = false;
 		bullet->SetAlive(true);
 
-		auto destroyTimer = DelayTime::create(5.0);
+		auto destroyTimer = DelayTime::create(0.3);
 		auto callbackBoom = CallFuncN::create(
 			CC_CALLBACK_1(GameScene::bulletBoom, this, (void*)&bullet->getPosition())
 			);

@@ -40,3 +40,17 @@ void Bullet::HitProgress(Target& target)
 	target.SetEffect(*this);
 
 }
+
+void Bullet::Start(Vec2 direction, float power)
+{
+	SetSpeed(power);
+	Move(direction);
+
+}
+/*
+void Bullet::BulletStart(GameScene* gs, Vec2 direction, float power){
+	Move(direction);
+	SetSpeed(power);
+	gs->scheduleUpdate();
+}
+*/

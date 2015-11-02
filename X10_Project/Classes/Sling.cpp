@@ -1,24 +1,34 @@
 #include "stdafx.h"
 #include "Sling.h"
 
-Sling::Sling() : angle(Point::ZERO), power(0)
+Sling* Sling::createSling(Bullet* bullet)
 {
+	Sling* sling = Sling::create();
+	
+	sling->addChild(bullet);
+	sling->addChild(sling->Stick);
+	sling->addChild(sling->Shooter);
+
+	bullet->setName("bullet");
+	bullet->setPosition(Point(0, 130));
+	return sling;
+}
+
+bool Sling::init()
+{
+	this->setPosition(200, 0);
 	Stick = Sprite::create("firework_stick 33x115.png");
-	Stick->setPosition(0, 130);
+	Stick->setPosition(0, 230);
 
 	Shooter = Sprite::create("firework_shooter 6x67.png");
-	Shooter->setPosition(200, 133);
-}
+	Shooter->setPosition(0, 133);
 
-void Sling::initSling()
-{
+	angle = Point::ZERO;
+	power = 0;
+	isPressed = false;
+	isShooted = false;
 
-}
-
-void Sling::Shot()
-{
-//	Bullet bullet;
-//	bullet.Start(Vec2(angle, power));
+	return true;
 }
 
 void Sling::onMouseDown(cocos2d::Event* event)
@@ -46,8 +56,8 @@ void Sling::onMouseMove(cocos2d::Event* event)
 			rotateDegree = 90;
 		else if (rotateDegree < -90)
 			rotateDegree = -90;
-
-		Shooter->setRotation(-rotateDegree);
+		auto sling = (Sling*)Shooter->getParent();
+		sling->setRotation(-rotateDegree);
 //		Shooter->setScaleX(1);
 //		Shooter->setScaleY(1);
 	}
@@ -62,7 +72,7 @@ void Sling::onMouseUp(cocos2d::Event* event)
 	power = sqrt(powerX + powerY);
 	angle = Point(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 	isPressed = false;
-//	Shot();
+	isShooted = true;
 
 	Shooter->setRotation(1);
 	Shooter->setScaleX(1);

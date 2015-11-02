@@ -1,7 +1,6 @@
 #ifndef __MC_SCENE_H__
 #define __MC_SCENE_H__
 
-#include "MCScene.h"
 #include "Explosion.h"
 #include "Enemy.h"
 

@@ -39,14 +39,18 @@ void BulletScene::update(float dt)
 {
 	static Target* before = nullptr;
 	Target* target;
-	bullet->Move(Vec2(bullet->GetDirection().x, 1));
-	CCLOG("out");
-	this->unscheduleUpdate();
-	if ((target = CheckHit()) && (target != before)){
-		HitOperator(target);
-		before = target;
+
+	if (sling->IsShooted()){
+		bullet->Move(Vec2(bullet->GetDirection().x, 1));
+		CCLOG("out");
+		this->unscheduleUpdate();
+		if ((target = CheckHit()) && (target != before)){
+			CCLOG("in");
+			HitOperator(target);
+			before = target;
+		}
+		this->scheduleUpdate();
 	}
-	this->scheduleUpdate();
 }
 
 Target* BulletScene::CheckHit()

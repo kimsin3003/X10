@@ -20,14 +20,7 @@ public:
 	void onMouseDown(cocos2d::Event* event);
 	void onMouseUp(cocos2d::Event* event);
 	void onMouseMove(cocos2d::Event* event);
-	void onMouseScroll(cocos2d::Event* event);
 	bool isPressed = false;
-
-	//bg
-	void initBG();
-
-	Sling sling;
-
 };
 
 #endif // __JW_Scene_H__

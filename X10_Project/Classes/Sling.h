@@ -3,18 +3,22 @@
 
 #include "Bullet.h"
 
-class Sling : public cocos2d::Layer
+class Sling : public Node
 {
 public:
-	Sling();
-	void Shot();
-	void initSling();
+	static Sling* createSling(Bullet* bullet);
+	
+
+	virtual bool init();
+	CREATE_FUNC(Sling);
 
 	//mouse listener
 	void onMouseDown(cocos2d::Event* event);
 	void onMouseUp(cocos2d::Event* event);
 	void onMouseMove(cocos2d::Event* event);
-	bool isPressed = false;
+	bool IsShooted() { return isShooted; }
+
+	bool isPressed;
 
 	Point posStartClick;
 	Sprite* Stick;
@@ -24,6 +28,8 @@ public:
 	float power;
 
 	enum { ShooterUIBoundary = 100 };
+
+	bool isShooted;
 };
 
 #endif

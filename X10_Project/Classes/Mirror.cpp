@@ -22,5 +22,5 @@ bool Mirror::init()
 
 void Mirror::SetEffect(Bullet& bullet)
 {
-	bullet.SetDirection(Vec2(-bullet.GetDirection().x, bullet.GetDirection().y));
+	bullet.SetDirection(Vec2(bullet.GetDirection().x, -bullet.GetDirection().y));
 }

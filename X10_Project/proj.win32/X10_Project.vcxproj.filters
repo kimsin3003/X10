@@ -10,14 +10,8 @@
     <ClCompile Include="..\Classes\MCScene.cpp">
       <Filter>Test</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\TWScene.cpp">
-      <Filter>Test</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Bullet.cpp">
       <Filter>Game Object</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\BulletScene.cpp">
-      <Filter>Test</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Enemy.cpp">
       <Filter>Game Object</Filter>
@@ -37,6 +31,9 @@
     <ClCompile Include="..\Classes\MainScene.cpp">
       <Filter>Test</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -48,14 +45,8 @@
     <ClInclude Include="..\Classes\MCScene.h">
       <Filter>Test</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\TWScene.h">
-      <Filter>Test</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Bullet.h">
       <Filter>Game Object</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BulletScene.h">
-      <Filter>Test</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Enemy.h">
       <Filter>Game Object</Filter>
@@ -73,6 +64,9 @@
       <Filter>Game Object</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
       <Filter>Test</Filter>
     </ClInclude>
   </ItemGroup>

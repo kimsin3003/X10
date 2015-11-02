@@ -7,7 +7,7 @@ public:
 	static Scene* createScene();
 	virtual bool init();
 
-
+//	void BulletStart(Vec2 direction, float power);
 	void update(float dt);
 	Target* CheckHit();
 	void HitOperator(Target* target);

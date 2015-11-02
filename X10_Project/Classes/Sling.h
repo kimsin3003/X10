@@ -7,29 +7,28 @@ class Sling : public Node
 {
 public:
 	static Sling* createSling(Bullet* bullet);
-	
-
-	virtual bool init();
 	CREATE_FUNC(Sling);
+	virtual bool init();
 
-	//mouse listener
 	void onMouseDown(cocos2d::Event* event);
 	void onMouseUp(cocos2d::Event* event);
 	void onMouseMove(cocos2d::Event* event);
+	
 	bool IsShooted() { return isShooted; }
+	bool isShooted;
 
+	bool IsPressed() { return isPressed; }
 	bool isPressed;
 
 	Point posStartClick;
+	
 	Sprite* Stick;
 	Sprite* Shooter;
 
-	Point angle; // 0~180
+	Point angle;
 	float power;
 
 	enum { ShooterUIBoundary = 100 };
-
-	bool isShooted;
 };
 
 #endif

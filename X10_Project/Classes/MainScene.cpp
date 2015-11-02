@@ -2,8 +2,8 @@
 #include "MainScene.h"
 #include "BulletScene.h"
 #include "JWScene.h"
-#include "TWScene.h"
 #include "MCScene.h"
+#include "GameScene.h"
 
 Scene* MainScene::createScene()
 {
@@ -78,7 +78,7 @@ void MainScene::ChangeSceneToMC(Ref* pSender)
 
 void MainScene::ChangeSceneToTW(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(BulletScene::createScene());
+	Director::getInstance()->replaceScene(GameScene::createScene());
 }
 
 void MainScene::ChangeSceneToJW(Ref* pSender)

@@ -1,33 +1,51 @@
 #include "stdafx.h"
 #include "Sling.h"
 
-Sling::Sling() : angle(Point::ZERO), power(0)
+Sling* Sling::createSling()
 {
+	Sling* sling = Sling::create();
+
+	sling->addChild(sling->Stick, 2);
+	sling->addChild(sling->Shooter, 1);
+
+	return sling;
+}
+
+bool Sling::init()
+{
+	this->setPosition(200, 160);
 	Stick = Sprite::create("firework_stick 33x115.png");
-	Stick->setPosition(0, 130);
+	Stick->setPosition(0, -30);
+	Stick->setScale(0.5);
 
 	Shooter = Sprite::create("firework_shooter 6x67.png");
-	Shooter->setPosition(200, 133);
-}
+	Shooter->setPosition(0, -60);
+	Shooter->setAnchorPoint(Point(0.5, 1));
+	Shooter->setScale(0.5);
 
-void Sling::initSling()
-{
+	angle = Point::ZERO;
+	power = 0;
+	
+	isPressed = false;
+	isShooted = false;
 
-}
-
-void Sling::Shot()
-{
-//	Bullet bullet;
-//	bullet.Start(Vec2(angle, power));
+	return true;
 }
 
 void Sling::onMouseDown(cocos2d::Event* event)
 {
 	auto mouseEvent = static_cast<EventMouse*>(event);
-	
+
 	posStartClick = Point(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 
-	isPressed = true;
+	if (posStartClick.y < this->getPosition().y + 100 &&
+		posStartClick.y > this->getPosition().y -100 && 
+		posStartClick.x < this->getPosition().x + 100 &&
+		posStartClick.x > this->getPosition().x - 100)
+	{
+		this->setColor(Color3B::GREEN);
+		isPressed = true;
+	}
 }
 
 void Sling::onMouseMove(cocos2d::Event* event)
@@ -38,33 +56,45 @@ void Sling::onMouseMove(cocos2d::Event* event)
 		Point ClickPoint = Point(mouseEvent->getCursorX(), mouseEvent->getCursorY());
 		Point posChange = ClickPoint - posStartClick;
 
-		int rotateDegree = (int)(posChange.x)%180;
-		int powerDegreeX = posChange.x;
-		int powerDegereY = posChange.y;
+		if (ClickPoint.y < ShooterUIBoundaryHeight &&
+			ClickPoint.x < ShooterUIBoundaryRight &&
+			ClickPoint.x > ShooterUIBoundaryLeft)
+		{
+			float distance = ClickPoint.getDistance(posStartClick);
+			float diffX = ClickPoint.x - this->getPosition().x;
+			angle.x = -diffX;
+			float diffY = ClickPoint.y - this->getPosition().y;
+			angle.y = -diffY;
+			float angleRadian = atan2f(diffY, diffX);
+			float angleOffSet = CC_RADIANS_TO_DEGREES(angleRadian) + 90;
+			this->setRotation(-angleOffSet);
 
-		if (rotateDegree > 90)
-			rotateDegree = 90;
-		else if (rotateDegree < -90)
-			rotateDegree = -90;
-
-		Shooter->setRotation(-rotateDegree);
-//		Shooter->setScaleX(1);
-//		Shooter->setScaleY(1);
+			Shooter->setScaleY(distance/Shooter->getContentSize().height);
+		}
 	}
 }
 
 void Sling::onMouseUp(cocos2d::Event* event)
 {
-	auto mouseEvent = static_cast<EventMouse*>(event);
+	if (isPressed)
+	{
+		auto mouseEvent = static_cast<EventMouse*>(event);
 
-	int powerX = pow(mouseEvent->getCursorX() - Shooter->getPositionX(), 2);
-	int powerY = pow(mouseEvent->getCursorY() - Shooter->getPositionY(), 2);
-	power = sqrt(powerX + powerY);
-	angle = Point(mouseEvent->getCursorX(), mouseEvent->getCursorY());
-	isPressed = false;
-//	Shot();
+		//힘과 각도를 계산
+		power = 1;
 
-	Shooter->setRotation(1);
-	Shooter->setScaleX(1);
-	Shooter->setScaleY(1);
+		//원상태로 돌린다
+		auto action_0 = RotateTo::create(0.25f, 0);
+		auto action_0E = EaseInOut::create(action_0, 1.0f);
+		auto action_1 = ScaleTo::create(0.25f, 0.5f);
+		auto action_1E = EaseInOut::create(action_1, 1.0f);
+
+		this->runAction(action_0E);
+		Shooter->runAction(action_1E);
+
+		//플래그 업데이트
+		isPressed = false;
+		isShooted = true;
+
+	}
 }

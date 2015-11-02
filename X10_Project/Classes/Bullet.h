@@ -12,14 +12,14 @@ public:
 	//Sprite* GetInstance();
 
 	int GetSpeed(){ return speed; }
-	void SetSpeed(int _speed){ speed = _speed; }
+	void SetSpeed(float _speed){ speed = _speed; }
 	void SetDirection(Vec2 _direction){ direction = _direction; }
 	Vec2 GetDirection() { return direction; }
 	CREATE_FUNC(Bullet);
 	void SetAlive(bool _alive) { alive = _alive; }
 	bool IsAlive(){ return alive; }
 	void HitProgress(Target& target );
-
+	void Start(Vec2 direction, float power);
 	void setPosition(const Vec2 &position) override { bullet->setPosition(position); }
 
 	const Vec2& getPosition() const override {	return bullet->getPosition(); }
@@ -28,6 +28,7 @@ public:
 
 	Rect getBoundingBox() const override { return bullet->getBoundingBox(); }
 
+	void boom(Scene* scene, Point p);
 private:
 
 	Sprite* bullet;

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "Target.h"
+#include "Explosion.h"
 
 bool Bullet::init()
 {
@@ -10,7 +11,7 @@ bool Bullet::init()
 	alive = true;
 	direction = Vec2(0, 0);
 	bullet = Sprite::create("res/bullet.png");
-	bullet->setAnchorPoint(Point(0.5, 0));
+	bullet->setAnchorPoint(Point(0.5, 0.5));
 	bullet->setScaleX(0.2);
 	bullet->setScaleY(0.2);
 	Size windowSize = Director::getInstance()->getVisibleSize();
@@ -23,11 +24,14 @@ bool Bullet::init()
 //Vec2's x,y absolute size is less or equal to 1
 void Bullet::Move(Vec2 initialDirection)
 {
+	if (bullet == nullptr)
+		return;
+
 	direction = initialDirection;
 	MoveBy* action;
 	
 	if(IsAlive()){
-		action = MoveBy::create(duration, direction * speed);
+		action = MoveBy::create(duration, direction * speed / 10);
 		bullet->runAction(action);
 		return;
 	}
@@ -39,4 +43,18 @@ void Bullet::HitProgress(Target& target)
 {
 	target.SetEffect(*this);
 
+}
+
+
+void Bullet::Start(Vec2 direction, float power)
+{
+	SetSpeed(power);
+	SetDirection(direction);
+
+}
+
+void Bullet::boom(Scene* scene, Point p)
+{
+	Explosion::boom(scene, getPosition());
+	this->setVisible(false);
 }

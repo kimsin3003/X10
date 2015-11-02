@@ -150,7 +150,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Bullet.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\Explosion.cpp" />
-    <ClCompile Include="..\Classes\BulletScene.cpp" />
+    <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\JWScene.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MCScene.cpp" />
@@ -160,7 +160,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
     <ClCompile Include="..\Classes\Target.cpp" />
-    <ClCompile Include="..\Classes\TWScene.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -168,7 +167,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Bullet.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\Explosion.h" />
-    <ClInclude Include="..\Classes\BulletScene.h" />
+    <ClInclude Include="..\Classes\GameScene.h" />
     <ClInclude Include="..\Classes\JWScene.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MCScene.h" />
@@ -176,7 +175,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Sling.h" />
     <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="..\Classes\Target.h" />
-    <ClInclude Include="..\Classes\TWScene.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>
   <ItemGroup>

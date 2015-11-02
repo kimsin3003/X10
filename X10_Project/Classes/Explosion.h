@@ -13,7 +13,7 @@ public:
 	static Explosion* createExplosion();
 	
 	virtual bool init();
-	void boom(const float time);
+	void boomRepeat(const float time);
 	float calcDmg(float enemyX, float enemeyY, const float distance);
 	void makeBigger(Node* body);
 	static void boom(Scene* scene, Point p);

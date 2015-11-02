@@ -25,6 +25,8 @@ public:
 	vector<Target*> targetList;
 
 	Layer* bulletLayer;
+
+	void ChangeToMainScene(Ref* pSender);
 };
 
 #endif

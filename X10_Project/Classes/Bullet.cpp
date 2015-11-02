@@ -45,25 +45,16 @@ void Bullet::HitProgress(Target& target)
 
 }
 
-<<<<<<< HEAD
+
 void Bullet::Start(Vec2 direction, float power)
 {
 	SetSpeed(power);
 	Move(direction);
 
 }
-/*
-void Bullet::BulletStart(GameScene* gs, Vec2 direction, float power){
-	Move(direction);
-	SetSpeed(power);
-	gs->scheduleUpdate();
-}
-*/
-=======
 
 void Bullet::boom(Scene* scene, Point p)
 {
 	Explosion::boom(scene, getPosition());
 	this->setVisible(false);
 }
->>>>>>> 993fb040094b6963d07802a25c5cf045530448c7

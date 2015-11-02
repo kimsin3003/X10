@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "Target.h"
+#include "Explosion.h"
 
 bool Bullet::init()
 {
@@ -39,4 +40,12 @@ void Bullet::HitProgress(Target& target)
 {
 	target.SetEffect(*this);
 
+}
+
+
+void Bullet::boom(Scene* scene, Point p)
+{
+	auto destroySelf = RemoveSelf::create();
+	Explosion::boom(scene, getPosition());
+	this->runAction(destroySelf);
 }

@@ -28,6 +28,7 @@ public:
 
 	Rect getBoundingBox() const override { return bullet->getBoundingBox(); }
 
+	void boom(Scene* scene, Point p);
 private:
 
 	Sprite* bullet;

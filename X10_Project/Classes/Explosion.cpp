@@ -22,7 +22,7 @@ bool Explosion::init()
 	return true;
 }
 
-void Explosion::boom(const float dTime)
+void Explosion::boomRepeat(const float dTime)
 {
 	auto body = this->getChildByName("ExplosionBody");
 	if (body != nullptr && body->getScale() * body->getContentSize().width < 100)
@@ -59,7 +59,7 @@ void Explosion::boom(Scene* scene, Point p)
 		return;
 	boom->setName("boom");
 	boom->setPosition(p);
-	boom->schedule(schedule_selector(Explosion::boom), 0.1);
+	boom->schedule(schedule_selector(Explosion::boomRepeat), 0.1);
 	scene->addChild(boom);
 
 	Enemy* enemy = (Enemy*)scene->getChildByName("Enemy");

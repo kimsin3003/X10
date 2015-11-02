@@ -138,11 +138,8 @@ void GameScene::bulletBoom(Node* b, void* pos)
 
 void GameScene::onMouseMove(cocos2d::Event* event)
 {
-<<<<<<< HEAD
 	if (sling == nullptr)
 		return;
 
-=======
->>>>>>> 80a36938ffaff4a3ac8c890cdc1471933dc05469
 	sling->onMouseMove(event);
 }

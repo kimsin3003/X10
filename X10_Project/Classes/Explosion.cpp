@@ -68,7 +68,7 @@ void Explosion::boom(Scene* scene, Point p)
 	auto enemyLocation = enemy->getPosition();
 	float dist = enemyLocation.distance(boom->getPosition());
 	CCLOG("Enemy( %f, %f ) , Distance: %f", enemy->getPositionX(), enemy->getPositionY(), dist);
-	if (dist < 100)
+	if (dist < 100){
 		if (dist < 2.0)
 		{
 			auto x10Label = Label::createWithTTF("!!!X10!!!", "fonts/arial.ttf", 100);
@@ -79,4 +79,5 @@ void Explosion::boom(Scene* scene, Point p)
 			scene->addChild(x10Label);
 		}
 		enemy->hitByExplosion(boom, dist);
+	}
 }

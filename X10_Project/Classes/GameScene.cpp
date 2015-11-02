@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameScene.h"
+#include "MainScene.h"
 #include "Bullet.h"
 #include "Mirror.h"
 #include "Target.h"
@@ -20,7 +21,7 @@ Scene* GameScene::createScene()
 
 bool GameScene::init()
 {
-	if (!LayerColor::initWithColor(Color4B(255,255,255,255)))
+	if (!LayerColor::initWithColor(Color4B(0,0,0,255)))
 	{
 		return false;
 	}
@@ -48,8 +49,20 @@ bool GameScene::init()
 	for (auto& target : targetList){
 		this->addChild(target);
 	}
-
 	this->scheduleUpdate();
+	
+	/*Enemey*/
+	auto enemy = Enemy::createEnemy();
+	enemy->setName("Enemy");
+	enemy->setPosition(Point(50, 150));
+	this->addChild(enemy);
+
+	/* go back to main scene */
+	auto GotoMainScene = MenuItemFont::create("Go to MainScene", CC_CALLBACK_1(GameScene::ChangeToMainScene, this));
+	auto GotoMainSceneMenu = Menu::create(GotoMainScene, NULL);
+	GotoMainSceneMenu->setPosition(200, 460);
+	this->addChild(GotoMainSceneMenu);
+
 	return true;
 }
 
@@ -58,6 +71,9 @@ void GameScene::update(float dt)
 	static Target* before = nullptr;
 	Target* target;
 	//CCLOG("out");
+	if (bullet == nullptr)
+		return;
+
 	if (bullet->IsAlive()){
 		bullet->Move(Vec2(bullet->GetDirection().x, bullet->GetDirection().y));
 		this->unscheduleUpdate();
@@ -142,4 +158,9 @@ void GameScene::onMouseMove(cocos2d::Event* event)
 		return;
 
 	sling->onMouseMove(event);
+}
+
+void GameScene::ChangeToMainScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(MainScene::createScene());
 }

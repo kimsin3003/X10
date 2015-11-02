@@ -4,6 +4,7 @@
 #include "Target.h"
 #include "Bullet.h"
 #include "Mirror.h"
+#include "Enemy.h"
 
 Scene* BulletScene::createScene()
 {
@@ -22,6 +23,7 @@ bool BulletScene::init()
 		return false;
 
 	bullet = Bullet::create();
+	bullet->setName("Bullet");
 	this->addChild(bullet);
 
 	targetList.push_back(Mirror::create());
@@ -32,6 +34,18 @@ bool BulletScene::init()
 
 	bullet->Move(Vec2(-0.5, 1));
 	this->scheduleUpdate();
+
+	auto _mouseListener = EventListenerMouse::create();
+	_mouseListener->onMouseDown = CC_CALLBACK_1(BulletScene::onMouseDown, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
+	
+	
+	/*Enemey*/
+	auto enemy = Enemy::createEnemy();
+	enemy->setName("Enemy");
+	enemy->setPosition(Point(115, 100));
+	this->addChild(enemy);
+
 	return true;
 }
 
@@ -73,3 +87,15 @@ void BulletScene::HitOperator(Target* target)
 	target->SetEffect(*bullet);
 }
 
+void BulletScene::onMouseDown(Event *event)
+{
+	if (event == nullptr)
+		return;
+	
+	auto bulletNode = getChildByName("Bullet");
+	if (bullet == nullptr)
+		return;
+
+	Bullet* bullet = (Bullet*)bulletNode;
+	bullet->boom((Scene*)this, bullet->getPosition());
+}

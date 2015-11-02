@@ -11,7 +11,7 @@ bool Bullet::init()
 	alive = true;
 	direction = Vec2(0, 0);
 	bullet = Sprite::create("res/bullet.png");
-	bullet->setAnchorPoint(Point(0.5, 0));
+	bullet->setAnchorPoint(Point(0.5, 0.5));
 	bullet->setScaleX(0.2);
 	bullet->setScaleY(0.2);
 	Size windowSize = Director::getInstance()->getVisibleSize();
@@ -24,6 +24,9 @@ bool Bullet::init()
 //Vec2's x,y absolute size is less or equal to 1
 void Bullet::Move(Vec2 initialDirection)
 {
+	if (bullet == nullptr)
+		return;
+
 	direction = initialDirection;
 	MoveBy* action;
 	
@@ -45,7 +48,6 @@ void Bullet::HitProgress(Target& target)
 
 void Bullet::boom(Scene* scene, Point p)
 {
-	auto destroySelf = RemoveSelf::create();
 	Explosion::boom(scene, getPosition());
-	this->runAction(destroySelf);
+	this->setVisible(false);
 }

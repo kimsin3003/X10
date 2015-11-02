@@ -143,6 +143,8 @@ void MCScene::onMouseUp(Event *event)
 
 void MCScene::onMouseDown(Event *event)
 {
+	if (event == nullptr)
+		return;
 	auto e = (EventMouse*)event;
 	auto mousePos = e->getLocation();
 	float xPos = e->getCursorX();
@@ -155,15 +157,25 @@ void MCScene::onMouseDown(Event *event)
 	auto moveToMouse = JumpBy::create(0.3, Point(0, 0), 50, 1);
 	runningBoy->runAction(moveToMouse);
 
+	boom((Scene*)this, Point(xPos, yPos));
+}
+
+void MCScene::ChangeBackGroundColor(const float intervalTime)
+{
+	this->setColor(Color3B((random() % 255), (random() % 255), (random() % 255)));
+}
+
+void MCScene::boom(Scene* scene, Point p)
+{
 	auto boom = Explosion::createExplosion();
 	if (boom == nullptr)
 		return;
 	boom->setName("boom");
-	boom->setPosition(Point(xPos, yPos));
+	boom->setPosition(p);
 	boom->schedule(schedule_selector(Explosion::boom), 0.1);
-	this->addChild(boom);
+	scene->addChild(boom);
 
-	Enemy* enemy = (Enemy*)this->getChildByName("Enemy");
+	Enemy* enemy = (Enemy*)scene->getChildByName("Enemy");
 	if (enemy == nullptr)
 		return;
 	auto enemyLocation = enemy->getPosition();
@@ -171,9 +183,4 @@ void MCScene::onMouseDown(Event *event)
 	CCLOG("Enemy( %f, %f ) , Distance: %f", enemy->getPositionX(), enemy->getPositionY(), dist);
 	if (dist < 100)
 		enemy->hitByExplosion(boom, dist);
-}
-
-void MCScene::ChangeBackGroundColor(const float intervalTime)
-{
-	this->setColor(Color3B((random() % 255), (random() % 255), (random() % 255)));
 }

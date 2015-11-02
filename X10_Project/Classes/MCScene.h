@@ -18,6 +18,7 @@ public:
 	void ChangeToMainScene(Ref* pSender);
 	void onMouseUp(Event *event);
 	void onMouseDown(Event *event);
+	void boom(Scene* scene, Point p);
 
 	CREATE_FUNC(MCScene);
 };

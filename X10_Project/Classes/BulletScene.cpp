@@ -21,6 +21,7 @@ bool BulletScene::init()
 	if (!Layer::init())
 		return false;
 
+	
 	bullet = Bullet::create();
 	this->addChild(bullet);
 
@@ -34,6 +35,9 @@ bool BulletScene::init()
 	this->scheduleUpdate();
 	return true;
 }
+
+//void Bullet::bulletStart(this, Point psition, Vec2 velocity);
+
 
 void BulletScene::update(float dt)
 {

@@ -31,7 +31,7 @@ void Bullet::Move(Vec2 initialDirection)
 	MoveBy* action;
 	
 	if(IsAlive()){
-		action = MoveBy::create(duration, direction * speed);
+		action = MoveBy::create(duration, direction * speed / 10);
 		bullet->runAction(action);
 		return;
 	}
@@ -49,7 +49,7 @@ void Bullet::HitProgress(Target& target)
 void Bullet::Start(Vec2 direction, float power)
 {
 	SetSpeed(power);
-	Move(direction);
+	SetDirection(direction);
 
 }
 

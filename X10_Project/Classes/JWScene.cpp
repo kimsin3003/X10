@@ -25,7 +25,7 @@ bool JWScene::init()
 		return false;
 	}
 	auto bullet = Bullet::create();
-	auto sling = Sling::createSling(bullet);
+	auto sling = Sling::createSling();
 
 	sling->setName("sling");
 

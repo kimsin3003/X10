@@ -22,6 +22,8 @@ public:
 	Bullet* bullet;
 	Sling* sling;
 	vector<Target*> targetList;
+
+	Layer* bulletLayer;
 };
 
 #endif

@@ -6,7 +6,7 @@
 class Sling : public Node
 {
 public:
-	static Sling* createSling(Bullet* bullet);
+	static Sling* createSling();
 	CREATE_FUNC(Sling);
 	virtual bool init();
 
@@ -28,7 +28,9 @@ public:
 	Point angle;
 	float power;
 
-	enum { ShooterUIBoundary = 100 };
+	enum { ShooterUIBoundaryHeight = 200, 
+		ShooterUIBoundaryLeft = 0, 
+		ShooterUIBoundaryRight = 400 };
 };
 
 #endif

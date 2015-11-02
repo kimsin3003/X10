@@ -24,11 +24,16 @@ bool GameScene::init()
 	{
 		return false;
 	}
-
+	bulletLayer = Layer::create();
 	bullet = Bullet::create();
-	sling = Sling::createSling(bullet); 
+	bulletLayer->addChild(bullet);
+	sling = Sling::createSling(); 
 	
+	this->addChild(bulletLayer);
 	this->addChild(sling);
+	CCLOG("x:%d", sling->getPosition().x);
+	CCLOG("y:%d", sling->getPosition().y);
+	bullet->setPosition(Vec2(sling->getPosition().x, sling->getPosition().y + 40));
 
 	sling->setName("sling");
 	
@@ -37,7 +42,6 @@ bool GameScene::init()
 	Mouse->onMouseUp = CC_CALLBACK_1(GameScene::onMouseUp, this);
 	Mouse->onMouseMove = CC_CALLBACK_1(GameScene::onMouseMove, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(Mouse, this);
-
 
 	targetList.push_back(Mirror::create());
 
@@ -80,7 +84,6 @@ Target* GameScene::CheckHit()
 		}
 	}
 
-
 	return NULL;
 }
 
@@ -90,7 +93,6 @@ void GameScene::HitOperator(Target* target)
 	CCLOG("in");
 	target->SetEffect(*bullet);
 }
-
 
 
 void GameScene::onMouseDown(cocos2d::Event* event)
@@ -105,15 +107,13 @@ void GameScene::onMouseUp(cocos2d::Event* event)
 
 	if (sling->IsShooted())
 	{
-		bullet->Start(Vec2(0,1), 1);
+		bullet->Start(sling->angle, sling->power);
 		sling->isShooted = false;
 		bullet->SetAlive(true);
 	}
-
 }
 
 void GameScene::onMouseMove(cocos2d::Event* event)
 {
 	sling->onMouseMove(event);
-
 }

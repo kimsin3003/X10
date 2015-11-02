@@ -14,6 +14,7 @@ public:
 	void onMouseUp(cocos2d::Event* event);
 	void onMouseMove(cocos2d::Event* event);
 	bool isPressed = false;
+	void bulletBoom(Node* sender, void* pos);
 
 	void update(float dt);
 	Target* CheckHit();

@@ -50,11 +50,13 @@ void Bullet::Start(Vec2 direction, float power)
 {
 	SetSpeed(power);
 	Move(direction);
-
 }
 
 void Bullet::boom(Scene* scene, Point p)
 {
+	if (alive == false)
+		return;
 	Explosion::boom(scene, getPosition());
+	this->alive = false;
 	this->setVisible(false);
 }

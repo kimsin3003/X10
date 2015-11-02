@@ -2,6 +2,11 @@
 #include "cocos2d.h"
 class Explosion;
 
+namespace ENEMY_CONST
+{
+	const float DEFAULT_HP = 1000;
+}
+
 class Enemy : public Node
 {
 private:

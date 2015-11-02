@@ -95,12 +95,17 @@ void GameScene::HitOperator(Target* target)
 
 void GameScene::onMouseDown(cocos2d::Event* event)
 {
-	sling->onMouseDown(event);
+	if (sling == nullptr)
+		return;
 
+	sling->onMouseDown(event);
 }
 
 void GameScene::onMouseUp(cocos2d::Event* event)
 {
+	if (sling == nullptr)
+		return;
+
 	sling->onMouseUp(event);
 
 	if (sling->IsShooted())
@@ -108,12 +113,32 @@ void GameScene::onMouseUp(cocos2d::Event* event)
 		bullet->Start(Vec2(0,1), 1);
 		sling->isShooted = false;
 		bullet->SetAlive(true);
+
+		auto destroyTimer = DelayTime::create(5.0);
+		auto callbackBoom = CallFuncN::create(
+			CC_CALLBACK_1(GameScene::bulletBoom, this, (void*)&bullet->getPosition())
+			);
+		auto action = Sequence::create( destroyTimer, callbackBoom, NULL);
+
+		bullet->runAction(action);
 	}
 
 }
 
+void GameScene::bulletBoom(Node* b, void* pos)
+{
+	if (b == nullptr)
+		return;
+	auto vec = (Vec2*)pos;
+
+	auto bullet = (Bullet*)b;
+	bullet->boom((Scene*)this, Point(*vec));
+}
+
 void GameScene::onMouseMove(cocos2d::Event* event)
 {
-	sling->onMouseMove(event);
+	if (sling == nullptr)
+		return;
 
+	sling->onMouseMove(event);
 }

@@ -2,37 +2,94 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
-    <ClCompile Include="..\Classes\Bullet.cpp" />
-    <ClCompile Include="..\Classes\Enemy.cpp" />
-    <ClCompile Include="..\Classes\Explosion.cpp" />
-    <ClCompile Include="..\Classes\BulletScene.cpp" />
-    <ClCompile Include="..\Classes\JWScene.cpp" />
-    <ClCompile Include="..\Classes\MainScene.cpp" />
-    <ClCompile Include="..\Classes\MCScene.cpp" />
-    <ClCompile Include="..\Classes\Mirror.cpp" />
-    <ClCompile Include="..\Classes\Sling.cpp" />
     <ClCompile Include="..\Classes\stdafx.cpp" />
-    <ClCompile Include="..\Classes\Target.cpp" />
-    <ClCompile Include="..\Classes\TWScene.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="..\Classes\JWScene.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MCScene.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TWScene.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Bullet.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\BulletScene.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Enemy.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Explosion.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Mirror.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Sling.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Target.cpp">
+      <Filter>Game Object</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>Test</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
-    <ClInclude Include="..\Classes\Bullet.h" />
-    <ClInclude Include="..\Classes\Enemy.h" />
-    <ClInclude Include="..\Classes\Explosion.h" />
-    <ClInclude Include="..\Classes\BulletScene.h" />
-    <ClInclude Include="..\Classes\JWScene.h" />
-    <ClInclude Include="..\Classes\MainScene.h" />
-    <ClInclude Include="..\Classes\MCScene.h" />
-    <ClInclude Include="..\Classes\Mirror.h" />
-    <ClInclude Include="..\Classes\Sling.h" />
     <ClInclude Include="..\Classes\stdafx.h" />
-    <ClInclude Include="..\Classes\Target.h" />
-    <ClInclude Include="..\Classes\TWScene.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="..\Classes\JWScene.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MCScene.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TWScene.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Bullet.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\BulletScene.h">
+      <Filter>Test</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Enemy.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Explosion.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Mirror.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Sling.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Target.h">
+      <Filter>Game Object</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>Test</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="game.rc" />
+    <Filter Include="Test">
+      <UniqueIdentifier>{9a3f566f-2023-440d-bfca-7432a97ff70b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Game Object">
+      <UniqueIdentifier>{9032a7ad-f7c5-492e-958a-5fcd0a4b0473}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{66937b0a-80c8-4b83-b6f8-c142ae08d7e9}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

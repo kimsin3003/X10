@@ -16,6 +16,7 @@ public:
 	void boom(const float time);
 	float calcDmg(float enemyX, float enemeyY, const float distance);
 	void makeBigger(Node* body);
+	static void boom(Scene* scene, Point p);
 
 	CREATE_FUNC(Explosion);
 };

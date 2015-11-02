@@ -47,7 +47,28 @@ float Explosion::calcDmg(float enemyX, float enemyY, const float distance)
 	float myY = this->getPositionY();
 	float deltaX = myX - enemyX;
 	float deltaY = myY - enemyY;
-	float result = mainDamage / 100 * distance;
+	float result = mainDamage / (distance / 10);
 	CCLOG("mainDMG : %f, Dmg : %f", mainDamage, result);
 	return result;
+}
+
+void Explosion::boom(Scene* scene, Point p)
+{
+	auto boom = Explosion::createExplosion();
+	if (boom == nullptr)
+		return;
+	boom->setName("boom");
+	boom->setPosition(p);
+	boom->schedule(schedule_selector(Explosion::boom), 0.1);
+	scene->addChild(boom);
+
+	Enemy* enemy = (Enemy*)scene->getChildByName("Enemy");
+	if (enemy == nullptr)
+		return;
+	auto enemyLocation = enemy->getPosition();
+	float dist = enemyLocation.distance(boom->getPosition());
+	CCLOG("Enemy( %f, %f ) , Distance: %f", enemy->getPositionX(), enemy->getPositionY(), dist);
+	if (dist < 100)
+		
+		enemy->hitByExplosion(boom, dist);
 }

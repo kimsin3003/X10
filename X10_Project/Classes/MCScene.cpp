@@ -144,25 +144,33 @@ void MCScene::onMouseUp(Event *event)
 void MCScene::onMouseDown(Event *event)
 {
 	auto e = (EventMouse*)event;
+	auto mousePos = e->getLocation();
 	float xPos = e->getCursorX();
 	float yPos = e->getCursorY();
-	
+
 	//A running man jump
 	auto blinkLabel = this->getChildByName("twMissionLabel");
 	blinkLabel->setVisible(true);
 	auto runningBoy = this->getChildByName("boy");
 	auto moveToMouse = JumpBy::create(0.3, Point(0, 0), 50, 1);
 	runningBoy->runAction(moveToMouse);
-	
+
 	auto boom = Explosion::createExplosion();
+	if (boom == nullptr)
+		return;
 	boom->setName("boom");
 	boom->setPosition(Point(xPos, yPos));
 	boom->schedule(schedule_selector(Explosion::boom), 0.1);
 	this->addChild(boom);
 
 	Enemy* enemy = (Enemy*)this->getChildByName("Enemy");
-	if (enemy->getPosition().distance(e->getLocation()) < 100)
-		enemy->hitByExplosion(boom);
+	if (enemy == nullptr)
+		return;
+	auto enemyLocation = enemy->getPosition();
+	float dist = enemyLocation.distance(boom->getPosition());
+	CCLOG("Enemy( %f, %f ) , Distance: %f", enemy->getPositionX(), enemy->getPositionY(), dist);
+	if (dist < 100)
+		enemy->hitByExplosion(boom, dist);
 }
 
 void MCScene::ChangeBackGroundColor(const float intervalTime)

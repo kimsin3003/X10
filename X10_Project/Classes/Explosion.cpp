@@ -2,7 +2,7 @@
 #include "Explosion.h"
 #include "Enemy.h"
 
-Explosion* Explosion::createExplosion(int dmg)
+Explosion* Explosion::createExplosion()
 {
 	auto Explosion = Explosion::create();
 	auto body = Sprite::create("res/explosion.png");
@@ -17,6 +17,7 @@ bool Explosion::init()
 	if (Node::init() == false)
 		return false;
 
+	this->mainDamage = EXPLOSION_CONST::DEFAULT_DAMAGE;
 
 	return true;
 }
@@ -40,12 +41,13 @@ void Explosion::makeBigger(Node* spr)
 	spr->setScale(spr->getScale()+0.2);
 }
 
-float Explosion::calcDmg(float enemyX, float enemyY)
+float Explosion::calcDmg(float enemyX, float enemyY, const float distance)
 {
 	float myX = this->getPositionX();
 	float myY = this->getPositionY();
 	float deltaX = myX - enemyX;
 	float deltaY = myY - enemyY;
-	float distance = sqrt(deltaX * deltaX + deltaY* deltaY);
-	return mainDamage / 30 * distance;
+	float result = mainDamage / 100 * distance;
+	CCLOG("mainDMG : %f, Dmg : %f", mainDamage, result);
+	return result;
 }

@@ -6,13 +6,13 @@ class Enemy : public Node
 {
 private:
 	Sprite* body;
-	int	maxHp;
-	int hp;
+	float	maxHp;
+	float hp;
 public:
 	static Enemy* createEnemy();
 	virtual bool init();
-	int getHp() const;
-	void hitByExplosion(Explosion* E);
+	float getHp() const;
+	void hitByExplosion(Explosion* E, float distance);
 	void die();
 
 	CREATE_FUNC(Enemy);

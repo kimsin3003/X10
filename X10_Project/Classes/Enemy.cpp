@@ -6,7 +6,6 @@ Enemy* Enemy::createEnemy()
 {
 	auto enemy = Enemy::create();
 	auto body = Sprite::create("res/alien.png");
-	
 	enemy->addChild(body);
 
 	return enemy;
@@ -23,17 +22,18 @@ bool Enemy::init()
 	return true;
 }
 
-int Enemy::getHp() const
+float Enemy::getHp() const
 {
 	return hp;
 }
 
-void Enemy::hitByExplosion(Explosion* explosion)
+void Enemy::hitByExplosion(Explosion* explosion, float distance)
 {
 	if (explosion == nullptr)
 		return;
+	float dmg = explosion->calcDmg(this->getPositionX(), this->getPositionY(), distance);
+	CCLOG("hp: %f, dmg = %f", hp, dmg); 
 
-	float dmg = explosion->calcDmg(this->getPositionX(), this->getPositionY());
 	if (dmg >= hp)
 	{
 		hp = 0;

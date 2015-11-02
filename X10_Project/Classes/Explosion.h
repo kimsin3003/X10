@@ -10,11 +10,11 @@ class Explosion : public Node
 private:
 	float mainDamage;
 public:
-	static Explosion* createExplosion(int dmg = EXPLOSION_CONST::DEFAULT_DAMAGE);
+	static Explosion* createExplosion();
 	
 	virtual bool init();
 	void boom(const float time);
-	float calcDmg(float enemyX, float enemeyY);
+	float calcDmg(float enemyX, float enemeyY, const float distance);
 	void makeBigger(Node* body);
 
 	CREATE_FUNC(Explosion);

@@ -31,10 +31,10 @@ public:
 	void boom(Scene* scene, Point p);
 private:
 
-	Sprite* bullet;
+	Sprite* bullet; ///# 코딩 컨벤션: 멤버 변수는 앞에 m_같은거 붙이도록..
 	Vec2 direction;
 	int speed;
-	const double duration = 1 / Director::getInstance()->getFrameRate();;
+	const double duration = 1 / Director::getInstance()->getFrameRate();; ///# 직접 함수호출하는 이런거는 생성자 또는 init에서 명시적으로 해주기 바람.
 	bool alive;
 };
 

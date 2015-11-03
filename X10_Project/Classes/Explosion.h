@@ -1,6 +1,6 @@
 #pragma once
 #include "cocos2d.h"
-namespace EXPLOSION_CONST
+namespace EXPLOSION_CONST ///# 마찬가지~~
 {
 	const int DEFAULT_DAMAGE = 500;
 }

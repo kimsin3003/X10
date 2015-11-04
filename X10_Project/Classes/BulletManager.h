@@ -2,20 +2,18 @@
 
 class Bullet;
 
-class BulletManager //singletone Bullet Manager
+class BulletManager
 {
-private:
-	vector<Bullet*>bulletList;
-	int CurrentBulletIndex;
-	static BulletManager* instance;
 public:
-	
-private:
-	Bullet* GetNextBullet();
-	BulletManager();
-	~BulletManager();
-public:
-	vector<Bullet*> GetFlyingBullets();
 	static BulletManager* GetInstance();
+	vector<Bullet*>* GetFlyingBullets();
+	Bullet* GetCurrentBullet();
+
+private:
+	static BulletManager* instance;
+	vector<Bullet*> bullets;
+	int CurBulletIndex;
+	BulletManager(){};
+	~BulletManager(){};
 };
 

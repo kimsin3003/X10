@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "BulletManager.h"
 
-BulletManager* BulletManager::instance = new BulletManager();
+BulletManager* BulletManager::instance = nullptr;
 
 BulletManager::BulletManager()
 {

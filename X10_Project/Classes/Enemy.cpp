@@ -16,8 +16,8 @@ bool Enemy::init()
 	if (Node::init() == false)
 		return false;
 
-	this->maxHp = 1000;
-	this->hp = 1000;
+	this->maxHp = ENEMY_CONST::DEFAULT_HP;
+	this->hp = ENEMY_CONST::DEFAULT_HP;
 
 	return true;
 }

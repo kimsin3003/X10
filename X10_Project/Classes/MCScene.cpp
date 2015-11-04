@@ -101,8 +101,8 @@ bool MCScene::init()
 	//애니매이션 프레임 추가
 	Vector<SpriteFrame*> animFrames;
 	const int frameCut = 3;//사용된 프레임 개수
-	const int AniCharheight = 70;
-	const int AniCharWidth = 32;
+	const int AniCharheight = boysize.height;
+	const int AniCharWidth = boysize.width;
 
 	animFrames.reserve(frameCut);
 	for (int i = 0; i < frameCut; i++)

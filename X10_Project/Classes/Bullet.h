@@ -1,41 +1,20 @@
-#ifndef __BULLET_H__
-#define __BULLET_H__
-class Target;
+#pragma once
 
-class Bullet : public Layer
+class Bullet : public cocos2d::Node
 {
 public:
-
-	virtual bool init();
-
-	void Move(Vec2 initialDirection);
-	//Sprite* GetInstance();
-
-	int GetSpeed(){ return speed; }
-	void SetSpeed(float _speed){ speed = _speed; }
-	void SetDirection(Vec2 _direction){ direction = _direction; }
-	Vec2 GetDirection() { return direction; }
 	CREATE_FUNC(Bullet);
-	void SetAlive(bool _alive) { alive = _alive; }
-	bool IsAlive(){ return alive; }
-	void HitProgress(Target& target );
-	void Start(Vec2 direction, float power);
-	void setPosition(const Vec2 &position) override { bullet->setPosition(position); }
+	bool init();
+	void SetDirection(Vec2 dir);
+	void SetSpeed(float spd);
+	void Move();
 
-	const Vec2& getPosition() const override {	return bullet->getPosition(); }
-
-	void setAnchorPoint(const Vec2& anchorPoint) override {	bullet->setAnchorPoint(anchorPoint);}
-
-	Rect getBoundingBox() const override { return bullet->getBoundingBox(); }
-
-	void boom(Scene* scene, Point p);
 private:
-
-	Sprite* bullet;
+	Sprite* spr;
+	float speed;
 	Vec2 direction;
-	int speed;
-	const double duration = 1 / Director::getInstance()->getFrameRate();;
-	bool alive;
+	float lifeTime;
+	bool isAlive;
+	bool isExplosion;
+	bool isFlying;
 };
-
-#endif

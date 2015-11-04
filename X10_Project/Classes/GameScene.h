@@ -17,7 +17,6 @@ public:
 	void bulletBoom(Node* sender, void* pos);
 	void ChangeToMainScene(Ref* pSender);
 
-	void ChangeToMainScene(Ref* pSender);
 	void update(float dt);
 	Target* CheckHit();
 	void HitOperator(Target* target);

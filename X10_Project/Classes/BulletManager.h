@@ -16,4 +16,3 @@ private:
 	BulletManager(){};
 	~BulletManager(){};
 };
-

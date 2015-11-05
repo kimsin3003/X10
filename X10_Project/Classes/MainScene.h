@@ -10,9 +10,6 @@ public:
     
     // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
-	void ChangeSceneToMC(Ref* pSender);
-	void ChangeSceneToTW(Ref* pSender);
-	void ChangeSceneToJW(Ref* pSender);
 
     // implement the "static create()" method manually
     CREATE_FUNC(MainScene);

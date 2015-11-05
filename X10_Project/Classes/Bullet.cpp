@@ -10,7 +10,7 @@ bool Bullet::init()
 	}
 
 	//temporary initailization for test
-	this->setPosition(Vec2(100, 100)); //Bullet manager sets bullet position
+	this->setPosition(Vec2(100, 100)); //Game manager sets initial bullet position
 	this->addChild(spr);
 	spr = Sprite::create("res/bullet.png");
 

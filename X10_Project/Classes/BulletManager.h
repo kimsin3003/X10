@@ -6,15 +6,16 @@ class BulletManager
 {
 public:
 	static BulletManager* GetInstance();
-	void initBulletManager();
-	void initBullets();
+	void Init();
 //	vector<Bullet*> GetFlyingBullets(); //Let's just check bullets state 'isFlying' in game manager
 	Bullet* GetBulletToShot();
-
+	void AddExplosion(Bullet* explosion);
 private:
+	void InitBullets(); // called in Init()
+
 	static BulletManager* instance;
 	vector<Bullet*> bullets;
-	int CurBulletIndex;
+	int curBulletIndex;
 	int defaultBulletNum;
 	BulletManager();
 	~BulletManager();

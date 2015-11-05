@@ -2,7 +2,7 @@
 #include "Bullet.h"
 
 
-bool Bullet::init()
+bool Bullet::Init()
 {
 	if (!Node::init())
 	{

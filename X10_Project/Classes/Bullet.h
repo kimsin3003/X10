@@ -4,18 +4,18 @@ class Bullet : public Node
 {
 public:
 	CREATE_FUNC(Bullet);
-	bool init();
+	bool Init();
 	void Move(); // called each frame 
-	void DecreaseLife(); // called in Move()
 	void SetDirection(Vec2 dir);
 	void SetSpeed(float spd);
-	
 	bool IsExplosion();
 	void SetExplosion(bool flag);
 	bool IsFlying();
 	void SetFlying(bool flag);
 
 private:
+	void DecreaseLife(); // called in Move()
+
 	Sprite* spr;
 	Vec2 direction;
 	float speed;

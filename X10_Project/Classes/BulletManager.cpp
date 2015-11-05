@@ -16,17 +16,17 @@ BulletManager* BulletManager::GetInstance()
 }
 
 //call in game manager's init
-void BulletManager::initBulletManager() //<- pass stage information parameter (si->BulletManger)
+void BulletManager::Init() //<- pass stage information parameter (si->BulletManger)
 {										//that holds the number of bullets to have(not implemented yet)
 	//temporary initialization for test
-	CurBulletIndex = 0;
+	curBulletIndex = 0;
 	defaultBulletNum = 5;
 	bullets.reserve(defaultBulletNum);
 
-	initBullets();
+	InitBullets();
 }
 
-void BulletManager::initBullets() //<- pass stage information parameter (si->Bullets) 
+void BulletManager::InitBullets() //<- pass stage information parameter (si->Bullets) 
 {								  //that holds what bullets to use (not implemented yet)
 
 // ex
@@ -41,5 +41,10 @@ void BulletManager::initBullets() //<- pass stage information parameter (si->Bul
 //call in gama manger's logic : GetBulletToShot -> add child & visible off & set position-> shot -> visible on
 Bullet* BulletManager::GetBulletToShot()
 {
-	return bullets[CurBulletIndex++];
+	return bullets[curBulletIndex++];
+}
+
+void BulletManager::AddExplosion(Bullet* explosion)
+{
+	bullets.push_back(explosion);
 }

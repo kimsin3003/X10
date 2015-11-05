@@ -8,7 +8,7 @@ public:
 	static BulletManager* GetInstance();
 	void initBulletManager();
 	void initBullets();
-	vector<Bullet*> GetFlyingBullets();
+//	vector<Bullet*> GetFlyingBullets(); //Let's just check bullets state 'isFlying' in game manager
 	Bullet* GetBulletToShot();
 
 private:

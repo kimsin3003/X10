@@ -1,5 +1,4 @@
-#ifndef __MAIN_SCENE_H__
-#define __MAIN_SCENE_H__
+#pragma once
 
 class MainScene : public cocos2d::Layer
 {
@@ -8,11 +7,7 @@ public:
 
     virtual bool init();
     
-    // a selector callback
     void menuCloseCallback(cocos2d::Ref* pSender);
 
-    // implement the "static create()" method manually
     CREATE_FUNC(MainScene);
 };
-
-#endif // __MainScene_SCENE_H__

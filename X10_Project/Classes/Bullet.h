@@ -1,6 +1,6 @@
 #pragma once
 
-class Bullet : public cocos2d::Node
+class Bullet : public Node
 {
 public:
 	CREATE_FUNC(Bullet);

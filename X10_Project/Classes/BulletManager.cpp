@@ -3,6 +3,9 @@
 
 BulletManager* BulletManager::instance = nullptr;
 
+BulletManager::BulletManager() {}
+BulletManager::~BulletManager() {}
+
 BulletManager* BulletManager::GetInstance()
 {
 	if (instance == nullptr)
@@ -34,10 +37,6 @@ void BulletManager::initBullets() //<- pass stage information parameter (si->Bul
 // ...
 
 }
-
-//Let's just check bullets state 'isFlying' in game manager
-vector<Bullet*> BulletManager::GetFlyingBullets()
-{}
 
 //call in gama manger's logic : GetBulletToShot -> add child & visible off & set position-> shot -> visible on
 Bullet* BulletManager::GetBulletToShot()

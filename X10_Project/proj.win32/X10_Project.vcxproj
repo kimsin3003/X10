@@ -162,6 +162,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     </ClCompile>
     <ClCompile Include="..\Classes\Target.cpp" />
     <ClCompile Include="..\Classes\TargetManager.cpp" />
+    <ClCompile Include="..\Classes\TWScene.cpp" />
     <ClCompile Include="..\Classes\UILayer.cpp" />
     <ClCompile Include="main.cpp" />
   </ItemGroup>
@@ -180,6 +181,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="..\Classes\Target.h" />
     <ClInclude Include="..\Classes\TargetManager.h" />
+    <ClInclude Include="..\Classes\TWScene.h" />
     <ClInclude Include="..\Classes\UILayer.h" />
     <ClInclude Include="main.h" />
   </ItemGroup>

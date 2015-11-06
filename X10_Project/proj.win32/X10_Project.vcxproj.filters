@@ -40,8 +40,13 @@
     <ClCompile Include="..\Classes\Enemy.cpp">
       <Filter>Game Object</Filter>
     </ClCompile>
+<<<<<<< HEAD
     <ClCompile Include="..\Classes\MCScene.cpp">
       <Filter>Old</Filter>
+=======
+    <ClCompile Include="..\Classes\TWScene.cpp">
+      <Filter>Scene</Filter>
+>>>>>>> 336d70bedccb6b4c96d806295732c051231475ad
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -84,8 +89,13 @@
     <ClInclude Include="..\Classes\Enemy.h">
       <Filter>Game Object</Filter>
     </ClInclude>
+<<<<<<< HEAD
     <ClInclude Include="..\Classes\MCScene.h">
       <Filter>Old</Filter>
+=======
+    <ClInclude Include="..\Classes\TWScene.h">
+      <Filter>Scene</Filter>
+>>>>>>> 336d70bedccb6b4c96d806295732c051231475ad
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -95,9 +95,6 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="game.rc" />
-  </ItemGroup>
-  <ItemGroup>
     <Filter Include="Scene">
       <UniqueIdentifier>{a5ec6f08-85e5-4448-82fe-afefac118824}</UniqueIdentifier>
     </Filter>
@@ -113,5 +110,13 @@
     <Filter Include="Layer">
       <UniqueIdentifier>{b4a61bd2-3425-4081-b1ee-479820b40afc}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Resource">
+      <UniqueIdentifier>{aa2c9d39-de91-4a7e-b0f8-c4d8759c463e}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="game.rc">
+      <Filter>Resource</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>

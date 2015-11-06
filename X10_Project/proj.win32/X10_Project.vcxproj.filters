@@ -40,6 +40,9 @@
     <ClCompile Include="..\Classes\Enemy.cpp">
       <Filter>Game Object</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MCScene.cpp">
+      <Filter>Old</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -81,6 +84,9 @@
     <ClInclude Include="..\Classes\Enemy.h">
       <Filter>Game Object</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\MCScene.h">
+      <Filter>Old</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Game Object">
@@ -97,6 +103,9 @@
     </Filter>
     <Filter Include="Manager">
       <UniqueIdentifier>{5e2a2fe3-606d-4e16-b12a-fc05728365c3}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Old">
+      <UniqueIdentifier>{51db9db8-51dd-408f-9a31-2351356b1fb8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

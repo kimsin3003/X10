@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
+#include "MCScene.h"
 
 Scene* MainScene::createScene()
 {
@@ -30,9 +31,21 @@ bool MainScene::init()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height / 2));
 
-	auto menu = Menu::create(closeItem, NULL);
+	/*Secret Paul's Test Page*/
+	auto PaulItem = MenuItemFont::create("p", CC_CALLBACK_1(MainScene::ChangeToMCScene,this));
+	PaulItem->setScale(0.2);
+	PaulItem->setPosition(Vec2(origin.x + visibleSize.width - PaulItem->getContentSize().width / 2,
+		origin.y + closeItem->getContentSize().height + PaulItem->getContentSize().height/2));
+	
+	auto menu = Menu::create(closeItem, PaulItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
+}
+
+void MainScene::ChangeToMCScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(MCScene::createScene());
+	return;
 }
 
 void MainScene::menuCloseCallback(Ref* pSender)

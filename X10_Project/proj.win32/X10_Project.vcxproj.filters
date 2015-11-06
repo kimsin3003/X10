@@ -4,26 +4,41 @@
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\stdafx.cpp" />
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="..\Classes\MainScene.cpp">
-      <Filter>Scene</Filter>
+    <ClCompile Include="..\Classes\Bullet.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\BulletManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\TargetManager.cpp">
-      <Filter>Manager</Filter>
+    <ClCompile Include="..\Classes\Enemy.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Explosion.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Target.cpp">
-      <Filter>Game Object</Filter>
+    <ClCompile Include="..\Classes\MCScene.cpp">
+      <Filter>OldNTest</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Bullet.cpp">
-      <Filter>Game Object</Filter>
+    <ClCompile Include="..\Classes\Target.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TargetManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\TWScene.cpp">
+      <Filter>OldNTest</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\GameScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MainScene.cpp">
+      <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Sling.cpp">
-      <Filter>Game Object</Filter>
+      <Filter>GameObject</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\GameLayer.cpp">
       <Filter>Layer</Filter>
@@ -31,48 +46,46 @@
     <ClCompile Include="..\Classes\UILayer.cpp">
       <Filter>Layer</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\GameScene.cpp">
-      <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Explosion.cpp">
-      <Filter>Game Object</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Enemy.cpp">
-      <Filter>Game Object</Filter>
-    </ClCompile>
-<<<<<<< HEAD
-    <ClCompile Include="..\Classes\MCScene.cpp">
-      <Filter>Old</Filter>
-=======
-    <ClCompile Include="..\Classes\TWScene.cpp">
-      <Filter>Scene</Filter>
->>>>>>> 336d70bedccb6b4c96d806295732c051231475ad
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="main.h" />
-    <ClInclude Include="..\Classes\MainScene.h">
-      <Filter>Scene</Filter>
+    <ClInclude Include="..\Classes\Bullet.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\BulletManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\TargetManager.h">
-      <Filter>Manager</Filter>
+    <ClInclude Include="..\Classes\Enemy.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Explosion.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Target.h">
-      <Filter>Game Object</Filter>
+    <ClInclude Include="..\Classes\MCScene.h">
+      <Filter>OldNTest</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Bullet.h">
-      <Filter>Game Object</Filter>
+    <ClInclude Include="..\Classes\Target.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TargetManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\TWScene.h">
+      <Filter>OldNTest</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\GameScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MainScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Sling.h">
-      <Filter>Game Object</Filter>
+      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameLayer.h">
       <Filter>Layer</Filter>
@@ -80,47 +93,25 @@
     <ClInclude Include="..\Classes\UILayer.h">
       <Filter>Layer</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\GameScene.h">
-      <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Explosion.h">
-      <Filter>Game Object</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Enemy.h">
-      <Filter>Game Object</Filter>
-    </ClInclude>
-<<<<<<< HEAD
-    <ClInclude Include="..\Classes\MCScene.h">
-      <Filter>Old</Filter>
-=======
-    <ClInclude Include="..\Classes\TWScene.h">
-      <Filter>Scene</Filter>
->>>>>>> 336d70bedccb6b4c96d806295732c051231475ad
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <Filter Include="Game Object">
-      <UniqueIdentifier>{9032a7ad-f7c5-492e-958a-5fcd0a4b0473}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Resource">
-      <UniqueIdentifier>{66937b0a-80c8-4b83-b6f8-c142ae08d7e9}</UniqueIdentifier>
-    </Filter>
+    <ResourceCompile Include="game.rc" />
+  </ItemGroup>
+  <ItemGroup>
     <Filter Include="Scene">
-      <UniqueIdentifier>{8fb16d5d-a5d4-412c-b104-3304af9ae9c2}</UniqueIdentifier>
+      <UniqueIdentifier>{a5ec6f08-85e5-4448-82fe-afefac118824}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Layer">
-      <UniqueIdentifier>{4e8db3a0-abbd-4d93-a76c-04fb40854b43}</UniqueIdentifier>
+    <Filter Include="OldNTest">
+      <UniqueIdentifier>{65107cc2-2ca7-4692-90bb-48572cff323b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject">
+      <UniqueIdentifier>{179b3b19-8a6e-44e4-b242-5b20f6f112f4}</UniqueIdentifier>
     </Filter>
     <Filter Include="Manager">
-      <UniqueIdentifier>{5e2a2fe3-606d-4e16-b12a-fc05728365c3}</UniqueIdentifier>
+      <UniqueIdentifier>{488aed1d-b802-480b-9ee0-f46ffce93888}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Old">
-      <UniqueIdentifier>{51db9db8-51dd-408f-9a31-2351356b1fb8}</UniqueIdentifier>
+    <Filter Include="Layer">
+      <UniqueIdentifier>{b4a61bd2-3425-4081-b1ee-479820b40afc}</UniqueIdentifier>
     </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <ResourceCompile Include="game.rc">
-      <Filter>Resource</Filter>
-    </ResourceCompile>
   </ItemGroup>
 </Project>

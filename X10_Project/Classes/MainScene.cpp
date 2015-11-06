@@ -24,6 +24,7 @@ bool MainScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	/* End Button */
 	auto closeItem = MenuItemImage::create(
 		"CloseNormal.png",
 		"CloseSelected.png",
@@ -38,23 +39,23 @@ bool MainScene::init()
 	PaulItem->setPosition(Vec2(origin.x + visibleSize.width - PaulItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height + PaulItem->getContentSize().height/2));
 	
-	auto menu = Menu::create(closeItem, PaulItem, NULL);
+	/*Secret Tw's Test Page*/
 	auto twScene = MenuItemFont::create("TW_SecretButton", CC_CALLBACK_1(MainScene::GoToTW, this));
 	twScene->setScaleX(0.5);
 	twScene->setScaleY(0.5);
 	twScene->setPosition(Point(200, 10));
 
-	auto menu = Menu::create(closeItem, twScene, NULL);
+	auto menu = Menu::create(closeItem, twScene, PaulItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 }
 
-<<<<<<< HEAD
 void MainScene::ChangeToMCScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MCScene::createScene());
 	return;
-=======
+}
+
 void MainScene::GoToTW(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(TWScene::createScene());

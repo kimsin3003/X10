@@ -10,4 +10,7 @@ public:
     void menuCloseCallback(cocos2d::Ref* pSender);
 
     CREATE_FUNC(MainScene);
+
+private:
+	void GoToTW(Ref* pSender);
 };

@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
+#include "TWScene.h"
 
 Scene* MainScene::createScene()
 {
@@ -30,9 +31,19 @@ bool MainScene::init()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height / 2));
 
-	auto menu = Menu::create(closeItem, NULL);
+	auto twScene = MenuItemFont::create("TW_SecretButton", CC_CALLBACK_1(MainScene::GoToTW, this));
+	twScene->setScaleX(0.5);
+	twScene->setScaleY(0.5);
+	twScene->setPosition(Point(200, 10));
+
+	auto menu = Menu::create(closeItem, twScene, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
+}
+
+void MainScene::GoToTW(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(TWScene::createScene());
 }
 
 void MainScene::menuCloseCallback(Ref* pSender)

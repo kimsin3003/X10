@@ -1,12 +1,17 @@
 #pragma once
+#include "Sling.h"
+#include "BulletManager.h"
 
 class GameManager
 {
 public:
-	GameManager* GetInstance();
+	static GameManager* GetInstance();
+	void Play();
 
 private:
-	GameManager* instance;
+	static GameManager* instance;
+	Sling* sling;
+	BulletManager* bulletManager;
 	GameManager();
 	~GameManager();
 

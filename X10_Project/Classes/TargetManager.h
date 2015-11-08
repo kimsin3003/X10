@@ -1,12 +1,14 @@
 #pragma once
+#include "Target.h"
 
 class TargetManager
 {
 public:
-	TargetManager* GetInstance();
-
+	static TargetManager* GetInstance();
+	vector<Target*> GetTargets() { return targets; }
 private:
-	TargetManager* instance;
+	static TargetManager* instance;
+	vector<Target*> targets;
 	TargetManager();
 	~TargetManager();
 };

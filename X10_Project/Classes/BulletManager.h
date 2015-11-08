@@ -9,7 +9,7 @@ public:
 	void Init();
 //	vector<Bullet*> GetFlyingBullets(); //Let's just check bullets state 'isFlying' in game manager
 	Bullet* GetBulletToShot();
-	vector<Bullet*> GetBullets(){ return bullets; }
+	vector<Bullet*>& GetBullets(){ return bullets; }
 	void AddExplosion(Bullet* explosion);
 
 private:

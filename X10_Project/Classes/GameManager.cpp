@@ -9,6 +9,7 @@ GameManager::GameManager()
 {
 	sling = Sling::GetInstance();
 	bulletManager = BulletManager::GetInstance();
+	targetManager = TargetManager::GetInstance();
 }
 
 GameManager* GameManager::GetInstance()
@@ -23,7 +24,7 @@ GameManager* GameManager::GetInstance()
 void GameManager::InitTargets(GameLayer* gameLayer){
 	
 	vector<Target*> targets = targetManager->GetTargets();
-	for (auto& target : targets)
+	for (auto target : targets)
 		gameLayer->addChild(target);
 }
 

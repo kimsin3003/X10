@@ -21,9 +21,6 @@ bool GameScene::init()
 		return false;
 	}
 
-	this->scheduleUpdate();
-	if (!Layer::init())
-		return false;
 	gameLayer = GameLayer::create();
 	GameManager::GetInstance()->InitTargets(gameLayer);
 

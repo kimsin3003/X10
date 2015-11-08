@@ -1,7 +1,9 @@
 #include "stdafx.h"
 #include "TargetManager.h"
 
-TargetManager::TargetManager() {}
+TargetManager::TargetManager() {
+	targets.reserve(5);
+}
 TargetManager::~TargetManager() {}
 
 TargetManager* TargetManager::instance = nullptr;

@@ -64,6 +64,7 @@ void Sling::Pull(Event* e)
 	shootAngle = -(startLocation - mouseLocation);
 	if (shootAngle.getAngle() < Vec2::ZERO.getAngle())
 	{
+		//밑으로 각도가 한계를 넘어가는 것들 수정하는 부분..
 	}
 	shootPower = startLocation.getDistance(mouseLocation);
 }

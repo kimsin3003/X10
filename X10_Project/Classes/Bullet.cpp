@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Bullet.h"
 
-
 bool Bullet::Init()
 {
 	if (!Node::init())

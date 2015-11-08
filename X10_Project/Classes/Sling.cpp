@@ -83,26 +83,29 @@ void Sling::Pull(Event* e)
 		return;
 	}
 	EventMouse* evMouse = (EventMouse*)e;
-	Point mouseLocation = evMouse->getLocation();
+	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	
-	shotAngle = mouseLocation - startLocation;
+	shotAngle = startLocation - mouseLocation;
 	if (shotAngle.getAngle() < Vec2::ZERO.getAngle())
 	{
 		//밑으로 각도가 한계를 넘어가는 것들 수정하는 부분..
+		//아직 안만듬
 	}
+
 	shotPower = startLocation.getDistance(mouseLocation);
+	if (shotPower > MAX_POWER)
+	{	
+		shotAngle = shotAngle / (shotPower / MAX_POWER);
+		shotPower = MAX_POWER;
+	}
 
-	ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
-	ccDrawLine(ccp(0, 0), ccp(100, 100));
-
-	//auto draw_node = DrawNode::create();
-	//draw_node->drawLine(Point(0, 0), Point(100, 100), Color4F(255,255,255,255));
-	auto label = Label::create(".","arial", 24);
-	auto delay = MoveBy::create(0.5, shotAngle);
+	auto label = Label::create(".","arial", FONT_SIZE);
+	auto delay = MoveBy::create(PREDICT_LINE_TIME, shotAngle);
 	auto action = Sequence::create(delay, RemoveSelf::create(), NULL);
-	label->runAction(action);
 	this->addChild(label);
+	label->runAction(action);
+	
 }
 
 Point Sling::GetStartLocation()
@@ -137,6 +140,11 @@ bool Sling::IsShotted() // --> 쐈는지 체크
 Vec2 Sling::GetDirection()
 {
 	return shotAngle;
+}
+
+float Sling::GetAngleInRadian()
+{
+	return shotAngle.getAngle();
 }
 
 float Sling::GetSpeed()

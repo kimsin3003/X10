@@ -42,7 +42,6 @@ void GameManager::Play(GameLayer* gameLayer)
 		gameLayer->addChild(bulletToShot);
 	}
 
-
 	//move flying bullets.
 	for (auto& bullet : bullets){
 		if (bullet->IsFlying()){
@@ -50,7 +49,6 @@ void GameManager::Play(GameLayer* gameLayer)
 			CheckCollide(bullet, targets);
 		}
 	} 
-
 
 }
 

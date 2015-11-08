@@ -6,6 +6,9 @@ public: //constant
 	const float WIDTH = 20;
 	const float HEIGHT = 50;
 	const float YPOS = 50;
+	const float MAX_POWER = 50;
+	const float FONT_SIZE = 24;
+	const float PREDICT_LINE_TIME = 0.5;
 
 public:
 	static Sling* GetInstance();
@@ -21,6 +24,7 @@ public:
 	
 	bool IsShotted(); // --> 쐈는지 체크
 	Vec2 GetDirection();
+	float GetAngleInRadian();
 	float GetSpeed();
 	
 private: //function to get singleton instance

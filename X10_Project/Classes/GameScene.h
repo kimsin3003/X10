@@ -5,7 +5,7 @@
 class GameScene : public Layer
 {
 public:
-	Scene* createScene();
+	static Scene* createScene();
 	virtual bool init(); 
 	CREATE_FUNC(GameScene);
 	virtual void update(float dt);

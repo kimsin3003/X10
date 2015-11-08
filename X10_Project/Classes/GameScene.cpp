@@ -16,7 +16,13 @@ Scene* GameScene::createScene()
 
 bool GameScene::init()
 {
+	if (Layer::init() == false)
+	{
+		return false;
+	}
+
 	this->scheduleUpdate();
+	return true;
 }
 
 void update(float dt){

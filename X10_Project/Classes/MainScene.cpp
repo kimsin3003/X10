@@ -3,6 +3,7 @@
 #include "MCScene.h"
 #include "TWScene.h"
 #include "GameScene.h"
+#include "Sling.h"
 
 Scene* MainScene::createScene()
 {
@@ -24,6 +25,7 @@ bool MainScene::init()
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	Sling::isExist = false;
 
 	/*Game start Button*/
 	auto startGame = MenuItemFont::create("START", CC_CALLBACK_1(MainScene::ChangeToGameScene, this));

@@ -4,6 +4,7 @@
 #include "MCScene.h"
 #include "Explosion.h"
 #include "Enemy.h"
+#include "Sling.h"
 
 Scene* MCScene::createScene()
 {
@@ -121,14 +122,13 @@ bool MCScene::init()
 	aniSprite->runAction(jumpForever);
 
 
-	///*Enemey*/
-	//auto enemy = Enemy::createEnemy();
-	//enemy->setName("Enemy");
-	//enemy->setPosition(Point(300, 460));
-	//this->addChild(enemy);
+	auto sling = Sling::GetInstance();
+	this->addChild(sling);
 
 	return true;
 }
+
+
 
 void MCScene::ChangeToMainScene(Ref* pSender)
 {

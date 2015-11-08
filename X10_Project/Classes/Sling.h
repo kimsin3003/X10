@@ -3,15 +3,18 @@
 class Sling : public Node
 {
 public: //constant
-	
+	const float WIDTH = 20;
+	const float HEIGHT = 50;
+	const float YPOS = 50;
 
 public:
 	static Sling* GetInstance();
-	
+	static bool isExist;
+
 	/*동작 변화를 위해 호출하는 함수들*/
 	void Reset(); // --> 매스테이지마다 리셋. 매개변수는 미정.
 	//sling manager가 있다면 가져가야 할 함수들
-	//void NewBulletLoad(Bullet* b);
+	void NewBulletLoad();
 	void PullStart(Event* e);
 	void Pull(Event* e);
 	void Shot(Event* e);

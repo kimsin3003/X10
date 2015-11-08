@@ -22,9 +22,17 @@ bool GameScene::init()
 	}
 
 	this->scheduleUpdate();
+	if (!Layer::init())
+		return false;
+	gameLayer = GameLayer::create();
+	uiLayer = UILayer::create();
+	this->addChild(gameLayer);
+	this->addChild(uiLayer);
+	this->scheduleUpdate();
+
 	return true;
 }
 
-void update(float dt){
-	GameManager::GetInstance()->Play();
+void GameScene::update(float dt){
+	GameManager::GetInstance()->Play(gameLayer);
 }

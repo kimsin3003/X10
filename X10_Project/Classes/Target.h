@@ -3,5 +3,6 @@
 
 class Target : public Node
 {
-
+public:
+	void SetEffect(Bullet* bullet);
 };

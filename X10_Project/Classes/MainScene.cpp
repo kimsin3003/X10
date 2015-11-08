@@ -2,6 +2,7 @@
 #include "MainScene.h"
 #include "MCScene.h"
 #include "TWScene.h"
+#include "GameScene.h"
 
 Scene* MainScene::createScene()
 {
@@ -24,6 +25,12 @@ bool MainScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
+	/*Game start Button*/
+	auto startGame = MenuItemFont::create("START", CC_CALLBACK_1(MainScene::ChangeToGameScene, this));
+	//set position center
+	startGame->setPosition(	visibleSize.width / 2, 	visibleSize.height / 2);
+
+
 	/* End Button */
 	auto closeItem = MenuItemImage::create(
 		"CloseNormal.png",
@@ -45,7 +52,8 @@ bool MainScene::init()
 	twScene->setScaleY(0.5);
 	twScene->setPosition(Point(200, 10));
 
-	auto menu = Menu::create(closeItem, twScene, PaulItem, NULL);
+	/*Create Menu*/
+	auto menu = Menu::create(startGame, closeItem, twScene, PaulItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 }
@@ -53,6 +61,12 @@ bool MainScene::init()
 void MainScene::ChangeToMCScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MCScene::createScene());
+	return;
+}
+
+void MainScene::ChangeToGameScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(GameScene::createScene());
 	return;
 }
 

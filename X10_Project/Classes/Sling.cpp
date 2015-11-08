@@ -17,7 +17,7 @@ bool Sling::init()
 	{
 		return false;
 	}
-
+	setName("Sling");
 	ChangeToEmpty();
 
 	//charater anmation start
@@ -28,6 +28,9 @@ bool Sling::init()
 	_mouseListener->onMouseMove = CC_CALLBACK_1(Sling::Pull, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 
+	auto body = Sprite::create("HelloWorld.png",Rect(0,0,20,50));
+	body->setName("body");
+	this->addChild(body);
 	return true;
 }
 
@@ -61,12 +64,15 @@ void Sling::Pull(Event* e)
 	EventMouse* evMouse = (EventMouse*)e;
 	Point mouseLocation = evMouse->getLocation();
 	Point startLocation = getStartLocation();
+	
 	shootAngle = -(startLocation - mouseLocation);
 	if (shootAngle.getAngle() < Vec2::ZERO.getAngle())
 	{
 		//밑으로 각도가 한계를 넘어가는 것들 수정하는 부분..
 	}
+
 	shootPower = startLocation.getDistance(mouseLocation);
+
 }
 
 Point Sling::getStartLocation()

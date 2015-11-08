@@ -2,6 +2,9 @@
 
 class Sling : public Node
 {
+public: //constant
+	
+
 public:
 	static Sling* GetInstance();
 	

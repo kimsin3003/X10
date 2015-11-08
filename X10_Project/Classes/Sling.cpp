@@ -13,7 +13,12 @@ Sling* Sling::GetInstance()
 
 bool Sling::init()
 {
-	status = empty;
+	if (Node::init() == false)
+	{
+		return false;
+	}
+
+	ChangeToEmpty();
 
 	//charater anmation start
 
@@ -22,6 +27,8 @@ bool Sling::init()
 	_mouseListener->onMouseDown = CC_CALLBACK_1(Sling::PullStart, this);
 	_mouseListener->onMouseMove = CC_CALLBACK_1(Sling::Pull, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
+
+	return true;
 }
 
 

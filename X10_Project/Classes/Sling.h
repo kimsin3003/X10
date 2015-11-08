@@ -35,7 +35,7 @@ private: //member function
 	void ChangeToShooted(); //pullig -> shooted
 	void ChangeToEmpty(); //shooted -> empty
 
-	Point getStartLocation();
+	Point GetStartLocation();
 
 private: //member variable
 	Vec2 shootAngle;

@@ -29,6 +29,9 @@ bool GameScene::init()
 	this->addChild(uiLayer);
 	this->scheduleUpdate();
 
+	auto sling = Sling::GetInstance();
+	this->addChild(sling);
+
 	return true;
 }
 

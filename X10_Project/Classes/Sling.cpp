@@ -105,7 +105,7 @@ void Sling::Pull(Event* e)
 	this->addChild(label);
 }
 
-Point Sling::getStartLocation()
+Point Sling::GetStartLocation()
 {
 	return getPosition();
 }

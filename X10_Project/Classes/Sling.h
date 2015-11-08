@@ -19,7 +19,7 @@ public:
 	void Pull(Event* e);
 	void Shot(Event* e);
 	
-	bool IsShoted(); // --> ½ú´ÂÁö Ã¼Å©
+	bool IsShotted(); // --> ½ú´ÂÁö Ã¼Å©
 	Vec2 GetDirection();
 	float GetSpeed();
 	
@@ -29,15 +29,15 @@ private: //function to get singleton instance
 	static Sling* instance;
 
 private: //member function
-	enum Status { empty, loaded, pulling, shoted } status;
+	enum Status { empty, loaded, pulling, shotted } status;
 	void ChangeToLoaded(); //empty -> load
 	void ChangeToPulling(); //loaded -> pulling
-	void ChangeToShooted(); //pullig -> shooted
-	void ChangeToEmpty(); //shooted -> empty
+	void ChangeToShotted(); //pullig -> shotted
+	void ChangeToEmpty(); //shotted -> empty
 
 	Point GetStartLocation();
 
 private: //member variable
-	Vec2 shootAngle;
-	float shootPower;
+	Vec2 shotAngle;
+	float shotPower;
 };

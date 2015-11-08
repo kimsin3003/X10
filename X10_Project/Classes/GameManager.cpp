@@ -33,8 +33,8 @@ void GameManager::Play(GameLayer* gameLayer)
 {
 	vector<Bullet*> bullets = bulletManager->GetBullets();
 	vector<Target*> targets = targetManager->GetTargets();
-	//shot if sling shotted the bullet. --> isShoted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
-	if (sling->IsShoted()){
+	//shot if sling shotted the bullet. --> isShotted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
+	if (sling->IsShotted()){
 		Bullet* bulletToShot = bulletManager->GetBulletToShot();
 		bulletToShot->SetDirection(sling->GetDirection());
 		bulletToShot->SetSpeed(sling->GetSpeed());

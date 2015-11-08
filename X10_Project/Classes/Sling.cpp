@@ -84,14 +84,14 @@ void Sling::Pull(Event* e)
 	}
 	EventMouse* evMouse = (EventMouse*)e;
 	Point mouseLocation = evMouse->getLocation();
-	Point startLocation = getStartLocation();
+	Point startLocation = GetStartLocation();
 	
-	shootAngle = mouseLocation - startLocation;
-	if (shootAngle.getAngle() < Vec2::ZERO.getAngle())
+	shotAngle = mouseLocation - startLocation;
+	if (shotAngle.getAngle() < Vec2::ZERO.getAngle())
 	{
 		//밑으로 각도가 한계를 넘어가는 것들 수정하는 부분..
 	}
-	shootPower = startLocation.getDistance(mouseLocation);
+	shotPower = startLocation.getDistance(mouseLocation);
 
 	ccDrawColor4F(1.0f, 0.0f, 0.0f, 1.0f);
 	ccDrawLine(ccp(0, 0), ccp(100, 100));
@@ -99,7 +99,7 @@ void Sling::Pull(Event* e)
 	//auto draw_node = DrawNode::create();
 	//draw_node->drawLine(Point(0, 0), Point(100, 100), Color4F(255,255,255,255));
 	auto label = Label::create(".","arial", 24);
-	auto delay = MoveBy::create(0.5, shootAngle);
+	auto delay = MoveBy::create(0.5, shotAngle);
 	auto action = Sequence::create(delay, RemoveSelf::create(), NULL);
 	label->runAction(action);
 	this->addChild(label);
@@ -119,12 +119,12 @@ void Sling::Shot(Event* e)
 	//fix shot angle,power from last pointer position.
 	Pull(e);
 
-	ChangeToShooted();
+	ChangeToShotted();
 }
 
-bool Sling::IsShoted() // --> 쐈는지 체크
+bool Sling::IsShotted() // --> 쐈는지 체크
 {
-	if (status == shoted)
+	if (status == shotted)
 	{
 		return true;
 	}
@@ -136,12 +136,12 @@ bool Sling::IsShoted() // --> 쐈는지 체크
 
 Vec2 Sling::GetDirection()
 {
-	return shootAngle;
+	return shotAngle;
 }
 
 float Sling::GetSpeed()
 {
-	return shootPower;
+	return shotPower;
 }
 
 
@@ -157,13 +157,13 @@ void Sling::ChangeToPulling() //loaded -> pulling
 		return;
 	status = pulling;
 }
-void Sling::ChangeToShooted() //pullig -> shooted
+void Sling::ChangeToShotted() //pullig -> shotted
 {
 	if (status != pulling)
 		return;
-	status = shoted;
+	status = shotted;
 }
-void Sling::ChangeToEmpty() //shooted -> empty
+void Sling::ChangeToEmpty() //shotted -> empty
 {
 	status = empty;
 	ChangeToLoaded();

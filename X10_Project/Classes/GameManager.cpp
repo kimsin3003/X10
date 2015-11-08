@@ -20,6 +20,12 @@ GameManager* GameManager::GetInstance()
 	return instance;
 }
 
+void GameManager::InitTargets(GameLayer* gameLayer){
+	
+	vector<Target*> targets = targetManager->GetTargets();
+	for (auto& target : targets)
+		gameLayer->addChild(target);
+}
 
 //main game logic
 void GameManager::Play(GameLayer* gameLayer)

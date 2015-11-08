@@ -25,6 +25,8 @@ bool GameScene::init()
 	if (!Layer::init())
 		return false;
 	gameLayer = GameLayer::create();
+	GameManager::GetInstance()->InitTargets(gameLayer);
+
 	uiLayer = UILayer::create();
 	this->addChild(gameLayer);
 	this->addChild(uiLayer);

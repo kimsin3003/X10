@@ -8,6 +8,7 @@ class GameManager
 {
 public:
 	static GameManager* GetInstance();
+	void InitTargets(GameLayer* gameLayer);
 	void Play(GameLayer* gameLayer);
 
 private:

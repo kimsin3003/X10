@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "BulletManager.h"
+#include "Bullet.h"
 
 BulletManager* BulletManager::instance = nullptr;
 
@@ -35,7 +36,8 @@ void BulletManager::InitBullets() //<- pass stage information parameter (si->Bul
 // bullets.push_back(si->bullets->pop_back());
 // bullets.push_back(si->bullets->pop_back());
 // ...
-
+	Bullet* b1 = Bullet::create();
+	bullets.push_back(b1);
 }
 
 //call in gama manger's logic : GetBulletToShot -> add child & visible off & set position-> shot -> visible on

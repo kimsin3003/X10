@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Bullet.h"
+#include "Sling.h"
 
 bool Bullet::Init()
 {
@@ -9,7 +10,7 @@ bool Bullet::Init()
 	}
 
 	//temporary initailization for test
-	this->setPosition(Vec2(100, 100)); //Game manager sets initial bullet position
+	this->setPosition(Sling::GetInstance()->getPosition()); //Game manager sets initial bullet position
 	this->addChild(spr);
 	spr = Sprite::create("res/bullet.png");
 

@@ -12,5 +12,7 @@ bool GameLayer::init()
 	if (Layer::init() == false)
 		return false;
 
+	setAnchorPoint(Vec2(0, 0));
+
 	return true;
 }

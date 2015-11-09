@@ -86,6 +86,10 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			if (((Bullet*)collider)->IsExplosing())
 			{
 				Explosion* explosion = ((Bullet*)collider)->GetExplosion();
+				Size size = Director::getInstance()->getVisibleSize();
+				Point half = Point(size.width, size.height)/2;
+				Point pos = collider->getPosition()-half;
+				explosion->setPosition(pos);
 				colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
 				((Bullet*)collider)->SetExplosing(false);

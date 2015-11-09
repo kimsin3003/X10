@@ -128,7 +128,6 @@ bool Bullet::IsBullet()
 Explosion* Bullet::GetExplosion()
 {
 	Explosion* explosion = Explosion::create();
-	explosion->SetPosition((Vec2)getPosition());
 	return explosion;
 }
 

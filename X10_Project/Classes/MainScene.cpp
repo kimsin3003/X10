@@ -2,6 +2,7 @@
 #include "MainScene.h"
 #include "MCScene.h"
 #include "TWScene.h"
+#include "JWScene.h"
 #include "GameScene.h"
 #include "Sling.h"
 #include "GameManager.h"
@@ -55,8 +56,14 @@ bool MainScene::init()
 	twScene->setScaleY(0.5);
 	twScene->setPosition(Point(200, 10));
 
+	/*Secret Jw's Test Page*/
+	auto jwScene = MenuItemFont::create("jwwj", CC_CALLBACK_1(MainScene::ChangeToJWScene, this));
+	jwScene->setScaleX(0.5);
+	jwScene->setScaleY(0.5);
+	jwScene->setPosition(Point(110, 10));
+
 	/*Create Menu*/
-	auto menu = Menu::create(startGame, closeItem, twScene, PaulItem, NULL);
+	auto menu = Menu::create(startGame, closeItem, twScene, PaulItem, jwScene, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
@@ -82,6 +89,10 @@ void MainScene::GoToTW(Ref* pSender)
 	Director::getInstance()->replaceScene(TWScene::createScene());
 }
 
+void MainScene::ChangeToJWScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(JWScene::createScene());
+}
 void MainScene::menuCloseCallback(Ref* pSender)
 {
     Director::getInstance()->end();

@@ -7,7 +7,6 @@ class ColliderManager
 public:
 	static ColliderManager* GetInstance();
 	void Init();
-//	Vector<Collider*> GetFlyingColliders(); //Let's just check Colliders state 'isFlying' in game manager
 	Collider* GetColliderToShot();
 	Vector<Collider*>& GetColliders(){ return colliders; }
 	void AddExplosion(Collider* explosion);

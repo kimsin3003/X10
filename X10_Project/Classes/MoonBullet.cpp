@@ -10,7 +10,7 @@ bool MoonBullet::init()
 	}
 
 	//temporary initialization for test
-	spr = Sprite::create("res/MoonBullet.png");
+	spr = Sprite::create("res/Bullet.png");
 	this->addChild(spr);
 
 	speed = 0;
@@ -56,15 +56,4 @@ void MoonBullet::Move()
 	Vec2 delta = speed * direction;
 	Vec2 curPos = this->getPosition();
 	setPosition(curPos + delta);
-}
-
-//add : as lifeTime gets near to zero, 1. speed decreases 2. color turns red
-void MoonBullet::DecreaseLife()
-{
-	lifeTime -= timeDecrease;
-}
-
-bool MoonBullet::IsFlying()
-{
-	return isFlying;
 }

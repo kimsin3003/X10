@@ -13,6 +13,7 @@ public:
 
 private:
 	void GoToTW(Ref* pSender);
+	void ChangeToJWScene(Ref* pSender);
 	void ChangeToMCScene(Ref* pSender);
 	void ChangeToGameScene(Ref* pSender);
 };

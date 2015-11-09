@@ -64,6 +64,9 @@
     <ClCompile Include="..\Classes\MoonBullet.cpp">
       <Filter>GameObject\Bullets</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\JWScene.cpp">
+      <Filter>OldNTest</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -128,6 +131,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MoonBullet.h">
       <Filter>GameObject\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\JWScene.h">
+      <Filter>OldNTest</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

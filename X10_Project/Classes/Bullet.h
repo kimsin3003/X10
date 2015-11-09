@@ -1,6 +1,7 @@
 #pragma once
 
 #include "Collider.h"
+#include "Explosion.h"
 
 class Bullet : public Collider
 {
@@ -9,20 +10,24 @@ public:
 	virtual bool init() override;
 	virtual void Act() override;
 	virtual void Move(); // called each frame 
+	virtual bool IsFlying();
+	virtual Explosion* GetExPlosion() { return explosion; }
 
 	void SetDirection(Vec2 dir);
 	void SetSpeed(float spd);
-	virtual bool IsFlying();
 
 	void SetFlying(bool flag);
-	bool IsAlive();
+	bool IsAlive() override;
+	bool IsBullet() override { return true; }
 	void SetAlive(bool flag);
 
 protected:
 	void DecreaseLife(); // called in Move()
 
+
 	Sprite* spr;
 	Vec2 direction;
+	Explosion* explosion;
 	float speed;
 	float lifeTime;
 	

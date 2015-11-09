@@ -21,6 +21,8 @@ bool TWScene::init()
 	}
 
 	ParticleFireworks* fireworks = ParticleFireworks::create();
+	fireworks->setPosition(Vec2(0,0));
+	
 	this->addChild(fireworks);
 
 	return true;

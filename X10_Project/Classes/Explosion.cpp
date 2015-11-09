@@ -26,6 +26,12 @@ void Explosion::Act()
 	}
 }
 
+void Explosion::SetPosition(Vec2 position)
+{
+	setPosition(position);
+	particle->setPosition(position);
+}
+
 bool Explosion::IsFlying()
 {
 	return isFlying;

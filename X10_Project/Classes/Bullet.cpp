@@ -56,7 +56,7 @@ void Bullet::Act()
 void Bullet::Move()
 {
 	Vec2 delta = speed * direction;
-	Vec2 curPos = this->getPosition();
+	Vec2 curPos = getPosition();
 	setPosition(curPos + delta);
 }
 
@@ -104,7 +104,7 @@ bool Bullet::IsBullet()
 Explosion* Bullet::GetExplosion()
 {
 	Explosion* explosion = Explosion::create();
-	explosion->setPosition(getPosition());
+	explosion->SetPosition((Vec2)getPosition());
 	return explosion;
 }
 

@@ -10,7 +10,6 @@ bool Bullet::init()
 	}
 
 	//temporary initialization for test
-	this->setPosition(Sling::GetInstance()->getPosition()); //Game manager sets initial bullet position
 	spr = Sprite::create("res/bullet.png");
 	this->addChild(spr);
 	
@@ -40,7 +39,9 @@ void Bullet::Move()
 		DecreaseLife();
 
 		if (lifeTime < 10)
+		{
 			SetSpeed(speed * speedSetRatio);
+		}
 	}
 	else
 	{

@@ -25,7 +25,7 @@ public:
 	Vec2 GetDirection();
 	float GetAngleInRadian();
 	float GetSpeed();
-	
+	float GetRotationAngle();
 	
 private: //function to get singleton instance
 	CREATE_FUNC(Sling);

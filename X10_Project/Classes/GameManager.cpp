@@ -4,6 +4,7 @@
 #include "Collider.h"
 #include "Target.h"
 #include "Bullet.h"
+
 GameManager* GameManager::instance = nullptr;
 
 GameManager::GameManager()
@@ -36,15 +37,16 @@ void GameManager::Play(GameLayer* gameLayer)
 	Vector<Target*> targets = targetManager->GetTargets(); 
 	//shot if sling shotted the Collider. --> isShotted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
 
-	
 	if (colliderManager->HasNextCollider()){
 		sling->NewColliderLoad();
 	}
 
 	if (sling->IsShotted()){
 		Bullet* colliderToShot = (Bullet*)colliderManager->GetColliderToShot();
+		colliderToShot->setPosition(sling->getPosition()); //Game manager sets initial bullet position
+		colliderToShot->setRotation(sling->GetRotationAngle());
 		colliderToShot->SetDirection(sling->GetDirection());
-		colliderToShot->SetSpeed(1);
+		colliderToShot->SetSpeed(sling->GetSpeed()/20);
 		colliderToShot->SetFlying(true);
 		gameLayer->addChild(colliderToShot);
 		sling->Reset();
@@ -57,7 +59,6 @@ void GameManager::Play(GameLayer* gameLayer)
 			CheckCollide(collider, targets);
 		}
 	} 
-
 }
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets){
@@ -66,4 +67,3 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets){
 			target->SetEffect(collider);
 	}
 }
-

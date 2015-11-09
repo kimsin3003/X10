@@ -146,6 +146,11 @@ float Sling::GetAngleInRadian()
 	return shotAngle.getAngle();
 }
 
+float Sling::GetRotationAngle()
+{
+	return -GetAngleInRadian() / 3.14 * 180 +90;
+}
+
 float Sling::GetSpeed()
 {
 	return shotPower;

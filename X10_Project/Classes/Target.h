@@ -7,4 +7,6 @@ class Target : public Node
 public:
 	void SetEffect(Collider* collider);
 	CREATE_FUNC(Target);
+private:
+
 };

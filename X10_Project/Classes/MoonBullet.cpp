@@ -57,14 +57,3 @@ void MoonBullet::Move()
 	Vec2 curPos = this->getPosition();
 	setPosition(curPos + delta);
 }
-
-//add : as lifeTime gets near to zero, 1. speed decreases 2. color turns red
-void MoonBullet::DecreaseLife()
-{
-	lifeTime -= timeDecrease;
-}
-
-bool MoonBullet::IsFlying()
-{
-	return isFlying;
-}

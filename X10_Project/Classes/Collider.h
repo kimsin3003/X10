@@ -9,5 +9,7 @@ public:
 	virtual bool IsAlive() = 0;
 
 protected:
+	bool isFlying;
+	bool isBullet;
 	bool isAlive;
 };

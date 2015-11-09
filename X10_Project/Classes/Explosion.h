@@ -11,11 +11,10 @@ public:
 	virtual bool IsFlying();
 	virtual void SetFlying(bool flag);
 	virtual bool IsAlive() override;
-	void SetPosition(Vec2 position);
 	bool IsBullet() override;
+	void SetPosition(Vec2 position);
 
 protected:
 	ParticleExplosion* particle;
 	int lifeTime;
-	bool isFlying;
 };

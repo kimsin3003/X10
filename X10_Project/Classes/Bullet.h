@@ -35,10 +35,6 @@ protected:
 	float speedDecreaseRatio;
 	float timeDecrease;
 
-	//Status - Game manager controls bullet according to its status
-	
-	bool isFlying; //T - Game manager checks Collision
-	bool isAlive; 
 private:
 	Sprite* MakeBody();
 	const int DEFAULT_FRAMES = 5;

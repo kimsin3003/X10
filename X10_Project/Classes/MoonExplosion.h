@@ -13,5 +13,4 @@ public:
 
 protected:
 	ParticleExplosion* particle;
-	bool isFlying;
 };

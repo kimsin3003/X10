@@ -20,6 +20,7 @@ bool GameScene::init()
 	{
 		return false;
 	}
+
 	uiLayer = UILayer::create();
 	gameLayer = GameLayer::create();
 	this->addChild(uiLayer);

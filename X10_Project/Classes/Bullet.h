@@ -1,14 +1,16 @@
 #pragma once
+#include "Collider.h"
 
-class Bullet : public Node
+class Bullet : public Collider
 {
 public:
 	CREATE_FUNC(Bullet);
 	virtual bool init() override;
+	virtual void Act() override;
 	void Move(); // called each frame 
 	void SetDirection(Vec2 dir);
 	void SetSpeed(float spd);
-	bool IsFlying();
+	virtual bool IsFlying();
 	void SetFlying(bool flag);
 	bool IsAlive();
 	void SetAlive(bool flag);

@@ -148,7 +148,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Bullet.cpp" />
-    <ClCompile Include="..\Classes\BulletManager.cpp" />
+    <ClCompile Include="..\Classes\Collider.cpp" />
+    <ClCompile Include="..\Classes\ColliderManager.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\Explosion.cpp" />
     <ClCompile Include="..\Classes\GameLayer.cpp" />
@@ -169,7 +170,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Bullet.h" />
-    <ClInclude Include="..\Classes\BulletManager.h" />
+    <ClInclude Include="..\Classes\Collider.h" />
+    <ClInclude Include="..\Classes\ColliderManager.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\Explosion.h" />
     <ClInclude Include="..\Classes\GameLayer.h" />

@@ -1,6 +1,6 @@
 #pragma once
 #include "Sling.h"
-#include "BulletManager.h"
+#include "ColliderManager.h"
 #include "GameLayer.h"
 #include "TargetManager.h"
 
@@ -12,10 +12,10 @@ public:
 	void Play(GameLayer* gameLayer);
 
 private:
-	void CheckCollide(Bullet* bullet, Vector<Target*> targets);
+	void CheckCollide(Collider* bullet, Vector<Target*> targets);
 	static GameManager* instance;
 	Sling* sling;
-	BulletManager* bulletManager;
+	ColliderManager* colliderManager;
 	TargetManager* targetManager;
 	GameManager();
 	~GameManager();

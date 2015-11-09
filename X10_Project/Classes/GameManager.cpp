@@ -1,14 +1,15 @@
 #include "stdafx.h"
 #pragma once
 #include "GameManager.h"
-#include "Bullet.h"
+#include "Collider.h"
 #include "Target.h"
+#include "Bullet.h"
 GameManager* GameManager::instance = nullptr;
 
 GameManager::GameManager()
 {
 	sling = Sling::GetInstance();
-	bulletManager = BulletManager::GetInstance();
+	colliderManager = ColliderManager::GetInstance();
 	targetManager = TargetManager::GetInstance();
 }
 
@@ -31,38 +32,38 @@ void GameManager::InitTargets(GameLayer* gameLayer){
 //main game logic
 void GameManager::Play(GameLayer* gameLayer)
 {
-	Vector<Bullet*> bullets = bulletManager->GetBullets();
+	Vector<Collider*> colliders = colliderManager->GetColliders();
 	Vector<Target*> targets = targetManager->GetTargets(); 
-	//shot if sling shotted the bullet. --> isShotted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
+	//shot if sling shotted the Collider. --> isShotted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
 
 	
-	if (bulletManager->HasNextBullet()){
-		sling->NewBulletLoad();
+	if (colliderManager->HasNextCollider()){
+		sling->NewColliderLoad();
 	}
 
 	if (sling->IsShotted()){
-		Bullet* bulletToShot = bulletManager->GetBulletToShot();
-		bulletToShot->SetDirection(sling->GetDirection());
-		bulletToShot->SetSpeed(1);
-		bulletToShot->SetFlying(true);
-		gameLayer->addChild(bulletToShot);
+		Bullet* colliderToShot = (Bullet*)colliderManager->GetColliderToShot();
+		colliderToShot->SetDirection(sling->GetDirection());
+		colliderToShot->SetSpeed(1);
+		colliderToShot->SetFlying(true);
+		gameLayer->addChild(colliderToShot);
 		sling->Reset();
 	}
 
-	//move flying bullets.
-	for (auto& bullet : bullets){
-		if (bullet->IsFlying()){
-			bullet->Move();
-			CheckCollide(bullet, targets);
+	//move flying Colliders.
+	for (auto& collider : colliders){
+		if (collider->IsFlying()){
+			collider->Act();
+			CheckCollide(collider, targets);
 		}
 	} 
 
 }
 
-void GameManager::CheckCollide(Bullet* bullet, Vector<Target*> targets){
+void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets){
 	for (auto& target : targets){
-		if (bullet->getBoundingBox().intersectsRect(target->getBoundingBox()))
-			target->SetEffect(bullet);
+		if (collider->getBoundingBox().intersectsRect(target->getBoundingBox()))
+			target->SetEffect(collider);
 	}
 }
 

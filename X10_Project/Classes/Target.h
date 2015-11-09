@@ -1,10 +1,10 @@
 #pragma once
 #include "stdafx.h"
-class Bullet;
+class Collider;
 
 class Target : public Node
 {
 public:
-	void SetEffect(Bullet* bullet);
+	void SetEffect(Collider* collider);
 	CREATE_FUNC(Target);
 };

@@ -85,3 +85,8 @@ void Bullet::SetAlive(bool flag)
 {
 	isAlive = flag;
 }
+
+void Bullet::Act()
+{
+	Move();
+}

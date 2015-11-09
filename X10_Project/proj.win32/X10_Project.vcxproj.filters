@@ -7,9 +7,6 @@
     <ClCompile Include="..\Classes\Bullet.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\BulletManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Enemy.cpp">
       <Filter>GameObject</Filter>
     </ClCompile>
@@ -46,6 +43,12 @@
     <ClCompile Include="..\Classes\UILayer.cpp">
       <Filter>Layer</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ColliderManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Collider.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -53,9 +56,6 @@
     <ClInclude Include="main.h" />
     <ClInclude Include="..\Classes\Bullet.h">
       <Filter>GameObject</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\BulletManager.h">
-      <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Enemy.h">
       <Filter>GameObject</Filter>
@@ -92,6 +92,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\UILayer.h">
       <Filter>Layer</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\ColliderManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Collider.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

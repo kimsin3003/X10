@@ -1,7 +1,8 @@
 #include "stdafx.h"
 #include "Target.h"
+#include "Collider.h"
 
-void Target::SetEffect(Bullet* bullet)
+void Target::SetEffect(Collider* collider)
 {
 
 }

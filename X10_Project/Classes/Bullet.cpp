@@ -11,9 +11,25 @@ bool Bullet::init()
 	}
 
 	//temporary initialization for test
-	spr = Sprite::create("res/bullet.png");
-	this->addChild(spr);
-	
+	Sprite* aniSprite = Sprite::create();
+	//애니매이션 프레임 추가
+	Vector<SpriteFrame*> animFrames;
+	float scale = Director::getInstance()->getContentScaleFactor();
+	const Size fireSize(DEFAULT_WIDTH/scale/DEFAULT_RATIO, DEFAULT_HEIGHT/scale/DEFAULT_RATIO);
+	int frameCut = DEFAULT_FRAMES;
+	animFrames.reserve(frameCut);
+	for (int i = 0; i < frameCut; i++){
+		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i,0), fireSize));
+		animFrames.pushBack(frame);
+	}
+	// create the animation out of the frame
+	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
+	Animate* animate = Animate::create(animation);
+	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
+	aniSprite->runAction(aniAction); //스프라이트(spr)에 실행
+	aniSprite->setScale(DEFAULT_RATIO);
+	this->addChild(aniSprite);
+
 	speed = 0;
 	direction = Vec2::ZERO;
 	timeDecrease = 1;

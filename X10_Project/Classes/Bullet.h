@@ -33,4 +33,9 @@ protected:
 	//Status - Game manager controls bullet according to its status
 	bool isFlying; //T - Game manager checks Collision
 	bool isAlive; 
+private:
+	const int DEFAULT_FRAMES = 5;
+	const float DEFAULT_WIDTH = 20;
+	const float DEFAULT_HEIGHT = 20;
+	const float DEFAULT_RATIO = 2;
 };

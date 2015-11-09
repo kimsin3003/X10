@@ -45,7 +45,7 @@ bool MainScene::init()
 
 	/*Secret Paul's Test Page*/
 	auto PaulItem = MenuItemFont::create("p", CC_CALLBACK_1(MainScene::ChangeToMCScene,this));
-	PaulItem->setScale(0.2f);
+	PaulItem->setScale(0.5f);
 	PaulItem->setPosition(Vec2(origin.x + visibleSize.width - PaulItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height + PaulItem->getContentSize().height/2));
 	

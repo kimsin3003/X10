@@ -3,11 +3,11 @@
 class Sling : public Node
 {
 public: //constant
-	const float WIDTH = 20;
-	const float HEIGHT = 50;
-	const float YPOS = 50;
-	const float MAX_POWER = 50;
-	const float FONT_SIZE = 24;
+	const float WIDTH	= 20;
+	const float HEIGHT	= 50;
+	const float YPOS	= 50;
+	const float MAX_POWER	= 50;
+	const float FONT_SIZE	= 24;
 	const float PREDICT_LINE_TIME = 0.5;
 
 public:
@@ -16,7 +16,6 @@ public:
 
 	/*동작 변화를 위해 호출하는 함수들*/
 	void Reset(); // --> 매스테이지마다 리셋. 매개변수는 미정.
-	//sling manager가 있다면 가져가야 할 함수들
 	void NewBulletLoad();
 	void PullStart(Event* e);
 	void Pull(Event* e);
@@ -32,12 +31,12 @@ private: //function to get singleton instance
 	virtual bool init();
 	static Sling* instance;
 
-private: //member function
+	//member function
 	enum Status { empty, loaded, pulling, shotted } status;
-	void ChangeToLoaded(); //empty -> load
+	void ChangeToLoaded();	//empty -> load
 	void ChangeToPulling(); //loaded -> pulling
 	void ChangeToShotted(); //pullig -> shotted
-	void ChangeToEmpty(); //shotted -> empty
+	void ChangeToEmpty();	//shotted -> empty
 
 	Point GetStartLocation();
 

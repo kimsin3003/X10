@@ -1,9 +1,8 @@
 #include "stdafx.h"
-#include "Collider.h"
+#include "MoonExplosion.h"
 #include "Explosion.h"
 
-//Base Class of All Explosions
-bool Explosion::init()
+bool MoonExplosion::init()
 {
 	isFlying = false;
 	particle = ParticleExplosion::create();
@@ -13,18 +12,18 @@ bool Explosion::init()
 	return true;
 }
 
-void Explosion::Act()
+void MoonExplosion::Act()
 {
 	isFlying = true;
 	particle->setVisible(true);
 }
 
-bool Explosion::IsFlying()
+bool MoonExplosion::IsFlying()
 {
 	return isFlying;
 }
 
-void Explosion::SetFlying(bool flag)
+void MoonExplosion::SetFlying(bool flag)
 {
 	isFlying = flag;
 }

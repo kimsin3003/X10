@@ -154,7 +154,7 @@ void MCScene::onMouseDown(Event *event)
 	auto blinkLabel = this->getChildByName("twMissionLabel");
 	blinkLabel->setVisible(true);
 	auto runningBoy = this->getChildByName("boy");
-	auto moveToMouse = JumpBy::create(0.3, Point(0, 0), 50, 1);
+	auto moveToMouse = JumpBy::create(0.3f, Point(0, 0), 50, 1);
 	runningBoy->runAction(moveToMouse);
 
 //	Explosion::boom((Scene*)this, Point(xPos, yPos));

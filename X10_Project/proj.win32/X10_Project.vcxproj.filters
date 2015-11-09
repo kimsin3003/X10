@@ -58,6 +58,12 @@
     <ClCompile Include="..\Classes\Bubble.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\MoonExplosion.cpp">
+      <Filter>GameObject\Explosions</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\MoonBullet.cpp">
+      <Filter>GameObject\Bullets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -116,6 +122,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Bubble.h">
       <Filter>GameObject\Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MoonExplosion.h">
+      <Filter>GameObject\Explosions</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\MoonBullet.h">
+      <Filter>GameObject\Bullets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

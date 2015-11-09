@@ -1,11 +1,11 @@
 #pragma once
 
-#include "Collider.h"
+#include "Explosion.h"
 
-class Explosion : public Collider
+class MoonExplosion : public Explosion
 {
 public:
-	CREATE_FUNC(Explosion);
+	CREATE_FUNC(MoonExplosion);
 	virtual bool init();
 	virtual void Act();
 	virtual bool IsFlying();

@@ -1,22 +1,16 @@
 #pragma once
 
-#include "Collider.h"
+#include "Bullet.h"
 
-class Bullet : public Collider
+class MoonBullet : public Bullet
 {
 public:
-	CREATE_FUNC(Bullet);
-	virtual bool init() override;
-	virtual void Act() override;
+	CREATE_FUNC(MoonBullet);
+	virtual bool init();
+	virtual void Act();
 	virtual void Move(); // called each frame 
 
-	void SetDirection(Vec2 dir);
-	void SetSpeed(float spd);
 	virtual bool IsFlying();
-
-	void SetFlying(bool flag);
-	bool IsAlive();
-	void SetAlive(bool flag);
 
 protected:
 	void DecreaseLife(); // called in Move()

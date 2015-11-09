@@ -1,9 +1,8 @@
 #include "stdafx.h"
 #include "Bullet.h"
+#include "MoonBullet.h"
 
-//Base Class of All Bullets
-
-bool Bullet::init()
+bool MoonBullet::init()
 {
 	if (!Node::init())
 	{
@@ -11,9 +10,9 @@ bool Bullet::init()
 	}
 
 	//temporary initialization for test
-	spr = Sprite::create("res/bullet.png");
+	spr = Sprite::create("res/MoonBullet.png");
 	this->addChild(spr);
-	
+
 	speed = 0;
 	direction = Vec2::ZERO;
 	timeDecrease = 1;
@@ -22,7 +21,7 @@ bool Bullet::init()
 	isFlying = false;
 	isAlive = true;
 
-	//depending on the type of bullet
+	//depending on the type of MoonBullet
 	lifeTime = Director::getInstance()->getFrameRate()*1.0;
 	speedSetRatio = 0.3f;
 	speedDecreaseRatio = 0.99f;
@@ -30,7 +29,7 @@ bool Bullet::init()
 	return true;
 }
 
-void Bullet::Act()
+void MoonBullet::Act()
 {
 	if (lifeTime > 0)
 	{
@@ -51,8 +50,8 @@ void Bullet::Act()
 	}
 }
 
-//move bullet 'node', not its sprite
-void Bullet::Move()
+//move MoonBullet 'node', not its sprite
+void MoonBullet::Move()
 {
 	Vec2 delta = speed * direction;
 	Vec2 curPos = this->getPosition();
@@ -60,37 +59,12 @@ void Bullet::Move()
 }
 
 //add : as lifeTime gets near to zero, 1. speed decreases 2. color turns red
-void Bullet::DecreaseLife()
+void MoonBullet::DecreaseLife()
 {
 	lifeTime -= timeDecrease;
 }
 
-void Bullet::SetDirection(Vec2 dir)
-{	
-	direction = dir;	
-}
-
-void Bullet::SetSpeed(float spd)
-{
-	speed = spd * speedSetRatio;
-}
-
-bool Bullet::IsFlying()
+bool MoonBullet::IsFlying()
 {
 	return isFlying;
-}
-
-void Bullet::SetFlying(bool flag)
-{
-	isFlying = flag;
-}
-
-bool Bullet::IsAlive()
-{
-	return isAlive;
-}
-
-void Bullet::SetAlive(bool flag)
-{
-	isAlive = flag;
 }

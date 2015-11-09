@@ -44,7 +44,7 @@ bool MainScene::init()
 
 	/*Secret Paul's Test Page*/
 	auto PaulItem = MenuItemFont::create("p", CC_CALLBACK_1(MainScene::ChangeToMCScene,this));
-	PaulItem->setScale(0.2);
+	PaulItem->setScale(0.2f);
 	PaulItem->setPosition(Vec2(origin.x + visibleSize.width - PaulItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height + PaulItem->getContentSize().height/2));
 	
@@ -64,6 +64,8 @@ bool MainScene::init()
 // 	particle->setEmissionRate(500);
 // 	particle->setGravity(Vec2::ZERO);
 // 	this->addChild(particle);
+
+	return true;
 }
 
 void MainScene::ChangeToMCScene(Ref* pSender)

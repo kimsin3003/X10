@@ -1,15 +1,13 @@
 #pragma once
-#include "stdafx.h"
 
 class Bullet;
 
-class Target : public Node
+class Cloud : public Target
 {
 public:
-	CREATE_FUNC(Target);
 	virtual bool init();
 	virtual void ApplyEffectToBullet(Bullet* bullet);
 
-protected:
-	Sprite* spr;
+private:
+
 };

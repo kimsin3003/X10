@@ -82,6 +82,10 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			collider->Act();
 			CheckCollide(collider, targets);
 		}
+		if (collider->IsBullet())
+		{
+			gameLayer->addChild(((Bullet*)collider)->GetExPlosion());
+		}
 	} 
 }
 

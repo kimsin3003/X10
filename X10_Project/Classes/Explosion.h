@@ -10,8 +10,11 @@ public:
 	virtual void Act();
 	virtual bool IsFlying();
 	virtual void SetFlying(bool flag);
+	virtual bool IsAlive() override;
+	bool IsBullet() override {	return false; }
 
 protected:
 	ParticleExplosion* particle;
+	int lifeTime;
 	bool isFlying;
 };

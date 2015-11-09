@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "GameManager.h"
-
+#include "Sling.h"
 
 Scene* GameScene::createScene()
 {
@@ -36,5 +36,5 @@ bool GameScene::init()
 }
 
 void GameScene::update(float dt){
-	GameManager::GetInstance()->Play(gameLayer);
+	GameManager::GetInstance()->Play(gameLayer, uiLayer);
 }

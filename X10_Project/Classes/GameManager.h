@@ -1,12 +1,12 @@
 #pragma once
 #include "stdafx.h"
-class Sling;
 class GameLayer;
 class UILayer;
 class ColliderManager;
 class TargetManager;
 class Collider;
 class Target;
+class Sling;
 
 class GameManager
 {

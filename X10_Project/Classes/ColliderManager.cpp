@@ -8,6 +8,7 @@ ColliderManager* ColliderManager::instance = nullptr;
 ColliderManager::ColliderManager() {
 	Init();
 }
+
 ColliderManager::~ColliderManager() {}
 
 ColliderManager* ColliderManager::GetInstance()
@@ -66,3 +67,10 @@ bool ColliderManager::HasNextCollider()
 		return true;
 	return false;
 }
+
+void ColliderManager::Reset()
+{
+	colliders.clear();
+	Init();
+}
+

@@ -12,10 +12,10 @@ public:
 	Vector<Collider*>& GetColliders(){ return colliders; }
 	void AddExplosion(Collider* explosion);
 	bool HasNextCollider();
+	void Reset();
 
 private:
 	void InitColliders(); // called in Init()
-
 	static ColliderManager* instance;
 	Vector<Collider*> colliders;
 	int curColliderIndex;

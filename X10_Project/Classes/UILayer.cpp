@@ -42,6 +42,7 @@ void UILayer::menuButtonCallback(Ref* pSender)
 	ChangeToMainScene(pSender);
 }
 
-void UILayer::ChangeToMainScene(Ref* pSender){
+void UILayer::ChangeToMainScene(Ref* pSender)
+{
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }

@@ -27,7 +27,7 @@ private:
 	float speedSetRatio;
 	float speedDecreaseRatio;
 	float timeDecrease;
-	
+
 	//Status - Game manager controls bullet according to its status
 	bool isFlying; //T - Game manager checks Collision
 	bool isAlive; 

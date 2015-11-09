@@ -1,8 +1,16 @@
 #include "stdafx.h"
 #include "Target.h"
-#include "Collider.h"
+#include "Bullet.h"
 
-void Target::SetEffect(Collider* collider)
+//Base class of all Targets
+bool Target::init()
+{
+	spr = Sprite::create("res/angle.png");
+	addChild(spr);
+	return true;
+}
+
+void Target::ApplyEffectToBullet(Bullet* bullet)
 {
 
 }

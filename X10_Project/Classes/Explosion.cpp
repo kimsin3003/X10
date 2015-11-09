@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Explosion.h"
 
+//Base Class of All Explosions
 bool Explosion::init()
 {
 	isFlying = false;

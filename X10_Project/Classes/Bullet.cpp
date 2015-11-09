@@ -22,7 +22,7 @@ bool Bullet::init()
 	isAlive = true;
 
 	//depending on the type of bullet
-	lifeTime = 60;
+	lifeTime = Director::getInstance()->getFrameRate()*1.0;
 	speedSetRatio = 0.3;
 	speedDecreaseRatio = 0.99;
 

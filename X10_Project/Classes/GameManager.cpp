@@ -44,7 +44,6 @@ void GameManager::Reset()
 
 void GameManager::InitTargets(GameLayer* gameLayer)
 {
-	
 	Vector<Target*> targets = targetManager->GetTargets();
 	for (auto iter = targets.begin(); iter < targets.end(); iter++)
 		gameLayer->addChild(*iter);
@@ -84,7 +83,13 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		}
 		if (collider->IsBullet())
 		{
-			gameLayer->addChild(((Bullet*)collider)->GetExPlosion());
+			if (((Bullet*)collider)->IsExplosing())
+			{
+				Explosion* explosion = ((Bullet*)collider)->GetExplosion();
+				colliderManager->AddExplosion(explosion);
+				gameLayer->addChild(explosion);
+				((Bullet*)collider)->SetExplosing(false);
+			}
 		}
 	} 
 }

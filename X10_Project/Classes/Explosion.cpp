@@ -5,24 +5,24 @@
 //Base Class of All Explosions
 bool Explosion::init()
 {
-	isFlying = false;
+	isFlying = true;
 	particle = ParticleExplosion::create();
-	particle->setVisible(false);
+	particle->setVisible(true);
 	this->addChild(particle);
-	lifeTime = 10 * Director::getInstance()->getFrameRate();
+	lifeTime = 2 * Director::getInstance()->getFrameRate();
 	return true;
 }
 
 void Explosion::Act()
 {
-	if (lifeTime-- > 0){
-		isFlying = true;
-		particle->setVisible(true);
+	if (lifeTime > 0){
+		lifeTime--;
 	}
 	else{
 		particle->setVisible(false);
+		isAlive = false;
 		isFlying = false;
-		this->removeFromParent();
+		removeFromParent();
 	}
 }
 
@@ -36,3 +36,12 @@ void Explosion::SetFlying(bool flag)
 	isFlying = flag;
 }
 
+bool Explosion::IsBullet()
+{
+	return false;
+}
+
+bool Explosion::IsAlive()
+{
+	return isAlive;
+}

@@ -19,9 +19,9 @@ bool Bullet::init()
 	timeDecrease = 1;
 
 	//status
+	isExplosing = false;
 	isFlying = false;
 	isAlive = true;
-
 	//depending on the type of bullet
 	lifeTime = Director::getInstance()->getFrameRate()*1.0;
 	speedSetRatio = 0.3f;
@@ -48,6 +48,7 @@ void Bullet::Act()
 		removeFromParent();
 		isAlive = false;
 		isFlying = false;
+		isExplosing = true;
 	}
 }
 
@@ -85,12 +86,29 @@ void Bullet::SetFlying(bool flag)
 	isFlying = flag;
 }
 
+bool Bullet::IsExplosing()
+{
+	return isExplosing;
+}
+
 bool Bullet::IsAlive()
 {
 	return isAlive;
 }
 
-void Bullet::SetAlive(bool flag)
+bool Bullet::IsBullet()
 {
-	isAlive = flag;
+	return true;
+}
+
+Explosion* Bullet::GetExplosion()
+{
+	Explosion* explosion = Explosion::create();
+	explosion->setPosition(getPosition());
+	return explosion;
+}
+
+void Bullet::SetExplosing(bool flag)
+{
+	isExplosing = flag;
 }

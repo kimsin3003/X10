@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "MoonBullet.h"
+#include "MoonExplosion.h"
 
 bool MoonBullet::init()
 {
@@ -16,7 +17,6 @@ bool MoonBullet::init()
 	speed = 0;
 	direction = Vec2::ZERO;
 	timeDecrease = 1;
-
 	//status
 	isFlying = false;
 	isAlive = true;
@@ -56,4 +56,9 @@ void MoonBullet::Move()
 	Vec2 delta = speed * direction;
 	Vec2 curPos = this->getPosition();
 	setPosition(curPos + delta);
+}
+
+Explosion* MoonBullet::GetExplosion()
+{
+	return MoonExplosion::create();
 }

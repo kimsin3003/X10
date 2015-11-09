@@ -15,14 +15,16 @@ bool Bullet::init()
 	
 	speed = 0;
 	direction = Vec2::ZERO;
-	lifeTime = 60;
-	speedSetRatio = 0.3;
-	speedDecreaseRatio = 0.99;
 	timeDecrease = 1;
 
 	//status
 	isFlying = false;
 	isAlive = true;
+
+	//depending on the type of bullet
+	lifeTime = 60;
+	speedSetRatio = 0.3;
+	speedDecreaseRatio = 0.99;
 
 	return true;
 }

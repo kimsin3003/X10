@@ -9,8 +9,8 @@ public:
 	void Act();
 	bool IsFlying();
 	void SetFlying(bool flag);
+
 private:
 	ParticleExplosion* particle;
 	bool isFlying;
-
 };

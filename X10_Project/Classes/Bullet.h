@@ -8,12 +8,14 @@ public:
 	virtual bool init() override;
 	virtual void Act() override;
 	void Move(); // called each frame 
+
 	void SetDirection(Vec2 dir);
 	void SetSpeed(float spd);
 	virtual bool IsFlying();
 	void SetFlying(bool flag);
 	bool IsAlive();
 	void SetAlive(bool flag);
+
 private:
 	void DecreaseLife(); // called in Move()
 

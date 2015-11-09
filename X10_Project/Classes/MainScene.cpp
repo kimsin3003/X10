@@ -1,5 +1,9 @@
 #include "stdafx.h"
 #include "MainScene.h"
+#include "MCScene.h"
+#include "TWScene.h"
+#include "GameScene.h"
+#include "Sling.h"
 
 Scene* MainScene::createScene()
 {
@@ -21,7 +25,15 @@ bool MainScene::init()
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	Sling::isExist = false;
 
+	/*Game start Button*/
+	auto startGame = MenuItemFont::create("START", CC_CALLBACK_1(MainScene::ChangeToGameScene, this));
+	//set position center
+	startGame->setPosition(	visibleSize.width / 2, 	visibleSize.height / 2);
+
+
+	/* End Button */
 	auto closeItem = MenuItemImage::create(
 		"CloseNormal.png",
 		"CloseSelected.png",
@@ -30,7 +42,20 @@ bool MainScene::init()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height / 2));
 
-	auto menu = Menu::create(closeItem, NULL);
+	/*Secret Paul's Test Page*/
+	auto PaulItem = MenuItemFont::create("p", CC_CALLBACK_1(MainScene::ChangeToMCScene,this));
+	PaulItem->setScale(0.2);
+	PaulItem->setPosition(Vec2(origin.x + visibleSize.width - PaulItem->getContentSize().width / 2,
+		origin.y + closeItem->getContentSize().height + PaulItem->getContentSize().height/2));
+	
+	/*Secret Tw's Test Page*/
+	auto twScene = MenuItemFont::create("TW_SecretButton", CC_CALLBACK_1(MainScene::GoToTW, this));
+	twScene->setScaleX(0.5);
+	twScene->setScaleY(0.5);
+	twScene->setPosition(Point(200, 10));
+
+	/*Create Menu*/
+	auto menu = Menu::create(startGame, closeItem, twScene, PaulItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
@@ -39,6 +64,23 @@ bool MainScene::init()
 	particle->setEmissionRate(500);
 	particle->setGravity(Vec2::ZERO);
 	this->addChild(particle);
+}
+
+void MainScene::ChangeToMCScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(MCScene::createScene());
+	return;
+}
+
+void MainScene::ChangeToGameScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(GameScene::createScene());
+	return;
+}
+
+void MainScene::GoToTW(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(TWScene::createScene());
 }
 
 void MainScene::menuCloseCallback(Ref* pSender)

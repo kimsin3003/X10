@@ -4,7 +4,7 @@ class Bullet : public Node
 {
 public:
 	CREATE_FUNC(Bullet);
-	bool Init();
+	virtual bool init() override;
 	void Move(); // called each frame 
 	void SetDirection(Vec2 dir);
 	void SetSpeed(float spd);

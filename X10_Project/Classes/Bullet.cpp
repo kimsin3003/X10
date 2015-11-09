@@ -2,7 +2,7 @@
 #include "Bullet.h"
 #include "Sling.h"
 
-bool Bullet::Init()
+bool Bullet::init()
 {
 	if (!Node::init())
 	{
@@ -11,8 +11,9 @@ bool Bullet::Init()
 
 	//temporary initailization for test
 	this->setPosition(Sling::GetInstance()->getPosition()); //Game manager sets initial bullet position
-	this->addChild(spr);
 	spr = Sprite::create("res/bullet.png");
+	this->addChild(spr);
+	
 
 	speed = 0;
 	direction = Vec2::ZERO;

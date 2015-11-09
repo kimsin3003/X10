@@ -26,6 +26,7 @@ public:
 	float GetAngleInRadian();
 	float GetSpeed();
 	
+	
 private: //function to get singleton instance
 	CREATE_FUNC(Sling);
 	virtual bool init();

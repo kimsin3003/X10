@@ -23,23 +23,30 @@ GameManager* GameManager::GetInstance()
 
 void GameManager::InitTargets(GameLayer* gameLayer){
 	
-	vector<Target*> targets = targetManager->GetTargets();
-	for (auto target : targets)
-		gameLayer->addChild(target);
+	Vector<Target*> targets = targetManager->GetTargets();
+	for (auto iter = targets.begin(); iter < targets.end(); iter++)
+		gameLayer->addChild(*iter);
 }
 
 //main game logic
 void GameManager::Play(GameLayer* gameLayer)
 {
-	vector<Bullet*> bullets = bulletManager->GetBullets();
-	vector<Target*> targets = targetManager->GetTargets();
+	Vector<Bullet*> bullets = bulletManager->GetBullets();
+	Vector<Target*> targets = targetManager->GetTargets(); 
 	//shot if sling shotted the bullet. --> isShotted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
+
+	
+	if (bulletManager->HasNextBullet()){
+		sling->NewBulletLoad();
+	}
+
 	if (sling->IsShotted()){
 		Bullet* bulletToShot = bulletManager->GetBulletToShot();
 		bulletToShot->SetDirection(sling->GetDirection());
 		bulletToShot->SetSpeed(sling->GetSpeed());
 		bulletToShot->SetFlying(true);
 		gameLayer->addChild(bulletToShot);
+		sling->Reset();
 	}
 
 	//move flying bullets.
@@ -52,7 +59,7 @@ void GameManager::Play(GameLayer* gameLayer)
 
 }
 
-void GameManager::CheckCollide(Bullet* bullet, vector<Target*> targets){
+void GameManager::CheckCollide(Bullet* bullet, Vector<Target*> targets){
 	for (auto& target : targets){
 		if (bullet->getBoundingBox().intersectsRect(target->getBoundingBox()))
 			target->SetEffect(bullet);

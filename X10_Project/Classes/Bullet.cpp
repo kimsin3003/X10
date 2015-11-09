@@ -29,20 +29,17 @@ bool Bullet::init()
 	return true;
 }
 
-//move bullet 'node', not its sprite
-void Bullet::Move()
+void Bullet::Act()
 {
 	if (lifeTime > 0)
 	{
-		Vec2 delta = speed * direction;
-		Vec2 curPos = this->getPosition();
-		this->setPosition(curPos + delta);
-
+		Move();
 		DecreaseLife();
 
-		if (lifeTime < 10)
+		if (lifeTime < 15)
 		{
-			SetSpeed(speed * speedSetRatio);
+			SetSpeed(speed * speedDecreaseRatio);
+			speedDecreaseRatio -= 0.06;
 		}
 	}
 	else
@@ -51,6 +48,14 @@ void Bullet::Move()
 		isAlive = false;
 		isFlying = false;
 	}
+}
+
+//move bullet 'node', not its sprite
+void Bullet::Move()
+{
+	Vec2 delta = speed * direction;
+	Vec2 curPos = this->getPosition();
+	setPosition(curPos + delta);
 }
 
 //add : as lifeTime gets near to zero, 1. speed decreases 2. color turns red
@@ -87,9 +92,4 @@ bool Bullet::IsAlive()
 void Bullet::SetAlive(bool flag)
 {
 	isAlive = flag;
-}
-
-void Bullet::Act()
-{
-	Move();
 }

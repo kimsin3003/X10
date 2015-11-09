@@ -5,14 +5,16 @@ bool Explosion::init()
 {
 	isFlying = false;
 	particle = ParticleExplosion::create();
+	particle->setVisible(false);
 	this->addChild(particle);
-	//this->setPosition()
+
 	return true;
 }
 
 void Explosion::Act()
 {
-
+	isFlying = true;
+	particle->setVisible(true);
 }
 
 bool Explosion::IsFlying()

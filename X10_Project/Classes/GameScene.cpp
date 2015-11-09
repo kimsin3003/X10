@@ -6,11 +6,17 @@
 Scene* GameScene::createScene()
 {
 	auto scene = Scene::create();
+	auto background = Sprite::create("res/x10bg.jpg");
+	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
+	background->setAnchorPoint(Point::ZERO);
+	background->setScale(scale);
+	background->setOpacity(140);
+	scene->addChild(background);
 
 	auto layer = GameScene::create();
 
 	scene->addChild(layer);
-
+	
 	return scene;
 }
 

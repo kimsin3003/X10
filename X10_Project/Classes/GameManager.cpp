@@ -64,6 +64,6 @@ void GameManager::Play(GameLayer* gameLayer)
 void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets){
 	for (auto& target : targets){
 		if (collider->getBoundingBox().intersectsRect(target->getBoundingBox()))
-			target->SetEffect(collider);
+			target->ApplyEffectToBullet((Bullet*)collider);
 	}
 }

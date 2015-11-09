@@ -9,27 +9,8 @@ bool Bullet::init()
 	{
 		return false;
 	}
-
-	//temporary initialization for test
-	Sprite* aniSprite = Sprite::create();
-	//애니매이션 프레임 추가
-	Vector<SpriteFrame*> animFrames;
-	float scale = Director::getInstance()->getContentScaleFactor();
-	const Size fireSize(DEFAULT_WIDTH/scale/DEFAULT_RATIO, DEFAULT_HEIGHT/scale/DEFAULT_RATIO);
-	int frameCut = DEFAULT_FRAMES;
-	animFrames.reserve(frameCut);
-	for (int i = 0; i < frameCut; i++){
-		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i,0), fireSize));
-		animFrames.pushBack(frame);
-	}
-	// create the animation out of the frame
-	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
-	Animate* animate = Animate::create(animation);
-	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
-	aniSprite->runAction(aniAction); //스프라이트(spr)에 실행
-	aniSprite->setScale(DEFAULT_RATIO);
-	this->addChild(aniSprite);
-
+	
+	//setting initial value
 	speed = 0;
 	direction = Vec2::ZERO;
 	timeDecrease = 1;
@@ -43,7 +24,34 @@ bool Bullet::init()
 	speedSetRatio = 0.3f;
 	speedDecreaseRatio = 0.99f;
 
+	//make body
+	Sprite* body = MakeBody();
+	this->addChild(body);
+
 	return true;
+}
+
+
+Sprite* Bullet::MakeBody()
+{
+	Sprite* aniSprite = Sprite::create();
+	//애니매이션 프레임 추가
+	Vector<SpriteFrame*> animFrames;
+	float scale = Director::getInstance()->getContentScaleFactor();
+	const Size fireSize(DEFAULT_WIDTH / scale / DEFAULT_RATIO, DEFAULT_HEIGHT / scale / DEFAULT_RATIO);
+	int frameCut = DEFAULT_FRAMES;
+	animFrames.reserve(frameCut);
+	for (int i = 0; i < frameCut; i++){
+		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i, 0), fireSize));
+		animFrames.pushBack(frame);
+	}
+	// create the animation out of the frame
+	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
+	Animate* animate = Animate::create(animation);
+	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
+	aniSprite->runAction(aniAction); //스프라이트(spr)에 실행
+	aniSprite->setScale(DEFAULT_RATIO);
+	return aniSprite;
 }
 
 void Bullet::Act()

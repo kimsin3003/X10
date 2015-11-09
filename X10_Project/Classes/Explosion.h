@@ -11,7 +11,7 @@ public:
 	virtual bool IsFlying();
 	virtual void SetFlying(bool flag);
 	virtual bool IsAlive() override;
-	bool IsBullet() override {	return false; }
+	bool IsBullet() override;
 
 protected:
 	ParticleExplosion* particle;

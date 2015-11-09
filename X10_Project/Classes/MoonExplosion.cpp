@@ -27,3 +27,4 @@ void MoonExplosion::SetFlying(bool flag)
 {
 	isFlying = flag;
 }
+

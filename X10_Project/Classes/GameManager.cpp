@@ -1,9 +1,14 @@
 #include "stdafx.h"
-#pragma once
+
 #include "GameManager.h"
 #include "Collider.h"
 #include "Target.h"
 #include "Bullet.h"
+#include "UILayer.h"
+#include "Sling.h"
+#include "ColliderManager.h"
+#include "TargetManager.h"
+#include "GameLayer.h"
 
 GameManager* GameManager::instance = nullptr;
 
@@ -14,6 +19,12 @@ GameManager::GameManager()
 	targetManager = TargetManager::GetInstance();
 }
 
+GameManager::~GameManager()
+{
+
+}
+
+
 GameManager* GameManager::GetInstance()
 {
 	if (instance == nullptr)
@@ -23,6 +34,13 @@ GameManager* GameManager::GetInstance()
 	return instance;
 }
 
+void GameManager::Reset()
+{
+	delete instance;
+	instance = new GameManager();
+}
+
+
 void GameManager::InitTargets(GameLayer* gameLayer){
 	
 	Vector<Target*> targets = targetManager->GetTargets();
@@ -31,7 +49,7 @@ void GameManager::InitTargets(GameLayer* gameLayer){
 }
 
 //main game logic
-void GameManager::Play(GameLayer* gameLayer)
+void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
 	Vector<Collider*> colliders = colliderManager->GetColliders();
 	Vector<Target*> targets = targetManager->GetTargets(); 

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "GameManager.h"
-
+#include "Sling.h"
 
 Scene* GameScene::createScene()
 {
@@ -20,13 +20,13 @@ bool GameScene::init()
 	{
 		return false;
 	}
-
+	uiLayer = UILayer::create();
 	gameLayer = GameLayer::create();
+	this->addChild(uiLayer);
+	this->addChild(gameLayer);
+	
 	GameManager::GetInstance()->InitTargets(gameLayer);
 
-	uiLayer = UILayer::create();
-	this->addChild(gameLayer);
-	this->addChild(uiLayer);
 	this->scheduleUpdate();
 
 	auto sling = Sling::GetInstance();
@@ -36,5 +36,5 @@ bool GameScene::init()
 }
 
 void GameScene::update(float dt){
-	GameManager::GetInstance()->Play(gameLayer);
+	GameManager::GetInstance()->Play(gameLayer, uiLayer);
 }

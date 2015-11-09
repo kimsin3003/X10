@@ -69,7 +69,7 @@ void Sling::PullStart(Event* e)
 		return;
 	}
 
-	/*이곳에 Pull mouse 위치 조건 설정 할 수 있음.*/
+	/*Pull mouse 위치 거리 조건 설정 */
 	EventMouse* evMouse = (EventMouse*)e;
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();

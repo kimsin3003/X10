@@ -12,7 +12,7 @@ public:
 	void Play(GameLayer* gameLayer);
 
 private:
-	void CheckCollide(Bullet* bullet, vector<Target*> targets);
+	void CheckCollide(Bullet* bullet, Vector<Target*> targets);
 	static GameManager* instance;
 	Sling* sling;
 	BulletManager* bulletManager;

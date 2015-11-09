@@ -7,16 +7,17 @@ class BulletManager
 public:
 	static BulletManager* GetInstance();
 	void Init();
-//	vector<Bullet*> GetFlyingBullets(); //Let's just check bullets state 'isFlying' in game manager
+//	Vector<Bullet*> GetFlyingBullets(); //Let's just check bullets state 'isFlying' in game manager
 	Bullet* GetBulletToShot();
-	vector<Bullet*>& GetBullets(){ return bullets; }
+	Vector<Bullet*>& GetBullets(){ return bullets; }
 	void AddExplosion(Bullet* explosion);
+	bool HasNextBullet();
 
 private:
 	void InitBullets(); // called in Init()
 
 	static BulletManager* instance;
-	vector<Bullet*> bullets;
+	Vector<Bullet*> bullets;
 	int curBulletIndex;
 	int defaultBulletNum;
 	BulletManager();

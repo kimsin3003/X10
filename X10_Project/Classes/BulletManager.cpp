@@ -4,7 +4,9 @@
 
 BulletManager* BulletManager::instance = nullptr;
 
-BulletManager::BulletManager() {}
+BulletManager::BulletManager() {
+	Init();
+}
 BulletManager::~BulletManager() {}
 
 BulletManager* BulletManager::GetInstance()
@@ -31,22 +33,35 @@ void BulletManager::InitBullets() //<- pass stage information parameter (si->Bul
 {								  //that holds what bullets to use (not implemented yet)
 
 // ex
-// bullets.push_back(si->bullets->pop_back());
-// bullets.push_back(si->bullets->pop_back());
-// bullets.push_back(si->bullets->pop_back());
-// bullets.push_back(si->bullets->pop_back());
+// bullets.pushBack(si->bullets->pop_back());
+// bullets.pushBack(si->bullets->pop_back());
+// bullets.pushBack(si->bullets->pop_back());
+// bullets.pushBack(si->bullets->pop_back());
 // ...
-	Bullet* b1 = Bullet::create();
-	bullets.push_back(b1);
+	bullets.pushBack(Bullet::create());
+	bullets.pushBack(Bullet::create());
+	bullets.pushBack(Bullet::create());
+	bullets.pushBack(Bullet::create());
+	bullets.pushBack(Bullet::create());
+
 }
 
 //call in gama manger's logic : GetBulletToShot -> add child & visible off & set position-> shot -> visible on
 Bullet* BulletManager::GetBulletToShot()
 {
-	return bullets[curBulletIndex++];
+	if (curBulletIndex < defaultBulletNum)
+		return bullets.at(curBulletIndex++);
+	return nullptr;
 }
 
 void BulletManager::AddExplosion(Bullet* explosion)
 {
-	bullets.push_back(explosion);
+	bullets.pushBack(explosion);
+}
+
+bool BulletManager::HasNextBullet()
+{
+	if (curBulletIndex < defaultBulletNum)
+		return true;
+	return false;
 }

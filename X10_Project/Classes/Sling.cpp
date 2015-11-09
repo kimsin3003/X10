@@ -173,5 +173,4 @@ void Sling::ChangeToShotted() //pullig -> shotted
 void Sling::ChangeToEmpty() //shotted -> empty
 {
 	status = empty;
-	ChangeToLoaded();
 }

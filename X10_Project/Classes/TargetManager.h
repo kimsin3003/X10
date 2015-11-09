@@ -5,10 +5,10 @@ class TargetManager
 {
 public:
 	static TargetManager* GetInstance();
-	vector<Target*> GetTargets() { return targets; }
+	Vector<Target*> GetTargets() { return targets; }
 private:
 	static TargetManager* instance;
-	vector<Target*> targets;
+	Vector<Target*> targets;
 	TargetManager();
 	~TargetManager();
 };

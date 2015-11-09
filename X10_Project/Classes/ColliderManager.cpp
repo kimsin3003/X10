@@ -40,11 +40,10 @@ void ColliderManager::InitColliders() //<- pass stage information parameter (si-
 // Colliders.pushBack(si->Colliders->pop_back());
 // Colliders.pushBack(si->Colliders->pop_back());
 // ...
-
-	colliders.pushBack(Bullet::create());
-	colliders.pushBack(Bullet::create());
-	colliders.pushBack(Bullet::create());
-	colliders.pushBack(Bullet::create());
+	for (int i = 0; i < defaultColliderNum; i++)
+	{
+		colliders.pushBack(Bullet::create());
+	}
 }
 
 //call in gama manger's logic : GetColliderToShot -> add child & visible off & set position-> shot -> visible on

@@ -25,8 +25,8 @@ void Explosion::Act()
 		isAlive = false;
 		isFlying = false;
 		removeFromParent();
-		Vector<Collider*> list = ColliderManager::GetInstance()->GetColliders();
-		list.eraseObject(this, true);
+		//Vector<Collider*> list = ColliderManager::GetInstance()->GetColliders();
+		//list.eraseObject(this);
 	}
 }
 

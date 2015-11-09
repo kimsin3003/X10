@@ -14,7 +14,6 @@ Scene* GameScene::createScene()
 	scene->addChild(background);
 
 	auto layer = GameScene::create();
-
 	scene->addChild(layer);
 	
 	return scene;

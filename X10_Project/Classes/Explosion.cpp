@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "Collider.h"
 #include "Explosion.h"
+#include "ColliderManager.h"
 
 //Base Class of All Explosions
 bool Explosion::init()
@@ -19,10 +20,13 @@ void Explosion::Act()
 		lifeTime--;
 	}
 	else{
+
 		particle->setVisible(false);
 		isAlive = false;
 		isFlying = false;
 		removeFromParent();
+		Vector<Collider*> list = ColliderManager::GetInstance()->GetColliders();
+		list.eraseObject(this, true);
 	}
 }
 

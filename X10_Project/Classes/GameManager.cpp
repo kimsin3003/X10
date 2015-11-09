@@ -74,8 +74,11 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	}
 
 	//move flying Colliders.
-	for (auto& collider : colliders)
+
+	Collider* collider;
+	for (int i = 0; i < colliders.size(); i++)
 	{
+		collider = colliders.at(i);
 		if (collider->IsFlying())
 		{
 			collider->Act();

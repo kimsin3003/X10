@@ -19,6 +19,12 @@ GameManager::GameManager()
 	targetManager = TargetManager::GetInstance();
 }
 
+GameManager::~GameManager()
+{
+
+}
+
+
 GameManager* GameManager::GetInstance()
 {
 	if (instance == nullptr)
@@ -27,6 +33,13 @@ GameManager* GameManager::GetInstance()
 	}
 	return instance;
 }
+
+void GameManager::Reset()
+{
+	delete instance;
+	instance = new GameManager();
+}
+
 
 void GameManager::InitTargets(GameLayer* gameLayer){
 	

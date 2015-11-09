@@ -12,6 +12,8 @@ class GameManager
 {
 public:
 	static GameManager* GetInstance();
+	static void Reset();
+
 	void InitTargets(GameLayer* gameLayer);
 	void Play(GameLayer* gameLayer, UILayer* uiLayer);
 

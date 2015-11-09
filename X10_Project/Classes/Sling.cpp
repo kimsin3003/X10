@@ -52,11 +52,11 @@ bool Sling::init()
 	return true;
 }
 
-
 void Sling::Reset() // --> 매스테이지마다 리셋. 매개변수는 미정.
 {
 	ChangeToEmpty();
 }
+
 void Sling::NewBulletLoad()
 {
 	ChangeToLoaded();
@@ -74,7 +74,6 @@ void Sling::PullStart(Event* e)
 	//
 	ChangeToPulling();
 }
-
 
 void Sling::Pull(Event* e)
 {

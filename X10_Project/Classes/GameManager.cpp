@@ -43,7 +43,7 @@ void GameManager::Play(GameLayer* gameLayer)
 	if (sling->IsShotted()){
 		Bullet* bulletToShot = bulletManager->GetBulletToShot();
 		bulletToShot->SetDirection(sling->GetDirection());
-		bulletToShot->SetSpeed(sling->GetSpeed());
+		bulletToShot->SetSpeed(1);
 		bulletToShot->SetFlying(true);
 		gameLayer->addChild(bulletToShot);
 		sling->Reset();

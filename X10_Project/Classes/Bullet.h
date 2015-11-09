@@ -8,11 +8,10 @@ public:
 	void Move(); // called each frame 
 	void SetDirection(Vec2 dir);
 	void SetSpeed(float spd);
-	bool IsExplosion();
-	void SetExplosion(bool flag);
 	bool IsFlying();
 	void SetFlying(bool flag);
-
+	bool IsAlive();
+	void SetAlive(bool flag);
 private:
 	void DecreaseLife(); // called in Move()
 
@@ -20,9 +19,10 @@ private:
 	Vec2 direction;
 	float speed;
 	float lifeTime;
-	float decreaseRatio;
-
+	float speedSetRatio;
+	float speedDecreaseRatio;
+	float timeDecrease;
 	//Status - Game manager controls bullet according to its status
 	bool isFlying; //T - Game manager checks Collision
-	bool isExplosion; //T - Game manager removes bullet and loads Explosion Effect 
+	bool isAlive;
 };

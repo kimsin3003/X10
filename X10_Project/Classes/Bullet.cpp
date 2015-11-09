@@ -2,6 +2,8 @@
 #include "Bullet.h"
 #include "Sling.h"
 
+//Base Class of All Bullets
+
 bool Bullet::init()
 {
 	if (!Node::init())

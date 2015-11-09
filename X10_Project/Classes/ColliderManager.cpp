@@ -45,7 +45,6 @@ void ColliderManager::InitColliders() //<- pass stage information parameter (si-
 	colliders.pushBack(Bullet::create());
 	colliders.pushBack(Bullet::create());
 	colliders.pushBack(Bullet::create());
-	colliders.pushBack(Bullet::create());
 }
 
 //call in gama manger's logic : GetColliderToShot -> add child & visible off & set position-> shot -> visible on

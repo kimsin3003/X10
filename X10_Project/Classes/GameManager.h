@@ -25,5 +25,4 @@ private:
 	TargetManager* targetManager;
 	GameManager();
 	~GameManager();
-
 };

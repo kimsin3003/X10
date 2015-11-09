@@ -10,7 +10,7 @@ bool MoonBullet::init()
 	}
 
 	//temporary initialization for test
-	spr = Sprite::create("res/MoonBullet.png");
+	spr = Sprite::create("res/Bullet.png");
 	this->addChild(spr);
 
 	speed = 0;

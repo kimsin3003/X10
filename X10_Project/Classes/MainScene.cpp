@@ -33,6 +33,12 @@ bool MainScene::init()
 	auto menu = Menu::create(closeItem, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
+
+	ParticleFireworks* particle = ParticleFireworks::create();
+	particle->setAngle(60);
+	particle->setEmissionRate(500);
+	particle->setGravity(Vec2::ZERO);
+	this->addChild(particle);
 }
 
 void MainScene::menuCloseCallback(Ref* pSender)

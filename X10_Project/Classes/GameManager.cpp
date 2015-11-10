@@ -45,14 +45,17 @@ void GameManager::Reset()
 void GameManager::InitTargets(GameLayer* gameLayer)
 {
 	Vector<Target*> targets = targetManager->GetTargets();
-	for (auto iter = targets.begin(); iter < targets.end(); iter++) ///# auto쓰는데 왜 iter++ ?? 이번 프로젝트는 최대한 auto를 쓰지 말기를 추천한다. 타입 추론 및 이터래이터의 타입을 정확히 알고 쓰는 연습을 하기 위함.
+	for (auto iter = targets.begin(); iter < targets.end(); iter++) 
+		///# auto쓰는데 왜 iter++ ?? 이번 프로젝트는 최대한 auto를 쓰지 말기를 추천한다. 
+		///#타입 추론 및 이터래이터의 타입을 정확히 알고 쓰는 연습을 하기 위함.
 		gameLayer->addChild(*iter);
 }
 
 //main game logic
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
-	Vector<Collider*> colliders = colliderManager->GetColliders(); ///# 벡터를 통째로 복사해서 임시 변수에 담지 말것... 성능 저하의 원인
+	Vector<Collider*> colliders = colliderManager->GetColliders(); 
+	///# 벡터를 통째로 복사해서 임시 변수에 담지 말것... 성능 저하의 원인
 	Vector<Target*> targets = targetManager->GetTargets(); 
 	//shot if sling shotted the Collider. --> isShotted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
 
@@ -64,7 +67,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	if (sling->IsShotted())
 	{
 		Bullet* colliderToShot = (Bullet*)colliderManager->GetColliderToShot();
-		colliderToShot->setPosition(sling->getPosition()); //Game manager sets initial bullet position
+		colliderToShot->setPosition(sling->getPosition());
 		colliderToShot->setRotation(sling->GetRotationAngle());
 		colliderToShot->SetDirection(sling->GetDirection());
 		colliderToShot->SetSpeed(sling->GetSpeed()/20);
@@ -72,8 +75,6 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		gameLayer->addChild(colliderToShot);
 		sling->Reset();
 	}
-
-	//move flying Colliders.
 
 	Collider* collider;
 	for (int i = 0; i < colliders.size(); i++)
@@ -84,6 +85,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			collider->Act();
 			CheckCollide(collider, targets);
 		}
+
 		if (collider->IsBullet())
 		{
 			if (((Bullet*)collider)->IsExplosing()) ///# C++ 캐스팅을 써라.

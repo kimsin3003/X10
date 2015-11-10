@@ -16,7 +16,6 @@ bool MoonBullet::init()
 	timeDecrease = 1;
 	//status
 	isFlying = false;
-	isAlive = true;
 
 	//depending on the type of MoonBullet
 	lifeTime = Director::getInstance()->getFrameRate()*1.0;
@@ -42,7 +41,6 @@ void MoonBullet::Act()
 	else
 	{
 		removeFromParent();
-		isAlive = false;
 		isFlying = false;
 	}
 }

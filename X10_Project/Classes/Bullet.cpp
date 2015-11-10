@@ -15,8 +15,7 @@ bool Bullet::init()
 	direction = Vec2::ZERO;
 	timeDecrease = 1;
 
-	//status
-	isAlive = true;
+	isBullet = true;
 	isFlying = false;
 	isExplosing = false;
 
@@ -74,7 +73,6 @@ void Bullet::Act()
 	else
 	{
 		removeFromParent();
-		isAlive = false;
 		isFlying = false;
 		isExplosing = true;
 	}
@@ -94,48 +92,8 @@ void Bullet::DecreaseLife()
 	lifeTime -= timeDecrease;
 }
 
-void Bullet::SetDirection(Vec2 dir)
-{	
-	direction = dir;	
-}
-
-void Bullet::SetSpeed(float spd)
-{
-	speed = spd * speedSetRatio;
-}
-
-bool Bullet::IsFlying()
-{
-	return isFlying;
-}
-
-void Bullet::SetFlying(bool flag)
-{
-	isFlying = flag;
-}
-
-bool Bullet::IsExplosing()
-{
-	return isExplosing;
-}
-
-bool Bullet::IsAlive()
-{
-	return isAlive;
-}
-
-bool Bullet::IsBullet()
-{
-	return true;
-}
-
 Explosion* Bullet::GetExplosion()
 {
 	Explosion* explosion = Explosion::create();
 	return explosion;
-}
-
-void Bullet::SetExplosing(bool flag)
-{
-	isExplosing = flag;
 }

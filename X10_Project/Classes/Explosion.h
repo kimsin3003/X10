@@ -13,8 +13,9 @@ public:
 	virtual bool IsFlying();
 	virtual void SetFlying(bool flag);
 	bool IsBullet() override;
-
+	void SetPosition(Point pos);
+	
 protected:
-	ParticleExplosion* particle; ///# 코딩 컨벤션
+	ParticleExplosion* explosion; ///# 코딩 컨벤션
 	int lifeTime;
 };

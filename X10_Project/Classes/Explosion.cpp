@@ -6,8 +6,8 @@
 //Base Class of All Explosions
 bool Explosion::init()
 {
-	particle = ParticleExplosion::create();
-	this->addChild(particle);
+	explosion = ParticleExplosion::create();
+	this->addChild(explosion);
 	isFlying = true;
 	lifeTime = 2 * Director::getInstance()->getFrameRate();
 	return true;
@@ -40,5 +40,11 @@ void Explosion::SetFlying(bool flag)
 bool Explosion::IsBullet()
 {
 	return false;
+}
+
+void Explosion::SetPosition(Point pos)
+{
+	setPosition(pos);
+	explosion->setPosition(0,0);
 }
 

@@ -96,10 +96,7 @@ Explosion* Bullet::GetExplosion()
 	ColliderManager* colliderManager = ColliderManager::GetInstance();
 	Explosion* explosion = Explosion::create();
 	
-	Size winSize = Director::getInstance()->getWinSize();
-	Point half = Point(winSize.width, winSize.height) / 2;
-	Point pos = this->getPosition() - half;
-	explosion->setPosition(pos);
+	explosion->SetPosition(this->getPosition());
 	
 	colliderManager->AddExplosion(explosion);
 	

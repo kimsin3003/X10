@@ -9,6 +9,7 @@ public:
 	virtual bool IsAlive() = 0;
 
 protected:
+	Sprite* body;
 	bool isFlying;
 	bool isBullet;
 	bool isAlive;

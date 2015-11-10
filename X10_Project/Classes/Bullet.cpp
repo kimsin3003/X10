@@ -16,25 +16,24 @@ bool Bullet::init()
 	timeDecrease = 1;
 
 	//status
-	isExplosing = false;
-	isFlying = false;
 	isAlive = true;
+	isFlying = false;
+	isExplosing = false;
 
 	//depending on the type of bullet
 	lifeTime = Director::getInstance()->getFrameRate()*1.0;
 	speedSetRatio = 0.3f;
 	speedDecreaseRatio = 0.99f;
 
-	//make body
-	Sprite* body = MakeBody();
-	this->addChild(body);
+	MakeBody();
 
+	addChild(body);
 	return true;
 }
 
 Sprite* Bullet::MakeBody()
 {
-	Sprite* aniSprite = Sprite::create();
+	body = Sprite::create();
 
 	//애니매이션 프레임 추가
 	float scale = Director::getInstance()->getContentScaleFactor();
@@ -54,9 +53,9 @@ Sprite* Bullet::MakeBody()
 	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
 	Animate* animate = Animate::create(animation);
 	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
-	aniSprite->runAction(aniAction); //스프라이트에 실행
-	aniSprite->setScale(BULLET_RATIO);
-	return aniSprite;
+	body->runAction(aniAction); //스프라이트에 실행
+	body->setScale(BULLET_RATIO);
+	return body;
 }
 
 void Bullet::Act()

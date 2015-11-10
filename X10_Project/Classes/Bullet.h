@@ -31,6 +31,9 @@ public:
 protected:
 	void DecreaseLife(); // call in Move()
 	Sprite* MakeBody();
+	
+protected:
+	Sprite* body;
 
 	Vec2 direction;
 	float speed;

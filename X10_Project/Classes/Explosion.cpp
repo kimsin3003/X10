@@ -6,10 +6,9 @@
 //Base Class of All Explosions
 bool Explosion::init()
 {
-	isFlying = true;
 	particle = ParticleExplosion::create();
-	particle->setVisible(true);
 	this->addChild(particle);
+	isFlying = true;
 	lifeTime = 2 * Director::getInstance()->getFrameRate();
 	return true;
 }
@@ -22,8 +21,7 @@ void Explosion::Act()
 	}
 	else
 	{
-		particle->setVisible(false);
-		isFlying = false;
+		SetFlying(false);
 		removeFromParent();
 		ColliderManager::GetInstance()->EraseCollider(this);
 	}

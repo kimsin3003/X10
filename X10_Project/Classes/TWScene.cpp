@@ -15,7 +15,7 @@ Scene* TWScene::createScene()
 
 bool TWScene::init()
 {
-	if (!CCLayerColor::initWithColor(Color4B::BLUE))
+	if (!LayerColor::initWithColor(Color4B::BLUE))
 	{
 		return false;
 	}

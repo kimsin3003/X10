@@ -8,7 +8,6 @@ public:
 	bool IsFlying() { return isFlying; }
 
 protected:
-	Sprite* body;
 	bool isFlying;
 	bool isBullet;
 };

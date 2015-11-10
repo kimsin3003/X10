@@ -2,7 +2,7 @@
 #define __TW_SCENE_H__
 using namespace cocos2d;
 
-class TWScene : public CCLayerColor
+class TWScene : public LayerColor
 {
 public:
 	static Scene* createScene();

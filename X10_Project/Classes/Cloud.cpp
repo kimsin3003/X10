@@ -4,8 +4,6 @@
 
 bool Cloud::init()
 {
-	spr = Sprite::create("res/targets/Mirror.png"); //example
-
 	return true;
 }
 

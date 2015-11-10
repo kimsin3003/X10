@@ -19,6 +19,7 @@ bool Bullet::init()
 	isExplosing = false;
 	isFlying = false;
 	isAlive = true;
+
 	//depending on the type of bullet
 	lifeTime = Director::getInstance()->getFrameRate()*1.0;
 	speedSetRatio = 0.3f;
@@ -31,27 +32,30 @@ bool Bullet::init()
 	return true;
 }
 
-
 Sprite* Bullet::MakeBody()
 {
 	Sprite* aniSprite = Sprite::create();
-	//애니매이션 프레임 추가
-	Vector<SpriteFrame*> animFrames;
-	float scale = Director::getInstance()->getContentScaleFactor();
-	const Size fireSize(DEFAULT_WIDTH / scale / DEFAULT_RATIO, DEFAULT_HEIGHT / scale / DEFAULT_RATIO); ///# const인 이유는?
-	int frameCut = DEFAULT_FRAMES;
-	animFrames.reserve(frameCut);
-	for (int i = 0; i < frameCut; i++){ ///# 코딩컨벤션: 중괄호 위치를 전체적으로 통일
 
-		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i, 0), fireSize)); ///# res/firework.png같은 문자열은 따로 빼서 한군데 모아놓도록
+	//애니매이션 프레임 추가
+	float scale = Director::getInstance()->getContentScaleFactor();
+	const Size fireSize(BULLET_WIDTH / scale / BULLET_RATIO, BULLET_HEIGHT / scale / BULLET_RATIO); 
+	int frameCut = BULLET_FRAMES;
+	Vector<SpriteFrame*> animFrames;
+	animFrames.reserve(frameCut);
+	
+	for (int i = 0; i < frameCut; i++)
+	{
+		///# res/firework.png같은 문자열은 따로 빼서 한군데 모아놓도록
+		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i, 0), fireSize)); 
 		animFrames.pushBack(frame);
 	}
+	
 	// create the animation out of the frame
 	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
 	Animate* animate = Animate::create(animation);
 	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
-	aniSprite->runAction(aniAction); //스프라이트(spr)에 실행
-	aniSprite->setScale(DEFAULT_RATIO);
+	aniSprite->runAction(aniAction); //스프라이트에 실행
+	aniSprite->setScale(BULLET_RATIO);
 	return aniSprite;
 }
 

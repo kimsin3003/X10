@@ -19,6 +19,7 @@ public:
 	//Setters and Getters
 	void SetDirection(Vec2 dir) { direction = dir; }
 	void SetSpeed(float spd) { speed = spd * speedSetRatio; }
+	void SetSpeedDecreaseRatio(float ratio) { speedDecreaseRatio = ratio; }
 	void SetFlying(bool flag) { isFlying = flag; }
 	void SetExplosing(bool flag) { isExplosing = flag; }
 	bool IsBullet() { return true; }
@@ -44,6 +45,10 @@ protected:
 		BULLET_FRAMES = 5,
 		BULLET_WIDTH = 20,
 		BULLET_HEIGHT = 20,
-		BULLET_RATIO = 2
+		BULLET_RATIO = 2,
+
+		BULLET_LIFETIME = 30,
+		BULLET_EXPLODETIME = 0,
+		BULLET_REDUCTIONSPEEDTIME = 15,
 	};
 };

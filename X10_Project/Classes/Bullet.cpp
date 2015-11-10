@@ -10,7 +10,6 @@ bool Bullet::init()
 		return false;
 	}
 	
-	//setting initial value
 	speed = 0;
 	direction = Vec2::ZERO;
 	timeDecrease = 1;
@@ -22,11 +21,11 @@ bool Bullet::init()
 	//depending on the type of bullet
 	lifeTime = Director::getInstance()->getFrameRate()*1.0;
 	speedSetRatio = 0.3f;
-	speedDecreaseRatio = 0.99f;
+	speedDecreaseRatio = 0.90f;
 
 	MakeBody();
-
 	addChild(body);
+
 	return true;
 }
 
@@ -34,7 +33,6 @@ Sprite* Bullet::MakeBody()
 {
 	body = Sprite::create();
 
-	//애니매이션 프레임 추가
 	float scale = Director::getInstance()->getContentScaleFactor();
 	const Size fireSize(BULLET_WIDTH / scale / BULLET_RATIO, BULLET_HEIGHT / scale / BULLET_RATIO); 
 	int frameCut = BULLET_FRAMES;
@@ -43,42 +41,38 @@ Sprite* Bullet::MakeBody()
 	
 	for (int i = 0; i < frameCut; i++)
 	{
-		///# res/firework.png같은 문자열은 따로 빼서 한군데 모아놓도록
 		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i, 0), fireSize)); 
 		animFrames.pushBack(frame);
 	}
 	
-	// create the animation out of the frame
 	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
 	Animate* animate = Animate::create(animation);
-	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
-	body->runAction(aniAction); //스프라이트에 실행
+	RepeatForever *aniAction = RepeatForever::create(animate);
+	body->runAction(aniAction);
 	body->setScale(BULLET_RATIO);
 	return body;
 }
 
 void Bullet::Act()
 {
-	if (lifeTime > 0)
+	if (lifeTime > BULLET_EXPLODETIME)
 	{
 		Move();
-		DecreaseLife();
-
-		if (lifeTime < 15)
+		if (lifeTime < BULLET_REDUCTIONSPEEDTIME)
 		{
 			SetSpeed(speed * speedDecreaseRatio);
-			speedDecreaseRatio -= 0.06f;
+			SetSpeedDecreaseRatio(speedDecreaseRatio - 0.05f);
 		}
+		DecreaseLife();
 	}
 	else
 	{
 		removeFromParent();
-		isFlying = false;
-		isExplosing = true;
+		SetFlying(false);
+		SetExplosing(true);
 	}
 }
 
-//move bullet 'node', not its sprite
 void Bullet::Move()
 {
 	Vec2 delta = speed * direction;
@@ -86,12 +80,13 @@ void Bullet::Move()
 	setPosition(curPos + delta);
 }
 
-//add : as lifeTime gets near to zero, 1. speed decreases 2. color turns red
 void Bullet::DecreaseLife()
 {
 	lifeTime -= timeDecrease;
 }
 
+///# 함수 안에서 자원을 생성한 다음에 그 포인터를 밖으로 넘겨주는 디자인은 나빠요... 
+///자원관리하기 아주 힘들다..
 Explosion* Bullet::GetExplosion()
 {
 	Explosion* explosion = Explosion::create();

@@ -6,7 +6,9 @@ bool Sling::isExist = false;
 
 Sling* Sling::GetInstance()
 {
-	if (instance == nullptr || isExist == false){
+	if (instance == nullptr || isExist == false){ ///# 중괄호 코딩 컨벤션
+
+		///# instance가 존재하는데 isExist가 false면 메모리 누수?
 		instance = Sling::create();
 		isExist = true;
 	}
@@ -70,7 +72,7 @@ void Sling::PullStart(Event* e)
 	}
 
 	/*Pull mouse 위치 거리 조건 설정 */
-	EventMouse* evMouse = (EventMouse*)e;
+	EventMouse* evMouse = (EventMouse*)e; ///# c++ 캐스팅을 써라.
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	float distance = startLocation.getDistance(mouseLocation);

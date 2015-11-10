@@ -42,7 +42,7 @@ void ColliderManager::InitColliders() //<- pass stage information parameter (si-
 // ...
 	for (int i = 0; i < defaultColliderNum; i++)
 	{
-		colliders.pushBack(Bullet::create());
+		colliders.pushBack(Bullet::create()); ///# 내부에서 new를 해서 벡터에 넣기 때문에 자원해제는 반드시 따로 해줘야 한다.
 	}
 }
 
@@ -68,7 +68,7 @@ bool ColliderManager::HasNextCollider()
 
 void ColliderManager::Reset()
 {
-	colliders.clear();
+	colliders.clear(); ///# 헐? Collider* 원소들은 다 메모리 누수 나겠네..
 	Init();
 }
 

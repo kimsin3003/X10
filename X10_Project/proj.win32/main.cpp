@@ -17,3 +17,13 @@ int APIENTRY _tWinMain(HINSTANCE hInstance,
     AppDelegate app;
     return Application::getInstance()->run();
 }
+
+/*
+
+
+기타 코멘트는 ///# 검색 ㄱㄱ
+
+///# 부분 수정한 뒤에는 코멘트 지우삼..
+
+
+*/

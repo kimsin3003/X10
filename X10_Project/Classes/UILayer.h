@@ -3,6 +3,7 @@
 class UILayer : public Layer
 {
 public:
+	///# enum...
 	const float PAUSE_BUTTON_WIDTH = 40;
 	const float PAUSE_BUTTON_HEIGHT = 40;
 

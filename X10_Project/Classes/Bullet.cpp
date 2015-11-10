@@ -38,11 +38,12 @@ Sprite* Bullet::MakeBody()
 	//애니매이션 프레임 추가
 	Vector<SpriteFrame*> animFrames;
 	float scale = Director::getInstance()->getContentScaleFactor();
-	const Size fireSize(DEFAULT_WIDTH / scale / DEFAULT_RATIO, DEFAULT_HEIGHT / scale / DEFAULT_RATIO);
+	const Size fireSize(DEFAULT_WIDTH / scale / DEFAULT_RATIO, DEFAULT_HEIGHT / scale / DEFAULT_RATIO); ///# const인 이유는?
 	int frameCut = DEFAULT_FRAMES;
 	animFrames.reserve(frameCut);
-	for (int i = 0; i < frameCut; i++){
-		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i, 0), fireSize));
+	for (int i = 0; i < frameCut; i++){ ///# 코딩컨벤션: 중괄호 위치를 전체적으로 통일
+
+		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i, 0), fireSize)); ///# res/firework.png같은 문자열은 따로 빼서 한군데 모아놓도록
 		animFrames.pushBack(frame);
 	}
 	// create the animation out of the frame

@@ -28,7 +28,8 @@ public:
 
 	/*동작 변화를 위해 호출하는 함수들*/
 	void Reset(); // --> 매스테이지마다 리셋. 매개변수는 미정.
-	void NewColliderLoad();
+	void LoadBullet();
+	void ShotComplete();
 	void PullStart(Event* e);
 	void Pull(Event* e);
 	void Shot(Event* e);

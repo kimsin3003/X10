@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Bullet.h"
+#include "ColliderManager.h"
 
 //Base Class of All Bullets
 
@@ -20,7 +21,7 @@ bool Bullet::init()
 
 	//depending on the type of bullet
 	lifeTime = Director::getInstance()->getFrameRate()*1.0;
-	speedSetRatio = 0.3f;
+	speedSetRatio = 0.01f;
 	speedDecreaseRatio = 0.90f;
 
 	MakeBody();
@@ -85,10 +86,22 @@ void Bullet::DecreaseLife()
 	lifeTime -= timeDecrease;
 }
 
-///# 함수 안에서 자원을 생성한 다음에 그 포인터를 밖으로 넘겨주는 디자인은 나빠요... 
-///자원관리하기 아주 힘들다..
+void Bullet::StopExplosing()
+{
+	SetExplosing(false);
+}
+
 Explosion* Bullet::GetExplosion()
 {
+	ColliderManager* colliderManager = ColliderManager::GetInstance();
 	Explosion* explosion = Explosion::create();
+	
+	Size winSize = Director::getInstance()->getWinSize();
+	Point half = Point(winSize.width, winSize.height) / 2;
+	Point pos = this->getPosition() - half;
+	explosion->setPosition(pos);
+	
+	colliderManager->AddExplosion(explosion);
+	
 	return explosion;
 }

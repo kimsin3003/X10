@@ -59,7 +59,11 @@ void Sling::Reset() // --> 매스테이지마다 리셋. 매개변수는 미정.
 	ChangeToEmpty();
 }
 
-void Sling::NewColliderLoad()
+void Sling::ShotComplete()
+{
+	ChangeToEmpty();
+}
+void Sling::LoadBullet()
 {
 	ChangeToLoaded();
 }

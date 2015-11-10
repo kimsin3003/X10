@@ -30,17 +30,17 @@ bool GameScene::init()
 	gameLayer = GameLayer::create();
 	this->addChild(uiLayer);
 	this->addChild(gameLayer);
-	
-	GameManager::GetInstance()->InitTargets(gameLayer);
-
 	this->scheduleUpdate();
 
+
+	GameManager::GetInstance()->InitTargets(gameLayer);
 	auto sling = Sling::GetInstance();
 	this->addChild(sling);
 
 	return true;
 }
 
-void GameScene::update(float dt){
+void GameScene::update(float dt)
+{
 	GameManager::GetInstance()->Play(gameLayer, uiLayer);
 }

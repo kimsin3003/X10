@@ -1,29 +1,15 @@
 #include "stdafx.h"
-
+#include "GameLayer.h"
+#include "UILayer.h"
 #include "GameManager.h"
+#include "ColliderManager.h"
+#include "TargetManager.h"
 #include "Collider.h"
 #include "Bullet.h"
 #include "Target.h"
 #include "Sling.h"
-#include "ColliderManager.h"
-#include "TargetManager.h"
-#include "GameLayer.h"
-#include "UILayer.h"
 
 GameManager* GameManager::instance = nullptr;
-
-GameManager::GameManager()
-{
-	sling = Sling::GetInstance();
-	colliderManager = ColliderManager::GetInstance();
-	targetManager = TargetManager::GetInstance();
-}
-
-GameManager::~GameManager()
-{
-
-}
-
 
 GameManager* GameManager::GetInstance()
 {
@@ -34,80 +20,89 @@ GameManager* GameManager::GetInstance()
 	return instance;
 }
 
+GameManager::GameManager()
+{
+	sling = Sling::GetInstance();
+	colliderManager = ColliderManager::GetInstance();
+	targetManager = TargetManager::GetInstance();
+}
+
+GameManager::~GameManager(){}
+
 void GameManager::Reset()
 {
 	delete instance;
-	instance = new GameManager();
+	instance = nullptr;
 	ColliderManager::GetInstance()->Reset();
+//	TargetManager::GetInstance()->Reset();
 }
-
 
 void GameManager::InitTargets(GameLayer* gameLayer)
 {
 	Vector<Target*> targets = targetManager->GetTargets();
-	for (auto iter = targets.begin(); iter < targets.end(); iter++) 
-		///# auto쓰는데 왜 iter++ ?? 이번 프로젝트는 최대한 auto를 쓰지 말기를 추천한다. 
-		///#타입 추론 및 이터래이터의 타입을 정확히 알고 쓰는 연습을 하기 위함.
-		gameLayer->addChild(*iter);
+	for (Target* target : targets)
+	{
+		gameLayer->addChild(target);
+	}
 }
 
-//main game logic
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
-
+	//벡터를 통째로 복사해서 임시 변수에 담지 말것. 성능 저하의 원인
 	Vector<Collider*> colliders = colliderManager->GetColliders();
-	///# 벡터를 통째로 복사해서 임시 변수에 담지 말것... 성능 저하의 원인
 	Vector<Target*> targets = targetManager->GetTargets(); 
-	//shot if sling shotted the Collider. --> isShotted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
 
-	if (colliderManager->HasNextCollider())
+	//총알이 있으면
+	if (colliderManager->HasBullet())
 	{
-		sling->NewColliderLoad();
+		//슬링에게 총알을 장전하라고 알린다.
+		sling->LoadBullet();
 	}
 
+	//슬링의 상태가 'IsShotted'이면
 	if (sling->IsShotted())
 	{
-		Bullet* colliderToShot = (Bullet*)colliderManager->GetColliderToShot();
-		colliderToShot->setPosition(sling->getPosition());
-		colliderToShot->setRotation(sling->GetRotationAngle());
-		colliderToShot->SetDirection(sling->GetDirection());
-		colliderToShot->SetSpeed(sling->GetSpeed()/20);
-		colliderToShot->SetFlying(true);
-		gameLayer->addChild(colliderToShot);
-		sling->Reset();
+		//위치, 각도, 속도가 세팅된 bullet을 생성하여 레이어에 붙인다
+		Bullet* bullet = (Bullet*)colliderManager->GetBulletToShot();
+		gameLayer->addChild(bullet);
+		//슬링에게 발사가 완료되었다고 알린다.
+		sling->ShotComplete();
 	}
 
 	for (Collider* collider : colliders)
 	{
-		//Check collide
+		//날고 있는 'collider'는 
 		if (collider->IsFlying())
 		{
+			//'Act()'를 하라고 시키고
 			collider->Act();
+			//그 'collider'이 타깃들과 충돌하는지 체크한다. 
 			CheckCollide(collider, targets);
 		}
 
-		//Explosion
+		//그 'collider'가 bullet이면
 		if (collider->IsBullet())
 		{
+			//그리고 폭발하는 중이면
 			if (((Bullet*)collider)->IsExplosing()) ///# C++ 캐스팅을 써라.
 			{
+				//폭발시켜주고
 				Explosion* explosion = ((Bullet*)collider)->GetExplosion();
-				Size size = Director::getInstance()->getVisibleSize();
-				Point half = Point(size.width, size.height)/2;
-				Point pos = collider->getPosition()-half;
-				explosion->setPosition(pos);
-				colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
-				((Bullet*)collider)->SetExplosing(false);
+				//그 'collider'(bullet)에게 상태를 바꾸라고 알린다
+				((Bullet*)collider)->StopExplosing();
 			}
 		}
 	} 
 }
 
-void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets){
-	for (auto& target : targets)
+void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
+{
+	for (Target* target : targets)
 	{
 		if (collider->getBoundingBox().intersectsRect(target->getBoundingBox()))
+		{
 			target->ApplyEffectToBullet((Bullet*)collider);
+		}
 	}
 }

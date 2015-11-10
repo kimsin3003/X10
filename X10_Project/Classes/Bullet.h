@@ -26,6 +26,8 @@ public:
 	bool IsFlying() { return isFlying; }
 	bool IsExplosing() { return isExplosing; }
 
+	//Status 
+	void StopExplosing();
 protected:
 	void DecreaseLife(); // call in Move()
 	Sprite* MakeBody();

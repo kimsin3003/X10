@@ -2,7 +2,7 @@
 #include "ColliderManager.h"
 #include "Collider.h"
 #include "Bullet.h"
-
+#include "Sling.h"
 ColliderManager* ColliderManager::instance = nullptr;
 
 ColliderManager::ColliderManager() {
@@ -24,9 +24,9 @@ ColliderManager* ColliderManager::GetInstance()
 void ColliderManager::Init() //<- pass stage information parameter (si->ColliderManger)
 {										//that holds the number of Colliders to have(not implemented yet)
 	//temporary initialization for test
-	curColliderIndex = 0;
-	defaultColliderNum = 5;
-	colliders.reserve(defaultColliderNum);
+	curBulletIndex = 0;
+	defaultBulletNum = 5;
+	colliders.reserve(defaultBulletNum);
 
 	InitColliders();
 }
@@ -40,17 +40,27 @@ void ColliderManager::InitColliders() //<- pass stage information parameter (si-
 // Colliders.pushBack(si->Colliders->pop_back());
 // Colliders.pushBack(si->Colliders->pop_back());
 // ...
-	for (int i = 0; i < defaultColliderNum; i++)
+	for (int i = 0; i < defaultBulletNum; i++)
 	{
 		colliders.pushBack(Bullet::create()); ///# 내부에서 new를 해서 벡터에 넣기 때문에 자원해제는 반드시 따로 해줘야 한다.
 	}
 }
 
-//call in gama manger's logic : GetColliderToShot -> add child & visible off & set position-> shot -> visible on
-Collider* ColliderManager::GetColliderToShot()
+Bullet* ColliderManager::GetBulletToShot()
 {
-	if (curColliderIndex < defaultColliderNum)
-		return colliders.at(curColliderIndex++);
+	if (curBulletIndex < defaultBulletNum)
+	{
+		Sling* sling = Sling::GetInstance();
+		Bullet* bullet = (Bullet*)colliders.at(curBulletIndex++);
+		
+		bullet->setPosition(sling->getPosition());
+		bullet->setRotation(sling->GetRotationAngle());
+		bullet->SetDirection(sling->GetDirection());
+		bullet->SetSpeed(sling->GetSpeed());
+		bullet->SetFlying(true);
+
+		return bullet;
+	}
 	return nullptr;
 }
 
@@ -59,10 +69,12 @@ void ColliderManager::AddExplosion(Collider* explosion)
 	colliders.pushBack(explosion);
 }
 
-bool ColliderManager::HasNextCollider()
+bool ColliderManager::HasBullet()
 {
-	if (curColliderIndex < defaultColliderNum)
+	if (curBulletIndex < defaultBulletNum)
+	{
 		return true;
+	}
 	return false;
 }
 
@@ -76,5 +88,3 @@ void ColliderManager::EraseCollider(Collider* collider)
 {
 	colliders.eraseObject(collider);
 }
-
-

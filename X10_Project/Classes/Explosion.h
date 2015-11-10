@@ -13,7 +13,6 @@ public:
 	virtual bool IsFlying();
 	virtual void SetFlying(bool flag);
 	bool IsBullet() override;
-	void SetPosition(Vec2 position);
 
 protected:
 	ParticleExplosion* particle; ///# 코딩 컨벤션

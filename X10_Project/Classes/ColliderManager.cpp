@@ -72,4 +72,9 @@ void ColliderManager::Reset()
 	Init();
 }
 
+void ColliderManager::EraseCollider(Collider* collider)
+{
+	colliders.eraseObject(collider);
+}
+
 

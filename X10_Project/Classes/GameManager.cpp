@@ -54,7 +54,8 @@ void GameManager::InitTargets(GameLayer* gameLayer)
 //main game logic
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
-	Vector<Collider*> colliders = colliderManager->GetColliders(); 
+
+	Vector<Collider*> colliders = colliderManager->GetColliders();
 	///# 벡터를 통째로 복사해서 임시 변수에 담지 말것... 성능 저하의 원인
 	Vector<Target*> targets = targetManager->GetTargets(); 
 	//shot if sling shotted the Collider. --> isShotted가 언제 어떻게 바뀌냐에 따라 여기는 바뀌어야할듯.
@@ -76,16 +77,16 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		sling->Reset();
 	}
 
-	Collider* collider;
-	for (int i = 0; i < colliders.size(); i++)
+	for (Collider* collider : colliders)
 	{
-		collider = colliders.at(i);
+		//Check collide
 		if (collider->IsFlying())
 		{
 			collider->Act();
 			CheckCollide(collider, targets);
 		}
 
+		//Explosion
 		if (collider->IsBullet())
 		{
 			if (((Bullet*)collider)->IsExplosing()) ///# C++ 캐스팅을 써라.

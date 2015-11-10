@@ -4,15 +4,16 @@
 GameLayer* GameLayer::createGameLayer()
 {
 	GameLayer* gLayer = GameLayer::create();
+
 	return gLayer;
 }
 
 bool GameLayer::init()
 {
-	if (Layer::init() == false)
+	if (!Layer::init())
+	{
 		return false;
-
-	setAnchorPoint(Vec2(0, 0));
+	}
 
 	return true;
 }

@@ -2,15 +2,18 @@
 
 class Sling : public Node
 {
-public: //constant
+public:
 	///# 이런거는 enum으로.. (예)
+/*
 	enum SLING_CONFIG
 	{
-		SC_WIDTH = 20,
-		SC_HEIGHT = 50,
-		/// ...
+		WIDTH = 20,
+		HEIGHT = 50,
+		YPOS = 50,
+		MAX_POWER = 30,
+		CLICK_RANGE = 10
 	};
-
+*/
 	const float WIDTH	= 20;
 	const float HEIGHT	= 50;
 	const float YPOS	= 50;
@@ -36,19 +39,20 @@ public:
 	float GetSpeed();
 	float GetRotationAngle();
 	
-private: //function to get singleton instance
+private: 
+	//function to get singleton instance
 	CREATE_FUNC(Sling);
 	virtual bool init();
 	static Sling* instance;
 
-	//member function
-	enum Status 
+	int status;
+	enum STATUS 
 	{ 
-		empty, ///# 보통 ENUM은 대문자로... 예: STATUS_EMPTY
-		loaded,
-		pulling,
-		shotted 
-	} status; ///# emum타입 멤버 변수는 따로 줄바꿔서..
+		EMPTY, 
+		LOADED,
+		PULLING,
+		SHOTTED 
+	};
 
 	void ChangeToLoaded();	//empty -> load
 	void ChangeToPulling(); //loaded -> pulling

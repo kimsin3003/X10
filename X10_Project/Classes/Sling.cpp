@@ -66,7 +66,7 @@ void Sling::NewColliderLoad()
 
 void Sling::PullStart(Event* e)
 {
-	if (status != loaded)
+	if (status != STATUS::LOADED)
 	{
 		return;
 	}
@@ -84,10 +84,11 @@ void Sling::PullStart(Event* e)
 
 void Sling::Pull(Event* e)
 {
-	if (status != pulling)
+	if (status != STATUS::PULLING)
 	{
 		return;
 	}
+
 	EventMouse* evMouse = (EventMouse*)e;
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
@@ -110,8 +111,7 @@ void Sling::Pull(Event* e)
 	auto delay = MoveBy::create(PREDICT_LINE_TIME, shotAngle);
 	auto action = Sequence::create(delay, RemoveSelf::create(), NULL);
 	this->addChild(label);
-	label->runAction(action);
-	
+	label->runAction(action);	
 }
 
 Point Sling::GetStartLocation()
@@ -121,26 +121,15 @@ Point Sling::GetStartLocation()
 
 void Sling::Shot(Event* e)
 {
-	if (status != pulling)
+	if (status != STATUS::PULLING)
 	{
 		return;
 	}
+
 	//fix shot angle,power from last pointer position.
 	Pull(e);
 
 	ChangeToShotted();
-}
-
-bool Sling::IsShotted() // --> ½ú´ÂÁö Ã¼Å©
-{
-	if (status == shotted)
-	{
-		return true;
-	}
-	else
-	{
-		return false;
-	}	
 }
 
 Vec2 Sling::GetDirection()
@@ -155,7 +144,7 @@ float Sling::GetAngleInRadian()
 
 float Sling::GetRotationAngle()
 {
-	return -GetAngleInRadian() / 3.14 * 180 +90;
+	return -GetAngleInRadian() / 3.14 * 180 + 90;
 }
 
 float Sling::GetSpeed()
@@ -164,25 +153,36 @@ float Sling::GetSpeed()
 }
 
 
+bool Sling::IsShotted() // --> ½ú´ÂÁö Ã¼Å©
+{
+	if (status == STATUS::SHOTTED)
+		return true;
+	else
+		return false;
+}
+
 void Sling::ChangeToLoaded() //empty -> load
 {
-	if (status != empty)
+	if (status != STATUS::EMPTY)
 		return;
-	status = loaded;
+	status = STATUS::LOADED;
 }
+
 void Sling::ChangeToPulling() //loaded -> pulling
 {
-	if (status != loaded)
+	if (status != STATUS::LOADED)
 		return;
-	status = pulling;
+	status = STATUS::PULLING;
 }
+
 void Sling::ChangeToShotted() //pullig -> shotted
 {
-	if (status != pulling)
+	if (status != STATUS::PULLING)
 		return;
-	status = shotted;
+	status = STATUS::SHOTTED;
 }
+
 void Sling::ChangeToEmpty() //shotted -> empty
 {
-	status = empty;
+	status = STATUS::EMPTY;
 }

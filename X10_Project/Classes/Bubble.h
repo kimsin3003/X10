@@ -6,9 +6,6 @@ class Bubble : public Target
 {
 public:
 	CREATE_FUNC(Bubble);
-	virtual bool init();
-	virtual void ApplyEffectToBullet(Bullet* bullet);
-
-private:
-
+	bool init();
+	void ApplyEffectToBullet(Bullet* bullet);
 };

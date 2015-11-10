@@ -5,9 +5,7 @@ class Bullet;
 class Mirror : public Target
 {
 public:
-	virtual bool init();
-	virtual void ApplyEffectToBullet(Bullet* bullet);
-
-private:
-
+	CREATE_FUNC(Mirror);
+	bool init();
+	void ApplyEffectToBullet(Bullet* bullet);
 };

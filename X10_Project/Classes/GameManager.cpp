@@ -2,6 +2,7 @@
 #include "GameLayer.h"
 #include "UILayer.h"
 #include "GameManager.h"
+#include "StageInformation.h"
 #include "ColliderManager.h"
 #include "TargetManager.h"
 #include "Collider.h"
@@ -25,6 +26,7 @@ GameManager::GameManager()
 	sling = Sling::GetInstance();
 	colliderManager = ColliderManager::GetInstance();
 	targetManager = TargetManager::GetInstance();
+	stage = nullptr;
 }
 
 GameManager::~GameManager(){}
@@ -37,6 +39,14 @@ void GameManager::Reset()
 //	TargetManager::GetInstance()->Reset();
 }
 
+void GameManager::SetStageInformation(const char* fileName, int StageNumber)
+{	
+	stage = new StageInformation(fileName, StageNumber);
+	targetManager->InitTargets(stage);
+	colliderManager->InitColliders(stage);
+}
+
+
 void GameManager::InitTargets(GameLayer* gameLayer)
 {
 	Vector<Target*> targets = targetManager->GetTargets();
@@ -45,6 +55,7 @@ void GameManager::InitTargets(GameLayer* gameLayer)
 		gameLayer->addChild(target);
 	}
 }
+
 
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {

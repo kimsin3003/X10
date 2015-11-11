@@ -164,6 +164,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MoonBullet.cpp" />
     <ClCompile Include="..\Classes\MoonExplosion.cpp" />
     <ClCompile Include="..\Classes\Sling.cpp" />
+    <ClCompile Include="..\Classes\StageInformation.cpp" />
     <ClCompile Include="..\Classes\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -192,6 +193,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MoonBullet.h" />
     <ClInclude Include="..\Classes\MoonExplosion.h" />
     <ClInclude Include="..\Classes\Sling.h" />
+    <ClInclude Include="..\Classes\StageInformation.h" />
     <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="..\Classes\Target.h" />
     <ClInclude Include="..\Classes\TargetManager.h" />

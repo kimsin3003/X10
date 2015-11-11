@@ -1,5 +1,5 @@
 #pragma once
-
+class StageInformation;
 class Collider;
 class Bullet;
 
@@ -15,7 +15,8 @@ public:
 	void AddExplosion(Collider* explosion);
 	bool HasBullet();
 	void Reset();
-	void EraseCollider(Collider* collider);
+	void EraseCollider(Collider* collider); 
+	void InitColliders(StageInformation* stage);
 
 private:
 	void InitColliders(); // called in Init()

@@ -24,8 +24,7 @@ public:
 
 public:
 	static Sling* GetInstance();
-	static bool isExist;
-
+	
 	/*동작 변화를 위해 호출하는 함수들*/
 	void Reset(); // --> 매스테이지마다 리셋. 매개변수는 미정.
 	void LoadBullet();

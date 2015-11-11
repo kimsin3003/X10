@@ -2,15 +2,13 @@
 #include "Sling.h"
 
 Sling* Sling::instance = nullptr;
-bool Sling::isExist = false;
 
 Sling* Sling::GetInstance()
 {
-	if (instance == nullptr || isExist == false){ ///# 중괄호 코딩 컨벤션
-
-		///# instance가 존재하는데 isExist가 false면 메모리 누수?
+	if (instance == nullptr )
+	{
 		instance = Sling::create();
-		isExist = true;
+		instance->retain(); //cocos가 맘대로 없애지 못하게 바꿈.
 	}
 	return instance;
 }
@@ -27,7 +25,7 @@ bool Sling::init()
 
 	//set Empey status
 	ChangeToEmpty();
-
+	
 	//set some frame work variable
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();

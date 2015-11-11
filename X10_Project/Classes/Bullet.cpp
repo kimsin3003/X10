@@ -35,14 +35,13 @@ Sprite* Bullet::MakeBody()
 	Sprite* body = Sprite::create();
 
 	float scale = Director::getInstance()->getContentScaleFactor();
-	const Size fireSize(BULLET_WIDTH / scale / BULLET_RATIO, BULLET_HEIGHT / scale / BULLET_RATIO); 
+	const Size fireSize(BULLET_WIDTH /scale , BULLET_HEIGHT /scale); 
 	int frameCut = BULLET_FRAMES;
 	Vector<SpriteFrame*> animFrames;
 	animFrames.reserve(frameCut);
-	
 	for (int i = 0; i < frameCut; i++)
 	{
-		SpriteFrame* frame = SpriteFrame::create("res/firework.png", Rect(Point(fireSize.width*i, 0), fireSize)); 
+		SpriteFrame* frame = SpriteFrame::create(FILE_NAME, Rect(Point(fireSize.width*i, 0), fireSize));
 		animFrames.pushBack(frame);
 	}
 	

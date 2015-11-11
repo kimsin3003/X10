@@ -45,11 +45,12 @@ protected:
 
 	bool isExplosing;
 
+	const char* FILE_NAME= "res/firework.png";
 	enum
 	{
 		BULLET_FRAMES = 5,
-		BULLET_WIDTH = 20,
-		BULLET_HEIGHT = 20,
+		BULLET_WIDTH = 10,
+		BULLET_HEIGHT = 10,
 		BULLET_RATIO = 2,
 
 		BULLET_LIFETIME = 30,

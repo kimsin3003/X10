@@ -45,6 +45,6 @@ bool Explosion::IsBullet()
 void Explosion::SetPosition(Point pos)
 {
 	setPosition(pos);
-	explosion->setPosition(0,0);
+	explosion->setPosition(Point::ZERO);
 }
 

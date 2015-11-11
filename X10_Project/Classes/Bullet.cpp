@@ -24,7 +24,7 @@ bool Bullet::init()
 	speedSetRatio = 0.01f;
 	speedDecreaseRatio = 0.90f;
 
-	MakeBody();
+	body = MakeBody();
 	addChild(body);
 
 	return true;
@@ -32,7 +32,7 @@ bool Bullet::init()
 
 Sprite* Bullet::MakeBody()
 {
-	body = Sprite::create();
+	Sprite* body = Sprite::create();
 
 	float scale = Director::getInstance()->getContentScaleFactor();
 	const Size fireSize(BULLET_WIDTH / scale / BULLET_RATIO, BULLET_HEIGHT / scale / BULLET_RATIO); 

@@ -29,7 +29,9 @@ GameManager::GameManager()
 	stage = nullptr;
 }
 
-GameManager::~GameManager(){}
+GameManager::~GameManager()
+{
+}
 
 void GameManager::Reset()
 {
@@ -39,9 +41,14 @@ void GameManager::Reset()
 //	TargetManager::GetInstance()->Reset();
 }
 
-void GameManager::SetStageInformation(const char* fileName, int StageNumber)
+void GameManager::SetStageInformation(int StageNumber)
 {	
-	stage = new StageInformation(fileName, StageNumber);
+	if (stage != nullptr)
+	{
+		delete stage;
+	}
+	stage = new StageInformation(StageNumber);
+	
 	targetManager->InitTargets(stage);
 	colliderManager->InitColliders(stage);
 }

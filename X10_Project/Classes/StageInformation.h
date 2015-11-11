@@ -2,7 +2,10 @@
 class StageInformation
 {
 public:
-	StageInformation(const char* FILENAME, int stage);
+	StageInformation(int stage);
 	~StageInformation();
+
+private:
+	const char* FILENAME = "temp.txt";
 };
 

@@ -3,15 +3,14 @@
 #include "GameManager.h"
 #include "Sling.h"
 
+GameScene::GameScene() : gameLayer(nullptr), uiLayer(nullptr)
+{
+
+}
+
 Scene* GameScene::createScene()
 {
 	auto scene = Scene::create();
-	auto background = Sprite::create("res/x10bg.jpg");
-	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
-	background->setAnchorPoint(Point::ZERO);
-	background->setScale(scale);
-	background->setOpacity(140);
-	scene->addChild(background);
 
 	auto layer = GameScene::create();
 	scene->addChild(layer);
@@ -26,18 +25,34 @@ bool GameScene::init()
 		return false;
 	}
 
-	uiLayer = UILayer::create();
+	//배경 그림 삽입.
+	auto background = loadBackGround();
+	this->addChild(background);
+
 	gameLayer = GameLayer::create();
-	this->addChild(uiLayer);
+	uiLayer = UILayer::create();
 	this->addChild(gameLayer);
+	this->addChild(uiLayer);
+	
 	this->scheduleUpdate();
 
-
+	/*stage Information 불러오는 부분. stageInfomation 완성되면 아랫줄 주석 제거 */
+	//SetStageInformation(const char* fileName, int StageNumber) 
 	GameManager::GetInstance()->InitTargets(gameLayer);
 	auto sling = Sling::GetInstance();
 	this->addChild(sling);
 
 	return true;
+}
+
+Sprite* GameScene::loadBackGround()
+{
+	auto background = Sprite::create(BOTTOM_BGIMG_FILE);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
+	background->setAnchorPoint(Point::ZERO);
+	background->setScale(scale);
+	background->setOpacity(140);
+	return background;
 }
 
 void GameScene::update(float dt)

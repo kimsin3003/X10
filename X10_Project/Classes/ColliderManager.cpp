@@ -23,7 +23,7 @@ ColliderManager* ColliderManager::GetInstance()
 	return instance;
 }
 
-void ColliderManager::InitColliders() //Temporary default collider
+void ColliderManager::InitColliders() //Temporary init colliders
 {
 	curBulletIndex = 0;
 	defaultBulletNum = 5;

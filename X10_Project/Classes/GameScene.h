@@ -5,6 +5,8 @@
 class GameScene : public Layer
 {
 public:
+	GameScene();
+	
 	static Scene* createScene();
 	virtual bool init(); 
 	CREATE_FUNC(GameScene);

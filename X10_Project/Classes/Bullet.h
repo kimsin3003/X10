@@ -31,12 +31,13 @@ public:
 	void TimeUp();
 	void ReduceSpeed();
 
+	Sprite* body;//임시로 퍼블릭으로 옮김
 protected:
 	void DecreaseLife(); // call in Move()
 	Sprite* MakeBody();
 	
 protected:
-	Sprite* body;
+
 
 	Vec2 direction;
 	float speed;

@@ -8,7 +8,12 @@
 
 bool Mirror::init()
 {
+	spr = Sprite::create(FILE_MIRROR);
+	addChild(spr);
 
+	//테스트용 코드
+	setScale(3.0f);
+	setPosition(30, 200);
 	return true;
 }
 
@@ -40,6 +45,7 @@ void Mirror::ToExplosion(Explosion* explosion)
 
 void Mirror::ToSelf(Bullet* bullet)
 {
+	spr = Sprite::create(FILE_MIRROR_ANGRY);
 	setScale(1.5);
 }
 

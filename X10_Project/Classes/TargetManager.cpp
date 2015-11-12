@@ -2,10 +2,13 @@
 #include "TargetManager.h"
 #include "StageInformation.h"
 
+#include "Mirror.h"
 
 TargetManager::TargetManager()
 {
-	targets.reserve(5);
+	currentTargetIdx = 0;
+	defaultTargetNumber = 1;
+	targets.reserve(defaultTargetNumber);
 }
 TargetManager::~TargetManager()
 {
@@ -14,6 +17,6 @@ TargetManager::~TargetManager()
 
 void TargetManager::InitTargets(StageInformation* si)
 {
-
+	targets.pushBack(Mirror::create());
 }
 

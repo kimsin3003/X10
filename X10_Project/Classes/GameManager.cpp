@@ -9,6 +9,7 @@
 #include "Bullet.h"
 #include "Target.h"
 #include "Sling.h"
+#include "Mirror.h"
 
 GameManager* GameManager::instance = nullptr;
 

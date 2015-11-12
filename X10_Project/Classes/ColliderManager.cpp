@@ -1,32 +1,35 @@
 #include "stdafx.h"
+#include "StageInformation.h"
 #include "ColliderManager.h"
 #include "Collider.h"
 #include "Bullet.h"
 #include "Sling.h"
 
-void ColliderManager::Init()
-{										
+ColliderManager::ColliderManager()
+{
 	curBulletIndex = 0;
 	defaultBulletNum = 5;
 	colliders.reserve(defaultBulletNum);
-
-	InitColliders();
 }
 
-void ColliderManager::InitColliders()
-{						
+ColliderManager::~ColliderManager()
+{
+	colliders.clear();
+}
 
+void ColliderManager::InitBullets(StageInformation* si)
+{
+	//이후에 si로 초기화
 	for (int i = 0; i < defaultBulletNum; i++)
 	{
 		colliders.pushBack(Bullet::create());
 	}
 }
 
-Bullet* ColliderManager::GetBulletToShot()
+Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 {
 	if (curBulletIndex < defaultBulletNum)
 	{
-		Sling* sling = Sling::GetInstance();
 		Bullet* bullet = (Bullet*)colliders.at(curBulletIndex++);
 		
 		bullet->setPosition(sling->getPosition());
@@ -37,12 +40,18 @@ Bullet* ColliderManager::GetBulletToShot()
 
 		return bullet;
 	}
+
 	return nullptr;
 }
 
 void ColliderManager::AddExplosion(Collider* explosion)
 {
 	colliders.pushBack(explosion);
+}
+
+void ColliderManager::EraseCollider(Collider* collider)
+{
+	colliders.eraseObject(collider);
 }
 
 bool ColliderManager::HasBullet()
@@ -54,13 +63,3 @@ bool ColliderManager::HasBullet()
 	return false;
 }
 
-void ColliderManager::Reset()
-{
-	colliders.clear(); ///# 헐? Collider* 원소들은 다 메모리 누수 나겠네..
-	Init();
-}
-
-void ColliderManager::EraseCollider(Collider* collider)
-{
-	colliders.eraseObject(collider);
-}

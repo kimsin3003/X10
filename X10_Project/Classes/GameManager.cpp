@@ -2,6 +2,7 @@
 #include "GameLayer.h"
 #include "UILayer.h"
 #include "GameManager.h"
+#include "StageInformation.h"
 #include "ColliderManager.h"
 #include "TargetManager.h"
 #include "Collider.h"
@@ -23,19 +24,36 @@ GameManager* GameManager::GetInstance()
 GameManager::GameManager()
 {
 	sling = Sling::GetInstance();
-	colliderManager = ColliderManager::GetInstance();
-	targetManager = TargetManager::GetInstance();
+	colliderManager = new ColliderManager();
+	targetManager = new TargetManager();
+	
+	stage = nullptr;
 }
 
-GameManager::~GameManager(){}
+GameManager::~GameManager()
+{
+
+}
 
 void GameManager::Reset()
 {
 	delete instance;
 	instance = nullptr;
-	ColliderManager::GetInstance()->Reset();
-//	TargetManager::GetInstance()->Reset();
 }
+
+void GameManager::SetStageInformation(int StageNumber)
+{	
+	if (stage != nullptr)
+	{
+		delete stage;
+	}
+
+	stage = new StageInformation(StageNumber);
+	
+//	targetManager->InitTargets(stage);
+	colliderManager->InitBullets(stage);
+}
+
 
 void GameManager::InitTargets(GameLayer* gameLayer)
 {
@@ -63,7 +81,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	if (sling->IsShotted())
 	{
 		//위치, 각도, 속도가 세팅된 bullet을 생성하여 레이어에 붙인다
-		Bullet* bullet = (Bullet*)colliderManager->GetBulletToShot();
+		Bullet* bullet = (Bullet*)colliderManager->GetBulletToShot(sling);
 		gameLayer->addChild(bullet);
 		//슬링에게 발사가 완료되었다고 알린다.
 		sling->ShotComplete();
@@ -75,22 +93,21 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		if (collider->IsFlying())
 		{
 			//'Act()'를 하라고 시키고
-			collider->Act();
-			//그 'collider'이 타깃들과 충돌하는지 체크한다. 
+			collider->Act(colliderManager);
+			//그 'collider'가 타깃들과 충돌하는지 체크한다. 
 			CheckCollide(collider, targets);
 		}
 
-		//그 'collider'가 bullet이면
+		//그 'collider'가 bullet이고
 		if (collider->IsBullet())
 		{
-			//그리고 폭발하는 중이면
+			//폭발해야하면
 			if (((Bullet*)collider)->IsExplosing()) ///# C++ 캐스팅을 써라.
 			{
-				//폭발시켜주고
+				//폭발 넣어주고 붙여준다
 				Explosion* explosion = ((Bullet*)collider)->GetExplosion();
+				colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
-				//그 'collider'(bullet)에게 상태를 바꾸라고 알린다
-				((Bullet*)collider)->StopExplosing();
 			}
 		}
 	} 

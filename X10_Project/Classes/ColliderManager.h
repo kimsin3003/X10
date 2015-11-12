@@ -1,22 +1,25 @@
 #pragma once
-
+class StageInformation;
 class Collider;
 class Bullet;
+class Sling;
 
 class ColliderManager
 {
 public:
-	void Init();
-	Bullet* GetBulletToShot();
+	ColliderManager();
+	~ColliderManager();
+	
+	void InitBullets(StageInformation* si);
+
+	Bullet* GetBulletToShot(Sling* sling);
 	Vector<Collider*>& GetColliders(){ return colliders; }
 
-	void AddExplosion(Collider* explosion);
 	bool HasBullet();
-	void Reset();
-	void EraseCollider(Collider* collider);
+	void AddExplosion(Collider* explosion);
+	void EraseCollider(Collider* collider); 
 
 private:
-	void InitColliders(); // called in Init()
 	Vector<Collider*> colliders;
 	int curBulletIndex;
 	int defaultBulletNum;

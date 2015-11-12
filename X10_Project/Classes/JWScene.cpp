@@ -2,7 +2,6 @@
 #include "MainScene.h"
 #include "JWScene.h"
 
-#include "MoonBullet.h"
 #include "Bullet.h"
 
 Scene* JWScene::createScene()
@@ -40,8 +39,6 @@ bool JWScene::init()
 	Mouse->onMouseUp = CC_CALLBACK_1(JWScene::onMouseUp, this);
 	Mouse->onMouseMove = CC_CALLBACK_1(JWScene::onMouseMove, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(Mouse, this);
-
-	auto MoonMoon = MoonBullet::create();
 
 	return true;
 }

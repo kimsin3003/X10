@@ -3,6 +3,8 @@
 #include "Collider.h"
 #include "Explosion.h"
 
+class ColliderManager;
+
 class Bullet : public Collider
 {
 public:
@@ -12,7 +14,7 @@ public:
 	CREATE_FUNC(Bullet);
 
 	virtual bool init() override;
-	virtual void Act() override;
+	virtual void Act(ColliderManager* cm) override;
 	virtual void Move();
 	virtual Explosion* GetExplosion();
 
@@ -45,11 +47,12 @@ protected:
 
 	bool isExplosing;
 
+	const char* FILE_NAME= "res/firework.png";
 	enum
 	{
 		BULLET_FRAMES = 5,
-		BULLET_WIDTH = 20,
-		BULLET_HEIGHT = 20,
+		BULLET_WIDTH = 10,
+		BULLET_HEIGHT = 10,
 		BULLET_RATIO = 2,
 
 		BULLET_LIFETIME = 30,

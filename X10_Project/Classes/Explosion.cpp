@@ -4,6 +4,7 @@
 #include "Explosion.h"
 
 //Base Class of All Explosions
+
 bool Explosion::init()
 {
 	explosion = ParticleExplosion::create();

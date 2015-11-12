@@ -11,7 +11,7 @@ bool Bullet::init()
 	{
 		return false;
 	}
-	
+
 	speed = 0;
 	direction = Vec2::ZERO;
 	timeDecrease = 1;

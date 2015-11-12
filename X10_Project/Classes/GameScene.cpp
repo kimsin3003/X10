@@ -40,6 +40,7 @@ bool GameScene::init()
 	//SetStageInformation(const char* fileName, int StageNumber)
 
 	GameManager::GetInstance()->SetStage(1);
+	GameManager::GetInstance()->SetTargets(gameLayer);
 	Sling* sling = Sling::GetInstance();
 	this->addChild(sling);
 

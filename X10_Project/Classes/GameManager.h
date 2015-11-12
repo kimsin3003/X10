@@ -17,7 +17,9 @@ public:
 
 	void Play(GameLayer* gameLayer, UILayer* uiLayer);
 	
+	void SetTargets(GameLayer* gameLayer);
 	void SetStage(int StageNumber);
+
 
 private:
 	GameManager();

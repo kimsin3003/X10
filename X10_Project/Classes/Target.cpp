@@ -1,14 +1,13 @@
 #include "stdafx.h"
-#include "Target.h"
+#include "Collider.h"
 #include "Explosion.h"
 #include "Bullet.h"
+#include "Target.h"
 
 //Base class of all Targets
 
 bool Target::init()
 {
-	spr = Sprite::create("res/angle.png");
-	addChild(spr);
 	return true;
 }
 

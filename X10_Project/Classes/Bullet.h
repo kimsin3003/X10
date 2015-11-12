@@ -23,13 +23,17 @@ public:
 	void SetSpeed(float spd) { speed = spd * speedSetRatio; }
 	void SetSpeedDecreaseRatio(float ratio) { speedDecreaseRatio = ratio; }
 	void SetFlying(bool flag) { isFlying = flag; }
-	void SetExplosing(bool flag) { isExplosing = flag; }
 	bool IsBullet() { return true; }
 	bool IsFlying() { return isFlying; }
-	bool IsExplosing() { return isExplosing; }
+	bool ShouldExplode() { return shouldExplode; }
 
 	//Status 
-	void StopExplosing();
+	void Crashed();
+	void Exploded();
+	void TimeUp();
+
+	void ReduceSpeed();
+
 protected:
 	void DecreaseLife(); // call in Move()
 	Sprite* MakeBody();
@@ -45,7 +49,7 @@ protected:
 	float speedSetRatio;
 	float speedDecreaseRatio;
 
-	bool isExplosing;
+	bool shouldExplode;
 
 	const char* FILE_NAME= "res/firework.png";
 	enum

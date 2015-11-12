@@ -18,7 +18,7 @@ bool Bullet::init()
 
 	isBullet = true;
 	isFlying = false;
-	isExplosing = false;
+	shouldExplode = false;
 
 	//depending on the type of bullet
 	lifeTime = Director::getInstance()->getFrameRate()*1.0;
@@ -59,18 +59,15 @@ void Bullet::Act(ColliderManager* cm)
 	if (lifeTime > BULLET_EXPLODETIME)
 	{
 		Move();
+		DecreaseLife();
 		if (lifeTime < BULLET_REDUCTIONSPEEDTIME)
 		{
-			SetSpeed(speed * speedDecreaseRatio);
-			SetSpeedDecreaseRatio(speedDecreaseRatio - 0.05f);
+			ReduceSpeed();
 		}
-		DecreaseLife();
 	}
 	else
 	{
-		removeFromParent();
-		SetFlying(false);
-		SetExplosing(true);
+		TimeUp();
 	}
 }
 
@@ -81,23 +78,38 @@ void Bullet::Move()
 	setPosition(curPos + delta);
 }
 
+Explosion* Bullet::GetExplosion()
+{
+	Explosion* explosion = Explosion::create();
+	explosion->SetPosition(getPosition());
+	Exploded();
+	return explosion;
+}
+
 void Bullet::DecreaseLife()
 {
 	lifeTime -= timeDecrease;
 }
 
-void Bullet::StopExplosing()
+void Bullet::ReduceSpeed()
 {
-	SetExplosing(false);
+	SetSpeed(speed * speedDecreaseRatio);
+	SetSpeedDecreaseRatio(speedDecreaseRatio - 0.05f);
 }
 
-Explosion* Bullet::GetExplosion()
+void Bullet::Exploded()
 {
-	Explosion* explosion = Explosion::create();
+	shouldExplode = false;
+}
 
-	explosion->SetPosition(getPosition());
+void Bullet::Crashed()
+{
+	shouldExplode = true;
+}
 
-	StopExplosing();
-
-	return explosion;
+void Bullet::TimeUp()
+{
+	removeFromParent();
+	shouldExplode = true;
+	isFlying = false;
 }

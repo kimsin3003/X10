@@ -10,4 +10,5 @@ StageInformation::StageInformation(int stage)
 
 StageInformation::~StageInformation()
 {
+
 }

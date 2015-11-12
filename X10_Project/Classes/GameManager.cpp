@@ -26,7 +26,6 @@ GameManager::GameManager()
 	sling = Sling::GetInstance();
 	colliderManager = new ColliderManager();
 	targetManager = new TargetManager();
-	
 	stage = nullptr;
 }
 
@@ -41,7 +40,7 @@ void GameManager::Reset()
 	instance = nullptr;
 }
 
-void GameManager::SetStageInformation(int StageNumber)
+void GameManager::SetStage(int StageNumber)
 {	
 	if (stage != nullptr)
 	{
@@ -50,18 +49,8 @@ void GameManager::SetStageInformation(int StageNumber)
 
 	stage = new StageInformation(StageNumber);
 	
-//	targetManager->InitTargets(stage);
+	targetManager->InitTargets(stage);
 	colliderManager->InitBullets(stage);
-}
-
-
-void GameManager::InitTargets(GameLayer* gameLayer)
-{
-	Vector<Target*> targets = targetManager->GetTargets();
-	for (Target* target : targets)
-	{
-		gameLayer->addChild(target);
-	}
 }
 
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
@@ -80,7 +69,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	//슬링의 상태가 'IsShotted'이면
 	if (sling->IsShotted())
 	{
-		//위치, 각도, 속도가 세팅된 bullet을 생성하여 레이어에 붙인다
+		//위치, 각도, 속도가 세팅된 bullet을 생성하고 레이어에 붙인다
 		Bullet* bullet = (Bullet*)colliderManager->GetBulletToShot(sling);
 		gameLayer->addChild(bullet);
 		//슬링에게 발사가 완료되었다고 알린다.
@@ -89,28 +78,28 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	for (Collider* collider : colliders)
 	{
-		//날고 있는 'collider'는 
+		//1. 날고 있는 'collider'는 
 		if (collider->IsFlying())
 		{
-			//'Act()'를 하라고 시키고
+			//'Act()'를 시키고
 			collider->Act(colliderManager);
 			//그 'collider'가 타깃들과 충돌하는지 체크한다. 
 			CheckCollide(collider, targets);
 		}
 
-		//그 'collider'가 bullet이고
+		//2. 'collider'가 bullet이고
 		if (collider->IsBullet())
 		{
 			//폭발해야하면
-			if (((Bullet*)collider)->IsExplosing()) ///# C++ 캐스팅을 써라.
+			if (((Bullet*)collider)->ShouldExplode())
 			{
-				//폭발 넣어주고 붙여준다
+				//폭발을 생성하여 벡터에 넣고 레이어에 붙여준다
 				Explosion* explosion = ((Bullet*)collider)->GetExplosion();
 				colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
 			}
 		}
-	} 
+	}
 }
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
@@ -119,7 +108,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
 	{
 		if (collider->getBoundingBox().intersectsRect(target->getBoundingBox()))
 		{
-			target->ApplyEffectToBullet((Bullet*)collider);
+			target->ApplyCollisionEffect(collider);
 		}
 	}
 }

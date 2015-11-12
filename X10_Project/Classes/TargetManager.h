@@ -14,5 +14,6 @@ public:
 
 private:
 	Vector<Target*> targets;
+	int defaultTargetNumber;
+	int currentTargetIdx;
 };
-

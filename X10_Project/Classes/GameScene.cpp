@@ -39,9 +39,8 @@ bool GameScene::init()
 	/*stage Information 불러오는 부분. stageInfomation 완성되면 아랫줄 주석 제거 */
 	//SetStageInformation(const char* fileName, int StageNumber)
 
-	GameManager::GetInstance()->SetStageInformation(1);
-	GameManager::GetInstance()->InitTargets(gameLayer);
-	auto sling = Sling::GetInstance();
+	GameManager::GetInstance()->SetStage(1);
+	Sling* sling = Sling::GetInstance();
 	this->addChild(sling);
 
 	this->scheduleUpdate();

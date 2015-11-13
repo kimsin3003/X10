@@ -25,6 +25,7 @@ public:
 	bool IsFlying() { return isFlying; }
 	bool ShouldExplode() { return shouldExplode; }
 	const Rect& GetBoundingBox() { return body->getBoundingBox(); }
+
 	//상태 변화
 	void Crashed();
 	void Exploded();

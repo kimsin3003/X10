@@ -15,13 +15,13 @@ void Target::ApplyCollisionEffect(Collider* collider)
 {
 	if (collider->IsBullet())
 	{
-		ToBullet((Bullet*)collider);
-		ToSelf((Bullet*)collider);
+		ToBullet(static_cast<Bullet*>(collider));
+		ToSelf(static_cast<Bullet*>(collider));
 	}
 	else
 	{
-		ToExplosion((Explosion*)collider);
-		ToSelf((Explosion*)collider);
+		ToExplosion(static_cast<Explosion*>(collider));
+		ToSelf(static_cast<Explosion*>(collider));
 	}
 }
 

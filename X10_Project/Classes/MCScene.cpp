@@ -98,7 +98,6 @@ bool MCScene::init()
 	//animation man
 	auto aniSprite = Sprite::create();
 	aniSprite->setPosition(100, 100);
-	this->addChild(aniSprite);
 	//애니매이션 프레임 추가
 	Vector<SpriteFrame*> animFrames;
 	const int frameCut = 3;//사용된 프레임 개수
@@ -108,8 +107,6 @@ bool MCScene::init()
 	animFrames.reserve(frameCut);
 	for (int i = 0; i < frameCut; i++)
 		animFrames.pushBack(SpriteFrame::create("res/animSprite2.png", Rect(AniCharWidth * i*3, AniCharheight, AniCharWidth, AniCharheight)));
-
-
 	// create the animation out of the frame
 	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
 	Animate* animate = Animate::create(animation);
@@ -124,6 +121,28 @@ bool MCScene::init()
 
 	auto sling = Sling::GetInstance();
 	this->addChild(sling);
+
+
+	Sprite* fireWorks = Sprite::create();
+	fireWorks->setPosition(100, 200);
+	auto cache = SpriteFrameCache::getInstance();
+	cache->addSpriteFramesWithFile("res/mcatlas.plist");
+	const int frameNum = 5;
+	Vector<SpriteFrame*> aniFrames(frameNum);
+	char str[100] = { 0 };
+	for (int i = 1; i <= frameNum; i++)
+	{
+		sprintf(str, "firework%d.png", i);
+		SpriteFrame* frame = cache->getSpriteFrameByName(str);
+
+		aniFrames.pushBack(frame);
+	}
+	Animation* ani = Animation::createWithSpriteFrames(aniFrames, 1.0f);
+	Animate* animateFromTmpAtlas = Animate::create(ani);
+	fireWorks->runAction(animateFromTmpAtlas);
+	fireWorks->addChild(Label::create("HH   ", "arial", 10));
+	fireWorks->setScale(10);
+	this->addChild(fireWorks);
 
 	return true;
 }

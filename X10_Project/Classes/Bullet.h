@@ -24,20 +24,20 @@ public:
 	bool IsBullet() { return true; }
 	bool IsFlying() { return isFlying; }
 	bool ShouldExplode() { return shouldExplode; }
-	
+	const Rect& GetBoundingBox() { return body->getBoundingBox(); }
 	//상태 변화
 	void Crashed();
 	void Exploded();
 	void TimeUp();
 	void ReduceSpeed();
 
-	Sprite* body;//임시로 퍼블릭으로 옮김
 protected:
 	void DecreaseLife(); // call in Move()
 	Sprite* MakeBody();
 	
 protected:
 
+	Sprite* body;//임시로 퍼블릭으로 옮김
 
 	Vec2 direction;
 	float speed;

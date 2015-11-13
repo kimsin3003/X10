@@ -74,7 +74,7 @@ void Sling::PullStart(Event* e)
 	}
 
 	/*Pull mouse 위치 거리 조건 설정 */
-	EventMouse* evMouse = (EventMouse*)e; ///# c++ 캐스팅을 써라.
+	EventMouse* evMouse = static_cast<EventMouse*>(e);
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	float distance = startLocation.getDistance(mouseLocation);
@@ -91,7 +91,7 @@ void Sling::Pull(Event* e)
 		return;
 	}
 
-	EventMouse* evMouse = (EventMouse*)e;
+	EventMouse* evMouse = static_cast<EventMouse*>(e);
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	

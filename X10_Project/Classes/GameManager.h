@@ -14,22 +14,23 @@ class GameManager
 public:
 	static GameManager* GetInstance();
 	static void Reset();
-	void InitTargets(GameLayer* gameLayer);
+
 	void Play(GameLayer* gameLayer, UILayer* uiLayer);
-	void SetStageNumber(int StageNumber);
+	
+	void SetTargets(GameLayer* gameLayer);
+	void SetStage(int StageNumber);
+
 
 private:
 	GameManager();
 	~GameManager();
 	void CheckCollide(Collider* bullet, Vector<Target*> targets);
-	void SetStageInformation(int StageNumber);
 	//# 복사로 벡터를 통째로 넘기지 마라.. const &로 넘길 것..
 
 private:
-	int StageNumber;
-	StageInformation* stage;
 	static GameManager* instance;
-	Sling* sling;
+	StageInformation* stage;
 	ColliderManager* colliderManager;
 	TargetManager* targetManager;
+	Sling* sling;
 };

@@ -1,9 +1,11 @@
 #pragma once
 
+class ColliderManager;
+
 class Collider : public Node
 {
 public:
-	virtual void Act() = 0;
+	virtual void Act(ColliderManager* cm) = 0;
 	virtual bool IsBullet() = 0;
 	bool IsFlying() { return isFlying; }
 

@@ -9,6 +9,7 @@
 #include "Bullet.h"
 #include "Target.h"
 #include "Sling.h"
+#include "Mirror.h"
 
 GameManager* GameManager::instance = nullptr;
 
@@ -24,45 +25,44 @@ GameManager* GameManager::GetInstance()
 GameManager::GameManager()
 {
 	sling = Sling::GetInstance();
-	colliderManager = ColliderManager::GetInstance();
-	targetManager = TargetManager::GetInstance();
+	colliderManager = new ColliderManager();
+	targetManager = new TargetManager();
 	stage = nullptr;
 }
 
 GameManager::~GameManager()
 {
+
 }
 
 void GameManager::Reset()
 {
 	delete instance;
 	instance = nullptr;
-	ColliderManager::GetInstance()->Reset();
-//	TargetManager::GetInstance()->Reset();
 }
 
-void GameManager::SetStageInformation(int StageNumber)
+void GameManager::SetStage(int StageNumber)
 {	
 	if (stage != nullptr)
 	{
 		delete stage;
 	}
+
 	stage = new StageInformation(StageNumber);
 	
 	targetManager->InitTargets(stage);
-	colliderManager->InitColliders(stage);
+	colliderManager->InitBullets(stage);
 }
 
-
-void GameManager::InitTargets(GameLayer* gameLayer)
+void GameManager::SetTargets(GameLayer* gameLayer)
 {
 	Vector<Target*> targets = targetManager->GetTargets();
+
 	for (Target* target : targets)
 	{
 		gameLayer->addChild(target);
 	}
 }
-
 
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
@@ -80,8 +80,8 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	//슬링의 상태가 'IsShotted'이면
 	if (sling->IsShotted())
 	{
-		//위치, 각도, 속도가 세팅된 bullet을 생성하여 레이어에 붙인다
-		Bullet* bullet = (Bullet*)colliderManager->GetBulletToShot();
+		//위치, 각도, 속도가 세팅된 bullet을 생성하고 레이어에 붙인다
+		Bullet* bullet = (Bullet*)colliderManager->GetBulletToShot(sling);
 		gameLayer->addChild(bullet);
 		//슬링에게 발사가 완료되었다고 알린다.
 		sling->ShotComplete();
@@ -89,38 +89,42 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	for (Collider* collider : colliders)
 	{
-		//날고 있는 'collider'는 
+		//1. 날고 있는 'collider'는 
 		if (collider->IsFlying())
 		{
-			//'Act()'를 하라고 시키고
-			collider->Act();
-			//그 'collider'이 타깃들과 충돌하는지 체크한다. 
+			//'Act()'를 시키고
+			collider->Act(colliderManager);
+			//그 'collider'가 타깃들과 충돌하는지 체크한다. 
 			CheckCollide(collider, targets);
 		}
 
-		//그 'collider'가 bullet이면
+		//2. 'collider'가 bullet이고
 		if (collider->IsBullet())
 		{
-			//그리고 폭발하는 중이면
-			if (((Bullet*)collider)->IsExplosing()) ///# C++ 캐스팅을 써라.
+			//폭발해야하면
+			if (((Bullet*)collider)->ShouldExplode())
 			{
-				//폭발시켜주고
+				//폭발을 생성하여 벡터에 넣고 레이어에 붙여준다
 				Explosion* explosion = ((Bullet*)collider)->GetExplosion();
+				colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
-				//그 'collider'(bullet)에게 상태를 바꾸라고 알린다
-				((Bullet*)collider)->StopExplosing();
 			}
 		}
-	} 
+	}
 }
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
 {
-	for (Target* target : targets)
+	for (Target*& target : targets)
 	{
-		if (collider->getBoundingBox().intersectsRect(target->getBoundingBox()))
+		//노드의 크기 vs 멤버로 가진 스프라이트의 크기 -> 스프라이트의 크기를 충돌체크해야한다. 
+		//충돌 체크를 하기 위한 영역 반환 메서드 만들어야함
+		const Rect colliderBoundingBox = ((Bullet*)collider)->GetBoundingBox();
+		const Rect targetBoundingBox = target->GetBoundingBox();
+
+		if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 		{
-			target->ApplyEffectToBullet((Bullet*)collider);
+			target->ApplyCollisionEffect(collider);
 		}
 	}
 }

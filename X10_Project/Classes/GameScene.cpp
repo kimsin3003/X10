@@ -29,18 +29,22 @@ bool GameScene::init()
 	auto background = loadBackGround();
 	this->addChild(background);
 
+	//레이어 삽입
 	gameLayer = GameLayer::create();
 	uiLayer = UILayer::create();
 	this->addChild(gameLayer);
 	this->addChild(uiLayer);
 	
-	this->scheduleUpdate();
 
 	/*stage Information 불러오는 부분. stageInfomation 완성되면 아랫줄 주석 제거 */
-	//SetStageInformation(const char* fileName, int StageNumber) 
-	GameManager::GetInstance()->InitTargets(gameLayer);
-	auto sling = Sling::GetInstance();
+	//SetStageInformation(const char* fileName, int StageNumber)
+
+	GameManager::GetInstance()->SetStage(1);
+	GameManager::GetInstance()->SetTargets(gameLayer);
+	Sling* sling = Sling::GetInstance();
 	this->addChild(sling);
+
+	this->scheduleUpdate();
 
 	return true;
 }

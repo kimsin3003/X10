@@ -1,20 +1,18 @@
 #pragma once
 
 #include "Collider.h"
+#include "ColliderManager.h"
 
 class Explosion : public Collider
 {
 public:
-	///# 기본 생성자에서 멤버 초기화 할 것
-
 	CREATE_FUNC(Explosion);
 	virtual bool init();
-	virtual void Act();
-	virtual bool IsFlying();
+	virtual void Act(ColliderManager* cm);
 	virtual void SetFlying(bool flag);
 	bool IsBullet() override;
 	void SetPosition(Point pos);
-	
+
 protected:
 	ParticleExplosion* explosion; ///# 코딩 컨벤션
 	int lifeTime;

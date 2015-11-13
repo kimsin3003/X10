@@ -1,9 +1,10 @@
 #include "stdafx.h"
 #include "Collider.h"
-#include "Explosion.h"
 #include "ColliderManager.h"
+#include "Explosion.h"
 
 //Base Class of All Explosions
+
 bool Explosion::init()
 {
 	explosion = ParticleExplosion::create();
@@ -13,7 +14,7 @@ bool Explosion::init()
 	return true;
 }
 
-void Explosion::Act()
+void Explosion::Act(ColliderManager* cm)
 {
 	if (lifeTime > 0)
 	{
@@ -23,13 +24,8 @@ void Explosion::Act()
 	{
 		SetFlying(false);
 		removeFromParent();
-		ColliderManager::GetInstance()->EraseCollider(this);
+		cm->EraseCollider(this);
 	}
-}
-
-bool Explosion::IsFlying()
-{
-	return isFlying;
 }
 
 void Explosion::SetFlying(bool flag)

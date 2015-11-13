@@ -2,26 +2,21 @@
 #include "TargetManager.h"
 #include "StageInformation.h"
 
-TargetManager* TargetManager::instance = nullptr;
-
-TargetManager* TargetManager::GetInstance()
-{
-	if (instance == nullptr)
-	{
-		instance = new TargetManager();
-	}
-	return instance;
-}
+#include "Mirror.h"
 
 TargetManager::TargetManager()
 {
-	targets.reserve(5);
+	currentTargetIdx = 0;
+	defaultTargetNumber = 1;
+	targets.reserve(defaultTargetNumber);
 }
-
-void TargetManager::InitTargets(StageInformation* stage)
+TargetManager::~TargetManager()
 {
-	//여기에 새로 타겟 정보를 세팅하세요~
+	targets.clear();
 }
 
-TargetManager::~TargetManager() {}
+void TargetManager::InitTargets(StageInformation* si)
+{
+	targets.pushBack(Mirror::create());
+}
 

@@ -161,8 +161,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MCScene.cpp" />
     <ClCompile Include="..\Classes\Mirror.cpp" />
-    <ClCompile Include="..\Classes\MoonBullet.cpp" />
-    <ClCompile Include="..\Classes\MoonExplosion.cpp" />
     <ClCompile Include="..\Classes\Sling.cpp" />
     <ClCompile Include="..\Classes\StageInformation.cpp" />
     <ClCompile Include="..\Classes\stdafx.cpp">
@@ -190,8 +188,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MCScene.h" />
     <ClInclude Include="..\Classes\Mirror.h" />
-    <ClInclude Include="..\Classes\MoonBullet.h" />
-    <ClInclude Include="..\Classes\MoonExplosion.h" />
     <ClInclude Include="..\Classes\Sling.h" />
     <ClInclude Include="..\Classes\StageInformation.h" />
     <ClInclude Include="..\Classes\stdafx.h" />

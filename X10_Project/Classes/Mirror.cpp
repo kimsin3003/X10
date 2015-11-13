@@ -34,8 +34,8 @@ void Mirror::ApplyCollisionEffect(Collider* collider)
 void Mirror::ToBullet(Bullet* bullet)
 {
 	Vec2 curDir = bullet->GetDirection();
-//	Vec2 reflect = Vec2(curDir.x * -1, curDir.y);
-//	bullet->SetDirection(reflect);
+	Vec2 reflect = Vec2(curDir.x * -1, curDir.y);
+	bullet->SetDirection(reflect);
 }
 
 void Mirror::ToExplosion(Explosion* explosion)

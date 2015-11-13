@@ -24,7 +24,7 @@ public:
 	bool IsBullet() { return true; }
 	bool IsFlying() { return isFlying; }
 	bool ShouldExplode() { return shouldExplode; }
-	const Rect& GetBoundingBox() { return body->getBoundingBox(); }
+	virtual const Rect& GetBoundingArea() override;
 
 	//상태 변화
 	void Crashed();

@@ -81,7 +81,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	if (sling->IsShotted())
 	{
 		//위치, 각도, 속도가 세팅된 bullet을 생성하고 레이어에 붙인다
-		Bullet* bullet = (Bullet*)colliderManager->GetBulletToShot(sling);
+		Bullet* bullet = static_cast<Bullet*>(colliderManager->GetBulletToShot(sling));
 		gameLayer->addChild(bullet);
 		//슬링에게 발사가 완료되었다고 알린다.
 		sling->ShotComplete();
@@ -105,7 +105,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			if (((Bullet*)collider)->ShouldExplode())
 			{
 				//폭발을 생성하여 벡터에 넣고 레이어에 붙여준다
-				Explosion* explosion = ((Bullet*)collider)->GetExplosion();
+				Explosion* explosion = (static_cast<Bullet*>(collider))->GetExplosion();
 				colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
 			}
@@ -119,8 +119,8 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
 	{
 		//노드의 크기 vs 멤버로 가진 스프라이트의 크기 -> 스프라이트의 크기를 충돌체크해야한다. 
 		//충돌 체크를 하기 위한 영역 반환 메서드 만들어야함
-		const Rect colliderBoundingBox = ((Bullet*)collider)->GetBoundingBox();
-		const Rect targetBoundingBox = target->GetBoundingBox();
+		const Rect colliderBoundingBox = (static_cast<Bullet*>(collider))->GetBoundingArea();
+		const Rect targetBoundingBox = target->GetBoundingArea();
 
 		if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 		{

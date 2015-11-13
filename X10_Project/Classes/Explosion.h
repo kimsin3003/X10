@@ -9,7 +9,9 @@ public:
 	CREATE_FUNC(Explosion);
 	virtual bool init();
 	virtual void Act(ColliderManager* cm);
+	virtual const Rect& GetBoundingArea() override;
 	virtual void SetFlying(bool flag);
+
 	bool IsBullet() override;
 	void SetPosition(Point pos);
 

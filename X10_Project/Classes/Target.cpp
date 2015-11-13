@@ -44,3 +44,9 @@ void Target::ToSelf(Explosion* explosion)
 {
 
 }
+
+const Rect& Target::GetBoundingArea()
+{
+	return Rect(this->getPosition(), spr->getContentSize());
+
+}

@@ -113,3 +113,8 @@ void Bullet::TimeUp()
 	shouldExplode = true;
 	isFlying = false;
 }
+
+const Rect& Bullet::GetBoundingArea()
+{
+	return Rect(this->getPosition(),body->getContentSize());
+}

@@ -44,3 +44,8 @@ void Explosion::SetPosition(Point pos)
 	explosion->setPosition(Point::ZERO);
 }
 
+const Rect& Explosion::GetBoundingArea()
+{
+	return explosion->getBoundingBox();
+}
+

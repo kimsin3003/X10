@@ -10,8 +10,7 @@ public:
 	CREATE_FUNC(Target);
 	virtual bool init();
 	virtual void ApplyCollisionEffect(Collider* collider);
-	const Rect& GetBoundingBox() { return spr->getBoundingBox(); }
-
+	virtual const Rect& GetBoundingArea();
 
 protected:
 	Sprite* spr; //임시로 퍼블릭으로 옮김

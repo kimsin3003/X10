@@ -110,9 +110,9 @@ bool MCScene::init()
 	// create the animation out of the frame
 	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
 	Animate* animate = Animate::create(animation);
+	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
 
 	// run it and repeat it forever
-	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
 	auto jump = JumpBy::create(0.5, Point(0, 0), 20, 1);
 	RepeatForever *jumpForever = RepeatForever::create(jump);
 	aniSprite->runAction(aniAction); //스프라이트(spr)에 실행
@@ -137,11 +137,11 @@ bool MCScene::init()
 
 		aniFrames.pushBack(frame);
 	}
-	Animation* ani = Animation::createWithSpriteFrames(aniFrames, 1.0f);
+	Animation* ani = Animation::createWithSpriteFrames(aniFrames, Director::getInstance()->getSecondsPerFrame());
 	Animate* animateFromTmpAtlas = Animate::create(ani);
-	fireWorks->runAction(animateFromTmpAtlas);
-	fireWorks->addChild(Label::create("HH   ", "arial", 10));
-	fireWorks->setScale(10);
+	RepeatForever *aniRepeat = RepeatForever::create(animateFromTmpAtlas); //액션을 만들어서
+	fireWorks->runAction(aniRepeat);
+	//fireWorks->addChild(Label::create("HH   ", "arial", 10));
 	this->addChild(fireWorks);
 
 	return true;

@@ -8,6 +8,7 @@
 
 bool Target::init()
 {
+	
 	return true;
 }
 
@@ -23,30 +24,4 @@ void Target::ApplyCollisionEffect(Collider* collider)
 		ToExplosion(static_cast<Explosion*>(collider));
 		ToSelf(static_cast<Explosion*>(collider));
 	}
-}
-
-void Target::ToBullet(Bullet* bullet)
-{
-
-}
-
-void Target::ToExplosion(Explosion* explosion)
-{
-
-}
-
-void Target::ToSelf(Bullet* bullet)
-{
-
-}
-
-void Target::ToSelf(Explosion* explosion)
-{
-
-}
-
-const Rect& Target::GetBoundingArea()
-{
-	return Rect(this->getPosition(), spr->getContentSize());
-
 }

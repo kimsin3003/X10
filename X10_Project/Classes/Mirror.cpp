@@ -12,24 +12,24 @@ bool Mirror::init()
 	addChild(spr);
 
 	//테스트용 코드
-	setScale(3.0f);
+	spr->setScale(3.0f);
 	setPosition(30, 200);
 	return true;
 }
-
-void Mirror::ApplyCollisionEffect(Collider* collider)
-{
-	if (collider->IsBullet())
-	{
-		ToBullet(static_cast<Bullet*>(collider));
-		ToSelf(static_cast<Bullet*>(collider));
-	}
-	else
-	{
-		ToExplosion(static_cast<Explosion*>(collider));
-		ToSelf(static_cast<Explosion*>(collider));
-	}
-}
+// 
+// void Mirror::ApplyCollisionEffect(Collider* collider)
+// {
+// 	if (collider->IsBullet())
+// 	{
+// 		ToBullet(static_cast<Bullet*>(collider));
+// 		ToSelf(static_cast<Bullet*>(collider));
+// 	}
+// 	else
+// 	{
+// 		ToExplosion(static_cast<Explosion*>(collider));
+// 		ToSelf(static_cast<Explosion*>(collider));
+// 	}
+// }
 
 void Mirror::ToBullet(Bullet* bullet)
 {
@@ -54,4 +54,9 @@ void Mirror::ToSelf(Bullet* bullet)
 void Mirror::ToSelf(Explosion* explosion)
 {
 
+}
+
+const Rect& Mirror::GetBoundingArea()
+{
+	return Rect(getPosition(), spr->getContentSize());
 }

@@ -4,7 +4,17 @@
 class Enemy : public Target
 {
 public:
-	void getHp(); 
-private:
-	float hp;
+	CREATE_FUNC(Enemy);
+	virtual const Rect& GetBoundingArea() override;
+	bool init() override;
+
+protected:
+	void ToBullet(Bullet* collider) override;
+	void ToExplosion(Explosion* explosion) override;
+	void ToSelf(Bullet* bullet) override;
+	void ToSelf(Explosion* explosion) override;
+
+
+	const string FILE_ENEMY = "res/enemy.png";
+	const string FILE_ENEMY_DEAD = "res/enemy_dead.png";
 };

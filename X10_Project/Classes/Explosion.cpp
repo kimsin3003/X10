@@ -8,8 +8,10 @@
 bool Explosion::init()
 {
 	explosion = ParticleExplosion::create();
+	explosion->setEmitterMode(kCCParticleModeGravity);
 	this->addChild(explosion);
 	isFlying = true;
+	radius = 0;
 	lifeTime = 0.5 * Director::getInstance()->getFrameRate();
 	return true;
 }
@@ -44,8 +46,10 @@ void Explosion::SetPosition(Point pos)
 	explosion->setPosition(Point::ZERO);
 }
 
-const Rect& Explosion::GetBoundingArea()
+const float& Explosion::GetBoundingRadius()
 {
-	return explosion->getBoundingBox();
+	radius += (explosion->getSpeedVar() + 10) / Director::getInstance()->getFrameRate();
+
+	return radius;
 }
 

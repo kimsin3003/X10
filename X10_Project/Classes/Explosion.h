@@ -9,7 +9,7 @@ public:
 	CREATE_FUNC(Explosion);
 	virtual bool init();
 	virtual void Act(ColliderManager* cm);
-	virtual const Rect& GetBoundingArea() override;
+	virtual const float& GetBoundingRadius();
 	virtual void SetFlying(bool flag);
 
 	bool IsBullet() override;
@@ -18,4 +18,5 @@ public:
 protected:
 	ParticleExplosion* explosion; ///# 코딩 컨벤션
 	int lifeTime;
+	float radius;
 };

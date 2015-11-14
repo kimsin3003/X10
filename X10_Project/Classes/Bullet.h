@@ -18,13 +18,13 @@ public:
 	//Setters and Getters
 	void SetDirection(Vec2 dir) { direction = dir; }
 	Vec2 GetDirection() { return direction; }
+	const Rect& GetBoundingArea();
 	void SetSpeed(float spd) { speed = spd * speedSetRatio; }
 	void SetSpeedDecreaseRatio(float ratio) { speedDecreaseRatio = ratio; }
 	void SetFlying(bool flag) { isFlying = flag; }
 	bool IsBullet() { return true; }
 	bool IsFlying() { return isFlying; }
 	bool ShouldExplode() { return shouldExplode; }
-	virtual const Rect& GetBoundingArea() override;
 
 	//상태 변화
 	void Crashed();

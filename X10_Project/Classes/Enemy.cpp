@@ -15,9 +15,8 @@ bool Enemy::init()
 
 void Enemy::ToBullet(Bullet* bullet)
 {
-	Vec2 curDir = bullet->GetDirection();
-	Vec2 reflect = Vec2(curDir.x * -1, curDir.y);
-	bullet->SetDirection(reflect);
+	bullet->Crashed(); 
+	bullet->removeFromParent();
 }
 
 void Enemy::ToExplosion(Explosion* explosion)

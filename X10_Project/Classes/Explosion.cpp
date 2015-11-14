@@ -10,7 +10,7 @@ bool Explosion::init()
 	explosion = ParticleExplosion::create();
 	this->addChild(explosion);
 	isFlying = true;
-	lifeTime = 10 * Director::getInstance()->getFrameRate();
+	lifeTime = 0.5 * Director::getInstance()->getFrameRate();
 	return true;
 }
 

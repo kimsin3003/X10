@@ -7,8 +7,8 @@
 
 ColliderManager::ColliderManager()
 {
-	curBulletIndex = 0;
-	defaultBulletNum = 0;
+	curBulletIndex = -1;
+	defaultBulletNum = -1;
 }
 
 ColliderManager::~ColliderManager()
@@ -25,6 +25,9 @@ void ColliderManager::InitBullets(StageInformation* si)
 	{
 		colliders.pushBack(Bullet::create());
 	}
+
+	//bullet index initiation
+	curBulletIndex = 0;
 }
 
 Bullet* ColliderManager::GetBulletToShot(Sling* sling)

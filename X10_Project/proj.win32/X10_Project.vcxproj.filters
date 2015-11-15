@@ -127,7 +127,7 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Target.h">
-      <Filter>GameObject</Filter>
+      <Filter>GameObject\Targets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

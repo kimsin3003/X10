@@ -43,7 +43,7 @@ void Mirror::ToExplosion(Explosion* explosion)
 
 }
 
-void Mirror::ToSelf(Bullet* bullet)
+void Mirror::ToSelf(const Bullet* bullet)
 {
 	spr->removeFromParent();
 	spr = Sprite::create(FILE_MIRROR_ANGRY);
@@ -51,7 +51,7 @@ void Mirror::ToSelf(Bullet* bullet)
 	spr->setScale(spr->getScale()+0.5);
 }
 
-void Mirror::ToSelf(Explosion* explosion)
+void Mirror::ToSelf(const Explosion* explosion)
 {
 
 }

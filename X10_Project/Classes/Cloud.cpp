@@ -22,12 +22,12 @@ void Cloud::ToExplosion(Explosion* explosion)
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Cloud::ToSelf(Bullet* bullet)
+void Cloud::ToSelf(const Bullet* bullet)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }
 
-void Cloud::ToSelf(Explosion* explosion)
+void Cloud::ToSelf(const Explosion* explosion)
 {
 	throw std::logic_error("The method or operation is not implemented.");
 }

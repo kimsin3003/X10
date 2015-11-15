@@ -24,7 +24,7 @@ void Enemy::ToExplosion(Explosion* explosion)
 
 }
 
-void Enemy::ToSelf(Bullet* bullet)
+void Enemy::ToSelf(const Bullet* bullet)
 {
 	spr->removeFromParent();
 	spr = Sprite::create(FILE_ENEMY_DEAD);
@@ -33,7 +33,7 @@ void Enemy::ToSelf(Bullet* bullet)
 	this->removeFromParent();
 }
 
-void Enemy::ToSelf(Explosion* explosion)
+void Enemy::ToSelf(const Explosion* explosion)
 {
 	spr->removeFromParent();
 	spr = Sprite::create(FILE_ENEMY_DEAD);

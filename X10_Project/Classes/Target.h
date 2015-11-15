@@ -11,7 +11,7 @@ public:
 
 	void ApplyCollisionEffect(Collider* collider); //재정의 ㄴㄴ 안에 부르는 To~~~들만 구현하면 되도록 
 	const Rect& GetBoundingArea() { return Rect(getPosition(), spr->getContentSize() * sprScaleRatio); }
-
+	void SetSprScaleRatio(float ratio) { sprScaleRatio = ratio; }
 protected:
 	Sprite* spr;
 	float sprScaleRatio = 1;

@@ -4,6 +4,7 @@
 
 #include "Mirror.h"
 #include "Cloud.h"
+#include "Bubble.h"
 #include "Enemy.h"
 #include "Bubble.h"
 
@@ -23,6 +24,7 @@ TargetManager::~TargetManager()
 
 void TargetManager::InitTargets(StageInformation* si)
 {
+
 	defaultTargetNumber = si->GetTargetCount();
 	targets.reserve(defaultTargetNumber);
 
@@ -45,7 +47,7 @@ void TargetManager::InitTargets(StageInformation* si)
 		//위치, 각도 정보 삽입
 		target->setPosition(si->GetTargetPosition());
 		target->setRotation(si->GetTargetRotation());
-		target->setScale(si->GetTargetScale());
+		target->SetSprScaleRatio(si->GetTargetScale());
 		
 		//리스트에 넣음.
 		targets.pushBack(target);

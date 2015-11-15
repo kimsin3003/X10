@@ -13,7 +13,6 @@ bool Mirror::init()
 
 	//테스트용 코드
 	spr->setScale(3.0f);
-	setPosition(30, 200);
 	return true;
 }
 // 

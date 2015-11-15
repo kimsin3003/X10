@@ -119,7 +119,7 @@ bool MCScene::init()
 	aniSprite->runAction(jumpForever);
 
 
-	auto sling = Sling::GetInstance();
+	auto sling = Sling::create();
 	this->addChild(sling);
 
 

@@ -4,11 +4,14 @@
 
 #include "Mirror.h"
 #include "Enemy.h"
+
+#include <hash_map>
+using namespace stdext;
+
 TargetManager::TargetManager()
 {
-	currentTargetIdx = 0;
-	defaultTargetNumber = 2;
-	targets.reserve(defaultTargetNumber);
+	currentTargetIdx = -1;
+	defaultTargetNumber = -1;
 }
 TargetManager::~TargetManager()
 {
@@ -17,7 +20,30 @@ TargetManager::~TargetManager()
 
 void TargetManager::InitTargets(StageInformation* si)
 {
-	targets.pushBack(Mirror::create());
-	targets.pushBack(Enemy::create());
+	defaultTargetNumber = si->GetTargetCount();
+	targets.reserve(defaultTargetNumber);
+
+	//각각의 클래스에 맞는 함수포인터 를 void*형태로 hash_map에 저장
+	hash_map<string, void*> targetTypeInfo; //string에 타입 이름.
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Enemy", Enemy::create));
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Mirror", Mirror::create));
+
+	while (si->HasNextTarget())
+	{
+		//타겟 이름을 불러와서
+		string type = si->GetTargetType();
+		void* createFunction = targetTypeInfo.at(type);	
+		//거기에 맞는 팩토리 함수 호출
+		Target* (*create)() = static_cast<Target* (*)()>(createFunction);
+		Target* target = (*create)();
+
+		//위치, 각도 정보 삽입
+		target->setPosition(si->GetTargetPosition());
+		target->setRotation(si->GetTargetRotation());
+		target->setScale(si->GetTargetScale());
+		
+		//리스트에 넣음.
+		targets.pushBack(target);
+	}
 }
 

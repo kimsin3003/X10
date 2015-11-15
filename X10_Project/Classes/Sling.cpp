@@ -1,18 +1,7 @@
 #include "stdafx.h"
 #include "Sling.h"
-
-Sling* Sling::instance = nullptr;
-
-Sling* Sling::GetInstance()
-{
-	if (instance == nullptr )
-	{
-		instance = Sling::create();
-		instance->retain(); //cocos가 맘대로 없애지 못하게 바꿈.
-	}
-	return instance;
-}
-
+#include "GameManager.h"
+#include "ColliderManager.h"
 
 bool Sling::init()
 {
@@ -131,7 +120,10 @@ void Sling::Shot(Event* e)
 	//fix shot angle,power from last pointer position.
 	Pull(e);
 
+
 	ChangeToShotted();
+	GameManager* gm = GameManager::GetInstance();
+	gm->ShotBullet(this);
 }
 
 Vec2 Sling::GetDirection()

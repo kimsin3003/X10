@@ -8,7 +8,6 @@ bool Enemy::init()
 	addChild(spr);
 	//테스트용.
 	spr->setScale(0.03f);
-	setPosition(200, 400);
 	return true;
 }
 

@@ -17,9 +17,11 @@ public:
 
 	void Play(GameLayer* gameLayer, UILayer* uiLayer);
 	
-	void SetTargets(GameLayer* gameLayer);
-	void SetStage(int StageNumber);
+	void SetStage(GameLayer* gameLayer, int StageNumber);
+	void AppendTargetsToLayer(GameLayer* gameLayer);
+	Sling* SetSling(GameLayer* gameLayer);
 
+	void ShotBullet(Sling* sling);
 
 private:
 	GameManager();

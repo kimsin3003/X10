@@ -11,20 +11,21 @@ bool Bullet::init()
 	{
 		return false;
 	}
-	screen = Director::getInstance()->getVisibleSize();
+	Director* director = Director::getInstance();
+	screen = director->getVisibleSize();
 
 	speed = 0;
 	direction = Vec2::ZERO;
-	timeDecrease = 1;
+	timeDecrease = 1 / director->getFrameRate();
 
 	isBullet = true;
 	isFlying = false;
 	shouldExplode = false;
 
 	//depending on the type of bullet
-	lifeTime = Director::getInstance()->getFrameRate()*1.0;
+	lifeTime = 5.0;
 	speedSetRatio = 0.01f;
-	speedDecreaseRatio = 0.90f;
+	speedDecreaseRatio = 1 - (10/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
 
 	body = MakeBody();
 	addChild(body);
@@ -107,8 +108,7 @@ void Bullet::DecreaseLife()
 
 void Bullet::ReduceSpeed()
 {
-	SetSpeed(speed * speedDecreaseRatio);
-	SetSpeedDecreaseRatio(speedDecreaseRatio - 0.05f);
+	SetSpeed((speed * speedDecreaseRatio) /speedSetRatio);
 }
 
 void Bullet::Exploded()

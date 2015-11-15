@@ -11,6 +11,7 @@ bool Bullet::init()
 	{
 		return false;
 	}
+	screen = Director::getInstance()->getVisibleSize();
 
 	speed = 0;
 	direction = Vec2::ZERO;
@@ -36,7 +37,7 @@ Sprite* Bullet::MakeBody()
 	Sprite* body = Sprite::create();
 
 	float scale = Director::getInstance()->getContentScaleFactor();
-	const Size fireSize(BULLET_WIDTH /scale , BULLET_HEIGHT /scale); 
+	Size fireSize(BULLET_WIDTH /scale , BULLET_HEIGHT /scale); 
 	int frameCut = BULLET_FRAMES;
 	Vector<SpriteFrame*> animFrames;
 	animFrames.reserve(frameCut);
@@ -75,7 +76,19 @@ void Bullet::Move()
 {
 	Vec2 delta = speed * direction;
 	Vec2 curPos = getPosition();
-	setPosition(curPos + delta);
+	//화면 밖으로 나갈 경우 반대 방향에서 나오게 처리.
+	//if (curPos.x + delta.x < screen.width)
+	//{
+	//	setPosition(curPos.x + delta.x + screen.width, delta.y + curPos.y);
+	//	return;
+	//}
+	//else if (curPos.x + delta.x > screen.width)
+	//{
+	//	setPosition(curPos.x + delta.x - screen.width, delta.y + curPos.y);
+	//	return;
+	//}
+	
+	setPosition(delta + curPos);
 }
 
 Explosion* Bullet::GetExplosion()

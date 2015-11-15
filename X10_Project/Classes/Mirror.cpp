@@ -3,7 +3,6 @@
 #include "Collider.h"
 #include "Explosion.h"
 #include "Bullet.h"
-
 #include "Mirror.h"
 
 bool Mirror::init()

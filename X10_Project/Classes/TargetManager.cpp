@@ -24,14 +24,7 @@ TargetManager::~TargetManager()
 
 void TargetManager::InitTargets(StageInformation* si)
 {
-<<<<<<< HEAD
-	targets.pushBack(Mirror::create());
-	targets.pushBack(Enemy::create());
-	targets.pushBack(Cloud::create());
-	targets.pushBack(Bubble::create());
 
-	//나중에 ----> si정보로 위치지정 여기서
-=======
 	defaultTargetNumber = si->GetTargetCount();
 	targets.reserve(defaultTargetNumber);
 
@@ -59,7 +52,6 @@ void TargetManager::InitTargets(StageInformation* si)
 		//리스트에 넣음.
 		targets.pushBack(target);
 	}
->>>>>>> a4f768468edb0674a486148eebec9441eb654651
 }
 
 void TargetManager::EraseTarget(Target* target)

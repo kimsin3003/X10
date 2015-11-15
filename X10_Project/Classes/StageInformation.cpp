@@ -9,13 +9,18 @@ StageInformation::StageInformation(int stage)
 		CurrentTargetIndex =0;
 		CurrentBulletIndex =0;
 		
-		TargetInfo info = TargetInfo("Enemy", Point(200, 400), 0, 1);
+		TargetInfo info;
+		
+		info = TargetInfo("Enemy", Point(200, 400), 0, 1);
 		TargetInfoList.push_back(info);
 
 		info = TargetInfo("Mirror", Point(30, 200),0, 1);
 		TargetInfoList.push_back(info);
 
 		info = TargetInfo("Cloud", Point(200, 200), 0, 1);
+		TargetInfoList.push_back(info);
+
+		info = TargetInfo("Bubble", Point(200, 300), 0, 1.5f);
 		TargetInfoList.push_back(info);
 
 		//bullet ´Ù¼¸°³

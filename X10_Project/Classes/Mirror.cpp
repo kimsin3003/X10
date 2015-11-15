@@ -3,7 +3,6 @@
 #include "Collider.h"
 #include "Explosion.h"
 #include "Bullet.h"
-
 #include "Mirror.h"
 
 bool Mirror::init()
@@ -13,22 +12,10 @@ bool Mirror::init()
 
 	//테스트용 코드
 	spr->setScale(3.0f);
+	sprScaleRatio = 3.0f;
+	spr->setScale(sprScaleRatio);
 	return true;
 }
-// 
-// void Mirror::ApplyCollisionEffect(Collider* collider)
-// {
-// 	if (collider->IsBullet())
-// 	{
-// 		ToBullet(static_cast<Bullet*>(collider));
-// 		ToSelf(static_cast<Bullet*>(collider));
-// 	}
-// 	else
-// 	{
-// 		ToExplosion(static_cast<Explosion*>(collider));
-// 		ToSelf(static_cast<Explosion*>(collider));
-// 	}
-// }
 
 void Mirror::ToBullet(Bullet* bullet)
 {
@@ -47,15 +34,11 @@ void Mirror::ToSelf(const Bullet* bullet)
 	spr->removeFromParent();
 	spr = Sprite::create(FILE_MIRROR_ANGRY);
 	addChild(spr);
-	spr->setScale(spr->getScale()+0.5);
+	sprScaleRatio *= 1.0f;
+	spr->setScale(sprScaleRatio);
 }
 
 void Mirror::ToSelf(const Explosion* explosion)
 {
 
-}
-
-const Rect& Mirror::GetBoundingArea()
-{
-	return Rect(getPosition(), spr->getContentSize());
 }

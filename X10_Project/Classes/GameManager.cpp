@@ -148,8 +148,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
 {
 	for (Target*& target : targets)
 	{
-		//노드의 크기 vs 멤버로 가진 스프라이트의 크기 -> 스프라이트의 크기를 충돌체크해야한다. 
-		//충돌 체크를 하기 위한 영역 반환 메서드 만들어야함
 		if (collider->IsBullet())
 		{
 			const Rect colliderBoundingBox = (static_cast<Bullet*>(collider))->GetBoundingArea();

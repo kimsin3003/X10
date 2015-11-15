@@ -7,7 +7,8 @@ bool Enemy::init()
 	spr = Sprite::create(FILE_ENEMY);
 	addChild(spr);
 	//테스트용.
-	spr->setScale(0.03f);
+	sprScaleRatio = 0.03f;
+	spr->setScale(sprScaleRatio);
 	return true;
 }
 
@@ -40,9 +41,3 @@ void Enemy::ToSelf(const Explosion* explosion)
 	spr->setScale(0.03f);
 	this->removeFromParent();
 }
-
-const Rect& Enemy::GetBoundingArea()
-{
-	return Rect(getPosition(), spr->getContentSize());
-}
-

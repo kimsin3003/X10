@@ -3,6 +3,7 @@
 #include "StageInformation.h"
 
 #include "Mirror.h"
+#include "Cloud.h"
 #include "Enemy.h"
 
 #include <hash_map>
@@ -13,6 +14,7 @@ TargetManager::TargetManager()
 	currentTargetIdx = -1;
 	defaultTargetNumber = -1;
 }
+
 TargetManager::~TargetManager()
 {
 	targets.clear();
@@ -47,3 +49,7 @@ void TargetManager::InitTargets(StageInformation* si)
 	}
 }
 
+void TargetManager::EraseTarget(Target* target)
+{
+	targets.eraseObject(target);
+}

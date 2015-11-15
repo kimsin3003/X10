@@ -48,7 +48,8 @@ void TargetManager::InitTargets(StageInformation* si)
 		target->setPosition(si->GetTargetPosition());
 		target->setRotation(si->GetTargetRotation());
 		target->SetSprScaleRatio(si->GetTargetScale());
-		
+		target->SetSprScale();
+
 		//리스트에 넣음.
 		targets.pushBack(target);
 	}

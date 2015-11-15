@@ -10,7 +10,6 @@ bool Cloud::init()
 	spr = Sprite::create(FILE_CLOUD);
 	addChild(spr);
 	applyEffectToMe = true;
-
 	return true;
 }
 

@@ -20,7 +20,7 @@ StageInformation::StageInformation(int stage)
 		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f);
 		TargetInfoList.push_back(info);
 
-		info = TargetInfo("Bubble", Point(200, 300), 0, 1.5f);
+		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f);
 		TargetInfoList.push_back(info);
 
 		//bullet ´Ù¼¸°³

@@ -35,7 +35,7 @@ void Mirror::ToSelf(const Bullet* bullet)
 	spr->removeFromParent();
 	spr = Sprite::create(FILE_MIRROR_ANGRY);
 	addChild(spr);
-	sprScaleRatio *= 1.01f; //1.01배가 충돌해 있는 동안 계에에에에속 적용됨
+	sprScaleRatio *= 1.5f; //1.01배가 충돌해 있는 동안 계에에에에속 적용됨
 	spr->setScale(sprScaleRatio);
 }
 

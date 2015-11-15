@@ -6,6 +6,7 @@ bool Enemy::init()
 {
 	spr = Sprite::create(FILE_ENEMY);
 	addChild(spr);
+
 	return true;
 }
 

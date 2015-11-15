@@ -146,8 +146,12 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
 {
+	static Target* lastTarget = nullptr;
 	for (Target*& target : targets)
 	{
+		if (target == lastTarget)
+			continue;
+
 		if (collider->IsBullet())
 		{
 			const Rect colliderBoundingBox = (static_cast<Bullet*>(collider))->GetBoundingArea();
@@ -155,6 +159,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
 
 			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 			{
+				lastTarget = target;
 				target->ApplyCollisionEffect(collider);
 			}
 		}
@@ -166,6 +171,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
 
 			if (targetBoundingBox.intersectsCircle(explosionPosition, explosionRadius))
 			{
+				lastTarget = target;
 				target->ApplyCollisionEffect(collider);
 			}
 		}

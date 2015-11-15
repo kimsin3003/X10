@@ -1,7 +1,5 @@
 #pragma once
 
-class Bullet;
-
 class Bubble : public Target
 {
 public:
@@ -13,4 +11,10 @@ protected:
 	void ToExplosion(Explosion* explosion);
 	void ToSelf(const Bullet* bullet);
 	void ToSelf(const Explosion* explosion);
+
+private:
+	const string FILE_BUBBLE = "res/target/Bubble.png";
+	const string FILE_BUBBLE_POP = "res/target/BubblePop.png";
+
+	bool applyEffectToMe;
 };

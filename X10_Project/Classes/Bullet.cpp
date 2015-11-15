@@ -16,14 +16,14 @@ bool Bullet::init()
 
 	speed = 0;
 	direction = Vec2::ZERO;
-	timeDecrease = 1 / director->getFrameRate();
-
+	
 	isBullet = true;
 	isFlying = false;
 	shouldExplode = false;
 
 	//depending on the type of bullet
 	lifeTime = 5.0;
+	timeDecrease = 1.0 / director->getFrameRate();
 	speedSetRatio = 0.01f;
 	speedDecreaseRatio = 1 - (10/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
 

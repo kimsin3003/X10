@@ -24,7 +24,7 @@ GameManager* GameManager::GetInstance()
 
 GameManager::GameManager()
 {
-	sling = Sling::GetInstance();
+	sling = nullptr;
 	colliderManager = new ColliderManager();
 	targetManager = new TargetManager();
 	stage = nullptr;
@@ -41,7 +41,7 @@ void GameManager::Reset()
 	instance = nullptr;
 }
 
-void GameManager::SetStage(int StageNumber)
+void GameManager::SetStage(GameLayer* gameLayer, int StageNumber)
 {	
 	if (stage != nullptr)
 	{
@@ -50,17 +50,64 @@ void GameManager::SetStage(int StageNumber)
 
 	stage = new StageInformation(StageNumber);
 	
+	//타겟 세팅
 	targetManager->InitTargets(stage);
+	AppendTargetsToLayer(gameLayer);
+	
+	//불렛 세팅
 	colliderManager->InitBullets(stage);
+
+	//슬링 세팅
+	sling = SetSling(gameLayer);
 }
 
-void GameManager::SetTargets(GameLayer* gameLayer)
+Sling* GameManager::SetSling(GameLayer* gameLayer)
+{
+
+	Sling* sling = Sling::create();
+	gameLayer->addChild(sling);
+
+	//총알이 있으면
+	if (colliderManager->HasBullet())
+	{
+		//슬링에게 총알을 장전하라고 알린다.
+		sling->LoadBullet();
+	}
+
+	return sling;
+}
+
+void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 {
 	Vector<Target*> targets = targetManager->GetTargets();
 
 	for (Target* target : targets)
 	{
 		gameLayer->addChild(target);
+	}
+
+}
+
+void GameManager::ShotBullet(Sling* sling)
+{
+	//슬링의 상태가 'IsShotted'이면
+	if (sling->IsShotted())
+	{
+		//위치, 각도, 속도가 세팅된 bullet을 생성하고 레이어에 붙인다
+		Bullet* bullet = static_cast<Bullet*>(colliderManager->GetBulletToShot(sling));
+		Scene* currentScene = Director::getInstance()->getRunningScene();
+		Scene* gameScene = static_cast<Scene*>(currentScene->getChildByName("GameScene"));
+		Layer* gameLayer = static_cast<Layer*>(gameScene->getChildByName("GameLayer"));
+		gameLayer->addChild(bullet);
+		//슬링에게 발사가 완료되었다고 알린다.
+		sling->ShotComplete();
+		
+		//총알이 있으면
+		if (colliderManager->HasBullet())
+		{
+			//슬링에게 총알을 장전하라고 알린다.
+			sling->LoadBullet();
+		}
 	}
 }
 
@@ -70,22 +117,6 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	Vector<Collider*> colliders = colliderManager->GetColliders();
 	Vector<Target*> targets = targetManager->GetTargets(); 
 
-	//총알이 있으면
-	if (colliderManager->HasBullet())
-	{
-		//슬링에게 총알을 장전하라고 알린다.
-		sling->LoadBullet();
-	}
-
-	//슬링의 상태가 'IsShotted'이면
-	if (sling->IsShotted())
-	{
-		//위치, 각도, 속도가 세팅된 bullet을 생성하고 레이어에 붙인다
-		Bullet* bullet = static_cast<Bullet*>(colliderManager->GetBulletToShot(sling));
-		gameLayer->addChild(bullet);
-		//슬링에게 발사가 완료되었다고 알린다.
-		sling->ShotComplete();
-	}
 
 	for (Collider* collider : colliders)
 	{

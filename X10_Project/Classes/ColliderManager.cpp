@@ -8,8 +8,7 @@
 ColliderManager::ColliderManager()
 {
 	curBulletIndex = 0;
-	defaultBulletNum = 5;
-	colliders.reserve(defaultBulletNum);
+	defaultBulletNum = 0;
 }
 
 ColliderManager::~ColliderManager()
@@ -19,6 +18,8 @@ ColliderManager::~ColliderManager()
 
 void ColliderManager::InitBullets(StageInformation* si)
 {
+	defaultBulletNum = si->GetBulletCount();
+	colliders.reserve(defaultBulletNum);
 	//이후에 si로 초기화
 	for (int i = 0; i < defaultBulletNum; i++)
 	{

@@ -9,7 +9,6 @@ bool Enemy::init()
 	//테스트용.
 	sprScaleRatio = 0.03f;
 	spr->setScale(sprScaleRatio);
-	setPosition(200, 400);
 	return true;
 }
 

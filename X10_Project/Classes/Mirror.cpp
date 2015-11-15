@@ -11,9 +11,9 @@ bool Mirror::init()
 	addChild(spr);
 
 	//테스트용 코드
+	spr->setScale(3.0f);
 	sprScaleRatio = 3.0f;
 	spr->setScale(sprScaleRatio);
-	setPosition(30, 200);
 	return true;
 }
 

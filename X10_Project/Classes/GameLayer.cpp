@@ -4,7 +4,7 @@
 GameLayer* GameLayer::createGameLayer()
 {
 	GameLayer* gLayer = GameLayer::create();
-
+	
 	return gLayer;
 }
 
@@ -14,6 +14,7 @@ bool GameLayer::init()
 	{
 		return false;
 	}
+	setName("GameLayer");
 
 	return true;
 }

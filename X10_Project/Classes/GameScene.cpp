@@ -5,7 +5,6 @@
 
 GameScene::GameScene() : gameLayer(nullptr), uiLayer(nullptr)
 {
-
 }
 
 Scene* GameScene::createScene()
@@ -24,9 +23,10 @@ bool GameScene::init()
 	{
 		return false;
 	}
+	setName("GameScene");
 
 	//배경 그림 삽입.
-	auto background = loadBackGround();
+	auto background = loadBackground();
 	this->addChild(background);
 
 	//레이어 삽입
@@ -36,20 +36,16 @@ bool GameScene::init()
 	this->addChild(uiLayer);
 	
 
-	/*stage Information 불러오는 부분. stageInfomation 완성되면 아랫줄 주석 제거 */
-	//SetStageInformation(const char* fileName, int StageNumber)
-
-	GameManager::GetInstance()->SetStage(1);
-	GameManager::GetInstance()->SetTargets(gameLayer);
-	Sling* sling = Sling::GetInstance();
-	this->addChild(sling);
-
+	/*stage Information 불러오는 부분.*/
+	int stageNum = 0; //임시 스테이지 번호.
+	GameManager::GetInstance()->SetStage(gameLayer, stageNum);
+	
 	this->scheduleUpdate();
 
 	return true;
 }
 
-Sprite* GameScene::loadBackGround()
+Sprite* GameScene::loadBackground()
 {
 	auto background = Sprite::create(BOTTOM_BGIMG_FILE);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);

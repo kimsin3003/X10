@@ -1,29 +1,36 @@
 #include "stdafx.h"
 #include "Target.h"
+#include "Collider.h"
+#include "Explosion.h"
+#include "Bullet.h"
 #include "Cloud.h"
 
 bool Cloud::init()
 {
+	spr = Sprite::create(FILE_CLOUD);
+	setPosition(Vec2(200, 200));
+	addChild(spr);
+
 	return true;
 }
 
 void Cloud::ToBullet(Bullet* collider)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+
 }
 
 void Cloud::ToExplosion(Explosion* explosion)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+
 }
 
 void Cloud::ToSelf(const Bullet* bullet)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+
 }
 
 void Cloud::ToSelf(const Explosion* explosion)
 {
-	throw std::logic_error("The method or operation is not implemented.");
+
 }
 

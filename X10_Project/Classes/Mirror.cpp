@@ -11,7 +11,8 @@ bool Mirror::init()
 	addChild(spr);
 
 	//테스트용 코드
-	spr->setScale(3.0f);
+	sprScaleRatio = 3.0f;
+	spr->setScale(sprScaleRatio);
 	setPosition(30, 200);
 	return true;
 }
@@ -33,7 +34,8 @@ void Mirror::ToSelf(const Bullet* bullet)
 	spr->removeFromParent();
 	spr = Sprite::create(FILE_MIRROR_ANGRY);
 	addChild(spr);
-	spr->setScale(spr->getScale()+0.5);
+	sprScaleRatio *= 1.0f;
+	spr->setScale(sprScaleRatio);
 }
 
 void Mirror::ToSelf(const Explosion* explosion)

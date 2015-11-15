@@ -7,7 +7,8 @@ bool Enemy::init()
 	spr = Sprite::create(FILE_ENEMY);
 	addChild(spr);
 	//테스트용.
-	spr->setScale(0.03f);
+	sprScaleRatio = 0.03f;
+	spr->setScale(sprScaleRatio);
 	setPosition(200, 400);
 	return true;
 }

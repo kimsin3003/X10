@@ -3,7 +3,9 @@
 #include "StageInformation.h"
 
 #include "Mirror.h"
+#include "Cloud.h"
 #include "Enemy.h"
+
 TargetManager::TargetManager()
 {
 	currentTargetIdx = 0;
@@ -19,5 +21,6 @@ void TargetManager::InitTargets(StageInformation* si)
 {
 	targets.pushBack(Mirror::create());
 	targets.pushBack(Enemy::create());
+	targets.pushBack(Cloud::create());
 }
 

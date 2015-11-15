@@ -10,6 +10,7 @@ bool Target::init()
 {
 	setAnchorPoint(Vec2(0, 0));
 	spr->setAnchorPoint(Vec2(0, 0));
+	float sprScaleRatio = 1;
 	return true;
 }
 

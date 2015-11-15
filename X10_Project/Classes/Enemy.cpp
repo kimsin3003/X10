@@ -41,9 +41,3 @@ void Enemy::ToSelf(const Explosion* explosion)
 	spr->setScale(0.03f);
 	this->removeFromParent();
 }
-
-const Rect& Enemy::GetBoundingArea()
-{
-	return Rect(getPosition(), spr->getContentSize());
-}
-

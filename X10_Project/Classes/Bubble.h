@@ -7,7 +7,6 @@ class Bubble : public Target
 public:
 	CREATE_FUNC(Bubble);
 	bool init();
-	const Rect& GetBoundingArea() override;
 
 protected:
 

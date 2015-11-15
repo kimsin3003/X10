@@ -13,7 +13,6 @@ Sling* Sling::GetInstance()
 	return instance;
 }
 
-
 bool Sling::init()
 {
 	if (Node::init() == false)

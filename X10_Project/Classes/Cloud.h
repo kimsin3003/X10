@@ -7,7 +7,6 @@ class Cloud : public Target
 public:
 	CREATE_FUNC(Cloud);
 	bool init();
-	const Rect& GetBoundingArea() override;
 
 
 protected:

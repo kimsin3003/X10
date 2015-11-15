@@ -16,20 +16,6 @@ bool Mirror::init()
 	setPosition(30, 200);
 	return true;
 }
-// 
-// void Mirror::ApplyCollisionEffect(Collider* collider)
-// {
-// 	if (collider->IsBullet())
-// 	{
-// 		ToBullet(static_cast<Bullet*>(collider));
-// 		ToSelf(static_cast<Bullet*>(collider));
-// 	}
-// 	else
-// 	{
-// 		ToExplosion(static_cast<Explosion*>(collider));
-// 		ToSelf(static_cast<Explosion*>(collider));
-// 	}
-// }
 
 void Mirror::ToBullet(Bullet* bullet)
 {
@@ -54,9 +40,4 @@ void Mirror::ToSelf(const Bullet* bullet)
 void Mirror::ToSelf(const Explosion* explosion)
 {
 
-}
-
-const Rect& Mirror::GetBoundingArea()
-{
-	return Rect(getPosition(), spr->getContentSize());
 }

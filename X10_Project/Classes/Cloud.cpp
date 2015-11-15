@@ -8,7 +8,6 @@
 bool Cloud::init()
 {
 	spr = Sprite::create(FILE_CLOUD);
-	setPosition(Vec2(200, 200));
 	addChild(spr);
 	sprScaleRatio = 4.0f;
 	spr->setScale(sprScaleRatio);

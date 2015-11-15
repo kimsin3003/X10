@@ -5,6 +5,7 @@
 #include "Mirror.h"
 #include "Cloud.h"
 #include "Enemy.h"
+#include "Bubble.h"
 
 #include <hash_map>
 using namespace stdext;
@@ -29,6 +30,8 @@ void TargetManager::InitTargets(StageInformation* si)
 	hash_map<string, void*> targetTypeInfo; //string에 타입 이름.
 	targetTypeInfo.insert(hash_map<string, void*>::value_type("Enemy", Enemy::create));
 	targetTypeInfo.insert(hash_map<string, void*>::value_type("Mirror", Mirror::create));
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Cloud", Cloud::create));
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bubble", Bubble::create));
 
 	while (si->HasNextTarget())
 	{

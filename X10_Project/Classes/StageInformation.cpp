@@ -15,6 +15,10 @@ StageInformation::StageInformation(int stage)
 		info = TargetInfo("Mirror", Point(30, 200),0, 1);
 		TargetInfoList.push_back(info);
 
+		info = TargetInfo("Cloud", Point(200, 200), 0, 1);
+		TargetInfoList.push_back(info);
+
+		//bullet ´Ù¼¸°³
 		string bulletType = "Bullet";
 		BulletInfoList.push_back(bulletType);
 		BulletInfoList.push_back(bulletType);

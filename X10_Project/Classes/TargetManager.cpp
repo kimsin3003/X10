@@ -12,10 +12,7 @@
 using namespace stdext;
 
 TargetManager::TargetManager()
-{
-	currentTargetIdx = -1;
-	defaultTargetNumber = -1;
-}
+{}
 
 TargetManager::~TargetManager()
 {
@@ -24,7 +21,6 @@ TargetManager::~TargetManager()
 
 void TargetManager::InitTargets(StageInformation* si)
 {
-
 	defaultTargetNumber = si->GetTargetCount();
 	targets.reserve(defaultTargetNumber);
 
@@ -48,13 +44,11 @@ void TargetManager::InitTargets(StageInformation* si)
 		target->setPosition(si->GetTargetPosition());
 		target->setRotation(si->GetTargetRotation());
 		target->SetSprScaleRatio(si->GetTargetScale());
-		target->SetSprScale();
+		target->SetSprScale(); //sprScaleRatio 값에 따라서 스케일이 정해짐
 
 		//리스트에 넣음.
 		targets.pushBack(target);
 	}
-
-	currentTargetIdx = 0;// target 인덱스 세팅. 근데 이거 어디다씀?
 }
 
 void TargetManager::EraseTarget(Target* target)

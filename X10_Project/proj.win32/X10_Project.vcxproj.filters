@@ -134,9 +134,6 @@
     <Filter Include="Scene">
       <UniqueIdentifier>{a5ec6f08-85e5-4448-82fe-afefac118824}</UniqueIdentifier>
     </Filter>
-    <Filter Include="OldNTest">
-      <UniqueIdentifier>{65107cc2-2ca7-4692-90bb-48572cff323b}</UniqueIdentifier>
-    </Filter>
     <Filter Include="GameObject">
       <UniqueIdentifier>{179b3b19-8a6e-44e4-b242-5b20f6f112f4}</UniqueIdentifier>
     </Filter>
@@ -157,6 +154,9 @@
     </Filter>
     <Filter Include="GameObject\Explosions">
       <UniqueIdentifier>{1b7770de-3bed-4d50-85ad-e7028b484aad}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="OldNTest">
+      <UniqueIdentifier>{65107cc2-2ca7-4692-90bb-48572cff323b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

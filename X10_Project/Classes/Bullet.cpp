@@ -77,18 +77,19 @@ void Bullet::Move()
 	Vec2 delta = speed * direction;
 	Vec2 curPos = getPosition();
 	//화면 밖으로 나갈 경우 반대 방향에서 나오게 처리.
-	//if (curPos.x + delta.x < screen.width)
-	//{
-	//	setPosition(curPos.x + delta.x + screen.width, delta.y + curPos.y);
-	//	return;
-	//}
-	//else if (curPos.x + delta.x > screen.width)
-	//{
-	//	setPosition(curPos.x + delta.x - screen.width, delta.y + curPos.y);
-	//	return;
-	//}
-	
-	setPosition(delta + curPos);
+	if (curPos.x + delta.x < 0)
+	{
+		curPos = Vec2(curPos.x + delta.x + screen.width, delta.y + curPos.y);
+	}
+	else if (curPos.x + delta.x > screen.width)
+	{
+		curPos = Vec2(curPos.x + delta.x - screen.width, delta.y + curPos.y);
+	}
+	else
+	{
+		curPos = curPos + delta;
+	}
+	setPosition(curPos);
 }
 
 Explosion* Bullet::GetExplosion()

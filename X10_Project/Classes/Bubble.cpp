@@ -8,12 +8,6 @@ bool Bubble::init()
 {
 	spr = Sprite::create(FILE_BUBBLE);
 	addChild(spr);
-	
-	//테스트용 코드
-	setPosition(Vec2(200, 300));
-	sprScaleRatio = 3.0f;
-	spr->setScale(sprScaleRatio);
-
 	applyEffectToMe = true;
 
 	return true;

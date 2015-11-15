@@ -11,13 +11,13 @@ StageInformation::StageInformation(int stage)
 		
 		TargetInfo info;
 		
-		info = TargetInfo("Enemy", Point(200, 400), 0, 1);
+		info = TargetInfo("Enemy", Point(200, 400), 0, 0.03f);
 		TargetInfoList.push_back(info);
 
-		info = TargetInfo("Mirror", Point(30, 200),0, 1);
+		info = TargetInfo("Mirror", Point(30, 200),0, 3.0f);
 		TargetInfoList.push_back(info);
 
-		info = TargetInfo("Cloud", Point(200, 200), 0, 1);
+		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f);
 		TargetInfoList.push_back(info);
 
 		info = TargetInfo("Bubble", Point(200, 300), 0, 1.5f);

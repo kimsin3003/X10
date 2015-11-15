@@ -9,11 +9,6 @@ bool Mirror::init()
 {
 	spr = Sprite::create(FILE_MIRROR);
 	addChild(spr);
-
-	//테스트용 코드
-	spr->setScale(3.0f);
-	sprScaleRatio = 3.0f;
-	spr->setScale(sprScaleRatio);
 	return true;
 }
 

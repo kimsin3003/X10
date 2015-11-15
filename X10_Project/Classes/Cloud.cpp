@@ -9,11 +9,6 @@ bool Cloud::init()
 {
 	spr = Sprite::create(FILE_CLOUD);
 	addChild(spr);
-
-	//테스트용 코드
-	setPosition(Vec2(200, 200));
-	sprScaleRatio = 4.0f;
-	spr->setScale(sprScaleRatio);
 	applyEffectToMe = true;
 
 	return true;

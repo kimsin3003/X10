@@ -105,9 +105,6 @@
     <ClInclude Include="..\Classes\Bullet.h">
       <Filter>GameObject\Bullets</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Target.h">
-      <Filter>GameObject\Targets</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Enemy.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
@@ -128,6 +125,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\StageInformation.h">
       <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Target.h">
+      <Filter>GameObject</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

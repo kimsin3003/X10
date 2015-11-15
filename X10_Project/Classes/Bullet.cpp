@@ -117,5 +117,5 @@ void Bullet::TimeUp()
 
 const Rect& Bullet::GetBoundingArea()
 {
-	return Rect(this->getPosition(), body->getContentSize());
+	return Rect(this->getPosition(), body->getContentSize()*BULLET_RATIO);
 }

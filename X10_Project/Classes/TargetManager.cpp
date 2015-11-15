@@ -9,7 +9,7 @@
 TargetManager::TargetManager()
 {
 	currentTargetIdx = 0;
-	defaultTargetNumber = 2;
+	defaultTargetNumber = 3;
 	targets.reserve(defaultTargetNumber);
 }
 TargetManager::~TargetManager()
@@ -24,3 +24,7 @@ void TargetManager::InitTargets(StageInformation* si)
 	targets.pushBack(Cloud::create());
 }
 
+void TargetManager::EraseTarget(Target* target)
+{
+	targets.eraseObject(target);
+}

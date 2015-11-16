@@ -10,6 +10,7 @@
 #include "Target.h"
 #include "Sling.h"
 #include "Mirror.h"
+#include "Explosion.h"
 
 GameManager* GameManager::instance = nullptr;
 

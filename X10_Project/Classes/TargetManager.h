@@ -1,6 +1,6 @@
 #pragma once
-#include "Target.h"
-
+class Target;
+class GameManager;
 class StageInformation;
 
 class TargetManager
@@ -16,4 +16,6 @@ public:
 private:
 	Vector<Target*> targets;
 	int defaultTargetNumber; //벡터 reserve 할 때 사용
+
+	friend class GameManager;
 };

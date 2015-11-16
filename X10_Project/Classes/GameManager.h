@@ -30,9 +30,9 @@ private:
 	//# 복사로 벡터를 통째로 넘기지 마라.. const &로 넘길 것..
 
 private:
-	static GameManager* instance;
-	StageInformation* stage;
-	ColliderManager* colliderManager;
-	TargetManager* targetManager;
-	Sling* sling;
+	static GameManager* m_instance;
+	StageInformation* m_stage;
+	ColliderManager* m_colliderManager;
+	TargetManager* m_targetManager;
+	Sling* m_sling;
 };

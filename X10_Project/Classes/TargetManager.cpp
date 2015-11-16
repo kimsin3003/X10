@@ -15,8 +15,8 @@ void TargetManager::InitTargets(StageInformation* si)
 {
 	ResetTargets();
 
-	defaultTargetNumber = si->GetTargetCount();
-	targets.reserve(defaultTargetNumber);
+	m_defaultTargetNumber = si->GetTargetCount();
+	m_targets.reserve(m_defaultTargetNumber);
 
 	//각각의 클래스에 맞는 함수포인터 를 void*형태로 hash_map에 저장
 	hash_map<string, void*> targetTypeInfo; //string에 타입 이름.
@@ -42,20 +42,20 @@ void TargetManager::InitTargets(StageInformation* si)
 		target->SetSprScale(); //sprScaleRatio 값에 따라서 스케일이 정해짐
 
 		//리스트에 넣음.
-		targets.pushBack(target);
+		m_targets.pushBack(target);
 	}
 }
 
 void TargetManager::ResetTargets()
 {
-	for (Target* target : targets)
+	for (Target* target : m_targets)
 	{
 		delete target;
 	}
-	targets.clear();
+	m_targets.clear();
 }
 
 void TargetManager::EraseTarget(Target* target)
 {
-	targets.eraseObject(target);
+	m_targets.eraseObject(target);
 }

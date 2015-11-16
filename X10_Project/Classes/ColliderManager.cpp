@@ -13,9 +13,9 @@ void ColliderManager::InitBullets(StageInformation* si)
 {
 	ResetBullets();
 
-	defaultBulletNum = si->GetBulletCount();
-	colliders.reserve(defaultBulletNum);
-	curBulletIndex = 0;
+	m_defaultBulletNum = si->GetBulletCount();
+	m_colliders.reserve(m_defaultBulletNum);
+	m_curBulletIndex = 0;
 
 	hash_map<string, void*> bulletTypeInfo;
 	bulletTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
@@ -30,16 +30,16 @@ void ColliderManager::InitBullets(StageInformation* si)
 		Bullet* bullet = (*create)();
 
 		//리스트에 넣음.
-		colliders.pushBack(bullet);
+		m_colliders.pushBack(bullet);
 	}
 	
 }
 
 Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 {
-	if (curBulletIndex < defaultBulletNum)
+	if (m_curBulletIndex < m_defaultBulletNum)
 	{
-		Bullet* bullet = (Bullet*)colliders.at(curBulletIndex++);
+		Bullet* bullet = (Bullet*)m_colliders.at(m_curBulletIndex++);
 		
 		bullet->setPosition(sling->getPosition());
 		bullet->setRotation(sling->GetRotationAngle());
@@ -55,25 +55,25 @@ Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 
 void ColliderManager::AddExplosion(Collider* explosion)
 {
-	colliders.pushBack(explosion);
+	m_colliders.pushBack(explosion);
 }
 
 void ColliderManager::ResetBullets()
 {
-	for (Collider* collider : colliders)
+	for (Collider* collider : m_colliders)
 	{
 		delete collider;
 	}
-	colliders.clear();
+	m_colliders.clear();
 }
 void ColliderManager::EraseCollider(Collider* collider)
 {
-	colliders.eraseObject(collider);
+	m_colliders.eraseObject(collider);
 }
 
 bool ColliderManager::HasBullet()
 {
-	if (curBulletIndex < defaultBulletNum)
+	if (m_curBulletIndex < m_defaultBulletNum)
 	{
 		return true;
 	}

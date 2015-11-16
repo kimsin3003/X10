@@ -12,23 +12,23 @@
 #include "Mirror.h"
 #include "Explosion.h"
 
-GameManager* GameManager::instance = nullptr;
+GameManager* GameManager::m_instance = nullptr;
 
 GameManager* GameManager::GetInstance()
 {
-	if (instance == nullptr)
+	if (m_instance == nullptr)
 	{
-		instance = new GameManager();
+		m_instance = new GameManager();
 	}
-	return instance;
+	return m_instance;
 }
 
 GameManager::GameManager()
 {
-	sling = nullptr;
-	colliderManager = new ColliderManager();
-	targetManager = new TargetManager();
-	stage = nullptr;
+	m_sling = nullptr;
+	m_colliderManager = new ColliderManager();
+	m_targetManager = new TargetManager();
+	m_stage = nullptr;
 }
 
 GameManager::~GameManager()
@@ -38,29 +38,29 @@ GameManager::~GameManager()
 
 void GameManager::Reset()
 {
-	delete instance;
-	instance = nullptr;
+	delete m_instance;
+	m_instance = nullptr;
 }
 
 void GameManager::SetStage(GameLayer* gameLayer, int StageNumber)
 {	
-	if (stage != nullptr)
+	if (m_stage != nullptr)
 	{
-		delete stage;
+		delete m_stage;
 	}
 
-	stage = new StageInformation(StageNumber);
+	m_stage = new StageInformation(StageNumber);
 	
 	//해당 스테이지의 타깃 정보를 벡터에 저장
-	targetManager->InitTargets(stage);
+	m_targetManager->InitTargets(m_stage);
 	//레이어에 붙여준다
 	AppendTargetsToLayer(gameLayer);
 	
 	//불렛 세팅
-	colliderManager->InitBullets(stage);
+	m_colliderManager->InitBullets(m_stage);
 
 	//슬링 세팅
-	sling = SetSling(gameLayer);
+	m_sling = SetSling(gameLayer);
 }
 
 Sling* GameManager::SetSling(GameLayer* gameLayer)
@@ -70,7 +70,7 @@ Sling* GameManager::SetSling(GameLayer* gameLayer)
 	gameLayer->addChild(sling);
 
 	//총알이 있으면
-	if (colliderManager->HasBullet())
+	if (m_colliderManager->HasBullet())
 	{
 		//슬링에게 총알을 장전하라고 알린다.
 		sling->LoadBullet();
@@ -81,7 +81,7 @@ Sling* GameManager::SetSling(GameLayer* gameLayer)
 
 void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 {
-	Vector<Target*> targets = targetManager->GetTargets();
+	Vector<Target*> targets = m_targetManager->GetTargets();
 
 	for (Target* target : targets)
 	{
@@ -96,7 +96,7 @@ void GameManager::ShotBullet(Sling* sling)
 	if (sling->IsShotted())
 	{
 		//위치, 각도, 속도가 세팅된 bullet을 생성하고 레이어에 붙인다
-		Bullet* bullet = static_cast<Bullet*>(colliderManager->GetBulletToShot(sling));
+		Bullet* bullet = static_cast<Bullet*>(m_colliderManager->GetBulletToShot(sling));
 		Scene* currentScene = Director::getInstance()->getRunningScene();
 		Scene* gameScene = static_cast<Scene*>(currentScene->getChildByName("GameScene"));
 		Layer* gameLayer = static_cast<Layer*>(gameScene->getChildByName("GameLayer"));
@@ -105,7 +105,7 @@ void GameManager::ShotBullet(Sling* sling)
 		sling->ShotComplete();
 		
 		//총알이 있으면
-		if (colliderManager->HasBullet())
+		if (m_colliderManager->HasBullet())
 		{
 			//슬링에게 총알을 장전하라고 알린다.
 			sling->LoadBullet();
@@ -116,8 +116,8 @@ void GameManager::ShotBullet(Sling* sling)
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
 	//벡터를 통째로 복사해서 임시 변수에 담지 말것. 성능 저하의 원인
-	Vector<Collider*> colliders = colliderManager->GetColliders();
-	Vector<Target*> targets = targetManager->GetTargets(); 
+	Vector<Collider*> colliders = m_colliderManager->GetColliders();
+	Vector<Target*> targets = m_targetManager->GetTargets(); 
 
 
 	for (Collider* collider : colliders)
@@ -126,7 +126,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		if (collider->IsFlying())
 		{
 			//'Act()'를 시키고
-			collider->Act(colliderManager);
+			collider->Act(m_colliderManager);
 			//그 'collider'가 타깃들과 충돌하는지 체크한다. 
 			CheckCollide(collider, targets);
 		}
@@ -139,7 +139,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			{
 				//폭발을 생성하여 벡터에 넣고 레이어에 붙여준다
 				Explosion* explosion = (static_cast<Bullet*>(collider))->GetExplosion();
-				colliderManager->AddExplosion(explosion);
+				m_colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
 			}
 		}

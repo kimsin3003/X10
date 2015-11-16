@@ -37,11 +37,11 @@ private:
 
 
 	const char* FILENAME = "temp.txt";
-	int CurrentTargetIndex;
-	int CurrentBulletIndex;
-	TargetInfo currentTarget;
-	string currentBullet;
-	vector<TargetInfo> TargetInfoList;
-	vector<string> BulletInfoList;
+	int m_currentTargetIndex;
+	int m_currentBulletIndex;
+	TargetInfo m_currentTarget;
+	string m_currentBullet;
+	vector<TargetInfo> m_targetInfoList;
+	vector<string> m_bulletInfoList;
 };
 

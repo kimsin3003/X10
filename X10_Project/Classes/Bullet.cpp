@@ -108,7 +108,7 @@ void Bullet::DecreaseLife()
 
 void Bullet::ReduceSpeed()
 {
-	SetSpeed((speed * speedDecreaseRatio) /speedSetRatio);
+	speed = speed * speedDecreaseRatio;
 }
 
 void Bullet::Exploded()

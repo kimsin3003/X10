@@ -12,6 +12,10 @@ protected:
 	void ToSelf(const Bullet* bullet);
 	void ToSelf(const Explosion* explosion);
 
-	const string FILE_MIRROR = "res/Mirror.png";
-	const string FILE_MIRROR_ANGRY = "res/MirrorAngry.png";
+	const string FILE_STAR_SAD = "res/target/StarSad.png";
+	const string FILE_STAR_HAPPY = "res/target/StarHappy.png";
+
+private:
+	bool ApplyEffectToMe;
+	bool ApplyEffectToBullet;
 };

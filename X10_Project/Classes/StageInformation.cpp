@@ -23,6 +23,9 @@ StageInformation::StageInformation(int stage)
 		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f);
 		TargetInfoList.push_back(info);
 
+		info = TargetInfo("Star", Point(100, 250), 0, 0.5f);
+		TargetInfoList.push_back(info);
+
 		//bullet ´Ù¼¸°³
 		string bulletType = "Bullet";
 		BulletInfoList.push_back(bulletType);

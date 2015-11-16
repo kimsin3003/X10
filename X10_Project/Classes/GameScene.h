@@ -1,6 +1,6 @@
 #pragma once
-#include "GameLayer.h"
-#include "UILayer.h"
+class GameLayer;
+class UILayer;
 
 class GameScene : public Layer
 {

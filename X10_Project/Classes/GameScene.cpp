@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "GameScene.h"
 #include "GameManager.h"
+#include "GameLayer.h"
+#include "UILayer.h"
 #include "Sling.h"
 
 GameScene::GameScene() : gameLayer(nullptr), uiLayer(nullptr)

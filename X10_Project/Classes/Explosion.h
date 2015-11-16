@@ -1,7 +1,7 @@
 #pragma once
 
 #include "Collider.h"
-#include "ColliderManager.h"
+class ColliderManager;
 
 class Explosion : public Collider
 {

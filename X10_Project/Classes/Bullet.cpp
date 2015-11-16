@@ -12,23 +12,23 @@ bool Bullet::init()
 		return false;
 	}
 	Director* director = Director::getInstance();
-	screen = director->getVisibleSize();
+	m_screen = director->getVisibleSize();
 
-	speed = 0;
-	direction = Vec2::ZERO;
+	m_speed = 0;
+	m_direction = Vec2::ZERO;
 	
-	isBullet = true;
-	isFlying = false;
-	shouldExplode = false;
+	m_isBullet = true;
+	m_isFlying = false;
+	m_shouldExplode = false;
 
 	//depending on the type of bullet
-	lifeTime = 5.0;
-	timeDecrease = 1.0 / director->getFrameRate();
-	speedSetRatio = 0.01f;
-	speedDecreaseRatio = 1 - (10/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
+	m_lifeTime = 5.0;
+	m_timeDecrease = 1.0 / director->getFrameRate();
+	m_speedSetRatio = 0.01f;
+	m_speedDecreaseRatio = 1 - (10/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
 
-	body = MakeBody();
-	addChild(body);
+	m_body = MakeBody();
+	addChild(m_body);
 
 	return true;
 }
@@ -58,11 +58,11 @@ Sprite* Bullet::MakeBody()
 
 void Bullet::Act(ColliderManager* cm)
 {
-	if (lifeTime > BULLET_EXPLODETIME)
+	if (m_lifeTime > BULLET_EXPLODETIME)
 	{
 		Move();
 		DecreaseLife();
-		if (lifeTime < BULLET_REDUCTIONSPEEDTIME)
+		if (m_lifeTime < BULLET_REDUCTIONSPEEDTIME)
 		{
 			ReduceSpeed();
 		}
@@ -75,16 +75,16 @@ void Bullet::Act(ColliderManager* cm)
 
 void Bullet::Move()
 {
-	Vec2 delta = speed * direction;
+	Vec2 delta = m_speed * m_direction;
 	Vec2 curPos = getPosition();
 	//화면 밖으로 나갈 경우 반대 방향에서 나오게 처리.
 	if (curPos.x + delta.x < 0)
 	{
-		curPos = Vec2(curPos.x + delta.x + screen.width, delta.y + curPos.y);
+		curPos = Vec2(curPos.x + delta.x + m_screen.width, delta.y + curPos.y);
 	}
-	else if (curPos.x + delta.x > screen.width)
+	else if (curPos.x + delta.x > m_screen.width)
 	{
-		curPos = Vec2(curPos.x + delta.x - screen.width, delta.y + curPos.y);
+		curPos = Vec2(curPos.x + delta.x - m_screen.width, delta.y + curPos.y);
 	}
 	else
 	{
@@ -103,33 +103,33 @@ Explosion* Bullet::GetExplosion()
 
 void Bullet::DecreaseLife()
 {
-	lifeTime -= timeDecrease;
+	m_lifeTime -= m_timeDecrease;
 }
 
 void Bullet::ReduceSpeed()
 {
-	speed = speed * speedDecreaseRatio;
+	m_speed = m_speed * m_speedDecreaseRatio;
 }
 
 void Bullet::Exploded()
 {
-	shouldExplode = false;
+	m_shouldExplode = false;
 }
 
 //외부에서 bullet을 강제로 죽일 때 사용.(폭발로 이어짐)
 void Bullet::Crashed()
 {
-	lifeTime = 0;
+	m_lifeTime = 0;
 }
 
 void Bullet::TimeUp()
 {
 	removeFromParent();
-	shouldExplode = true;
-	isFlying = false;
+	m_shouldExplode = true;
+	m_isFlying = false;
 }
 
 const Rect& Bullet::GetBoundingArea()
 {
-	return Rect(this->getPosition(), body->getContentSize()*BULLET_RATIO);
+	return Rect(this->getPosition(), m_body->getContentSize()*BULLET_RATIO);
 }

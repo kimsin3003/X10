@@ -16,15 +16,15 @@ public:
 	virtual Explosion* GetExplosion();
 
 	//Setters and Getters
-	void SetDirection(Vec2 dir) { direction = dir; }
-	Vec2 GetDirection() { return direction; }
+	void SetDirection(Vec2 dir) { m_direction = dir; }
+	Vec2 GetDirection() { return m_direction; }
 	const Rect& GetBoundingArea();
-	void SetSpeed(float spd) { speed = spd * speedSetRatio; }
-	void SetSpeedDecreaseRatio(float ratio) { speedDecreaseRatio = ratio; }
-	void SetFlying(bool flag) { isFlying = flag; }
+	void SetSpeed(float spd) { m_speed = spd * m_speedSetRatio; }
+	void SetSpeedDecreaseRatio(float ratio) { m_speedDecreaseRatio = ratio; }
+	void SetFlying(bool flag) { m_isFlying = flag; }
 	bool IsBullet() { return true; }
-	bool IsFlying() { return isFlying; }
-	bool ShouldExplode() { return shouldExplode; }
+	bool IsFlying() { return m_isFlying; }
+	bool ShouldExplode() { return m_shouldExplode; }
 
 	//상태 변화
 	void Crashed();
@@ -38,17 +38,17 @@ protected:
 	
 protected:
 
-	Sprite* body;//임시로 퍼블릭으로 옮김
+	Sprite* m_body;//임시로 퍼블릭으로 옮김
 
-	Vec2 direction;
-	float speed;
+	Vec2 m_direction;
+	float m_speed;
 	
-	float lifeTime;
-	float timeDecrease;
-	float speedSetRatio;
-	float speedDecreaseRatio;
+	float m_lifeTime;
+	float m_timeDecrease;
+	float m_speedSetRatio;
+	float m_speedDecreaseRatio;
 
-	bool shouldExplode;
+	bool m_shouldExplode;
 
 	const char* FILE_NAME= "res/firework.png";
 
@@ -65,5 +65,5 @@ protected:
 	};
 
 private:
-	Size screen;
+	Size m_screen;
 };

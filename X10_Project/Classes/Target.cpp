@@ -9,7 +9,7 @@
 bool Target::init()
 {
 	setAnchorPoint(Vec2(0, 0));
-	spr->setAnchorPoint(Vec2(0, 0));
+	m_spr->setAnchorPoint(Vec2(0, 0));
 	return true;
 }
 
@@ -30,7 +30,7 @@ void Target::ApplyCollisionEffect(Collider* collider)
 const Rect& Target::GetBoundingArea() 
 { 
 	Point nodePos = getPosition();
-	Size sprSize = spr->getContentSize() * sprScaleRatio;
+	Size sprSize = m_spr->getContentSize() * m_sprScaleRatio;
 	nodePos.x -= sprSize.width / 2;
 	nodePos.y -= sprSize.height / 2;
 	return Rect(nodePos, sprSize);

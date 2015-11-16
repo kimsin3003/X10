@@ -14,8 +14,4 @@ protected:
 
 	const string FILE_STAR_SAD = "res/target/StarSad.png";
 	const string FILE_STAR_HAPPY = "res/target/StarHappy.png";
-
-private:
-	bool ApplyEffectToMe;
-	bool ApplyEffectToBullet;
 };

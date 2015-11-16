@@ -4,12 +4,11 @@
 
 bool Enemy::init()
 {
-	spr = Sprite::create(FILE_ENEMY);
-	addChild(spr);
+	m_spr = Sprite::create(FILE_ENEMY);
+	addChild(m_spr);
 
 	return true;
 }
-
 
 void Enemy::ToBullet(Bullet* bullet)
 {
@@ -24,18 +23,18 @@ void Enemy::ToExplosion(Explosion* explosion)
 
 void Enemy::ToSelf(const Bullet* bullet)
 {
-	spr->removeFromParent();
-	spr = Sprite::create(FILE_ENEMY_DEAD);
-	addChild(spr);
-	spr->setScale(0.03f);
+	m_spr->removeFromParent();
+	m_spr = Sprite::create(FILE_ENEMY_DEAD);
+	addChild(m_spr);
+	m_spr->setScale(0.03f);
 	this->removeFromParent();
 }
 
 void Enemy::ToSelf(const Explosion* explosion)
 {
-	spr->removeFromParent();
-	spr = Sprite::create(FILE_ENEMY_DEAD);
-	addChild(spr);
-	spr->setScale(0.03f);
+	m_spr->removeFromParent();
+	m_spr = Sprite::create(FILE_ENEMY_DEAD);
+	addChild(m_spr);
+	m_spr->setScale(0.03f);
 	this->removeFromParent();
 }

@@ -7,19 +7,19 @@
 
 bool Star::init()
 {
-	spr = Sprite::create(FILE_STAR_SAD);
-	addChild(spr);
-	ApplyEffectToMe = true;
-	ApplyEffectToBullet = true;
+	m_spr = Sprite::create(FILE_STAR_SAD);
+	addChild(m_spr);
+	m_ApplyEffectToMe = true;
+	m_ApplyEffectToBullet = true;
 	return true;
 }
 
 void Star::ToBullet(Bullet* bullet)
 {
-	if (ApplyEffectToBullet)
+	if (m_ApplyEffectToBullet)
 	{
 		bullet->Crashed();
-		ApplyEffectToBullet = false;
+		m_ApplyEffectToBullet = false;
 	}
 }
 
@@ -30,15 +30,15 @@ void Star::ToExplosion(Explosion* explosion)
 
 void Star::ToSelf(const Bullet* bullet)
 {
-	if (ApplyEffectToMe)
+	if (m_ApplyEffectToMe)
 	{
-		spr->removeFromParent();
-		spr = Sprite::create(FILE_STAR_HAPPY);
-		addChild(spr);
-		sprScaleRatio *= 2.0f;
-		spr->setScale(sprScaleRatio);
+		m_spr->removeFromParent();
+		m_spr = Sprite::create(FILE_STAR_HAPPY);
+		addChild(m_spr);
+		m_sprScaleRatio *= 2.0f;
+		m_spr->setScale(m_sprScaleRatio);
 
-		ApplyEffectToMe = false;
+		m_ApplyEffectToMe = false;
 	}
 }
 

@@ -163,6 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Mirror.cpp" />
     <ClCompile Include="..\Classes\Sling.cpp" />
     <ClCompile Include="..\Classes\StageInformation.cpp" />
+    <ClCompile Include="..\Classes\Star.cpp" />
     <ClCompile Include="..\Classes\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -190,6 +191,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Mirror.h" />
     <ClInclude Include="..\Classes\Sling.h" />
     <ClInclude Include="..\Classes\StageInformation.h" />
+    <ClInclude Include="..\Classes\Star.h" />
     <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="..\Classes\Target.h" />
     <ClInclude Include="..\Classes\TargetManager.h" />

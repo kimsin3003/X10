@@ -26,3 +26,12 @@ void Target::ApplyCollisionEffect(Collider* collider)
 		ToSelf(static_cast<Explosion*>(collider));
 	}
 }
+
+const Rect& Target::GetBoundingArea() 
+{ 
+	Point nodePos = getPosition();
+	Size sprSize = spr->getContentSize() * sprScaleRatio;
+	nodePos.x -= sprSize.width / 2;
+	nodePos.y -= sprSize.height / 2;
+	return Rect(nodePos, sprSize);
+}

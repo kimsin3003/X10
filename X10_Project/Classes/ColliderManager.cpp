@@ -17,23 +17,22 @@ void ColliderManager::InitBullets(StageInformation* si)
 	colliders.reserve(defaultBulletNum);
 	curBulletIndex = 0;
 
-	for (int i = 0; i < defaultBulletNum; i++)
-	{
-		colliders.pushBack(Bullet::create());
-	}
-	/*
-	hash_map<string, void*> targetTypeInfo;
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
-
+	hash_map<string, void*> bulletTypeInfo;
+	bulletTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
 	while (si->HasNextBullet())
 	{
+		//타겟 이름을 불러와서
+		string type = si->GetCurrentBulletInfo();
+		void* createFunction = bulletTypeInfo.at(type);
 		
+		//거기에 맞는 팩토리 함수 호출
+		Bullet* (*create)() = static_cast<Bullet* (*)()>(createFunction);
+		Bullet* bullet = (*create)();
+
+		//리스트에 넣음.
+		colliders.pushBack(bullet);
 	}
-	*/
+	
 }
 
 Bullet* ColliderManager::GetBulletToShot(Sling* sling)

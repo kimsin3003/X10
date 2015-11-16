@@ -6,9 +6,9 @@
 //구해주려고 터트렸더니...... 펑 //헐 겁나잔인
 bool Bubble::init()
 {
-	spr = Sprite::create(FILE_BUBBLE);
-	addChild(spr);
-	applyEffectToMe = true;
+	m_spr = Sprite::create(FILE_BUBBLE);
+	addChild(m_spr);
+	m_ApplyEffectToMe = true;
 
 	return true;
 }
@@ -28,16 +28,16 @@ void Bubble::ToExplosion(Explosion* explosion)
 //나중에 컨셉에 따라 구별될지 모르니까 일단 내비둠
 void Bubble::ToSelf(const Bullet* bullet)
 {
-	if (applyEffectToMe)
+	if (m_ApplyEffectToMe)
 	{
-		applyEffectToMe = false;
+		m_ApplyEffectToMe = false;
 
-		spr->setVisible(false); //임시 코드, 
+		m_spr->setVisible(false); //임시 코드, 
 								//타깃 매니저가 들고 있는 targets에서 제거해주는 게 맞는데
 								//그렇게 하려면 타깃 매니저를 매개변수로 전달해야함
 
 		Sprite* spr_00 = Sprite::create(FILE_BUBBLE_POP);
-		spr_00->setScale(sprScaleRatio);
+		spr_00->setScale(m_sprScaleRatio);
 		addChild(spr_00);
 		Sequence* action = Sequence::create(
 			DelayTime::create(0.5f),
@@ -49,16 +49,16 @@ void Bubble::ToSelf(const Bullet* bullet)
 
 void Bubble::ToSelf(const Explosion* explosion)
 {
-	if (applyEffectToMe)
+	if (m_ApplyEffectToMe)
 	{
-		applyEffectToMe = false;
+		m_ApplyEffectToMe = false;
 
-		spr->setVisible(false); //임시 코드, 
+		m_spr->setVisible(false); //임시 코드, 
 								//타깃 매니저가 들고 있는 targets에서 제거해주는 게 맞는데
 								//그렇게 하려면 타깃 매니저를 매개변수로 전달해야함
 
 		Sprite* spr_00 = Sprite::create(FILE_BUBBLE_POP);
-		spr_00->setScale(sprScaleRatio);
+		spr_00->setScale(m_sprScaleRatio);
 		addChild(spr_00);
 		Sequence* action = Sequence::create(
 			DelayTime::create(0.5f),

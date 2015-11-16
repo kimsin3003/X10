@@ -7,8 +7,8 @@
 
 bool Mirror::init()
 {
-	spr = Sprite::create(FILE_MIRROR);
-	addChild(spr);
+	m_spr = Sprite::create(FILE_MIRROR);
+	addChild(m_spr);
 	return true;
 }
 
@@ -26,11 +26,11 @@ void Mirror::ToExplosion(Explosion* explosion)
 
 void Mirror::ToSelf(const Bullet* bullet)
 {
-	spr->removeFromParent();
-	spr = Sprite::create(FILE_MIRROR_ANGRY);
-	addChild(spr);
-	sprScaleRatio *= 1.05f;
-	spr->setScale(sprScaleRatio);
+	m_spr->removeFromParent();
+	m_spr = Sprite::create(FILE_MIRROR_ANGRY);
+	addChild(m_spr);
+	m_sprScaleRatio *= 1.05f;
+	m_spr->setScale(m_sprScaleRatio);
 }
 
 void Mirror::ToSelf(const Explosion* explosion)

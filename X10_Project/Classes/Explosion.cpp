@@ -7,30 +7,30 @@
 
 bool Explosion::init()
 {
-	radius = 0;
-	maxRadius = 100;
+	m_radius = 0;
+	m_maxRadius = 100;
 
-	explosion = ParticleExplosion::create();
-	explosion->setEmitterMode(kCCParticleModeGravity);
-	explosion->setEmissionRate(500);
-	explosion->setDuration(0.1);
-	explosion->setLife(0.5);
-	explosion->setSpeed(30);
-	explosion->setSpeedVar(0);
-	explosion->setEndSize(10);
-	explosion->setStartSize(10);
+	m_explosion = ParticleExplosion::create();
+	m_explosion->setEmitterMode(kCCParticleModeGravity);
+	m_explosion->setEmissionRate(500);
+	m_explosion->setDuration(0.1);
+	m_explosion->setLife(0.5);
+	m_explosion->setSpeed(30);
+	m_explosion->setSpeedVar(0);
+	m_explosion->setEndSize(10);
+	m_explosion->setStartSize(10);
 	
-	this->addChild(explosion);
-	isFlying = true;
-	lifeTime = 1.0 * Director::getInstance()->getFrameRate();
+	this->addChild(m_explosion);
+	m_isFlying = true;
+	m_lifeTime = 1.0 * Director::getInstance()->getFrameRate();
 	return true;
 }
 
 void Explosion::Act(ColliderManager* cm)
 {
-	if (lifeTime > 0)
+	if (m_lifeTime > 0)
 	{
-		lifeTime--;
+		m_lifeTime--;
 	}
 	else
 	{
@@ -42,7 +42,7 @@ void Explosion::Act(ColliderManager* cm)
 
 void Explosion::SetFlying(bool flag)
 {
-	isFlying = flag;
+	m_isFlying = flag;
 }
 
 bool Explosion::IsBullet()
@@ -53,13 +53,13 @@ bool Explosion::IsBullet()
 void Explosion::SetPosition(Point pos)
 {
 	setPosition(pos);
-	explosion->setPosition(Point::ZERO);
+	m_explosion->setPosition(Point::ZERO);
 }
 
 const float& Explosion::GetBoundingRadius()
 {
-	radius += explosion->getSpeed()/ 2 / Director::getInstance()->getFrameRate();
+	m_radius += m_explosion->getSpeed() / 2 / Director::getInstance()->getFrameRate();
 
-	return radius;
+	return m_radius;
 }
 

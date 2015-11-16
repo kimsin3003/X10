@@ -38,7 +38,7 @@ private:
 	//function to get singleton instance
 	virtual bool init();
 	
-	int status;
+	int m_status;
 	enum STATUS 
 	{ 
 		EMPTY, 
@@ -55,6 +55,6 @@ private:
 	Point GetStartLocation();
 
 	//member variable to make 'Shot Infomation'
-	Vec2 shotAngle;
-	float shotPower;
+	Vec2 m_shotAngle;
+	float m_shotPower;
 };

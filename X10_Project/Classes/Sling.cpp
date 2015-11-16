@@ -57,7 +57,7 @@ void Sling::LoadBullet()
 
 void Sling::PullStart(Event* e)
 {
-	if (status != STATUS::LOADED)
+	if (m_status != STATUS::LOADED)
 	{
 		return;
 	}
@@ -75,7 +75,7 @@ void Sling::PullStart(Event* e)
 
 void Sling::Pull(Event* e)
 {
-	if (status != STATUS::PULLING)
+	if (m_status != STATUS::PULLING)
 	{
 		return;
 	}
@@ -84,22 +84,22 @@ void Sling::Pull(Event* e)
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	
-	shotAngle = startLocation - mouseLocation;
-	if (shotAngle.getAngle() < Vec2::ZERO.getAngle())
+	m_shotAngle = startLocation - mouseLocation;
+	if (m_shotAngle.getAngle() < Vec2::ZERO.getAngle())
 	{
 		//밑으로 각도가 한계를 넘어가는 것들 수정하는 부분..
 		//아직 안만듬
 	}
 
-	shotPower = startLocation.getDistance(mouseLocation);
-	if (shotPower > MAX_POWER)
+	m_shotPower = startLocation.getDistance(mouseLocation);
+	if (m_shotPower > MAX_POWER)
 	{	
-		shotAngle = shotAngle / (shotPower / MAX_POWER);
-		shotPower = MAX_POWER;
+		m_shotAngle = m_shotAngle / (m_shotPower / MAX_POWER);
+		m_shotPower = MAX_POWER;
 	}
 
 	auto label = Label::create(".","arial", FONT_SIZE);
-	auto delay = MoveBy::create(PREDICT_LINE_TIME, shotAngle);
+	auto delay = MoveBy::create(PREDICT_LINE_TIME, m_shotAngle);
 	auto action = Sequence::create(delay, RemoveSelf::create(), NULL);
 	this->addChild(label);
 	label->runAction(action);	
@@ -112,7 +112,7 @@ Point Sling::GetStartLocation()
 
 void Sling::Shot(Event* e)
 {
-	if (status != STATUS::PULLING)
+	if (m_status != STATUS::PULLING)
 	{
 		return;
 	}
@@ -128,12 +128,12 @@ void Sling::Shot(Event* e)
 
 Vec2 Sling::GetDirection()
 {
-	return shotAngle;
+	return m_shotAngle;
 }
 
 float Sling::GetAngleInRadian()
 {
-	return shotAngle.getAngle();
+	return m_shotAngle.getAngle();
 }
 
 float Sling::GetRotationAngle()
@@ -143,13 +143,13 @@ float Sling::GetRotationAngle()
 
 float Sling::GetSpeed()
 {
-	return shotPower;
+	return m_shotPower;
 }
 
 
 bool Sling::IsShotted() // --> 쐈는지 체크
 {
-	if (status == STATUS::SHOTTED)
+	if (m_status == STATUS::SHOTTED)
 		return true;
 	else
 		return false;
@@ -157,26 +157,26 @@ bool Sling::IsShotted() // --> 쐈는지 체크
 
 void Sling::ChangeToLoaded() //empty -> load
 {
-	if (status != STATUS::EMPTY)
+	if (m_status != STATUS::EMPTY)
 		return;
-	status = STATUS::LOADED;
+	m_status = STATUS::LOADED;
 }
 
 void Sling::ChangeToPulling() //loaded -> pulling
 {
-	if (status != STATUS::LOADED)
+	if (m_status != STATUS::LOADED)
 		return;
-	status = STATUS::PULLING;
+	m_status = STATUS::PULLING;
 }
 
 void Sling::ChangeToShotted() //pullig -> shotted
 {
-	if (status != STATUS::PULLING)
+	if (m_status != STATUS::PULLING)
 		return;
-	status = STATUS::SHOTTED;
+	m_status = STATUS::SHOTTED;
 }
 
 void Sling::ChangeToEmpty() //shotted -> empty
 {
-	status = STATUS::EMPTY;
+	m_status = STATUS::EMPTY;
 }

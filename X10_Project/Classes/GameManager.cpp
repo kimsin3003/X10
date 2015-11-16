@@ -50,8 +50,9 @@ void GameManager::SetStage(GameLayer* gameLayer, int StageNumber)
 
 	stage = new StageInformation(StageNumber);
 	
-	//타겟 세팅
+	//해당 스테이지의 타깃 정보를 벡터에 저장
 	targetManager->InitTargets(stage);
+	//레이어에 붙여준다
 	AppendTargetsToLayer(gameLayer);
 	
 	//불렛 세팅

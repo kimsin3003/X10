@@ -1,26 +1,19 @@
 #include "stdafx.h"
 #include "TargetManager.h"
-#include "StageInformation.h"
-
+//Targets
+#include "Enemy.h"
 #include "Mirror.h"
 #include "Cloud.h"
 #include "Bubble.h"
-#include "Enemy.h"
-#include "Bubble.h"
-
+//Stage Information
+#include "StageInformation.h"
 #include <hash_map>
 using namespace stdext;
 
-TargetManager::TargetManager()
-{}
-
-TargetManager::~TargetManager()
-{
-	targets.clear();
-}
-
 void TargetManager::InitTargets(StageInformation* si)
 {
+	ResetTargets();
+
 	defaultTargetNumber = si->GetTargetCount();
 	targets.reserve(defaultTargetNumber);
 
@@ -49,6 +42,15 @@ void TargetManager::InitTargets(StageInformation* si)
 		//리스트에 넣음.
 		targets.pushBack(target);
 	}
+}
+
+void TargetManager::ResetTargets()
+{
+	for (Target* target : targets)
+	{
+		delete target;
+	}
+	targets.clear();
 }
 
 void TargetManager::EraseTarget(Target* target)

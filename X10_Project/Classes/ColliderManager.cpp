@@ -1,33 +1,39 @@
 #include "stdafx.h"
-#include "StageInformation.h"
 #include "ColliderManager.h"
+#include "Sling.h"
+//colliders
 #include "Collider.h"
 #include "Bullet.h"
-#include "Sling.h"
-
-ColliderManager::ColliderManager()
-{
-	curBulletIndex = -1;
-	defaultBulletNum = -1;
-}
-
-ColliderManager::~ColliderManager()
-{
-	colliders.clear();
-}
+//Stage Information
+#include "StageInformation.h"
+#include <hash_map>
+using namespace stdext;
 
 void ColliderManager::InitBullets(StageInformation* si)
 {
+	ResetBullets();
+
 	defaultBulletNum = si->GetBulletCount();
 	colliders.reserve(defaultBulletNum);
-	//이후에 si로 초기화
+	curBulletIndex = 0;
+
 	for (int i = 0; i < defaultBulletNum; i++)
 	{
 		colliders.pushBack(Bullet::create());
 	}
+	/*
+	hash_map<string, void*> targetTypeInfo;
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
 
-	//bullet index initiation
-	curBulletIndex = 0;
+	while (si->HasNextBullet())
+	{
+		
+	}
+	*/
 }
 
 Bullet* ColliderManager::GetBulletToShot(Sling* sling)
@@ -53,6 +59,14 @@ void ColliderManager::AddExplosion(Collider* explosion)
 	colliders.pushBack(explosion);
 }
 
+void ColliderManager::ResetBullets()
+{
+	for (Collider* collider : colliders)
+	{
+		delete collider;
+	}
+	colliders.clear();
+}
 void ColliderManager::EraseCollider(Collider* collider)
 {
 	colliders.eraseObject(collider);

@@ -64,6 +64,9 @@
     <ClCompile Include="..\Classes\StageInformation.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Star.cpp">
+      <Filter>GameObject\Targets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -127,6 +130,9 @@
       <Filter>Manager</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Target.h">
+      <Filter>GameObject\Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Star.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
   </ItemGroup>

@@ -32,7 +32,7 @@ StageInformation::StageInformation(int stage)
 		BulletInfoList.push_back(bulletType);
 	}
 
-	if (stage > 1)
+	if (stage > 0)
 	{
 		/*파일에서 정보를 불러서 stage 정보로 채울 부분*/
 	}

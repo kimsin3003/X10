@@ -11,19 +11,21 @@ bool Bullet::init()
 	{
 		return false;
 	}
+	Director* director = Director::getInstance();
+	screen = director->getVisibleSize();
 
 	speed = 0;
 	direction = Vec2::ZERO;
-	timeDecrease = 1;
-
+	
 	isBullet = true;
 	isFlying = false;
 	shouldExplode = false;
 
 	//depending on the type of bullet
-	lifeTime = Director::getInstance()->getFrameRate()*1.0;
+	lifeTime = 5.0;
+	timeDecrease = 1.0 / director->getFrameRate();
 	speedSetRatio = 0.01f;
-	speedDecreaseRatio = 0.90f;
+	speedDecreaseRatio = 1 - (10/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
 
 	body = MakeBody();
 	addChild(body);
@@ -36,7 +38,7 @@ Sprite* Bullet::MakeBody()
 	Sprite* body = Sprite::create();
 
 	float scale = Director::getInstance()->getContentScaleFactor();
-	const Size fireSize(BULLET_WIDTH /scale , BULLET_HEIGHT /scale); 
+	Size fireSize(BULLET_WIDTH /scale , BULLET_HEIGHT /scale); 
 	int frameCut = BULLET_FRAMES;
 	Vector<SpriteFrame*> animFrames;
 	animFrames.reserve(frameCut);
@@ -75,7 +77,20 @@ void Bullet::Move()
 {
 	Vec2 delta = speed * direction;
 	Vec2 curPos = getPosition();
-	setPosition(curPos + delta);
+	//화면 밖으로 나갈 경우 반대 방향에서 나오게 처리.
+	if (curPos.x + delta.x < 0)
+	{
+		curPos = Vec2(curPos.x + delta.x + screen.width, delta.y + curPos.y);
+	}
+	else if (curPos.x + delta.x > screen.width)
+	{
+		curPos = Vec2(curPos.x + delta.x - screen.width, delta.y + curPos.y);
+	}
+	else
+	{
+		curPos = curPos + delta;
+	}
+	setPosition(curPos);
 }
 
 Explosion* Bullet::GetExplosion()
@@ -93,8 +108,7 @@ void Bullet::DecreaseLife()
 
 void Bullet::ReduceSpeed()
 {
-	SetSpeed(speed * speedDecreaseRatio);
-	SetSpeedDecreaseRatio(speedDecreaseRatio - 0.05f);
+	SetSpeed((speed * speedDecreaseRatio) /speedSetRatio);
 }
 
 void Bullet::Exploded()

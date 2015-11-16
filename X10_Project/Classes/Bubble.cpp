@@ -3,7 +3,7 @@
 #include "Bubble.h"
 
 //방울 컨셉: 물방울에 갇힌 요정 
-//구해주려고 터트렸더니...... 펑
+//구해주려고 터트렸더니...... 펑 //헐 겁나잔인
 bool Bubble::init()
 {
 	spr = Sprite::create(FILE_BUBBLE);

@@ -7,12 +7,22 @@
 
 bool Explosion::init()
 {
+	radius = 0;
+	maxRadius = 100;
+
 	explosion = ParticleExplosion::create();
 	explosion->setEmitterMode(kCCParticleModeGravity);
+	explosion->setEmissionRate(500);
+	explosion->setDuration(0.1);
+	explosion->setLife(0.5);
+	explosion->setSpeed(30);
+	explosion->setSpeedVar(0);
+	explosion->setEndSize(10);
+	explosion->setStartSize(10);
+	
 	this->addChild(explosion);
 	isFlying = true;
-	radius = 0;
-	lifeTime = 0.5 * Director::getInstance()->getFrameRate();
+	lifeTime = 1.0 * Director::getInstance()->getFrameRate();
 	return true;
 }
 
@@ -48,7 +58,7 @@ void Explosion::SetPosition(Point pos)
 
 const float& Explosion::GetBoundingRadius()
 {
-	radius += (explosion->getSpeedVar() + 10) / Director::getInstance()->getFrameRate();
+	radius += explosion->getSpeed()/ 2 / Director::getInstance()->getFrameRate();
 
 	return radius;
 }

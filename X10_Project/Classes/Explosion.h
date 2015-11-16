@@ -19,4 +19,5 @@ protected:
 	ParticleExplosion* explosion; ///# 코딩 컨벤션
 	int lifeTime;
 	float radius;
+	float maxRadius;
 };

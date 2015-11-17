@@ -81,7 +81,7 @@ Sling* GameManager::SetSling(GameLayer* gameLayer)
 
 void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 {
-	Vector<Target*> targets = m_targetManager->GetTargets();
+	const Vector<Target*>& targets = m_targetManager->GetTargets();
 
 	for (Target* target : targets)
 	{
@@ -115,7 +115,7 @@ void GameManager::ShotBullet(Sling* sling)
 
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
-	//벡터를 통째로 복사해서 임시 변수에 담지 말것. 성능 저하의 원인
+	///# 벡터를 통째로 복사해서 임시 변수에 담지 말것. 성능 저하의 원인
 	Vector<Collider*> colliders = m_colliderManager->GetColliders();
 	Vector<Target*> targets = m_targetManager->GetTargets(); 
 
@@ -135,10 +135,10 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		if (collider->IsBullet())
 		{
 			//폭발해야하면
-			if (((Bullet*)collider)->ShouldExplode())
+			if (((Bullet*)collider)->ShouldExplode()) ///# 이럴때 dynamic_cast를 쓰는거다. 이거 공부하고 위키에 남길 것!
 			{
 				//폭발을 생성하여 벡터에 넣고 레이어에 붙여준다
-				Explosion* explosion = (static_cast<Bullet*>(collider))->GetExplosion();
+				Explosion* explosion = (static_cast<Bullet*>(collider))->GetExplosion(); ///# 마찬가지로 다이나믹_캐스트!
 				m_colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
 			}

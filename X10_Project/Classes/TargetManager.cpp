@@ -19,12 +19,17 @@ void TargetManager::InitTargets(StageInformation* si)
 	m_targets.reserve(m_defaultTargetNumber);
 
 	//각각의 클래스에 맞는 함수포인터 를 void*형태로 hash_map에 저장
-	hash_map<string, void*> targetTypeInfo; //string에 타입 이름.
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Enemy", Enemy::create));
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Mirror", Mirror::create));
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Cloud", Cloud::create));
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bubble", Bubble::create));
-	targetTypeInfo.insert(hash_map<string, void*>::value_type("Star", Star::create));
+
+	///# 이렇게 typedef같은거로 치환해놓으면 편하다
+	///# 근데 void* 쓰지마라.. 함수 포인터 쓸거면 std::funcktion!!
+	typedef hash_map<string, void*> TargetInfoMap;
+
+	TargetInfoMap targetTypeInfo; //string에 타입 이름.
+	targetTypeInfo.insert(TargetInfoMap::value_type("Enemy", Enemy::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type("Mirror", Mirror::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type("Cloud", Cloud::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type("Bubble", Bubble::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type("Star", Star::create));
 
 	while (si->HasNextTarget())
 	{

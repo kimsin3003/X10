@@ -3,7 +3,6 @@
 class Sling : public Node
 {
 public:
-	///# 이런거는 enum으로.. (예)
 
 	enum SLING_CONFIG
 	{

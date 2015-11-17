@@ -22,13 +22,13 @@ private:
 
 	struct TargetInfo //정보 묶음용 이너 클래스...struct로 할껄.
 	{
-	public:
+		///# struct도 클래스다.. 코딩 컨벤션 동일하게..
 		string typeName;
 		Point position;
 		float rotation;
 		float scale;
 
-		TargetInfo(){};
+		TargetInfo(){} ///# 위의 멤버 변수들은 초기화 왜 안함?
 		TargetInfo(string str, Point p, float r, float s)
 			: typeName(str), position(p), rotation(r), scale(s)
 		{};

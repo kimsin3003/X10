@@ -17,7 +17,8 @@ void ColliderManager::InitBullets(StageInformation* si)
 	m_colliders.reserve(m_defaultBulletNum);
 	m_curBulletIndex = 0;
 
-	hash_map<string, void*> bulletTypeInfo;
+	hash_map<string, void*> bulletTypeInfo; ///# void*는 네버에버 쓰지마라.. 
+
 	bulletTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
 	while (si->HasNextBullet())
 	{
@@ -26,6 +27,9 @@ void ColliderManager::InitBullets(StageInformation* si)
 		void* createFunction = bulletTypeInfo.at(type);
 		
 		//거기에 맞는 팩토리 함수 호출
+
+		///# C++ 에서는 아주 구형 컴파일러만 쓸 수 있는 상황이 아니라면, 함수 포인터는 쓰지 않는데. 
+		/// 이 기회에 std::function 및 std::bind에 대해 공부하고 이 부분을 모두 이걸로 바꾸어 볼 것!
 		Bullet* (*create)() = static_cast<Bullet* (*)()>(createFunction);
 		Bullet* bullet = (*create)();
 
@@ -39,7 +43,7 @@ Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 {
 	if (m_curBulletIndex < m_defaultBulletNum)
 	{
-		Bullet* bullet = (Bullet*)m_colliders.at(m_curBulletIndex++);
+		Bullet* bullet = (Bullet*)m_colliders.at(m_curBulletIndex++); ///# C-style 캐스팅 쓰지 말 것.
 		
 		bullet->setPosition(sling->getPosition());
 		bullet->setRotation(sling->GetRotationAngle());

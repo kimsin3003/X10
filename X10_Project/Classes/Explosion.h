@@ -16,7 +16,7 @@ public:
 	void SetPosition(Point pos);
 
 protected:
-	ParticleExplosion* m_explosion; ///# 코딩 컨벤션
+	ParticleExplosion* m_explosion;
 	int	m_lifeTime;
 	float m_radius;
 	float m_maxRadius;

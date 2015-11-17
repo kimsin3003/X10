@@ -26,7 +26,7 @@ bool Bullet::init()
 	m_lifeTime = 5.0;
 	m_timeDecrease = 1.0 / director->getFrameRate();
 	m_speedSetRatio = 0.01f;
-	m_speedDecreaseRatio = 1 - (10/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
+	m_speedDecreaseRatio = 1 - (10.0/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
 
 	m_body = MakeBody();
 	addChild(m_body);

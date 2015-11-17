@@ -8,7 +8,7 @@ class TargetManager
 public:
 	TargetManager() {}
 	~TargetManager() {}
-	Vector<Target*> GetTargets() { return m_targets; };
+	Vector<Target*> GetTargets() { return m_targets; }  ///# 벡터 통째 리턴은 아주 비효율적.
 	void InitTargets(StageInformation* si);
 	void ResetTargets();
 	void EraseTarget(Target* target);

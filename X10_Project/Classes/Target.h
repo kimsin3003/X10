@@ -20,7 +20,8 @@ protected:
 	virtual void ToSelf(const Explosion* explosion) = 0;	
 	
 	Sprite* m_spr;
-	float m_sprScaleRatio = 1;
+	float m_sprScaleRatio = 1; ///# 디폴트값 초기화는 모아서.. 생성자에서 하거나 멤버 선언시 하거나.. 통일되게..
+	///# 코딩 컨벤션 m_대or소? 
 	bool m_ApplyEffectToMe;
 	bool m_ApplyEffectToBullet;
 

@@ -21,6 +21,7 @@ void Enemy::ToExplosion(Explosion* explosion)
 
 }
 
+///# 아래 두 ToSelf는 사실상 같은거 아닌가? Bullet과 Explosion모두 Collider의 자식이면 ToSelf(const Collider* bullet) 하나만 있어도 되지?
 void Enemy::ToSelf(const Bullet* bullet)
 {
 	m_spr->removeFromParent();

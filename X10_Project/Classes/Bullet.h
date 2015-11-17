@@ -37,7 +37,7 @@ protected:
 	
 protected:
 
-	Sprite* m_body;//임시로 퍼블릭으로 옮김
+	Sprite* m_body;
 
 	Vec2 m_direction;
 	float m_speed;

@@ -26,7 +26,7 @@ public:
 private:
 	GameManager();
 	~GameManager();
-	void CheckCollide(Collider* bullet, Vector<Target*> targets); ///# 복사로 벡터를 통째로 넘기지 마라.. const &로 넘길 것..
+	void CheckCollide(Collider* bullet, Vector<Target*>& targets); ///# 복사로 벡터를 통째로 넘기지 마라.. const &로 넘길 것..
 	
 
 private:

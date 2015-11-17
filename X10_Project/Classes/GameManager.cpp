@@ -116,8 +116,8 @@ void GameManager::ShotBullet(Sling* sling)
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
 	///# 벡터를 통째로 복사해서 임시 변수에 담지 말것. 성능 저하의 원인
-	Vector<Collider*> colliders = m_colliderManager->GetColliders();
-	Vector<Target*> targets = m_targetManager->GetTargets(); 
+	Vector<Collider*>& colliders = m_colliderManager->m_colliders;
+	Vector<Target*>& targets = m_targetManager->m_targets; 
 
 
 	for (Collider* collider : colliders)
@@ -146,35 +146,35 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	}
 }
 
-void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
+void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 {
 	static Target* lastTarget = nullptr;
-	for (Target*& target : targets)
+	for (Target* target : targets)
 	{
 		if (target == lastTarget)
 			continue;
 
-		if (collider->IsBullet())
+		if (bullet->IsBullet())
 		{
-			const Rect colliderBoundingBox = (static_cast<Bullet*>(collider))->GetBoundingArea();
+			const Rect colliderBoundingBox = (static_cast<Bullet*>(bullet))->GetBoundingArea();
 			const Rect targetBoundingBox = target->GetBoundingArea();
 
 			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 			{
 				lastTarget = target;
-				target->ApplyCollisionEffect(collider);
+				target->ApplyCollisionEffect(bullet);
 			}
 		}
 		else
 		{
-			const float explosionRadius = (static_cast<Explosion*>(collider))->GetBoundingRadius();
-			const Vec2 explosionPosition = (static_cast<Explosion*>(collider))->getPosition();
+			const float explosionRadius = (static_cast<Explosion*>(bullet))->GetBoundingRadius();
+			const Vec2 explosionPosition = (static_cast<Explosion*>(bullet))->getPosition();
 			const Rect targetBoundingBox = target->GetBoundingArea();
 
 			if (targetBoundingBox.intersectsCircle(explosionPosition, explosionRadius))
 			{
 				lastTarget = target;
-				target->ApplyCollisionEffect(collider);
+				target->ApplyCollisionEffect(bullet);
 			}
 		}
 	}

@@ -21,7 +21,7 @@ protected:
 	
 	Sprite* m_spr;
 	float m_sprScaleRatio = 1;
-	bool m_ApplyEffectToMe;
-	bool m_ApplyEffectToBullet;
+	bool m_applyEffectToMe;
+	bool m_applyEffectToBullet;
 
 };

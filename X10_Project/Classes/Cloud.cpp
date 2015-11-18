@@ -9,7 +9,7 @@ bool Cloud::init()
 {
 	m_spr = Sprite::create(FILE_CLOUD);
 	addChild(m_spr);
-	m_ApplyEffectToMe = true;
+	m_applyEffectToMe = true;
 	return true;
 }
 
@@ -28,9 +28,9 @@ void Cloud::ToExplosion(Explosion* explosion)
 //나중에 컨셉에 따라 구별될지 모르니까 일단 내비둠
 void Cloud::ToSelf(const Bullet* bullet)
 {
-	if (m_ApplyEffectToMe)
+	if (m_applyEffectToMe)
 	{
-		m_ApplyEffectToMe = false;
+		m_applyEffectToMe = false;
 
 		m_spr->setVisible(false); //임시 코드, 
 								//타깃 매니저가 들고 있는 targets에서 제거해주는 게 맞는데
@@ -63,9 +63,9 @@ void Cloud::ToSelf(const Bullet* bullet)
 
 void Cloud::ToSelf(const Explosion* explosion)
 {
-	if (m_ApplyEffectToMe)
+	if (m_applyEffectToMe)
 	{
-		m_ApplyEffectToMe = false;
+		m_applyEffectToMe = false;
 
 		m_spr->setVisible(false); //임시 코드, 
 								//타깃 매니저가 들고 있는 targets에서 제거해주는 게 맞는데

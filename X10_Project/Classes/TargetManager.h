@@ -8,7 +8,7 @@ class TargetManager
 public:
 	TargetManager() {}
 	~TargetManager() {}
-	Vector<Target*> GetTargets() { return m_targets; };
+	Vector<Target*>& GetTargets() { return m_targets; };
 	void InitTargets(StageInformation* si);
 	void ResetTargets();
 	void EraseTarget(Target* target);

@@ -9,8 +9,8 @@ class Bullet : public Collider
 public:
 	CREATE_FUNC(Bullet);
 
-	virtual bool init() override;
-	virtual void Act(ColliderManager* cm) override;
+	virtual bool init();
+	virtual void Act(ColliderManager* cm);
 	virtual void Move();
 	virtual Explosion* GetExplosion();
 

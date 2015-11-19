@@ -41,22 +41,22 @@ void CrossExplosion::AddLings()
 	switch (m_curLingIdx)
 	{
 	case 0:
-		ling->setPosition(0, -lingPosDelta);
-		m_lingBeginTime -= lingBeginDelta;
-		break;
-	case 1:
 		ling->setPosition(0, 0);
 		m_lingBeginTime -= lingBeginDelta;
 		break;
+	case 1:
+		ling->setPosition(0, lingPosDelta);
+		m_lingBeginTime -= lingBeginDelta;
+		break;
 	case 2:
-		ling->setPosition(-lingPosDelta, 0);
+		ling->setPosition(-lingPosDelta, lingPosDelta);
 		break;
 	case 3:
-		ling->setPosition(lingPosDelta, 0);
+		ling->setPosition(lingPosDelta, lingPosDelta);
 		m_lingBeginTime -= lingBeginDelta;
 		break;
 	case 4:
-		ling->setPosition(0, lingPosDelta);
+		ling->setPosition(0, 2*lingPosDelta);
 		break;
 	}
 
@@ -90,7 +90,7 @@ void CrossExplosion::SetLingDefault(ParticleExplosion* ling)
 
 const float& CrossExplosion::GetBoundingRadius()
 {
-	m_radius += 1;
+	m_radius += 1 / Director::getInstance()->getFrameRate();
 
 	return m_radius;
 }

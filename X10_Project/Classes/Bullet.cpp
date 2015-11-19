@@ -123,6 +123,7 @@ void Bullet::Exploded()
 void Bullet::Crashed()
 {
 	m_lifeTime = 0;
+	Explode();
 }
 
 void Bullet::Explode()

@@ -23,7 +23,6 @@ bool CrossBullet::init()
 	m_shouldExplode = false;
 	m_timeToExplode = 140;
 	
-	//depending on the type of CrossBullet
 	m_lifeTime = 5.0;
 	m_timeDecrease = 1.0 / director->getFrameRate();
 	m_speedSetRatio = 0.01f;
@@ -47,7 +46,7 @@ void CrossBullet::Act(ColliderManager* cm)
 			if (m_lifeTime <= m_timeToExplode)
 			{
 				Explode();
-				m_timeToExplode = -10000;
+				m_timeToExplode = -1;
 			}
 		}
 	}
@@ -80,7 +79,7 @@ void CrossBullet::Move()
 Explosion* CrossBullet::GetExplosion()
 {
 	Explosion* explosion = CrossExplosion::create();
-	explosion->setPosition(getPosition()); //test용 , S로 변경
+	explosion->setPosition(getPosition());
 	explosion->setRotation(getRotation());
 	Exploded();
 	return explosion;

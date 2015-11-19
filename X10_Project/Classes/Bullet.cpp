@@ -122,7 +122,7 @@ void Bullet::Exploded()
 //외부에서 bullet을 강제로 죽일 때 사용.(폭발로 이어짐)
 void Bullet::Crashed()
 {
-	m_lifeTime = 0;
+	TimeUp();
 	Explode();
 }
 

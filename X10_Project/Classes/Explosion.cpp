@@ -34,9 +34,7 @@ void Explosion::Act(ColliderManager* cm)
 	}
 	else
 	{
-		SetFlying(false);
-		removeFromParent();
-		cm->EraseCollider(this);
+		RemoveSelf(cm);
 	}
 }
 
@@ -49,6 +47,13 @@ void Explosion::SetPosition(Point pos)
 {
 	setPosition(pos);
 	m_explosion->setPosition(Point::ZERO);
+}
+
+void Explosion::RemoveSelf(ColliderManager* cm)
+{
+	SetFlying(false);
+	removeFromParent();
+	cm->EraseCollider(this);
 }
 
 const float& Explosion::GetBoundingRadius()

@@ -18,4 +18,6 @@ private:
 	Vector<ParticleExplosion*> m_crossLings;
 	int m_lingBeginTime;
 	int m_curLingIdx;
+
+	void RemoveSelf(ColliderManager* cm);
 };

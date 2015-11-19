@@ -46,7 +46,7 @@ void CrossBullet::Act(ColliderManager* cm)
 			if (m_lifeTime <= m_timeToExplode)
 			{
 				Explode();
-				m_timeToExplode = -1;
+				m_timeToExplode = STOP_COUNTING_EXPLODE_TIME;
 			}
 		}
 	}

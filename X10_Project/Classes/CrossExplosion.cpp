@@ -26,10 +26,21 @@ void CrossExplosion::Act(ColliderManager* cm)
 	}
 	else
 	{
-		SetFlying(false);
-		removeFromParent();
-		cm->EraseCollider(this);
+		RemoveSelf(cm);
 	}
+}
+
+void CrossExplosion::RemoveSelf(ColliderManager* cm)
+{
+	SetFlying(false);
+	for (int i = 0; i < lingNum; i++)
+	{
+		ParticleExplosion* ling = m_crossLings.at(i);
+		ling->removeFromParent();
+	}
+	m_crossLings.clear();
+	removeFromParent();
+	cm->EraseCollider(this);
 }
 
 void CrossExplosion::AddLings()
@@ -90,7 +101,7 @@ void CrossExplosion::SetLingDefault(ParticleExplosion* ling)
 
 const float& CrossExplosion::GetBoundingRadius()
 {
-	m_radius += 1 / Director::getInstance()->getFrameRate();
+	m_radius = 10 * m_curLingIdx / Director::getInstance()->getFrameRate();
 
 	return m_radius;
 }

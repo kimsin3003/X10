@@ -16,4 +16,5 @@ public:
 
 private:
 	float m_timeToExplode;
+	enum { STOP_COUNTING_EXPLODE_TIME = -30000};
 };

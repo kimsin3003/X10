@@ -3,7 +3,6 @@
 #include "ColliderManager.h"
 #include "GameManager.h"
 #include "Explosion.h"
-#include "CrossExplosion.h"
 
 //Base Class of All Bullets
 
@@ -71,6 +70,7 @@ void Bullet::Act(ColliderManager* cm)
 	}
 	else
 	{
+		Explode();
 		TimeUp();
 	}
 }
@@ -98,7 +98,7 @@ void Bullet::Move()
 Explosion* Bullet::GetExplosion()
 {
 	Explosion* explosion = Explosion::create();
-	explosion->setPosition(getPosition()); //test용 , S로 변경
+	explosion->SetPosition(getPosition());
 	explosion->setRotation(getRotation());
 	Exploded();
 	return explosion;
@@ -133,7 +133,6 @@ void Bullet::Explode()
 void Bullet::TimeUp()
 {
 	removeFromParent();
-	m_shouldExplode = true;
 	m_isFlying = false;
 }
 

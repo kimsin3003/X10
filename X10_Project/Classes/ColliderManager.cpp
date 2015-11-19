@@ -4,6 +4,8 @@
 //colliders
 #include "Collider.h"
 #include "Bullet.h"
+#include "CrossBullet.h"
+
 //Stage Information
 #include "StageInformation.h"
 #include <hash_map>
@@ -18,7 +20,12 @@ void ColliderManager::InitBullets(StageInformation* si)
 	m_curBulletIndex = 0;
 
 	hash_map<string, void*> bulletTypeInfo;
+	bulletTypeInfo.insert(hash_map<string, void*>::value_type("CrossBullet", CrossBullet::create));
+	bulletTypeInfo.insert(hash_map<string, void*>::value_type("CrossBullet", CrossBullet::create));
+	bulletTypeInfo.insert(hash_map<string, void*>::value_type("CrossBullet", CrossBullet::create));
 	bulletTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
+	bulletTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
+	
 	while (si->HasNextBullet())
 	{
 		//타겟 이름을 불러와서

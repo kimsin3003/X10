@@ -26,11 +26,13 @@ StageInformation::StageInformation(int stage)
 		info = TargetInfo("Star", Point(100, 250), 0, 0.5f);
 		m_targetInfoList.push_back(info);
 
-		//bullet ´Ù¼¸°³
-		string bulletType = "Bullet";
+		//CrossBullet 3°³ Bullet 2°³
+		string bulletType = "CrossBullet";
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
+
+		bulletType = "Bullet";
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
 	}

@@ -2,7 +2,6 @@
 
 #include "Bullet.h"
 class Explosion;
-class Explosion;
 class ColliderManager;
 
 class CrossBullet : public Bullet
@@ -16,5 +15,5 @@ public:
 	Explosion* GetExplosion();
 
 private:
-	enum {TimeToExplode = 100};
+	float m_timeToExplode;
 };

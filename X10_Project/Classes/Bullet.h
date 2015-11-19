@@ -2,7 +2,6 @@
 
 #include "Collider.h"
 class Explosion;
-class CrossExplosion;
 class ColliderManager;
 
 class Bullet : public Collider

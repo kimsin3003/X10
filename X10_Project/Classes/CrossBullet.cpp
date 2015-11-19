@@ -5,7 +5,6 @@
 #include "Explosion.h"
 #include "CrossExplosion.h"
 #include "Bullet.h"
-//Base Class of All Bullets
 
 bool CrossBullet::init()
 {
@@ -22,7 +21,8 @@ bool CrossBullet::init()
 	m_isBullet = true;
 	m_isFlying = false;
 	m_shouldExplode = false;
-
+	m_timeToExplode = 140;
+	
 	//depending on the type of CrossBullet
 	m_lifeTime = 5.0;
 	m_timeDecrease = 1.0 / director->getFrameRate();
@@ -44,9 +44,10 @@ void CrossBullet::Act(ColliderManager* cm)
 		if (m_lifeTime < BULLET_REDUCTIONSPEEDTIME)
 		{
 			ReduceSpeed();
-			if (m_lifeTime == TimeToExplode)
+			if (m_lifeTime <= m_timeToExplode)
 			{
 				Explode();
+				m_timeToExplode = -10000;
 			}
 		}
 	}

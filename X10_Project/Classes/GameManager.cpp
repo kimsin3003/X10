@@ -11,6 +11,7 @@
 #include "Sling.h"
 #include "Mirror.h"
 #include "Explosion.h"
+#include "CrossExplosion.h"
 
 GameManager* GameManager::m_instance = nullptr;
 

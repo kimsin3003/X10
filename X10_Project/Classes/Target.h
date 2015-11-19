@@ -1,15 +1,17 @@
 #pragma once
 
+
 class Collider;
 class Bullet;
 class Explosion;
+class TargetManager;
 
 class Target : public Node
 {
 public:
 	virtual bool init();
 
-	void ApplyCollisionEffect(Collider* collider); //재정의 ㄴㄴ 안에 부르는 To~~~들만 구현하면 되도록 
+	void ApplyCollisionEffect(Collider* collider); 
 	const Rect& GetBoundingArea();
 	void SetSprScaleRatio(float ratio) { m_sprScaleRatio = ratio; }
 	void SetSprScale() { m_spr->setScale(m_sprScaleRatio); }
@@ -23,5 +25,4 @@ protected:
 	float m_sprScaleRatio = 1;
 	bool m_applyEffectToMe;
 	bool m_applyEffectToBullet;
-
 };

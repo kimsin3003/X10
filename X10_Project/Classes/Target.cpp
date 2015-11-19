@@ -2,6 +2,7 @@
 #include "Collider.h"
 #include "Explosion.h"
 #include "Bullet.h"
+#include "TargetManager.h"
 #include "Target.h"
 
 //Base class of all Targets

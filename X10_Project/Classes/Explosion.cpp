@@ -45,11 +45,6 @@ void Explosion::SetFlying(bool flag)
 	m_isFlying = flag;
 }
 
-bool Explosion::IsBullet()
-{
-	return false;
-}
-
 void Explosion::SetPosition(Point pos)
 {
 	setPosition(pos);

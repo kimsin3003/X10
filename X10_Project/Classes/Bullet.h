@@ -2,6 +2,7 @@
 
 #include "Collider.h"
 class Explosion;
+class CrossExplosion;
 class ColliderManager;
 
 class Bullet : public Collider
@@ -27,6 +28,7 @@ public:
 
 	//상태 변화
 	void Crashed();
+	void Explode();
 	void Exploded();
 	void TimeUp();
 	void ReduceSpeed();
@@ -63,6 +65,5 @@ protected:
 		BULLET_REDUCTIONSPEEDTIME = 3,
 	};
 
-private:
 	Size m_screen;
 };

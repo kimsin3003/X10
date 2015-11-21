@@ -19,5 +19,5 @@ private:
 	int m_lingBeginTime;
 	int m_curLingIdx;
 
-	void RemoveSelf(ColliderManager* cm);
+	void RemoveSelf();
 };

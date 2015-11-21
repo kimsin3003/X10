@@ -77,7 +77,6 @@ void MainScene::ChangeToMCScene(Ref* pSender)
 
 void MainScene::ChangeToGameScene(Ref* pSender)
 {
-	GameManager::GetInstance()->Reset();
 
 	Director::getInstance()->replaceScene(GameScene::createScene());
 	return;

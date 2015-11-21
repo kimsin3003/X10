@@ -31,12 +31,12 @@ public:
 	void Exploded();
 	void TimeUp();
 	void ReduceSpeed();
+	bool IsDead() override;
+	bool NotShooted();
 
 protected:
 	void DecreaseLife(); // call in Move()
 	Sprite* MakeBody();
-	
-protected:
 
 	Sprite* m_body;//임시로 퍼블릭으로 옮김
 

@@ -57,6 +57,26 @@ Sprite* Bullet::MakeBody()
 	return body;
 }
 
+bool Bullet::IsDead()
+{
+	
+	if (m_lifeTime == 0 && !m_shouldExplode)
+		return true;
+	return false;
+}
+
+bool Bullet::NotShooted()
+{
+	CCLOG("m_lifeTime: %d", m_lifeTime);
+	if (m_shouldExplode)
+		CCLOG("ex: true");
+	else
+		CCLOG("ex: false");
+	if (m_lifeTime > 0 && !m_isFlying)
+		return true;
+	return false;
+}
+
 void Bullet::Act(ColliderManager* cm)
 {
 	if (m_lifeTime > BULLET_EXPLODETIME)

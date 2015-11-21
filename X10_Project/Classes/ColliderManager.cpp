@@ -15,9 +15,9 @@ void ColliderManager::InitBullets(StageInformation* si)
 {
 	ResetBullets();
 
-	m_defaultBulletNum = si->GetBulletCount();
-	m_colliders.reserve(m_defaultBulletNum);
-	m_curBulletIndex = 0;
+	m_BulletNum = si->GetBulletCount();
+	m_colliders.reserve(m_BulletNum);
+	m_curBulletIndex = -1;
 
 	hash_map<string, void*> bulletTypeInfo;
 	bulletTypeInfo.insert(hash_map<string, void*>::value_type("CrossBullet", CrossBullet::create));
@@ -42,23 +42,6 @@ void ColliderManager::InitBullets(StageInformation* si)
 	
 }
 
-Bullet* ColliderManager::GetBulletToShot(Sling* sling)
-{
-	if (m_curBulletIndex < m_defaultBulletNum)
-	{
-		Bullet* bullet = (Bullet*)m_colliders.at(m_curBulletIndex++);
-		
-		bullet->setPosition(sling->getPosition());
-		bullet->setRotation(sling->GetRotationAngle());
-		bullet->SetDirection(sling->GetDirection());
-		bullet->SetSpeed(sling->GetSpeed());
-		bullet->SetFlying(true);
-
-		return bullet;
-	}
-
-	return nullptr;
-}
 
 void ColliderManager::AddExplosion(Collider* explosion)
 {
@@ -73,17 +56,53 @@ void ColliderManager::ResetBullets()
 	}
 	m_colliders.clear();
 }
-void ColliderManager::EraseCollider(Collider* collider)
+void ColliderManager::EraseDeadColliders()
 {
-	m_colliders.eraseObject(collider);
+	Collider* collider = nullptr;
+	for (int i = 0; i < m_colliders.size(); i++){
+		collider = m_colliders.at(i);
+		if (collider->IsDead()){
+			m_colliders.erase(m_colliders.begin() + i);
+			if (collider->IsBullet())
+				m_BulletNum--;
+		}
+	}
 }
 
-bool ColliderManager::HasBullet()
+
+//반드시 쏠 불렛이 있는지 체크하고 불렛을 가져가야한다.
+bool ColliderManager::HasBulletToShot()
 {
-	if (m_curBulletIndex < m_defaultBulletNum)
-	{
-		return true;
+	Collider* collider = nullptr;
+	for (int i = 0; i < m_BulletNum; i++){
+		collider = m_colliders.at(i);
+		if (collider->IsBullet())
+		{
+			if (dynamic_cast<Bullet*>(collider)->NotShooted()){
+				m_curBulletIndex = i;
+				return true;
+			}
+		}
 	}
+	m_curBulletIndex = -1;
 	return false;
 }
 
+
+Bullet* ColliderManager::GetBulletToShot(Sling* sling)
+{
+	if (m_curBulletIndex != -1)
+	{
+		Bullet* bullet = (Bullet*)m_colliders.at(m_curBulletIndex);
+
+		bullet->setPosition(sling->getPosition());
+		bullet->setRotation(sling->GetRotationAngle());
+		bullet->SetDirection(sling->GetDirection());
+		bullet->SetSpeed(sling->GetSpeed());
+		bullet->SetFlying(true);
+
+		return bullet;
+	}
+
+	return nullptr;
+}

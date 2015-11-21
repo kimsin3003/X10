@@ -14,8 +14,12 @@ public:
 	void SetFlying(bool flag);
 	bool IsBullet() { return false; }
 	void SetPosition(Point pos);
+	bool IsDead() override;
+
 protected:
-	virtual void RemoveSelf(ColliderManager* cm);
+	virtual void RemoveSelf();
+
+
 	ParticleExplosion* m_explosion; ///# 코딩 컨벤션
 	float m_lifeTime;
 	float m_radius;

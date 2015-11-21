@@ -26,11 +26,11 @@ void CrossExplosion::Act(ColliderManager* cm)
 	}
 	else
 	{
-		RemoveSelf(cm);
+		RemoveSelf();
 	}
 }
 
-void CrossExplosion::RemoveSelf(ColliderManager* cm)
+void CrossExplosion::RemoveSelf()
 {
 	SetFlying(false);
 	for (int i = 0; i < lingNum; i++)
@@ -40,7 +40,6 @@ void CrossExplosion::RemoveSelf(ColliderManager* cm)
 	}
 	m_crossLings.clear();
 	removeFromParent();
-	cm->EraseCollider(this);
 }
 
 void CrossExplosion::AddLings()

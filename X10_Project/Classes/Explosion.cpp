@@ -23,6 +23,7 @@ bool Explosion::init()
 	this->addChild(m_explosion);
 	m_isFlying = true;
 	m_lifeTime = 1.0 * Director::getInstance()->getFrameRate();
+	m_toBeErased = false;
 	return true;
 }
 
@@ -53,13 +54,12 @@ void Explosion::RemoveSelf()
 {
 	SetFlying(false);
 	removeFromParent();
+	m_toBeErased = true;
 }
 
-bool Explosion::IsDead()
+bool Explosion::ToBeErased()
 {
-	if (m_lifeTime == 0)
-		return true;
-	return false;
+	return m_toBeErased;
 }
 
 const float& Explosion::GetBoundingRadius()

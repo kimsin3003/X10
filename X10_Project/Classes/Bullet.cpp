@@ -21,6 +21,7 @@ bool Bullet::init()
 	m_isBullet = true;
 	m_isFlying = false;
 	m_shouldExplode = false;
+	m_toBeErased = false;
 
 	//depending on the type of bullet
 	m_lifeTime = 5.0;
@@ -57,12 +58,9 @@ Sprite* Bullet::MakeBody()
 	return body;
 }
 
-bool Bullet::IsDead()
+bool Bullet::ToBeErased()
 {
-	
-	if (m_lifeTime == 0 && !m_shouldExplode)
-		return true;
-	return false;
+	return m_toBeErased;
 }
 
 bool Bullet::NotShooted()
@@ -137,6 +135,7 @@ void Bullet::ReduceSpeed()
 void Bullet::Exploded()
 {
 	m_shouldExplode = false;
+	m_toBeErased = true;
 }
 
 //외부에서 bullet을 강제로 죽일 때 사용.(폭발로 이어짐)

@@ -14,7 +14,7 @@ public:
 	void SetFlying(bool flag);
 	bool IsBullet() { return false; }
 	void SetPosition(Point pos);
-	bool IsDead() override;
+	bool ToBeErased() override;
 
 protected:
 	virtual void RemoveSelf();

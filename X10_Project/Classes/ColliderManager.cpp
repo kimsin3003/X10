@@ -61,7 +61,7 @@ void ColliderManager::EraseDeadColliders()
 	Collider* collider = nullptr;
 	for (int i = 0; i < m_colliders.size(); i++){
 		collider = m_colliders.at(i);
-		if (collider->IsDead()){
+		if (collider->ToBeErased()){
 			m_colliders.erase(m_colliders.begin() + i);
 			if (collider->IsBullet())
 				m_BulletNum--;

@@ -31,7 +31,7 @@ public:
 	void Exploded();
 	void TimeUp();
 	void ReduceSpeed();
-	bool IsDead() override;
+	bool ToBeErased() override;
 	bool NotShooted();
 
 protected:

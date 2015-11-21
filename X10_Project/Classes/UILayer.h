@@ -3,9 +3,11 @@
 class UILayer : public Layer
 {
 public:
-	///# enum...
-	const float PAUSE_BUTTON_WIDTH = 40;
-	const float PAUSE_BUTTON_HEIGHT = 40;
+	
+	enum CONSTANT{
+		PAUSE_BUTTON_WIDTH = 40,
+		PAUSE_BUTTON_HEIGHT = 40
+	};
 
 	CREATE_FUNC(UILayer);
 	static UILayer* createUILayer();

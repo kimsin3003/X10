@@ -33,8 +33,8 @@ bool StageScene::init()
 	setName("StageScene");
 
 	//배경 그림 삽입.
-	//Layer* background = LoadBackground();
-	//this->addChild(background);
+	Sprite* background = LoadBackground();
+	this->addChild(background);
 
 	/*menu List : CCVector*/
 	Vector<MenuItem*> menuList;
@@ -55,9 +55,14 @@ bool StageScene::init()
 
 }
 
-Layer* StageScene::LoadBackground()
+Sprite* StageScene::LoadBackground()
 {
-	return nullptr;
+	auto background = Sprite::create(BGIMG_FILE);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
+	background->setAnchorPoint(Point::ZERO);
+	background->setScale(scale);
+	background->setOpacity(140);
+	return background;
 }
 
 void StageScene::MenuButtonCallback(Ref* pSender)
@@ -110,6 +115,10 @@ MenuItemImage* StageScene::MakeStageButton(int stage, float xPos, float yPos)
 	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2,0.2));
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stage));
 	menuItem->setPosition(xPos, yPos);
-	
+	char str[10];
+	sprintf(str, "Stage %d", stage);
+	Label* stageText = Label::create(str, "Consolas", 10);
+	menuItem->addChild(stageText);
+	stageText->setPosition(Point(0, -10));
 	return menuItem;
 }

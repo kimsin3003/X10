@@ -92,22 +92,22 @@ bool StageInformation::HasNextTarget()
 
 string StageInformation::GetTargetType()
 {//타겟 타입을 받아옴.
-	return m_currentTarget.typeName;
+	return m_currentTarget.m_typeName;
 }
 
 Point StageInformation::GetTargetPosition()
 {
-	return m_currentTarget.position;
+	return m_currentTarget.m_position;
 }
 
 float StageInformation::GetTargetRotation()
 {
-	return m_currentTarget.rotation;
+	return m_currentTarget.m_rotation;
 }
 
 float StageInformation::GetTargetScale()
 {
-	return m_currentTarget.scale;
+	return m_currentTarget.m_scale;
 }
 
 bool StageInformation::HasNextBullet() //더 넘길 불렛이 있는지 검사

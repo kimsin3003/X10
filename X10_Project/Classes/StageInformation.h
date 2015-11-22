@@ -23,15 +23,15 @@ private:
 	struct TargetInfo //정보 묶음용 이너 클래스...struct로 할껄.
 	{
 	public:
-		string typeName;
-		Point position;
-		float rotation;
-		float scale;
+		string m_typeName;
+		Point m_position;
+		float m_rotation;
+		float m_scale;
 
-		TargetInfo() : TargetInfo("", Point::ZERO, 0, 0)
-		{};
-		TargetInfo(string str, Point p, float r, float s) : typeName(str), position(p), rotation(r), scale(s)
-		{};
+		TargetInfo() : TargetInfo("", Point::ZERO, 0, 0) {}
+		TargetInfo(string str, Point p, float r, float s) 
+			: m_typeName(str), m_position(p), m_rotation(r), m_scale(s)
+		{}
 		~TargetInfo(){}
 	};
 

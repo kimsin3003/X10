@@ -5,17 +5,17 @@
 bool CrossExplosion::init()
 {
 	m_radius = 0;
-	m_maxRadius = 25;
+	m_maxRadius = 2.5f;
 
 	m_explosion = ParticleExplosion::create();
 	m_explosion->setEmitterMode(kCCParticleModeGravity);
-	m_explosion->setEmissionRate(250);
-	m_explosion->setDuration(0.75f);
-	m_explosion->setLife(0.40f);
+	m_explosion->setEmissionRate(150);
+	m_explosion->setDuration(0.1f);
+	m_explosion->setLife(0.25f);
 	m_explosion->setSpeed(25);
-	m_explosion->setSpeedVar(1);
-	m_explosion->setEndSize(5);
-	m_explosion->setStartSize(3);
+	m_explosion->setSpeedVar(0);
+	m_explosion->setEndSize(4.0f);
+	m_explosion->setStartSize(4.0f);
 	m_explosion->setPosition(Point::ZERO);
 
 	this->addChild(m_explosion);

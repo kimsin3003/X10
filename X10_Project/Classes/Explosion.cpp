@@ -7,7 +7,7 @@
 bool Explosion::init()
 {
 	m_radius = 0;
-	m_maxRadius = 100;
+	m_maxRadius = 3.0f;
 
 	m_explosion = ParticleExplosion::create();
 	m_explosion->setEmitterMode(kCCParticleModeGravity);

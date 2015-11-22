@@ -22,34 +22,21 @@ void Bubble::ToSelf(const Bullet* bullet)
 	{
 		m_applyEffectToMe = false;
 
-		m_spr->setVisible(false); 
+		m_spr->removeFromParent();
+		m_spr = Sprite::create(FILE_BUBBLE_POP);
+		m_spr->setScale(m_sprScaleRatio);
+		addChild(m_spr);
 
-		Sprite* spr_00 = Sprite::create(FILE_BUBBLE_POP);
-		spr_00->setScale(m_sprScaleRatio);
-		addChild(spr_00);
 		Sequence* action = Sequence::create(
 			DelayTime::create(0.5f),
-			RemoveSelf::create(),
+		//	RemoveSelf::create(),
 			NULL);
-		spr_00->runAction(action);
+
+		m_spr->runAction(action);
 	}
 }
 
 void Bubble::ToSelf(const Explosion* explosion)
 {
-	if (m_applyEffectToMe)
-	{
-		m_applyEffectToMe = false;
-
-		m_spr->setVisible(false); 
-
-		Sprite* spr_00 = Sprite::create(FILE_BUBBLE_POP);
-		spr_00->setScale(m_sprScaleRatio);
-		addChild(spr_00);
-		Sequence* action = Sequence::create(
-			DelayTime::create(0.5f),
-			RemoveSelf::create(),
-			NULL);
-		spr_00->runAction(action);
-	}
+	ToSelf(static_cast<Bullet*>(NULL));
 }

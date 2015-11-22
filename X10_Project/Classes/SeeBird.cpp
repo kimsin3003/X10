@@ -30,6 +30,10 @@ bool SeeBird::init()
 	return true;
 }
 
+//나중에 벡터에서 삭제될 수 있도록 
+//bullet의 toBeErased 값을 조정하는 방향
+//CC_CALLBACK_01 을 활용
+
 void SeeBird::ToBullet(Bullet* bullet)
 {
 	bullet->StopAction();

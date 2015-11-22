@@ -43,11 +43,17 @@ void Cloud::ToSelf(const Bullet* bullet)
 			RemoveSelf::create(),
 			NULL);
 
-		spr_00->runAction(action_00);
-		spr_01->runAction(action_01);
+		Sequence* action_02 = Sequence::create(
+			DelayTime::create(1.25f),
+		//	RemoveSelf::create(),
+			NULL);
 
 		spr_00->setScale(m_sprScaleRatio);
 		spr_01->setScale(m_sprScaleRatio);
+
+		spr_00->runAction(action_00);
+		spr_01->runAction(action_01);
+	//	m_spr->runAction(action_02);
 	}
 }
 
@@ -57,7 +63,7 @@ void Cloud::ToSelf(const Explosion* explosion)
 	{
 		m_applyEffectToMe = false;
 
-		m_spr->setVisible(false); 
+		m_spr->setVisible(false);
 
 		Sprite* spr_00 = Sprite::create(FILE_CLOUD_LEFT);
 		Sprite* spr_01 = Sprite::create(FILE_CLOUD_RIGHT);
@@ -76,11 +82,17 @@ void Cloud::ToSelf(const Explosion* explosion)
 			RemoveSelf::create(),
 			NULL);
 
-		spr_00->runAction(action_00);
-		spr_01->runAction(action_01);
+		Sequence* action_02 = Sequence::create(
+			DelayTime::create(1.25f),
+		//	RemoveSelf::create(),
+			NULL);
 
 		spr_00->setScale(m_sprScaleRatio);
 		spr_01->setScale(m_sprScaleRatio);
+
+		spr_00->runAction(action_00);
+		spr_01->runAction(action_01);
+	//	m_spr->runAction(action_02);
 	}
 }
 

@@ -13,7 +13,6 @@ bool Enemy::init()
 void Enemy::ToBullet(Bullet* bullet)
 {
 	bullet->Crashed(); 
-	bullet->removeFromParent();
 }
 
 void Enemy::ToSelf(const Bullet* bullet)

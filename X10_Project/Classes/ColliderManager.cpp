@@ -21,9 +21,6 @@ void ColliderManager::InitBullets(StageInformation* si)
 
 	hash_map<string, void*> bulletTypeInfo;
 	bulletTypeInfo.insert(hash_map<string, void*>::value_type("CrossBullet", CrossBullet::create));
-	bulletTypeInfo.insert(hash_map<string, void*>::value_type("CrossBullet", CrossBullet::create));
-	bulletTypeInfo.insert(hash_map<string, void*>::value_type("CrossBullet", CrossBullet::create));
-	bulletTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
 	bulletTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
 	
 	while (si->HasNextBullet())
@@ -42,7 +39,6 @@ void ColliderManager::InitBullets(StageInformation* si)
 	
 }
 
-
 void ColliderManager::AddExplosion(Collider* explosion)
 {
 	m_colliders.pushBack(explosion);
@@ -56,19 +52,24 @@ void ColliderManager::ResetBullets()
 	}
 	m_colliders.clear();
 }
+
 void ColliderManager::EraseDeadColliders()
 {
 	Collider* collider = nullptr;
-	for (int i = 0; i < m_colliders.size(); i++){
+	for (int i = 0; i < m_colliders.size(); i++)
+	{
 		collider = m_colliders.at(i);
-		if (collider->ToBeErased()){
+		if (collider->ToBeErased())
+		{
 			m_colliders.erase(m_colliders.begin() + i);
 			if (collider->IsBullet())
+			{
+				m_curBulletIndex--;
 				m_BulletNum--;
+			}
 		}
 	}
 }
-
 
 //반드시 쏠 불렛이 있는지 체크하고 불렛을 가져가야한다.
 bool ColliderManager::HasBulletToShot()
@@ -78,7 +79,8 @@ bool ColliderManager::HasBulletToShot()
 		collider = m_colliders.at(i);
 		if (collider->IsBullet())
 		{
-			if (dynamic_cast<Bullet*>(collider)->NotShooted()){
+			if (dynamic_cast<Bullet*>(collider)->NotShooted())
+			{
 				m_curBulletIndex = i;
 				return true;
 			}
@@ -87,7 +89,6 @@ bool ColliderManager::HasBulletToShot()
 	m_curBulletIndex = -1;
 	return false;
 }
-
 
 Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 {

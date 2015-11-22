@@ -12,4 +12,5 @@ public:
 
 private:
 	float m_timeToExplode;
+	float m_crossPosDelta;
 };

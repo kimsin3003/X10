@@ -8,6 +8,8 @@ bool CrossBullet::init()
 {
 	Bullet::init();
 
+	m_timeToExplode = 10;
+
 	return true;
 }
 

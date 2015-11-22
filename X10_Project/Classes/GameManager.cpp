@@ -7,6 +7,7 @@
 #include "TargetManager.h"
 #include "Collider.h"
 #include "Bullet.h"
+#include "CrossBullet.h"
 #include "Target.h"
 #include "Sling.h"
 #include "Mirror.h"
@@ -117,32 +118,27 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	for (Collider* collider : colliders)
 	{
-		//1. 날고 있는 'collider'는 
 		if (collider->IsFlying())
 		{
-			//'Act()'를 시키고
 			collider->Act();
-			//그 'collider'가 타깃들과 충돌하는지 체크한다. 
 			CheckCollide(collider, targets);
 		}
 
-		//2. 'collider'가 bullet이고
 		if (collider->IsBullet())
 		{
-			//폭발해야하면
 			if (((Bullet*)collider)->ShouldExplode())
 			{
-				//폭발을 생성하여 벡터에 넣고 레이어에 붙여준다
 				Explosion* explosion = (static_cast<Bullet*>(collider))->GetExplosion();
 				m_colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
 			}
 		}
 	}
+
 	m_colliderManager->EraseDeadColliders();
 }
 
-void GameManager::CheckCollide(Collider* bullet, const Vector<Target*>& targets)
+void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 {
 
 	static Target* m_lastTarget = nullptr;

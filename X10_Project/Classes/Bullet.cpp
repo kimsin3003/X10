@@ -125,13 +125,12 @@ void Bullet::DecreaseLife()
 
 void Bullet::ReduceSpeed()
 {
-	m_speed = m_speed * m_speedDecreaseRatio;
+	m_speed *= m_speedDecreaseRatio;
 }
 
 void Bullet::Crashed()
 {
 	m_lifeTime = -1;
-	Explode();
 }
 
 void Bullet::TimeUp()

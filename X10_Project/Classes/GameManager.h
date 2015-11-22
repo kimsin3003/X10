@@ -25,7 +25,7 @@ public:
 private:
 	GameManager();
 	~GameManager();
-	void CheckCollide(Collider* bullet, const Vector<Target*>& targets);
+	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
 
 private:
 	static GameManager* m_instance;

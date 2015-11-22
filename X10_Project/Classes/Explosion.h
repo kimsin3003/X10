@@ -7,7 +7,7 @@ class Explosion : public Collider
 public:
 	CREATE_FUNC(Explosion);
 	virtual bool init();
-	virtual void Act();
+	void Act();
 	const float& GetBoundingRadius();
 	void SetPosition(Point pos);
 	bool IsBullet() { return false; }

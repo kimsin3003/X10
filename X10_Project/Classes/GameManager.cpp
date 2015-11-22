@@ -108,9 +108,10 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 		if (collider->IsBullet())
 		{
-			if (((Bullet*)collider)->ShouldExplode())
+			Bullet* bullet = dynamic_cast<Bullet*>(collider);
+			if ( bullet && bullet->ShouldExplode())
 			{
-				Explosion* explosion = (static_cast<Bullet*>(collider))->GetExplosion();
+				Explosion* explosion = bullet->GetExplosion();
 				m_colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
 			}

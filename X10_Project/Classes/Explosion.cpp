@@ -23,6 +23,7 @@ bool Explosion::init()
 	this->addChild(m_explosion);
 	m_isFlying = true;
 	m_lifeTime = 1.0 * Director::getInstance()->getFrameRate();
+	m_toBeErased = false;
 	return true;
 }
 
@@ -34,7 +35,7 @@ void Explosion::Act(ColliderManager* cm)
 	}
 	else
 	{
-		RemoveSelf(cm);
+		RemoveSelf();
 	}
 }
 
@@ -49,11 +50,16 @@ void Explosion::SetPosition(Point pos)
 	m_explosion->setPosition(Point::ZERO);
 }
 
-void Explosion::RemoveSelf(ColliderManager* cm)
+void Explosion::RemoveSelf()
 {
 	SetFlying(false);
 	removeFromParent();
-	cm->EraseCollider(this);
+	m_toBeErased = true;
+}
+
+bool Explosion::ToBeErased()
+{
+	return m_toBeErased;
 }
 
 const float& Explosion::GetBoundingRadius()

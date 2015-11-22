@@ -37,12 +37,6 @@ GameManager::~GameManager()
 
 }
 
-void GameManager::Reset()
-{
-	delete m_instance;
-	m_instance = nullptr;
-}
-
 void GameManager::SetStage(GameLayer* gameLayer, int StageNumber)
 {	
 	if (m_stage != nullptr)
@@ -71,7 +65,7 @@ Sling* GameManager::SetSling(GameLayer* gameLayer)
 	gameLayer->addChild(sling);
 
 	//총알이 있으면
-	if (m_colliderManager->HasBullet())
+	if (m_colliderManager->HasBulletToShot())
 	{
 		//슬링에게 총알을 장전하라고 알린다.
 		sling->LoadBullet();
@@ -106,7 +100,7 @@ void GameManager::ShotBullet(Sling* sling)
 		sling->ShotComplete();
 		
 		//총알이 있으면
-		if (m_colliderManager->HasBullet())
+		if (m_colliderManager->HasBulletToShot())
 		{
 			//슬링에게 총알을 장전하라고 알린다.
 			sling->LoadBullet();
@@ -145,37 +139,43 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			}
 		}
 	}
+	m_colliderManager->EraseDeadColliders();
 }
 
-void GameManager::CheckCollide(Collider* collider, Vector<Target*> targets)
+void GameManager::CheckCollide(Collider* bullet, const Vector<Target*>& targets)
 {
-	static Target* lastTarget = nullptr;
-	for (Target*& target : targets)
+
+	static Target* m_lastTarget = nullptr;
+	for (Target* target : targets)
 	{
-		if (target == lastTarget)
+		if (target == m_lastTarget)
 			continue;
 
-		if (collider->IsBullet())
+		if (bullet->IsBullet())
 		{
-			const Rect colliderBoundingBox = (static_cast<Bullet*>(collider))->GetBoundingArea();
+			const Rect colliderBoundingBox = (static_cast<Bullet*>(bullet))->GetBoundingArea();
 			const Rect targetBoundingBox = target->GetBoundingArea();
 
 			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 			{
-				lastTarget = target;
-				target->ApplyCollisionEffect(collider);
+				m_lastTarget = target;
+				target->ApplyCollisionEffect(bullet);
+			}
+			else{
+				if (m_lastTarget == target)
+					m_lastTarget = nullptr;
 			}
 		}
 		else
 		{
-			const float explosionRadius = (static_cast<Explosion*>(collider))->GetBoundingRadius();
-			const Vec2 explosionPosition = (static_cast<Explosion*>(collider))->getPosition();
+			const float explosionRadius = (static_cast<Explosion*>(bullet))->GetBoundingRadius();
+			const Vec2 explosionPosition = (static_cast<Explosion*>(bullet))->getPosition();
 			const Rect targetBoundingBox = target->GetBoundingArea();
 
 			if (targetBoundingBox.intersectsCircle(explosionPosition, explosionRadius))
 			{
-				lastTarget = target;
-				target->ApplyCollisionEffect(collider);
+				m_lastTarget = target;
+				target->ApplyCollisionEffect(bullet);
 			}
 		}
 	}

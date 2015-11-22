@@ -6,6 +6,7 @@
 #include "GameScene.h"
 #include "Sling.h"
 #include "GameManager.h"
+#include "StageScene.h"
 
 Scene* MainScene::createScene()
 {
@@ -28,11 +29,19 @@ bool MainScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	/*Game start Button*/
+	/*Game start Button
+	* 이건 최근 플레이 했던 탄이나, 최고 높은 탄으로 세팅되게 해놓는게 낫지 않을까?
+	* 삭제 할라고 보니까 그게 날것 같어..
+	*/
 	auto startGame = MenuItemFont::create("START", CC_CALLBACK_1(MainScene::ChangeToGameScene, this));
 	//set position center
 	startGame->setPosition(	visibleSize.width / 2, 	visibleSize.height / 2);
 
+	/*Stage Select Button*/
+	auto stageSelect = MenuItemFont::create("Stage Select", CC_CALLBACK_1(MainScene::ChangeToStageScene, this));
+	stageSelect->setScale(0.7);
+	//set position center
+	stageSelect->setPosition(visibleSize.width / 2, visibleSize.height / 2 - startGame->getContentSize().height);
 
 	/* End Button */
 	auto closeItem = MenuItemImage::create(
@@ -62,25 +71,26 @@ bool MainScene::init()
 	jwScene->setPosition(Point(110, 10));
 
 	/*Create Menu*/
-	auto menu = Menu::create(startGame, closeItem, twScene, PaulItem, jwScene, NULL);
+	auto menu = Menu::create(startGame, stageSelect, closeItem, twScene, PaulItem, jwScene, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
 	return true;
 }
 
+void MainScene::ChangeToGameScene(Ref* pSender)
+{
+	StageScene::GotoStage(pSender, 0);
+}
+
+void MainScene::ChangeToStageScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(StageScene::CreateScene());
+}
+
 void MainScene::ChangeToMCScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MCScene::createScene());
-	return;
-}
-
-void MainScene::ChangeToGameScene(Ref* pSender)
-{
-	GameManager::GetInstance()->Reset();
-
-	Director::getInstance()->replaceScene(GameScene::createScene());
-	return;
 }
 
 void MainScene::GoToTW(Ref* pSender)

@@ -21,13 +21,12 @@ void CrossExplosion::Act(ColliderManager* cm)
 	}
 	else
 	{
-		RemoveSelf(cm);
+		RemoveSelf();
 	}
 }
 
-void CrossExplosion::RemoveSelf(ColliderManager* cm)
+void CrossExplosion::RemoveSelf()
 {
 	SetFlying(false);
 	removeFromParent();
-	cm->EraseCollider(this);
 }

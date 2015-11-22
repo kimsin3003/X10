@@ -21,6 +21,7 @@ bool Bullet::init()
 	m_isBullet = true;
 	m_isFlying = false;
 	m_shouldExplode = false;
+	m_toBeErased = false;
 
 	//depending on the type of bullet
 	m_lifeTime = 5.0;
@@ -55,6 +56,23 @@ Sprite* Bullet::MakeBody()
 	body->runAction(aniAction);
 	body->setScale(BULLET_RATIO);
 	return body;
+}
+
+bool Bullet::ToBeErased()
+{
+	return m_toBeErased;
+}
+
+bool Bullet::NotShooted()
+{
+	CCLOG("m_lifeTime: %d", m_lifeTime);
+	if (m_shouldExplode)
+		CCLOG("ex: true");
+	else
+		CCLOG("ex: false");
+	if (m_lifeTime > 0 && !m_isFlying)
+		return true;
+	return false;
 }
 
 void Bullet::Act(ColliderManager* cm)
@@ -118,6 +136,7 @@ void Bullet::ReduceSpeed()
 void Bullet::Exploded()
 {
 	m_shouldExplode = false;
+	m_toBeErased = true;
 }
 
 void Bullet::Crashed()

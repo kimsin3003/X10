@@ -13,7 +13,6 @@ class GameManager
 {
 public:
 	static GameManager* GetInstance();
-	static void Reset();
 
 	void Play(GameLayer* gameLayer, UILayer* uiLayer);
 	
@@ -26,8 +25,7 @@ public:
 private:
 	GameManager();
 	~GameManager();
-	void CheckCollide(Collider* bullet, Vector<Target*> targets);
-	//# 복사로 벡터를 통째로 넘기지 마라.. const &로 넘길 것..
+	void CheckCollide(Collider* bullet, const Vector<Target*>& targets);
 
 private:
 	static GameManager* m_instance;

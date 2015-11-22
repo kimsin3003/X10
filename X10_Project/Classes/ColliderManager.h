@@ -15,12 +15,12 @@ public:
 	Bullet* GetBulletToShot(Sling* sling);
 	Vector<Collider*>& GetColliders(){ return m_colliders; }
 
-	bool HasBullet();
+	bool HasBulletToShot();
 	void AddExplosion(Collider* explosion);
-	void EraseCollider(Collider* collider); 
+	void EraseDeadColliders(); 
 
 private:
 	Vector<Collider*> m_colliders;
 	int m_curBulletIndex;
-	int m_defaultBulletNum;
+	int m_BulletNum;
 };

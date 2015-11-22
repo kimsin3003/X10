@@ -14,6 +14,7 @@ Scene* GameScene::createScene()
 	auto scene = Scene::create();
 
 	auto layer = GameScene::create();
+	layer->setName("GameScene");
 	scene->addChild(layer);
 	
 	return scene;
@@ -25,8 +26,7 @@ bool GameScene::init()
 	{
 		return false;
 	}
-	setName("GameScene");
-
+	
 	//배경 그림 삽입.
 	auto background = loadBackground();
 	this->addChild(background);
@@ -36,11 +36,6 @@ bool GameScene::init()
 	uiLayer = UILayer::create();
 	this->addChild(gameLayer);
 	this->addChild(uiLayer);
-	
-
-	/*stage Information 불러오는 부분.*/
-	int stageNum = 0; //임시 스테이지 번호.
-	GameManager::GetInstance()->SetStage(gameLayer, stageNum);
 	
 	this->scheduleUpdate();
 

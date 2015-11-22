@@ -73,6 +73,9 @@
     <ClCompile Include="..\Classes\CrossBullet.cpp">
       <Filter>GameObject\Bullets</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\StageScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -146,6 +149,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\CrossBullet.h">
       <Filter>GameObject\Bullets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

@@ -1,6 +1,5 @@
 #pragma once
 
-
 class Collider;
 class Bullet;
 class Explosion;
@@ -10,7 +9,6 @@ class Target : public Node
 {
 public:
 	virtual bool init();
-
 	void ApplyCollisionEffect(Collider* collider); 
 	const Rect& GetBoundingArea();
 	void SetSprScaleRatio(float ratio) { m_sprScaleRatio = ratio; }

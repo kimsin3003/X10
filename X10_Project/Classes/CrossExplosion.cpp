@@ -16,6 +16,7 @@ bool CrossExplosion::init()
 	m_explosion->setSpeedVar(1);
 	m_explosion->setEndSize(5);
 	m_explosion->setStartSize(3);
+	m_explosion->setPosition(Point::ZERO);
 
 	this->addChild(m_explosion);
 

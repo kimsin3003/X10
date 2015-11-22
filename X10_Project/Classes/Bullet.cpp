@@ -22,7 +22,7 @@ bool Bullet::init()
 	m_toBeErased = false;
 
 	m_lifeTime = 5.0;
-	m_timeDecrease = 1.0 / director->getFrameRate();
+	m_lifeDecrease = 1.0 / director->getFrameRate();
 	m_speedSetRatio = 0.01f;
 	m_speedDecreaseRatio = 1 - (10/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
 
@@ -111,7 +111,7 @@ void Bullet::Move()
 Explosion* Bullet::GetExplosion()
 {
 	Explosion* explosion = Explosion::create();
-	explosion->SetPosition(getPosition());
+	explosion->setPosition(getPosition());
 	explosion->setRotation(getRotation());
 	Exploded();
 	return explosion;
@@ -119,7 +119,7 @@ Explosion* Bullet::GetExplosion()
 
 void Bullet::DecreaseLife()
 {
-	m_lifeTime -= m_timeDecrease;
+	m_lifeTime -= m_lifeDecrease;
 }
 
 void Bullet::ReduceSpeed()

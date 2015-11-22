@@ -37,7 +37,7 @@ protected:
 	Vec2 m_direction;
 	float m_speed;
 	float m_lifeTime;
-	float m_timeDecrease;
+	float m_lifeDecrease;
 	float m_speedSetRatio;
 	float m_speedDecreaseRatio;
 
@@ -47,7 +47,7 @@ protected:
 
 	Size m_screen;
 
-	enum
+	enum BULLET_CONFIG
 	{
 		BULLET_FRAMES = 5,
 		BULLET_WIDTH = 10,

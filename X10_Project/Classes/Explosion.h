@@ -9,7 +9,6 @@ public:
 	virtual bool init();
 	void Act();
 	const float& GetBoundingRadius();
-	void SetPosition(const Point& pos);
 	bool IsBullet() { return false; }
 
 protected:

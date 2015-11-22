@@ -18,7 +18,7 @@ bool Explosion::init()
 	m_explosion->setSpeedVar(0);
 	m_explosion->setEndSize(10);
 	m_explosion->setStartSize(10);
-	
+	m_explosion->setPosition(Point::ZERO);
 	this->addChild(m_explosion);
 	
 	m_lifeTime = 1.0 * Director::getInstance()->getFrameRate();
@@ -38,12 +38,6 @@ void Explosion::Act()
 	{
 		RemoveSelf();
 	}
-}
-
-void Explosion::SetPosition(const Point& pos)
-{
-	setPosition(pos);
-	m_explosion->setPosition(Point::ZERO);
 }
 
 void Explosion::RemoveSelf()

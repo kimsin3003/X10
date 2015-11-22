@@ -16,26 +16,28 @@ bool CrossBullet::init()
 	m_shouldExplode = false;
 	m_toBeErased = false;
 
-	m_lifeTime = 1.75f;
-	m_timeDecrease = 1.0f / director->getFrameRate();
+	m_lifeTime = 1.0f;
+	m_lifeDecrease = 1.0f / director->getFrameRate();
 	m_speedSetRatio = 0.01f;
 	m_speedDecreaseRatio = 1 - (10 / BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
 
 	m_body = MakeBody();
 	addChild(m_body);
 
-	m_pattern = CENTER;
-
+	m_pattern = MOVE;
+	tmp_BULLET_REDUCTIONSPEEDTIME = m_lifeTime / 10;
 	return true;
 }
 
 void CrossBullet::Act()
 {
 	DecreaseLife();
-	if (m_lifeTime > BULLET_EXPLODETIME && m_pattern == CENTER)
+	if (m_lifeTime > BULLET_EXPLODETIME)
 	{
-		Move();
-		if (m_lifeTime < BULLET_REDUCTIONSPEEDTIME)
+		if (m_pattern == MOVE)
+			Move();
+		
+		if (m_lifeTime < tmp_BULLET_REDUCTIONSPEEDTIME)
 		{
 			ReduceSpeed();
 		}
@@ -44,6 +46,8 @@ void CrossBullet::Act()
 	{
 		switch (m_pattern)
 		{
+		case MOVE: 
+			m_pattern = CENTER;
 		case CENTER:
 			Explode();
 			m_lifeTime += DELTA_TIME;
@@ -60,31 +64,34 @@ void CrossBullet::Act()
 Explosion* CrossBullet::GetExplosion()
 {
 	Explosion* explosion = CrossExplosion::create();
+
+	explosion->setRotation(getRotation());
+
 	switch (m_pattern)
 	{
 	case CENTER:
-		explosion->SetPosition(getPosition());
+		explosion->setPosition(getPosition());
 		m_pattern = CROSS_DOWN;
 		break;
 	case CROSS_DOWN:
-		explosion->SetPosition(getPosition() + Point(0, -DELTA_POS));
+		explosion->setPosition(getPosition() + Point(0, -DELTA_POS));
 		m_pattern = CROSS_UP;
 		break;
 	case CROSS_UP:
-		explosion->SetPosition(getPosition() + Point(0, DELTA_POS));
+		explosion->setPosition(getPosition() + Point(0, DELTA_POS));
 		m_pattern = CROSS_LEFT;
 		break;
 	case CROSS_LEFT:
-		explosion->SetPosition(getPosition() + Point(-DELTA_POS, 0));
+		explosion->setPosition(getPosition() + Point(-DELTA_POS, 0));
 		m_pattern = CROSS_RIGHT;
 		break;
 	case CROSS_RIGHT:
-		explosion->SetPosition(getPosition() + Point(DELTA_POS, 0));
+		explosion->setPosition(getPosition() + Point(DELTA_POS, 0));
 		m_pattern = DIE;
 		break;
 	}
 
-	explosion->setRotation(getRotation());
 	Exploded();
+
 	return explosion;
 }

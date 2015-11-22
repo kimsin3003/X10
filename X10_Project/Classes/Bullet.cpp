@@ -20,7 +20,7 @@ bool Bullet::init()
 	m_isFlying = false;
 	m_shouldExplode = false;
 	m_toBeErased = false;
-
+	m_stopAction = false;
 	m_lifeTime = 5.0;
 	m_lifeDecrease = 1.0 / director->getFrameRate();
 	m_speedSetRatio = 0.01f;
@@ -72,6 +72,11 @@ bool Bullet::NotShooted()
 
 void Bullet::Act()
 {
+	if (m_stopAction)
+	{
+		return;
+	}
+
 	if (m_lifeTime > BULLET_EXPLODETIME)
 	{
 		Move();

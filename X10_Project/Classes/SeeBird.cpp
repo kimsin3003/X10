@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "Target.h"
+#include "Bullet.h"
 #include "SeeBird.h"
 
 bool SeeBird::init()
@@ -31,7 +32,14 @@ bool SeeBird::init()
 
 void SeeBird::ToBullet(Bullet* bullet)
 {
+	bullet->StopAction();
+	bullet->setPosition(getPosition());
+	Sequence* act = Sequence::create(
+					DelayTime::create(0.5f),
+						MoveBy::create(1.0f, Point(-(Director::getInstance()->getWinSize().width), 0)),
+							NULL);
 
+	bullet->runAction(act);
 }
 
 void SeeBird::ToSelf(const Bullet* bullet) 

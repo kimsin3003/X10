@@ -21,13 +21,14 @@ public:
 	
 	bool IsBullet() { return true; }
 	bool ShouldExplode() { return m_shouldExplode; }
+	bool NotShooted();
 
 	void Crashed();
 	void Explode() { m_shouldExplode = true; }
 	void Exploded() { m_shouldExplode = false; }
 	void TimeUp();
 	void ReduceSpeed();
-	bool NotShooted();
+	void StopAction() { m_stopAction = true; }
 
 protected:
 	void DecreaseLife();
@@ -42,7 +43,7 @@ protected:
 	float m_speedDecreaseRatio;
 
 	bool m_shouldExplode;
-	bool m_stopActions;
+	bool m_stopAction;
 	const char* FILE_NAME= "res/firework.png";
 
 	Size m_screen;

@@ -15,6 +15,7 @@ bool CrossBullet::init()
 	m_isFlying = false;
 	m_shouldExplode = false;
 	m_toBeErased = false;
+	m_stopAction = false;
 
 	m_lifeTime = 1.0f;
 	m_lifeDecrease = 1.0f / director->getFrameRate();
@@ -31,6 +32,11 @@ bool CrossBullet::init()
 
 void CrossBullet::Act()
 {
+	if (m_stopAction)
+	{
+		return;
+	}
+
 	DecreaseLife();
 	if (m_lifeTime > BULLET_EXPLODETIME)
 	{

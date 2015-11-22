@@ -8,7 +8,7 @@ public:
 	bool init() override;
 
 protected:
-	void ToBullet(Bullet* collider) override;
+	void ToBullet(Bullet* bullet) override;
 	void ToSelf(const Bullet* bullet) override;
 	void ToSelf(const Explosion* explosion) override;
 

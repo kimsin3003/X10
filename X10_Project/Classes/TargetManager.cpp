@@ -6,6 +6,8 @@
 #include "Cloud.h"
 #include "Bubble.h"
 #include "Star.h"
+#include "SeeBird.h"
+
 //Stage Information
 #include "StageInformation.h"
 #include <hash_map>
@@ -25,6 +27,7 @@ void TargetManager::InitTargets(StageInformation* si)
 	targetTypeInfo.insert(hash_map<string, void*>::value_type("Cloud", Cloud::create));
 	targetTypeInfo.insert(hash_map<string, void*>::value_type("Bubble", Bubble::create));
 	targetTypeInfo.insert(hash_map<string, void*>::value_type("Star", Star::create));
+	targetTypeInfo.insert(hash_map<string, void*>::value_type("SeeBird", SeeBird::create));
 
 	while (si->HasNextTarget())
 	{

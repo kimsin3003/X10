@@ -11,7 +11,7 @@ bool Bubble::init()
 	return true;
 }
 
-void Bubble::ToBullet(Bullet* collider)
+void Bubble::ToBullet(Bullet* bullet)
 {
 
 }

@@ -3,7 +3,8 @@
 
 StageInformation::StageInformation(int stage)
 {
-	//0탄 임시 페이지
+	Size winSize = Director::getInstance()->getWinSize();
+
 	if (stage == 0)
 	{
 		m_currentTargetIndex =0;
@@ -24,6 +25,23 @@ StageInformation::StageInformation(int stage)
 		m_targetInfoList.push_back(info);
 
 		info = TargetInfo("Star", Point(100, 250), 0, 0.5f);
+		m_targetInfoList.push_back(info);
+
+		//SeeBirds for tests
+		Point seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
+		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		m_targetInfoList.push_back(info);
+
+		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
+		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		m_targetInfoList.push_back(info);
+
+		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
+		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		m_targetInfoList.push_back(info);
+
+		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
+		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
 		m_targetInfoList.push_back(info);
 
 		//CrossBullet 3개 Bullet 2개

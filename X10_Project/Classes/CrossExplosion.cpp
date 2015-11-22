@@ -11,7 +11,7 @@ bool CrossExplosion::init()
 	m_explosion->setEmitterMode(kCCParticleModeGravity);
 	m_explosion->setEmissionRate(150);
 	m_explosion->setDuration(0.1f);
-	m_explosion->setLife(0.25f);
+	m_explosion->setLife(1.0f);
 	m_explosion->setSpeed(25);
 	m_explosion->setSpeedVar(0);
 	m_explosion->setEndSize(4.0f);

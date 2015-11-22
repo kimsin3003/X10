@@ -23,7 +23,6 @@ void Target::ApplyCollisionEffect(Collider* collider)
 	}
 	else
 	{
-		ToExplosion(static_cast<Explosion*>(collider));
 		ToSelf(static_cast<Explosion*>(collider));
 	}
 }

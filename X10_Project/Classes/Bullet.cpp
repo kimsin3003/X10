@@ -129,7 +129,7 @@ void Bullet::ReduceSpeed()
 
 void Bullet::Crashed()
 {
-	m_lifeTime = -1;
+	m_lifeTime = BULLET_EXPLODETIME;
 }
 
 void Bullet::TimeUp()

@@ -16,11 +16,6 @@ void SeeBird::ToBullet(Bullet* collider)
 
 }
 
-void SeeBird::ToExplosion(Explosion* explosion)
-{
-
-}
-
 void SeeBird::ToSelf(const Bullet* bullet)
 {
 

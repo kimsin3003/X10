@@ -9,7 +9,6 @@ public:
 
 protected:
 	void ToBullet(Bullet* collider) override;
-	void ToExplosion(Explosion* explosion) override;
 	void ToSelf(const Bullet* bullet) override;
 	void ToSelf(const Explosion* explosion) override;
 

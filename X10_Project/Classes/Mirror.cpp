@@ -19,11 +19,6 @@ void Mirror::ToBullet(Bullet* bullet)
 	bullet->SetDirection(reflect);
 }
 
-void Mirror::ToExplosion(Explosion* explosion)
-{
-
-}
-
 void Mirror::ToSelf(const Bullet* bullet)
 {
 	m_spr->removeFromParent();

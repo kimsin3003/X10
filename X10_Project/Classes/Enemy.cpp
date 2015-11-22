@@ -16,11 +16,6 @@ void Enemy::ToBullet(Bullet* bullet)
 	bullet->removeFromParent();
 }
 
-void Enemy::ToExplosion(Explosion* explosion)
-{
-
-}
-
 void Enemy::ToSelf(const Bullet* bullet)
 {
 	m_spr->removeFromParent();

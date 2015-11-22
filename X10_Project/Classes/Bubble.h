@@ -8,7 +8,6 @@ public:
 
 protected:
 	void ToBullet(Bullet* collider);
-	void ToExplosion(Explosion* explosion);
 	void ToSelf(const Bullet* bullet);
 	void ToSelf(const Explosion* explosion);
 

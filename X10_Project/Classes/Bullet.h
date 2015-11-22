@@ -42,7 +42,7 @@ protected:
 	float m_speedDecreaseRatio;
 
 	bool m_shouldExplode;
-
+	bool m_stopActions;
 	const char* FILE_NAME= "res/firework.png";
 
 	Size m_screen;

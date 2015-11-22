@@ -11,12 +11,17 @@ public:
 	Explosion* GetExplosion();
 
 private:
-	int m_explosion_pattern;
+	int m_pattern;
+	int m_crossDir;
 	enum 
 	{
-		DELTA_POS = 15,
-		DELTA_TIME = 60,
 		CENTER, 
-		CROSS
+		CROSS_LEFT,
+		CROSS_RIGHT,
+		CROSS_UP,
+		CROSS_DOWN,
+		DIE,
+		DELTA_POS = 15,
+		DELTA_TIME = 60
 	};
 };

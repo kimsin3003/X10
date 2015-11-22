@@ -43,32 +43,17 @@ void GameManager::SetStage(GameLayer* gameLayer, int StageNumber)
 	}
 
 	m_stage = new StageInformation(StageNumber);
-	
-	//해당 스테이지의 타깃 정보를 벡터에 저장
 	m_targetManager->InitTargets(m_stage);
-	//레이어에 붙여준다
 	AppendTargetsToLayer(gameLayer);
-	
-	//불렛 세팅
 	m_colliderManager->InitBullets(m_stage);
-
-	//슬링 세팅
 	m_sling = SetSling(gameLayer);
 }
 
 Sling* GameManager::SetSling(GameLayer* gameLayer)
 {
-
 	Sling* sling = Sling::create();
 	gameLayer->addChild(sling);
-
-	//총알이 있으면
-	if (m_colliderManager->HasBulletToShot())
-	{
-		//슬링에게 총알을 장전하라고 알린다.
-		sling->LoadBullet();
-	}
-
+	sling->LoadBullet();
 	return sling;
 }
 
@@ -80,7 +65,6 @@ void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 	{
 		gameLayer->addChild(target);
 	}
-
 }
 
 void GameManager::ShotBullet(Sling* sling)
@@ -105,7 +89,6 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	//벡터를 통째로 복사해서 임시 변수에 담지 말것. 성능 저하의 원인
 	Vector<Collider*> colliders = m_colliderManager->GetColliders();
 	Vector<Target*> targets = m_targetManager->GetTargets(); 
-
 
 	for (Collider* collider : colliders)
 	{

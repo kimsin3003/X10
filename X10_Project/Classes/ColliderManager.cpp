@@ -59,14 +59,9 @@ void ColliderManager::EraseDeadColliders()
 	for (int i = 0; i < m_colliders.size(); i++)
 	{
 		collider = m_colliders.at(i);
-		if (collider->ToBeErased())
+		if (!collider->IsBullet() && collider->ToBeErased())
 		{
 			m_colliders.erase(m_colliders.begin() + i);
-			if (collider->IsBullet())
-			{
-				m_curBulletIndex--;
-				m_BulletNum--;
-			}
 		}
 	}
 }

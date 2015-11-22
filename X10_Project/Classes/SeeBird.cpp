@@ -42,11 +42,15 @@ void SeeBird::ToBullet(Bullet* bullet)
 	{
 		m_applyEffectToBullet = false;
 
+		Size winSize = Director::getInstance()->getWinSize();
+
 		bullet->StopAction();
+		bullet->StopFlying();
+
 		bullet->setPosition(getPosition());
 		Sequence* act = Sequence::create(
 			DelayTime::create(0.5f),
-			MoveBy::create(1.0f, Point(-(Director::getInstance()->getWinSize().width), 0)),
+			MoveBy::create(1.0f, Point(-winSize.width - 10, 0)),
 			NULL);
 
 		bullet->runAction(act);
@@ -65,22 +69,23 @@ void SeeBird::ToSelf(const Bullet* bullet)
 
 		Sequence* act = Sequence::create(
 			DelayTime::create(0.5f),
-			MoveTo::create(1.0f, Point(-BIRD_WIDTH, getPosition().y)),
+			MoveBy::create(1.0f, Point(-winSize.width - 10, 0)),
 			NULL);
 
-		runAction(act);
+		m_spr->runAction(act);
 
 		Sequence* act_00 = Sequence::create(
-			DelayTime::create(1.65f),
-			MoveBy::create(2.0f, Point(winSize.width / 3, -getPosition().y)),
+			DelayTime::create(2.00f),
+			MoveBy::create(2.0f, Point(winSize.width / 2 + 100, -(getPosition().y))),
+			DelayTime::create(2.5f),
+			RemoveSelf::create(),
 			NULL);
 
 		m_feather = Sprite::create(FILE_FEATHER);
 		addChild(m_feather);
 
-		m_feather->setPosition(0, getPosition().y);
+		m_feather->setPosition(-(getPosition().x+50), 0);
 		m_feather->runAction(act_00);
-		
 	}
 }
 
@@ -89,6 +94,7 @@ void SeeBird::ToSelf(const Explosion* explosion)
 	if (m_applyEffectToMe)
 	{
 		m_applyEffectToMe = false;
+		m_applyEffectToBullet = false;
 		removeFromParent();
 		m_toBeErased = true;
 	}

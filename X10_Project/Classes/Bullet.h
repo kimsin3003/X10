@@ -29,6 +29,7 @@ public:
 	void TimeUp();
 	void ReduceSpeed();
 	void StopAction() { m_stopAction = true; }
+	void StopFlying() { m_isFlying = false; }
 
 protected:
 	void DecreaseLife();

@@ -1,18 +1,22 @@
 #include "stdafx.h"
+#include "GameManager.h"
+//레이어
 #include "GameLayer.h"
 #include "UILayer.h"
-#include "GameManager.h"
+//스테이지
 #include "StageInformation.h"
+//매니저
 #include "ColliderManager.h"
 #include "TargetManager.h"
+//컬라이더
 #include "Collider.h"
 #include "Bullet.h"
 #include "CrossBullet.h"
-#include "Target.h"
-#include "Sling.h"
-#include "Mirror.h"
 #include "Explosion.h"
-#include "CrossExplosion.h"
+//타깃
+#include "Target.h"
+//슬링
+#include "Sling.h"
 
 GameManager* GameManager::m_instance = nullptr;
 
@@ -71,16 +75,20 @@ void GameManager::ShotBullet(Sling* sling)
 {
 	Bullet* bullet = static_cast<Bullet*>(m_colliderManager->GetBulletToShot(sling));
 	
-	Scene* currentScene = Director::getInstance()->getRunningScene();
-	Scene* gameScene = static_cast<Scene*>(currentScene->getChildByName("GameScene"));
-	Layer* gameLayer = static_cast<Layer*>(gameScene->getChildByName("GameLayer"));
-	gameLayer->addChild(bullet);
-
-	sling->ShotComplete();
-
-	if (m_colliderManager->HasBulletToShot())
+	if (bullet)
 	{
-		sling->LoadBullet();
+		Scene* currentScene = Director::getInstance()->getRunningScene();
+		Scene* gameScene = static_cast<Scene*>(currentScene->getChildByName("GameScene"));
+		Layer* gameLayer = static_cast<Layer*>(gameScene->getChildByName("GameLayer"));
+
+		gameLayer->addChild(bullet);
+
+		sling->ShotComplete();
+
+		if (m_colliderManager->HasBulletToShot())
+		{
+			sling->LoadBullet();
+		}
 	}
 }
 

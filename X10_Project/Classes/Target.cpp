@@ -9,8 +9,14 @@
 
 bool Target::init()
 {
-	setAnchorPoint(Vec2(0, 0));
-	m_spr->setAnchorPoint(Vec2(0, 0));
+	if (!Node::init())
+	{
+		return false;
+	}
+
+	m_applyEffectToMe = true;
+	m_applyEffectToBullet = true;
+	m_toBeErased = false;
 	return true;
 }
 

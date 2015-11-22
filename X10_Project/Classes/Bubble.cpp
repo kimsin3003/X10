@@ -4,9 +4,13 @@
 
 bool Bubble::init()
 {
+	if (!Target::init())
+	{
+		return false;
+	}
+
 	m_spr = Sprite::create(FILE_BUBBLE);
 	addChild(m_spr);
-	m_applyEffectToMe = true;
 
 	return true;
 }

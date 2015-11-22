@@ -20,7 +20,7 @@ protected:
 	virtual void ToSelf(const Explosion* explosion) = 0;	
 	
 	Sprite* m_spr;
-	float m_sprScaleRatio = 1;
+	float m_sprScaleRatio;
 	bool m_toBeErased;
 	bool m_applyEffectToMe;
 	bool m_applyEffectToBullet;

@@ -58,11 +58,6 @@ Sprite* Bullet::MakeBody()
 	return body;
 }
 
-bool Bullet::ToBeErased()
-{
-	return m_toBeErased;
-}
-
 bool Bullet::NotShooted()
 {
 	CCLOG("m_lifeTime: %d", m_lifeTime);

@@ -8,18 +8,29 @@
 
 bool CrossBullet::init()
 {
-	if (!Bullet::init())
-	{
-		return false;
-	}
-	
-	m_timeToExplode = 140;
-	
+	Director* director = Director::getInstance();
+	m_screen = director->getVisibleSize();
+
+	m_speed = 0;
+	m_direction = Vec2::ZERO;
+
+	m_isBullet = true;
+	m_isFlying = false;
+	m_shouldExplode = false;
+	m_toBeErased = false;
+
+	m_lifeTime = 5.0;
+	m_timeDecrease = 1.0 / director->getFrameRate();
+	m_speedSetRatio = 0.01f;
+	m_speedDecreaseRatio = 1 - (10 / BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
+
+	m_body = MakeBody();
+	addChild(m_body);
 
 	return true;
 }
 
-void CrossBullet::Act(ColliderManager* cm)
+void CrossBullet::Act()
 {
 	if (m_lifeTime > BULLET_EXPLODETIME)
 	{
@@ -31,7 +42,6 @@ void CrossBullet::Act(ColliderManager* cm)
 			if (m_lifeTime <= m_timeToExplode)
 			{
 				Explode();
-				m_timeToExplode = STOP_COUNTING_EXPLODE_TIME;
 			}
 		}
 	}
@@ -39,26 +49,6 @@ void CrossBullet::Act(ColliderManager* cm)
 	{
 		TimeUp();
 	}
-}
-
-void CrossBullet::Move()
-{
-	Vec2 delta = m_speed * m_direction;
-	Vec2 curPos = getPosition();
-	//화면 밖으로 나갈 경우 반대 방향에서 나오게 처리.
-	if (curPos.x + delta.x < 0)
-	{
-		curPos = Vec2(curPos.x + delta.x + m_screen.width, delta.y + curPos.y);
-	}
-	else if (curPos.x + delta.x > m_screen.width)
-	{
-		curPos = Vec2(curPos.x + delta.x - m_screen.width, delta.y + curPos.y);
-	}
-	else
-	{
-		curPos = curPos + delta;
-	}
-	setPosition(curPos);
 }
 
 Explosion* CrossBullet::GetExplosion()

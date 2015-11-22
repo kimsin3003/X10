@@ -27,7 +27,7 @@ bool Explosion::init()
 	return true;
 }
 
-void Explosion::Act(ColliderManager* cm)
+void Explosion::Act()
 {
 	if (m_lifeTime > 0)
 	{
@@ -55,11 +55,6 @@ void Explosion::RemoveSelf()
 	SetFlying(false);
 	removeFromParent();
 	m_toBeErased = true;
-}
-
-bool Explosion::ToBeErased()
-{
-	return m_toBeErased;
 }
 
 const float& Explosion::GetBoundingRadius()

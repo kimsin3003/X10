@@ -10,8 +10,8 @@ public:
 	CREATE_FUNC(Bullet);
 
 	virtual bool init();
-	virtual void Act(ColliderManager* cm);
-	virtual void Move();
+	virtual void Act();
+	void Move();
 	virtual Explosion* GetExplosion();
 
 	//Setters and Getters
@@ -31,7 +31,6 @@ public:
 	void Exploded();
 	void TimeUp();
 	void ReduceSpeed();
-	bool ToBeErased() override;
 	bool NotShooted();
 
 protected:

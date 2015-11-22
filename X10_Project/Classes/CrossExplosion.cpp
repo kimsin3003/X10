@@ -5,15 +5,11 @@
 
 bool CrossExplosion::init()
 {
-	m_radius = 0;
-	m_maxRadius = 100;
-	m_isFlying = true;
-	m_lifeTime = 5 * Director::getInstance()->getFrameRate();
-
+	Explosion::init();
 	return true;
 }
 
-void CrossExplosion::Act(ColliderManager* cm)
+void CrossExplosion::Act()
 {
 	if (m_lifeTime > 0)
 	{
@@ -23,10 +19,4 @@ void CrossExplosion::Act(ColliderManager* cm)
 	{
 		RemoveSelf();
 	}
-}
-
-void CrossExplosion::RemoveSelf()
-{
-	SetFlying(false);
-	removeFromParent();
 }

@@ -10,11 +10,9 @@ public:
 	CREATE_FUNC(CrossBullet);
 
 	bool init();
-	void Act(ColliderManager* cm);
-	void Move();
+	void Act();
 	Explosion* GetExplosion();
 
 private:
 	float m_timeToExplode;
-	enum { STOP_COUNTING_EXPLODE_TIME = -30000};
 };

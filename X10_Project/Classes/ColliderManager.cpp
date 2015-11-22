@@ -85,7 +85,7 @@ Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 {
 	if (m_curBulletIndex < m_BulletNum)
 	{
-		Bullet* bullet = (Bullet*)m_colliders.at(m_curBulletIndex);
+		Bullet* bullet = static_cast<Bullet*>(m_colliders.at(m_curBulletIndex));
 
 		bullet->setPosition(sling->getPosition());
 		bullet->setRotation(sling->GetRotationAngle());

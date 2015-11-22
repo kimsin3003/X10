@@ -29,7 +29,7 @@ bool SeeBird::init()
 	return true;
 }
 
-void SeeBird::ToBullet(Bullet* collider)
+void SeeBird::ToBullet(Bullet* bullet)
 {
 
 }

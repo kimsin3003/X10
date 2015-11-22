@@ -13,7 +13,7 @@ bool Cloud::init()
 	return true;
 }
 
-void Cloud::ToBullet(Bullet* collider)
+void Cloud::ToBullet(Bullet* bullet)
 {
 
 }

@@ -23,11 +23,6 @@ void Star::ToBullet(Bullet* bullet)
 	}
 }
 
-void Star::ToExplosion(Explosion* explosion)
-{
-
-}
-
 void Star::ToSelf(const Bullet* bullet)
 {
 	if (m_applyEffectToMe)

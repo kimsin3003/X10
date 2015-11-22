@@ -63,6 +63,7 @@ void Bullet::Act(ColliderManager* cm)
 	{
 		Move();
 		DecreaseLife();
+
 		if (m_lifeTime < BULLET_REDUCTIONSPEEDTIME)
 		{
 			ReduceSpeed();
@@ -119,7 +120,6 @@ void Bullet::Exploded()
 	m_shouldExplode = false;
 }
 
-//외부에서 bullet을 강제로 죽일 때 사용.(폭발로 이어짐)
 void Bullet::Crashed()
 {
 	TimeUp();

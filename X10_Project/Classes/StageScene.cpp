@@ -1,7 +1,9 @@
 #include "stdafx.h"
+#include "MainScene.h"
 #include "StageScene.h"
 #include "GameScene.h"
 #include "UILayer.h"
+#include "GameManager.h"
 
 StageScene::StageScene()
 {
@@ -30,26 +32,22 @@ bool StageScene::init()
 	}
 	setName("StageScene");
 
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
 	//배경 그림 삽입.
-	Layer* background = LoadBackground();
-	this->addChild(background);
+	//Layer* background = LoadBackground();
+	//this->addChild(background);
+
+	/*menu List : CCVector*/
+	Vector<MenuItem*> menuList;
 
 	/*back Button */
 	MenuItemImage* pauseButton = MakeBackButton();
 	Size buttonSize = pauseButton->getContentSize();
-	pauseButton->setPosition(
-		origin.x + visibleSize.width - buttonSize.width / 2,
-		origin.y + buttonSize.height / 2
-		);
-
-
-	/*menu List : CCVector*/
-	Vector<MenuItem*> menuList;
 	menuList.pushBack(pauseButton);
 	
+	/*Test Stage*/
+	MenuItemImage* stage0 = MakeStageButton(0, 100, 300);
+	menuList.pushBack(stage0);
+
 	/*Create Menu*/
 	auto menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
@@ -69,7 +67,17 @@ void StageScene::MenuButtonCallback(Ref* pSender)
 
 void StageScene::ChangeToMainScene(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(GameScene::createScene());
+	Director::getInstance()->replaceScene(MainScene::createScene());
+}
+
+void StageScene::GotoStage(Ref* pSender, int stageNum)
+{
+	Scene* game = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(game->getChildByName("GameScene"));
+	/*stage Information 불러오는 부분.*/
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+
+	Director::getInstance()->replaceScene(game);
 }
 
 MenuItemImage* StageScene::MakeBackButton()
@@ -78,7 +86,30 @@ MenuItemImage* StageScene::MakeBackButton()
 		"OrangePauseButton.png",
 		"OrangePauseButton.png",
 		CC_CALLBACK_1(StageScene::MenuButtonCallback, this));
-	button->setScale(UILayer::PAUSE_BUTTON_WIDTH, UILayer::PAUSE_BUTTON_HEIGHT);
+	Size buttonSize = button->getContentSize();
+	float scale = MIN(
+		UILayer::PAUSE_BUTTON_WIDTH / buttonSize.width,
+		UILayer::PAUSE_BUTTON_HEIGHT / buttonSize.height);
+	button->setScale(scale);
 	
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+	button->setPosition(
+		origin.x + visibleSize.width - buttonSize.width*scale / 2,
+		origin.y + buttonSize.height*scale / 2
+		);
+
 	return button;
+}
+
+MenuItemImage* StageScene::MakeStageButton(int stage, float xPos, float yPos)
+{
+	MenuItemImage* menuItem = MenuItemImage::create();
+	menuItem->setNormalImage(Sprite::create("res/star.png"));
+	menuItem->setSelectedImage(Sprite::create("res/star_twinkle.png"));
+	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2,0.2));
+	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stage));
+	menuItem->setPosition(xPos, yPos);
+	
+	return menuItem;
 }

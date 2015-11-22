@@ -11,6 +11,12 @@ public:
 	Explosion* GetExplosion();
 
 private:
-	float m_timeToExplode;
-	float m_crossPosDelta;
+	int m_explosion_pattern;
+	enum 
+	{
+		DELTA_POS = 15,
+		DELTA_TIME = 60,
+		CENTER, 
+		CROSS
+	};
 };

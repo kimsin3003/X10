@@ -55,6 +55,11 @@ void Sling::LoadBullet()
 	ChangeToLoaded();
 }
 
+Point Sling::GetStartLocation()
+{
+	return getPosition();
+}
+
 void Sling::PullStart(Event* e)
 {
 	if (m_status != STATUS::LOADED)
@@ -105,10 +110,6 @@ void Sling::Pull(Event* e)
 	label->runAction(action);	
 }
 
-Point Sling::GetStartLocation()
-{
-	return getPosition();
-}
 
 void Sling::Shot(Event* e)
 {
@@ -119,7 +120,6 @@ void Sling::Shot(Event* e)
 
 	//fix shot angle,power from last pointer position.
 	Pull(e);
-
 
 	ChangeToShotted();
 	GameManager* gm = GameManager::GetInstance();
@@ -145,7 +145,6 @@ float Sling::GetSpeed()
 {
 	return m_shotPower;
 }
-
 
 bool Sling::IsShotted() // --> 쐈는지 체크
 {

@@ -5,15 +5,13 @@
 #include "UILayer.h"
 #include "Sling.h"
 
-GameScene::GameScene() : gameLayer(nullptr), uiLayer(nullptr)
-{
-}
+GameScene::GameScene() : gameLayer(nullptr), uiLayer(nullptr) {}
 
 Scene* GameScene::createScene()
 {
-	auto scene = Scene::create();
+	Scene* scene = Scene::create();
 
-	auto layer = GameScene::create();
+	Layer* layer = GameScene::create();
 	layer->setName("GameScene");
 	scene->addChild(layer);
 	
@@ -37,6 +35,9 @@ bool GameScene::init()
 	this->addChild(gameLayer);
 	this->addChild(uiLayer);
 	
+	//게임 매니저 초기화
+	gameManager = GameManager::GetInstance();
+
 	this->scheduleUpdate();
 
 	return true;
@@ -54,5 +55,5 @@ Sprite* GameScene::loadBackground()
 
 void GameScene::update(float dt)
 {
-	GameManager::GetInstance()->Play(gameLayer, uiLayer);
+	gameManager->Play(gameLayer, uiLayer);
 }

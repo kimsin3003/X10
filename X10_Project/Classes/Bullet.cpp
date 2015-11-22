@@ -76,7 +76,6 @@ void Bullet::Act()
 	{
 		Move();
 		DecreaseLife();
-
 		if (m_lifeTime < BULLET_REDUCTIONSPEEDTIME)
 		{
 			ReduceSpeed();

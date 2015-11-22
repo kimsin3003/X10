@@ -5,14 +5,8 @@
 #include "UILayer.h"
 #include "GameManager.h"
 
-StageScene::StageScene()
-{
-}
-
-
-StageScene::~StageScene()
-{
-}
+StageScene::StageScene() {}
+StageScene::~StageScene() {}
 
 Scene* StageScene::CreateScene()
 {

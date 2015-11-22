@@ -7,29 +7,31 @@
 bool CrossBullet::init()
 {
 	Bullet::init();
-
-	m_timeToExplode = 10;
-
 	return true;
 }
 
 void CrossBullet::Act()
 {
+	DecreaseLife();
 	if (m_lifeTime > BULLET_EXPLODETIME)
 	{
 		Move();
-		DecreaseLife();
 		if (m_lifeTime < BULLET_REDUCTIONSPEEDTIME)
 		{
 			ReduceSpeed();
-			if (m_lifeTime <= m_timeToExplode)
-			{
-				Explode();
-			}
 		}
 	}
 	else
 	{
+		if (m_lifeTime < 0)
+		{
+			Explode();
+		}
+		else if (m_lifeTime < -DELTA_TIME)
+		{
+			Explode();
+		}
+
 		TimeUp();
 	}
 }
@@ -37,7 +39,14 @@ void CrossBullet::Act()
 Explosion* CrossBullet::GetExplosion()
 {
 	Explosion* explosion = CrossExplosion::create();
-	explosion->setPosition(getPosition());
+	switch (m_explosion_pattern)
+	{
+	case CENTER:
+		break;
+	case CROSS:
+		break;
+	}
+	explosion->SetPosition(getPosition());
 	explosion->setRotation(getRotation());
 	Exploded();
 	return explosion;

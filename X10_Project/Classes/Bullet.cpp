@@ -1,7 +1,5 @@
 #include "stdafx.h"
 #include "Bullet.h"
-#include "ColliderManager.h"
-#include "GameManager.h"
 #include "Explosion.h"
 
 //Base Class of All Bullets
@@ -12,18 +10,17 @@ bool Bullet::init()
 	{
 		return false;
 	}
+
 	Director* director = Director::getInstance();
 	m_screen = director->getVisibleSize();
 
 	m_speed = 0;
 	m_direction = Vec2::ZERO;
 	
-	m_isBullet = true;
 	m_isFlying = false;
 	m_shouldExplode = false;
 	m_toBeErased = false;
 
-	//depending on the type of bullet
 	m_lifeTime = 5.0;
 	m_timeDecrease = 1.0 / director->getFrameRate();
 	m_speedSetRatio = 0.01f;
@@ -61,12 +58,15 @@ Sprite* Bullet::MakeBody()
 bool Bullet::NotShooted()
 {
 	CCLOG("m_lifeTime: %d", m_lifeTime);
+	
 	if (m_shouldExplode)
 		CCLOG("ex: true");
 	else
 		CCLOG("ex: false");
+	
 	if (m_lifeTime > 0 && !m_isFlying)
 		return true;
+
 	return false;
 }
 
@@ -93,7 +93,7 @@ void Bullet::Move()
 {
 	Vec2 delta = m_speed * m_direction;
 	Vec2 curPos = getPosition();
-	//화면 밖으로 나갈 경우 반대 방향에서 나오게 처리.
+
 	if (curPos.x + delta.x < 0)
 	{
 		curPos = Vec2(curPos.x + delta.x + m_screen.width, delta.y + curPos.y);
@@ -128,27 +128,17 @@ void Bullet::ReduceSpeed()
 	m_speed = m_speed * m_speedDecreaseRatio;
 }
 
-void Bullet::Exploded()
-{
-	m_shouldExplode = false;
-	m_toBeErased = true;
-}
-
 void Bullet::Crashed()
 {
-	TimeUp();
+	m_lifeTime = -1;
 	Explode();
-}
-
-void Bullet::Explode()
-{
-	m_shouldExplode = true;
 }
 
 void Bullet::TimeUp()
 {
 	removeFromParent();
 	m_isFlying = false;
+	m_toBeErased = true;
 }
 
 const Rect& Bullet::GetBoundingArea()

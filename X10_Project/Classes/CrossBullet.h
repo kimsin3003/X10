@@ -1,14 +1,11 @@
 #pragma once
 
 #include "Bullet.h"
-class Explosion;
-class ColliderManager;
 
 class CrossBullet : public Bullet
 {
 public:
 	CREATE_FUNC(CrossBullet);
-
 	bool init();
 	void Act();
 	Explosion* GetExplosion();

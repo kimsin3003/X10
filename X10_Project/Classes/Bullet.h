@@ -1,8 +1,6 @@
 #pragma once
 
 #include "Collider.h"
-class Explosion;
-class ColliderManager;
 
 class Bullet : public Collider
 {
@@ -11,36 +9,32 @@ public:
 
 	virtual bool init();
 	virtual void Act();
-	void Move();
 	virtual Explosion* GetExplosion();
+	void Move();
 
-	//Setters and Getters
 	void SetDirection(Vec2 dir) { m_direction = dir; }
 	Vec2 GetDirection() { return m_direction; }
-	const Rect& GetBoundingArea();
 	void SetSpeed(float spd) { m_speed = spd * m_speedSetRatio; }
 	void SetSpeedDecreaseRatio(float ratio) { m_speedDecreaseRatio = ratio; }
+	const Rect& GetBoundingArea();
+	
 	bool IsBullet() { return true; }
-	bool IsFlying() { return m_isFlying; }
 	bool ShouldExplode() { return m_shouldExplode; }
 
-	//상태 변화
 	void Crashed();
-	void Explode();
-	void Exploded();
+	void Explode() { m_shouldExplode = true; }
+	void Exploded() { m_shouldExplode = false; }
 	void TimeUp();
 	void ReduceSpeed();
 	bool NotShooted();
 
 protected:
-	void DecreaseLife(); // call in Move()
+	void DecreaseLife();
 	Sprite* MakeBody();
-
-	Sprite* m_body;//임시로 퍼블릭으로 옮김
+	Sprite* m_body;
 
 	Vec2 m_direction;
 	float m_speed;
-	
 	float m_lifeTime;
 	float m_timeDecrease;
 	float m_speedSetRatio;
@@ -49,6 +43,8 @@ protected:
 	bool m_shouldExplode;
 
 	const char* FILE_NAME= "res/firework.png";
+
+	Size m_screen;
 
 	enum
 	{
@@ -61,6 +57,4 @@ protected:
 		BULLET_EXPLODETIME = 0,
 		BULLET_REDUCTIONSPEEDTIME = 3,
 	};
-
-	Size m_screen;
 };

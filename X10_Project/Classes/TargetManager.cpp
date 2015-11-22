@@ -11,6 +11,7 @@
 //Stage Information
 #include "StageInformation.h"
 #include <hash_map>
+#include <functional>
 using namespace stdext;
 
 void TargetManager::InitTargets(StageInformation* si)

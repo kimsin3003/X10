@@ -10,14 +10,14 @@ bool Explosion::init()
 	m_maxRadius = 3.0f;
 
 	m_explosion = ParticleExplosion::create();
-	m_explosion->setEmitterMode(kCCParticleModeGravity);
+	m_explosion->setEmitterMode(kCCParticleModeRadius);
 	m_explosion->setEmissionRate(500);
 	m_explosion->setDuration(0.1);
 	m_explosion->setLife(0.5);
-	m_explosion->setSpeed(30);
-	m_explosion->setSpeedVar(0);
-	m_explosion->setEndSize(10);
-	m_explosion->setStartSize(10);
+//	m_explosion->setSpeed(30);
+	//m_explosion->setSpeedVar(0);
+	m_explosion->setEndSize(50);
+	m_explosion->setStartSize(50);
 	m_explosion->setPosition(Point::ZERO);
 	this->addChild(m_explosion);
 	
@@ -49,7 +49,7 @@ void Explosion::RemoveSelf()
 
 const float& Explosion::GetBoundingRadius()
 {
-	m_radius += m_explosion->getSpeed() / 2 / Director::getInstance()->getFrameRate();
+	//m_radius += m_explosion->getSpeed() / 2 / Director::getInstance()->getFrameRate();
 
-	return m_radius;
+	return m_explosion->getStartRadius();
 }

@@ -12,7 +12,6 @@ public:
 
 private:
 	int m_pattern;
-	int m_crossDir;
 	enum 
 	{
 		CENTER, 
@@ -21,7 +20,7 @@ private:
 		CROSS_UP,
 		CROSS_DOWN,
 		DIE,
-		DELTA_POS = 15,
-		DELTA_TIME = 60
+		DELTA_POS = 15
 	};
+	const float DELTA_TIME = 2.75f;
 };

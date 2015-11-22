@@ -40,7 +40,7 @@ void Explosion::Act()
 	}
 }
 
-void Explosion::SetPosition(Point pos)
+void Explosion::SetPosition(const Point& pos)
 {
 	setPosition(pos);
 	m_explosion->setPosition(Point::ZERO);

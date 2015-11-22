@@ -90,22 +90,22 @@ void Bullet::Act()
 
 void Bullet::Move()
 {
-	Vec2 delta = m_speed * m_direction;
-	Vec2 curPos = getPosition();
-
+	const Vec2 delta = m_speed * m_direction;
+	const Vec2 curPos = getPosition();
+	Vec2 newPos;
 	if (curPos.x + delta.x < 0)
 	{
-		curPos = Vec2(curPos.x + delta.x + m_screen.width, delta.y + curPos.y);
+		newPos = Vec2(curPos.x + delta.x + m_screen.width, delta.y + curPos.y);
 	}
 	else if (curPos.x + delta.x > m_screen.width)
 	{
-		curPos = Vec2(curPos.x + delta.x - m_screen.width, delta.y + curPos.y);
+		newPos = Vec2(curPos.x + delta.x - m_screen.width, delta.y + curPos.y);
 	}
 	else
 	{
-		curPos = curPos + delta;
+		newPos = curPos + delta;
 	}
-	setPosition(curPos);
+	setPosition(newPos);
 }
 
 Explosion* Bullet::GetExplosion()

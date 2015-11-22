@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Collider.h"
-class ColliderManager;
 
 class Explosion : public Collider
 {
@@ -10,16 +9,12 @@ public:
 	virtual bool init();
 	virtual void Act();
 	const float& GetBoundingRadius();
-
-	void SetFlying(bool flag);
-	bool IsBullet() { return false; }
 	void SetPosition(Point pos);
+	bool IsBullet() { return false; }
 
 protected:
-	virtual void RemoveSelf();
-
+	void RemoveSelf();
 	ParticleExplosion* m_explosion;
-
 	float m_lifeTime;
 	float m_radius;
 	float m_maxRadius;

@@ -70,7 +70,7 @@ bool Bullet::NotShooted()
 	return false;
 }
 
-void Bullet::Act(ColliderManager* cm)
+void Bullet::Act()
 {
 	if (m_lifeTime > BULLET_EXPLODETIME)
 	{

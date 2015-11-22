@@ -20,7 +20,6 @@ public:
 	const Rect& GetBoundingArea();
 	void SetSpeed(float spd) { m_speed = spd * m_speedSetRatio; }
 	void SetSpeedDecreaseRatio(float ratio) { m_speedDecreaseRatio = ratio; }
-	void SetFlying(bool flag) { m_isFlying = flag; }
 	bool IsBullet() { return true; }
 	bool IsFlying() { return m_isFlying; }
 	bool ShouldExplode() { return m_shouldExplode; }

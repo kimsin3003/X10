@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Collider.h"
-#include "ColliderManager.h"
 #include "Explosion.h"
 
 //Base Class of All Explosions
@@ -21,9 +20,11 @@ bool Explosion::init()
 	m_explosion->setStartSize(10);
 	
 	this->addChild(m_explosion);
-	m_isFlying = true;
+	
 	m_lifeTime = 1.0 * Director::getInstance()->getFrameRate();
+	m_isFlying = true;
 	m_toBeErased = false;
+
 	return true;
 }
 
@@ -37,11 +38,6 @@ void Explosion::Act()
 	{
 		RemoveSelf();
 	}
-}
-
-void Explosion::SetFlying(bool flag)
-{
-	m_isFlying = flag;
 }
 
 void Explosion::SetPosition(Point pos)
@@ -63,4 +59,3 @@ const float& Explosion::GetBoundingRadius()
 
 	return m_radius;
 }
-

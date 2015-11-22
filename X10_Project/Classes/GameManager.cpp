@@ -121,7 +121,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		if (collider->IsFlying())
 		{
 			//'Act()'를 시키고
-			collider->Act(m_colliderManager);
+			collider->Act();
 			//그 'collider'가 타깃들과 충돌하는지 체크한다. 
 			CheckCollide(collider, targets);
 		}

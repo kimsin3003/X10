@@ -163,6 +163,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MCScene.cpp" />
     <ClCompile Include="..\Classes\Mirror.cpp" />
+    <ClCompile Include="..\Classes\SeeBird.cpp" />
     <ClCompile Include="..\Classes\Sling.cpp" />
     <ClCompile Include="..\Classes\StageInformation.cpp" />
     <ClCompile Include="..\Classes\StageScene.cpp" />
@@ -194,6 +195,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MCScene.h" />
     <ClInclude Include="..\Classes\Mirror.h" />
+    <ClInclude Include="..\Classes\SeeBird.h" />
     <ClInclude Include="..\Classes\Sling.h" />
     <ClInclude Include="..\Classes\StageInformation.h" />
     <ClInclude Include="..\Classes\StageScene.h" />

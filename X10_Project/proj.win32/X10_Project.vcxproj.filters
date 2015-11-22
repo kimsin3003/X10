@@ -76,6 +76,9 @@
     <ClCompile Include="..\Classes\StageScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\SeeBird.cpp">
+      <Filter>GameObject\Targets</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -152,6 +155,9 @@
     </ClInclude>
     <ClInclude Include="..\Classes\StageScene.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\SeeBird.h">
+      <Filter>GameObject\Targets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

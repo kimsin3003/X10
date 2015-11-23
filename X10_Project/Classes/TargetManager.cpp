@@ -31,14 +31,6 @@ void TargetManager::InitTargets(StageInformation* si)
 	targetTypeInfo.insert(TargetInfoMap::value_type("Star", Star::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type("SeeBird", SeeBird::create));
 
-	//hash_map<string, void*> targetTypeInfo; //string에 타입 이름.
-	//targetTypeInfo.insert(hash_map<string, void*>::value_type("Enemy", Enemy::create));
-	//targetTypeInfo.insert(hash_map<string, void*>::value_type("Mirror", Mirror::create));
-	//targetTypeInfo.insert(hash_map<string, void*>::value_type("Cloud", Cloud::create));
-	//targetTypeInfo.insert(hash_map<string, void*>::value_type("Bubble", Bubble::create));
-	//targetTypeInfo.insert(hash_map<string, void*>::value_type("Star", Star::create));
-	//targetTypeInfo.insert(hash_map<string, void*>::value_type("SeeBird", SeeBird::create));
-
 	while (si->HasNextTarget())
 	{
 		//타겟 이름을 불러와서

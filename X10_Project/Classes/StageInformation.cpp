@@ -4,14 +4,13 @@
 StageInformation::StageInformation(int stage)
 {
 	Size winSize = Director::getInstance()->getWinSize();
+	m_currentTargetIndex = 0;
+	m_currentBulletIndex = 0;
+
+	TargetInfo info;
 
 	if (stage == 0)
 	{
-		m_currentTargetIndex = 0;
-		m_currentBulletIndex = 0;
-
-		TargetInfo info;
-
 		info = TargetInfo("Enemy", Point(200, 400), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
@@ -54,19 +53,71 @@ StageInformation::StageInformation(int stage)
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
 	}
+	else if (stage == 1)
+	{
+
+		info = TargetInfo("Enemy", Point(200, 280), 0, 0.03f / 2);
+		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Enemy", Point(150, 260), 0, 0.03f / 2);
+		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Enemy", Point(150, 220), 0, 0.03f / 2);
+		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Enemy", Point(200, 200), 0, 0.03f / 2);
+		m_targetInfoList.push_back(info);
+
+		// 		info = TargetInfo("Enemy", Point(Director::getInstance()->getVisibleSize().width - 100, 250), 0, 0.03f / 2);
+		// 		m_targetInfoList.push_back(info);
+
+		// 		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f / 2);
+		// 		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Mirror", Point(100, 240), 0, 3.0f);
+		m_targetInfoList.push_back(info);
+
+		// 		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f / 2);
+		// 		m_targetInfoList.push_back(info);
+		// 
+		// 		info = TargetInfo("Star", Point(100, 250), 0, 0.5f / 2);
+		// 		m_targetInfoList.push_back(info);
+
+		//SeeBirds for tests
+		// 		Point seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
+		// 		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		// 		m_targetInfoList.push_back(info);
+		// 
+		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
+		// 		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		// 		m_targetInfoList.push_back(info);
+		// 
+		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
+		// 		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		// 		m_targetInfoList.push_back(info);
+		// 
+		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
+		// 		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		// 		m_targetInfoList.push_back(info);
+
+		//CrossBullet 3°³ Bullet 2°³
+		string bulletType = "CrossBullet";
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		bulletType = "Bullet";
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+
+	}
 	else if (stage == 2)
 	{
-		m_currentTargetIndex = 0;
-		m_currentBulletIndex = 0;
-
-		TargetInfo info;
-
 		info = TargetInfo("Enemy", Point(160, 280), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
 		for (int j = 0; j <= 17; j++)
 		{
-			info = TargetInfo("Bubble", Point(160+j*10, 100+j*15), 0, 2.5f / 2);
+			info = TargetInfo("Bubble", Point(160 + j * 10, 100 + j * 15), 0, 2.5f / 2);
 			m_targetInfoList.push_back(info);
 		}
 
@@ -78,9 +129,9 @@ StageInformation::StageInformation(int stage)
 
 		for (int i = 0; i < 5; i++)
 		{
-			for (int j = 0; j <= i*2-1; j++)
+			for (int j = 0; j <= i * 2 - 1; j++)
 			{
-				info = TargetInfo("Star", Point(180 + (j * 15) - (i*20) , 175 + (i * 20)), i*30+j*2, 0.5f / 2);
+				info = TargetInfo("Star", Point(180 + (j * 15) - (i * 20), 175 + (i * 20)), i * 30 + j * 2, 0.5f / 2);
 				m_targetInfoList.push_back(info);
 			}
 		}
@@ -101,7 +152,9 @@ StageInformation::StageInformation(int stage)
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
+
 	}
+	
 }
 
 StageInformation::~StageInformation()

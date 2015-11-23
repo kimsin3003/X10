@@ -2,8 +2,6 @@
 #include "Bullet.h"
 #include "Explosion.h"
 
-//Base Class of All Bullets
-
 bool Bullet::init()
 {
 	if (!Node::init())

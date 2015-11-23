@@ -7,24 +7,24 @@ StageInformation::StageInformation(int stage)
 
 	if (stage == 0)
 	{
-		m_currentTargetIndex =0;
-		m_currentBulletIndex =0;
-		
+		m_currentTargetIndex = 0;
+		m_currentBulletIndex = 0;
+
 		TargetInfo info;
-		
-		info = TargetInfo("Enemy", Point(200, 400), 0, 0.03f/2);
+
+		info = TargetInfo("Enemy", Point(200, 400), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f/2);
-		m_targetInfoList.push_back(info); 
-		
-		info = TargetInfo("Mirror", Point(30, 200), 0, 3.0f/2);
-		m_targetInfoList.push_back(info);	
-
-		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f/2);
+		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Star", Point(100, 250), 0, 0.5f/2);
+		info = TargetInfo("Mirror", Point(30, 200), 0, 3.0f / 2);
+		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f / 2);
+		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Star", Point(100, 250), 0, 0.5f / 2);
 		m_targetInfoList.push_back(info);
 
 		//SeeBirds for tests
@@ -54,10 +54,53 @@ StageInformation::StageInformation(int stage)
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
 	}
-
-	if (stage > 0)
+	else if (stage == 2)
 	{
-		/*파일에서 정보를 불러서 stage 정보로 채울 부분*/
+		m_currentTargetIndex = 0;
+		m_currentBulletIndex = 0;
+
+		TargetInfo info;
+
+		info = TargetInfo("Enemy", Point(160, 280), 0, 0.03f / 2);
+		m_targetInfoList.push_back(info);
+
+		for (int j = 0; j <= 17; j++)
+		{
+			info = TargetInfo("Bubble", Point(160+j*10, 100+j*15), 0, 2.5f / 2);
+			m_targetInfoList.push_back(info);
+		}
+
+		for (int j = 0; j <= 17; j++)
+		{
+			info = TargetInfo("Bubble", Point(160 - j * 10, 100 + j * 15), 0, 2.5f / 2);
+			m_targetInfoList.push_back(info);
+		}
+
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j <= i*2-1; j++)
+			{
+				info = TargetInfo("Star", Point(180 + (j * 15) - (i*20) , 175 + (i * 20)), i*30+j*2, 0.5f / 2);
+				m_targetInfoList.push_back(info);
+			}
+		}
+
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j <= i * 2 - 1; j++)
+			{
+				info = TargetInfo("Star", Point(180 + (j * 15) - (i * 20), 385 - (i * 20)), i * 30 + j * 2, 0.5f / 2);
+				m_targetInfoList.push_back(info);
+			}
+		}
+
+		//Bullet 5개
+		string bulletType = "Bullet";
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
 	}
 }
 

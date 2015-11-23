@@ -14,8 +14,6 @@ bool Explosion::init()
 	m_explosion->setEmissionRate(500);
 	m_explosion->setDuration(0.1);
 	m_explosion->setLife(0.5);
-//	m_explosion->setSpeed(30);
-	//m_explosion->setSpeedVar(0);
 	m_explosion->setEndSize(50);
 	m_explosion->setStartSize(50);
 	m_explosion->setPosition(Point::ZERO);

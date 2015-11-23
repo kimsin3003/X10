@@ -96,7 +96,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
 	//벡터를 통째로 복사해서 임시 변수에 담지 말것. 성능 저하의 원인
 	Vector<Collider*> colliders = m_colliderManager->m_colliders;
-	Vector<Target*> targets = m_targetManager->m_targets
+	Vector<Target*> targets = m_targetManager->m_targets;
 
 	for (Collider* collider : colliders)
 	{

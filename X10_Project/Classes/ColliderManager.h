@@ -23,4 +23,6 @@ private:
 	Vector<Collider*> m_colliders;
 	int m_curBulletIndex;
 	int m_BulletNum;
+
+	friend class GameManager;
 };

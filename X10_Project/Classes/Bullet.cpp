@@ -2,8 +2,6 @@
 #include "Bullet.h"
 #include "Explosion.h"
 
-//Base Class of All Bullets
-
 bool Bullet::init()
 {
 	if (!Node::init())
@@ -140,5 +138,5 @@ void Bullet::TimeUp()
 
 const Rect& Bullet::GetBoundingArea()
 {
-	return Rect(this->getPosition(), m_body->getContentSize()*BULLET_RATIO);
+	return Rect(this->getPosition(), m_body->getContentSize());
 }

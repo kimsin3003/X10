@@ -11,6 +11,6 @@ protected:
 	void ToSelf(const Bullet* bullet);
 	void ToSelf(const Explosion* explosion);
 
-	const string FILE_STAR_SAD = "res/target/StarSad.png";
-	const string FILE_STAR_HAPPY = "res/target/StarHappy.png";
+	const string FILE_STAR_HAPPY = "res/target/StarSad.png";
+	const string FILE_STAR_SAD = "res/target/StarHappy.png";
 };

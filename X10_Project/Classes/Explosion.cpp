@@ -49,5 +49,5 @@ const float& Explosion::GetBoundingRadius()
 {
 	//m_radius += m_explosion->getSpeed() / 2 / Director::getInstance()->getFrameRate();
 
-	return m_explosion->getStartRadius();
+	return m_explosion->getEndRadius();
 }

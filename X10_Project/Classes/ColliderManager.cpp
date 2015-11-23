@@ -85,7 +85,7 @@ Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 		bullet->setPosition(sling->getPosition());
 		bullet->setRotation(sling->GetRotationAngle());
 		bullet->SetDirection(sling->GetDirection());
-		bullet->SetSpeed(sling->GetSpeed());
+		bullet->SetStartSpeed(sling->GetSpeed());
 		bullet->SetFlying(true);
 
 		m_curBulletIndex++;

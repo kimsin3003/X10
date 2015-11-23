@@ -55,20 +55,6 @@ Sprite* Bullet::MakeBody()
 	return body;
 }
 
-bool Bullet::NotShooted()
-{
-	CCLOG("m_lifeTime: %d", m_lifeTime);
-	
-	if (m_shouldExplode)
-		CCLOG("ex: true");
-	else
-		CCLOG("ex: false");
-	
-	if (m_lifeTime > 0 && !m_isFlying)
-		return true;
-
-	return false;
-}
 
 void Bullet::Act()
 {

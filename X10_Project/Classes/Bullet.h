@@ -21,7 +21,6 @@ public:
 	
 	bool IsBullet() { return true; }
 	bool ShouldExplode() { return m_shouldExplode; }
-	bool NotShooted();
 
 	void Crashed();
 	void Explode() { m_shouldExplode = true; }

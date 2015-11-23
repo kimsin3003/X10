@@ -81,6 +81,7 @@ void Sling::PullStart(Event* e)
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	float distance = startLocation.getDistance(mouseLocation);
+
 	if (distance > CLICK_RANGE)
 		return;
 	

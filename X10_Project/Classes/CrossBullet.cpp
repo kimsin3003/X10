@@ -24,12 +24,11 @@ void CrossBullet::Act()
 	if (m_lifeTime > BULLET_EXPLODETIME)
 	{
 		if (m_pattern == MOVE)
-			Move();
-		
-		if (m_lifeTime < tmp_BULLET_REDUCTIONSPEEDTIME)
 		{
-			ReduceSpeed();
+			Move();
 		}
+		
+		ReduceSpeed();
 	}
 	else
 	{

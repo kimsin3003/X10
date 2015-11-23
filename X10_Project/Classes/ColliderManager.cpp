@@ -69,14 +69,9 @@ void ColliderManager::EraseDeadColliders()
 //반드시 쏠 불렛이 있는지 체크하고 불렛을 가져가야한다.
 bool ColliderManager::HasBulletToShot()
 {
-	Bullet* bullet = nullptr;
-	for (int i = 0; i < m_BulletNum; i++)
+	if (m_curBulletIndex < m_BulletNum)
 	{
-		bullet = static_cast<Bullet*>(m_colliders.at(i));
-		if(bullet->NotShooted())
-		{
-			return true;
-		}
+		return true;
 	}
 	return false;
 }

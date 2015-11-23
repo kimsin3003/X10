@@ -42,6 +42,10 @@ bool StageScene::init()
 	MenuItemImage* stage0 = MakeStageButton(0, 100, 300);
 	menuList.pushBack(stage0);
 
+	/*Paul's Stage*/
+	MenuItemImage* stage3 = MakeStageButton(3, 300, 400);
+	menuList.pushBack(stage3);
+
 	/*Create Menu*/
 	auto menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);

@@ -58,6 +58,67 @@ StageInformation::StageInformation(int stage)
 	if (stage > 0)
 	{
 		/*파일에서 정보를 불러서 stage 정보로 채울 부분*/
+		/**/
+	}
+
+	if (stage == 3)
+	{
+		m_currentTargetIndex = 0;
+		m_currentBulletIndex = 0;
+		
+		Size screen = Director::getInstance()->getVisibleSize();
+
+		TargetInfo info;
+
+		info = TargetInfo("Mirror", Point(0, 200), 0, 1.5);
+		m_targetInfoList.push_back(info);
+		info = TargetInfo("Mirror", Point(320, 200), 0, 1.5f);
+		m_targetInfoList.push_back(info);
+		
+		info = TargetInfo("Mirror", Point(160, 300), 0, 3.0f / 2);
+		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Mirror_y", Point(160, 100), 0, 2.5f / 2);
+		m_targetInfoList.push_back(info);
+		info = TargetInfo("Mirror_y", Point(70, 250), 0, 2.5f / 2);
+		m_targetInfoList.push_back(info);
+
+
+		info = TargetInfo("Enemy", Point(300, 360), 0, 0.02f);
+		m_targetInfoList.push_back(info);
+		info = TargetInfo("Mirror", Point(0, 360), 0, 1.5);
+		m_targetInfoList.push_back(info);
+		info = TargetInfo("Mirror", Point(320, 360), 0, 1.5f);
+		m_targetInfoList.push_back(info);
+
+		for (int xpos = 0; xpos < screen.width + 40; xpos += 34)
+		{
+			info = TargetInfo("Mirror_y", Point(xpos, 480), 0, 2.5f / 2);
+			m_targetInfoList.push_back(info);
+		}
+
+		info = TargetInfo("Star", Point(100, 250), 0, 0.25f);
+		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Star", Point(250, 250), 0, 0.25f );
+		m_targetInfoList.push_back(info);
+		info = TargetInfo("Star", Point(260, 250), 0, 0.25f);
+		m_targetInfoList.push_back(info);
+
+		info = TargetInfo("Star", Point(230, 210), 0, 0.25f);
+		m_targetInfoList.push_back(info);
+		
+		info = TargetInfo("Star", Point(220, 190), 0, 0.25f);
+		m_targetInfoList.push_back(info);
+		info = TargetInfo("Star", Point(230, 190), 0, 0.25f);
+		m_targetInfoList.push_back(info);
+
+		string bulletType = "Bullet";
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
 	}
 }
 

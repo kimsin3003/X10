@@ -3,6 +3,7 @@
 //Targets
 #include "Enemy.h"
 #include "Mirror.h"
+#include "Mirror_y.h"
 #include "Cloud.h"
 #include "Bubble.h"
 #include "Star.h"
@@ -26,6 +27,7 @@ void TargetManager::InitTargets(StageInformation* si)
 	TargetInfoMap targetTypeInfo;
 	targetTypeInfo.insert(TargetInfoMap::value_type("Enemy", Enemy::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type("Mirror", Mirror::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type("Mirror_y", Mirror_y::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type("Cloud", Cloud::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type("Bubble", Bubble::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type("Star", Star::create));

@@ -106,10 +106,9 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			CheckCollide(collider, targets);
 		}
 
-		if (collider->IsBullet())
+		if (Bullet* bullet = dynamic_cast<Bullet*>(collider))
 		{
-			Bullet* bullet = dynamic_cast<Bullet*>(collider);
-			if ( bullet && bullet->ShouldExplode())
+			if (bullet->ShouldExplode())
 			{
 				Explosion* explosion = bullet->GetExplosion();
 				m_colliderManager->AddExplosion(explosion);

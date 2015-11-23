@@ -12,19 +12,19 @@ StageInformation::StageInformation(int stage)
 		
 		TargetInfo info;
 		
-		info = TargetInfo("Enemy", Point(200, 400), 0, 0.03f);
+		info = TargetInfo("Enemy", Point(200, 400), 0, 0.03f/2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f);
+		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f/2);
 		m_targetInfoList.push_back(info); 
 		
-		info = TargetInfo("Mirror", Point(30, 200), 0, 3.0f);
+		info = TargetInfo("Mirror", Point(30, 200), 0, 3.0f/2);
 		m_targetInfoList.push_back(info);	
 
-		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f);
+		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f/2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Star", Point(100, 250), 0, 0.5f);
+		info = TargetInfo("Star", Point(100, 250), 0, 0.5f/2);
 		m_targetInfoList.push_back(info);
 
 		//SeeBirds for tests

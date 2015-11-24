@@ -8,9 +8,11 @@ public:
 		STAR_WIDTH = 20,
 		STAR_HEIGHT = 20
 	};
-	const char* BGIMG_FILE = "res/starry_night.jpg";
+	const char* BGIMG_FILE = "res/starry_night.jpg"; ///# 이런거 나중에 전부 기술부채가 된다. 한군데 빼서 모아놓도록
 
 	StageScene();
+	
+	///# 소멸자 구현이 없으면 쓰지 말 것. 특히 아래 소멸자의 경우에는 virtual임에도 그걸 표기하지 않으면서 선언을 해 놓으면 정말 헷갈린다.
 	~StageScene();
 
 	static Scene* CreateScene();

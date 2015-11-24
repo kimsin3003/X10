@@ -13,7 +13,7 @@
 #include "StageInformation.h"
 #include <hash_map>
 #include <functional>
-using namespace stdext;
+using namespace stdext; ///# 이 네임스페이스는 왜? 표준이 아니고 쓸 일도 없고
 
 void TargetManager::InitTargets(StageInformation* si)
 {
@@ -22,7 +22,7 @@ void TargetManager::InitTargets(StageInformation* si)
 	m_defaultTargetNumber = si->GetTargetCount();
 	m_targets.reserve(m_defaultTargetNumber);
 
-	//각각의 클래스에 맞는 함수포인터 를 void*형태로 hash_map에 저장
+	//각각의 클래스에 맞는 함수포인터를 Target* 반환 형태로 hash_map에 저장
 	typedef hash_map<string,std::function<Target*()>>  TargetInfoMap;
 	TargetInfoMap targetTypeInfo;
 	targetTypeInfo.insert(TargetInfoMap::value_type("Enemy", Enemy::create));

@@ -94,6 +94,7 @@ void GameManager::ShotBullet(Sling* sling)
 
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
+	///# 왜 임시변수에 복사해서 쓰지? 효율 나빠짐.
 	Vector<Collider*> colliders = m_colliderManager->m_colliders;
 	Vector<Target*> targets = m_targetManager->m_targets;
 
@@ -130,8 +131,8 @@ void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 
 		if (bullet->IsBullet())
 		{
-			const Rect colliderBoundingBox = (static_cast<Bullet*>(bullet))->GetBoundingArea();
-			const Rect targetBoundingBox = target->GetBoundingArea();
+			const Rect& colliderBoundingBox = (static_cast<Bullet*>(bullet))->GetBoundingArea();
+			const Rect& targetBoundingBox = target->GetBoundingArea();
 
 			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 			{

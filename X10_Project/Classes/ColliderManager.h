@@ -8,7 +8,7 @@ class ColliderManager
 {
 public:
 	ColliderManager() {}
-	~ColliderManager() {}
+	~ColliderManager() {} ///# 구현이 없으면 선언조차 하지 말 것
 	
 	void InitBullets(StageInformation* si);
 	void ResetBullets();

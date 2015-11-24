@@ -34,7 +34,8 @@ bool SeeBird::init()
 
 //나중에 벡터에서 삭제될 수 있도록 
 //bullet의 toBeErased 값을 조정하는 방향
-//CC_CALLBACK_01 을 활용
+//CC_CALLBACK_01 을 활용 
+///# 이참에 CC_CALLBACK계열의 동작 원리도 공부할 것: 이런 새로운 종류의(?) 매크로나 템플릿을 보면 그걸 파봐서 공부하는 습관을 들이도록..
 
 void SeeBird::ToBullet(Bullet* bullet)
 {

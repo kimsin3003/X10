@@ -34,22 +34,16 @@ GameManager::GameManager()
 	m_sling = nullptr;
 	m_colliderManager = new ColliderManager();
 	m_targetManager = new TargetManager();
-	m_stage = nullptr;
 }
 
 GameManager::~GameManager() {}
 
 void GameManager::SetStage(GameLayer* gameLayer, int StageNumber)
 {	
-	if (m_stage != nullptr)
-	{
-		delete m_stage;
-	}
-
-	m_stage = new StageInformation(StageNumber);
-	m_targetManager->InitTargets(m_stage);
+	StageInformation stageInfo(StageNumber);
+	m_targetManager->InitTargets(&stageInfo);
 	AppendTargetsToLayer(gameLayer);
-	m_colliderManager->InitBullets(m_stage);
+	m_colliderManager->InitBullets(&stageInfo);
 	m_sling = SetSling(gameLayer);
 }
 
@@ -95,11 +89,12 @@ void GameManager::ShotBullet(Sling* sling)
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
 	///# 왜 임시변수에 복사해서 쓰지? 효율 나빠짐.
-	Vector<Collider*> colliders = m_colliderManager->m_colliders;
-	Vector<Target*> targets = m_targetManager->m_targets;
-
-	for (Collider* collider : colliders)
+	Vector<Collider*>& colliders = m_colliderManager->m_colliders;
+	Vector<Target*>& targets = m_targetManager->m_targets;
+	Collider* collider = nullptr;
+	for (int i = 0; i < colliders.size(); i++)
 	{
+		collider = colliders.at(i);
 		if (collider->IsFlying())
 		{
 			collider->Act();
@@ -131,8 +126,8 @@ void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 
 		if (bullet->IsBullet())
 		{
-			const Rect& colliderBoundingBox = (static_cast<Bullet*>(bullet))->GetBoundingArea();
-			const Rect& targetBoundingBox = target->GetBoundingArea();
+			const Rect colliderBoundingBox = (static_cast<Bullet*>(bullet))->GetBoundingArea();
+			const Rect targetBoundingBox = target->GetBoundingArea();
 
 			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 			{

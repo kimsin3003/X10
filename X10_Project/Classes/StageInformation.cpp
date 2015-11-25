@@ -215,7 +215,8 @@ StageInformation::StageInformation(int stage)
 
 StageInformation::~StageInformation()
 {
-
+	m_targetInfoList.clear();
+	m_bulletInfoList.clear();
 }
 
 int StageInformation::GetTargetCount()

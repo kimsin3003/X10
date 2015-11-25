@@ -29,7 +29,6 @@ private:
 
 private:
 	static GameManager* m_instance;
-	StageInformation* m_stage;
 	ColliderManager* m_colliderManager;
 	TargetManager* m_targetManager;
 	Sling* m_sling;

@@ -20,17 +20,17 @@ bool Sling::init()
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	//set position low center position
-	setPosition(Point(visibleSize.width/2, YPOS));
+	setPosition(Point(205, 53));
 	
 	//charater set
-	auto body = Sprite::create("HelloWorld.png");
-	body->setName("body");
-	//scale adjustment
-	Size bodySize = body->getContentSize();
-	float bodyScale = MIN(WIDTH / bodySize.width, HEIGHT / bodySize.height);
-	body->setScale(bodyScale);
-
-	this->addChild(body);
+// 	auto body = Sprite::create("HelloWorld.png");
+// 	body->setName("body");
+// 	//scale adjustment
+// 	Size bodySize = body->getContentSize();
+// 	float bodyScale = MIN(WIDTH / bodySize.width, HEIGHT / bodySize.height);
+// 	body->setScale(bodyScale);
+// 
+// 	this->addChild(body);
 
 	/*Make Expect line*/
 	for (int i = 0; i < DOTNUM_OF_LINE; i++)

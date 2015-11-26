@@ -17,6 +17,8 @@ public:
 	void Play(GameLayer* gameLayer, UILayer* uiLayer);
 	
 	void SetStage(GameLayer* gameLayer, int StageNumber);
+
+
 	void AppendTargetsToLayer(GameLayer* gameLayer);
 	Sling* SetSling(GameLayer* gameLayer);
 

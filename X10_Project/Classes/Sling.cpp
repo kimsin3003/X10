@@ -31,7 +31,16 @@ bool Sling::init()
 	body->setScale(bodyScale);
 
 	this->addChild(body);
-	
+
+	/*Make Expect line*/
+	for (int i = 0; i < DOTNUM_OF_LINE; i++)
+	{
+		Sprite* dot = MakeDotOfExpectLine();
+		m_expectLine.pushBack(dot);
+		dot->setVisible(false);
+		this->addChild(dot);
+	}
+
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseUp = CC_CALLBACK_1(Sling::Shot, this);
 	_mouseListener->onMouseDown = CC_CALLBACK_1(Sling::PullStart, this);
@@ -72,9 +81,10 @@ void Sling::PullStart(Event* e)
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	float distance = startLocation.getDistance(mouseLocation);
+
 	if (distance > CLICK_RANGE)
 		return;
-
+	
 	ChangeToPulling();
 }
 
@@ -103,11 +113,17 @@ void Sling::Pull(Event* e)
 		m_shotPower = MAX_POWER;
 	}
 
-	auto label = Label::create(".","arial", FONT_SIZE);
+	/*Set Position expect line */
+	for (int i = 0; i < m_expectLine.size(); i++)
+	{
+		Sprite* dot = m_expectLine.at(i);
+		dot->setPosition(m_shotAngle * i);
+	}
+	/*auto label = Label::create(".","arial", FONT_SIZE);
 	auto delay = MoveBy::create(PREDICT_LINE_TIME, m_shotAngle);
 	auto action = Sequence::create(delay, RemoveSelf::create(), NULL);
 	this->addChild(label);
-	label->runAction(action);	
+	label->runAction(action);*/	
 }
 
 
@@ -124,6 +140,7 @@ void Sling::Shot(Event* e)
 	ChangeToShotted();
 	GameManager* gm = GameManager::GetInstance();
 	gm->ShotBullet(this);
+	
 }
 
 Vec2 Sling::GetDirection()
@@ -166,6 +183,11 @@ void Sling::ChangeToPulling() //loaded -> pulling
 	if (m_status != STATUS::LOADED)
 		return;
 	m_status = STATUS::PULLING;
+	
+	for (Sprite* dot : m_expectLine)
+	{
+		dot->setVisible(true);
+	}
 }
 
 void Sling::ChangeToShotted() //pullig -> shotted
@@ -173,9 +195,21 @@ void Sling::ChangeToShotted() //pullig -> shotted
 	if (m_status != STATUS::PULLING)
 		return;
 	m_status = STATUS::SHOTTED;
+
+	for (Sprite* dot : m_expectLine)
+	{
+		dot->setVisible(false);
+	}
 }
 
 void Sling::ChangeToEmpty() //shotted -> empty
 {
 	m_status = STATUS::EMPTY;
+}
+
+Sprite* Sling::MakeDotOfExpectLine()
+{
+	
+	Sprite* dot = Sprite::create(DOT_FILENAME);
+	return dot;
 }

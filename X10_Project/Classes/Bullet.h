@@ -15,13 +15,13 @@ public:
 
 	void SetDirection(Vec2 dir) { m_direction = dir; }
 	Vec2 GetDirection() { return m_direction; }
-	void SetSpeed(float spd) { m_speed = spd * m_speedSetRatio; }
+	void SetSpeed(float spd);
+	void SetStartSpeed(float speed);
 	void SetSpeedDecreaseRatio(float ratio) { m_speedDecreaseRatio = ratio; }
 	const Rect& GetBoundingArea();
 	
 	bool IsBullet() { return true; }
 	bool ShouldExplode() { return m_shouldExplode; }
-	bool NotShooted();
 
 	void Crashed();
 	void Explode() { m_shouldExplode = true; }
@@ -37,6 +37,8 @@ protected:
 	Sprite* m_body;
 
 	Vec2 m_direction;
+	float m_startLife;
+	float m_startSpeed;
 	float m_speed;
 	float m_lifeTime;
 	float m_lifeDecrease;
@@ -54,7 +56,7 @@ protected:
 		BULLET_FRAMES = 5,
 		BULLET_WIDTH = 10,
 		BULLET_HEIGHT = 10,
-		BULLET_RATIO = 1,
+		BULLET_RATIO = 2,
 
 		BULLET_LIFETIME = 30,
 		BULLET_EXPLODETIME = 0,

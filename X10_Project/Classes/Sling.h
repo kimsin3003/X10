@@ -5,13 +5,14 @@ class Sling : public Node
 public:
 	enum SLING_CONFIG
 	{
-		WIDTH	= 20,
-		HEIGHT	= 50,
-		YPOS	= 50,
+		WIDTH = 20,
+		HEIGHT = 50,
+		YPOS = 50,
 		MAX_POWER = 30,
 		CLICK_RANGE = 10,
+		DOTNUM_OF_LINE = 5
 	};
-
+	const char* DOT_FILENAME = "res/dot.png";
 	const float FONT_SIZE	= 24;
 	const float PREDICT_LINE_TIME = 0.5;
 
@@ -52,4 +53,7 @@ private:
 
 	Vec2 m_shotAngle;
 	float m_shotPower;
+	Vector<Sprite*> m_expectLine;
+
+	Sprite* MakeDotOfExpectLine();
 };

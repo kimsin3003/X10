@@ -2,8 +2,6 @@
 #include "Bullet.h"
 #include "Explosion.h"
 
-//Base Class of All Bullets
-
 bool Bullet::init()
 {
 	if (!Node::init())
@@ -13,7 +11,6 @@ bool Bullet::init()
 
 	Director* director = Director::getInstance();
 	m_screen = director->getVisibleSize();
-
 	m_speed = 0;
 	m_direction = Vec2::ZERO;
 	
@@ -21,7 +18,8 @@ bool Bullet::init()
 	m_shouldExplode = false;
 	m_toBeErased = false;
 	m_stopAction = false;
-	m_lifeTime = 5.0;
+	m_lifeTime = 3.0f;
+	m_startLife = m_lifeTime;
 	m_lifeDecrease = 1.0 / director->getFrameRate();
 	m_speedSetRatio = 0.01f;
 	m_speedDecreaseRatio = 1 - (10.0f/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
@@ -55,20 +53,6 @@ Sprite* Bullet::MakeBody()
 	return body;
 }
 
-bool Bullet::NotShooted()
-{
-	CCLOG("m_lifeTime: %d", m_lifeTime);
-	
-	if (m_shouldExplode)
-		CCLOG("ex: true");
-	else
-		CCLOG("ex: false");
-	
-	if (m_lifeTime > 0 && !m_isFlying)
-		return true;
-
-	return false;
-}
 
 void Bullet::Act()
 {
@@ -81,16 +65,24 @@ void Bullet::Act()
 	{
 		Move();
 		DecreaseLife();
-		if (m_lifeTime < BULLET_REDUCTIONSPEEDTIME)
-		{
-			ReduceSpeed();
-		}
+		ReduceSpeed();
 	}
 	else
 	{
 		Explode();
 		TimeUp();
 	}
+}
+
+void Bullet::SetStartSpeed(float speed)
+{
+	m_startSpeed = speed * m_speedSetRatio;
+	SetSpeed(speed);
+}
+
+void Bullet::SetSpeed(float spd)
+{
+	m_speed = spd * m_speedSetRatio;
 }
 
 void Bullet::Move()
@@ -129,7 +121,7 @@ void Bullet::DecreaseLife()
 
 void Bullet::ReduceSpeed()
 {
-	m_speed *= m_speedDecreaseRatio;
+	m_speed = (m_lifeTime / m_startLife) * m_startSpeed;
 }
 
 void Bullet::Crashed()
@@ -146,5 +138,5 @@ void Bullet::TimeUp()
 
 const Rect& Bullet::GetBoundingArea()
 {
-	return Rect(this->getPosition(), m_body->getContentSize()*BULLET_RATIO);
+	return Rect(this->getPosition(), m_body->getContentSize());
 }

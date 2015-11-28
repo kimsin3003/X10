@@ -19,19 +19,19 @@ void ColliderManager::InitBullets(StageInformation* si)
 	m_colliders.reserve(m_BulletNum);
 	m_curBulletIndex = 0;
 
-	hash_map<string, void*> bulletTypeInfo;
-	bulletTypeInfo.insert(hash_map<string, void*>::value_type("CrossBullet", CrossBullet::create));
-	bulletTypeInfo.insert(hash_map<string, void*>::value_type("Bullet", Bullet::create));
-	
+	typedef hash_map<string, function<Bullet*()>> BulletInfoMap;
+	BulletInfoMap bulletTypeInfo; //string에 타입 이름.
+	bulletTypeInfo.insert(BulletInfoMap::value_type("Bullet", Bullet::create));
+	bulletTypeInfo.insert(BulletInfoMap::value_type("CrossBullet", CrossBullet::create));
+
 	while (si->HasNextBullet())
 	{
 		//타겟 이름을 불러와서
 		string type = si->GetCurrentBulletInfo();
-		void* createFunction = bulletTypeInfo.at(type);
+		auto createFunction = bulletTypeInfo.at(type);
 		
 		//거기에 맞는 팩토리 함수 호출
-		Bullet* (*create)() = static_cast<Bullet* (*)()>(createFunction);
-		Bullet* bullet = (*create)();
+		Bullet* bullet = createFunction();
 
 		//리스트에 넣음.
 		m_colliders.pushBack(bullet);
@@ -69,14 +69,9 @@ void ColliderManager::EraseDeadColliders()
 //반드시 쏠 불렛이 있는지 체크하고 불렛을 가져가야한다.
 bool ColliderManager::HasBulletToShot()
 {
-	Bullet* bullet = nullptr;
-	for (int i = 0; i < m_BulletNum; i++)
+	if (m_curBulletIndex < m_BulletNum)
 	{
-		bullet = static_cast<Bullet*>(m_colliders.at(i));
-		if(bullet->NotShooted())
-		{
-			return true;
-		}
+		return true;
 	}
 	return false;
 }
@@ -90,7 +85,7 @@ Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 		bullet->setPosition(sling->getPosition());
 		bullet->setRotation(sling->GetRotationAngle());
 		bullet->SetDirection(sling->GetDirection());
-		bullet->SetSpeed(sling->GetSpeed());
+		bullet->SetStartSpeed(sling->GetSpeed());
 		bullet->SetFlying(true);
 
 		m_curBulletIndex++;

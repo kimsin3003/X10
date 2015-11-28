@@ -49,9 +49,6 @@
     <ClCompile Include="..\Classes\Explosion.cpp">
       <Filter>GameObject\Explosions</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Mirror.cpp">
-      <Filter>GameObject\Targets</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Cloud.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
@@ -77,6 +74,12 @@
       <Filter>Scene</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\SeeBird.cpp">
+      <Filter>GameObject\Targets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Mirror_y.cpp">
+      <Filter>GameObject\Targets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Mirror.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
   </ItemGroup>
@@ -126,9 +129,6 @@
     <ClInclude Include="..\Classes\Explosion.h">
       <Filter>GameObject\Explosions</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Mirror.h">
-      <Filter>GameObject\Targets</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Cloud.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
@@ -157,6 +157,12 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\SeeBird.h">
+      <Filter>GameObject\Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Mirror_y.h">
+      <Filter>GameObject\Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Mirror.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
   </ItemGroup>

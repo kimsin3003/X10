@@ -6,24 +6,7 @@
 
 bool CrossBullet::init()
 {
-	Director* director = Director::getInstance();
-	m_screen = director->getVisibleSize();
-
-	m_speed = 0;
-	m_direction = Vec2::ZERO;
-
-	m_isFlying = false;
-	m_shouldExplode = false;
-	m_toBeErased = false;
-	m_stopAction = false;
-
-	m_lifeTime = 1.0f;
-	m_lifeDecrease = 1.0f / director->getFrameRate();
-	m_speedSetRatio = 0.01f;
-	m_speedDecreaseRatio = 1 - (10 / BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
-
-	m_body = MakeBody();
-	addChild(m_body);
+	Bullet::init();
 
 	m_pattern = MOVE;
 	tmp_BULLET_REDUCTIONSPEEDTIME = m_lifeTime / 10;
@@ -41,12 +24,11 @@ void CrossBullet::Act()
 	if (m_lifeTime > BULLET_EXPLODETIME)
 	{
 		if (m_pattern == MOVE)
-			Move();
-		
-		if (m_lifeTime < tmp_BULLET_REDUCTIONSPEEDTIME)
 		{
-			ReduceSpeed();
+			Move();
 		}
+		
+		ReduceSpeed();
 	}
 	else
 	{

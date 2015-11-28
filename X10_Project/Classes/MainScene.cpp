@@ -7,6 +7,7 @@
 #include "Sling.h"
 #include "GameManager.h"
 #include "StageScene.h"
+#include "File.h"
 
 Scene* MainScene::createScene()
 {
@@ -80,12 +81,12 @@ bool MainScene::init()
 
 void MainScene::ChangeToGameScene(Ref* pSender)
 {
-	StageScene::GotoStage(pSender, 0);
+	StageScene::GotoStage(pSender, File::GetLastStage());
 }
 
 void MainScene::ChangeToStageScene(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(StageScene::GetInstance());
+	Director::getInstance()->replaceScene(StageScene::createScene());
 }
 
 void MainScene::ChangeToMCScene(Ref* pSender)

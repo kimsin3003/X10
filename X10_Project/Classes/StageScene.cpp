@@ -4,20 +4,17 @@
 #include "GameScene.h"
 #include "UILayer.h"
 #include "GameManager.h"
+#include "File.h"
 
-Scene* StageScene::instance = nullptr;
-
-Scene* StageScene::GetInstance()
+Scene* StageScene::createScene()
 {
-	if (instance == nullptr)
-	{
-		instance = Scene::create();
 
-		Layer* layer = StageScene::create();
-		instance->addChild(layer);
-	}
+	Scene* scene = Scene::create();
 
-	return instance;
+	Layer* layer = StageScene::create();
+	scene->addChild(layer);
+
+	return scene;
 }
 
 bool StageScene::init()
@@ -32,6 +29,15 @@ bool StageScene::init()
 	Sprite* background = LoadBackground();
 	this->addChild(background);
 
+	SetupButtons();
+
+	return true;
+
+}
+
+void StageScene::SetupButtons()
+{
+
 	/*menu List : CCVector*/
 	Vector<MenuItem*> menuList;
 
@@ -39,29 +45,18 @@ bool StageScene::init()
 	MenuItemImage* pauseButton = MakeBackButton();
 	Size buttonSize = pauseButton->getContentSize();
 	menuList.pushBack(pauseButton);
-	
-	/*Test Stage*/
-	MenuItemImage* stage0 = MakeStageButton(0, 100, 300);
-	menuList.pushBack(stage0);
 
-	/*Paul's Stage*/
-	MenuItemImage* stage3 = MakeStageButton(3, 300, 400);
-	menuList.pushBack(stage3);
+	int advancedState = File::GetLastStage() + 1;
 
-	/*TW's stage*/
-	MenuItemImage* stage1 = MakeStageButton(1, 200, 400);
-	menuList.pushBack(stage1);
-
-	/*JW's stage*/
-	MenuItemImage* stage2 = MakeStageButton(2, 300, 300);
-	menuList.pushBack(stage2);
+	for (int i = 0; i <= advancedState; i++)
+	{
+		menuList.pushBack(MakeStageButton(i, 50 * (i + 1), 300));
+	}
 
 	/*Create Menu*/
 	auto menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu);
-
-	///# 리턴값 어디갔노?
 
 }
 

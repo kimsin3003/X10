@@ -11,7 +11,7 @@ public:
 	const char* BGIMG_FILE = "res/starry_night.jpg"; ///# 이런거 나중에 전부 기술부채가 된다. 한군데 빼서 모아놓도록
 
 
-	static Scene* GetInstance();
+	static Scene* createScene();
 	CREATE_FUNC(StageScene);
 	virtual bool init();
 
@@ -21,10 +21,10 @@ public:
 	void MenuButtonCallback(Ref* pSender);
 
 private:
+	void SetupButtons();
 	void ChangeToMainScene(Ref* pSender);
 	Sprite* LoadBackground(); //아직 배경 안만듬...
 	MenuItemImage* MakeBackButton();
 	MenuItemImage* MakeStageButton(int stage, float xPos, float yPos);
-	static Scene* instance;
 };
 

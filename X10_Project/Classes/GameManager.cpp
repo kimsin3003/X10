@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameManager.h"
+#include "File.h"
 //레이어
 #include "GameLayer.h"
 #include "UILayer.h"
@@ -18,6 +19,8 @@
 #include "Target.h"
 //슬링
 #include "Sling.h"
+
+using namespace File;
 
 GameManager* GameManager::m_instance = nullptr;
 
@@ -39,13 +42,14 @@ GameManager::GameManager()
 
 GameManager::~GameManager() {}
 
-void GameManager::SetStage(GameLayer* gameLayer, int StageNumber)
+void GameManager::SetStage(GameLayer* gameLayer, int stageNumber)
 {	
-	StageInformation stageInfo(StageNumber);
+	StageInformation stageInfo(stageNumber);
 	m_targetManager->InitTargets(&stageInfo);
 	AppendTargetsToLayer(gameLayer);
 	m_colliderManager->InitBullets(&stageInfo);
 	m_sling = SetSling(gameLayer);
+	m_stage = stageNumber;
 }
 
 Sling* GameManager::SetSling(GameLayer* gameLayer)
@@ -89,7 +93,6 @@ void GameManager::ShotBullet(Sling* sling)
 
 void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 {
-	///# 왜 임시변수에 복사해서 쓰지? 효율 나빠짐.
 	Vector<Collider*>& colliders = m_colliderManager->m_colliders;
 	Vector<Target*>& targets = m_targetManager->m_targets;
 	Collider* collider = nullptr;
@@ -119,13 +122,13 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	if (!m_targetManager->HasEnemy())
 	{
 		EndStage();
-		Director::getInstance()->replaceScene(StageScene::GetInstance());
+		Director::getInstance()->replaceScene(StageScene::createScene());
 	}
 }
 
 void GameManager::EndStage()
 {
-
+	File::UpdateLastStage(m_stage);
 }
 
 

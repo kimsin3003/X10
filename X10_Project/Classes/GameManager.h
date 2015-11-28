@@ -35,4 +35,5 @@ private:
 	ColliderManager* m_colliderManager;
 	TargetManager* m_targetManager;
 	Sling* m_sling;
+	int m_stage;
 };

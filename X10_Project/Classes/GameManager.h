@@ -26,6 +26,7 @@ private:
 	GameManager();
 	~GameManager();
 	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
+	void EndStage();
 
 private:
 	static GameManager* m_instance;

@@ -11,6 +11,7 @@ bool Enemy::init()
 
 	m_spr = Sprite::create(FILE_ENEMY);
 	addChild(m_spr);
+	m_isEnemy = true;
 
 	return true;
 }
@@ -33,4 +34,5 @@ void Enemy::ToSelf(const Bullet* bullet)
 void Enemy::ToSelf(const Explosion* explosion)
 {
 	ToSelf(static_cast<Bullet*>(NULL));
+	m_toBeErased = true;
 }

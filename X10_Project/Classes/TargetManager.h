@@ -11,7 +11,8 @@ public:
 	Vector<Target*>& GetTargets() { return m_targets; };
 	void InitTargets(StageInformation* si);
 	void ResetTargets();
-	void EraseTarget(Target* target);
+	void EraseDeadTargets();
+	bool HasEnemy();
 
 private:
 	Vector<Target*> m_targets;

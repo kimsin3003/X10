@@ -59,7 +59,30 @@ void TargetManager::ResetTargets()
 	m_targets.clear();
 }
 
-void TargetManager::EraseTarget(Target* target)
+void TargetManager::EraseDeadTargets()
 {
-	m_targets.eraseObject(target);
+	Target* target = nullptr;
+	for (int i = 0; i < m_targets.size(); i++)
+	{
+		target = m_targets.at(i);
+		if (!target->ToBeErased())
+		{
+			m_targets.erase(m_targets.begin() + i);
+		}
+	}
 }
+
+bool TargetManager::HasEnemy()
+{
+	Target* target;
+	for (int i = 0; i < m_targets.size(); i++)
+	{
+		target = m_targets.at(i);
+		if (target->IsEnemy())
+		{
+			return true;
+		}
+	}
+	return false;
+}
+

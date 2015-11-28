@@ -17,6 +17,7 @@ bool Target::init()
 	m_applyEffectToMe = true;
 	m_applyEffectToBullet = true;
 	m_toBeErased = false;
+	m_isEnemy = false;
 	return true;
 }
 

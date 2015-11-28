@@ -10,10 +10,8 @@ public:
 	};
 	const char* BGIMG_FILE = "res/starry_night.jpg";
 
-	StageScene();
-	~StageScene();
 
-	static Scene* CreateScene();
+	static Scene* GetInstance();
 	CREATE_FUNC(StageScene);
 	virtual bool init();
 
@@ -27,5 +25,6 @@ private:
 	Sprite* LoadBackground(); //아직 배경 안만듬...
 	MenuItemImage* MakeBackButton();
 	MenuItemImage* MakeStageButton(int stage, float xPos, float yPos);
+	static Scene* instance;
 };
 

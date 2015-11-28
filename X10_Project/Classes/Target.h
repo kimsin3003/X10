@@ -14,6 +14,7 @@ public:
 	void SetSprScaleRatio(float ratio) { m_sprScaleRatio = ratio; }
 	void SetSprScale() { m_spr->setScale(m_sprScaleRatio); }
 	bool ToBeErased() { return m_toBeErased; }
+	virtual bool IsEnemy() { return m_isEnemy; }
 protected:
 	virtual void ToBullet(Bullet* bullet) = 0;
 	virtual void ToSelf(const Bullet* bullet) = 0;
@@ -24,4 +25,5 @@ protected:
 	bool m_toBeErased;
 	bool m_applyEffectToMe;
 	bool m_applyEffectToBullet;
+	bool m_isEnemy;
 };

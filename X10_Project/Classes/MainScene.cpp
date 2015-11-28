@@ -85,7 +85,7 @@ void MainScene::ChangeToGameScene(Ref* pSender)
 
 void MainScene::ChangeToStageScene(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(StageScene::CreateScene());
+	Director::getInstance()->replaceScene(StageScene::GetInstance());
 }
 
 void MainScene::ChangeToMCScene(Ref* pSender)

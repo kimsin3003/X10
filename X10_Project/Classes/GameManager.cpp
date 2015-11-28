@@ -5,6 +5,7 @@
 #include "UILayer.h"
 //스테이지
 #include "StageInformation.h"
+#include "StageScene.h"
 //매니저
 #include "ColliderManager.h"
 #include "TargetManager.h"
@@ -119,7 +120,19 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	}
 
 	m_colliderManager->EraseDeadColliders();
+
+	if (!m_targetManager->HasEnemy())
+	{
+		EndStage();
+		Director::getInstance()->replaceScene(StageScene::GetInstance());
+	}
 }
+
+void GameManager::EndStage()
+{
+
+}
+
 
 void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 {

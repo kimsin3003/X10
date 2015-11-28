@@ -5,17 +5,19 @@
 #include "UILayer.h"
 #include "GameManager.h"
 
-StageScene::StageScene() {}
-StageScene::~StageScene() {}
+Scene* StageScene::instance = nullptr;
 
-Scene* StageScene::CreateScene()
+Scene* StageScene::GetInstance()
 {
-	Scene* scene = Scene::create();
+	if (instance == nullptr)
+	{
+		instance = Scene::create();
 
-	Layer* layer = StageScene::create();
-	scene->addChild(layer);
+		Layer* layer = StageScene::create();
+		instance->addChild(layer);
+	}
 
-	return scene;
+	return instance;
 }
 
 bool StageScene::init()

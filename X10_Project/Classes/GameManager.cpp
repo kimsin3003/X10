@@ -118,6 +118,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	}
 
 	m_colliderManager->EraseDeadColliders();
+	m_targetManager->EraseDeadTargets();
 
 	if (!m_targetManager->HasEnemy())
 	{

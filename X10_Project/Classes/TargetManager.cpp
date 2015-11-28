@@ -67,7 +67,7 @@ void TargetManager::EraseDeadTargets()
 	for (int i = 0; i < m_targets.size(); i++)
 	{
 		target = m_targets.at(i);
-		if (!target->ToBeErased())
+		if (target->ToBeErased())
 		{
 			m_targets.erase(m_targets.begin() + i);
 		}

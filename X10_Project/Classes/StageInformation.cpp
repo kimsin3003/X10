@@ -112,6 +112,8 @@ StageInformation::StageInformation(int stage)
 	}
 	else if (stage == 2)
 	{
+		///# 아래 상수값 코드상에 직접 사용하고 있는데, technical debt...
+		/// 만일 테스트 용이라면 테스트용이라고 꼭 명시를 할 것.
 		info = TargetInfo("Enemy", Point(160, 280), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
@@ -213,7 +215,8 @@ StageInformation::StageInformation(int stage)
 
 StageInformation::~StageInformation()
 {
-
+	m_targetInfoList.clear();
+	m_bulletInfoList.clear();
 }
 
 int StageInformation::GetTargetCount()

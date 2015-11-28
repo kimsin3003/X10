@@ -107,10 +107,11 @@ bool MCScene::init()
 	animFrames.reserve(frameCut);
 	for (int i = 0; i < frameCut; i++)
 		animFrames.pushBack(SpriteFrame::create("res/animSprite2.png", Rect(AniCharWidth * i*3, AniCharheight, AniCharWidth, AniCharheight)));
+
 	// create the animation out of the frame
 	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
 	Animate* animate = Animate::create(animation);
-	RepeatForever *aniAction = RepeatForever::create(animate); //액션을 만들어서
+	RepeatForever* aniAction = RepeatForever::create(animate); //액션을 만들어서
 
 	// run it and repeat it forever
 	auto jump = JumpBy::create(0.5, Point(0, 0), 20, 1);

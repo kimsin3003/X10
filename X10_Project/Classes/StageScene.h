@@ -8,7 +8,7 @@ public:
 		STAR_WIDTH = 20,
 		STAR_HEIGHT = 20
 	};
-	const char* BGIMG_FILE = "res/starry_night.jpg";
+	const char* BGIMG_FILE = "res/starry_night.jpg"; ///# 이런거 나중에 전부 기술부채가 된다. 한군데 빼서 모아놓도록
 
 
 	static Scene* GetInstance();

@@ -1,6 +1,7 @@
 #pragma once
 #include "Target.h"
 
+///# 네이밍 및 코딩 컨벤션
 class Mirror_y : public Target
 {
 public:

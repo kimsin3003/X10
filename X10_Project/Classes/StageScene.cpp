@@ -61,6 +61,8 @@ bool StageScene::init()
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu);
 
+	///# 리턴값 어디갔노?
+
 }
 
 Sprite* StageScene::LoadBackground()

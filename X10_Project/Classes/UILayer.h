@@ -4,7 +4,8 @@ class UILayer : public Layer
 {
 public:
 	
-	enum CONSTANT{
+	enum CONSTANT
+	{
 		PAUSE_BUTTON_WIDTH = 40,
 		PAUSE_BUTTON_HEIGHT = 40
 	};

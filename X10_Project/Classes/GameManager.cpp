@@ -7,6 +7,7 @@
 //스테이지
 #include "StageInformation.h"
 #include "StageScene.h"
+#include "GameScene.h"
 //매니저
 #include "ColliderManager.h"
 #include "TargetManager.h"
@@ -39,10 +40,22 @@ GameManager::GameManager()
 	m_targetManager = new TargetManager();
 }
 
+
+void GameManager::Reset()
+{
+	m_sling = nullptr;
+	delete m_colliderManager;
+	m_colliderManager = new ColliderManager();
+	delete m_targetManager;
+	m_targetManager = new TargetManager();
+}
+
+
 GameManager::~GameManager() {}
 
 void GameManager::SetStage(GameLayer* gameLayer, int stageNumber)
 {	
+	Reset();
 	StageInformation stageInfo(stageNumber);
 	m_targetManager->InitTargets(&stageInfo);
 	AppendTargetsToLayer(gameLayer);
@@ -120,25 +133,15 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	if (!m_targetManager->HasEnemy())
 	{
-		WinProgress();
-		Director::getInstance()->replaceScene(StageScene::createScene());
+		WinProgress(uiLayer);
+		
 	}
 
 	else if (!m_colliderManager->HasBulletToShot()){
-		
+		FailProgress(uiLayer);
 	}
 }
 
-void GameManager::WinProgress()
-{
-	FileStuff::UpdateLastStage(m_stage + 1);
-}
-
-
-void GameManager::FailProgress()
-{
-
-}
 
 void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 {
@@ -177,4 +180,18 @@ void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 			}
 		}
 	}
+}
+
+void GameManager::WinProgress(UILayer* uiLayer)
+{
+
+	FileStuff::UpdateLastStage(m_stage + 1);
+	uiLayer->MakeSuccessWidget(m_stage);
+	
+}
+
+
+void GameManager::FailProgress(UILayer* uiLayer)
+{
+	uiLayer->MakeFailWidget(m_stage);
 }

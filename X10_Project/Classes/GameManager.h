@@ -28,10 +28,11 @@ private:
 	GameManager();
 	~GameManager();
 	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
-	void WinProgress();
-	void FailProgress();
+	void WinProgress(UILayer* uiLayer);
+	void FailProgress(UILayer* uiLayer);
 
 private:
+	void Reset();
 	static GameManager* m_instance;
 	ColliderManager* m_colliderManager;
 	TargetManager* m_targetManager;

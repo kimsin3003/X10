@@ -7,7 +7,7 @@
 bool Explosion::init()
 {
 	m_radius = 0;
-	m_maxRadius = 3.0f;
+	m_maxRadius = 30.0f;
 
 	m_lifeTime = 2.0f;
 	m_lifeDecrease = Director::getInstance()->getDeltaTime();
@@ -24,9 +24,7 @@ bool Explosion::init()
 	m_explosion->setStartSizeVar(0);
 	m_explosion->setEndSizeVar(0);
 	m_explosion->setSpeedVar(0);
-	m_explosion->setSpeed(10);
-	//m_explosion->setStartRadius(10);
-	//m_explosion->setEndRadius(50);
+	m_explosion->setSpeed(m_maxRadius / m_lifeTime);
 	m_explosion->setPosition(Point::ZERO);
 	this->addChild(m_explosion);
 	

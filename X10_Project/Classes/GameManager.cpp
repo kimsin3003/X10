@@ -20,7 +20,6 @@
 //½½¸µ
 #include "Sling.h"
 
-using namespace File;
 
 GameManager* GameManager::m_instance = nullptr;
 

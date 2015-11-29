@@ -155,16 +155,16 @@ void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 					m_lastTarget = nullptr;
 			}
 		}
-		else
+		else if ( Explosion* explosion = dynamic_cast<Explosion*>(bullet))
 		{
-			const float explosionRadius = (static_cast<Explosion*>(bullet))->GetBoundingRadius();
-			const Vec2 explosionPosition = (static_cast<Explosion*>(bullet))->getPosition();
+			const float explosionRadius = explosion->GetBoundingRadius();
+			const Vec2 explosionPosition = explosion->getPosition();
 			const Rect targetBoundingBox = target->GetBoundingArea();
 
-			if (targetBoundingBox.intersectsCircle(explosionPosition, explosionRadius))
+			if ( targetBoundingBox.intersectsCircle( explosionPosition, explosionRadius) )
 			{
 				m_lastTarget = target;
-				target->ApplyCollisionEffect(bullet);
+				target->ApplyCollisionEffect(explosion);
 			}
 		}
 	}

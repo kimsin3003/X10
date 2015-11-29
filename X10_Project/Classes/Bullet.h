@@ -30,7 +30,7 @@ public:
 	void ReduceSpeed();
 	void StopAction() { m_stopAction = true; }
 	void StopFlying() { m_isFlying = false; }
-
+	void EraseOn() { m_toBeErased = true; }
 protected:
 	void DecreaseLife();
 	void AddDebrisToParent();

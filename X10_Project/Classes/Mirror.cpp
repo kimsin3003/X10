@@ -12,6 +12,7 @@ bool Mirror::init()
 		return false;
 	}
 
+	m_isEnemy = false;
 	m_spr = Sprite::create(FILE_MIRROR);
 	addChild(m_spr);
 

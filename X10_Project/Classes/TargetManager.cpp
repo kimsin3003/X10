@@ -69,6 +69,8 @@ void TargetManager::EraseDeadTargets()
 		target = m_targets.at(i);
 		if (target->ToBeErased())
 		{
+			target->removeAllChildrenWithCleanup(true);
+			target->removeFromParentAndCleanup(true);
 			m_targets.erase(m_targets.begin() + i);
 		}
 	}

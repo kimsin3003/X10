@@ -9,6 +9,7 @@ bool Bubble::init()
 		return false;
 	}
 
+	m_isEnemy = false;
 	m_spr = Sprite::create(FILE_BUBBLE);
 	addChild(m_spr);
 
@@ -33,7 +34,7 @@ void Bubble::ToSelf(const Bullet* bullet)
 
 		Sequence* action = Sequence::create(
 			DelayTime::create(0.5f),
-		//	RemoveSelf::create(),
+			CallFunc::create(CC_CALLBACK_0(Bubble::EraseOn, this)),
 			NULL);
 
 		m_spr->runAction(action);

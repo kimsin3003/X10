@@ -100,10 +100,10 @@ void Sling::Pull(Event* e)
 	Point startLocation = GetStartLocation();
 	
 	m_shotAngle = startLocation - mouseLocation;
-	if (m_shotAngle.getAngle() < Vec2::ZERO.getAngle())
+	if (m_shotAngle.getAngle() <= Vec2::ZERO.getAngle())
 	{
-		//밑으로 각도가 한계를 넘어가는 것들 수정하는 부분..
-		//아직 안만듬
+		m_shotAngle = Vec2::ZERO;
+		return;
 	}
 
 	m_shotPower = startLocation.getDistance(mouseLocation);
@@ -131,6 +131,18 @@ void Sling::Shot(Event* e)
 {
 	if (m_status != STATUS::PULLING)
 	{
+		return;
+	}
+
+	if (m_shotAngle.getAngle() <= Vec2::ZERO.getAngle())
+	{
+		m_shotAngle = Vec2::ZERO;
+		m_status = STATUS::LOADED;
+		for (int i = 0; i < m_expectLine.size(); i++)
+		{
+			Sprite* dot = m_expectLine.at(i);
+			dot->setVisible(false);
+		}
 		return;
 	}
 

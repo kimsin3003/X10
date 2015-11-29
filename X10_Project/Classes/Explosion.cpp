@@ -2,12 +2,21 @@
 #include "Collider.h"
 #include "Explosion.h"
 
-//Base Class of All Explosions
+Explosion::Explosion() : m_explosion(nullptr),
+		m_lifeDecrease(-1), m_lifeTime(-1), m_radius(-1), m_maxRadius(-1)
+{
 
+}
+
+Explosion::~Explosion()
+{}
+
+
+//Base Class of All Explosions
 bool Explosion::init()
 {
 	m_radius = 0;
-	m_maxRadius = 30.0f;
+	m_maxRadius = DEFAULT_RADIUS;
 
 	m_lifeTime = 2.0f;
 	m_lifeDecrease = Director::getInstance()->getDeltaTime();

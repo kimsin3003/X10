@@ -4,6 +4,10 @@
 
 bool CrossExplosion::init()
 {
+	m_lifeTime = 1.0;
+	m_isFlying = true;
+	m_toBeErased = false;
+	
 	m_radius = 0;
 	m_maxRadius = 2.5f;
 
@@ -17,10 +21,6 @@ bool CrossExplosion::init()
 	m_explosion->setPosition(Point::ZERO);
 
 	this->addChild(m_explosion);
-
-	m_lifeTime = 1.0 * Director::getInstance()->getFrameRate();
-	m_isFlying = true;
-	m_toBeErased = false;
 
 	return true;
 }

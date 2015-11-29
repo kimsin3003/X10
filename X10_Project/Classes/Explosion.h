@@ -11,7 +11,14 @@ public:
 	const float& GetBoundingRadius();
 	bool IsBullet() { return false; }
 
+	enum{
+		DEFAULT_RADIUS = 30
+	};
+
 protected:
+	Explosion();
+	virtual ~Explosion();
+
 	void RemoveSelf();
 	ParticleExplosion* m_explosion;
 	float m_lifeTime;

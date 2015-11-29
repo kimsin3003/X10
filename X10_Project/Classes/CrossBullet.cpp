@@ -4,6 +4,11 @@
 #include "Explosion.h"
 #include "CrossExplosion.h"
 
+CrossBullet::CrossBullet() : DELTA_POS(Explosion::DEFAULT_RADIUS)
+{
+
+}
+
 bool CrossBullet::init()
 {
 	Bullet::init();
@@ -51,7 +56,7 @@ void CrossBullet::Act()
 
 Explosion* CrossBullet::GetExplosion()
 {
-	Explosion* explosion = CrossExplosion::create();
+	Explosion* explosion = Explosion::create();
 
 	explosion->setRotation(getRotation());
 

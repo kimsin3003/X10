@@ -11,6 +11,7 @@ public:
 	Explosion* GetExplosion();
 
 private:
+	CrossBullet();
 	int m_pattern;
 
 	enum PATTERN
@@ -26,6 +27,6 @@ private:
 	
 	
 	float tmp_BULLET_REDUCTIONSPEEDTIME; //임시로 
-	const float DELTA_POS = 17.5f;
+	const float DELTA_POS; //constructor 에서 초기화
 	const float DELTA_TIME = 0.5f;
 };

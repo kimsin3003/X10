@@ -59,26 +59,37 @@ void ColliderManager::EraseDeadColliders()
 	for (int i = 0; i < m_colliders.size(); i++)
 	{
 		collider = m_colliders.at(i);
-		if (!collider->IsBullet() && collider->ToBeErased())
+		if (collider->ToBeErased())
 		{
+			if (collider->IsBullet())
+			{
+				m_curBulletIndex--;
+				m_BulletNum--;
+			}
 			m_colliders.erase(m_colliders.begin() + i);
 		}
 	}
 }
 
-//반드시 쏠 불렛이 있는지 체크하고 불렛을 가져가야한다.
 bool ColliderManager::HasBulletToShot()
 {
-	if (m_curBulletIndex < m_BulletNum)
+	Bullet* bullet = nullptr;
+	for (int i = 0; i < m_BulletNum; i++)
 	{
-		return true;
+		bullet = static_cast<Bullet*>(m_colliders.at(i));
+		if (bullet->IsActing() == false && bullet->IsFlying() == false)
+		{
+			m_curBulletIndex = i;
+			return true;
+		}
 	}
+	m_curBulletIndex = -1;
 	return false;
 }
 
 Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 {
-	if (m_curBulletIndex < m_BulletNum)
+	if (m_curBulletIndex != -1)
 	{
 		Bullet* bullet = static_cast<Bullet*>(m_colliders.at(m_curBulletIndex));
 

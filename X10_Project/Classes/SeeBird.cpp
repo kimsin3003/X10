@@ -42,7 +42,6 @@ void SeeBird::ToBullet(Bullet* bullet)
 		Size winSize = Director::getInstance()->getWinSize();
 
 		bullet->StopAction();
-		bullet->StopFlying();
 
 		bullet->setPosition(getPosition());
 		

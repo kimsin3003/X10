@@ -29,6 +29,7 @@ public:
 	void TimeUp();
 	void ReduceSpeed();
 	void StopAction() { m_stopAction = true; }
+	bool IsActing() { return m_stopAction; }
 	void StopFlying() { m_isFlying = false; }
 	void EraseOn() { m_toBeErased = true; }
 protected:

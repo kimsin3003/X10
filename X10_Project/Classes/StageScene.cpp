@@ -4,7 +4,7 @@
 #include "GameScene.h"
 #include "UILayer.h"
 #include "GameManager.h"
-#include "File.h"
+#include "FileStuff.h"
 
 Scene* StageScene::createScene()
 {
@@ -46,7 +46,7 @@ void StageScene::SetupButtons()
 	Size buttonSize = pauseButton->getContentSize();
 	menuList.pushBack(pauseButton);
 
-	int advancedState = File::GetLastStage() + 1;
+	int advancedState = FileStuff::GetLastStage();
 
 	for (int i = 0; i <= advancedState; i++)
 	{

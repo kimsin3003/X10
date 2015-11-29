@@ -2,7 +2,7 @@
 #include <iostream>
 #include <fstream>
 
-namespace File
+namespace FileStuff
 {
 	
 	int GetLastStage();

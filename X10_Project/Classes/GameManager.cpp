@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "GameManager.h"
-#include "File.h"
+#include "FileStuff.h"
 //·¹ÀÌ¾î
 #include "GameLayer.h"
 #include "UILayer.h"
@@ -120,16 +120,25 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	if (!m_targetManager->HasEnemy())
 	{
-		EndStage();
+		WinProgress();
 		Director::getInstance()->replaceScene(StageScene::createScene());
+	}
+
+	else if (!m_colliderManager->HasBulletToShot()){
+		
 	}
 }
 
-void GameManager::EndStage()
+void GameManager::WinProgress()
 {
-	File::UpdateLastStage(m_stage);
+	FileStuff::UpdateLastStage(m_stage + 1);
 }
 
+
+void GameManager::FailProgress()
+{
+
+}
 
 void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 {

@@ -82,7 +82,7 @@
     <ClCompile Include="..\Classes\Mirror.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\File.cpp">
+    <ClCompile Include="..\Classes\FileStuff.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
   </ItemGroup>
@@ -168,7 +168,7 @@
     <ClInclude Include="..\Classes\Mirror.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\File.h">
+    <ClInclude Include="..\Classes\FileStuff.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>

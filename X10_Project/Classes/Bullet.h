@@ -3,6 +3,7 @@
 #include "Collider.h"
 #include "Explosion.h"
 
+
 class Bullet : public Collider
 {
 public:
@@ -50,8 +51,7 @@ protected:
 
 	bool m_shouldExplode;
 	bool m_stopAction;
-	const char* FILE_NAME= "res/firework.png";
-
+	
 	Size m_screen;
 
 	enum BULLET_CONFIG

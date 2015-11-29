@@ -1,8 +1,11 @@
 #include "stdafx.h"
 #include "FileStuff.h"
 
-extern const char* LastStageFile = "../Resources/files/last_stage.txt";
-extern const char* StageScene_Background_IMG_FILE = "res/starry_night.jpg";
+namespace FileStuff
+{
+	extern const char* LastStageFile = "../Resources/files/last_stage.txt";
+	extern const char* StageScene_Background_IMG_FILE = "res/starry_night.jpg";
+}
 
 int FileStuff::GetLastStage()
 {

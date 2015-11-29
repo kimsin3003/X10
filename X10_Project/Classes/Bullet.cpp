@@ -27,9 +27,9 @@ bool Bullet::init()
 	m_body = MakeBody();
 	addChild(m_body);
 
-
+	//부스러기 만드는 부분.
 	CallFunc* callback = CallFunc::create(CC_CALLBACK_0(Bullet::AddDebrisToParent, this));
-	Sequence* action = Sequence::create(DelayTime::create(0.05f),callback,NULL);
+	Sequence* action = Sequence::create(DelayTime::create(0.15f),callback,NULL);
 	RepeatForever* makeDebris = RepeatForever::create(action);
 	this->runAction(makeDebris);
 

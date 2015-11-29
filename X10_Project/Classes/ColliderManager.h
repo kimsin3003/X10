@@ -7,8 +7,7 @@ class Sling;
 class ColliderManager
 {
 public:
-	ColliderManager() {}
-	~ColliderManager() {} ///# 구현이 없으면 선언조차 하지 말 것
+	~ColliderManager() { m_colliders.clear(); }
 	
 	void InitBullets(StageInformation* si);
 	void ResetBullets();

@@ -1,10 +1,10 @@
 #include "stdafx.h"
-#include "File.h"
+#include "FileStuff.h"
 
 extern const char* LastStageFile = "../Resources/files/last_stage.txt";
 extern const char* StageScene_Background_IMG_FILE = "res/starry_night.jpg";
 
-int File::GetLastStage()
+int FileStuff::GetLastStage()
 {
 	ifstream ifs(LastStageFile);
 	char lastStage;
@@ -19,8 +19,11 @@ int File::GetLastStage()
 	return (int)(lastStage - '0');
 }
 
-void File::UpdateLastStage(int stageNum)
+void FileStuff::UpdateLastStage(int stageNum)
 {
-	ofstream ofs(LastStageFile);
-	ofs << (char)('0' + stageNum);
+	if (GetLastStage() < stageNum)
+	{
+		ofstream ofs(LastStageFile);
+		ofs << (char)('0' + stageNum);
+	}
 }

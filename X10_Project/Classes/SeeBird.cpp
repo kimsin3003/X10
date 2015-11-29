@@ -10,6 +10,7 @@ bool SeeBird::init()
 		return false;
 	}
 
+	m_isEnemy = false; 
 	m_spr = Sprite::create(FILE_SEEBIRD);
 
 	Size winSize = Director::getInstance()->getWinSize();
@@ -23,7 +24,7 @@ bool SeeBird::init()
 
 	Sequence* act = Sequence::create(
 						DelayTime::create(RandomHelper::random_real(3.0f, 9.0f)),
-							MoveBy::create(3.0f, Point(-(winSize.width + BIRD_WIDTH), 0)),
+							MoveBy::create(3.0f, Point(-(winSize.width + BIRD_WIDTH*3), 0)),
 							//RemoveSelf::create(),
 							NULL);
 
@@ -31,11 +32,6 @@ bool SeeBird::init()
 	
 	return true;
 }
-
-//나중에 벡터에서 삭제될 수 있도록 
-//bullet의 toBeErased 값을 조정하는 방향
-//CC_CALLBACK_01 을 활용 
-///# 이참에 CC_CALLBACK계열의 동작 원리도 공부할 것: 이런 새로운 종류의(?) 매크로나 템플릿을 보면 그걸 파봐서 공부하는 습관을 들이도록..
 
 void SeeBird::ToBullet(Bullet* bullet)
 {
@@ -46,12 +42,13 @@ void SeeBird::ToBullet(Bullet* bullet)
 		Size winSize = Director::getInstance()->getWinSize();
 
 		bullet->StopAction();
-		bullet->StopFlying();
 
 		bullet->setPosition(getPosition());
+		
 		Sequence* act = Sequence::create(
 			DelayTime::create(0.5f),
 			MoveBy::create(1.0f, Point(-winSize.width - 10, 0)),
+			CallFunc::create(CC_CALLBACK_0(Bullet::EraseOn, bullet)),
 			NULL);
 
 		bullet->runAction(act);
@@ -70,7 +67,7 @@ void SeeBird::ToSelf(const Bullet* bullet)
 
 		Sequence* act = Sequence::create(
 			DelayTime::create(0.5f),
-			MoveBy::create(1.0f, Point(-winSize.width - 10, 0)),
+			MoveBy::create(1.0f, Point(-winSize.width - BIRD_WIDTH * 2, 0)),
 			NULL);
 
 		m_spr->runAction(act);
@@ -79,6 +76,7 @@ void SeeBird::ToSelf(const Bullet* bullet)
 			DelayTime::create(2.00f),
 			MoveBy::create(2.0f, Point(winSize.width / 2 + 100, -(getPosition().y))),
 			DelayTime::create(2.5f),
+			CallFunc::create(CC_CALLBACK_0(SeeBird::EraseOn, this)),
 			RemoveSelf::create(),
 			NULL);
 

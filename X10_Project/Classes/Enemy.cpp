@@ -9,9 +9,9 @@ bool Enemy::init()
 		return false;
 	}
 
+	m_isEnemy = true;
 	m_spr = Sprite::create(FILE_ENEMY);
 	addChild(m_spr);
-	m_isEnemy = true;
 
 	return true;
 }

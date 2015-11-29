@@ -13,6 +13,7 @@ bool Star::init()
 	}
 	m_spr = Sprite::create(FILE_STAR_SAD);
 	addChild(m_spr);
+	m_isEnemy = false;
 	m_applyEffectToMe = true;
 	m_applyEffectToBullet = true;
 	return true;

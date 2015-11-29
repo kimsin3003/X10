@@ -12,6 +12,7 @@ bool Cloud::init()
 		return false;
 	}
 
+	m_isEnemy = false;
 	m_spr = Sprite::create(FILE_CLOUD);
 	addChild(m_spr);
 
@@ -33,6 +34,7 @@ void Cloud::ToSelf(const Bullet* bullet)
 
 		Sprite* spr_00 = Sprite::create(FILE_CLOUD_LEFT);
 		Sprite* spr_01 = Sprite::create(FILE_CLOUD_RIGHT);
+
 		addChild(spr_00);
 		addChild(spr_01);
 
@@ -43,6 +45,7 @@ void Cloud::ToSelf(const Bullet* bullet)
 			MoveBy::create(1.0f, Vec2(-30, 0)),
 			RemoveSelf::create(),
 			NULL);
+
 		Sequence* action_01 = Sequence::create(
 			MoveBy::create(1.0f, Vec2(30, 0)),
 			RemoveSelf::create(),

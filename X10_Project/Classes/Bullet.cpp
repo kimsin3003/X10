@@ -27,7 +27,20 @@ bool Bullet::init()
 	m_body = MakeBody();
 	addChild(m_body);
 
+
+	CallFunc* callback = CallFunc::create(CC_CALLBACK_0(Bullet::AddDebrisToParent, this));
+	Sequence* action = Sequence::create(DelayTime::create(0.05f),callback,NULL);
+	RepeatForever* makeDebris = RepeatForever::create(action);
+	this->runAction(makeDebris);
+
 	return true;
+}
+
+void Bullet::AddDebrisToParent()
+{
+	if (auto gameLayer = this->getParent()){
+		gameLayer->addChild(MakeDebris());
+	}
 }
 
 Sprite* Bullet::MakeBody()
@@ -53,6 +66,16 @@ Sprite* Bullet::MakeBody()
 	return body;
 }
 
+Sprite* Bullet::MakeDebris()
+{
+	Sprite* debris = Sprite::create("res/debris.png");
+	debris->setPosition(this->getPosition());
+	MoveBy* fall = MoveBy::create(2.0, Vec2(0,-100));
+	auto ease = EaseIn::create(fall, 2.0);
+	Sequence* action = Sequence::create(ease, RemoveSelf::create(), NULL);
+	debris->runAction(action);
+	return debris;
+}
 
 void Bullet::Act()
 {

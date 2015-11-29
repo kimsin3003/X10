@@ -33,6 +33,8 @@ public:
 
 protected:
 	void DecreaseLife();
+	void AddDebrisToParent();
+	Sprite* MakeDebris();
 	Sprite* MakeBody();
 	Sprite* m_body;
 

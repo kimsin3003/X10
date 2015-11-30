@@ -82,8 +82,11 @@
     <ClCompile Include="..\Classes\Mirror.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\ConstVars.cpp">
+      <Filter>Namspace</Filter>
+    </ClCompile>
     <ClCompile Include="..\Classes\FileStuff.cpp">
-      <Filter>Scene</Filter>
+      <Filter>Namspace</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -168,8 +171,11 @@
     <ClInclude Include="..\Classes\Mirror.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\ConstVars.h">
+      <Filter>Namspace</Filter>
+    </ClInclude>
     <ClInclude Include="..\Classes\FileStuff.h">
-      <Filter>Scene</Filter>
+      <Filter>Namspace</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
@@ -199,6 +205,9 @@
     </Filter>
     <Filter Include="OldNTest">
       <UniqueIdentifier>{65107cc2-2ca7-4692-90bb-48572cff323b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Namspace">
+      <UniqueIdentifier>{22db0e7a-d753-4f2e-8857-0cabf3429c31}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

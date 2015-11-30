@@ -146,7 +146,7 @@ StageInformation::StageInformation(int stage)
 			}
 		}
 
-		//Bullet 5°³
+		//Bullet 5°³`
 		string bulletType = "Bullet";
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);

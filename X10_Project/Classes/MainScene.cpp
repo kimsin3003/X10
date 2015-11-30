@@ -7,7 +7,7 @@
 #include "Sling.h"
 #include "GameManager.h"
 #include "StageScene.h"
-#include "FileStuff.h"
+#include "ConstVars.h"
 
 Scene* MainScene::createScene()
 {
@@ -81,7 +81,7 @@ bool MainScene::init()
 
 void MainScene::ChangeToGameScene(Ref* pSender)
 {
-	StageScene::GotoStage(pSender, FileStuff::GetLastStage());
+	StageScene::GotoStage(pSender, UserDefault::getInstance()->getIntegerForKey(ConstVars::lastStage));
 }
 
 void MainScene::ChangeToStageScene(Ref* pSender)

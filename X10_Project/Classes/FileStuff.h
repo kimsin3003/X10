@@ -4,8 +4,5 @@
 
 namespace FileStuff
 {
-	
-	int GetLastStage();
-	void UpdateLastStage(int stageNum);
 
 }

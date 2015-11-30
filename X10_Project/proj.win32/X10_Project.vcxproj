@@ -152,6 +152,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Cloud.cpp" />
     <ClCompile Include="..\Classes\Collider.cpp" />
     <ClCompile Include="..\Classes\ColliderManager.cpp" />
+    <ClCompile Include="..\Classes\ConstVars.cpp" />
     <ClCompile Include="..\Classes\CrossBullet.cpp" />
     <ClCompile Include="..\Classes\CrossExplosion.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
@@ -186,6 +187,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Cloud.h" />
     <ClInclude Include="..\Classes\Collider.h" />
     <ClInclude Include="..\Classes\ColliderManager.h" />
+    <ClInclude Include="..\Classes\ConstVars.h" />
     <ClInclude Include="..\Classes\CrossBullet.h" />
     <ClInclude Include="..\Classes\CrossExplosion.h" />
     <ClInclude Include="..\Classes\Enemy.h" />

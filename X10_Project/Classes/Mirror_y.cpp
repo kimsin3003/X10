@@ -3,11 +3,6 @@
 #include "Bullet.h"
 #include "FileStuff.h"
 
-namespace FileStuff
-{
-	const string MIRROR_Y = "res/target/flat_mirror.png";
-}
-
 bool Mirror_y::init()
 {
 	if (!Target::init())

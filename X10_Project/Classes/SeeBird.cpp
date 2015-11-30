@@ -4,11 +4,6 @@
 #include "SeeBird.h"
 #include "FileStuff.h"
 
-namespace FileStuff
-{
-	const string SEEBIRD = "res/target/seagull.png";
-	const string FEATHER = "res/target/Feather.png";
-}
 
 bool SeeBird::init()
 {

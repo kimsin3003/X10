@@ -12,7 +12,5 @@ private:
 	void ToSelf(const Explosion* explosion);
 
 	///# 두말하면 잔소리..
-	const string FILE_CLOUD = "res/target/Cloud.png";
-	const string FILE_CLOUD_LEFT = "res/target/CloudLeft.png";
-	const string FILE_CLOUD_RIGHT = "res/target/CloudRight.png";
+	
 };

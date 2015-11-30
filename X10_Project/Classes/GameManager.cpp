@@ -65,6 +65,7 @@ void GameManager::SetStage(GameLayer* gameLayer, int stageNumber)
 	m_colliderManager->InitBullets(&stageInfo);
 	m_sling = SetSling(gameLayer);
 	m_stage = stageNumber;
+	m_isJudged = false;
 }
 
 Sling* GameManager::SetSling(GameLayer* gameLayer)

@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "StageScene.h"
 #include "GameManager.h"
+#include "FileStuff.h"
 
 UILayer* UILayer::createUILayer()
 {
@@ -21,8 +22,8 @@ bool UILayer::init()
 
 	/* Pause Button */
 	auto pauseButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		FileStuff::PauseButton,
+		FileStuff::PauseButton,
 		CC_CALLBACK_1(UILayer::menuButtonCallback, this));
 	Size buttonSize = pauseButton->getContentSize();
 	float scale = MIN(
@@ -54,8 +55,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//다시시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
-		"RetryButton.png",
-		"RetryButton.png",
+		FileStuff::RetryButton,
+		FileStuff::RetryButton,
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -70,8 +71,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//스테이지 선택화면 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		"NextButton.png",
-		"NextButton.png",
+		FileStuff::NextButton,
+		FileStuff::NextButton,
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();
@@ -88,8 +89,6 @@ void UILayer::MakeSuccessWidget(int m_stage)
 	auto menu = Menu::create(retryButton, stageSceneButton, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu);
-
-
 }
 
 
@@ -106,8 +105,8 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	//다시시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
-		"RetryButton.png",
-		"RetryButton.png",
+		FileStuff::RetryButton,
+		FileStuff::RetryButton,
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -122,8 +121,8 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	//스테이지 선택화면으로 이동하는 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		"BackButton.png",
-		"BackButton.png",
+		FileStuff::BackButton,
+		FileStuff::BackButton,
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();

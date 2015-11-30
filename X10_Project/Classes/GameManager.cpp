@@ -200,7 +200,6 @@ void GameManager::WinProgress(UILayer* uiLayer)
 	uiLayer->MakeSuccessWidget(m_stage);
 }
 
-
 void GameManager::FailProgress(UILayer* uiLayer)
 {
 	uiLayer->MakeFailWidget(m_stage);

@@ -15,6 +15,7 @@
 #include <functional>
 using namespace stdext; ///# 이 네임스페이스는 왜? 표준이 아니고 쓸 일도 없고
 
+
 void TargetManager::InitTargets(StageInformation* si)
 {
 	ResetTargets();
@@ -23,20 +24,21 @@ void TargetManager::InitTargets(StageInformation* si)
 	m_targets.reserve(m_defaultTargetNumber);
 
 	//각각의 클래스에 맞는 함수포인터를 Target* 반환 형태로 hash_map에 저장
-	typedef hash_map<string,std::function<Target*()>>  TargetInfoMap;
+	typedef StageInformation::TargetInfo::TargetType TargetType;
+	typedef hash_map<TargetType,std::function<Target*()>>  TargetInfoMap;
 	TargetInfoMap targetTypeInfo;
-	targetTypeInfo.insert(TargetInfoMap::value_type("Enemy", Enemy::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type("Mirror", Mirror::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type("Mirror_y", Mirror_y::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type("Cloud", Cloud::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type("Bubble", Bubble::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type("Star", Star::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type("SeeBird", SeeBird::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::ENEMY, Enemy::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::MIRROR, Mirror::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::MIRROR_Y, Mirror_y::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::CLOUD, Cloud::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::BUBBLE, Bubble::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::STAR, Star::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::SEEBIRD, SeeBird::create));
 
 	while (si->HasNextTarget())
 	{
-		//타겟 이름을 불러와서
-		string type = si->GetTargetType();
+		//타겟 타입을 불러와서
+		TargetType type = si->GetTargetType();
 		auto createFunction = targetTypeInfo.at(type);	
 		//거기에 맞는 팩토리 함수 호출
 		Target* target = createFunction();

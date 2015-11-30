@@ -50,6 +50,7 @@ void GameManager::Reset()
 	m_colliderManager = new ColliderManager();
 	delete m_targetManager;
 	m_targetManager = new TargetManager();
+	m_isJudged = false;
 }
 
 

@@ -54,8 +54,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//다시시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		"RetryButton.png",
+		"RetryButton.png",
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -70,8 +70,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//스테이지 선택화면 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		"BackButton.png",
+		"BackButton.png",
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();
@@ -83,26 +83,9 @@ void UILayer::MakeSuccessWidget(int m_stage)
 	stageSceneButton->setScale(stageSceneButtonScale);
 	stageSceneButton->setPosition(visibleSize.width / 2, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
 
-
-	//다음 스테이지로 가는 버튼
-	MenuItemImage* nextStageButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
-		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage + 1));
-
-	Size nextStageButtonSize = nextStageButton->getContentSize();
-
-	float nextStageButtonScale = MIN(
-		BUTTON_WIDTH / nextStageButtonSize.width,
-		BUTTON_HEIGHT / nextStageButtonSize.height);
-
-	nextStageButton->setScale(nextStageButtonScale);
-	nextStageButton->setPosition(visibleSize.width / 2 + BUTTON_WIDTH, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
-
-
 	/*Create Menu*/
 	this->addChild(successMessage);
-	auto menu = Menu::create(retryButton, stageSceneButton, nextStageButton, NULL);
+	auto menu = Menu::create(retryButton, stageSceneButton, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu);
 
@@ -123,8 +106,8 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	//다시시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		"RetryButton.png",
+		"RetryButton.png",
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -139,8 +122,8 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	//스테이지 선택화면으로 이동하는 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		"BackButton.png",
+		"BackButton.png",
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();
@@ -151,8 +134,6 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	stageSceneButton->setScale(stageSceneButtonScale);
 	stageSceneButton->setPosition(visibleSize.width / 2 + BUTTON_WIDTH, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
-
-
 
 	/*Create Menu*/
 	this->addChild(successMessage);

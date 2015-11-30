@@ -1,12 +1,97 @@
 # X10  
   
-week6 release 브랜치 : 플레이 가능한 레밸 디자인 3개 + 추가적인 게임 오브젝트들(See Bird, 천장 거울, 십자 폭죽) 
-  
-벡터 반환 문제 : friend 키워드를 사용하여 해결  
-  
-폭죽 속도 : 모든 폭죽이 같은 속도를 가지게 설정. 폭죽의 감속을 좀 더 자연스럽게 수정
-폭발(Bug) : 타깃과 충돌 체크가 안 됨
-      
-불릿과 목표물 간의 충돌 체크의 정밀도 향상  
+  슽스텡스텡지스텡지ㅣ 선선택선태ㄱ선태ㄱ홤선태ㄱ화면 관관련
+ View all issues 
 
-2015 NEXT 개경프 - 김태우, 김명찬, 최진욱
+최종으로 깬 스테이지 저장 위치를 파일에서 UserDefault로 변경  enhancementView all enhancement issues  
+ #74 opened an hour ago by kimsin3003View all issues opened by kimsin3003   7주차 완결된 게임!  View all issues in this milestone  
+
+@kimsin3003 View everything assigned to kimsin3003 
+
+ 0  
+
+  
+ View all issues 
+
+스테이지가 무한이 생기는 문제  enhancementView all enhancement issues  
+ #73 opened an hour ago by kimsin3003View all issues opened by kimsin3003   7주차 완결된 게임!  View all issues in this milestone  
+
+@kimsin3003 View everything assigned to kimsin3003 
+
+ 0  
+
+  
+ View all issues 
+
+스테이지 선택화면 전환 로직  coreView all core issues  
+ #70 opened 2 days ago by kimsin3003View all issues opened by kimsin3003   7주차 완결된 게임!  View all issues in this milestone  
+
+@kimsin3003 View everything assigned to kimsin3003 
+
+ 0  
+
+  
+ View all issues 
+
+게임 종료 로직 구현  coreView all core issues  
+ #69 opened 4 days ago by kimsin3003View all issues opened by kimsin3003   7주차 완결된 게임!  View all issues in this milestone  
+
+@kimsin3003 View everything assigned to kimsin3003 
+
+ 0  
+
+  
+ View all issues 
+
+승리/패배 판정  
+#59 opened 7 days ago by FeatherHubView all issues opened by FeatherHub   7주차 완결된 게임!  View all issues in this milestone  
+
+@kimsin3003 View everything assigned to kimsin3003 
+
+ 0  
+
+  
+ View all issues 
+
+제거해야 할 Target 들 제거 방법  coreView all core issues enhancementView all enhancement issues  
+ #57 opened 8 days ago by FeatherHubView all issues opened by FeatherHub   7주차 완결된 게임!  View all issues in this milestone  
+
+@FeatherHub View everything assigned to FeatherHub 
+
+ 1  
+
+  
+ View all issues 
+
+불릿의 회전에 맞춰서 폭발물의 십자모양 설정하기  TrivialView all Trivial issues  
+ #55 opened 8 days ago by FeatherHubView all issues opened by FeatherHub   7주차 완결된 게임!  View all issues in this milestone  
+
+@FeatherHub View everything assigned to FeatherHub 
+
+ 1  
+
+  
+ View all issues 
+
+ bullet 날아갈때 흔적 남기는 효과 추가.  
+ #48 opened 14 days ago by Paul-KimView all issues opened by Paul-Kim   7주차 완결된 게임!  View all issues in this milestone  
+
+@Paul-Kim View everything assigned to Paul-Kim 
+
+ 0  
+
+  
+ View all issues 
+
+ Sling 수평보다 더 및으로 각도 안내려가게 수정  
+#28 opened 20 days ago by Paul-KimView all issues opened by Paul-Kim   7주차 완결된 게임!  View all issues in this milestone  
+
+@FeatherHub View everything assigned to FeatherHub 
+
+ 1  
+
+  
+ View all issues 
+
+현재 상태창 추가하기 
+

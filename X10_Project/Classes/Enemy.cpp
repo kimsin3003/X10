@@ -3,12 +3,6 @@
 #include "Bullet.h"
 #include "FileStuff.h"
 
-namespace FileStuff
-{
-	const string ENEMY = "res/target/ufo.png";
-	const string ENEMY_DEAD = "res/enemy_dead.png";
-}
-
 bool Enemy::init()
 {
 	if (!Target::init())

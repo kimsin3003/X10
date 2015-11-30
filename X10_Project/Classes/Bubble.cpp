@@ -3,11 +3,7 @@
 #include "Bubble.h"
 #include "FileStuff.h"
 
-namespace FileStuff
-{
-	const string BUBBLE = "res/target/Bubble2.png";
-	const string BUBBLE_POP = "res/target/BubblePop.png";
-}
+
 
 bool Bubble::init()
 {

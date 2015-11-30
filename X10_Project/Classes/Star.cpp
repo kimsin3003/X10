@@ -6,11 +6,6 @@
 #include "Star.h"
 #include "FileStuff.h"
 
-namespace FileStuff
-{
-	const string STAR_HAPPY = "res/target/StarSad.png";
-	const string STAR_SAD = "res/target/StarHappy.png";
-}
 
 bool Star::init()
 {

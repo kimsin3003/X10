@@ -4,6 +4,7 @@
 #include "Explosion.h"
 #include "Bullet.h"
 #include "Cloud.h"
+#include "FileStuff.h"
 
 bool Cloud::init()
 {
@@ -13,7 +14,7 @@ bool Cloud::init()
 	}
 
 	m_isEnemy = false;
-	m_spr = Sprite::create(FILE_CLOUD);
+	m_spr = Sprite::create(FileStuff::FILE_CLOUD);
 	addChild(m_spr);
 
 	return true;
@@ -32,8 +33,8 @@ void Cloud::ToSelf(const Bullet* bullet)
 
 		m_spr->setVisible(false); 
 
-		Sprite* spr_00 = Sprite::create(FILE_CLOUD_LEFT);
-		Sprite* spr_01 = Sprite::create(FILE_CLOUD_RIGHT);
+		Sprite* spr_00 = Sprite::create(FileStuff::FILE_CLOUD_LEFT);
+		Sprite* spr_01 = Sprite::create(FileStuff::FILE_CLOUD_RIGHT);
 
 		addChild(spr_00);
 		addChild(spr_01);

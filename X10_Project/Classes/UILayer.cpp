@@ -4,6 +4,7 @@
 #include "GameScene.h"
 #include "StageScene.h"
 #include "GameManager.h"
+#include "FileStuff.h"
 
 UILayer* UILayer::createUILayer()
 {
@@ -21,8 +22,8 @@ bool UILayer::init()
 
 	/* Pause Button */
 	auto pauseButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		FileStuff::PauseButton,
+		FileStuff::PauseButton,
 		CC_CALLBACK_1(UILayer::menuButtonCallback, this));
 	Size buttonSize = pauseButton->getContentSize();
 	float scale = MIN(
@@ -54,8 +55,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//다시시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		FileStuff::PauseButton,
+		FileStuff::PauseButton,
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -70,8 +71,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//스테이지 선택화면 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		FileStuff::PauseButton,
+		FileStuff::PauseButton,
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();
@@ -86,8 +87,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//다음 스테이지로 가는 버튼
 	MenuItemImage* nextStageButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		FileStuff::PauseButton,
+		FileStuff::PauseButton,
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage + 1));
 
 	Size nextStageButtonSize = nextStageButton->getContentSize();
@@ -123,8 +124,8 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	//다시시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		FileStuff::PauseButton,
+		FileStuff::PauseButton,
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -139,8 +140,8 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	//스테이지 선택화면으로 이동하는 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		FileStuff::PauseButton,
+		FileStuff::PauseButton,
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();

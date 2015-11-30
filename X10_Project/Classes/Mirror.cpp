@@ -6,11 +6,7 @@
 #include "Mirror.h"
 #include "FileStuff.h"
 
-namespace FileStuff
-{
-	const string MIRROR = "res/target/Mirror.png";
-	const string MIRROR_ANGRY = "res/target/MirrorAngry.png";
-}
+
 
 bool Mirror::init()
 {

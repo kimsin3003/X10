@@ -4,10 +4,6 @@
 #include "ColliderManager.h"
 #include "FileStuff.h"
 
-namespace FileStuff
-{
-	const char* SlingLineDot = "res/dot.png";
-}
 
 bool Sling::init()
 {

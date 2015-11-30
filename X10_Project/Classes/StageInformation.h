@@ -29,8 +29,8 @@ private:
 		float m_scale;
 
 		TargetInfo() : TargetInfo("", Point::ZERO, 0, 0) {}
-		TargetInfo(string str, Point p, float r = 0.0, float scale = 1.0) 
-			: m_typeName(str), m_position(p), m_rotation(r), m_scale(scale)
+		TargetInfo(string str, Point p, float r, float s) 
+			: m_typeName(str), m_position(p), m_rotation(r), m_scale(s)
 		{}
 		~TargetInfo(){}
 	};

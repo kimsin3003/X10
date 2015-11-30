@@ -2,13 +2,6 @@
 #include "Target.h"
 #include "Bullet.h"
 #include "SeeBird.h"
-#include "FileStuff.h"
-
-namespace FileStuff
-{
-	const string SEEBIRD = "res/target/seagull.png";
-	const string FEATHER = "res/target/Feather.png";
-}
 
 bool SeeBird::init()
 {
@@ -18,7 +11,7 @@ bool SeeBird::init()
 	}
 
 	m_isEnemy = false; 
-	m_spr = Sprite::create(FileStuff::SEEBIRD);
+	m_spr = Sprite::create(FILE_SEEBIRD);
 
 	Size winSize = Director::getInstance()->getWinSize();
 	
@@ -87,7 +80,7 @@ void SeeBird::ToSelf(const Bullet* bullet)
 			RemoveSelf::create(),
 			NULL);
 
-		m_feather = Sprite::create(FileStuff::FEATHER);
+		m_feather = Sprite::create(FILE_FEATHER);
 		addChild(m_feather);
 
 		m_feather->setPosition(-(getPosition().x+50), 0);

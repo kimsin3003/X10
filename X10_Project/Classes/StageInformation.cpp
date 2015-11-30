@@ -56,16 +56,16 @@ StageInformation::StageInformation(int stage)
 	else if (stage == 1)
 	{
 
-		info = TargetInfo("Enemy", Point(200, 280), 0, 1.03f / 2);
+		info = TargetInfo("Enemy", Point(200, 280), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Enemy", Point(150, 260), 0, 1.03f / 2);
+		info = TargetInfo("Enemy", Point(150, 260), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Enemy", Point(150, 220), 0, 1.03f / 2);
+		info = TargetInfo("Enemy", Point(150, 220), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Enemy", Point(200, 200), 0, 1.03f / 2);
+		info = TargetInfo("Enemy", Point(200, 200), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
 		// 		info = TargetInfo("Enemy", Point(Director::getInstance()->getVisibleSize().width - 100, 250), 0, 0.03f / 2);
@@ -114,7 +114,7 @@ StageInformation::StageInformation(int stage)
 	{
 		///# 아래 상수값 코드상에 직접 사용하고 있는데, technical debt...
 		/// 만일 테스트 용이라면 테스트용이라고 꼭 명시를 할 것.
-		info = TargetInfo("Enemy", Point(160, 280), 0, 1.03f);
+		info = TargetInfo("Enemy", Point(160, 280), 0, 0.03f / 2);
 		m_targetInfoList.push_back(info);
 
 		for (int j = 0; j <= 17; j++)
@@ -174,7 +174,7 @@ StageInformation::StageInformation(int stage)
 		m_targetInfoList.push_back(info);
 
 
-		info = TargetInfo("Enemy", Point(300, 360), 0, 3.0f);
+		info = TargetInfo("Enemy", Point(300, 360), 0, 0.02f);
 		m_targetInfoList.push_back(info);
 		info = TargetInfo("Mirror", Point(0, 360), 0, 1.5);
 		m_targetInfoList.push_back(info);

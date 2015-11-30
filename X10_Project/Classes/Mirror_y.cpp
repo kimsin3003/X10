@@ -1,12 +1,6 @@
 #include "stdafx.h"
 #include "Mirror_y.h"
 #include "Bullet.h"
-#include "FileStuff.h"
-
-namespace FileStuff
-{
-	const string MIRROR_Y = "res/target/flat_mirror.png";
-}
 
 bool Mirror_y::init()
 {
@@ -16,7 +10,7 @@ bool Mirror_y::init()
 	}
 
 	m_isEnemy = false;
-	m_spr = Sprite::create(FileStuff::MIRROR_Y);
+	m_spr = Sprite::create(FILE_MIRROR);
 	addChild(m_spr);
 
 	return true;

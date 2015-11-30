@@ -12,4 +12,6 @@ protected:
 	void ToSelf(const Explosion* explosion);
 
 private:
+	const string FILE_BUBBLE = "res/target/Bubble.png";
+	const string FILE_BUBBLE_POP = "res/target/BubblePop.png";
 };

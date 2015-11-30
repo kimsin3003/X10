@@ -38,4 +38,5 @@ private:
 	TargetManager* m_targetManager;
 	Sling* m_sling;
 	int m_stage;
+	bool m_isJudged;
 };

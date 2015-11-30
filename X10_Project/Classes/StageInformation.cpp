@@ -11,7 +11,7 @@ StageInformation::StageInformation(int stage)
 
 	if (stage == 0)
 	{
-		info = TargetInfo("Enemy", Point(200, 400), 0, 0.03f / 2);
+		info = TargetInfo("Enemy", Point(200, 400), 0, 1.00f / 2);
 		m_targetInfoList.push_back(info);
 
 		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f / 2);
@@ -147,7 +147,7 @@ StageInformation::StageInformation(int stage)
 			}
 		}
 
-		//Bullet 5°³
+		//Bullet 5°³`
 		string bulletType = "Bullet";
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);

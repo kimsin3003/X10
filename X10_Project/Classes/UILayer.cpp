@@ -103,7 +103,7 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	/*Create Menu*/
 	this->addChild(successMessage);
-	auto menu = Menu::create(retryButton, stageSceneButton, nextStageButton, NULL);
+	auto menu = Menu::create(retryButton, stageSceneButton, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu);
 
@@ -152,8 +152,6 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	stageSceneButton->setScale(stageSceneButtonScale);
 	stageSceneButton->setPosition(visibleSize.width / 2 + BUTTON_WIDTH, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
-
-
 
 	/*Create Menu*/
 	this->addChild(successMessage);

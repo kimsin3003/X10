@@ -39,6 +39,7 @@ GameManager::GameManager()
 	m_sling = nullptr;
 	m_colliderManager = new ColliderManager();
 	m_targetManager = new TargetManager();
+	m_isJudged = false;
 }
 
 
@@ -49,6 +50,7 @@ void GameManager::Reset()
 	m_colliderManager = new ColliderManager();
 	delete m_targetManager;
 	m_targetManager = new TargetManager();
+	m_isJudged = false;
 }
 
 
@@ -132,14 +134,19 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	m_colliderManager->EraseDeadColliders();
 	m_targetManager->EraseDeadTargets();
 
-	if (!m_targetManager->HasEnemy())
+	if (!m_isJudged)
 	{
-		WinProgress(uiLayer);
-		
-	}
-
-	else if (!m_colliderManager->HasCollider()){
-		FailProgress(uiLayer);
+		if (!m_targetManager->HasEnemy())
+		{
+			m_isJudged = true;
+			m_sling->ShotComplete();
+			WinProgress(uiLayer);
+		}
+		else if (!m_colliderManager->HasCollider()){
+			m_isJudged = true;
+			m_sling->ShotComplete();
+			FailProgress(uiLayer);
+		}
 	}
 }
 

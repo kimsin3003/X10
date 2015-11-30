@@ -137,7 +137,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		
 	}
 
-	else if (!m_colliderManager->HasBulletToShot()){
+	else if (!m_colliderManager->HasCollider()){
 		FailProgress(uiLayer);
 	}
 }

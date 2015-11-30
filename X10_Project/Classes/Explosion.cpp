@@ -22,8 +22,9 @@ bool Explosion::init()
 	m_lifeDecrease = Director::getInstance()->getDeltaTime();
 	m_isFlying = true;
 	m_toBeErased = false;
-
+	  
 	m_explosion = ParticleExplosion::create();
+	m_explosion->setColor(Color3B());
 	m_explosion->setEmitterMode(kCCParticleModeGravity);
 	m_explosion->setEmissionRate(400);
 	m_explosion->setDuration(m_lifeTime/10);

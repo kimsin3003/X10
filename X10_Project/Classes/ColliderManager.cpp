@@ -105,3 +105,19 @@ Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 	}
 	return nullptr;
 }
+
+bool ColliderManager::HasCollider()
+{
+	if (m_colliders.size() == 0)
+		return false;
+// 	Collider* collider;
+// 	for (int i = 0; i < m_colliders.size(); i++)
+// 	{
+// 		collider = m_colliders.at(i);
+// 		if (collider->IsBullet())
+// 		{
+// 			return true;
+// 		}
+// 	}
+ 	return true;
+}

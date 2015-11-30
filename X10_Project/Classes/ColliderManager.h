@@ -17,7 +17,7 @@ public:
 	bool HasBulletToShot();
 	void AddExplosion(Collider* explosion);
 	void EraseDeadColliders(); 
-
+	bool HasCollider();
 private:
 	Vector<Collider*> m_colliders;
 	int m_curBulletIndex;

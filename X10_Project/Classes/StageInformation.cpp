@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "StageInformation.h"
+#include <fstream>
 
 StageInformation::StageInformation(int stage)
 {
@@ -9,24 +10,46 @@ StageInformation::StageInformation(int stage)
 
 	TargetInfo info;
 
-	if (stage == 0)
+	if (stage <= 1 && stage >=0)
 	{
-		info = TargetInfo(TargetInfo::ENEMY, Point(200, 400));
-		m_targetInfoList.push_back(info);
+		char fileName[100];
+		sprintf(fileName, "../Resources/files/target%d.txt", stage);
+		ifstream ifs(fileName);
 
-		info = TargetInfo(TargetInfo::CLOUD, Point(200, 200));
-		m_targetInfoList.push_back(info);
+		while (!ifs.eof())
+		{
+			int type;
+			float posX, posY, rotation, scaleX, scaleY;
+			ifs >> type >> posX >> posY >> rotation >> scaleX >> scaleY;
+			info = TargetInfo(static_cast<TargetType>(type), Point(posX, posY), rotation, scaleX, scaleY);
+			m_targetInfoList.push_back(info);
+		}
 
-		info = TargetInfo(TargetInfo::MIRROR, Point(30, 200));
-		m_targetInfoList.push_back(info);
+		sprintf(fileName, "../Resources/files/bullet%d.txt", stage);
+		ifs = ifstream(fileName);
 
-		info = TargetInfo(TargetInfo::BUBBLE, Point(200, 300), 0, 2.5f / 2);
-		m_targetInfoList.push_back(info);
+		while (!ifs.eof())
+		{
+			int crossnum, bulletnum;
+			ifs >> crossnum >> bulletnum;
 
-		info = TargetInfo(TargetInfo::STAR, Point(100, 250), 0, 0.5f / 2);
-		m_targetInfoList.push_back(info);
+			string bulletType = "CrossBullet";
+			for (int i = 0; i < crossnum; i++)
+			{
+				m_bulletInfoList.push_back(bulletType);
+			}
 
-		//SeeBirds for tests
+			bulletType = "Bullet";
+			for (int i = 0; i < bulletnum; i++)
+			{
+				m_bulletInfoList.push_back(bulletType);
+			}
+
+		}
+
+		return;
+
+		//SeeBirds ... 파일에서 어떻게 읽어오지...
 		Point seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		m_targetInfoList.push_back(info);
@@ -42,72 +65,6 @@ StageInformation::StageInformation(int stage)
 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		m_targetInfoList.push_back(info);
-
-		//CrossBullet 3개 Bullet 2개
-		string bulletType = "CrossBullet";
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-
-		bulletType = "Bullet";
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-	}
-	else if (stage == 1)
-	{
-
-		info = TargetInfo(TargetInfo::ENEMY, Point(200, 280), 0, 1.03f / 2);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::ENEMY, Point(150, 260), 0, 1.03f / 2);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::ENEMY, Point(150, 220), 0, 1.03f / 2);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::ENEMY, Point(200, 200), 0, 1.03f / 2);
-		m_targetInfoList.push_back(info);
-
-		// 		info = TargetInfo(TargetInfo::ENEMY, Point(Director::getInstance()->getVisibleSize().width - 100, 250), 0, 0.03f / 2);
-		// 		m_targetInfoList.push_back(info);
-
-		// 		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f / 2);
-		// 		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::MIRROR, Point(100, 240), 0, 3.0f);
-		m_targetInfoList.push_back(info);
-
-		// 		info = TargetInfo(TargetInfo::BUBBLE, Point(200, 300), 0, 2.5f / 2);
-		// 		m_targetInfoList.push_back(info);
-		// 
-		// 		info = TargetInfo(TargetInfo::STAR, Point(100, 250), 0, 0.5f / 2);
-		// 		m_targetInfoList.push_back(info);
-
-		//SeeBirds for tests
-		// 		Point seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		// 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
-		// 		m_targetInfoList.push_back(info);
-		// 
-		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		// 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
-		// 		m_targetInfoList.push_back(info);
-		// 
-		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		// 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
-		// 		m_targetInfoList.push_back(info);
-		// 
-		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		// 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
-		// 		m_targetInfoList.push_back(info);
-
-		//CrossBullet 3개 Bullet 2개
-		string bulletType = "CrossBullet";
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		bulletType = "Bullet";
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
 
 	}
 	else if (stage == 2)
@@ -209,6 +166,10 @@ StageInformation::StageInformation(int stage)
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);
+	}
+	else
+	{
+
 	}
 }
 

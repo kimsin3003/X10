@@ -1,6 +1,13 @@
 #include "stdafx.h"
 #include "Target.h"
 #include "Bubble.h"
+#include "FileStuff.h"
+
+namespace FileStuff
+{
+	const string BUBBLE = "res/target/Bubble2.png";
+	const string BUBBLE_POP = "res/target/BubblePop.png";
+}
 
 bool Bubble::init()
 {
@@ -10,7 +17,7 @@ bool Bubble::init()
 	}
 
 	m_isEnemy = false;
-	m_spr = Sprite::create(FILE_BUBBLE);
+	m_spr = Sprite::create(FileStuff::BUBBLE);
 	addChild(m_spr);
 
 	return true;
@@ -28,7 +35,7 @@ void Bubble::ToSelf(const Bullet* bullet)
 		m_applyEffectToMe = false;
 
 		m_spr->removeFromParent();
-		m_spr = Sprite::create(FILE_BUBBLE_POP);
+		m_spr = Sprite::create(FileStuff::BUBBLE_POP);
 		m_spr->setScale(m_sprScaleRatio);
 		addChild(m_spr);
 

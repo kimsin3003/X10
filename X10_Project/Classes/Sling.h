@@ -12,7 +12,6 @@ public:
 		CLICK_RANGE = 10,
 		DOTNUM_OF_LINE = 5
 	};
-	const char* DOT_FILENAME = "res/dot.png"; ///# 기술부채
 	const float FONT_SIZE	= 24;
 	const float PREDICT_LINE_TIME = 0.5;
 

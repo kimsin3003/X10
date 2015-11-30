@@ -4,6 +4,13 @@
 #include "Explosion.h"
 #include "Bullet.h"
 #include "Mirror.h"
+#include "FileStuff.h"
+
+namespace FileStuff
+{
+	const string MIRROR = "res/target/Mirror.png";
+	const string MIRROR_ANGRY = "res/target/MirrorAngry.png";
+}
 
 bool Mirror::init()
 {
@@ -13,7 +20,7 @@ bool Mirror::init()
 	}
 
 	m_isEnemy = false;
-	m_spr = Sprite::create(FILE_MIRROR);
+	m_spr = Sprite::create(FileStuff::MIRROR);
 	addChild(m_spr);
 
 	return true;
@@ -33,7 +40,7 @@ void Mirror::ToSelf(const Bullet* bullet)
 		m_applyEffectToMe = false;
 
 		m_spr->removeFromParent();
-		m_spr = Sprite::create(FILE_MIRROR_ANGRY);
+		m_spr = Sprite::create(FileStuff::MIRROR_ANGRY);
 		addChild(m_spr);
 		m_sprScaleRatio *= 1.1f;
 		m_spr->setScale(m_sprScaleRatio);

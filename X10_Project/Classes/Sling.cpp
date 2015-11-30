@@ -2,6 +2,12 @@
 #include "Sling.h"
 #include "GameManager.h"
 #include "ColliderManager.h"
+#include "FileStuff.h"
+
+namespace FileStuff
+{
+	const char* SlingLineDot = "res/dot.png";
+}
 
 bool Sling::init()
 {
@@ -222,6 +228,6 @@ void Sling::ChangeToEmpty() //shotted -> empty
 Sprite* Sling::MakeDotOfExpectLine()
 {
 	
-	Sprite* dot = Sprite::create(DOT_FILENAME);
+	Sprite* dot = Sprite::create(FileStuff::SlingLineDot);
 	return dot;
 }

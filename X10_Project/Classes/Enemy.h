@@ -13,6 +13,4 @@ protected:
 	void ToSelf(const Bullet* bullet) override;
 	void ToSelf(const Explosion* explosion) override;
 
-	const string FILE_ENEMY = "res/enemy.png";
-	const string FILE_ENEMY_DEAD = "res/enemy_dead.png";
 };

@@ -1,6 +1,12 @@
 #include "stdafx.h"
 #include "Bullet.h"
 #include "Explosion.h"
+#include "FileStuff.h"
+
+namespace FileStuff
+{
+	const char* BULLET = "res/firework.png";
+}
 
 bool Bullet::init()
 {
@@ -54,7 +60,7 @@ Sprite* Bullet::MakeBody()
 	animFrames.reserve(frameCut);
 	for (int i = 0; i < frameCut; i++)
 	{
-		SpriteFrame* frame = SpriteFrame::create(FILE_NAME, Rect(Point(fireSize.width*i, 0), fireSize));
+		SpriteFrame* frame = SpriteFrame::create(FileStuff::BULLET, Rect(Point(fireSize.width*i, 0), fireSize));
 		animFrames.pushBack(frame);
 	}
 	

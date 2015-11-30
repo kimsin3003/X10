@@ -81,7 +81,7 @@ void UILayer::MakeSuccessWidget(int m_stage)
 		BUTTON_HEIGHT / stageSceneButtonSize.height);
 
 	stageSceneButton->setScale(stageSceneButtonScale);
-	stageSceneButton->setPosition(visibleSize.width / 2, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
+	stageSceneButton->setPosition(visibleSize.width / 2 + BUTTON_WIDTH, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
 
 	/*Create Menu*/
 	this->addChild(successMessage);

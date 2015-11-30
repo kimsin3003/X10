@@ -11,36 +11,36 @@ StageInformation::StageInformation(int stage)
 
 	if (stage == 0)
 	{
-		info = TargetInfo("Enemy", Point(200, 400), 0, 1.00f / 2);
+		info = TargetInfo(TargetInfo::ENEMY, Point(200, 400));
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f / 2);
+		info = TargetInfo(TargetInfo::CLOUD, Point(200, 200));
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Mirror", Point(30, 200), 0, 3.0f / 2);
+		info = TargetInfo(TargetInfo::MIRROR, Point(30, 200));
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f / 2);
+		info = TargetInfo(TargetInfo::BUBBLE, Point(200, 300), 0, 2.5f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Star", Point(100, 250), 0, 0.5f / 2);
+		info = TargetInfo(TargetInfo::STAR, Point(100, 250), 0, 0.5f / 2);
 		m_targetInfoList.push_back(info);
 
 		//SeeBirds for tests
 		Point seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		m_targetInfoList.push_back(info);
 
 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		m_targetInfoList.push_back(info);
 
 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		m_targetInfoList.push_back(info);
 
 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		m_targetInfoList.push_back(info);
 
 		//CrossBullet 3개 Bullet 2개
@@ -56,48 +56,48 @@ StageInformation::StageInformation(int stage)
 	else if (stage == 1)
 	{
 
-		info = TargetInfo("Enemy", Point(200, 280), 0, 1.03f / 2);
+		info = TargetInfo(TargetInfo::ENEMY, Point(200, 280), 0, 1.03f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Enemy", Point(150, 260), 0, 1.03f / 2);
+		info = TargetInfo(TargetInfo::ENEMY, Point(150, 260), 0, 1.03f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Enemy", Point(150, 220), 0, 1.03f / 2);
+		info = TargetInfo(TargetInfo::ENEMY, Point(150, 220), 0, 1.03f / 2);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Enemy", Point(200, 200), 0, 1.03f / 2);
+		info = TargetInfo(TargetInfo::ENEMY, Point(200, 200), 0, 1.03f / 2);
 		m_targetInfoList.push_back(info);
 
-		// 		info = TargetInfo("Enemy", Point(Director::getInstance()->getVisibleSize().width - 100, 250), 0, 0.03f / 2);
+		// 		info = TargetInfo(TargetInfo::ENEMY, Point(Director::getInstance()->getVisibleSize().width - 100, 250), 0, 0.03f / 2);
 		// 		m_targetInfoList.push_back(info);
 
 		// 		info = TargetInfo("Cloud", Point(200, 200), 0, 4.0f / 2);
 		// 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Mirror", Point(100, 240), 0, 3.0f);
+		info = TargetInfo(TargetInfo::MIRROR, Point(100, 240), 0, 3.0f);
 		m_targetInfoList.push_back(info);
 
-		// 		info = TargetInfo("Bubble", Point(200, 300), 0, 2.5f / 2);
+		// 		info = TargetInfo(TargetInfo::BUBBLE, Point(200, 300), 0, 2.5f / 2);
 		// 		m_targetInfoList.push_back(info);
 		// 
-		// 		info = TargetInfo("Star", Point(100, 250), 0, 0.5f / 2);
+		// 		info = TargetInfo(TargetInfo::STAR, Point(100, 250), 0, 0.5f / 2);
 		// 		m_targetInfoList.push_back(info);
 
 		//SeeBirds for tests
 		// 		Point seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		// 		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		// 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		// 		m_targetInfoList.push_back(info);
 		// 
 		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		// 		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		// 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		// 		m_targetInfoList.push_back(info);
 		// 
 		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		// 		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		// 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		// 		m_targetInfoList.push_back(info);
 		// 
 		// 		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		// 		info = TargetInfo("SeeBird", seeBirdPos, 0, 1.0f);
+		// 		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
 		// 		m_targetInfoList.push_back(info);
 
 		//CrossBullet 3개 Bullet 2개
@@ -112,20 +112,19 @@ StageInformation::StageInformation(int stage)
 	}
 	else if (stage == 2)
 	{
-		///# 아래 상수값 코드상에 직접 사용하고 있는데, technical debt...
 		/// 만일 테스트 용이라면 테스트용이라고 꼭 명시를 할 것.
-		info = TargetInfo("Enemy", Point(160, 280), 0, 1.03f);
+		info = TargetInfo(TargetInfo::ENEMY, Point(160, 280), 0, 1.03f);
 		m_targetInfoList.push_back(info);
 
 		for (int j = 0; j <= 17; j++)
 		{
-			info = TargetInfo("Bubble", Point(160 + j * 10, 100 + j * 15), 0, 2.5f / 2);
+			info = TargetInfo(TargetInfo::BUBBLE, Point(160 + j * 10, 100 + j * 15), 0, 2.5f / 2);
 			m_targetInfoList.push_back(info);
 		}
 
 		for (int j = 0; j <= 17; j++)
 		{
-			info = TargetInfo("Bubble", Point(160 - j * 10, 100 + j * 15), 0, 2.5f / 2);
+			info = TargetInfo(TargetInfo::BUBBLE, Point(160 - j * 10, 100 + j * 15), 0, 2.5f / 2);
 			m_targetInfoList.push_back(info);
 		}
 
@@ -133,7 +132,7 @@ StageInformation::StageInformation(int stage)
 		{
 			for (int j = 0; j <= i * 2 - 1; j++)
 			{
-				info = TargetInfo("Star", Point(180 + (j * 15) - (i * 20), 175 + (i * 20)), i * 30 + j * 2, 0.5f / 2);
+				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 175 + (i * 20)), i * 30 + j * 2, 0.5f / 2);
 				m_targetInfoList.push_back(info);
 			}
 		}
@@ -142,7 +141,7 @@ StageInformation::StageInformation(int stage)
 		{
 			for (int j = 0; j <= i * 2 - 1; j++)
 			{
-				info = TargetInfo("Star", Point(180 + (j * 15) - (i * 20), 385 - (i * 20)), i * 30 + j * 2, 0.5f / 2);
+				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 385 - (i * 20)), i * 30 + j * 2, 0.5f / 2);
 				m_targetInfoList.push_back(info);
 			}
 		}
@@ -160,47 +159,47 @@ StageInformation::StageInformation(int stage)
 
 		Size screen = Director::getInstance()->getVisibleSize();
 
-		info = TargetInfo("Mirror", Point(0, 200), 0, 1.5);
+		info = TargetInfo(TargetInfo::MIRROR, Point(0, 200), 0, 1.5);
 		m_targetInfoList.push_back(info);
-		info = TargetInfo("Mirror", Point(320, 200), 0, 1.5f);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo("Mirror", Point(160, 300), 0, 3.0f / 2);
+		info = TargetInfo(TargetInfo::MIRROR, Point(320, 200), 0, 1.5f);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Mirror_y", Point(160, 100), 0, 2.5f / 2);
+		info = TargetInfo(TargetInfo::MIRROR, Point(160, 300), 0, 3.0f / 2);
 		m_targetInfoList.push_back(info);
-		info = TargetInfo("Mirror_y", Point(70, 250), 0, 2.5f / 2);
+
+		info = TargetInfo(TargetInfo::MIRROR_Y, Point(160, 100), 0, 2.5f / 2);
+		m_targetInfoList.push_back(info);
+		info = TargetInfo(TargetInfo::MIRROR_Y, Point(70, 250), 0, 2.5f / 2);
 		m_targetInfoList.push_back(info);
 
 
-		info = TargetInfo("Enemy", Point(300, 360), 0, 3.0f);
+		info = TargetInfo(TargetInfo::ENEMY, Point(300, 360), 0, 3.0f);
 		m_targetInfoList.push_back(info);
-		info = TargetInfo("Mirror", Point(0, 360), 0, 1.5);
+		info = TargetInfo(TargetInfo::MIRROR, Point(0, 360), 0, 1.5);
 		m_targetInfoList.push_back(info);
-		info = TargetInfo("Mirror", Point(320, 360), 0, 1.5f);
+		info = TargetInfo(TargetInfo::MIRROR, Point(320, 360), 0, 1.5f);
 		m_targetInfoList.push_back(info);
 
 		for (int xpos = 0; xpos < screen.width + 40; xpos += 34)
 		{
-			info = TargetInfo("Mirror_y", Point(xpos, 480), 0, 2.5f / 2);
+			info = TargetInfo(TargetInfo::MIRROR_Y, Point(xpos, 480), 0, 2.5f / 2);
 			m_targetInfoList.push_back(info);
 		}
 
-		info = TargetInfo("Star", Point(100, 250), 0, 0.25f);
+		info = TargetInfo(TargetInfo::STAR, Point(100, 250), 0, 0.25f);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Star", Point(250, 250), 0, 0.25f);
+		info = TargetInfo(TargetInfo::STAR, Point(250, 250), 0, 0.25f);
 		m_targetInfoList.push_back(info);
-		info = TargetInfo("Star", Point(260, 250), 0, 0.25f);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo("Star", Point(230, 210), 0, 0.25f);
+		info = TargetInfo(TargetInfo::STAR, Point(260, 250), 0, 0.25f);
 		m_targetInfoList.push_back(info);
 
-		info = TargetInfo("Star", Point(220, 190), 0, 0.25f);
+		info = TargetInfo(TargetInfo::STAR, Point(230, 210), 0, 0.25f);
 		m_targetInfoList.push_back(info);
-		info = TargetInfo("Star", Point(230, 190), 0, 0.25f);
+
+		info = TargetInfo(TargetInfo::STAR, Point(220, 190), 0, 0.25f);
+		m_targetInfoList.push_back(info);
+		info = TargetInfo(TargetInfo::STAR, Point(230, 190), 0, 0.25f);
 		m_targetInfoList.push_back(info);
 
 		//Bullet 5개
@@ -243,9 +242,9 @@ bool StageInformation::HasNextTarget()
 	}
 }
 
-string StageInformation::GetTargetType()
+TargetType StageInformation::GetTargetType()
 {//타겟 타입을 받아옴.
-	return m_currentTarget.m_typeName;
+	return m_currentTarget.m_name;
 }
 
 Point StageInformation::GetTargetPosition()
@@ -260,7 +259,7 @@ float StageInformation::GetTargetRotation()
 
 float StageInformation::GetTargetScale()
 {
-	return m_currentTarget.m_scale;
+	return (m_currentTarget.m_scaleX +m_currentTarget.m_scaleY)/2;
 }
 
 bool StageInformation::HasNextBullet() //더 넘길 불렛이 있는지 검사

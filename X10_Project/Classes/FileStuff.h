@@ -29,4 +29,8 @@ namespace FileStuff
 	extern const string SlingLineDot;
 
 	extern const string PauseButton;
+	extern const string RetryButton;
+	extern const string BackButton;
+	extern const string NextButton;
+
 }

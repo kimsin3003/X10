@@ -196,7 +196,7 @@ void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 void GameManager::WinProgress(UILayer* uiLayer)
 {
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::lastStage);
-	if (lastStage < m_stage + 1 && m_stage + 1 < StageInformation::GetMaxStageNum())
+	if (lastStage < m_stage + 1 && m_stage + 1 <= StageInformation::GetMaxStageNum())
 	{
 		UserDefault::getInstance()->setIntegerForKey(ConstVars::lastStage, m_stage + 1);
 	}

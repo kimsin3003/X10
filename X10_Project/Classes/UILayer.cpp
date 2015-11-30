@@ -70,8 +70,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//스테이지 선택화면 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		"BackButton.png",
-		"BackButton.png",
+		"NextButton.png",
+		"NextButton.png",
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();

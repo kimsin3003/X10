@@ -17,6 +17,7 @@ public:
 	
 	bool HasNextBullet(); //더 넘길 불렛이 있는지 검사
 	string GetCurrentBulletInfo(); //지금 불렛의 타입을 반환
+	static int GetMaxStageNum(){ return m_maxStageNum; }
 
 private:
 
@@ -39,6 +40,7 @@ private:
 	const char* FILENAME = "temp.txt";
 	int m_currentTargetIndex;
 	int m_currentBulletIndex;
+	static const int m_maxStageNum = 3;
 	TargetInfo m_currentTarget;
 	string m_currentBullet;
 	vector<TargetInfo> m_targetInfoList;

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "GameManager.h"
 #include "FileStuff.h"
+#include "ConstVars.h"
 //·¹ÀÌ¾î
 #include "GameLayer.h"
 #include "UILayer.h"
@@ -190,10 +191,12 @@ void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
 
 void GameManager::WinProgress(UILayer* uiLayer)
 {
-
-	FileStuff::UpdateLastStage(m_stage + 1);
+	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::lastStage);
+	if (lastStage < m_stage + 1 && m_stage + 1 < StageInformation::GetMaxStageNum())
+	{
+		UserDefault::getInstance()->setIntegerForKey(ConstVars::lastStage, m_stage + 1);
+	}
 	uiLayer->MakeSuccessWidget(m_stage);
-	
 }
 
 

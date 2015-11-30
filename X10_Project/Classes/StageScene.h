@@ -26,5 +26,6 @@ private:
 	Sprite* LoadBackground(); //아직 배경 안만듬...
 	MenuItemImage* MakeBackButton();
 	MenuItemImage* MakeStageButton(int stage, float xPos, float yPos);
+	int m_maxStage;
 };
 

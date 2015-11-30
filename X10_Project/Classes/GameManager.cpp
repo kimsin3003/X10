@@ -140,11 +140,13 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 		{
 			m_isJudged = true;
 			m_sling->ShotComplete();
+			m_sling->removeAllChildren();
 			WinProgress(uiLayer);
 		}
 		else if (!m_colliderManager->HasCollider()){
 			m_isJudged = true;
 			m_sling->ShotComplete();
+			m_sling->removeAllChildren();
 			FailProgress(uiLayer);
 		}
 	}

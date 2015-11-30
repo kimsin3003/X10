@@ -13,7 +13,7 @@ StageInformation::StageInformation(int stage)
 	if (stage <= 1 && stage >=0)
 	{
 		char fileName[100];
-		sprintf(fileName, "../Resources/files/target%d.txt", stage);
+		sprintf(fileName, "files/target%d.txt", stage);
 		ifstream ifs(fileName);
 
 		while (!ifs.eof())
@@ -25,7 +25,7 @@ StageInformation::StageInformation(int stage)
 			m_targetInfoList.push_back(info);
 		}
 
-		sprintf(fileName, "../Resources/files/bullet%d.txt", stage);
+		sprintf(fileName, "files/bullet%d.txt", stage);
 		ifs = ifstream(fileName);
 
 		while (!ifs.eof())
@@ -38,7 +38,6 @@ StageInformation::StageInformation(int stage)
 			{
 				m_bulletInfoList.push_back(bulletType);
 			}
-
 			bulletType = "Bullet";
 			for (int i = 0; i < bulletnum; i++)
 			{

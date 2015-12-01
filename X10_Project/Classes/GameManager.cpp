@@ -42,7 +42,6 @@ GameManager::GameManager()
 	m_isJudged = false;
 }
 
-
 void GameManager::Reset()
 {
 	m_sling = nullptr;
@@ -52,7 +51,6 @@ void GameManager::Reset()
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
 }
-
 
 GameManager::~GameManager() {}
 
@@ -134,59 +132,43 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	m_colliderManager->EraseDeadColliders();
 	m_targetManager->EraseDeadTargets();
-
-	if (!m_isJudged)
-	{
-		if (!m_targetManager->HasEnemy())
-		{
-			m_isJudged = true;
-			m_sling->ShotComplete();
-			m_sling->removeAllChildren();
-			WinProgress(uiLayer);
-		}
-		else if (!m_colliderManager->HasCollider()){
-			m_isJudged = true;
-			m_sling->ShotComplete();
-			m_sling->removeAllChildren();
-			FailProgress(uiLayer);
-		}
-	}
+	ControlProgress(gameLayer, uiLayer);
 }
 
-
-void GameManager::CheckCollide(Collider* bullet, Vector<Target*>& targets)
+void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 {
-
-	static Target* m_lastTarget = nullptr;
+//	static Target* lastTarget = nullptr;
 	for (Target* target : targets)
 	{
-		if (target == m_lastTarget)
-			continue;
+//		if (target == lastTarget)
+//			continue;
 
-		if (bullet->IsBullet())
+		if (collider->IsBullet())
 		{
-			const Rect colliderBoundingBox = (static_cast<Bullet*>(bullet))->GetBoundingArea();
+			const Rect colliderBoundingBox = dynamic_cast<Bullet*>(collider)->GetBoundingArea();
 			const Rect targetBoundingBox = target->GetBoundingArea();
 
 			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 			{
-				m_lastTarget = target;
-				target->ApplyCollisionEffect(bullet);
+//				lastTarget = target;
+				target->ApplyCollisionEffect(collider);
 			}
-			else{
-				if (m_lastTarget == target)
-					m_lastTarget = nullptr;
+			else
+			{
+//				if (lastTarget == target)
+//					lastTarget = nullptr;
 			}
 		}
-		else if ( Explosion* explosion = dynamic_cast<Explosion*>(bullet))
+		else
 		{
+			Explosion* explosion = dynamic_cast<Explosion*>(collider);
 			const float explosionRadius = explosion->GetBoundingRadius();
 			const Vec2 explosionPosition = explosion->getPosition();
 			const Rect targetBoundingBox = target->GetBoundingArea();
 
 			if ( targetBoundingBox.intersectsCircle( explosionPosition, explosionRadius) )
 			{
-				m_lastTarget = target;
+//				lastTarget = target;
 				target->ApplyCollisionEffect(explosion);
 			}
 		}
@@ -206,4 +188,24 @@ void GameManager::WinProgress(UILayer* uiLayer)
 void GameManager::FailProgress(UILayer* uiLayer)
 {
 	uiLayer->MakeFailWidget(m_stage);
+}
+
+void GameManager::ControlProgress(GameLayer* gameLayer, UILayer* uiLayer)
+{
+	if (!m_isJudged)
+	{
+		if (!m_targetManager->HasEnemy())
+		{
+			m_isJudged = true;
+			m_sling->ShotComplete();
+			m_sling->removeAllChildren();
+			WinProgress(uiLayer);
+		}
+		else if (!m_colliderManager->HasCollider()){
+			m_isJudged = true;
+			m_sling->ShotComplete();
+			m_sling->removeAllChildren();
+			FailProgress(uiLayer);
+		}
+	}
 }

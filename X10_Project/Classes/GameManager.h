@@ -30,6 +30,7 @@ private:
 	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
 	void WinProgress(UILayer* uiLayer);
 	void FailProgress(UILayer* uiLayer);
+	void ControlProgress(GameLayer* gameLayer, UILayer* uiLayer);
 
 private:
 	void Reset();

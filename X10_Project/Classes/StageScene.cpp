@@ -23,15 +23,26 @@ bool StageScene::init()
 	{
 		return false;
 	}
+
 	setName("StageScene");
 
-	//배경 그림 삽입.
 	Sprite* background = LoadBackground();
-	this->addChild(background);
+	addChild(background);
 
 	SetupButtons();
 
 	return true;
+}
+
+void StageScene::GotoStage(Ref* pSender, int stageNum)
+{
+	Scene* game = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(game->getChildByName("GameScene"));
+
+	/*stage Information 불러오는 부분.*/
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+
+	Director::getInstance()->replaceScene(game);
 }
 
 void StageScene::SetupButtons()
@@ -52,15 +63,14 @@ void StageScene::SetupButtons()
 	}
 
 	/*Create Menu*/
-	auto menu = Menu::createWithArray(menuList);
+	Menu* menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu);
-
+	addChild(menu);
 }
 
 Sprite* StageScene::LoadBackground()
 {
-	auto background = Sprite::create(BGIMG_FILE);
+	Sprite* background = Sprite::create(FileStuff::STAGESCENE_BACKGROUND);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);
@@ -78,22 +88,13 @@ void StageScene::ChangeToMainScene(Ref* pSender)
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 
-void StageScene::GotoStage(Ref* pSender, int stageNum)
-{
-	Scene* game = GameScene::createScene();
-	GameScene* gameScene = static_cast<GameScene*>(game->getChildByName("GameScene"));
-	/*stage Information 불러오는 부분.*/
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
-
-	Director::getInstance()->replaceScene(game);
-}
-
 MenuItemImage* StageScene::MakeBackButton()
 {
 	MenuItemImage* button = MenuItemImage::create(
 		FileStuff::PAUSEBUTTON,
 		FileStuff::PAUSEBUTTON,
 		CC_CALLBACK_1(StageScene::MenuButtonCallback, this));
+
 	Size buttonSize = button->getContentSize();
 	float scale = MIN(
 		UILayer::PAUSE_BUTTON_WIDTH / buttonSize.width,

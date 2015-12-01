@@ -27,5 +27,4 @@ namespace FileStuff
 	const string BACKBUTTON = "BackButton.png";
 	const string STAR_OFF = "res/star_off.png";
 	const string STAR_ON = "res/star_on.png";
-
 }

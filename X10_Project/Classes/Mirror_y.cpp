@@ -26,10 +26,7 @@ void Mirror_y::ToBullet(Bullet* bullet)
 
 void Mirror_y::ToSelf(const Bullet* bullet)
 {
-	if (m_applyEffectToMe)
-	{
-		m_applyEffectToMe = false;
-	}
+
 }
 
 void Mirror_y::ToSelf(const Explosion* explosion)

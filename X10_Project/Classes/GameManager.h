@@ -18,7 +18,6 @@ public:
 	
 	void SetStage(GameLayer* gameLayer, int StageNumber);
 
-
 	void AppendTargetsToLayer(GameLayer* gameLayer);
 	Sling* SetSling(GameLayer* gameLayer);
 

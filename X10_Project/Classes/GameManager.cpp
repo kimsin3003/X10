@@ -76,9 +76,7 @@ Sling* GameManager::SetSling(GameLayer* gameLayer)
 
 void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 {
-	Vector<Target*> targets = m_targetManager->GetTargets();
-
-	for (Target* target : targets)
+	for (Target* target : m_targetManager->m_targets)
 	{
 		gameLayer->addChild(target);
 	}
@@ -86,7 +84,7 @@ void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 
 void GameManager::ShotBullet(Sling* sling)
 {
-	Bullet* bullet = static_cast<Bullet*>(m_colliderManager->GetBulletToShot(sling));
+	Bullet* bullet = m_colliderManager->GetBulletToShot(sling);
 	
 	if (bullet)
 	{
@@ -110,6 +108,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 	Vector<Collider*>& colliders = m_colliderManager->m_colliders;
 	Vector<Target*>& targets = m_targetManager->m_targets;
 	Collider* collider = nullptr;
+
 	for (int i = 0; i < colliders.size(); i++)
 	{
 		collider = colliders.at(i);

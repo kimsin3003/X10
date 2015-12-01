@@ -7,7 +7,6 @@ class TargetManager
 {
 public:
 	~TargetManager() { m_targets.clear(); }
-	Vector<Target*>& GetTargets() { return m_targets; };
 	void InitTargets(StageInformation* si);
 	void ResetTargets();
 	void EraseDeadTargets();

@@ -12,7 +12,6 @@ public:
 	void InitBullets(StageInformation* si);
 	void ResetBullets();
 	Bullet* GetBulletToShot(Sling* sling);
-	Vector<Collider*>& GetColliders(){ return m_colliders; }
 
 	bool HasBulletToShot();
 	void AddExplosion(Collider* explosion);

@@ -63,8 +63,8 @@ void ColliderManager::EraseDeadColliders()
 		{
 			if (collider->IsBullet())
 			{
-				m_curBulletIndex--;
 				m_BulletNum--;
+				m_curBulletIndex--;
 			}
 			m_colliders.erase(m_colliders.begin() + i);
 		}
@@ -99,10 +99,9 @@ Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 		bullet->SetStartSpeed(sling->GetSpeed());
 		bullet->SetFlying(true);
 
-		m_curBulletIndex++;
-
 		return bullet;
 	}
+
 	return nullptr;
 }
 
@@ -110,14 +109,6 @@ bool ColliderManager::HasCollider()
 {
 	if (m_colliders.size() == 0)
 		return false;
-// 	Collider* collider;
-// 	for (int i = 0; i < m_colliders.size(); i++)
-// 	{
-// 		collider = m_colliders.at(i);
-// 		if (collider->IsBullet())
-// 		{
-// 			return true;
-// 		}
-// 	}
+
  	return true;
 }

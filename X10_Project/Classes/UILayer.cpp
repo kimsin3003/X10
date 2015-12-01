@@ -142,7 +142,6 @@ void UILayer::MakeFailWidget(int m_stage)
 
 }
 
-
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(StageScene::createScene());
@@ -167,4 +166,3 @@ void UILayer::ChangeToMainScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
-

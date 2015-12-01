@@ -20,7 +20,7 @@ bool CrossExplosion::init()
 	m_explosion->setStartSize(25.0f);
 	m_explosion->setPosition(Point::ZERO);
 
-	this->addChild(m_explosion);
+	addChild(m_explosion);
 
 	return true;
 }

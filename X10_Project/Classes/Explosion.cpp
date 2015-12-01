@@ -8,11 +8,6 @@ Explosion::Explosion() : m_explosion(nullptr),
 
 }
 
-Explosion::~Explosion()
-{}
-
-
-//Base Class of All Explosions
 bool Explosion::init()
 {
 	m_radius = 0;
@@ -55,9 +50,9 @@ void Explosion::Act()
 
 void Explosion::RemoveSelf()
 {
-	SetFlying(false);
-	removeFromParent();
+	m_isFlying = false;
 	m_toBeErased = true;
+	removeFromParent();
 }
 
 const float& Explosion::GetBoundingRadius()

@@ -11,8 +11,9 @@ public:
 
 	virtual bool init();
 	virtual void Act();
-	virtual void Move();
 	virtual Explosion* GetExplosion();
+	
+	void Move();
 
 	//direction
 	void SetDirection(Vec2 dir) { m_direction = dir; }

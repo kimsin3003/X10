@@ -11,9 +11,6 @@ public:
 	const float& GetBoundingRadius();
 	bool IsBullet() { return false; }
 
-	enum{
-		DEFAULT_RADIUS = 30
-	};
 
 protected:
 	Explosion();
@@ -25,4 +22,9 @@ protected:
 	float m_lifeDecrease;
 	float m_radius;
 	float m_maxRadius;
+
+	enum
+	{
+		DEFAULT_RADIUS = 30
+	};
 };

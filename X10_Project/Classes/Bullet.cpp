@@ -3,11 +3,6 @@
 #include "Explosion.h"
 #include "FileStuff.h"
 
-namespace FileStuff
-{
-	const char* BULLET = "res/firework.png";
-}
-
 bool Bullet::init()
 {
 	if (!Node::init())
@@ -74,7 +69,7 @@ Sprite* Bullet::MakeBody()
 
 Sprite* Bullet::MakeDebris()
 {
-	Sprite* debris = Sprite::create("res/debris.png");
+	Sprite* debris = Sprite::create(FileStuff::DEBRIS);
 	debris->setPosition(this->getPosition());
 	MoveBy* fall = MoveBy::create(2.0, Vec2(0,-100));
 	auto ease = EaseIn::create(fall, 2.0);

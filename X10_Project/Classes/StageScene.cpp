@@ -5,10 +5,10 @@
 #include "UILayer.h"
 #include "GameManager.h"
 #include "ConstVars.h"
+#include "FileStuff.h"
 
 Scene* StageScene::createScene()
 {
-
 	Scene* scene = Scene::create();
 
 	Layer* layer = StageScene::create();
@@ -32,12 +32,10 @@ bool StageScene::init()
 	SetupButtons();
 
 	return true;
-
 }
 
 void StageScene::SetupButtons()
 {
-
 	/*menu List : CCVector*/
 	Vector<MenuItem*> menuList;
 
@@ -93,8 +91,8 @@ void StageScene::GotoStage(Ref* pSender, int stageNum)
 MenuItemImage* StageScene::MakeBackButton()
 {
 	MenuItemImage* button = MenuItemImage::create(
-		"OrangePauseButton.png",
-		"OrangePauseButton.png",
+		FileStuff::PAUSEBUTTON,
+		FileStuff::PAUSEBUTTON,
 		CC_CALLBACK_1(StageScene::MenuButtonCallback, this));
 	Size buttonSize = button->getContentSize();
 	float scale = MIN(
@@ -115,8 +113,8 @@ MenuItemImage* StageScene::MakeBackButton()
 MenuItemImage* StageScene::MakeStageButton(int stage, float xPos, float yPos)
 {
 	MenuItemImage* menuItem = MenuItemImage::create();
-	menuItem->setNormalImage(Sprite::create("res/star.png"));
-	menuItem->setSelectedImage(Sprite::create("res/star_twinkle.png"));
+	menuItem->setNormalImage(Sprite::create(FileStuff::STAR_SAD));
+	menuItem->setSelectedImage(Sprite::create(FileStuff::STAR_HAPPY));
 	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2,0.2));
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stage));
 	menuItem->setPosition(xPos, yPos);

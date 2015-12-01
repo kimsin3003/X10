@@ -224,6 +224,6 @@ void Sling::ChangeToEmpty() //shotted -> empty
 Sprite* Sling::MakeDotOfExpectLine()
 {
 	
-	Sprite* dot = Sprite::create(FileStuff::SlingLineDot);
+	Sprite* dot = Sprite::create(FileStuff::SLINGLINEDOT);
 	return dot;
 }

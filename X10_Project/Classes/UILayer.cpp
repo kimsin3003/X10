@@ -22,8 +22,8 @@ bool UILayer::init()
 
 	/* Pause Button */
 	auto pauseButton = MenuItemImage::create(
-		FileStuff::PauseButton,
-		FileStuff::PauseButton,
+		FileStuff::PAUSEBUTTON,
+		FileStuff::PAUSEBUTTON,
 		CC_CALLBACK_1(UILayer::menuButtonCallback, this));
 	Size buttonSize = pauseButton->getContentSize();
 	float scale = MIN(
@@ -55,8 +55,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//다시시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
-		FileStuff::RetryButton,
-		FileStuff::RetryButton,
+		FileStuff::RETRYBUTTON,
+		FileStuff::RETRYBUTTON,
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -71,8 +71,8 @@ void UILayer::MakeSuccessWidget(int m_stage)
 
 	//스테이지 선택화면 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		FileStuff::NextButton,
-		FileStuff::NextButton,
+		FileStuff::NEXTBUTTON,
+		FileStuff::NEXTBUTTON,
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();
@@ -105,8 +105,8 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	//다시시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
-		FileStuff::RetryButton,
-		FileStuff::RetryButton,
+		FileStuff::RETRYBUTTON,
+		FileStuff::RETRYBUTTON,
 		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -121,8 +121,8 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	//스테이지 선택화면으로 이동하는 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
-		FileStuff::BackButton,
-		FileStuff::BackButton,
+		FileStuff::BACKBUTTON,
+		FileStuff::BACKBUTTON,
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();

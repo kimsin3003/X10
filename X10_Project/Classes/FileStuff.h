@@ -4,11 +4,13 @@
 
 namespace FileStuff
 {
-	extern const string StageScene_Background;
+	extern const string STAGESCENE_BACKGROUND;
 
 	extern const string BUBBLE;
 	extern const string BUBBLE_POP;
-
+	
+	extern const string BULLET;
+	extern const string DEBRIS;
 	extern const string FILE_CLOUD;
 	extern const string FILE_CLOUD_LEFT;
 	extern const string FILE_CLOUD_RIGHT;
@@ -26,11 +28,11 @@ namespace FileStuff
 	extern const string STAR_HAPPY;
 	extern const string STAR_SAD;
 
-	extern const string SlingLineDot;
+	extern const string SLINGLINEDOT;
 
-	extern const string PauseButton;
-	extern const string RetryButton;
-	extern const string BackButton;
-	extern const string NextButton;
+	extern const string PAUSEBUTTON;
+	extern const string RETRYBUTTON;
+	extern const string BACKBUTTON;
+	extern const string NEXTBUTTON;
 
 }

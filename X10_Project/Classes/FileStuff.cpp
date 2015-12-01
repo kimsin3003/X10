@@ -3,9 +3,11 @@
 
 namespace FileStuff
 {
-	const string StageScene_Background = "res/starry_night.jpg";
+	const string STAGESCENE_BACKGROUND = "res/starry_night.jpg";
 	const string BUBBLE = "res/target/Bubble2.png";
 	const string BUBBLE_POP = "res/target/BubblePop.png";
+	const string BULLET = "res/firework.png";
+	const string DEBRIS = "res/debris.png";
 	const string FILE_CLOUD = "res/target/Cloud.png";
 	const string FILE_CLOUD_LEFT = "res/target/CloudLeft.png";
 	const string FILE_CLOUD_RIGHT = "res/target/CloudRight.png";
@@ -18,9 +20,9 @@ namespace FileStuff
 	const string FEATHER = "res/target/Feather.png";
 	const string STAR_HAPPY = "res/target/StarSad.png";
 	const string STAR_SAD = "res/target/StarHappy.png";
-	const string SlingLineDot = "res/dot.png";
-	const string PauseButton = "OrangePauseButton.png";
-	const string NextButton = "NextButton.png";
-	const string RetryButton = "RetryButton.png";
-	const string BackButton = "BackButton.png";;
+	const string SLINGLINEDOT = "res/dot.png";
+	const string PAUSEBUTTON = "OrangePauseButton.png";
+	const string NEXTBUTTON = "NextButton.png";
+	const string RETRYBUTTON = "RetryButton.png";
+	const string BACKBUTTON = "BackButton.png";;
 }

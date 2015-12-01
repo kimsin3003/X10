@@ -3,15 +3,7 @@
 class Sling : public Node
 {
 public:
-	enum SLING_CONFIG
-	{
-		WIDTH = 20,
-		HEIGHT = 50,
-		YPOS = 50,
-		MAX_POWER = 30,
-		CLICK_RANGE = 10,
-		DOTNUM_OF_LINE = 5
-	};
+
 	const float FONT_SIZE	= 24;
 	const float PREDICT_LINE_TIME = 0.5;
 
@@ -41,6 +33,16 @@ private:
 		LOADED,
 		PULLING,
 		SHOTTED 
+	};
+
+	enum SLING_CONFIG
+	{
+		WIDTH = 20,
+		HEIGHT = 50,
+		YPOS = 50,
+		MAX_POWER = 30,
+		CLICK_RANGE = 10,
+		DOTNUM_OF_LINE = 5
 	};
 
 	void ChangeToLoaded();	//empty -> load

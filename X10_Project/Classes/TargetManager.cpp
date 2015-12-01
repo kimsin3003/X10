@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "TargetManager.h"
+
 //Targets
 #include "Enemy.h"
 #include "Mirror.h"
@@ -8,13 +9,10 @@
 #include "Bubble.h"
 #include "Star.h"
 #include "SeeBird.h"
-
 //Stage Information
 #include "StageInformation.h"
 #include <hash_map>
 #include <functional>
-using namespace stdext; ///# 이 네임스페이스는 왜? 표준이 아니고 쓸 일도 없고
-
 
 void TargetManager::InitTargets(StageInformation* si)
 {

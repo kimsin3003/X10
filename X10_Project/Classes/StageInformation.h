@@ -48,8 +48,6 @@ public:
 
 private:
 
-	
-
 	const char* FILENAME = "temp.txt";
 	int m_currentTargetIndex;
 	int m_currentBulletIndex;

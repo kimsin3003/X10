@@ -46,5 +46,5 @@ void Bubble::ToSelf(const Bullet* bullet)
 
 void Bubble::ToSelf(const Explosion* explosion)
 {
-	ToSelf(static_cast<Bullet*>(NULL));
+	ToSelf(static_cast<Bullet*>(NULL)); ///# C++에선 nullptr쓰는 습관을
 }

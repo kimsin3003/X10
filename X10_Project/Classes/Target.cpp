@@ -33,7 +33,7 @@ void Target::ApplyCollisionEffect(Collider* collider)
 	}
 }
 
-const Rect& Target::GetBoundingArea() 
+const Rect& Target::GetBoundingArea()  ///# 스택 하위 프레임에서 생성된것을 참조로 리턴하지 말 것
 { 
 	Point nodePos = getPosition();
 	Size sprSize = m_spr->getContentSize() * m_sprScaleRatio;

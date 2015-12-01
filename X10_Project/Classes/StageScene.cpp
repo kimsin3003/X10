@@ -115,7 +115,7 @@ MenuItemImage* StageScene::MakeBackButton()
 MenuItemImage* StageScene::MakeStageButton(int stage, float xPos, float yPos)
 {
 	MenuItemImage* menuItem = MenuItemImage::create();
-	menuItem->setNormalImage(Sprite::create("res/star.png"));
+	menuItem->setNormalImage(Sprite::create("res/star.png")); ///# 모아라 모아~~ 
 	menuItem->setSelectedImage(Sprite::create("res/star_twinkle.png"));
 	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2,0.2));
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stage));

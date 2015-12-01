@@ -8,10 +8,11 @@ public:
 	CREATE_FUNC(Explosion);
 	virtual bool init();
 	void Act();
-	const float& GetBoundingRadius();
+	const float& GetBoundingRadius(); ///#왜 참조로 리턴? 
 	bool IsBullet() { return false; }
 
-	enum{
+	enum
+	{
 		DEFAULT_RADIUS = 30
 	};
 

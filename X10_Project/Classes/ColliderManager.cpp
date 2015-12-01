@@ -66,7 +66,7 @@ void ColliderManager::EraseDeadColliders()
 				m_curBulletIndex--;
 				m_BulletNum--;
 			}
-			m_colliders.erase(m_colliders.begin() + i);
+			m_colliders.erase(m_colliders.begin() + i); ///# 컨테이너 순회중에 그 안에서 지워도 되나? 컨테이너별로 자료구조가 다르기 때문에 되는것도 있고 안되는것도 있다. 명백히 확인하고 사용할 것
 		}
 	}
 }

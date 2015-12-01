@@ -50,10 +50,10 @@ private:
 
 	
 
-	const char* FILENAME = "temp.txt";
+	const char* FILENAME = "temp.txt"; ///# 알쟈?
 	int m_currentTargetIndex;
 	int m_currentBulletIndex;
-	static const int m_maxStageNum = 3;
+	static const int m_maxStageNum = 3; ///# 이런거는 enum으로 빼는게 낫지 않나? 중간에 변경될 값도 아닌데..
 	TargetInfo m_currentTarget;
 	string m_currentBullet;
 	vector<TargetInfo> m_targetInfoList;

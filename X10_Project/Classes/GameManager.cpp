@@ -78,7 +78,7 @@ Sling* GameManager::SetSling(GameLayer* gameLayer)
 
 void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 {
-	Vector<Target*> targets = m_targetManager->GetTargets();
+	Vector<Target*> targets = m_targetManager->GetTargets(); ///# 벡터 복사 금지 성능 저하됨
 
 	for (Target* target : targets)
 	{
@@ -88,7 +88,7 @@ void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 
 void GameManager::ShotBullet(Sling* sling)
 {
-	Bullet* bullet = static_cast<Bullet*>(m_colliderManager->GetBulletToShot(sling));
+	Bullet* bullet = static_cast<Bullet*>(m_colliderManager->GetBulletToShot(sling)); ///# 여기에서 casting이 왜 필요?
 	
 	if (bullet)
 	{

@@ -5,7 +5,7 @@
 
 namespace FileStuff
 {
-	const char* BULLET = "res/firework.png";
+	const char* BULLET = "res/firework.png"; ///# 문자 리터럴은 한군데 빼놓으삼
 }
 
 bool Bullet::init()
@@ -66,7 +66,7 @@ Sprite* Bullet::MakeBody()
 	
 	Animation* animation = Animation::createWithSpriteFrames(animFrames, 0.1f);
 	Animate* animate = Animate::create(animation);
-	RepeatForever *aniAction = RepeatForever::create(animate);
+	RepeatForever* aniAction = RepeatForever::create(animate);
 	body->runAction(aniAction);
 	body->setScale(BULLET_RATIO);
 	return body;
@@ -74,7 +74,7 @@ Sprite* Bullet::MakeBody()
 
 Sprite* Bullet::MakeDebris()
 {
-	Sprite* debris = Sprite::create("res/debris.png");
+	Sprite* debris = Sprite::create("res/debris.png"); ///# 마찬가지
 	debris->setPosition(this->getPosition());
 	MoveBy* fall = MoveBy::create(2.0, Vec2(0,-100));
 	auto ease = EaseIn::create(fall, 2.0);
@@ -167,5 +167,6 @@ void Bullet::TimeUp()
 
 const Rect& Bullet::GetBoundingArea()
 {
-	return Rect(this->getPosition(), m_body->getContentSize());
+	return Rect(this->getPosition(), m_body->getContentSize()); ///# 헐... 여기서 생성해서 참조로 리턴하지마라. 스택이 정리되면 어쩔라고? 위험한 코드
+	///# 관련하여 RVO에 대해 공부할 것
 }

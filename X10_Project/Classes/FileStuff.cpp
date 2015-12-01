@@ -3,6 +3,7 @@
 
 namespace FileStuff
 {
+	///# 문자 리터럴을 나타내는 상수는 전부 대문자_대문자 형태로 할 것
 	const string StageScene_Background = "res/starry_night.jpg";
 	const string BUBBLE = "res/target/Bubble2.png";
 	const string BUBBLE_POP = "res/target/BubblePop.png";

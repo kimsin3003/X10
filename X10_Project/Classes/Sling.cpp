@@ -224,6 +224,6 @@ void Sling::ChangeToEmpty() //shotted -> empty
 Sprite* Sling::MakeDotOfExpectLine()
 {
 	
-	Sprite* dot = Sprite::create(FileStuff::SlingLineDot);
+	Sprite* dot = Sprite::create(FileStuff::SlingLineDot); ///# 바로 리턴하면 되지? 사실 MakeDotOfExpectLine 함수 자체가 필요한가?
 	return dot;
 }

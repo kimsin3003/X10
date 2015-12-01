@@ -4,29 +4,24 @@
 #include "Explosion.h"
 #include "CrossExplosion.h"
 
-CrossBullet::CrossBullet() : DELTA_POS(Explosion::DEFAULT_RADIUS)
-{
-
-}
-
 bool CrossBullet::init()
 {
 	Bullet::init();
 
 	m_pattern = MOVE;
-	tmp_BULLET_REDUCTIONSPEEDTIME = m_lifeTime / 10;
+
 	return true;
 }
 
 void CrossBullet::Act()
 {
-	if (m_stopAction)
+	if (m_isStopped)
 	{
 		return;
 	}
 
 	DecreaseLife();
-	if (m_lifeTime > BULLET_EXPLODETIME)
+	if (m_lifeTime > BULLET_EXPLODE_TIME)
 	{
 		if (m_pattern == MOVE)
 		{

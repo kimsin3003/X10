@@ -50,7 +50,7 @@ void SeeBird::ToBullet(Bullet* bullet)
 		Sequence* act = Sequence::create(
 			DelayTime::create(0.5f),
 			MoveBy::create(1.0f, Point(-winSize.width - 10, 0)),
-			CallFunc::create(CC_CALLBACK_0(Bullet::EraseOn, bullet)),
+			CallFunc::create(CC_CALLBACK_0(Bullet::EraseMe, bullet)),
 			NULL);
 
 		bullet->runAction(act);

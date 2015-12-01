@@ -123,7 +123,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 		if (Bullet* bullet = dynamic_cast<Bullet*>(collider))
 		{
-			if (bullet->ShouldExplode())
+			if (bullet->IsToExplode())
 			{
 				Explosion* explosion = bullet->GetExplosion();
 				m_colliderManager->AddExplosion(explosion);

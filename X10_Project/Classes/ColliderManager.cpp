@@ -77,7 +77,7 @@ bool ColliderManager::HasBulletToShot()
 	for (int i = 0; i < m_BulletNum; i++)
 	{
 		bullet = static_cast<Bullet*>(m_colliders.at(i));
-		if (bullet->IsActing() == false && bullet->IsFlying() == false)
+		if (bullet->IsActionStopped() == false && bullet->IsFlying() == false)
 		{
 			m_curBulletIndex = i;
 			return true;

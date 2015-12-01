@@ -12,44 +12,59 @@ bool Bullet::init()
 
 	Director* director = Director::getInstance();
 	m_screen = director->getVisibleSize();
-	m_speed = 0;
+
+	m_speed = 0.0f;
+	m_speedSetRatio = 0.01f;
+	m_speedDecreaseRatio = 1 - (10.0f / BULLET_REDUCTION_SPEED_TIME) / director->getFrameRate();
 	m_direction = Vec2::ZERO;
 	
 	m_isFlying = false;
-	m_shouldExplode = false;
+	m_isToExplode = false;
 	m_toBeErased = false;
-	m_stopAction = false;
-	m_lifeTime = 3.0f;
-	m_startLife = m_lifeTime;
-	m_lifeDecrease = 1.0 / director->getFrameRate();
-	m_speedSetRatio = 0.01f;
-	m_speedDecreaseRatio = 1 - (10.0f/BULLET_REDUCTIONSPEEDTIME) / director->getFrameRate();
+	m_isStopped = false;
 
+	m_lifeTime = BULLET_LIFETIME;
+	m_startLife = m_lifeTime;
+	m_lifeDecrease = BULLET_LIFE_DECREASE_DELTA / director->getFrameRate();
+	
 	m_body = MakeBody();
 	addChild(m_body);
 
-	//부스러기 만드는 부분.
-	CallFunc* callback = CallFunc::create(CC_CALLBACK_0(Bullet::AddDebrisToParent, this));
-	Sequence* action = Sequence::create(DelayTime::create(0.15f),callback,NULL);
-	RepeatForever* makeDebris = RepeatForever::create(action);
-	this->runAction(makeDebris);
+	//Add debris to bullet
+	CallFunc* addDebris = CallFunc::create(CC_CALLBACK_0(Bullet::AddDebrisToParent, this));
+	Sequence* addDelay = Sequence::create(DelayTime::create(0.15f), addDebris, NULL);
+	RepeatForever* DebrisEffect = RepeatForever::create(addDelay);
+	runAction(DebrisEffect);
 
 	return true;
 }
 
 void Bullet::AddDebrisToParent()
 {
-	if (auto gameLayer = this->getParent()){
+	if (Node* gameLayer = getParent())
+	{
 		gameLayer->addChild(MakeDebris());
 	}
+}
+
+Sprite* Bullet::MakeDebris()
+{
+	Sprite* debris = Sprite::create(FileStuff::DEBRIS);
+	debris->setPosition(this->getPosition());
+	MoveBy* fall = MoveBy::create(2.0, Vec2(0, -100));
+	auto ease = EaseIn::create(fall, 2.0);
+	Sequence* action = Sequence::create(ease, RemoveSelf::create(), NULL);
+	debris->runAction(action);
+	return debris;
 }
 
 Sprite* Bullet::MakeBody()
 {
 	Sprite* body = Sprite::create();
-
+	
 	float scale = Director::getInstance()->getContentScaleFactor();
 	Size fireSize(BULLET_WIDTH /scale , BULLET_HEIGHT /scale); 
+	
 	int frameCut = BULLET_FRAMES;
 	Vector<SpriteFrame*> animFrames;
 	animFrames.reserve(frameCut);
@@ -64,28 +79,18 @@ Sprite* Bullet::MakeBody()
 	RepeatForever *aniAction = RepeatForever::create(animate);
 	body->runAction(aniAction);
 	body->setScale(BULLET_RATIO);
-	return body;
-}
 
-Sprite* Bullet::MakeDebris()
-{
-	Sprite* debris = Sprite::create(FileStuff::DEBRIS);
-	debris->setPosition(this->getPosition());
-	MoveBy* fall = MoveBy::create(2.0, Vec2(0,-100));
-	auto ease = EaseIn::create(fall, 2.0);
-	Sequence* action = Sequence::create(ease, RemoveSelf::create(), NULL);
-	debris->runAction(action);
-	return debris;
+	return body;
 }
 
 void Bullet::Act()
 {
-	if (m_stopAction)
+	if (m_isStopped)
 	{
 		return;
 	}
 
-	if (m_lifeTime > BULLET_EXPLODETIME)
+	if (m_lifeTime > BULLET_EXPLODE_TIME)
 	{
 		Move();
 		DecreaseLife();
@@ -96,17 +101,6 @@ void Bullet::Act()
 		Explode();
 		TimeUp();
 	}
-}
-
-void Bullet::SetStartSpeed(float speed)
-{
-	m_startSpeed = speed * m_speedSetRatio;
-	SetSpeed(speed);
-}
-
-void Bullet::SetSpeed(float spd)
-{
-	m_speed = spd * m_speedSetRatio;
 }
 
 void Bullet::Move()
@@ -138,9 +132,15 @@ Explosion* Bullet::GetExplosion()
 	return explosion;
 }
 
-void Bullet::DecreaseLife()
+void Bullet::SetStartSpeed(float speed)
 {
-	m_lifeTime -= m_lifeDecrease;
+	m_startSpeed = speed * m_speedSetRatio;
+	SetSpeed(speed);
+}
+
+void Bullet::SetSpeed(float spd)
+{
+	m_speed = spd * m_speedSetRatio;
 }
 
 void Bullet::ReduceSpeed()
@@ -148,9 +148,14 @@ void Bullet::ReduceSpeed()
 	m_speed = (m_lifeTime / m_startLife) * m_startSpeed;
 }
 
+void Bullet::DecreaseLife()
+{
+	m_lifeTime -= m_lifeDecrease;
+}
+
 void Bullet::Crashed()
 {
-	m_lifeTime = BULLET_EXPLODETIME;
+	m_lifeTime = BULLET_EXPLODE_TIME;
 }
 
 void Bullet::TimeUp()

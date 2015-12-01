@@ -38,7 +38,6 @@ bool Explosion::init()
 	m_explosion->setPosition(Point::ZERO);
 	this->addChild(m_explosion);
 	
-	
 	return true;
 }
 

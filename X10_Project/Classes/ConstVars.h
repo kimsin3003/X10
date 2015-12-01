@@ -1,7 +1,7 @@
 #pragma once
 namespace ConstVars
 {
-	extern const char* lastStage;
-	extern const char* cleared;
+	extern const char* LASTSTAGE;
+	extern const char* CLEARED;
 }
 

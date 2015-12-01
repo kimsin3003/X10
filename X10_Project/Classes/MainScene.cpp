@@ -81,7 +81,7 @@ bool MainScene::init()
 
 void MainScene::ChangeToGameScene(Ref* pSender)
 {
-	StageScene::GotoStage(pSender, UserDefault::getInstance()->getIntegerForKey(ConstVars::lastStage));
+	StageScene::GotoStage(pSender, UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE));
 }
 
 void MainScene::ChangeToStageScene(Ref* pSender)

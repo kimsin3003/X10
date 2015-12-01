@@ -35,4 +35,7 @@ namespace FileStuff
 	extern const string BACKBUTTON;
 	extern const string NEXTBUTTON;
 
+	extern const string STAR_OFF;
+	extern const string STAR_ON;
+
 }

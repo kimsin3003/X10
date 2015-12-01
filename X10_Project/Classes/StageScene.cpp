@@ -44,7 +44,7 @@ void StageScene::SetupButtons()
 	Size buttonSize = pauseButton->getContentSize();
 	menuList.pushBack(pauseButton);
 
-	int advancedState = UserDefault::getInstance()->getIntegerForKey(ConstVars::lastStage);
+	int advancedState = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
 	for (int i = 0; i <= advancedState; i++)
 	{
@@ -113,8 +113,8 @@ MenuItemImage* StageScene::MakeBackButton()
 MenuItemImage* StageScene::MakeStageButton(int stage, float xPos, float yPos)
 {
 	MenuItemImage* menuItem = MenuItemImage::create();
-	menuItem->setNormalImage(Sprite::create(FileStuff::STAR_SAD));
-	menuItem->setSelectedImage(Sprite::create(FileStuff::STAR_HAPPY));
+	menuItem->setNormalImage(Sprite::create(FileStuff::STAR_OFF));
+	menuItem->setSelectedImage(Sprite::create(FileStuff::STAR_ON));
 	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2,0.2));
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stage));
 	menuItem->setPosition(xPos, yPos);

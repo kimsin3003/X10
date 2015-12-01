@@ -33,7 +33,7 @@ void Target::ApplyCollisionEffect(Collider* collider)
 	}
 }
 
-const Rect& Target::GetBoundingArea() 
+const Rect Target::GetBoundingArea() 
 { 
 	Point nodePos = getPosition();
 	Size sprSize = m_spr->getContentSize() * m_sprScaleRatio;

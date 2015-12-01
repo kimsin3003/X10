@@ -20,7 +20,7 @@ namespace FileStuff
 	const string FEATHER = "res/target/Feather.png";
 	const string STAR_HAPPY = "res/target/StarSad.png";
 	const string STAR_SAD = "res/target/StarHappy.png";
-	const string SLINGLINEDOT = "res/dot.png";
+	const string SLING_LINE_DOT = "res/dot.png";
 	const string PAUSEBUTTON = "OrangePauseButton.png";
 	const string NEXTBUTTON = "NextButton.png";
 	const string RETRYBUTTON = "RetryButton.png";

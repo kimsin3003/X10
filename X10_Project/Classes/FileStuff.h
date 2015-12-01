@@ -28,7 +28,7 @@ namespace FileStuff
 	extern const string STAR_HAPPY;
 	extern const string STAR_SAD;
 
-	extern const string SLINGLINEDOT;
+	extern const string SLING_LINE_DOT;
 
 	extern const string PAUSEBUTTON;
 	extern const string RETRYBUTTON;

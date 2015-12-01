@@ -37,10 +37,10 @@ bool Sling::init()
 	/*Make Expect line*/
 	for (int i = 0; i < DOTNUM_OF_LINE; i++)
 	{
-		Sprite* dot = MakeDotOfExpectLine();
+		Sprite* dot = Sprite::create(FileStuff::SLING_LINE_DOT);
 		m_expectLine.pushBack(dot);
 		dot->setVisible(false);
-		this->addChild(dot);
+		addChild(dot);
 	}
 
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
@@ -219,11 +219,4 @@ void Sling::ChangeToShotted() //pullig -> shotted
 void Sling::ChangeToEmpty() //shotted -> empty
 {
 	m_status = STATUS::EMPTY;
-}
-
-Sprite* Sling::MakeDotOfExpectLine()
-{
-	
-	Sprite* dot = Sprite::create(FileStuff::SLINGLINEDOT);
-	return dot;
 }

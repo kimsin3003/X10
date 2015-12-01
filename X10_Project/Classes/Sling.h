@@ -55,6 +55,4 @@ private:
 	Vec2 m_shotAngle;
 	float m_shotPower;
 	Vector<Sprite*> m_expectLine;
-
-	Sprite* MakeDotOfExpectLine();
 };

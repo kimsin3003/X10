@@ -136,7 +136,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 {
-	static Target* lastTarget = nullptr; // 한번 충돌한 타겟에 대해 여러번 충돌체크가 되지 않도록 함.
+	static Target* lastTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
 	bool collidingCheck = false; //현재 충돌중인 타겟이 있는지 체크. --> lastTarget을 유지할 필요가 있는지체크
 	for (Target* target : targets)
 	{
@@ -145,7 +145,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 		if (collider->IsBullet())
 		{
-			const Rect colliderBoundingBox = dynamic_cast<Bullet*>(collider)->GetBoundingArea();
+			const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
 			const Rect targetBoundingBox = target->GetBoundingArea();
 
 			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
@@ -157,7 +157,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 		}
 		else
 		{
-			Explosion* explosion = dynamic_cast<Explosion*>(collider);
+			Explosion* explosion = static_cast<Explosion*>(collider);
 			const float explosionRadius = explosion->GetBoundingRadius();
 			const Vec2 explosionPosition = explosion->getPosition();
 			const Rect targetBoundingBox = target->GetBoundingArea();

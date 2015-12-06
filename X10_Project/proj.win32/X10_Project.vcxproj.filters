@@ -177,6 +177,12 @@
     <ClInclude Include="..\Classes\FileStuff.h">
       <Filter>Namspace</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\CollectionManager.h">
+      <Filter>Manager</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Collection.h">
+      <Filter>GameObject</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">

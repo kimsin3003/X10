@@ -27,4 +27,10 @@ namespace FileStuff
 	const string BACKBUTTON = "BackButton.png";
 	const string STAR_OFF = "res/star_off.png";
 	const string STAR_ON = "res/star_on.png";
+
+	const string LETTER = "res/collection/letter.png";
+	const string SHOES = "res/collection/shoes.png";
+	const string SCARF = "res/collection/scarf.png";
+	const string BOTTLE = "res/collection/bottle.png";
+	const string MONITOR = "res/collection/monitor.png";
 }

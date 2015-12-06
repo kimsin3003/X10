@@ -18,8 +18,8 @@ namespace FileStuff
 	const string MIRROR_Y = "res/target/flat_mirror.png";
 	const string SEEBIRD = "res/target/seagull.png";
 	const string FEATHER = "res/target/Feather.png";
-	const string STAR_HAPPY = "res/target/StarSad.png";
-	const string STAR_SAD = "res/target/StarHappy.png";
+	const string STAR_HAPPY = "res/target/brick_destruct.png";
+	const string STAR_SAD = "res/target/brick.png";
 	const string SLING_LINE_DOT = "res/dot.png";
 	const string PAUSEBUTTON = "OrangePauseButton.png";
 	const string NEXTBUTTON = "NextButton.png";

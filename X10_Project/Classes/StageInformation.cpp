@@ -10,7 +10,7 @@ StageInformation::StageInformation(int stage)
 
 	TargetInfo info;
 
-	if (stage <= 1 && stage >=0)
+	if (stage <= 2 && stage >=0)
 	{
 		char fileName[100];
 		sprintf(fileName, "../Resources/files/target%d.txt", stage);
@@ -49,27 +49,10 @@ StageInformation::StageInformation(int stage)
 
 		return;
 
-		//SeeBirds ... 파일에서 어떻게 읽어오지...
-		Point seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
-		m_targetInfoList.push_back(info);
-
-		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
-		m_targetInfoList.push_back(info);
-
-		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
-		m_targetInfoList.push_back(info);
-
-		seeBirdPos = Point(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-		info = TargetInfo(TargetInfo::SEEBIRD, seeBirdPos, 0, 1.0f);
-		m_targetInfoList.push_back(info);
-
 	}
-	else if (stage == 2)
+	else if (stage == 3)
 	{
-		/// 만일 테스트 용이라면 테스트용이라고 꼭 명시를 할 것.
+		/// 테스트용.
 		info = TargetInfo(TargetInfo::ENEMY, Point(160, 280), 0, 1.03f);
 		m_targetInfoList.push_back(info);
 
@@ -89,7 +72,7 @@ StageInformation::StageInformation(int stage)
 		{
 			for (int j = 0; j <= i * 2 - 1; j++)
 			{
-				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 175 + (i * 20)), i * 30 + j * 2, 0.5f / 2);
+				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 175 + (i * 20)), i * 30 + j * 2, 2.0,2.0);
 				m_targetInfoList.push_back(info);
 			}
 		}
@@ -98,68 +81,12 @@ StageInformation::StageInformation(int stage)
 		{
 			for (int j = 0; j <= i * 2 - 1; j++)
 			{
-				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 385 - (i * 20)), i * 30 + j * 2, 0.5f / 2);
+				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 385 - (i * 20)), i * 30 + j * 2, 2.0, 2.0);
 				m_targetInfoList.push_back(info);
 			}
 		}
 
 		//Bullet 5개`
-		string bulletType = "Bullet";
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-	}
-	else if (stage == 3)
-	{
-
-		Size screen = Director::getInstance()->getVisibleSize();
-
-		info = TargetInfo(TargetInfo::MIRROR, Point(0, 200), 0, 1.5);
-		m_targetInfoList.push_back(info);
-		info = TargetInfo(TargetInfo::MIRROR, Point(320, 200), 0, 1.5f);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::MIRROR, Point(160, 300), 0, 3.0f / 2);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::MIRROR_Y, Point(160, 100), 0, 2.5f / 2);
-		m_targetInfoList.push_back(info);
-		info = TargetInfo(TargetInfo::MIRROR_Y, Point(70, 250), 0, 2.5f / 2);
-		m_targetInfoList.push_back(info);
-
-
-		info = TargetInfo(TargetInfo::ENEMY, Point(300, 360), 0, 3.0f);
-		m_targetInfoList.push_back(info);
-		info = TargetInfo(TargetInfo::MIRROR, Point(0, 360), 0, 1.5);
-		m_targetInfoList.push_back(info);
-		info = TargetInfo(TargetInfo::MIRROR, Point(320, 360), 0, 1.5f);
-		m_targetInfoList.push_back(info);
-
-		for (int xpos = 0; xpos < screen.width + 40; xpos += 34)
-		{
-			info = TargetInfo(TargetInfo::MIRROR_Y, Point(xpos, 480), 0, 2.5f / 2);
-			m_targetInfoList.push_back(info);
-		}
-
-		info = TargetInfo(TargetInfo::STAR, Point(100, 250), 0, 0.25f);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::STAR, Point(250, 250), 0, 0.25f);
-		m_targetInfoList.push_back(info);
-		info = TargetInfo(TargetInfo::STAR, Point(260, 250), 0, 0.25f);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::STAR, Point(230, 210), 0, 0.25f);
-		m_targetInfoList.push_back(info);
-
-		info = TargetInfo(TargetInfo::STAR, Point(220, 190), 0, 0.25f);
-		m_targetInfoList.push_back(info);
-		info = TargetInfo(TargetInfo::STAR, Point(230, 190), 0, 0.25f);
-		m_targetInfoList.push_back(info);
-
-		//Bullet 5개
 		string bulletType = "Bullet";
 		m_bulletInfoList.push_back(bulletType);
 		m_bulletInfoList.push_back(bulletType);

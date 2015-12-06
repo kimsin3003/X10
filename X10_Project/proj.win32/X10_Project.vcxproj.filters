@@ -90,6 +90,9 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Collection.cpp" />
     <ClCompile Include="..\Classes\CollectionManager.cpp" />
+    <ClCompile Include="..\Classes\jsoncpp.cpp">
+      <Filter>JsonParser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -185,6 +188,12 @@
     <ClInclude Include="..\Classes\Collection.h">
       <Filter>GameObject</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\json\json.h">
+      <Filter>JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\json\json-forwards.h">
+      <Filter>JsonParser</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -216,6 +225,9 @@
     </Filter>
     <Filter Include="Namspace">
       <UniqueIdentifier>{22db0e7a-d753-4f2e-8857-0cabf3429c31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="JsonParser">
+      <UniqueIdentifier>{a9a26f3c-7811-4b25-a8bf-dbbacd7263ac}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

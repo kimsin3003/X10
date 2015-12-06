@@ -17,6 +17,7 @@ public:
 	void ChangeToMainScene(Ref* pSender);
 	void onMouseUp(Event *event);
 	void onMouseDown(Event *event);
+	string makeJsonTestString();
 
 	CREATE_FUNC(MCScene);
 };

@@ -88,6 +88,8 @@
     <ClCompile Include="..\Classes\FileStuff.cpp">
       <Filter>Namspace</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\Collection.cpp" />
+    <ClCompile Include="..\Classes\CollectionManager.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "StageInformation.h"
 #include <fstream>
+#include <json.h>
 
 StageInformation::StageInformation(int stage)
 {

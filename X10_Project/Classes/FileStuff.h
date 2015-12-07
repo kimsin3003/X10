@@ -11,9 +11,9 @@ namespace FileStuff
 	
 	extern const string BULLET;
 	extern const string DEBRIS;
-	extern const string FILE_CLOUD;
-	extern const string FILE_CLOUD_LEFT;
-	extern const string FILE_CLOUD_RIGHT;
+	extern const string CLOUD;
+	extern const string CLOUD_LEFT;
+	extern const string CLOUD_RIGHT;
 
 	extern const string ENEMY;
 	extern const string ENEMY_DEAD;

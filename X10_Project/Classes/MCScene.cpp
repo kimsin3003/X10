@@ -174,19 +174,77 @@ string MCScene::makeJsonTestString()
 	*/
 	
 	Json::Value target;
-	target["type"] = 0;
-	Json::Value position;
-	position["x"] = 200;
-	position["y"] = 300;
-	target["position"] = position;
-	target["rotation"] = 0;
-	Json::Value scale;
-	scale["x"] = 2.0f;
-	scale["y"] = 2.0f;
-	target["scale"] = scale;
-
 	Json::Value targets;
-	targets.append(target);
+
+	for (int j = 0; j <= 17; j++)
+	{
+		target["type"] = 4;
+		Json::Value position;
+		position["x"] = 160 + j * 10;
+		position["y"] = 100 + j * 15;
+		target["position"] = position;
+		target["rotation"] = 0;
+		Json::Value scale;
+		scale["x"] = 2.0f;
+		scale["y"] = 2.0f;
+		target["scale"] = scale;
+
+		targets.append(target);
+	}
+
+	for (int j = 0; j <= 17; j++)
+	{
+		target["type"] = 4;
+		Json::Value position;
+		position["x"] = 160 - j * 10;
+		position["y"] = 100 + j * 15;
+		target["position"] = position;
+		target["rotation"] = 0;
+		Json::Value scale;
+		scale["x"] = 2.0f;
+		scale["y"] = 2.0f;
+		target["scale"] = scale;
+
+		targets.append(target);
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j <= i * 2 - 1; j++)
+		{
+			target["type"] = 5;
+			Json::Value position;
+			position["x"] = 180 + (j * 15) - (i * 20);
+			position["y"] = 175 + (i * 20);
+			target["position"] = position;
+			target["rotation"] = i * 30 + j * 2;
+			Json::Value scale;
+			scale["x"] = 2.0f;
+			scale["y"] = 2.0f;
+			target["scale"] = scale;
+
+			targets.append(target);
+		}
+	}
+
+	for (int i = 0; i < 5; i++)
+	{
+		for (int j = 0; j <= i * 2 - 1; j++)
+		{
+			target["type"] = 5;
+			Json::Value position;
+			position["x"] = 180 + (j * 15) - (i * 20);
+			position["y"] = 385 - (i * 20);
+			target["position"] = position;
+			target["rotation"] = i * 30 + j * 2;
+			Json::Value scale;
+			scale["x"] = 2.0f;
+			scale["y"] = 2.0f;
+			target["scale"] = scale;
+
+			targets.append(target);
+		}
+	}
 
 	Json::StyledWriter writer;
 	string result = writer.write(targets);

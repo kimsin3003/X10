@@ -51,7 +51,8 @@ private:
 	const char* FILENAME = "temp.txt";
 	int m_currentTargetIndex;
 	int m_currentBulletIndex;
-	static const int m_maxStageNum = 3;
+	static const int m_maxStageNum = 4;
+	static const int BUFFERSIZE = 65536;
 	TargetInfo m_currentTarget;
 	string m_currentBullet;
 	vector<TargetInfo> m_targetInfoList;

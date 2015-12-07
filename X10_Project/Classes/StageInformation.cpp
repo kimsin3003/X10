@@ -13,8 +13,114 @@ StageInformation::StageInformation(int stage)
 
 	TargetInfo info;
 
-	if (stage <= 2 && stage >=0)
+	if (stage <= 4 && stage >=0)
 	{
+		/*load targets*/
+		char fileName[100];
+		sprintf(fileName, "../Resources/files/target%d.json", stage);
+		FILE* fp = fopen(fileName, "r");
+		
+		char tmp[BUFFERSIZE];
+		size_t fileSize = fread(tmp, 1, BUFFERSIZE, fp);
+		fclose(fp);
+
+		Json::Value targets;
+		Json::Reader reader;
+
+		if (reader.parse(tmp, targets) == false)
+		{
+			CCLOG("Target Load Fail.");
+			return;
+		}
+
+		for (int i = 0; i < targets.size(); i++)
+		{
+			Json::Value target = targets[i];
+			int type = target["type"].asInt();
+			TargetType targetType = static_cast<TargetType>(type);
+
+			Json::Value position = target["position"];
+			Point pos = Point(position["x"].asFloat(), position["y"].asFloat());
+			float rotation = target["rotation"].asFloat();
+
+			Json::Value scale = target["scale"];
+			float scalex = scale["x"].asFloat();
+			float scaley = scale["y"].asFloat();
+
+			info = TargetInfo(targetType, pos, rotation, scalex, scaley);
+			m_targetInfoList.push_back(info);
+		}
+
+		/*load bullets*/
+		sprintf(fileName, "../Resources/files/bullet%d.json", stage);
+		fp = fopen(fileName, "r");
+		fileSize = fread(tmp, 1, BUFFERSIZE, fp);
+		fclose(fp);
+
+		Json::Value bullets;
+
+		if (reader.parse(tmp, bullets) == false)
+		{
+			CCLOG("Target Load Fail.");
+			return;
+		}
+
+		for (int i = 0; i < bullets.size(); i++)
+		{
+			string bullet = bullets[i].asString();
+			m_bulletInfoList.push_back(bullet);
+		}
+	}
+	else
+	{	
+
+		/*******예전 stage 3*********/
+		/*
+		info = TargetInfo(TargetInfo::ENEMY, Point(160, 280), 0, 1.03f);
+		m_targetInfoList.push_back(info);
+
+		for (int j = 0; j <= 17; j++)
+		{
+			info = TargetInfo(TargetInfo::BUBBLE, Point(160 + j * 10, 100 + j * 15), 0, 2.5f / 2);
+			m_targetInfoList.push_back(info);
+		}
+
+		for (int j = 0; j <= 17; j++)
+		{
+			info = TargetInfo(TargetInfo::BUBBLE, Point(160 - j * 10, 100 + j * 15), 0, 2.5f / 2);
+			m_targetInfoList.push_back(info);
+		}
+
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j <= i * 2 - 1; j++)
+			{
+				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 175 + (i * 20)), i * 30 + j * 2, 2.0, 2.0);
+				m_targetInfoList.push_back(info);
+			}
+		}
+
+		for (int i = 0; i < 5; i++)
+		{
+			for (int j = 0; j <= i * 2 - 1; j++)
+			{
+				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 385 - (i * 20)), i * 30 + j * 2, 2.0, 2.0);
+				m_targetInfoList.push_back(info);
+			}
+		}
+
+		//Bullet 5개`
+		string bulletType = "Bullet";
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		m_bulletInfoList.push_back(bulletType);
+		*/
+
+
+		/********예전 스테이지 0,1,2**********/
+		/*
 		char fileName[100];
 		sprintf(fileName, "../Resources/files/target%d.txt", stage);
 		ifstream ifs(fileName);
@@ -47,114 +153,12 @@ StageInformation::StageInformation(int stage)
 			{
 				m_bulletInfoList.push_back(bulletType);
 			}
-
 		}
+		*/
+	}
+	
 
 		return;
-
-	}
-	else if (stage == 3)
-	{
-		/// 테스트용.
-		info = TargetInfo(TargetInfo::ENEMY, Point(160, 280), 0, 1.03f);
-		m_targetInfoList.push_back(info);
-
-		for (int j = 0; j <= 17; j++)
-		{
-			info = TargetInfo(TargetInfo::BUBBLE, Point(160 + j * 10, 100 + j * 15), 0, 2.5f / 2);
-			m_targetInfoList.push_back(info);
-		}
-
-		for (int j = 0; j <= 17; j++)
-		{
-			info = TargetInfo(TargetInfo::BUBBLE, Point(160 - j * 10, 100 + j * 15), 0, 2.5f / 2);
-			m_targetInfoList.push_back(info);
-		}
-
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j <= i * 2 - 1; j++)
-			{
-				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 175 + (i * 20)), i * 30 + j * 2, 2.0,2.0);
-				m_targetInfoList.push_back(info);
-			}
-		}
-
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j <= i * 2 - 1; j++)
-			{
-				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 385 - (i * 20)), i * 30 + j * 2, 2.0, 2.0);
-				m_targetInfoList.push_back(info);
-			}
-		}
-
-		//Bullet 5개`
-		string bulletType = "Bullet";
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-	}
-	else
-	{
-		char fileName[100];
-		sprintf(fileName, "../Resources/files/target%d.json", stage);
-		ifstream ifs(fileName);
-		// json 문서 읽기
-				
-		Json::Value targets;
-		Json::Reader reader;
-		string jsonStr;
-		if (reader.parse(jsonStr, targets) == false)
-		{
-			CCLOG("Target Load Fail.");
-			return;
-		}
-
-		for (int i = 0; i < targets.size(); i++)
-		{
-			Json::Value target = targets[i];
-			int type = target["type"].asInt();
-			TargetType targetType = static_cast<TargetType>(type);
-
-			Json::Value position = target["position"];
-			Point pos = Point(position["x"].asFloat(), position["y"].asFloat());
-			float rotation = target["rotation"].asFloat();
-			
-			Json::Value scale = target["scale"];
-			float scalex = scale["x"].asFloat();
-			float scaley = scale["y"].asFloat();
-
-			info = TargetInfo(targetType, pos, rotation, scalex, scaley);
-			m_targetInfoList.push_back(info);
-		}
-		
-
-		sprintf(fileName, "../Resources/files/bullet%d.txt", stage);
-		ifs = ifstream(fileName);
-
-		while (!ifs.eof())
-		{
-			int crossnum, bulletnum;
-			ifs >> crossnum >> bulletnum;
-
-			string bulletType = "CrossBullet";
-			for (int i = 0; i < crossnum; i++)
-			{
-				m_bulletInfoList.push_back(bulletType);
-			}
-
-			bulletType = "Bullet";
-			for (int i = 0; i < bulletnum; i++)
-			{
-				m_bulletInfoList.push_back(bulletType);
-			}
-
-		}
-
-	}
 }
 
 StageInformation::~StageInformation()

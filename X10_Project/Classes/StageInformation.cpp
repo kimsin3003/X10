@@ -17,8 +17,11 @@ StageInformation::StageInformation(int stage)
 	{
 		/*load targets*/
 		char fileName[100];
-		sprintf(fileName, "../Resources/files/target%d.json", stage);
-		FILE* fp = fopen(fileName, "r");
+		sprintf(fileName, "files/target%d.json", stage);
+		FILE* fp;
+		if (!(fp = fopen(fileName, "r"))){
+			return;
+		}
 		
 		char tmp[BUFFERSIZE];
 		size_t fileSize = fread(tmp, 1, BUFFERSIZE, fp);
@@ -52,8 +55,11 @@ StageInformation::StageInformation(int stage)
 		}
 
 		/*load bullets*/
-		sprintf(fileName, "../Resources/files/bullet%d.json", stage);
-		fp = fopen(fileName, "r");
+		sprintf(fileName, "files/bullet%d.json", stage);
+		if (!(fp = fopen(fileName, "r"))){
+			return;
+		}
+		
 		fileSize = fread(tmp, 1, BUFFERSIZE, fp);
 		fclose(fp);
 

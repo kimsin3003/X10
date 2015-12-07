@@ -8,9 +8,9 @@ namespace FileStuff
 	const string BUBBLE_POP = "res/target/BubblePop.png";
 	const string BULLET = "res/firework.png";
 	const string DEBRIS = "res/debris.png";
-	const string FILE_CLOUD = "res/target/Cloud.png";
-	const string FILE_CLOUD_LEFT = "res/target/CloudLeft.png";
-	const string FILE_CLOUD_RIGHT = "res/target/CloudRight.png";
+	const string CLOUD = "res/target/Cloud.png";
+	const string CLOUD_LEFT = "res/target/CloudLeft.png";
+	const string CLOUD_RIGHT = "res/target/CloudRight.png";
 	const string ENEMY = "res/target/ufo.png";
 	const string ENEMY_DEAD = "res/enemy_dead.png";
 	const string MIRROR = "res/target/Mirror.png";

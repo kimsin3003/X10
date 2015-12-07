@@ -172,6 +172,7 @@ string MCScene::makeJsonTestString()
 					}
 	}
 	*/
+	
 	Json::Value target;
 	target["type"] = 0;
 	Json::Value position;
@@ -184,12 +185,15 @@ string MCScene::makeJsonTestString()
 	scale["y"] = 2.0f;
 	target["scale"] = scale;
 
-	Json::StyledWriter writer;
-	string result = writer.write(target);
+	Json::Value targets;
+	targets.append(target);
 
-	//ofstream out("output.txt");
-	//out << result;
-	//out.close();
+	Json::StyledWriter writer;
+	string result = writer.write(targets);
+
+	ofstream out("test.json");
+	out << result;
+	out.close();
 
 	return result;
 }

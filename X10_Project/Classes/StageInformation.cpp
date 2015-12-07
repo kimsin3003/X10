@@ -1,6 +1,8 @@
 #include "stdafx.h"
 #include "StageInformation.h"
 #include <fstream>
+#include <iostream>
+#include <string>
 #include <json/json.h>
 
 StageInformation::StageInformation(int stage)
@@ -97,6 +99,60 @@ StageInformation::StageInformation(int stage)
 	}
 	else
 	{
+		char fileName[100];
+		sprintf(fileName, "../Resources/files/target%d.json", stage);
+		ifstream ifs(fileName);
+		// json 문서 읽기
+				
+		Json::Value targets;
+		Json::Reader reader;
+		string jsonStr;
+		if (reader.parse(jsonStr, targets) == false)
+		{
+			CCLOG("Target Load Fail.");
+			return;
+		}
+
+		for (int i = 0; i < targets.size(); i++)
+		{
+			Json::Value target = targets[i];
+			int type = target["type"].asInt();
+			TargetType targetType = static_cast<TargetType>(type);
+
+			Json::Value position = target["position"];
+			Point pos = Point(position["x"].asFloat(), position["y"].asFloat());
+			float rotation = target["rotation"].asFloat();
+			
+			Json::Value scale = target["scale"];
+			float scalex = scale["x"].asFloat();
+			float scaley = scale["y"].asFloat();
+
+			info = TargetInfo(targetType, pos, rotation, scalex, scaley);
+			m_targetInfoList.push_back(info);
+		}
+		
+
+		sprintf(fileName, "../Resources/files/bullet%d.txt", stage);
+		ifs = ifstream(fileName);
+
+		while (!ifs.eof())
+		{
+			int crossnum, bulletnum;
+			ifs >> crossnum >> bulletnum;
+
+			string bulletType = "CrossBullet";
+			for (int i = 0; i < crossnum; i++)
+			{
+				m_bulletInfoList.push_back(bulletType);
+			}
+
+			bulletType = "Bullet";
+			for (int i = 0; i < bulletnum; i++)
+			{
+				m_bulletInfoList.push_back(bulletType);
+			}
+
+		}
 
 	}
 }

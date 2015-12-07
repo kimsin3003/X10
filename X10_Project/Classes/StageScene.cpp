@@ -6,6 +6,7 @@
 #include "GameManager.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
+#include "CollectionManager.h"
 
 Scene* StageScene::createScene()
 {
@@ -13,7 +14,6 @@ Scene* StageScene::createScene()
 
 	Layer* layer = StageScene::create();
 	scene->addChild(layer);
-
 	return scene;
 }
 
@@ -29,7 +29,10 @@ bool StageScene::init()
 	Sprite* background = LoadBackground();
 	addChild(background);
 
+	collectionManager = new CollectionManager();
+
 	SetupButtons();
+	SetupCollection();
 
 	return true;
 }
@@ -66,6 +69,14 @@ void StageScene::SetupButtons()
 	Menu* menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
 	addChild(menu);
+}
+
+void StageScene::SetupCollection()
+{
+	int advancedStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+
+	collectionManager->InitCollections(advancedStage);
+	collectionManager->AppendCollectionToLayer(this);
 }
 
 Sprite* StageScene::LoadBackground()

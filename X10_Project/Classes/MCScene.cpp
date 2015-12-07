@@ -1,10 +1,14 @@
-#include <string>
 #include "stdafx.h"
 #include "MainScene.h"
 #include "MCScene.h"
 #include "Explosion.h"
 #include "Enemy.h"
 #include "Sling.h"
+#include <string>
+#include <fstream>
+#include <iostream>
+#include <string>
+#include <json/json.h>
 
 Scene* MCScene::createScene()
 {
@@ -145,10 +149,50 @@ bool MCScene::init()
 	//fireWorks->addChild(Label::create("HH   ", "arial", 10));
 	this->addChild(fireWorks);
 
+
+	/*JSON Test*/
+	string jsonTest = makeJsonTestString();
+	
 	return true;
 }
 
+string MCScene::makeJsonTestString()
+{
+	/*
+	{
+		"type" : 0 ,
+		"position": {
+						"x" : 200 ,
+						"y" : 300
+					} ,
+		"rotation" : 0 ,
+		"scale" :	{
+						"x" : 2.0 ,
+						"y" : 2.0
+					}
+	}
+	*/
+	Json::Value target;
+	target["type"] = 0;
+	Json::Value position;
+	position["x"] = 200;
+	position["y"] = 300;
+	target["position"] = position;
+	target["rotation"] = 0;
+	Json::Value scale;
+	scale["x"] = 2.0f;
+	scale["y"] = 2.0f;
+	target["scale"] = scale;
 
+	Json::StyledWriter writer;
+	string result = writer.write(target);
+
+	//ofstream out("output.txt");
+	//out << result;
+	//out.close();
+
+	return result;
+}
 
 void MCScene::ChangeToMainScene(Ref* pSender)
 {

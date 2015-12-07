@@ -38,4 +38,10 @@ namespace FileStuff
 	extern const string STAR_OFF;
 	extern const string STAR_ON;
 
+	extern const string LETTER;
+	extern const string SHOES;
+	extern const string SCARF;
+	extern const string BOTTLE;
+	extern const string MONITOR;
+
 }

@@ -39,6 +39,8 @@ bool Sling::init()
 	{
 		Sprite* dot = Sprite::create(FileStuff::SLING_LINE_DOT);
 		m_expectLine.pushBack(dot);
+		dot->setOpacity((DOTNUM_OF_LINE - i)*255/DOTNUM_OF_LINE);
+		dot->setScale(i + 1);
 		dot->setVisible(false);
 		addChild(dot);
 	}
@@ -119,9 +121,11 @@ void Sling::Pull(Event* e)
 	for (int i = 0; i < m_expectLine.size(); i++)
 	{
 		Sprite* dot = m_expectLine.at(i);
-		dot->setPosition(m_shotAngle * i);
+		dot->setPosition(m_shotAngle *m_shotPower/MAX_POWER * i);
 	}
-	/*auto label = Label::create(".","arial", FONT_SIZE);
+
+	/* 명찬: 다른분 안보실거면 지워도 됩니다. 
+	auto label = Label::create(".","arial", FONT_SIZE);
 	auto delay = MoveBy::create(PREDICT_LINE_TIME, m_shotAngle);
 	auto action = Sequence::create(delay, RemoveSelf::create(), NULL);
 	this->addChild(label);

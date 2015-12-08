@@ -14,6 +14,7 @@
     <ProjectGuid>{76A39BB2-9B84-4C65-98A5-654D86B86F2A}</ProjectGuid>
     <RootNamespace>test_win32</RootNamespace>
     <Keyword>Win32Proj</Keyword>
+    <WindowsTargetPlatformVersion>8.1</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
@@ -155,6 +156,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Collider.cpp" />
     <ClCompile Include="..\Classes\ColliderManager.cpp" />
     <ClCompile Include="..\Classes\ConstVars.cpp" />
+    <ClCompile Include="..\Classes\cppson.cpp" />
     <ClCompile Include="..\Classes\CrossBullet.cpp" />
     <ClCompile Include="..\Classes\CrossExplosion.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
@@ -193,6 +195,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Collider.h" />
     <ClInclude Include="..\Classes\ColliderManager.h" />
     <ClInclude Include="..\Classes\ConstVars.h" />
+    <ClInclude Include="..\Classes\cppson.h" />
     <ClInclude Include="..\Classes\CrossBullet.h" />
     <ClInclude Include="..\Classes\CrossExplosion.h" />
     <ClInclude Include="..\Classes\Enemy.h" />

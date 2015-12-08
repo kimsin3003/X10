@@ -151,7 +151,7 @@ bool MCScene::init()
 
 
 	/*JSON Test*/
-	string jsonTest = makeJsonTestString();
+	//string jsonTest = makeJsonTestString();
 	
 	return true;
 }

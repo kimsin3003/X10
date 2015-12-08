@@ -4,6 +4,8 @@
 #include "FileStuff.h"
 #include "StageScene.h"
 
+///# .h파일과 .cpp파일은 같은 필터 아래에 둘 것~~ 
+
 CollectionManager::CollectionManager()
 {
 	m_curColNum = 0;

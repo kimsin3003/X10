@@ -4,7 +4,7 @@ class UILayer : public Layer
 {
 public:
 	
-	enum CONSTANT
+	enum CONSTANT ///# 네이밍 조심. 너무 일반적이고 범용적인 이름..
 	{
 		PAUSE_BUTTON_WIDTH = 40,
 		PAUSE_BUTTON_HEIGHT = 40

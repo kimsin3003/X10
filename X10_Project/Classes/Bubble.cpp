@@ -46,5 +46,6 @@ void Bubble::ToSelf(const Bullet* bullet)
 
 void Bubble::ToSelf(const Explosion* explosion)
 {
+	///# Bullet과 Explosion모두 Collider의 자식인데, 다형성을 이용하면 굳이 이렇게 할 필요가 없을텐데..
 	ToSelf(static_cast<Bullet*>(NULL));
 }

@@ -167,5 +167,5 @@ void Bullet::TimeUp()
 
 const Rect& Bullet::GetBoundingArea()
 {
-	return Rect(this->getPosition(), m_body->getContentSize());
+	return Rect(this->getPosition(), m_body->getContentSize()); ///# 이거 콜스택에서 정리되면...
 }

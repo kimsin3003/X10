@@ -25,7 +25,7 @@ public:
 	void SetSpeedDecreaseRatio(float ratio) { m_speedDecreaseRatio = ratio; }
 	void ReduceSpeed();
 	
-	const Rect& GetBoundingArea();
+	const Rect& GetBoundingArea(); ///# 함수 내부 객체의 참조 리턴은 위험하다
 	
 	//status
 	void Explode() { m_isToExplode = true; }

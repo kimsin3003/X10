@@ -25,7 +25,7 @@ void Cloud::ToBullet(Bullet* bullet)
 
 }
 
-void Cloud::ToSelf(const Bullet* bullet)
+void Cloud::ToSelf(const Bullet* bullet) ///# bullet인자를 쓰지도 않는데, 계속 이렇게 구현하면, 인터페이스가 잘못되었을 확률이 높다.
 {
 	if (m_applyEffectToMe)
 	{

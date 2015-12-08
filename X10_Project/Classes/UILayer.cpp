@@ -6,9 +6,9 @@
 #include "GameManager.h"
 #include "FileStuff.h"
 
-UILayer* UILayer::createUILayer()
+UILayer* UILayer::createUILayer() ///# 이 멤버 함수가 굳이 필요하나?
 {
-	UILayer* IU = UILayer::create();
+	UILayer* IU = UILayer::create(); ///# I Seoul U 
 	return IU;
 }
 
@@ -49,7 +49,7 @@ void UILayer::MakeSuccessWidget(int m_stage)
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	//성공 메시지
-	Label* successMessage = Label::createWithTTF("SUCCESS", "fonts/nanumgothic.ttf", 34);
+	Label* successMessage = Label::createWithTTF("SUCCESS", "fonts/nanumgothic.ttf", 34); ///# 이제 그만~
 	successMessage->setPosition(visibleSize.width / 2, visibleSize.height / 2 + successMessage->getContentSize().height / 2);
 
 

@@ -3,6 +3,17 @@
 #include "Collection.h"
 #include "StageScene.h"
 //move to file system
+
+///# 네임스페이스는 이런데 쓰라고 있는게 아니야~~~  이런 용도라면 enum을 쓰면 됨
+
+///# 즉 이런식으로..
+enum POS_IU
+{
+	PI_X = 100,
+	PI_Y = 100
+};
+
+
 namespace POS_MONITOR
 {
 	const int X = 100;

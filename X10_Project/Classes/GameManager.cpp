@@ -89,9 +89,8 @@ void GameManager::ShotBullet(Sling* sling)
 	if (bullet)
 	{
 		Scene* currentScene = Director::getInstance()->getRunningScene();
-		Scene* gameScene = static_cast<Scene*>(currentScene->getChildByName("GameScene"));
-		Layer* gameLayer = static_cast<Layer*>(gameScene->getChildByName("GameLayer"));
-
+		GameScene* gameScene = static_cast<GameScene*>(currentScene->getChildByName("GameScene"));
+		GameLayer* gameLayer = gameScene->GetGameLayer();
 		gameLayer->addChild(bullet);
 
 		sling->ShotComplete();
@@ -131,7 +130,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	m_colliderManager->EraseDeadColliders();
 	m_targetManager->EraseDeadTargets();
-	ControlProgress(gameLayer, uiLayer);
+	ControlWinFailProgress(gameLayer, uiLayer);
 }
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
@@ -169,8 +168,11 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 			}
 		}
 	}
+
 	if (!collidingCheck)
+	{
 		lastTarget = nullptr;
+	}
 }
 
 void GameManager::WinProgress(UILayer* uiLayer)
@@ -188,7 +190,7 @@ void GameManager::FailProgress(UILayer* uiLayer)
 	uiLayer->MakeFailWidget(m_stage);
 }
 
-void GameManager::ControlProgress(GameLayer* gameLayer, UILayer* uiLayer)
+void GameManager::ControlWinFailProgress(GameLayer* gameLayer, UILayer* uiLayer)
 {
 	if (!m_isJudged)
 	{

@@ -93,6 +93,9 @@
     <ClCompile Include="..\Classes\jsoncpp.cpp">
       <Filter>JsonParser</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\cppson.cpp">
+      <Filter>JsonParser</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -192,6 +195,9 @@
       <Filter>JsonParser</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\json\json-forwards.h">
+      <Filter>JsonParser</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\cppson.h">
       <Filter>JsonParser</Filter>
     </ClInclude>
   </ItemGroup>

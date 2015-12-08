@@ -69,6 +69,52 @@ Field_ ## name ## <type> name;
 namespace cppson
 {
 
+	template<typename T>
+	class JsonField
+	{
+	public:
+		operator T()
+		{
+			return value;
+		}
+
+		T& get()
+		{
+			return value;
+		}
+
+		T& operator*()
+		{
+			return value;
+		}
+
+		T* operator->()
+		{
+			return &value;
+		}
+
+		T& operator=(T& rhs)
+		{
+			null = false;
+			value = rhs;
+		}
+
+		bool operator==(T& rhs)
+		{
+			return value == rhs;
+		}
+
+		bool isNull()
+		{
+			return null;
+		}
+
+	protected:
+		T value;
+		bool null = true;
+
+		friend class JsonValue;
+	};
 
 class JsonValue : public Json::Value
 {
@@ -121,9 +167,8 @@ public:
 
 	}
 
-	template<template<typename> typename T, typename U,
-		typename = std::enable_if_t<std::is_base_of<JsonField<U>, T<U>>::value >>
-	bool parse(T<U>& val)
+	template<typename T>
+	bool parse(JsonField<T>& val)
 	{
 		if (!isNull())
 		{
@@ -258,53 +303,6 @@ public:
 };
 
 template<typename T>
-class JsonField
-{
-public:
-	operator T()
-	{
-		return value;
-	}
-
-	T& get()
-	{
-		return value;
-	}
-
-	T& operator*()
-	{
-		return value;
-	}
-
-	T* operator->()
-	{
-		return &value;
-	}
-
-	T& operator=(T& rhs)
-	{
-		null = false;
-		value = rhs;
-	}
-
-	bool operator==(T& rhs)
-	{
-		return value == rhs;
-	}
-
-	bool isNull()
-	{
-		return null;
-	}
-
-protected:
-	T value;
-	bool null = true;
-
-	friend class JsonValue;
-};
-
-template<typename T>
 class Parsable
 {
 public:
@@ -405,9 +403,8 @@ std::string toJson(T& value)
 	return res + "}";
 }
 
-template<template<typename> typename T, typename U,
-		 typename = std::enable_if_t<std::is_base_of<JsonField<U>, T<U>>::value>>
-std::string toJson(T<U>& val)
+template<typename T>
+std::string toJson(JsonField<T>& val)
 {
 	if (val.isNull())
 		return "null";

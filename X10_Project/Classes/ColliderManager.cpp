@@ -8,7 +8,7 @@
 
 //Stage Information
 #include "StageInformation.h"
-#include <hash_map>
+#include <unordered_map>
 using namespace stdext;
 
 void ColliderManager::InitBullets(StageInformation* si)
@@ -19,7 +19,7 @@ void ColliderManager::InitBullets(StageInformation* si)
 	m_colliders.reserve(m_BulletNum);
 	m_curBulletIndex = 0;
 
-	typedef hash_map<string, function<Bullet*()>> BulletInfoMap;
+	typedef unordered_map<string, function<Bullet*()>> BulletInfoMap;
 	BulletInfoMap bulletTypeInfo; //string에 타입 이름.
 	bulletTypeInfo.insert(BulletInfoMap::value_type("Bullet", Bullet::create));
 	bulletTypeInfo.insert(BulletInfoMap::value_type("CrossBullet", CrossBullet::create));

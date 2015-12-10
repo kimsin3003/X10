@@ -2,6 +2,7 @@
 
 #include "Collection.h"
 #include "StageScene.h"
+
 //move to file system
 namespace POS_MONITOR
 {
@@ -11,25 +12,25 @@ namespace POS_MONITOR
 
 namespace POS_BOTTLE
 {
-	const int X = 150;
+	const int X = 125;
 	const int Y = 100;
 }
 
 namespace POS_SCARF
 {
-	const int X = 200;
+	const int X = 150;
 	const int Y = 100;
 }
 
 namespace POS_SHOES
 {
-	const int X = 250;
+	const int X = 175;
 	const int Y = 100;
 }
 
 namespace POS_LETTER
 {
-	const int X = 300;
+	const int X = 200;
 	const int Y = 100;
 }
 
@@ -41,6 +42,7 @@ public:
 	void InitCollections(int stageNumber);
 	void ResetCollections();
 	void AppendCollectionToLayer(StageScene* layer);
+	Sprite* GetCollectionOfStage(int stageNum);
 
 //  When a collection touched, run interactions 
 

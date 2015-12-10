@@ -30,10 +30,6 @@ bool MainScene::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	
-	/* 이건 최근 플레이 했던 탄이나, 최고 높은 탄으로 세팅되게 해놓는게 낫지 않을까?
-	삭제 할라고 보니까 그게 날것 같아 */
-	
 	/*Game start Button*/
 	MenuItemFont* startGame = MenuItemFont::create("Game Start", CC_CALLBACK_1(MainScene::ChangeToGameScene, this));
 	startGame->setPosition(visibleSize.width / 2, visibleSize.height / 2 + startGame->getContentSize().height);

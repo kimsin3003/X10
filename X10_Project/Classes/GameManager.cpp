@@ -10,6 +10,7 @@
 #include "StageScene.h"
 #include "GameScene.h"
 //매니저
+#include "CollectionManager.h"
 #include "ColliderManager.h"
 #include "TargetManager.h"
 //컬라이더
@@ -142,6 +143,12 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 		if (target == lastTarget)
 			continue;
 
+		if (target->IsEnemy())
+		{
+			m_targetManager->SaveEnemyPosition(target->getPosition());
+			EnemyDyingEffect();
+		}
+
 		if (collider->IsBullet())
 		{
 			const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
@@ -175,14 +182,58 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 	}
 }
 
+void GameManager::EnemyDyingEffect()
+{
+	/*
+	ParticleSmoke* enemyDyingEffect = ParticleSmoke::create();
+	enemyDyingEffect->setPosition(enemyPosition);
+	gameLayer->addChild(enemyDyingEffect);
+	*/
+}
+
+void GameManager::EarnCollectionEvent()
+{
+	Scene* currentScene = Director::getInstance()->getRunningScene();
+	GameScene* gameScene = static_cast<GameScene*>(currentScene->getChildByName("GameScene"));
+	GameLayer* gameLayer = gameScene->GetGameLayer();
+	const Point& enemyPosition = m_targetManager->GetEnemyPosition();
+
+	Sprite* collection = m_collectionManager->GetCollectionOfStage(m_stage);
+	collection->setPosition(enemyPosition);
+	gameLayer->addChild(collection);
+
+	MoveBy* moveBy_00 = MoveBy::create(1.50f, Point(0, -10));
+	MoveBy* moveBy_01 = MoveBy::create(1.00f, Point(0, -10));
+
+	Blink* blink_00 = Blink::create(1.50f, 5);
+	Blink* blink_01 = Blink::create(1.00f, 5);
+
+	FadeIn* fadeIn = FadeIn::create(1.00f);
+	FadeOut* fadeOut = FadeOut::create(2.00f);
+
+	Spawn* spawn_00 = Spawn::create(fadeIn, moveBy_00, blink_00, NULL);
+	Spawn* spawn_01 = Spawn::create(fadeOut, moveBy_01, blink_01, NULL);
+
+	Sequence* sequence = Sequence::create(spawn_00, spawn_01, NULL);
+
+	collection->runAction(sequence);
+}
+
 void GameManager::WinProgress(UILayer* uiLayer)
 {
+	EarnCollectionEvent();
+
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 	if (lastStage < m_stage + 1 && m_stage + 1 <= StageInformation::GetMaxStageNum())
 	{
 		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_stage + 1);
 	}
-	uiLayer->MakeSuccessWidget(m_stage);
+	
+	DelayTime* waitEventTime = DelayTime::create(3.00f);
+	CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(UILayer::MakeSuccessWidget, uiLayer, m_stage));
+	Sequence* waitAndshow = Sequence::create(waitEventTime, showWidget, NULL);
+
+	uiLayer->runAction(waitAndshow);
 }
 
 void GameManager::FailProgress(UILayer* uiLayer)

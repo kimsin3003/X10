@@ -88,13 +88,17 @@
     <ClCompile Include="..\Classes\FileStuff.cpp">
       <Filter>Namspace</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Collection.cpp" />
-    <ClCompile Include="..\Classes\CollectionManager.cpp" />
     <ClCompile Include="..\Classes\jsoncpp.cpp">
       <Filter>JsonParser</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\cppson.cpp">
       <Filter>JsonParser</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\CollectionManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Collection.cpp">
+      <Filter>GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>

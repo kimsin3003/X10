@@ -12,7 +12,7 @@ void Collection::SetSprite(const string& name, const Point& pos)
 	m_spr = Sprite::create(name);
 	setPosition(pos);
 	m_spr->setPosition(Point::ZERO);
-	m_spr->setScale(2.5f);
+	m_spr->setScale(1.5f);
 
 	addChild(m_spr);
 }

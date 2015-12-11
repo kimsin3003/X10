@@ -27,12 +27,12 @@ bool GameScene::init()
 	}
 	
 	//¹è°æ »ðÀÔ
-	Sprite* background = loadBackground();
-	addChild(background);
+	m_background = loadBackground();
+	addChild(m_background);
 
 	//Ä³¸¯ÅÍ »ðÀÔ
-	Sprite* character = loadCharacter();
-	background->addChild(character, 2);
+	m_character = loadCharacter();
+	m_background->addChild(m_character, 2);
 
 	//·¹ÀÌ¾î »ðÀÔ
 	m_gameLayer = GameLayer::create();
@@ -60,7 +60,7 @@ Sprite* GameScene::loadBackground()
 
 Sprite* GameScene::loadCharacter()
 {
-	Sprite* character = Sprite::create(FileStuff::CHARACTER);
+	Sprite* character = Sprite::create(FileStuff::CHARACTER_HARDPIXEL);
 	character->setPosition(40, 12);
 	return character;
 }

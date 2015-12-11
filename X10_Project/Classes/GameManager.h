@@ -31,8 +31,9 @@ private:
 	void WinProgress(UILayer* uiLayer);
 	void EarnCollectionEvent();
 	void FailProgress(UILayer* uiLayer);
-	void ControlWinFailProgress(GameLayer* gameLayer, UILayer* uiLayer);
+	void ControlWinFailProgress(UILayer* uiLayer);
 	void EnemyDyingEffect();
+	void SetCurCollectionPos(const Vec2& pos);
 private:
 	void Reset();
 	static GameManager* m_instance;
@@ -40,6 +41,7 @@ private:
 	TargetManager* m_targetManager;
 	CollectionManager* m_collectionManager;
 	Sling* m_sling;
+	Sprite* m_curCollection;
 	int m_stage;
 	bool m_isJudged;
 };

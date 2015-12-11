@@ -58,12 +58,14 @@ public:
 	static int GetMaxStageNum(){ return m_maxStageNum; }
 
 	bool MakeJsonFileFromLayer(Layer* layer, const char* fileName = "temp.json");
-private:
 
+
+private:
+	static const int m_maxStageNum = 17;
 	const char* FILENAME = "temp.txt";
 	int m_currentTargetIndex;
 	int m_currentBulletIndex;
-	static const int m_maxStageNum = 4;
+
 	static const int BUFFERSIZE = 65536;
 	TargetInfo m_currentTarget;
 	string m_currentBullet;

@@ -12,7 +12,7 @@ public:
 	static void GotoStage(Ref* pSender,int stageNum);
 
 private:
-	enum CONSTANT
+	enum starSize
 	{
 		STAR_WIDTH = 15,
 		STAR_HEIGHT = 15
@@ -23,14 +23,9 @@ private:
 	void ChangeToMainScene(Ref* pSender);
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
-	
-	void SetupButtons();
 	MenuItemImage* MakeBackButton();
 	MenuItemImage* MakeStageButton(int stage, Point pos);
-	void ChangeToMainScene(Ref* pSender);
 	
-	void SetupCollection();
-
 	CollectionManager* m_collectionManager;
 	StageButtonPosInformation* m_stageButtonPosInfo;
 

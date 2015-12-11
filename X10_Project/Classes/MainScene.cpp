@@ -8,6 +8,7 @@
 #include "GameManager.h"
 #include "StageScene.h"
 #include "ConstVars.h"
+#include "FileStuff.h"
 
 Scene* MainScene::createScene()
 {
@@ -29,29 +30,37 @@ bool MainScene::init()
 
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
+	float selectedScale = 1.2;
+	Point selectedAnchor = Point(selectedScale - 1.0, selectedScale - 1.0) / 2;
 	/*Game start Button*/
-	MenuItemFont* startGame = MenuItemFont::create("Game Start", CC_CALLBACK_1(MainScene::ChangeToGameScene, this));
-	startGame->setPosition(visibleSize.width / 2, visibleSize.height / 2 + startGame->getContentSize().height);
+	MenuItemImage* startGame = MenuItemImage::create(FileStuff::START_IMG, FileStuff::START_IMG, CC_CALLBACK_1(MainScene::ChangeToGameScene, this));
+	startGame->setScale(4.0);
+	startGame->getSelectedImage()->setAnchorPoint(selectedAnchor);
+	startGame->getSelectedImage()->setScale(selectedScale);
+	startGame->setPosition(visibleSize.width / 2, visibleSize.height / 2 + startGame->getContentSize().height * startGame->getScale());
 
 	/*Stage Select Button*/
-	MenuItemFont* stageSelect = MenuItemFont::create("Stage Select", CC_CALLBACK_1(MainScene::ChangeToStageScene, this));
+	MenuItemImage* stageSelect = MenuItemImage::create(FileStuff::STAGE_SELECT_IMG, FileStuff::STAGE_SELECT_IMG, CC_CALLBACK_1(MainScene::ChangeToStageScene, this));
+	stageSelect->setScale(2.0);
+	stageSelect->getSelectedImage()->setAnchorPoint(selectedAnchor);
+	stageSelect->getSelectedImage()->setScale(selectedScale);
 	stageSelect->setPosition(visibleSize.width / 2, visibleSize.height / 2 - startGame->getContentSize().height);
 
 	/* End Button */
 	MenuItemImage* closeItem = MenuItemImage::create(
-		"CloseNormal.png",
-		"CloseSelected.png",
+		FileStuff::CLOSE_BUTTON,
+		FileStuff::CLOSE_BUTTON,
 		CC_CALLBACK_1(MainScene::menuCloseCallback, this));
-
-	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width / 2,
-		origin.y + closeItem->getContentSize().height / 2));
+	float scale = 2.0f;
+	closeItem->setScale(scale);
+	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width * scale / 2,
+		closeItem->getContentSize().height * scale / 2));
 
 	/*Secret Paul's Test Page*/
 	auto PaulItem = MenuItemFont::create("p", CC_CALLBACK_1(MainScene::ChangeToMCScene,this));
 	PaulItem->setScale(0.5f);
 	PaulItem->setPosition(Vec2(origin.x + visibleSize.width - PaulItem->getContentSize().width / 2,
-		origin.y + closeItem->getContentSize().height + PaulItem->getContentSize().height/2));
+		origin.y + closeItem->getContentSize().height*scale + PaulItem->getContentSize().height/2));
 	
 	/*Secret Tw's Test Page*/
 	auto twScene = MenuItemFont::create("TW_SecretButton", CC_CALLBACK_1(MainScene::GoToTW, this));

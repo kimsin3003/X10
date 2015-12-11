@@ -111,7 +111,6 @@ MenuItemImage* StageScene::MakeBackButton()
 		UILayer::PAUSE_BUTTON_WIDTH / buttonSize.width,
 		UILayer::PAUSE_BUTTON_HEIGHT / buttonSize.height);
 	button->setScale(scale);
-	
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	button->setPosition(

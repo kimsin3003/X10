@@ -14,8 +14,8 @@ public:
 private:
 	enum CONSTANT
 	{
-		STAR_WIDTH = 20,
-		STAR_HEIGHT = 20
+		STAR_WIDTH = 15,
+		STAR_HEIGHT = 15
 	};
 
 	void SetupButtons();

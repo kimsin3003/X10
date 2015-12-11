@@ -46,5 +46,8 @@ namespace FileStuff
 
 	extern const string CHARACTER;
 	extern const string BACKGROUND;
+	extern const string START_IMG;
+	extern const string STAGE_SELECT_IMG;
 
+	extern const string CLOSE_BUTTON;
 }

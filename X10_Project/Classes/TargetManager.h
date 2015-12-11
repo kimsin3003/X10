@@ -11,10 +11,12 @@ public:
 	void ResetTargets();
 	void EraseDeadTargets();
 	bool HasEnemy();
+	void SaveEnemyPosition(const Point pos);
+	Point GetEnemyPosition() { return m_enemyPosition; }
 
 private:
 	Vector<Target*> m_targets;
-	int m_defaultTargetNumber; //벡터 reserve 할 때 사용
-
+	int m_defaultTargetNumber;
+	Point m_enemyPosition;
 	friend class GameManager;
 };

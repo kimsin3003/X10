@@ -28,7 +28,7 @@ bool GameScene::init()
 	
 	//배경 삽입
 	Sprite* background = loadBackground();
-	addChild(background, 1);
+	addChild(background);
 
 	//캐릭터 삽입
 	Sprite* character = loadCharacter();

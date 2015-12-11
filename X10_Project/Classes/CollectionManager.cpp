@@ -53,7 +53,6 @@ void CollectionManager::InitCollections(int stageNumber)
 			m_curColNum++;
 		}
 	}
-
 }
 
 void CollectionManager::ResetCollections()
@@ -71,4 +70,35 @@ void CollectionManager::AppendCollectionToLayer(StageScene* layer)
 	{
 		layer->addChild(m_collections.at(i));
 	}
+}
+
+Sprite* CollectionManager::GetCollectionOfStage(int stageNum)
+{
+	Sprite* collectionSpr;
+	string sprToLoad;
+
+	switch (stageNum)
+	{
+	case MONITOR:
+		sprToLoad = FileStuff::MONITOR;
+		break;
+	case BOTTLE:
+		sprToLoad = FileStuff::BOTTLE;
+		break;
+	case SCARF:
+		sprToLoad = FileStuff::SCARF;
+		break;
+	case SHOES:
+		sprToLoad = FileStuff::SHOES;
+		break;
+	case LETTER:
+		sprToLoad = FileStuff::LETTER;
+		break;
+	default:
+		sprToLoad = FileStuff::CLOUD;
+	};
+	
+	collectionSpr = Sprite::create(sprToLoad);
+
+	return  collectionSpr;
 }

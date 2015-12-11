@@ -5,6 +5,7 @@ class UILayer;
 class StageInformation;
 class ColliderManager;
 class TargetManager;
+class CollectionManager;
 class Collider;
 class Target;
 class Sling;
@@ -28,14 +29,16 @@ private:
 	~GameManager();
 	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
 	void WinProgress(UILayer* uiLayer);
+	void EarnCollectionEvent();
 	void FailProgress(UILayer* uiLayer);
 	void ControlWinFailProgress(GameLayer* gameLayer, UILayer* uiLayer);
-
+	void EnemyDyingEffect();
 private:
 	void Reset();
 	static GameManager* m_instance;
 	ColliderManager* m_colliderManager;
 	TargetManager* m_targetManager;
+	CollectionManager* m_collectionManager;
 	Sling* m_sling;
 	int m_stage;
 	bool m_isJudged;

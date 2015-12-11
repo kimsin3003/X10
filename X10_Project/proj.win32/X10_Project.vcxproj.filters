@@ -99,6 +99,12 @@
     <ClCompile Include="..\Classes\cppson.cpp">
       <Filter>JsonParser</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CollectionManager.cpp">
+      <Filter>Manager</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Collection.cpp">
+      <Filter>GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />

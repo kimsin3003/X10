@@ -33,4 +33,7 @@ namespace FileStuff
 	const string SCARF = "res/collection/scarf.png";
 	const string BOTTLE = "res/collection/bottle.png";
 	const string MONITOR = "res/collection/monitor.png";
+
+	const string CHARACTER = "res/character2.png";
+	const string BACKGROUND = "res/background2.png";
 }

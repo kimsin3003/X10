@@ -4,8 +4,9 @@
 #include "GameLayer.h"
 #include "UILayer.h"
 #include "Sling.h"
+#include "FileStuff.h"
 
-GameScene::GameScene() : gameLayer(nullptr), uiLayer(nullptr) {}
+GameScene::GameScene() : m_gameLayer(nullptr), m_uiLayer(nullptr) {}
 
 Scene* GameScene::createScene()
 {
@@ -25,33 +26,31 @@ bool GameScene::init()
 		return false;
 	}
 	
-	//배경 그림 삽입.
-	auto background = loadBackground();
-	this->addChild(background);
+	//배경 삽입
+	Sprite* background = loadBackground();
+	addChild(background, 1);
+
+	//캐릭터 삽입
+	Sprite* character = loadCharacter();
+	background->addChild(character, 2);
 
 	//레이어 삽입
-	gameLayer = GameLayer::create();
-	uiLayer = UILayer::create();
-	this->addChild(gameLayer);
-	this->addChild(uiLayer);
+	m_gameLayer = GameLayer::create();
+	m_uiLayer = UILayer::create();
+	addChild(m_gameLayer);
+	addChild(m_uiLayer);
 	
 	//게임 매니저 초기화
-	gameManager = GameManager::GetInstance();
+	m_gameManager = GameManager::GetInstance();
 
-	this->scheduleUpdate();
+	scheduleUpdate();
 
 	return true;
 }
 
 Sprite* GameScene::loadBackground()
 {
-	auto background = Sprite::create(BOTTOM_BGIMG_FILE);
-
-	Sprite* character = Sprite::create(CHARACTER_FILE);
-
-	character->setPosition(40, 12);
-	background->addChild(character);
-
+	Sprite* background = Sprite::create(FileStuff::BACKGROUND);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);
@@ -59,7 +58,14 @@ Sprite* GameScene::loadBackground()
 	return background;
 }
 
+Sprite* GameScene::loadCharacter()
+{
+	Sprite* character = Sprite::create(FileStuff::CHARACTER);
+	character->setPosition(40, 12);
+	return character;
+}
+
 void GameScene::update(float dt)
 {
-	gameManager->Play(gameLayer, uiLayer);
+	m_gameManager->Play(m_gameLayer, m_uiLayer);
 }

@@ -44,4 +44,7 @@ namespace FileStuff
 	extern const string BOTTLE;
 	extern const string MONITOR;
 
+	extern const string CHARACTER;
+	extern const string BACKGROUND;
+
 }

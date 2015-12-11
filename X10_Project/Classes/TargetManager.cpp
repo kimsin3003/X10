@@ -11,7 +11,7 @@
 #include "SeeBird.h"
 //Stage Information
 #include "StageInformation.h"
-#include <hash_map>
+#include <unordered_map>
 #include <functional>
 
 void TargetManager::InitTargets(StageInformation* si)
@@ -21,17 +21,17 @@ void TargetManager::InitTargets(StageInformation* si)
 	m_defaultTargetNumber = si->GetTargetCount();
 	m_targets.reserve(m_defaultTargetNumber);
 
-	//각각의 클래스에 맞는 함수포인터를 Target* 반환 형태로 hash_map에 저장
-	typedef StageInformation::TargetInfo::TargetType TargetType;
-	typedef hash_map<TargetType,std::function<Target*()>>  TargetInfoMap;
+	//각각의 클래스에 맞는 함수포인터를 Target* 반환 형태로 unordered_map에 저장
+	typedef TargetInfo::TargetType TargetType;
+	typedef unordered_map<TargetType,std::function<Target*()>>  TargetInfoMap;
 	TargetInfoMap targetTypeInfo;
-	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::ENEMY, Enemy::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::MIRROR, Mirror::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::MIRROR_Y, Mirror_y::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::CLOUD, Cloud::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::BUBBLE, Bubble::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::STAR, Star::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(StageInformation::TargetInfo::SEEBIRD, SeeBird::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::ENEMY, Enemy::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::MIRROR, Mirror::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::MIRROR_Y, Mirror_y::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::CLOUD, Cloud::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::BUBBLE, Bubble::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::STAR, Star::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::SEEBIRD, SeeBird::create));
 
 	while (si->HasNextTarget())
 	{

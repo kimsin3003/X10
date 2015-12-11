@@ -123,13 +123,6 @@ void Sling::Pull(Event* e)
 		Sprite* dot = m_expectLine.at(i);
 		dot->setPosition(m_shotAngle *m_shotPower/MAX_POWER * i);
 	}
-
-	/* 명찬: 다른분 안보실거면 지워도 됩니다. 
-	auto label = Label::create(".","arial", FONT_SIZE);
-	auto delay = MoveBy::create(PREDICT_LINE_TIME, m_shotAngle);
-	auto action = Sequence::create(delay, RemoveSelf::create(), NULL);
-	this->addChild(label);
-	label->runAction(action);*/	
 }
 
 

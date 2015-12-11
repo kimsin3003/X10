@@ -27,31 +27,11 @@ StageInformation::StageInformation(int stage)
 		size_t fileSize = fread(tmp, 1, BUFFERSIZE, fp);
 		fclose(fp);
 
-		Json::Value targets;
-		Json::Reader reader;
-
-		if (reader.parse(tmp, targets) == false)
+		//load from file
+		if (!cppson::loadFile(m_targetInfoList, fileName))
 		{
 			CCLOG("Target Load Fail.");
 			return;
-		}
-
-		for (int i = 0; i < targets.size(); i++)
-		{
-			Json::Value target = targets[i];
-			int type = target["type"].asInt();
-			TargetType targetType = static_cast<TargetType>(type);
-
-			Json::Value position = target["position"];
-			Point pos = Point(position["x"].asFloat(), position["y"].asFloat());
-			float rotation = target["rotation"].asFloat();
-
-			Json::Value scale = target["scale"];
-			float scalex = scale["x"].asFloat();
-			float scaley = scale["y"].asFloat();
-
-			info = TargetInfo(targetType, pos, rotation, scalex, scaley);
-			m_targetInfoList.push_back(info);
 		}
 
 		/*load bullets*/
@@ -65,16 +45,11 @@ StageInformation::StageInformation(int stage)
 
 		Json::Value bullets;
 
-		if (reader.parse(tmp, bullets) == false)
+		//load from file
+		if (!cppson::loadFile(m_bulletInfoList, fileName))
 		{
 			CCLOG("Target Load Fail.");
 			return;
-		}
-
-		for (int i = 0; i < bullets.size(); i++)
-		{
-			string bullet = bullets[i].asString();
-			m_bulletInfoList.push_back(bullet);
 		}
 	}
 	else
@@ -204,7 +179,7 @@ TargetType StageInformation::GetTargetType()
 
 Point StageInformation::GetTargetPosition()
 {
-	return m_currentTarget.m_position;
+	return m_currentTarget.m_position.get();
 }
 
 float StageInformation::GetTargetRotation()
@@ -214,7 +189,7 @@ float StageInformation::GetTargetRotation()
 
 float StageInformation::GetTargetScale()
 {
-	return (m_currentTarget.m_scaleX +m_currentTarget.m_scaleY)/2;
+	return (m_currentTarget.m_scale->x +m_currentTarget.m_scale->y)/2;
 }
 
 bool StageInformation::HasNextBullet() //더 넘길 불렛이 있는지 검사

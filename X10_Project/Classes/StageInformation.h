@@ -8,15 +8,7 @@ public:
 	FIELD(float, x);
 	FIELD(float, y);
 
-	TargetPoint& operator=(TargetPoint& rhs)
-	{
-		x = rhs.x;
-		y = rhs.y;
-
-		return *this;
-	}
-
-	operator Point()
+	operator Point() const
 	{
 		return Point(x, y);
 	}

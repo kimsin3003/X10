@@ -212,18 +212,18 @@ bool StageInformation::MakeJsonFileFromLayer(Layer* layer, const char* fileName)
 			tmpTypeNum = 0;
 		}
 
-		targetInfo.m_name = static_cast<TargetType>(tmpTypeNum);
-		targetInfo.m_rotation = child->getRotation();
+		targetInfo.m_name.set(static_cast<TargetType>(tmpTypeNum));
+		targetInfo.m_rotation.set(child->getRotation());
 		TargetPoint scale;
-		scale.x = child->getScaleY();
-		scale.y = child->getScaleY();
+		scale.x.set(child->getScaleY());
+		scale.y.set(child->getScaleY());
 
-		targetInfo.m_scale = TargetPoint(scale);
+		targetInfo.m_scale.set(scale);
 		
 		TargetPoint position;
-		position.x = child->getPositionX();
-		position.y = child->getPositionY();
-		targetInfo.m_position = TargetPoint(position);
+		position.x.set(child->getPositionX());
+		position.y.set(child->getPositionY());
+		targetInfo.m_position.set(position);
 
 		m_targetInfoList.push_back(targetInfo);
 	}

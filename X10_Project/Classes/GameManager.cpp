@@ -23,7 +23,6 @@
 //½½¸µ
 #include "Sling.h"
 
-
 GameManager* GameManager::m_instance = nullptr;
 
 GameManager* GameManager::GetInstance()
@@ -131,7 +130,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	m_colliderManager->EraseDeadColliders();
 	m_targetManager->EraseDeadTargets();
-	ControlWinFailProgress(gameLayer, uiLayer);
+	ControlWinFailProgress(uiLayer);
 }
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
@@ -186,9 +185,15 @@ void GameManager::EnemyDyingEffect()
 {
 	/*
 	ParticleSmoke* enemyDyingEffect = ParticleSmoke::create();
-	enemyDyingEffect->setPosition(enemyPosition);
+	enemyDyingEffect->setPosition(enemyPos);
 	gameLayer->addChild(enemyDyingEffect);
 	*/
+}
+
+void GameManager::SetCurCollectionPos(const Vec2& pos)
+{
+	const Vec2 compensateToParentPos = Vec2(160, 0);
+	m_curCollection->setPosition(pos + compensateToParentPos);
 }
 
 void GameManager::EarnCollectionEvent()
@@ -196,44 +201,70 @@ void GameManager::EarnCollectionEvent()
 	Scene* currentScene = Director::getInstance()->getRunningScene();
 	GameScene* gameScene = static_cast<GameScene*>(currentScene->getChildByName("GameScene"));
 	GameLayer* gameLayer = gameScene->GetGameLayer();
-	const Point& enemyPosition = m_targetManager->GetEnemyPosition();
 
-	Sprite* collection = m_collectionManager->GetCollectionOfStage(m_stage);
-	collection->setPosition(enemyPosition);
-	gameLayer->addChild(collection);
+	const Point& enemyPos = m_targetManager->GetEnemyPosition();
+	const Vec2& aboveCharacterPos = gameScene->GetCharacterPosition() + Vec2(0, 100);
 
+	m_curCollection = m_collectionManager->GetCollectionSprOfStage(m_stage);
+	m_curCollection->setPosition(enemyPos);
+	gameLayer->addChild(m_curCollection);
+
+	//part 1
 	MoveBy* moveBy_00 = MoveBy::create(1.50f, Point(0, -10));
 	MoveBy* moveBy_01 = MoveBy::create(1.00f, Point(0, -10));
 
 	Blink* blink_00 = Blink::create(1.50f, 5);
 	Blink* blink_01 = Blink::create(1.00f, 5);
 
-	FadeIn* fadeIn = FadeIn::create(1.00f);
-	FadeOut* fadeOut = FadeOut::create(2.00f);
+	FadeIn* fadeIn_00 = FadeIn::create(1.50f);
+	FadeOut* fadeOut_00 = FadeOut::create(1.00f);
 
-	Spawn* spawn_00 = Spawn::create(fadeIn, moveBy_00, blink_00, NULL);
-	Spawn* spawn_01 = Spawn::create(fadeOut, moveBy_01, blink_01, NULL);
+	Spawn* spawn_00 = Spawn::create(fadeIn_00, moveBy_00, blink_00, NULL);
+	Spawn* spawn_01 = Spawn::create(fadeOut_00, moveBy_01, blink_01, NULL);
 
-	Sequence* sequence = Sequence::create(spawn_00, spawn_01, NULL);
+	//part 2
+	CallFuncN* callFuncN = CallFuncN::create(CC_CALLBACK_0(GameManager::SetCurCollectionPos, this, aboveCharacterPos));
 
-	collection->runAction(sequence);
+	MoveBy* moveBy_02 = MoveBy::create(1.50f, Point(0, -30));
+	MoveBy* moveBy_03 = MoveBy::create(1.00f, Point(0, -20));
+
+	Blink* blink_02 = Blink::create(1.50f, 5);
+	Blink* blink_03 = Blink::create(1.00f, 5);
+
+	FadeIn* fadeIn_01 = FadeIn::create(0.01f);
+	FadeOut* fadeOut_01 = FadeOut::create(2.50f);
+
+	Spawn* spawn_02 = Spawn::create(fadeIn_01, moveBy_02, blink_02, NULL);
+	Spawn* spawn_03 = Spawn::create(fadeOut_01, moveBy_03, blink_03, NULL);
+
+	Sequence* sequence = Sequence::create(spawn_00, spawn_01, callFuncN, spawn_02, spawn_03, NULL);
+
+	m_curCollection->runAction(sequence);
 }
 
 void GameManager::WinProgress(UILayer* uiLayer)
 {
-	EarnCollectionEvent();
-
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+
+	if (m_stage == lastStage)
+	{
+		EarnCollectionEvent();
+
+		DelayTime* waitEventTime = DelayTime::create(4.50f);
+		CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(UILayer::MakeSuccessWidget, uiLayer, m_stage));
+		Sequence* waitAndshow = Sequence::create(waitEventTime, showWidget, NULL);
+
+		uiLayer->runAction(waitAndshow);
+	}
+	else
+	{
+		uiLayer->MakeSuccessWidget(m_stage);
+	}
+
 	if (lastStage < m_stage + 1 && m_stage + 1 <= StageInformation::GetMaxStageNum())
 	{
 		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_stage + 1);
 	}
-	
-	DelayTime* waitEventTime = DelayTime::create(3.00f);
-	CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(UILayer::MakeSuccessWidget, uiLayer, m_stage));
-	Sequence* waitAndshow = Sequence::create(waitEventTime, showWidget, NULL);
-
-	uiLayer->runAction(waitAndshow);
 }
 
 void GameManager::FailProgress(UILayer* uiLayer)
@@ -241,7 +272,7 @@ void GameManager::FailProgress(UILayer* uiLayer)
 	uiLayer->MakeFailWidget(m_stage);
 }
 
-void GameManager::ControlWinFailProgress(GameLayer* gameLayer, UILayer* uiLayer)
+void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 {
 	if (!m_isJudged)
 	{

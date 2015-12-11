@@ -27,12 +27,12 @@ bool GameScene::init()
 	}
 	
 	//배경 삽입
-	Sprite* background = loadBackground();
-	addChild(background);
+	m_background = loadBackground();
+	addChild(m_background);
 
 	//캐릭터 삽입
-	Sprite* character = loadCharacter();
-	background->addChild(character, 2);
+	m_character = loadCharacter();
+	m_background->addChild(m_character, 2);
 
 	//레이어 삽입
 	m_gameLayer = GameLayer::create();

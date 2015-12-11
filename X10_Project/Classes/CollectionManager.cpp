@@ -70,7 +70,7 @@ void CollectionManager::AppendCollectionToLayer(StageScene* layer)
 	}
 }
 
-Sprite* CollectionManager::GetCollectionOfStage(int stageNum)
+Sprite* CollectionManager::GetCollectionSprOfStage(int stageNum)
 {
 	Sprite* collectionSpr;
 	string sprToLoad;

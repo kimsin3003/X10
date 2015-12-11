@@ -42,7 +42,7 @@ public:
 	void InitCollections(int stageNumber);
 	void ResetCollections();
 	void AppendCollectionToLayer(StageScene* layer);
-	Sprite* GetCollectionOfStage(int stageNum);
+	Sprite* GetCollectionSprOfStage(int stageNum);
 
 //  When a collection touched, run interactions 
 

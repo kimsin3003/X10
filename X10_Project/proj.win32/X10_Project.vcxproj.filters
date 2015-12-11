@@ -58,9 +58,6 @@
     <ClCompile Include="..\Classes\JWScene.cpp">
       <Filter>OldNTest</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\StageInformation.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Star.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
@@ -99,6 +96,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Collection.cpp">
       <Filter>GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageInformation.cpp">
+      <Filter>GameObject\Information</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\StageButtonPosInformation.cpp">
+      <Filter>GameObject\Information</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -156,9 +159,6 @@
     <ClInclude Include="..\Classes\JWScene.h">
       <Filter>OldNTest</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\StageInformation.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Target.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
@@ -204,6 +204,12 @@
     <ClInclude Include="..\Classes\cppson.h">
       <Filter>JsonParser</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\StageInformation.h">
+      <Filter>GameObject\Information</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\StageButtonPosInformation.h">
+      <Filter>GameObject\Information</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">
@@ -238,6 +244,9 @@
     </Filter>
     <Filter Include="JsonParser">
       <UniqueIdentifier>{a9a26f3c-7811-4b25-a8bf-dbbacd7263ac}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="GameObject\Information">
+      <UniqueIdentifier>{6ae3f083-f62f-44eb-8aff-e0cf4fb8ff97}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>

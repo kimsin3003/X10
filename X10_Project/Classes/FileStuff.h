@@ -46,5 +46,5 @@ namespace FileStuff
 
 	extern const string CHARACTER;
 	extern const string BACKGROUND;
-
+	extern const string MOTHER;
 }

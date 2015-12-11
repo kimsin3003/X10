@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "StageInformation.h"
 #include "CollectionManager.h"
 #include "Collection.h"
 #include "FileStuff.h"
@@ -8,48 +9,69 @@ CollectionManager::CollectionManager()
 {
 	m_curColNum = 0;
 	m_collections.reserve(5);
+	m_colPos = Point(100, 100);
+	m_deltaPos = Point(25, 0);
 }
 
-//Stack 구조로 저장
 void CollectionManager::InitCollections(int stageNumber)
 {
+	int maxStageNum = StageInformation::GetMaxStageNum();
+	if (stageNumber > maxStageNum)
+	{
+		stageNumber = LETTER;
+	}
+
 	switch (stageNumber)
 	{
+		case LETTER:
+		case LETTER + 1:
+		case LETTER + 2:
+		case LETTER + 3: //14~17 //*last stage -> don't 
+						 // instead collections rotating event
+		{
+			Collection* letter = Collection::create();
+			letter->SetSprite(FileStuff::LETTER, m_colPos);
+			m_collections.pushBack(letter);
+			m_curColNum++;
+		}
 		case MONITOR:
+		case MONITOR + 1:
+		case MONITOR + 2: //11~13
 		{
 			Collection* monitor = Collection::create();
-			monitor->SetSprite(FileStuff::MONITOR, Point(POS_MONITOR::X, POS_MONITOR::Y));
+			monitor->SetSprite(FileStuff::MONITOR, m_colPos += m_deltaPos);
 			m_collections.pushBack(monitor);
 			m_curColNum++;
 		}
 		case BOTTLE:
+		case BOTTLE + 1:
+		case BOTTLE + 2: //8~10
 		{
 			Collection* bottle = Collection::create();
-			bottle->SetSprite(FileStuff::BOTTLE, Point(POS_BOTTLE::X, POS_BOTTLE::Y));
+			bottle->SetSprite(FileStuff::BOTTLE, m_colPos += m_deltaPos);
 			m_collections.pushBack(bottle);
 			m_curColNum++;
 		}
 		case SCARF:
+		case SCARF + 1:
+		case SCARF + 2:
+		case SCARF + 3:	// 4~7
 		{
 			Collection* scarf = Collection::create();
-			scarf->SetSprite(FileStuff::SCARF, Point(POS_SCARF::X, POS_SCARF::Y));
+			scarf->SetSprite(FileStuff::SCARF, m_colPos += m_deltaPos);
 			m_collections.pushBack(scarf);
 			m_curColNum++;
 		}
 		case SHOES:
+		case SHOES + 1:
+		case SHOES + 2: //1~3
 		{
 			Collection* shoes = Collection::create();
-			shoes->SetSprite(FileStuff::SHOES, Point(POS_SHOES::X, POS_SHOES::Y));
+			shoes->SetSprite(FileStuff::SHOES, m_colPos += m_deltaPos);
 			m_collections.pushBack(shoes);
 			m_curColNum++;
 		}
-		case LETTER:
-		{
-			Collection* letter = Collection::create();
-			letter->SetSprite(FileStuff::LETTER, Point(POS_LETTER::X, POS_LETTER::Y));
-			m_collections.pushBack(letter);
-			m_curColNum++;
-		}
+
 	}
 }
 

@@ -36,4 +36,6 @@ namespace FileStuff
 
 	const string CHARACTER = "res/character2.png";
 	const string BACKGROUND = "res/background2.png";
+	const string MOTHER = "res/bg/mother.png";
+
 }

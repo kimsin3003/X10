@@ -1,5 +1,6 @@
 #pragma once
 #include "Collider.h"
+class Target;
 class StageInformation;
 class Bullet;
 class Sling;

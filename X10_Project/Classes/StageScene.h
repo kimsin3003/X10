@@ -1,6 +1,7 @@
 #pragma once
 
 class CollectionManager;
+class StageButtonPosInformation;
 
 class StageScene : public Layer
 {
@@ -23,7 +24,11 @@ private:
 	void ChangeToMainScene(Ref* pSender);
 	Sprite* LoadBackground();
 	MenuItemImage* MakeBackButton();
-	MenuItemImage* MakeStageButton(int stage, float xPos, float yPos);
-	CollectionManager* collectionManager;
-	int m_maxStage;
+	MenuItemImage* MakeStageButton(int stage, Point pos);
+
+	CollectionManager* m_collectionManager;
+	StageButtonPosInformation* m_stageButtonPosInfo;
+
+	int m_stageToPlay;
+	int m_maxStageNum;
 };

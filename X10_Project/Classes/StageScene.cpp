@@ -1,19 +1,28 @@
 #include "stdafx.h"
-#include "MainScene.h"
+//scene
 #include "StageScene.h"
+#include "MainScene.h"
 #include "GameScene.h"
 #include "UILayer.h"
+#include "StageButtonPosInformation.h"
+#include "StageInformation.h"
+#include "CollectionManager.h"
 #include "GameManager.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
-#include "CollectionManager.h"
 
 Scene* StageScene::createScene()
 {
 	Scene* scene = Scene::create();
+	scene->setAnchorPoint(Vec2::ZERO);
+	scene->setPosition(Vec2::ZERO);
 
 	Layer* layer = StageScene::create();
+	layer->setAnchorPoint(Vec2::ZERO);
+	layer->setPosition(Vec2::ZERO);
+
 	scene->addChild(layer);
+
 	return scene;
 }
 
@@ -29,7 +38,21 @@ bool StageScene::init()
 	Sprite* background = LoadBackground();
 	addChild(background);
 
-	collectionManager = new CollectionManager();
+	//클리어하면 별자리 그림 출력
+	if (m_stageToPlay == m_maxStageNum) 
+	{
+		Sprite* mother = Sprite::create(FileStuff::MOTHER);
+		mother->setAnchorPoint(Vec2::ZERO);
+		mother->setPosition(20, 250);
+		mother->setScale(1.5f);
+		addChild(mother);
+	}
+
+	m_collectionManager = new CollectionManager();
+	m_stageButtonPosInfo = new StageButtonPosInformation();
+
+	m_stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+	m_maxStageNum = StageInformation::GetMaxStageNum();
 
 	SetupButtons();
 	SetupCollection();
@@ -37,20 +60,8 @@ bool StageScene::init()
 	return true;
 }
 
-void StageScene::GotoStage(Ref* pSender, int stageNum)
-{
-	Scene* game = GameScene::createScene();
-	GameScene* gameScene = static_cast<GameScene*>(game->getChildByName("GameScene"));
-
-	/*stage Information 불러오는 부분.*/
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
-
-	Director::getInstance()->replaceScene(game);
-}
-
 void StageScene::SetupButtons()
 {
-	/*menu List : CCVector*/
 	Vector<MenuItem*> menuList;
 
 	/*back Button */
@@ -58,11 +69,14 @@ void StageScene::SetupButtons()
 	Size buttonSize = pauseButton->getContentSize();
 	menuList.pushBack(pauseButton);
 
-	int advancedState = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
-
-	for (int i = 0; i <= advancedState; i++)
+	if (m_stageToPlay > m_maxStageNum)
 	{
-		menuList.pushBack(MakeStageButton(i, 50 * (i + 1), 300));
+		m_stageToPlay = m_maxStageNum;
+	}
+
+	for (int i = 1; i <= m_stageToPlay; i++)
+	{
+		menuList.pushBack(MakeStageButton(i, m_stageButtonPosInfo->GetStageButtonPos(i)));
 	}
 
 	/*Create Menu*/
@@ -73,19 +87,35 @@ void StageScene::SetupButtons()
 
 void StageScene::SetupCollection()
 {
-	int advancedStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+	m_collectionManager->InitCollections(m_stageToPlay);
+	m_collectionManager->AppendCollectionToLayer(this);
+}
 
-	collectionManager->InitCollections(advancedStage);
-	collectionManager->AppendCollectionToLayer(this);
+void StageScene::GotoStage(Ref* pSender, int stageNum)
+{
+	Scene* game = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(game->getChildByName("GameScene"));
+
+	int maxStageNum = StageInformation::GetMaxStageNum();
+	if (stageNum > maxStageNum)
+	{
+		stageNum = maxStageNum;
+	}
+
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+
+	Director::getInstance()->replaceScene(game);
 }
 
 Sprite* StageScene::LoadBackground()
 {
+
 	Sprite* background = Sprite::create(FileStuff::STAGESCENE_BACKGROUND);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);
 	background->setOpacity(140);
+
 	return background;
 }
 
@@ -122,18 +152,18 @@ MenuItemImage* StageScene::MakeBackButton()
 	return button;
 }
 
-MenuItemImage* StageScene::MakeStageButton(int stage, float xPos, float yPos)
+MenuItemImage* StageScene::MakeStageButton(int stage, Point pos)
 {
 	MenuItemImage* menuItem = MenuItemImage::create();
 	menuItem->setNormalImage(Sprite::create(FileStuff::STAR_OFF));
 	menuItem->setSelectedImage(Sprite::create(FileStuff::STAR_ON));
-	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2,0.2));
+	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2, 0.2));
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stage));
-	menuItem->setPosition(xPos, yPos);
-	char str[10];
-	sprintf(str, "Stage %d", stage);
-	Label* stageText = Label::create(str, "Consolas", 10);
-	menuItem->addChild(stageText);
-	stageText->setPosition(Point(0, -10));
+	menuItem->setPosition(pos);
+	//char str[10];
+	//sprintf(str, "Stage %d", stage);
+	//Label* stageText = Label::create(str, "Consolas", 10);
+	//menuItem->addChild(stageText);
+	//stageText->setPosition(Point(0, -10));
 	return menuItem;
 }

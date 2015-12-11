@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "TargetManager.h"
-
 //Targets
 #include "Enemy.h"
 #include "Mirror.h"

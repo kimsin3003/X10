@@ -9,7 +9,7 @@ CollectionManager::CollectionManager()
 {
 	m_curColNum = 0;
 	m_collections.reserve(5);
-	m_colPos = Point(100, 100);
+	m_colPos = Point(40, 75);
 	m_deltaPos = Point(25, 0);
 }
 

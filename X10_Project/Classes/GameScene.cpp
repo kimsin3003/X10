@@ -60,7 +60,7 @@ Sprite* GameScene::loadBackground()
 
 Sprite* GameScene::loadCharacter()
 {
-	Sprite* character = Sprite::create(FileStuff::CHARACTER);
+	Sprite* character = Sprite::create(FileStuff::CHARACTER_HARDPIXEL);
 	character->setPosition(40, 12);
 	return character;
 }

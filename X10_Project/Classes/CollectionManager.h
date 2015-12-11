@@ -18,12 +18,6 @@ public:
 //	void SetEffectToCharacter(//Chractor* character);
 //  void ShowBoxOfTheCollection(//Collection* collection);
 
-private:
-	Vector<Collection*> m_collections;
-	int m_curColNum;
-	Point m_colPos;
-	Point m_deltaPos;
-
 	enum CollectionCode
 	{
 		SHOES = 1,
@@ -32,4 +26,12 @@ private:
 		MONITOR = 11,
 		LETTER = 14
 	};
+
+private:
+	Vector<Collection*> m_collections;
+	int m_curColNum;
+	Point m_colPos;
+	Point m_deltaPos;
+
+
 };

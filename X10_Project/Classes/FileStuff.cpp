@@ -34,8 +34,13 @@ namespace FileStuff
 	const string BOTTLE = "res/collection/bottle.png";
 	const string MONITOR = "res/collection/monitor.png";
 
-	const string CHARACTER = "res/character2.png";
+	const string CHARACTER = "res/character/boy.png";
+	const string CHARACTER_HARDPIXEL = "res/character/boy_hardpixel.png";
+	const string CHARACTER_STANDING = "res/character/boy_standing.png";
+
 	const string BACKGROUND = "res/background2.png";
 	const string MOTHER = "res/bg/mother.png";
 
+	const string SPECIAL_STAR = "res/button/special_star.png";
+	const string NORMAL_STAR = "res/button/normal_star.png";
 }

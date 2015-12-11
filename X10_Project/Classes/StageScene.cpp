@@ -3,11 +3,15 @@
 #include "StageScene.h"
 #include "MainScene.h"
 #include "GameScene.h"
+//layer
 #include "UILayer.h"
+//info
 #include "StageButtonPosInformation.h"
 #include "StageInformation.h"
+//manager
 #include "CollectionManager.h"
 #include "GameManager.h"
+//config
 #include "ConstVars.h"
 #include "FileStuff.h"
 
@@ -38,7 +42,9 @@ bool StageScene::init()
 	Sprite* background = LoadBackground();
 	addChild(background);
 
-	//클리어하면 별자리 그림 출력
+	m_character = LoadCharacter();
+	background->addChild(m_character);
+
 	if (m_stageToPlay == m_maxStageNum) 
 	{
 		Sprite* mother = Sprite::create(FileStuff::MOTHER);
@@ -64,7 +70,6 @@ void StageScene::SetupButtons()
 {
 	Vector<MenuItem*> menuList;
 
-	/*back Button */
 	MenuItemImage* pauseButton = MakeBackButton();
 	Size buttonSize = pauseButton->getContentSize();
 	menuList.pushBack(pauseButton);
@@ -79,7 +84,6 @@ void StageScene::SetupButtons()
 		menuList.pushBack(MakeStageButton(i, m_stageButtonPosInfo->GetStageButtonPos(i)));
 	}
 
-	/*Create Menu*/
 	Menu* menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
 	addChild(menu);
@@ -109,8 +113,7 @@ void StageScene::GotoStage(Ref* pSender, int stageNum)
 
 Sprite* StageScene::LoadBackground()
 {
-
-	Sprite* background = Sprite::create(FileStuff::STAGESCENE_BACKGROUND);
+	Sprite* background = Sprite::create(FileStuff::BACKGROUND);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);
@@ -119,9 +122,13 @@ Sprite* StageScene::LoadBackground()
 	return background;
 }
 
-void StageScene::MenuButtonCallback(Ref* pSender)
+Sprite* StageScene::LoadCharacter()
 {
-	ChangeToMainScene(pSender);
+	Sprite* character = Sprite::create(FileStuff::CHARACTER_STANDING);
+	character->setPosition(40, 12);
+	character->setScale(0.3f);
+
+	return character;
 }
 
 void StageScene::ChangeToMainScene(Ref* pSender)
@@ -134,7 +141,7 @@ MenuItemImage* StageScene::MakeBackButton()
 	MenuItemImage* button = MenuItemImage::create(
 		FileStuff::PAUSEBUTTON,
 		FileStuff::PAUSEBUTTON,
-		CC_CALLBACK_1(StageScene::MenuButtonCallback, this));
+		CC_CALLBACK_1(StageScene::ChangeToMainScene, this));
 
 	Size buttonSize = button->getContentSize();
 	float scale = MIN(
@@ -152,18 +159,33 @@ MenuItemImage* StageScene::MakeBackButton()
 	return button;
 }
 
-MenuItemImage* StageScene::MakeStageButton(int stage, Point pos)
+MenuItemImage* StageScene::MakeStageButton(int stageNum, Point pos)
 {
 	MenuItemImage* menuItem = MenuItemImage::create();
-	menuItem->setNormalImage(Sprite::create(FileStuff::STAR_OFF));
+
+	if (stageNum == CollectionManager::SHOES ||
+		stageNum == CollectionManager::SCARF ||
+		stageNum == CollectionManager::BOTTLE ||
+		stageNum == CollectionManager::MONITOR ||
+		stageNum == CollectionManager::LETTER ||
+		stageNum == m_maxStageNum)
+	{
+		menuItem->setNormalImage(Sprite::create(FileStuff::SPECIAL_STAR));
+	}
+	else
+	{
+		menuItem->setNormalImage(Sprite::create(FileStuff::NORMAL_STAR));
+	}
 	menuItem->setSelectedImage(Sprite::create(FileStuff::STAR_ON));
 	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2, 0.2));
-	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stage));
+	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stageNum));
 	menuItem->setPosition(pos);
+
 	//char str[10];
-	//sprintf(str, "Stage %d", stage);
+	//sprintf(str, "Stage %d", stageNum);
 	//Label* stageText = Label::create(str, "Consolas", 10);
 	//menuItem->addChild(stageText);
 	//stageText->setPosition(Point(0, -10));
+	
 	return menuItem;
 }

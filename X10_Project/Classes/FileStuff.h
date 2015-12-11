@@ -45,6 +45,13 @@ namespace FileStuff
 	extern const string MONITOR;
 
 	extern const string CHARACTER;
+	extern const string CHARACTER_HARDPIXEL;
+	extern const string CHARACTER_STANDING;
+
 	extern const string BACKGROUND;
 	extern const string MOTHER;
+
+	extern const string SPECIAL_STAR;
+	extern const string NORMAL_STAR;
+
 }

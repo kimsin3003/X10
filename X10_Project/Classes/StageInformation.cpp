@@ -17,7 +17,7 @@ StageInformation::StageInformation(int stage)
 	{
 		/*load targets*/
 		char fileName[100];
-		sprintf(fileName, "../Resources/files/target%d.json", stage);
+		sprintf(fileName, "files/target%d.json", stage);
 
 		//load from file
 		if (!cppson::loadFile(m_targetInfoList, fileName))
@@ -27,7 +27,7 @@ StageInformation::StageInformation(int stage)
 		}
 
 		/*load bullets*/
-		sprintf(fileName, "../Resources/files/bullet%d.json", stage);
+		sprintf(fileName, "files/bullet%d.json", stage);
 
 		//load from file
 		if (!cppson::loadFile(m_bulletInfoList, fileName))

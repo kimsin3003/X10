@@ -8,6 +8,14 @@ public:
 	FIELD(float, x);
 	FIELD(float, y);
 
+	TargetPoint& operator=(TargetPoint& rhs)
+	{
+		x = rhs.x;
+		y = rhs.y;
+
+		return *this;
+	}
+
 	operator Point()
 	{
 		return Point(x, y);
@@ -57,7 +65,7 @@ public:
 	string GetCurrentBulletInfo(); //지금 불렛의 타입을 반환
 	static int GetMaxStageNum(){ return m_maxStageNum; }
 
-
+	bool MakeJsonFileFromLayer(Layer* layer, const char* fileName = "temp.json");
 private:
 
 	const char* FILENAME = "temp.txt";

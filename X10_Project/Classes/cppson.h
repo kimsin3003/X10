@@ -36,6 +36,16 @@ public:\
 	{\
 		static Init_ ## name init;\
 	}\
+	T& operator=(T rhs)\
+	{\
+		null = false;\
+		return value = rhs;\
+	}\
+	T& operator=(T& rhs)\
+	{\
+		null = false;\
+		return value = rhs;\
+	}\
 };\
 Field_ ## name ## <type> name;
 
@@ -61,6 +71,16 @@ public:\
 	Field_ ## name ## ()\
 	{\
 		static Init_ ## name init;\
+	}\
+	T& operator=(T rhs)\
+	{\
+		null = false;\
+		return value = rhs;\
+	}\
+	T& operator=(T& rhs)\
+	{\
+		null = false;\
+		return value = rhs;\
 	}\
 };\
 Field_ ## name ## <type> name;
@@ -91,12 +111,6 @@ namespace cppson
 		T* operator->()
 		{
 			return &value;
-		}
-
-		T& operator=(T& rhs)
-		{
-			null = false;
-			value = rhs;
 		}
 
 		bool operator==(T& rhs)

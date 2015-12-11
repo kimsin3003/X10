@@ -1,14 +1,15 @@
 #include "stdafx.h"
-#include "MainScene.h"
-#include "MCScene.h"
-#include "Explosion.h"
-#include "Enemy.h"
-#include "Sling.h"
 #include <string>
 #include <fstream>
 #include <iostream>
 #include <string>
 #include <json/json.h>
+#include "MainScene.h"
+#include "MCScene.h"
+#include "Explosion.h"
+#include "Enemy.h"
+#include "Sling.h"
+#include "StageInformation.h"
 
 Scene* MCScene::createScene()
 {
@@ -151,8 +152,44 @@ bool MCScene::init()
 
 
 	/*JSON Test*/
-	string jsonTest = makeJsonTestString();
+	//string jsonTest = makeJsonTestString();
 	
+	/*write To .json test*/
+	StageInformation tmpStageInf(0);
+	Layer* tmpLayer = Layer::create();
+	Sprite* spr1 = Sprite::create();
+	spr1->setName("1");
+	spr1->setRotation(90.f);
+	spr1->setPosition(Point(123, 456));
+	spr1->setScaleX(1);
+	spr1->setScaleY(2);
+	tmpLayer->addChild(spr1);
+
+	Sprite* spr2 = Sprite::create();
+	spr2->setName("2");
+	spr2->setRotation(120.f);
+	spr2->setPosition(Point(23, 56));
+	spr2->setScaleX(2);
+	spr2->setScaleY(3);
+	tmpLayer->addChild(spr2);
+
+	Sprite* spr3 = Sprite::create();
+	spr3->setName("3");
+	spr3->setRotation(170.f);
+	spr3->setPosition(Point(52, 46));
+	spr3->setScaleX(3);
+	spr3->setScaleY(4);
+	tmpLayer->addChild(spr3);
+	
+	Sprite* spr4 = Sprite::create();
+	spr4->setName("4");
+	spr4->setRotation(270.f);
+	spr4->setPosition(Point(64, 92));
+	spr4->setScaleX(4);
+	spr4->setScaleY(5);
+	tmpLayer->addChild(spr4);
+
+	tmpStageInf.MakeJsonFileFromLayer(tmpLayer, "tmpfile.json");
 	return true;
 }
 

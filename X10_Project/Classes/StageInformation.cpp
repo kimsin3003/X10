@@ -194,3 +194,46 @@ string StageInformation::GetCurrentBulletInfo() //지금 불렛의 타입을 반환
 {
 	return m_currentBullet;
 }
+
+bool StageInformation::MakeJsonFileFromLayer(Layer* layer, const char* fileName)
+{
+	//stageInformaition 객체를 이용해 filename에 Json 파일로 남김.
+	m_targetInfoList.clear();
+
+	for (Node* child : layer->getChildren())
+	{
+		TargetInfo targetInfo;
+		int tmpTypeNum = 0;
+		try{ //string을 int로 변환.
+			tmpTypeNum= std::stoi(child->getName());
+		}
+		catch (const std::invalid_argument e){
+			//name 읽어는것을 실패함. 
+			tmpTypeNum = 0;
+		}
+
+		targetInfo.m_name = static_cast<TargetType>(tmpTypeNum);
+		targetInfo.m_rotation = child->getRotation();
+		TargetPoint scale;
+		scale.x = child->getScaleY();
+		scale.y = child->getScaleY();
+
+		targetInfo.m_scale = TargetPoint(scale);
+		
+		TargetPoint position;
+		position.x = child->getPositionX();
+		position.y = child->getPositionY();
+		targetInfo.m_position = TargetPoint(position);
+
+		m_targetInfoList.push_back(targetInfo);
+	}
+	
+	
+	//write to file
+	if (!cppson::toJson(m_targetInfoList, fileName))
+	{
+		CCLOG("Target write Fail.");
+		return false;
+	}
+	return true;
+}

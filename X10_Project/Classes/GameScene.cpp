@@ -6,8 +6,6 @@
 #include "Sling.h"
 #include "FileStuff.h"
 
-GameScene::GameScene() : m_gameLayer(nullptr), m_uiLayer(nullptr) {}
-
 Scene* GameScene::createScene()
 {
 	Scene* scene = Scene::create();
@@ -26,26 +24,29 @@ bool GameScene::init()
 		return false;
 	}
 	
-	//배경 삽입
 	m_background = loadBackground();
 	addChild(m_background);
 
-	//캐릭터 삽입
 	m_character = loadCharacter();
-	m_background->addChild(m_character, 2);
+	m_background->addChild(m_character);
 
-	//레이어 삽입
 	m_gameLayer = GameLayer::create();
-	m_uiLayer = UILayer::create();
 	addChild(m_gameLayer);
+	
+	m_uiLayer = UILayer::create();
 	addChild(m_uiLayer);
 	
-	//게임 매니저 초기화
 	m_gameManager = GameManager::GetInstance();
 
 	scheduleUpdate();
 
 	return true;
+}
+
+void GameScene::CleanUp()
+{
+	removeAllChildrenWithCleanup(true);
+	removeFromParentAndCleanup(true);
 }
 
 Sprite* GameScene::loadBackground()
@@ -54,7 +55,7 @@ Sprite* GameScene::loadBackground()
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);
-	background->setOpacity(140);
+//	background->setOpacity(140);
 	return background;
 }
 

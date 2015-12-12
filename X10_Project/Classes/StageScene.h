@@ -15,7 +15,7 @@ private:
 	void SetupButtons();
 	void SetupCollection();
 	void ChangeToMainScene(Ref* pSender);
-	void EndingEvent();
+	void EndingEvent(float dt);
 
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
@@ -27,6 +27,6 @@ private:
 
 	Sprite* m_character;
 
-	int m_stageToPlay;
 	int m_maxStageNum;
+	int m_stageToPlay;
 };

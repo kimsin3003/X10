@@ -41,6 +41,9 @@ bool StageScene::init()
 
 	setName("StageScene");
 
+	m_stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+	m_maxStageNum = StageInformation::GetMaxStageNum();
+
 	Collection::m_isLooking = false;
 
 	Sprite* background = LoadBackground();
@@ -57,14 +60,14 @@ bool StageScene::init()
 		mother->setScale(1.5f);
 		addChild(mother);
 
-		EndingEvent();
+		this->scheduleOnce(schedule_selector(StageScene::EndingEvent), 1.5f);
+
+		return true;
 	}
+
 
 	m_collectionManager = new CollectionManager();
 	m_stageButtonPosInfo = new StageButtonPosInformation();
-
-	m_stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
-	m_maxStageNum = StageInformation::GetMaxStageNum();
 
 	SetupButtons();
 	SetupCollection();
@@ -80,11 +83,6 @@ void StageScene::SetupButtons()
 
 	menuList.pushBack(pauseButton);
 
-	if (m_stageToPlay > m_maxStageNum)
-	{
-		m_stageToPlay = m_maxStageNum;
-	}
-
 	for (int i = 1; i <= m_stageToPlay; i++)
 	{
 		menuList.pushBack(MakeStageButton(i, m_stageButtonPosInfo->GetStageButtonPos(i)));
@@ -97,7 +95,7 @@ void StageScene::SetupButtons()
 
 void StageScene::SetupCollection()
 {
-	m_collectionManager->InitCollections(m_stageToPlay);
+	m_collectionManager->InitCollections(m_stageToPlay-1);
 	m_collectionManager->AppendCollectionToLayer(this);
 }
 
@@ -105,12 +103,6 @@ void StageScene::GotoStage(Ref* pSender, int stageNum)
 {
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
-
-	int maxStageNum = StageInformation::GetMaxStageNum();
-	if (stageNum > maxStageNum)
-	{
-		stageNum = maxStageNum;
-	}
 
 	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
@@ -140,12 +132,15 @@ Sprite* StageScene::LoadCharacter()
 
 void StageScene::ChangeToMainScene(Ref* pSender)
 {
+
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 
-void StageScene::EndingEvent()
+void StageScene::EndingEvent(float dt)
 {
-
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	TransitionRotoZoom* byebye = TransitionRotoZoom::create(2.0f, MainScene::createScene());
+	Director::getInstance()->replaceScene(byebye);
 }
 
 MenuItemImage* StageScene::MakeBackButton()

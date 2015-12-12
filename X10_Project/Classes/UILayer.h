@@ -16,7 +16,6 @@ public:
 	void MakeFailWidget(int m_stage);
 	
 private:
-
 	enum ButtonSize
 	{
 		BUTTON_WIDTH = 40,

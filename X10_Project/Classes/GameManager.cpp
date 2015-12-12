@@ -54,15 +54,15 @@ void GameManager::Reset()
 
 GameManager::~GameManager() {}
 
-void GameManager::SetStage(GameLayer* gameLayer, int stageNumber)
+void GameManager::SetStage(GameLayer* gameLayer, int stageNum)
 {	
 	Reset();
-	StageInformation stageInfo(stageNumber);
+	StageInformation stageInfo(stageNum);
 	m_targetManager->InitTargets(&stageInfo);
 	AppendTargetsToLayer(gameLayer);
 	m_colliderManager->InitBullets(&stageInfo);
 	m_sling = SetSling(gameLayer);
-	m_stage = stageNumber;
+	m_stage = stageNum;
 }
 
 Sling* GameManager::SetSling(GameLayer* gameLayer)
@@ -195,18 +195,15 @@ void GameManager::SetCurCollectionPos(const Vec2& pos)
 	m_curCollection->setPosition(pos + compensateToParentPos);
 }
 
-void GameManager::EarnCollectionEvent()
+void GameManager::EarnCollectionEvent(UILayer* uiLayer)
 {
-	Scene* currentScene = Director::getInstance()->getRunningScene();
-	GameScene* gameScene = static_cast<GameScene*>(currentScene->getChildByName("GameScene"));
-	GameLayer* gameLayer = gameScene->GetGameLayer();
-
+	GameScene* gameScene = static_cast<GameScene*>(uiLayer->getParent());
 	const Point& enemyPos = m_targetManager->GetEnemyPosition();
 	const Vec2& aboveCharacterPos = gameScene->GetCharacterPosition() + Vec2(0, 100);
 
 	m_curCollection = m_collectionManager->GetCollectionSprOfStage(m_stage);
 	m_curCollection->setPosition(enemyPos);
-	gameLayer->addChild(m_curCollection);
+	uiLayer->addChild(m_curCollection);
 
 	//part 1
 	MoveBy* moveBy_00 = MoveBy::create(1.50f, Point(0, -10));
@@ -252,7 +249,7 @@ void GameManager::WinProgress(UILayer* uiLayer)
 		m_stage == CollectionManager::MONITOR ||
 		m_stage == CollectionManager::LETTER))
 	{
-		EarnCollectionEvent();
+		EarnCollectionEvent(uiLayer);
 
 		DelayTime* waitEventTime = DelayTime::create(4.50f);
 		CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(UILayer::MakeSuccessWidget, uiLayer, m_stage));
@@ -265,7 +262,7 @@ void GameManager::WinProgress(UILayer* uiLayer)
 		uiLayer->MakeSuccessWidget(m_stage);
 	}
 
-	if (lastStage < m_stage && m_stage + 1 <= StageInformation::GetMaxStageNum())
+	if (lastStage == m_stage && m_stage + 1 <= StageInformation::GetMaxStageNum())
 	{
 		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_stage + 1);
 	}

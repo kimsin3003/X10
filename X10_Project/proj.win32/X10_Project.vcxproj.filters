@@ -70,12 +70,6 @@
     <ClCompile Include="..\Classes\StageScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\SeeBird.cpp">
-      <Filter>GameObject\Targets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Mirror_y.cpp">
-      <Filter>GameObject\Targets</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Mirror.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
@@ -108,6 +102,12 @@
     </ClCompile>
     <ClCompile Include="..\Classes\MapEditer.cpp">
       <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Gull.cpp">
+      <Filter>GameObject\Targets</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\Virtical_Mirror.cpp">
+      <Filter>GameObject\Targets</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -180,12 +180,6 @@
     <ClInclude Include="..\Classes\StageScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\SeeBird.h">
-      <Filter>GameObject\Targets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Mirror_y.h">
-      <Filter>GameObject\Targets</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Mirror.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
@@ -221,6 +215,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MapEditer.h">
       <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Gull.h">
+      <Filter>GameObject\Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\Virtical_Mirror.h">
+      <Filter>GameObject\Targets</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

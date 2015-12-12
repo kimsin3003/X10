@@ -22,11 +22,11 @@ public:
 	{
 		ENEMY,
 		MIRROR,
-		MIRROR_Y,
+		VIRTICAL_MIRROR,
 		CLOUD,
 		BUBBLE,
 		STAR,
-		SEEBIRD
+		GULL
 	};
 
 	FIELD_WITH_KEY(TargetType, type, m_name);
@@ -62,7 +62,6 @@ public:
 
 private:
 	static const int m_maxStageNum = 17;
-	const char* FILENAME = "temp.txt";
 	int m_currentTargetIndex;
 	int m_currentBulletIndex;
 

@@ -172,8 +172,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MapEditer.cpp" />
     <ClCompile Include="..\Classes\MCScene.cpp" />
     <ClCompile Include="..\Classes\Mirror.cpp" />
-    <ClCompile Include="..\Classes\Mirror_y.cpp" />
-    <ClCompile Include="..\Classes\SeeBird.cpp" />
+    <ClCompile Include="..\Classes\Virtical_Mirror.cpp" />
+    <ClCompile Include="..\Classes\Gull.cpp" />
     <ClCompile Include="..\Classes\Sling.cpp" />
     <ClCompile Include="..\Classes\StageButtonPosInformation.cpp" />
     <ClCompile Include="..\Classes\StageInformation.cpp" />
@@ -215,8 +215,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MapEditer.h" />
     <ClInclude Include="..\Classes\MCScene.h" />
     <ClInclude Include="..\Classes\Mirror.h" />
-    <ClInclude Include="..\Classes\Mirror_y.h" />
-    <ClInclude Include="..\Classes\SeeBird.h" />
+    <ClInclude Include="..\Classes\Virtical_Mirror.h" />
+    <ClInclude Include="..\Classes\Gull.h" />
     <ClInclude Include="..\Classes\Sling.h" />
     <ClInclude Include="..\Classes\StageButtonPosInformation.h" />
     <ClInclude Include="..\Classes\StageInformation.h" />

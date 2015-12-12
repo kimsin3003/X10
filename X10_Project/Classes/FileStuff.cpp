@@ -15,8 +15,8 @@ namespace FileStuff
 	const string ENEMY_DEAD = "res/enemy_dead.png";
 	const string MIRROR = "res/target/Mirror.png";
 	const string MIRROR_ANGRY = "res/target/MirrorAngry.png";
-	const string MIRROR_Y = "res/target/flat_mirror.png";
-	const string SEEBIRD = "res/target/seagull.png";
+	const string VIRTICAL_MIRROR = "res/target/flat_mirror.png";
+	const string GULL = "res/target/seagull.png";
 	const string FEATHER = "res/target/Feather.png";
 	const string STAR_HAPPY = "res/target/brick_destruct.png";
 	const string STAR_SAD = "res/target/brick.png";

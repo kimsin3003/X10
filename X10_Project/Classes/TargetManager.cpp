@@ -3,11 +3,11 @@
 //Targets
 #include "Enemy.h"
 #include "Mirror.h"
-#include "Mirror_y.h"
+#include "Virtical_Mirror.h"
 #include "Cloud.h"
 #include "Bubble.h"
 #include "Star.h"
-#include "SeeBird.h"
+#include "Gull.h"
 //Stage Information
 #include "StageInformation.h"
 #include <unordered_map>
@@ -26,11 +26,11 @@ void TargetManager::InitTargets(StageInformation* si)
 	TargetInfoMap targetTypeInfo;
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::ENEMY, Enemy::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::MIRROR, Mirror::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::MIRROR_Y, Mirror_y::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::VIRTICAL_MIRROR, Virtical_Mirror::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::CLOUD, Cloud::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::BUBBLE, Bubble::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::STAR, Star::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::SEEBIRD, SeeBird::create));
+	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::GULL, Gull::create));
 
 	while (si->HasNextTarget())
 	{

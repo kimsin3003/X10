@@ -472,8 +472,10 @@ namespace cppson
 	{
 		std::ofstream file(fileName);
 
-		if (!file.is_open())
+		if (!file.is_open()){
+			CCLOG("not open");
 			return false;
+		}
 
 		file << toJson(value);
 

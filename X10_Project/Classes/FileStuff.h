@@ -21,9 +21,9 @@ namespace FileStuff
 
 	extern const string MIRROR;
 	extern const string MIRROR_ANGRY;
-	extern const string MIRROR_Y;
+	extern const string VIRTICAL_MIRROR;
 
-	extern const string SEEBIRD;
+	extern const string GULL;
 	extern const string FEATHER;
 
 	extern const string STAR_HAPPY;

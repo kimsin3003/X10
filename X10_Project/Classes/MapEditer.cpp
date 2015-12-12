@@ -24,8 +24,6 @@ bool MapEditer::init()
 	this->addChild(m_layer, 1);
 	
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
-	_mouseListener->onMouseMove = CC_CALLBACK_1(MapEditer::OnMouseMove, this);
-	_mouseListener->onMouseUp = CC_CALLBACK_1(MapEditer::OnMouseUp, this);
 	_mouseListener->onMouseDown = CC_CALLBACK_1(MapEditer::onMouseDown, this);
 	_mouseListener->onMouseScroll = CC_CALLBACK_1(MapEditer::OnMouseScroll, this);
 
@@ -44,26 +42,14 @@ bool MapEditer::init()
 	return true;
 }
 
-void MapEditer::SetCallBackFuncs(){
-	
-}
-
-void MapEditer::OnMouseMove(Event* event){
-	
-}
-
-void MapEditer::OnMouseUp(Event* event){
-
-}
-
-void MapEditer::onMouseDown(EventMouse* event){
-	CCLOG("mouse down");
+void MapEditer::LeftMouseDown(EventMouse* event)
+{
 	Sprite* sprite = nullptr;
 
-	if(this->getChildByName("saveButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
+	if (this->getChildByName("saveButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
 		Save();
 	}
-	
+
 	switch (m_pressedKey){
 	case EventKeyboard::KeyCode::KEY_B:
 		sprite = Sprite::create(FileStuff::BUBBLE);
@@ -106,10 +92,37 @@ void MapEditer::onMouseDown(EventMouse* event){
 		m_layer->addChild(sprite);
 	}
 	m_pressedKey = static_cast<EventKeyboard::KeyCode>(-1);
+}
+
+void MapEditer::RightMouseDown(EventMouse* event)
+{
+
+	Vector<Node*>& children = m_layer->getChildren();
+	for (int i = 0; i < children.size(); i++)
+	{
+		if (children.at(i)->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
+		{
+			children.at(i)->removeFromParent();
+			break;
+		}
+	}
+}
+
+void MapEditer::onMouseDown(EventMouse* event)
+{
+	CCLOG("mouse down");
+	
+	if (event->getMouseButton() == 0)
+		LeftMouseDown(event);
+
+	else if (event->getMouseButton() == 1)
+		RightMouseDown(event);
+	
 
 }
 
-void MapEditer::OnMouseScroll(Event* event){
+void MapEditer::OnMouseScroll(Event* event)
+{
 
 }
 

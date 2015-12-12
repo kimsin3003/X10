@@ -13,8 +13,8 @@ public:
 private:
 	Layer* m_layer;
 	void Save();
-	void OnMouseMove(Event* event);
-	void OnMouseUp(Event* event);
+	void LeftMouseDown(EventMouse* event);
+	void RightMouseDown(EventMouse* event);
 	void onMouseDown(EventMouse* event);
 	void OnMouseScroll(Event* event);
 	void OnKeyPressed(EventKeyboard::KeyCode keyCode);

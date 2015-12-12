@@ -90,6 +90,7 @@ void CollectionManager::AppendCollectionToLayer(StageScene* layer)
 	for (int i = 0; i < m_curColNum; i++)
 	{
 		menuList.pushBack(m_collections.at(i)->GetCollection());
+		layer->addChild(m_collections.at(i));
 	}
 
 	Menu* menu = Menu::createWithArray(menuList);

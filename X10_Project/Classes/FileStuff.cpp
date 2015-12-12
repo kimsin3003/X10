@@ -48,4 +48,9 @@ namespace FileStuff
 	const string NORMAL_STAR = "res/button/normal_star.png";
 
 	const string MAPEDITER_DEFAULT_FILE = "res/mapediter/temp.txt";
+
+	const string TEXT_BOX = "res/collection/text_box.png";
+
+	const string FONT_ARIAL = "res/fonts/arial.ttf";
+
 }

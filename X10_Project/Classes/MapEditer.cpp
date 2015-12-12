@@ -42,8 +42,6 @@ bool MapEditer::init()
 	this->addChild(saveButton);
 
 	return true;
-
-
 }
 
 void MapEditer::SetCallBackFuncs(){

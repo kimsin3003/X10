@@ -56,6 +56,8 @@ bool StageScene::init()
 		mother->setPosition(20, 250);
 		mother->setScale(1.5f);
 		addChild(mother);
+
+		EndingEvent();
 	}
 
 	m_collectionManager = new CollectionManager();
@@ -101,8 +103,8 @@ void StageScene::SetupCollection()
 
 void StageScene::GotoStage(Ref* pSender, int stageNum)
 {
-	Scene* game = GameScene::createScene();
-	GameScene* gameScene = static_cast<GameScene*>(game->getChildByName("GameScene"));
+	Scene* scene = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 
 	int maxStageNum = StageInformation::GetMaxStageNum();
 	if (stageNum > maxStageNum)
@@ -111,8 +113,9 @@ void StageScene::GotoStage(Ref* pSender, int stageNum)
 	}
 
 	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 
-	Director::getInstance()->replaceScene(game);
+	Director::getInstance()->replaceScene(sceneWithEffect);
 }
 
 Sprite* StageScene::LoadBackground()
@@ -138,6 +141,11 @@ Sprite* StageScene::LoadCharacter()
 void StageScene::ChangeToMainScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MainScene::createScene());
+}
+
+void StageScene::EndingEvent()
+{
+
 }
 
 MenuItemImage* StageScene::MakeBackButton()

@@ -2,6 +2,7 @@
 #include "UILayer.h"
 #include "MainScene.h"
 #include "GameScene.h"
+#include "GameLayer.h"
 #include "StageScene.h"
 #include "GameManager.h"
 #include "FileStuff.h"
@@ -128,20 +129,21 @@ void UILayer::MakeFailWidget(int m_stage)
 	auto menu = Menu::create(retryButton, stageSceneButton, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu);
-
 }
 
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(StageScene::createScene());
+	TransitionProgressOutIn* sceneWithEffect = TransitionProgressOutIn::create(0.75f, StageScene::createScene());
+	Director::getInstance()->replaceScene(sceneWithEffect);
 }
 
 void UILayer::GotoStage(Ref* pSender, int stageNum)
 {
-	Scene* game = GameScene::createScene();
-	GameScene* gameScene = static_cast<GameScene*>(game->getChildByName("GameScene"));
-	/*stage Information 불러오는 부분.*/
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+	Scene* scene = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 
-	Director::getInstance()->replaceScene(game);
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
+	
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+	Director::getInstance()->replaceScene(sceneWithEffect);
 }

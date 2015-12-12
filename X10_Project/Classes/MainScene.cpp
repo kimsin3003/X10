@@ -9,6 +9,7 @@
 #include "StageScene.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
+#include "MapEditer.h"
 
 Scene* MainScene::createScene()
 {
@@ -46,6 +47,11 @@ bool MainScene::init()
 	stageSelect->getSelectedImage()->setScale(selectedScale);
 	stageSelect->setPosition(visibleSize.width / 2, visibleSize.height / 2 - startGame->getContentSize().height);
 
+	/*MapEditer Button*/
+	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 50), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
+	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height / 2 - startGame->getContentSize().height - mapEditer->getContentSize().height);
+
+
 	/* End Button */
 	MenuItemImage* closeItem = MenuItemImage::create(
 		FileStuff::CLOSE_BUTTON,
@@ -75,7 +81,7 @@ bool MainScene::init()
 	jwScene->setPosition(Point(110, 10));
 
 	/*Create Menu*/
-	auto menu = Menu::create(startGame, stageSelect, closeItem, twScene, PaulItem, jwScene, NULL);
+	auto menu = Menu::create(startGame, stageSelect, mapEditer, closeItem, twScene, PaulItem, jwScene, NULL);
 	menu->setPosition(Vec2::ZERO);
 	this->addChild(menu, 1);
 
@@ -90,6 +96,11 @@ void MainScene::ChangeToGameScene(Ref* pSender)
 void MainScene::ChangeToStageScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(StageScene::createScene());
+}
+
+void MainScene::ChangeToMapEditScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(MapEditer::createScene());
 }
 
 void MainScene::ChangeToMCScene(Ref* pSender)

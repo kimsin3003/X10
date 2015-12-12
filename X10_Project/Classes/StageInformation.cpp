@@ -205,7 +205,7 @@ bool StageInformation::MakeJsonFileFromLayer(Layer* layer, const char* fileName)
 		TargetInfo targetInfo;
 		int tmpTypeNum = 0;
 		try{ //string을 int로 변환.
-			tmpTypeNum= std::stoi(child->getName());
+			tmpTypeNum= child->getTag();
 		}
 		catch (const std::invalid_argument e){
 			//name 읽어는것을 실패함. 

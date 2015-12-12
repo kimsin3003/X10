@@ -100,29 +100,18 @@ void MapEditer::RightMouseDown(EventMouse* event)
 	Vector<Node*>& children = m_layer->getChildren();
 	for (int i = 0; i < children.size(); i++)
 	{
-		if (children.at(i)->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
+		Node* child = children.at(i);
+		if (child->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
 		{
-			children.at(i)->removeFromParent();
+			child->removeFromParent();
 			break;
 		}
 	}
 }
 
-void MapEditer::onMouseDown(EventMouse* event)
+void MapEditer::WheelDown(EventMouse* event)
 {
-	CCLOG("mouse down");
-	
-	if (event->getMouseButton() == 0)
-		LeftMouseDown(event);
 
-	else if (event->getMouseButton() == 1)
-		RightMouseDown(event);
-	
-
-}
-
-void MapEditer::OnMouseScroll(EventMouse* event)
-{
 	Vector<Node*>& children = m_layer->getChildren();
 	for (int i = 0; i < children.size(); i++)
 	{
@@ -135,9 +124,40 @@ void MapEditer::OnMouseScroll(EventMouse* event)
 	}
 }
 
+void MapEditer::onMouseDown(EventMouse* event)
+{
+	
+	if (event->getMouseButton() == 0)
+		LeftMouseDown(event);
+
+	else if (event->getMouseButton() == 1)
+		RightMouseDown(event);
+
+	else if (event->getMouseButton() == 2)
+		WheelDown(event);
+	
+
+}
+
+void MapEditer::OnMouseScroll(EventMouse* event)
+{
+	Vector<Node*>& children = m_layer->getChildren();
+	for (int i = 0; i < children.size(); i++)
+	{
+		Node* child = children.at(i);
+		if (child->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
+		{
+			if ((float)event->getScrollY() < 0)
+				child->setScale(child->getScale() * 1.1f);
+			else
+				child->setScale(child->getScale() * 0.9f);
+			break;
+		}
+	}
+}
+
 void MapEditer::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 {
-	CCLOG("Key Pressed");
 	m_pressedKey = keyCode;
 }
 

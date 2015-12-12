@@ -15,6 +15,8 @@ private:
 	void SetupButtons();
 	void SetupCollection();
 	void ChangeToMainScene(Ref* pSender);
+	void EndingEvent();
+
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
 	MenuItemImage* MakeBackButton();

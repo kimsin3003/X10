@@ -21,7 +21,7 @@ namespace FileStuff
 	const string STAR_HAPPY = "res/target/brick_destruct.png";
 	const string STAR_SAD = "res/target/brick.png";
 	const string SLING_LINE_DOT = "res/dot.png";
-	const string PAUSEBUTTON = "OrangePauseButton.png";
+	const string PAUSEBUTTON = "backButton.png";
 	const string NEXTBUTTON = "NextButton.png";
 	const string RETRYBUTTON = "RetryButton.png";
 	const string BACKBUTTON = "BackButton.png";
@@ -39,6 +39,9 @@ namespace FileStuff
 	const string CHARACTER_STANDING = "res/character/boy_standing.png";
 
 	const string BACKGROUND = "res/background2.png";
+	const string START_IMG = "res/start.png";
+	const string STAGE_SELECT_IMG = "res/stage_select.png";
+	const string CLOSE_BUTTON = "closeButton.png";
 	const string MOTHER = "res/bg/mother.png";
 
 	const string SPECIAL_STAR = "res/button/special_star.png";

@@ -246,7 +246,12 @@ void GameManager::WinProgress(UILayer* uiLayer)
 {
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
-	if (m_stage == lastStage)
+	if (m_stage == lastStage &&
+		(m_stage == CollectionManager::SHOES ||
+		m_stage == CollectionManager::SCARF ||
+		m_stage == CollectionManager::BOTTLE ||
+		m_stage == CollectionManager::MONITOR ||
+		m_stage == CollectionManager::LETTER))
 	{
 		EarnCollectionEvent();
 
@@ -261,7 +266,7 @@ void GameManager::WinProgress(UILayer* uiLayer)
 		uiLayer->MakeSuccessWidget(m_stage);
 	}
 
-	if (lastStage < m_stage + 1 && m_stage + 1 <= StageInformation::GetMaxStageNum())
+	if (lastStage < m_stage && m_stage + 1 <= StageInformation::GetMaxStageNum())
 	{
 		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_stage + 1);
 	}

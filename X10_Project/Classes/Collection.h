@@ -5,8 +5,15 @@ class Collection : public Node
 public:
 	CREATE_FUNC(Collection);
 	bool init();
-	void SetSprite(const string& name, const Point& pos);
+	void SetCollection(const string& name, const Point& pos, int code);
+	MenuItemImage* GetCollection() { return m_collection; }
 
 private:
-	Sprite* m_spr;
+	MenuItemImage* m_collection;
+
+	void LetterExplanation();
+	void MonitorExplanation();
+	void BottleExplanation();
+	void ScarfExplanation();
+	void ShoesExplanation();
 };

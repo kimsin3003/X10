@@ -71,7 +71,7 @@ void StageScene::SetupButtons()
 	Vector<MenuItem*> menuList;
 
 	MenuItemImage* pauseButton = MakeBackButton();
-	Size buttonSize = pauseButton->getContentSize();
+
 	menuList.pushBack(pauseButton);
 
 	if (m_stageToPlay > m_maxStageNum)
@@ -83,7 +83,7 @@ void StageScene::SetupButtons()
 	{
 		menuList.pushBack(MakeStageButton(i, m_stageButtonPosInfo->GetStageButtonPos(i)));
 	}
-
+	
 	Menu* menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
 	addChild(menu);
@@ -170,6 +170,7 @@ MenuItemImage* StageScene::MakeStageButton(int stageNum, Point pos)
 		stageNum == m_maxStageNum)
 	{
 		menuItem->setNormalImage(Sprite::create(FileStuff::SPECIAL_STAR));
+		menuItem->setScale(1.25f);
 	}
 	else
 	{

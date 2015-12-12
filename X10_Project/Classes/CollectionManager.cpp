@@ -10,7 +10,7 @@ CollectionManager::CollectionManager()
 	m_curColNum = 0;
 	m_collections.reserve(5);
 	m_colPos = Point(40, 75);
-	m_deltaPos = Point(25, 0);
+	m_deltaPos = Point(30, 0);
 }
 
 void CollectionManager::InitCollections(int stageNumber)
@@ -30,7 +30,7 @@ void CollectionManager::InitCollections(int stageNumber)
 						 // instead collections rotating event
 		{
 			Collection* letter = Collection::create();
-			letter->SetSprite(FileStuff::LETTER, m_colPos);
+			letter->SetCollection(FileStuff::LETTER, m_colPos, LETTER);
 			m_collections.pushBack(letter);
 			m_curColNum++;
 		}
@@ -39,7 +39,7 @@ void CollectionManager::InitCollections(int stageNumber)
 		case MONITOR + 2: //11~13
 		{
 			Collection* monitor = Collection::create();
-			monitor->SetSprite(FileStuff::MONITOR, m_colPos += m_deltaPos);
+			monitor->SetCollection(FileStuff::MONITOR, m_colPos += m_deltaPos, MONITOR);
 			m_collections.pushBack(monitor);
 			m_curColNum++;
 		}
@@ -48,7 +48,7 @@ void CollectionManager::InitCollections(int stageNumber)
 		case BOTTLE + 2: //8~10
 		{
 			Collection* bottle = Collection::create();
-			bottle->SetSprite(FileStuff::BOTTLE, m_colPos += m_deltaPos);
+			bottle->SetCollection(FileStuff::BOTTLE, m_colPos += m_deltaPos, BOTTLE);
 			m_collections.pushBack(bottle);
 			m_curColNum++;
 		}
@@ -58,7 +58,7 @@ void CollectionManager::InitCollections(int stageNumber)
 		case SCARF + 3:	// 4~7
 		{
 			Collection* scarf = Collection::create();
-			scarf->SetSprite(FileStuff::SCARF, m_colPos += m_deltaPos);
+			scarf->SetCollection(FileStuff::SCARF, m_colPos += m_deltaPos, SCARF);
 			m_collections.pushBack(scarf);
 			m_curColNum++;
 		}
@@ -67,11 +67,10 @@ void CollectionManager::InitCollections(int stageNumber)
 		case SHOES + 2: //1~3
 		{
 			Collection* shoes = Collection::create();
-			shoes->SetSprite(FileStuff::SHOES, m_colPos += m_deltaPos);
+			shoes->SetCollection(FileStuff::SHOES, m_colPos += m_deltaPos, SHOES);
 			m_collections.pushBack(shoes);
 			m_curColNum++;
 		}
-
 	}
 }
 
@@ -86,10 +85,16 @@ void CollectionManager::ResetCollections()
 
 void CollectionManager::AppendCollectionToLayer(StageScene* layer)
 {
+	Vector<MenuItem*> menuList;
+
 	for (int i = 0; i < m_curColNum; i++)
 	{
-		layer->addChild(m_collections.at(i));
+		menuList.pushBack(m_collections.at(i)->GetCollection());
 	}
+
+	Menu* menu = Menu::createWithArray(menuList);
+	menu->setPosition(Vec2::ZERO);
+	layer->addChild(menu);
 }
 
 Sprite* CollectionManager::GetCollectionSprOfStage(int stageNum)

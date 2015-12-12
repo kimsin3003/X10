@@ -12,12 +12,6 @@ public:
 	static void GotoStage(Ref* pSender,int stageNum);
 
 private:
-	enum starSize
-	{
-		STAR_WIDTH = 15,
-		STAR_HEIGHT = 15
-	};
-
 	void SetupButtons();
 	void SetupCollection();
 	void ChangeToMainScene(Ref* pSender);

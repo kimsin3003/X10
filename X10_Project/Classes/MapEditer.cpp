@@ -121,9 +121,18 @@ void MapEditer::onMouseDown(EventMouse* event)
 
 }
 
-void MapEditer::OnMouseScroll(Event* event)
+void MapEditer::OnMouseScroll(EventMouse* event)
 {
-
+	Vector<Node*>& children = m_layer->getChildren();
+	for (int i = 0; i < children.size(); i++)
+	{
+		Node* child = children.at(i);
+		if (child->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
+		{
+			child->setRotation(child->getRotation() + 45);
+			break;
+		}
+	}
 }
 
 void MapEditer::OnKeyPressed(EventKeyboard::KeyCode keyCode)

@@ -4,6 +4,7 @@
 
 namespace FileStuff
 {
+
 	extern const string STAGESCENE_BACKGROUND;
 
 	extern const string BUBBLE;
@@ -53,5 +54,7 @@ namespace FileStuff
 
 	extern const string SPECIAL_STAR;
 	extern const string NORMAL_STAR;
+
+	extern const string MAPEDITER_DEFAULT_FILE;
 
 }

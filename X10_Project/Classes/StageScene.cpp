@@ -15,6 +15,8 @@
 #include "ConstVars.h"
 #include "FileStuff.h"
 
+#include "Collection.h"
+
 Scene* StageScene::createScene()
 {
 	Scene* scene = Scene::create();
@@ -38,6 +40,8 @@ bool StageScene::init()
 	}
 
 	setName("StageScene");
+
+	Collection::m_isLooking = false;
 
 	Sprite* background = LoadBackground();
 	addChild(background);

@@ -3,7 +3,6 @@
 #include "MapEditLayer.h"
 #include "StageInformation.h"
 
-
 Scene* MapEditer::createScene()
 {
 	Scene* scene = Scene::create();
@@ -18,6 +17,8 @@ Scene* MapEditer::createScene()
 bool MapEditer::init()
 {
 	m_layer = Layer::create();
+
+	return true;
 }
 
 void MapEditer::SetCallBackFuncs(){

@@ -60,4 +60,8 @@ namespace FileStuff
 	extern const string MAPEDITER_DEFAULT_FILE;
 
 	extern const string CLOSE_BUTTON;
+
+	extern const string TEXT_BOX;
+
+	extern const string FONT_ARIAL;
 }

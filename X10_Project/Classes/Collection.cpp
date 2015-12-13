@@ -92,8 +92,8 @@ void Collection::MakeTextBox(const string& name, int code)
 			nullptr);
 
 		m_collSpr->runAction(seq_00);	
-		m_textBox->runAction(sequence);
 		m_text->runAction(seq_01);
+		m_textBox->runAction(sequence);
 	}
 }
 

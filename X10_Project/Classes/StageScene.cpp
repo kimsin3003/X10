@@ -14,7 +14,7 @@
 //config
 #include "ConstVars.h"
 #include "FileStuff.h"
-
+//etc
 #include "Collection.h"
 
 Scene* StageScene::createScene()
@@ -34,7 +34,7 @@ Scene* StageScene::createScene()
 
 bool StageScene::init()
 {
-	if (Layer::init() == false)
+	if (!Layer::init())
 	{
 		return false;
 	}
@@ -52,6 +52,12 @@ bool StageScene::init()
 	m_character = LoadCharacter();
 	background->addChild(m_character);
 
+	if (m_stageToPlay == 0)
+	{
+		this->scheduleOnce(schedule_selector(StageScene::IntroEvent), 0.0f);
+		return true;
+	}
+
 	if (m_stageToPlay == m_maxStageNum) 
 	{
 		Sprite* mother = Sprite::create(FileStuff::MOTHER);
@@ -64,7 +70,6 @@ bool StageScene::init()
 
 		return true;
 	}
-
 
 	m_collectionManager = new CollectionManager();
 	m_stageButtonPosInfo = new StageButtonPosInformation();
@@ -99,17 +104,6 @@ void StageScene::SetupCollection()
 	m_collectionManager->AppendCollectionToLayer(this);
 }
 
-void StageScene::GotoStage(Ref* pSender, int stageNum)
-{
-	Scene* scene = GameScene::createScene();
-	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
-
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
-	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
-
-	Director::getInstance()->replaceScene(sceneWithEffect);
-}
-
 Sprite* StageScene::LoadBackground()
 {
 	Sprite* background = Sprite::create(FileStuff::BACKGROUND);
@@ -130,15 +124,115 @@ Sprite* StageScene::LoadCharacter()
 	return character;
 }
 
+void StageScene::GotoStage(Ref* pSender, int stageNum)
+{
+	Scene* scene = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
+
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
+
+	Director::getInstance()->replaceScene(sceneWithEffect);
+}
+
 void StageScene::ChangeToMainScene(Ref* pSender)
 {
-
 	Director::getInstance()->replaceScene(MainScene::createScene());
+}
+
+void StageScene::IntroEvent(float dt)
+{
+	float fadeInTime = 2.0f;
+	float delayTime = 3.0f;
+
+	Vec2 deltaPos = Vec2(0, 16.0f);
+	Vec2 textPos = Vec2(160.0f, 320.0f);
+
+	//0.0f~
+	Label* text_00 = Label::create(
+		"It seems that I forgot all memories by some kind of accident.", 
+		FileStuff::FONT_ARIAL, 12.5f);
+	text_00->setOpacity(10);
+	text_00->setAnchorPoint(Vec2(0.5, 0.5));
+	text_00->setPosition(textPos);
+	addChild(text_00);
+
+	FadeIn* fadeIn_00 = FadeIn::create(fadeInTime);
+
+	text_00->runAction(fadeIn_00);
+
+	//1.0f~
+	Label* text_01 = Label::create(
+		"In my head was just this question at that confusing moment.", 
+		FileStuff::FONT_ARIAL, 12.5f);
+	text_01->setOpacity(10);
+	text_01->setAnchorPoint(Vec2(0.5, 0.5));
+	text_01->setPosition(textPos -= deltaPos);
+	addChild(text_01);
+
+	Sequence* seq_01 = Sequence::create(
+		DelayTime::create(delayTime += fadeInTime),
+		FadeIn::create(fadeInTime),
+		nullptr);
+
+	text_01->runAction(seq_01);
+
+	//2.0f~
+	Label* text_02 = Label::create(
+		"Why cant I stop doing this?", 
+		FileStuff::FONT_ARIAL, 12.5f);
+	text_02->setOpacity(10);
+	text_02->setAnchorPoint(Vec2(0.5, 0.5));
+	text_02->setPosition(textPos -= deltaPos);
+	addChild(text_02);
+
+	Sequence* seq_02 = Sequence::create(
+		DelayTime::create(delayTime += fadeInTime+1.0f),
+		FadeIn::create(fadeInTime),
+		nullptr);
+
+	text_02->runAction(seq_02);
+
+	//3.0f~
+	Label* text_03 = Label::create(
+		"SHOOTING UFOS", 
+		FileStuff::FONT_ARIAL, 15.5f);
+	text_03->setAnchorPoint(Vec2(0.5, 0.5));
+	text_03->setPosition(textPos -= deltaPos);
+	text_03->setOpacity(10);
+	addChild(text_03);
+
+	Sequence* seq_03 = Sequence::create(
+		DelayTime::create(delayTime += fadeInTime+2.0f),
+		FadeIn::create(0.0f),
+		NULL);
+
+	text_03->runAction(seq_03);
+
+	Label* text_04 = Label::create(
+		"WITH MOTHERFUCKING FIRECRACKERS",
+		FileStuff::FONT_ARIAL, 15.5f);
+	text_04->setAnchorPoint(Vec2(0.5, 0.5));
+	text_04->setPosition(textPos -= deltaPos);
+	text_04->setOpacity(10);
+	addChild(text_04);
+
+	Sequence* seq_04 = Sequence::create(
+		DelayTime::create(delayTime),
+		FadeIn::create(0.0f),
+		NULL);
+
+	text_04->runAction(seq_04);
+	//sprite
+
+	//5.0f~
+//	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+//	GotoStage(this, 1);
 }
 
 void StageScene::EndingEvent(float dt)
 {
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
 	TransitionRotoZoom* byebye = TransitionRotoZoom::create(2.0f, MainScene::createScene());
 	Director::getInstance()->replaceScene(byebye);
 }

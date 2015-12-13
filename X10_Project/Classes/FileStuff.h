@@ -1,67 +1,57 @@
 #pragma once;
+
 #include <iostream>
 #include <fstream>
 
 namespace FileStuff
 {
+	const string STAGESCENE_BACKGROUND = "res/starry_night.jpg";
+	const string BUBBLE = "res/target/Bubble2.png";
+	const string BUBBLE_POP = "res/target/BubblePop.png";
+	const string BULLET = "res/firework.png";
+	const string DEBRIS = "res/debris.png";
+	const string CLOUD = "res/target/Cloud.png";
+	const string CLOUD_LEFT = "res/target/CloudLeft.png";
+	const string CLOUD_RIGHT = "res/target/CloudRight.png";
+	const string ENEMY = "res/target/ufo.png";
+	const string ENEMY_DEAD = "res/enemy_dead.png";
+	const string MIRROR = "res/target/Mirror.png";
+	const string MIRROR_ANGRY = "res/target/MirrorAngry.png";
+	const string VIRTICAL_MIRROR = "res/target/flat_mirror.png";
+	const string GULL = "res/target/seagull.png";
+	const string FEATHER = "res/target/Feather.png";
+	const string STAR_HAPPY = "res/target/brick_destruct.png";
+	const string STAR_SAD = "res/target/brick.png";
+	const string SLING_LINE_DOT = "res/dot.png";
+	const string PAUSEBUTTON = "backButton.png";
+	const string NEXTBUTTON = "NextButton.png";
+	const string RETRYBUTTON = "RetryButton.png";
+	const string BACKBUTTON = "BackButton.png";
+	const string STAR_OFF = "res/star_off.png";
+	const string STAR_ON = "res/star_on.png";
 
-	extern const string STAGESCENE_BACKGROUND;
+	const string LETTER = "res/collection/letter.png";
+	const string SHOES = "res/collection/shoes.png";
+	const string SCARF = "res/collection/scarf.png";
+	const string BOTTLE = "res/collection/bottle.png";
+	const string MONITOR = "res/collection/monitor.png";
 
-	extern const string BUBBLE;
-	extern const string BUBBLE_POP;
-	
-	extern const string BULLET;
-	extern const string DEBRIS;
-	extern const string CLOUD;
-	extern const string CLOUD_LEFT;
-	extern const string CLOUD_RIGHT;
+	const string CHARACTER = "res/character/boy.png";
+	const string CHARACTER_HARDPIXEL = "res/character/boy_hardpixel.png";
+	const string CHARACTER_STANDING = "res/character/boy_standing.png";
 
-	extern const string ENEMY;
-	extern const string ENEMY_DEAD;
+	const string BACKGROUND = "res/background2.png";
+	const string START_IMG = "res/start.png";
+	const string STAGE_SELECT_IMG = "res/stage_select.png";
+	const string CLOSE_BUTTON = "closeButton.png";
+	const string MOTHER = "res/bg/mother.png";
 
-	extern const string MIRROR;
-	extern const string MIRROR_ANGRY;
-	extern const string VIRTICAL_MIRROR;
+	const string SPECIAL_STAR = "res/button/special_star.png";
+	const string NORMAL_STAR = "res/button/normal_star.png";
 
-	extern const string GULL;
-	extern const string FEATHER;
+	const string MAPEDITER_DEFAULT_FILE = "res/map_editer/temp.txt";
 
-	extern const string STAR_HAPPY;
-	extern const string STAR_SAD;
+	const string TEXT_BOX = "res/collection/text_box.png";
 
-	extern const string SLING_LINE_DOT;
-
-	extern const string PAUSEBUTTON;
-	extern const string RETRYBUTTON;
-	extern const string BACKBUTTON;
-	extern const string NEXTBUTTON;
-
-	extern const string STAR_OFF;
-	extern const string STAR_ON;
-
-	extern const string LETTER;
-	extern const string SHOES;
-	extern const string SCARF;
-	extern const string BOTTLE;
-	extern const string MONITOR;
-
-	extern const string CHARACTER;
-	extern const string CHARACTER_HARDPIXEL;
-	extern const string CHARACTER_STANDING;
-
-	extern const string BACKGROUND;
-	extern const string START_IMG;
-	extern const string STAGE_SELECT_IMG;
-	extern const string MOTHER;
-
-	extern const string SPECIAL_STAR;
-	extern const string NORMAL_STAR;
-
-	extern const string MAPEDITER_DEFAULT_FILE;
-
-	extern const string CLOSE_BUTTON;
-
-	extern const string TEXT_BOX;
-
-	extern const string FONT_ARIAL;
+	const string FONT_ARIAL = "res/fonts/arial.ttf";
 }

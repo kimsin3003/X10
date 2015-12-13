@@ -15,6 +15,7 @@ private:
 	void SetupButtons();
 	void SetupCollection();
 	void ChangeToMainScene(Ref* pSender);
+	void IntroEvent(float dt);
 	void EndingEvent(float dt);
 
 	Sprite* LoadBackground();

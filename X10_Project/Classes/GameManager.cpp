@@ -199,7 +199,7 @@ void GameManager::EarnCollectionEvent(UILayer* uiLayer)
 {
 	GameScene* gameScene = static_cast<GameScene*>(uiLayer->getParent());
 	const Point& enemyPos = m_targetManager->GetEnemyPosition();
-	const Vec2& aboveCharacterPos = gameScene->GetCharacterPosition() + Vec2(0, 100);
+	const Vec2& aboveCharacterPos = m_sling->getPosition() + Vec2(0, 100);
 
 	m_curCollection = m_collectionManager->GetCollectionSprOfStage(m_stage);
 	m_curCollection->setPosition(enemyPos);
@@ -281,13 +281,11 @@ void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 		{
 			m_isJudged = true;
 			m_sling->ShotComplete();
-			m_sling->removeAllChildren();
 			WinProgress(uiLayer);
 		}
 		else if (!m_colliderManager->HasCollider()){
 			m_isJudged = true;
 			m_sling->ShotComplete();
-			m_sling->removeAllChildren();
 			FailProgress(uiLayer);
 		}
 	}

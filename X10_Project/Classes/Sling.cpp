@@ -4,6 +4,9 @@
 #include "ColliderManager.h"
 #include "FileStuff.h"
 
+Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0)
+{
+}
 
 bool Sling::init()
 {
@@ -21,28 +24,24 @@ bool Sling::init()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	//set position low center position
-	setPosition(Point(205, 53));
+	//set position of character
+	setPosition(SLING_POSITION);
 	
 	//charater set
-// 	auto body = Sprite::create("HelloWorld.png");
-// 	body->setName("body");
-// 	//scale adjustment
-// 	Size bodySize = body->getContentSize();
-// 	float bodyScale = MIN(WIDTH / bodySize.width, HEIGHT / bodySize.height);
-// 	body->setScale(bodyScale);
-// 
-// 	this->addChild(body);
+	Sprite* character = Sprite::create(FileStuff::CHARACTER_HARDPIXEL);
+	character->setScale(SLING_SCALE);
+	addChild(character, 2.0);
 
 	/*Make Expect line*/
 	for (int i = 0; i < DOTNUM_OF_LINE; i++)
 	{
 		Sprite* dot = Sprite::create(FileStuff::SLING_LINE_DOT);
 		m_expectLine.pushBack(dot);
-		dot->setOpacity((DOTNUM_OF_LINE - i)*255/DOTNUM_OF_LINE);
-		dot->setScale(i + 1);
+		float r = -((2.f / DOTNUM_OF_LINE)*(2.f / DOTNUM_OF_LINE) * (i*1.f - DOTNUM_OF_LINE / 2.f) * (i*1.f - DOTNUM_OF_LINE / 2.f)) +1;
+		dot->setOpacity(r*180);
+		dot->setScale(r*2);
 		dot->setVisible(false);
-		addChild(dot);
+		addChild(dot, 1.0);
 	}
 
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();

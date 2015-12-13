@@ -25,7 +25,7 @@ public:
 	float GetRotationAngle();
 	
 private: 
-	
+	Sling();
 	int m_status;
 	enum STATUS 
 	{ 
@@ -42,8 +42,10 @@ private:
 		YPOS = 50,
 		MAX_POWER = 30,
 		CLICK_RANGE = 10,
-		DOTNUM_OF_LINE = 5
+		DOTNUM_OF_LINE = 10
 	};
+	const Point SLING_POSITION = Point(205, 63);
+	const float SLING_SCALE = 5.0;
 
 	void ChangeToLoaded();	//empty -> load
 	void ChangeToPulling(); //loaded -> pulling

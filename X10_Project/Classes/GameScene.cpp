@@ -27,8 +27,9 @@ bool GameScene::init()
 	m_background = loadBackground();
 	addChild(m_background);
 
-	m_character = loadCharacter();
-	m_background->addChild(m_character);
+	//slingÀ¸·Î ¿Å±è
+	//m_character = loadCharacter();
+	//m_background->addChild(m_character, 2.0);
 
 	m_gameLayer = GameLayer::create();
 	addChild(m_gameLayer);
@@ -59,12 +60,13 @@ Sprite* GameScene::loadBackground()
 	return background;
 }
 
-Sprite* GameScene::loadCharacter()
-{
-	Sprite* character = Sprite::create(FileStuff::CHARACTER_HARDPIXEL);
-	character->setPosition(40, 12);
-	return character;
-}
+//Sprite* GameScene::loadCharacter()
+//{
+//	// slingÀ¸·Î ¿Å±è
+//	Sprite* character = Sprite::create(FileStuff::CHARACTER_HARDPIXEL);
+//	character->setPosition(40, 12);
+//	return character;
+//}
 
 void GameScene::update(float dt)
 {

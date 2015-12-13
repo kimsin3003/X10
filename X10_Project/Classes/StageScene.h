@@ -3,7 +3,7 @@
 class CollectionManager;
 class StageButtonPosInformation;
 
-class StageScene : public Layer
+class StageScene : public LayerColor
 {
 public:
 	static Scene* createScene();
@@ -19,6 +19,17 @@ private:
 	void PrintIntroPage(const string fileDir, float startTime, float keepTime);
 	void PrintIntroText(const string message, const Vec2 pos, float startTime, float keepTime);
 	void EndingEvent(float dt);
+	void Take01(float startTime);
+	void Take02(float startTime);
+	Repeat* CreateSpark(float blackTime, float whiteTime, int repeatTime);
+	void Take03(float startTime);
+	void Take04(float startTime);
+	void Take05(float startTime);
+	void Take06(float startTime);
+	void Take07(float startTime);
+	void Take08(float startTime);
+	void Take09(float startTime);
+	void Take10(float startTime);
 
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();

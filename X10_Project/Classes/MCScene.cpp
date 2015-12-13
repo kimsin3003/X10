@@ -10,6 +10,7 @@
 #include "Enemy.h"
 #include "Sling.h"
 #include "StageInformation.h"
+#include "ConstVars.h"
 
 Scene* MCScene::createScene()
 {
@@ -28,6 +29,8 @@ bool MCScene::init()
 	{
 		return false;
 	}
+
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 17);
 
 	//background color change
 	this->schedule(schedule_selector(MCScene::ChangeBackGroundColor), BG_CHANGE_INTERVAL);

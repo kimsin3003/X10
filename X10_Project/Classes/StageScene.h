@@ -16,6 +16,8 @@ private:
 	void SetupCollection();
 	void ChangeToMainScene(Ref* pSender);
 	void IntroEvent(float dt);
+	void PrintIntroPage(const string fileDir, float startTime, float keepTime);
+	void PrintIntroText(const string message, const Vec2 pos, float startTime, float keepTime);
 	void EndingEvent(float dt);
 
 	Sprite* LoadBackground();

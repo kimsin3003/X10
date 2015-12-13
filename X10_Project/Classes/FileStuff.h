@@ -54,4 +54,9 @@ namespace FileStuff
 	const string TEXT_BOX = "res/collection/text_box.png";
 
 	const string FONT_ARIAL = "res/fonts/arial.ttf";
+
+	const string INTRO_01 = "res/event/intro_01.png";
+	const string INTRO_02 = "res/event/intro_02.png";
+	const string INTRO_03 = "res/event/intro_03.png";
+	const string INTRO_04 = "res/event/intro_04.png";
 }

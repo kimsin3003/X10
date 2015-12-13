@@ -44,6 +44,12 @@ bool StageScene::init()
 	m_stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 	m_maxStageNum = StageInformation::GetMaxStageNum();
 
+	if (m_stageToPlay == 0)
+	{
+		this->scheduleOnce(schedule_selector(StageScene::IntroEvent), 0.0f);
+		return true;
+	}
+
 	Collection::m_isLooking = false;
 
 	Sprite* background = LoadBackground();
@@ -52,11 +58,6 @@ bool StageScene::init()
 	m_character = LoadCharacter();
 	background->addChild(m_character);
 
-	if (m_stageToPlay == 0)
-	{
-		this->scheduleOnce(schedule_selector(StageScene::IntroEvent), 0.0f);
-		return true;
-	}
 
 	if (m_stageToPlay == m_maxStageNum) 
 	{
@@ -140,94 +141,88 @@ void StageScene::ChangeToMainScene(Ref* pSender)
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 
+
 void StageScene::IntroEvent(float dt)
 {
-	float fadeInTime = 2.0f;
-	float delayTime = 3.0f;
+	//Covetous Version
+	/*
+	PrintIntroPage(FileStuff::INTRO_01, 0.0f, 8.0f);
+	PrintIntroPage(FileStuff::INTRO_02, 8.0f, 8.0f);
+	PrintIntroPage(FileStuff::INTRO_03, 16.0f, 3.0f);
+	PrintIntroPage(FileStuff::INTRO_04, 20.0f, 5.0f);
+	
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	
+	CallFuncN* callFuncN = CallFuncN::create(
+		CC_CALLBACK_0(StageScene::GotoStage, this, 1));
 
-	Vec2 deltaPos = Vec2(0, 16.0f);
-	Vec2 textPos = Vec2(160.0f, 320.0f);
-
-	//0.0f~
-	Label* text_00 = Label::create(
-		"It seems that I forgot all memories by some kind of accident.", 
-		FileStuff::FONT_ARIAL, 12.5f);
-	text_00->setOpacity(10);
-	text_00->setAnchorPoint(Vec2(0.5, 0.5));
-	text_00->setPosition(textPos);
-	addChild(text_00);
-
-	FadeIn* fadeIn_00 = FadeIn::create(fadeInTime);
-
-	text_00->runAction(fadeIn_00);
-
-	//1.0f~
-	Label* text_01 = Label::create(
-		"In my head was just this question at that confusing moment.", 
-		FileStuff::FONT_ARIAL, 12.5f);
-	text_01->setOpacity(10);
-	text_01->setAnchorPoint(Vec2(0.5, 0.5));
-	text_01->setPosition(textPos -= deltaPos);
-	addChild(text_01);
-
-	Sequence* seq_01 = Sequence::create(
-		DelayTime::create(delayTime += fadeInTime),
-		FadeIn::create(fadeInTime),
+	Sequence* seq = Sequence::create(
+		DelayTime::create(25.0f),
+		callFuncN,
 		nullptr);
 
-	text_01->runAction(seq_01);
+	runAction(seq);
+	*/
 
-	//2.0f~
-	Label* text_02 = Label::create(
-		"Why cant I stop doing this?", 
-		FileStuff::FONT_ARIAL, 12.5f);
-	text_02->setOpacity(10);
-	text_02->setAnchorPoint(Vec2(0.5, 0.5));
-	text_02->setPosition(textPos -= deltaPos);
-	addChild(text_02);
+	//FadeIn Version	
+	Vec2 deltaPos = Vec2(0, 45.0f*2.0f);
+	Vec2 textPos = Vec2(160.0f, 360.0f);
 
-	Sequence* seq_02 = Sequence::create(
-		DelayTime::create(delayTime += fadeInTime+1.0f),
-		FadeIn::create(fadeInTime),
+	PrintIntroText("By some kind of accident\nI forgot all of my memories", textPos, 0.0f, 3.0f);
+	PrintIntroText("At that confusing moment\nin my head was just one\nquestion", textPos-=deltaPos, 4.5f, 3.0f);
+	PrintIntroText("Why cant I stop doing this?", textPos-=deltaPos, 9.0f, 3.0f);
+	PrintIntroText("SHOOTING UFOS\nWITH THESE\nFIRECRACKERS", textPos-=deltaPos, 13.0f, 1.0f);
+
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+
+	CallFuncN* callFuncN = CallFuncN::create(
+		CC_CALLBACK_0(StageScene::GotoStage, this, 1));
+
+	Sequence* seq = Sequence::create(
+		DelayTime::create(16.0f),
+		callFuncN,
 		nullptr);
 
-	text_02->runAction(seq_02);
+	runAction(seq);
+}
 
-	//3.0f~
-	Label* text_03 = Label::create(
-		"SHOOTING UFOS", 
-		FileStuff::FONT_ARIAL, 15.5f);
-	text_03->setAnchorPoint(Vec2(0.5, 0.5));
-	text_03->setPosition(textPos -= deltaPos);
-	text_03->setOpacity(10);
-	addChild(text_03);
+void StageScene::PrintIntroPage(const string fileDir, float startTime, float keepTime)
+{
+	Sprite* page = Sprite::create(fileDir);
+	page->setPosition(Vec2(160, 240));
+	page->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
+	page->setScale(1.5f);
+	page->setOpacity(0);
+	addChild(page);
 
-	Sequence* seq_03 = Sequence::create(
-		DelayTime::create(delayTime += fadeInTime+2.0f),
+	Sequence* seq = Sequence::create(
+		DelayTime::create(startTime),
 		FadeIn::create(0.0f),
+		DelayTime::create(keepTime),
+		RemoveSelf::create(),
+		nullptr);
+
+	page->runAction(seq);
+}
+
+void StageScene::PrintIntroText(const string message, const Vec2 pos, float startTime, float keepTime)
+{
+	Label* text = Label::create(
+		message, FileStuff::FONT_ARIAL, 12.5f);
+	text->setAlignment(TextHAlignment::CENTER);
+	text->setScale(1.75f);
+	text->setOpacity(0);
+	text->setAnchorPoint(Vec2(0.5, 0.5));
+	text->setPosition(pos);
+	addChild(text);
+
+
+	Sequence* seq = Sequence::create(
+		DelayTime::create(startTime),
+		FadeIn::create(keepTime-1.0f),
 		NULL);
 
-	text_03->runAction(seq_03);
-
-	Label* text_04 = Label::create(
-		"WITH MOTHERFUCKING FIRECRACKERS",
-		FileStuff::FONT_ARIAL, 15.5f);
-	text_04->setAnchorPoint(Vec2(0.5, 0.5));
-	text_04->setPosition(textPos -= deltaPos);
-	text_04->setOpacity(10);
-	addChild(text_04);
-
-	Sequence* seq_04 = Sequence::create(
-		DelayTime::create(delayTime),
-		FadeIn::create(0.0f),
-		NULL);
-
-	text_04->runAction(seq_04);
-	//sprite
-
-	//5.0f~
-//	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
-//	GotoStage(this, 1);
+	text->runAction(seq);
 }
 
 void StageScene::EndingEvent(float dt)

@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "MainScene.h"
 #include "JWScene.h"
+#include "ConstVars.h"
 
 #include "Bullet.h"
 
@@ -26,6 +27,7 @@ bool JWScene::init()
 	{
 		return false;
 	}
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
 
 	auto winSize = Director::getInstance()->getWinSize();
 

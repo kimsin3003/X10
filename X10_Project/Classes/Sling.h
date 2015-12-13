@@ -45,6 +45,7 @@ private:
 		DOTNUM_OF_LINE = 10
 	};
 	const Point SLING_POSITION = Point(205, 63);
+	const float DEFAULT_ARM = -40.f;
 	const float SLING_SCALE = 5.0;
 
 	void ChangeToLoaded();	//empty -> load
@@ -55,6 +56,7 @@ private:
 	Point GetStartLocation();
 
 	Vec2 m_shotAngle;
+	Sprite* m_arm;
 	float m_shotPower;
 	Vector<Sprite*> m_expectLine;
 };

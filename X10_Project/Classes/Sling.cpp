@@ -4,7 +4,7 @@
 #include "ColliderManager.h"
 #include "FileStuff.h"
 
-Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0)
+Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0), m_arm(nullptr)
 {
 }
 
@@ -43,6 +43,13 @@ bool Sling::init()
 		dot->setVisible(false);
 		addChild(dot, 1.0);
 	}
+	//add arm
+	Sprite* arm = Sprite::create(FileStuff::CHARACTER_ARM);
+	m_arm = arm;
+	m_arm->setAnchorPoint(Point(0.5, 0));
+	m_arm->setScale(SLING_SCALE);
+	m_arm->setRotation(DEFAULT_ARM);
+	addChild(m_arm);
 
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseUp = CC_CALLBACK_1(Sling::Shot, this);
@@ -122,6 +129,8 @@ void Sling::Pull(Event* e)
 		Sprite* dot = m_expectLine.at(i);
 		dot->setPosition(m_shotAngle *m_shotPower/MAX_POWER * i);
 	}
+	// set rotation arm angle
+	m_arm->setRotation(-m_shotAngle.getAngle()*60 + 90);
 }
 
 

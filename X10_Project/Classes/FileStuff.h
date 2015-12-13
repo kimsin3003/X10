@@ -22,7 +22,6 @@ namespace FileStuff
 	const string FEATHER = "res/target/Feather.png";
 	const string STAR_HAPPY = "res/target/brick_destruct.png";
 	const string STAR_SAD = "res/target/brick.png";
-	const string SLING_LINE_DOT = "res/dot.png";
 	const string PAUSEBUTTON = "backButton.png";
 	const string NEXTBUTTON = "NextButton.png";
 	const string RETRYBUTTON = "RetryButton.png";
@@ -39,6 +38,8 @@ namespace FileStuff
 	const string CHARACTER = "res/character/boy.png";
 	const string CHARACTER_HARDPIXEL = "res/character/boy_hardpixel.png";
 	const string CHARACTER_STANDING = "res/character/boy_standing.png";
+	const string CHARACTER_ARM = "res/character/boy_arm.png";
+	const string SLING_LINE_DOT = "res/character/dot.png";
 
 	const string BACKGROUND = "res/background2.png";
 	const string START_IMG = "res/start.png";

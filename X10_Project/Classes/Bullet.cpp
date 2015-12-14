@@ -1,6 +1,5 @@
 #include "stdafx.h"
 #include "Bullet.h"
-#include "Explosion.h"
 #include "FileStuff.h"
 
 bool Bullet::init()
@@ -99,7 +98,7 @@ void Bullet::Act()
 	else
 	{
 		Explode();
-		TimeUp();
+		Dead();
 	}
 }
 
@@ -153,12 +152,7 @@ void Bullet::DecreaseLife()
 	m_lifeTime -= m_lifeDecrease;
 }
 
-void Bullet::Crashed()
-{
-	m_lifeTime = BULLET_EXPLODE_TIME;
-}
-
-void Bullet::TimeUp()
+void Bullet::Dead()
 {
 	removeFromParent();
 	m_isFlying = false;

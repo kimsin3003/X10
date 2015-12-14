@@ -12,13 +12,13 @@ public:
 	bool init();
 	GameLayer* GetGameLayer() { return m_gameLayer; }
 	UILayer* GetUILayer() { return m_uiLayer; }
-	//Point Getition(){ return m_character->getPosition(); } //sling¿∏∑Œ ø≈±Ë
+	Point GetCharacterPos(){ return m_character->getPosition(); }
 	void update(float dt);
 	void CleanUp();
 
 private:
 	Sprite* loadBackground();
-	//Sprite* loadCharacter(); //sling¿∏∑Œ ø≈±Ë
+	Sprite* loadCharacter();
 	Sprite* m_character;
 	Sprite* m_background;
 

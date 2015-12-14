@@ -14,7 +14,6 @@ public:
 
 protected:
 	Explosion();
-	virtual ~Explosion() {};
 	void RemoveSelf();
 
 	ParticleExplosion* m_explosion;

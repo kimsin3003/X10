@@ -66,6 +66,11 @@ bool MapEditer::init()
 	backButton->setName("backButton");
 	this->addChild(backButton);
 
+	MenuItemLabel* warning = MenuItemLabel::create(Label::create("If complete making level\nCHANGE FILE NAME:\n target0.json in files folder", "res/NanumGothic.ttf", 12));
+	warning->setPosition(200, 30);
+	warning->setName("warning");
+	this->addChild(warning);
+
 	vector<TargetInfo> infoList;
 	string fileName = FileStuff::EDITING_FILENAME;
 	//load from file
@@ -246,7 +251,6 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 
 void MapEditer::RightMouseDown(EventMouse* event)
 {
-
 	Vector<Node*>& children = m_layer->getChildren();
 	for (int i = 0; i < children.size(); i++)
 	{
@@ -261,7 +265,6 @@ void MapEditer::RightMouseDown(EventMouse* event)
 
 void MapEditer::WheelDown(EventMouse* event)
 {
-
 	Vector<Node*>& children = m_layer->getChildren();
 	for (int i = 0; i < children.size(); i++)
 	{
@@ -276,7 +279,6 @@ void MapEditer::WheelDown(EventMouse* event)
 
 void MapEditer::onMouseDown(EventMouse* event)
 {
-
 	if (event->getMouseButton() == 0)
 		LeftMouseDown(event);
 
@@ -285,8 +287,6 @@ void MapEditer::onMouseDown(EventMouse* event)
 
 	else if (event->getMouseButton() == 2)
 		WheelDown(event);
-
-
 }
 
 void MapEditer::OnMouseScroll(EventMouse* event)

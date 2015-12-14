@@ -1,8 +1,5 @@
 #pragma once;
 
-#include <iostream>
-#include <fstream>
-
 namespace FileStuff
 {
 	const string STAGESCENE_BACKGROUND = "res/starry_night.jpg";
@@ -60,5 +57,4 @@ namespace FileStuff
 	const string INTRO_02 = "res/event/intro_02.png";
 	const string INTRO_03 = "res/event/intro_03.png";
 	const string INTRO_04 = "res/event/intro_04.png";
-
 }

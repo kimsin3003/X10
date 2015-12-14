@@ -4,6 +4,8 @@
 #include "StageInformation.h"
 #include "Target.h"
 #include "FileStuff.h"
+#include "Sling.h"
+#include "MainScene.h"
 
 Scene* MapEditer::createScene()
 {
@@ -22,6 +24,15 @@ bool MapEditer::init()
 		return false;
 	m_layer = Layer::create();
 	this->addChild(m_layer, 1);
+
+	Sprite* background = Sprite::create(FileStuff::BACKGROUND);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
+	background->setAnchorPoint(Point::ZERO);
+	background->setScale(scale);
+	this->addChild(background);
+
+	Sling* sling = Sling::create();
+	this->addChild(sling);
 	
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseDown = CC_CALLBACK_1(MapEditer::onMouseDown, this);
@@ -165,4 +176,5 @@ void MapEditer::Save()
 {
 	StageInformation* stInfo = new StageInformation(0);
 	stInfo->MakeJsonFileFromLayer(m_layer);
+	Director::getInstance()->replaceScene(MainScene::createScene());
 }

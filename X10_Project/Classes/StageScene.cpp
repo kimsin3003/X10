@@ -385,8 +385,13 @@ MenuItemImage* StageScene::MakeBackButton()
 MenuItemImage* StageScene::MakeStageButton(int stageNum, Point pos)
 {
 	MenuItemImage* menuItem = MenuItemImage::create();
+	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
-	if (stageNum == CollectionManager::SHOES ||
+	if (stageNum == lastStage)
+	{
+		menuItem->setNormalImage(Sprite::create(FileStuff::TOGO_STAR));
+	}
+	else if (stageNum == CollectionManager::SHOES ||
 		stageNum == CollectionManager::SCARF ||
 		stageNum == CollectionManager::BOTTLE ||
 		stageNum == CollectionManager::MONITOR ||

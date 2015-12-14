@@ -69,6 +69,7 @@ void Sling::ShotComplete()
 {
 	ChangeToEmpty();
 }
+
 void Sling::LoadBullet()
 {
 	ChangeToLoaded();

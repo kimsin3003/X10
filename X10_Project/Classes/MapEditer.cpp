@@ -5,6 +5,7 @@
 #include "Target.h"
 #include "FileStuff.h"
 #include "Sling.h"
+#include "MainScene.h"
 
 Scene* MapEditer::createScene()
 {
@@ -175,4 +176,5 @@ void MapEditer::Save()
 {
 	StageInformation* stInfo = new StageInformation(0);
 	stInfo->MakeJsonFileFromLayer(m_layer);
+	Director::getInstance()->replaceScene(MainScene::createScene());
 }

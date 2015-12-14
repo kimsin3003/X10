@@ -259,7 +259,14 @@ void GameManager::WinProgress(UILayer* uiLayer)
 	}
 	else
 	{
-		uiLayer->MakeSuccessWidget(m_stage);
+		if (m_stage==0)
+		{
+			Director::getInstance()->popScene();
+		}
+		else
+		{
+			uiLayer->MakeSuccessWidget(m_stage);
+		}
 	}
 
 	if (lastStage == m_stage && m_stage + 1 <= StageInformation::GetMaxStageNum())
@@ -270,7 +277,14 @@ void GameManager::WinProgress(UILayer* uiLayer)
 
 void GameManager::FailProgress(UILayer* uiLayer)
 {
-	uiLayer->MakeFailWidget(m_stage);
+	if (m_stage == 0)
+	{
+		Director::getInstance()->popScene();
+	}
+	else
+	{
+		uiLayer->MakeFailWidget(m_stage);
+	}
 }
 
 void GameManager::ControlWinFailProgress(UILayer* uiLayer)

@@ -203,16 +203,8 @@ bool StageInformation::MakeJsonFileFromLayer(Layer* layer, const char* fileName)
 	for (Node* child : layer->getChildren())
 	{
 		TargetInfo targetInfo;
-		int tmpTypeNum = 0;
-		try{ //string을 int로 변환.
-			tmpTypeNum= child->getTag();
-		}
-		catch (const std::invalid_argument e){
-			//name 읽어는것을 실패함. 
-			tmpTypeNum = 0;
-		}
-
-		targetInfo.m_name.set(static_cast<TargetType>(tmpTypeNum));
+		
+		targetInfo.m_name.set(static_cast<TargetType>(child->getTag()));
 		targetInfo.m_rotation.set(child->getRotation());
 		TargetPoint scale;
 		scale.x.set(child->getScaleY());

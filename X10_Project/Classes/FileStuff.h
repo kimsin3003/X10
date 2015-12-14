@@ -51,6 +51,7 @@ namespace FileStuff
 	const string NORMAL_STAR = "res/button/normal_star.png";
 	const string TOGO_STAR = "res/button/togo_star.png";
 
+	const string EDITING_FILENAME = "files/target0.json";
 	const string TEXT_BOX = "res/collection/text_box.png";
 
 	const string FONT_ARIAL = "res/fonts/arial.ttf";

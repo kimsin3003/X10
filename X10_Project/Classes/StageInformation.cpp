@@ -195,7 +195,7 @@ string StageInformation::GetCurrentBulletInfo() //지금 불렛의 타입을 반환
 	return m_currentBullet;
 }
 
-bool StageInformation::MakeJsonFileFromLayer(Layer* layer, const char* fileName)
+bool StageInformation::MakeJsonFileFromLayer(Layer* layer, string fileName)
 {
 	//stageInformaition 객체를 이용해 filename에 Json 파일로 남김.
 	m_targetInfoList.clear();

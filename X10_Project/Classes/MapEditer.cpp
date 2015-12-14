@@ -67,7 +67,7 @@ bool MapEditer::init()
 	this->addChild(backButton);
 
 	vector<TargetInfo> infoList;
-	string fileName = "files/target0.json";
+	string fileName = FileStuff::EDITING_FILENAME;
 	//load from file
 	if (!cppson::loadFile(infoList, fileName))
 	{
@@ -80,7 +80,6 @@ bool MapEditer::init()
 		{
 			Sprite* sprite = nullptr;
 			Point point;
-			Point scale;
 			switch (targetInfo.m_name.get()){
 			case TargetInfo::BUBBLE:
 				sprite = Sprite::create(FileStuff::BUBBLE);
@@ -88,7 +87,8 @@ bool MapEditer::init()
 				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
 				sprite->setPosition(point);
 				sprite->setRotation(targetInfo.m_rotation.get());
-				scale = Point(targetInfo.m_scale.get().x.get(), targetInfo.m_scale.get().y.get());
+				sprite->setScaleX(targetInfo.m_scale.get().x.get());
+				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::CLOUD:
@@ -97,7 +97,8 @@ bool MapEditer::init()
 				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
 				sprite->setPosition(point);
 				sprite->setRotation(targetInfo.m_rotation.get());
-				scale = Point(targetInfo.m_scale.get().x.get(), targetInfo.m_scale.get().y.get());
+				sprite->setScaleX(targetInfo.m_scale.get().x.get());
+				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::ENEMY:
@@ -106,7 +107,8 @@ bool MapEditer::init()
 				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
 				sprite->setPosition(point);
 				sprite->setRotation(targetInfo.m_rotation.get());
-				scale = Point(targetInfo.m_scale.get().x.get(), targetInfo.m_scale.get().y.get());
+				sprite->setScaleX(targetInfo.m_scale.get().x.get());
+				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::MIRROR:
@@ -115,7 +117,8 @@ bool MapEditer::init()
 				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
 				sprite->setPosition(point);
 				sprite->setRotation(targetInfo.m_rotation.get());
-				scale = Point(targetInfo.m_scale.get().x.get(), targetInfo.m_scale.get().y.get());
+				sprite->setScaleX(targetInfo.m_scale.get().x.get());
+				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::VIRTICAL_MIRROR:
@@ -124,7 +127,8 @@ bool MapEditer::init()
 				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
 				sprite->setPosition(point);
 				sprite->setRotation(targetInfo.m_rotation.get());
-				scale = Point(targetInfo.m_scale.get().x.get(), targetInfo.m_scale.get().y.get());
+				sprite->setScaleX(targetInfo.m_scale.get().x.get());
+				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::GULL:
@@ -133,7 +137,8 @@ bool MapEditer::init()
 				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
 				sprite->setPosition(point);
 				sprite->setRotation(targetInfo.m_rotation.get());
-				scale = Point(targetInfo.m_scale.get().x.get(), targetInfo.m_scale.get().y.get());
+				sprite->setScaleX(targetInfo.m_scale.get().x.get());
+				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::STAR:
@@ -142,7 +147,8 @@ bool MapEditer::init()
 				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
 				sprite->setPosition(point);
 				sprite->setRotation(targetInfo.m_rotation.get());
-				scale = Point(targetInfo.m_scale.get().x.get(), targetInfo.m_scale.get().y.get());
+				sprite->setScaleX(targetInfo.m_scale.get().x.get());
+				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 			}
 			

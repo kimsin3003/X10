@@ -1,6 +1,6 @@
 #pragma once
 #include "cppson.h"
-
+#include "FileStuff.h"
 
 JSON_CLASS(TargetPoint)
 {
@@ -57,7 +57,7 @@ public:
 	string GetCurrentBulletInfo(); //지금 불렛의 타입을 반환
 	static int GetMaxStageNum(){ return m_maxStageNum; }
 
-	bool MakeJsonFileFromLayer(Layer* layer, const char* fileName = "files/target0.json");
+	bool MakeJsonFileFromLayer(Layer* layer, string fileName = FileStuff::EDITING_FILENAME);
 
 private:
 	static const int m_maxStageNum = 17;

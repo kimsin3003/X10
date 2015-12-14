@@ -32,7 +32,7 @@ private:
 	void FailProgress(UILayer* uiLayer);
 	void ControlWinFailProgress(UILayer* uiLayer);
 	void EnemyDyingEffect();
-	void SetCurCollectionPos(const Vec2& pos);
+	void SetCollectionPos(const Vec2& pos);
 	void Reset();
 
 	static GameManager* m_instance;

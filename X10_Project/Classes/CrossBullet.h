@@ -1,7 +1,5 @@
 #pragma once
 
-#include "Bullet.h"
-
 class CrossBullet : public Bullet
 {
 public:

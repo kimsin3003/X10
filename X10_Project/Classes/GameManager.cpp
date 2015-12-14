@@ -116,8 +116,9 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			CheckCollide(collider, targets);
 		}
 
-		if (Bullet* bullet = dynamic_cast<Bullet*>(collider))
+		if (collider->IsBullet())
 		{
+			Bullet* bullet = static_cast<Bullet*>(collider);
 			if (bullet->IsToExplode())
 			{
 				Explosion* explosion = bullet->GetExplosion();
@@ -139,7 +140,9 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 	for (Target* target : targets)
 	{
 		if (target == lastTarget)
+		{
 			continue;
+		}
 
 		if (target->IsEnemy())
 		{
@@ -189,7 +192,7 @@ void GameManager::EnemyDyingEffect()
 	*/
 }
 
-void GameManager::SetCurCollectionPos(const Vec2& pos)
+void GameManager::SetCollectionPos(const Vec2& pos)
 {
 	const Vec2 compensateToParentPos = Vec2(160, 0);
 	m_curCollection->setPosition(pos + compensateToParentPos);
@@ -199,7 +202,7 @@ void GameManager::EarnCollectionEvent(UILayer* uiLayer)
 {
 	GameScene* gameScene = static_cast<GameScene*>(uiLayer->getParent());
 	const Point& enemyPos = m_targetManager->GetEnemyPosition();
-	const Vec2& aboveCharacterPos = m_sling->getPosition() + Vec2(0, 100);
+	const Vec2& aboveCharacterPos = gameScene->GetCharacterPos() + Vec2(0, 100);
 
 	m_curCollection = m_collectionManager->GetCollectionSprOfStage(m_stage);
 	m_curCollection->setPosition(enemyPos);
@@ -219,7 +222,8 @@ void GameManager::EarnCollectionEvent(UILayer* uiLayer)
 	Spawn* spawn_01 = Spawn::create(fadeOut_00, moveBy_01, blink_01, NULL);
 
 	//part 2
-	CallFuncN* callFuncN = CallFuncN::create(CC_CALLBACK_0(GameManager::SetCurCollectionPos, this, aboveCharacterPos));
+	CallFuncN* callFuncN = CallFuncN::create(CC_CALLBACK_0
+		(GameManager::SetCollectionPos, this, aboveCharacterPos));
 
 	MoveBy* moveBy_02 = MoveBy::create(1.50f, Point(0, -30));
 	MoveBy* moveBy_03 = MoveBy::create(1.00f, Point(0, -20));
@@ -233,7 +237,8 @@ void GameManager::EarnCollectionEvent(UILayer* uiLayer)
 	Spawn* spawn_02 = Spawn::create(fadeIn_01, moveBy_02, blink_02, NULL);
 	Spawn* spawn_03 = Spawn::create(fadeOut_01, moveBy_03, blink_03, NULL);
 
-	Sequence* sequence = Sequence::create(spawn_00, spawn_01, callFuncN, spawn_02, spawn_03, NULL);
+	Sequence* sequence = Sequence::create(
+		spawn_00, spawn_01, callFuncN, spawn_02, spawn_03, NULL);
 
 	m_curCollection->runAction(sequence);
 }
@@ -252,7 +257,8 @@ void GameManager::WinProgress(UILayer* uiLayer)
 		EarnCollectionEvent(uiLayer);
 
 		DelayTime* waitEventTime = DelayTime::create(4.50f);
-		CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(UILayer::MakeSuccessWidget, uiLayer, m_stage));
+		CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(
+			UILayer::MakeSuccessWidget, uiLayer, m_stage));
 		Sequence* waitAndshow = Sequence::create(waitEventTime, showWidget, NULL);
 
 		uiLayer->runAction(waitAndshow);

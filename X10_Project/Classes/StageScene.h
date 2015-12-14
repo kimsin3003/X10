@@ -15,13 +15,14 @@ private:
 	void SetupButtons();
 	void SetupCollection();
 	void ChangeToMainScene(Ref* pSender);
+	
 	void IntroEvent(float dt);
 	void PrintIntroPage(const string fileDir, float startTime, float keepTime);
 	void PrintIntroText(const string message, const Vec2 pos, float startTime, float keepTime);
+	
 	void EndingEvent(float dt);
 	void Take01(float startTime);
 	void Take02(float startTime);
-	Repeat* CreateSpark(float blackTime, float whiteTime, int repeatTime);
 	void Take03(float startTime);
 	void Take04(float startTime);
 	void Take05(float startTime);
@@ -30,6 +31,8 @@ private:
 	void Take08(float startTime);
 	void Take09(float startTime);
 	void Take10(float startTime);
+
+	Repeat* CreateSpark(float blackTime, float whiteTime, int repeatTime);
 
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();

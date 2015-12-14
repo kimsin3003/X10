@@ -26,11 +26,6 @@ bool Sling::init()
 
 	//set position of character
 	setPosition(SLING_POSITION);
-	
-	//charater set
-	Sprite* character = Sprite::create(FileStuff::CHARACTER_HARDPIXEL);
-	character->setScale(SLING_SCALE);
-	addChild(character, 2.0);
 
 	/*Make Expect line*/
 	for (int i = 0; i < DOTNUM_OF_LINE; i++)
@@ -43,6 +38,7 @@ bool Sling::init()
 		dot->setVisible(false);
 		addChild(dot, 1.0);
 	}
+
 	//add arm
 	Sprite* arm = Sprite::create(FileStuff::CHARACTER_ARM);
 	m_arm = arm;

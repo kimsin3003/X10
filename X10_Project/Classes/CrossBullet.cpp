@@ -44,7 +44,7 @@ void CrossBullet::Act()
 			Explode();
 			break;
 		case DIE:
-			TimeUp();
+			Dead();
 		}
 	}
 }

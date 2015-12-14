@@ -22,8 +22,11 @@ bool MapEditer::init()
 {
 	if (!Layer::init())
 		return false;
+
 	m_layer = Layer::create();
 	this->addChild(m_layer, 1);
+
+	
 
 	Sprite* background = Sprite::create(FileStuff::BACKGROUND);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
@@ -37,6 +40,7 @@ bool MapEditer::init()
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseDown = CC_CALLBACK_1(MapEditer::onMouseDown, this);
 	_mouseListener->onMouseScroll = CC_CALLBACK_1(MapEditer::OnMouseScroll, this);
+	m_clicked_sprite = nullptr;
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 
@@ -59,6 +63,17 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 
 	if (this->getChildByName("saveButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
 		Save();
+	}
+
+	Vector<Node*>& children = m_layer->getChildren();
+	for (int i = 0; i < children.size(); i++)
+	{
+		Node* child = children.at(i);
+		if (child->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
+		{
+			m_clicked_sprite = child;
+			return;
+		}
 	}
 
 	switch (m_pressedKey){
@@ -170,6 +185,29 @@ void MapEditer::OnMouseScroll(EventMouse* event)
 void MapEditer::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 {
 	m_pressedKey = keyCode;
+
+	if (m_clicked_sprite)
+	{
+		switch (keyCode)
+		{
+		case EventKeyboard::KeyCode::KEY_UP_ARROW:
+			m_clicked_sprite->setPosition(m_clicked_sprite->getPosition().x, m_clicked_sprite->getPosition().y + 1);
+			break;
+
+		case EventKeyboard::KeyCode::KEY_RIGHT_ARROW:
+			m_clicked_sprite->setPosition(m_clicked_sprite->getPosition().x + 1, m_clicked_sprite->getPosition().y);
+			break;
+
+		case EventKeyboard::KeyCode::KEY_DOWN_ARROW:
+			m_clicked_sprite->setPosition(m_clicked_sprite->getPosition().x, m_clicked_sprite->getPosition().y - 1);
+			break;
+
+		case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
+			m_clicked_sprite->setPosition(m_clicked_sprite->getPosition().x - 1, m_clicked_sprite->getPosition().y);
+			break;
+
+		}
+	}
 }
 
 void MapEditer::Save()

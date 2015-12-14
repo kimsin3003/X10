@@ -20,4 +20,5 @@ private:
 	void OnMouseScroll(EventMouse* event);
 	void OnKeyPressed(EventKeyboard::KeyCode keyCode);
 	EventKeyboard::KeyCode m_pressedKey;
+	Node* m_clicked_sprite;
 };

@@ -1,7 +1,7 @@
 #include "stdafx.h"
 #include "ColliderManager.h"
 #include "Sling.h"
-//colliders
+//collider
 #include "Collider.h"
 #include "Bullet.h"
 #include "CrossBullet.h"
@@ -14,8 +14,10 @@ void ColliderManager::InitBullets(StageInformation* si)
 {
 	ResetBullets();
 
-	m_BulletNum = si->GetBulletCount();
-	m_colliders.reserve(m_BulletNum);
+	m_bulletNum = si->GetBulletCount();
+	m_colliders.reserve(m_bulletNum);
+	m_crossNum = 0;
+	m_normalNum = 0; 
 	m_curBulletIndex = 0;
 
 	typedef unordered_map<string, function<Bullet*()>> BulletInfoMap;
@@ -27,6 +29,15 @@ void ColliderManager::InitBullets(StageInformation* si)
 	{
 		//타겟 이름을 불러와서
 		string type = si->GetCurrentBulletInfo();
+		if (type == "CrossBullet")
+		{
+			m_crossNum++;
+		}
+		else if (type == "Bullet")
+		{
+			m_normalNum++;
+		}
+
 		auto createFunction = bulletTypeInfo.at(type);
 		
 		//거기에 맞는 팩토리 함수 호출
@@ -62,8 +73,8 @@ void ColliderManager::EraseDeadColliders()
 		{
 			if (collider->IsBullet())
 			{
-				m_BulletNum--;
 				m_curBulletIndex--;
+				m_bulletNum--;
 			}
 			m_colliders.erase(m_colliders.begin() + i);
 		}
@@ -73,7 +84,7 @@ void ColliderManager::EraseDeadColliders()
 bool ColliderManager::HasBulletToShot()
 {
 	Bullet* bullet = nullptr;
-	for (int i = 0; i < m_BulletNum; i++)
+	for (int i = 0; i < m_bulletNum; i++)
 	{
 		bullet = static_cast<Bullet*>(m_colliders.at(i));
 		if (bullet->IsActionStopped() == false && bullet->IsFlying() == false)
@@ -107,7 +118,8 @@ Bullet* ColliderManager::GetBulletToShot(Sling* sling)
 bool ColliderManager::HasCollider()
 {
 	if (m_colliders.size() == 0)
+	{
 		return false;
-
+	}
  	return true;
 }

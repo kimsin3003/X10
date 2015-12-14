@@ -41,7 +41,6 @@ public:
 class StageInformation
 {
 public:
-
 	StageInformation(int stage);
 	~StageInformation();
 	int GetTargetCount();//ÃÑ Å¸°Ù ¼ö¸¦ ¹ÝÈ¯
@@ -60,7 +59,7 @@ public:
 	bool MakeJsonFileFromLayer(Layer* layer, string fileName = FileStuff::EDITING_FILENAME);
 
 private:
-	static const int m_maxStageNum = 17;
+	static const int m_maxStageNum = 18;
 	int m_currentTargetIndex;
 	int m_currentBulletIndex;
 

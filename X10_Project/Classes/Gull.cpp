@@ -10,6 +10,7 @@ bool Gull::init()
 	{
 		return false;
 	}
+
 	m_spr = Sprite::create(FileStuff::GULL);
 
 	Size winSize = Director::getInstance()->getWinSize();

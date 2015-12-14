@@ -54,18 +54,19 @@ void GameManager::Reset()
 
 GameManager::~GameManager() {}
 
-void GameManager::SetStage(GameLayer* gameLayer, int stageNum)
+void GameManager::SetStage(GameLayer* gameLayer, UILayer* uiLayer, int stageNum)
 {	
 	Reset();
 	StageInformation stageInfo(stageNum);
 	m_targetManager->InitTargets(&stageInfo);
 	AppendTargetsToLayer(gameLayer);
 	m_colliderManager->InitBullets(&stageInfo);
-	m_sling = SetSling(gameLayer);
+	AppendBulletsToLayer(uiLayer);
+	m_sling = InitSling(gameLayer);
 	m_stage = stageNum;
 }
 
-Sling* GameManager::SetSling(GameLayer* gameLayer)
+Sling* GameManager::InitSling(GameLayer* gameLayer)
 {
 	Sling* sling = Sling::create();
 	gameLayer->addChild(sling);
@@ -81,6 +82,17 @@ void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
 	}
 }
 
+void GameManager::AppendBulletsToLayer(UILayer* uiLayer)
+{
+	for (int i = 0; i < m_colliderManager->m_bulletNum; i++)
+	{
+		Bullet* bullet = static_cast<Bullet*>(m_colliderManager->m_colliders.at(i));
+		Sprite* bulletSpr = bullet->GetSprite();
+		uiLayer->addChild(bulletSpr);
+		bulletSpr->setPosition(Vec2(45 + i*25, 50));
+	}
+}
+
 void GameManager::ShotBullet(Sling* sling)
 {
 	Bullet* bullet = m_colliderManager->GetBulletToShot(sling);
@@ -90,6 +102,8 @@ void GameManager::ShotBullet(Sling* sling)
 		Scene* currentScene = Director::getInstance()->getRunningScene();
 		GameScene* gameScene = static_cast<GameScene*>(currentScene->getChildByName("GameScene"));
 		GameLayer* gameLayer = gameScene->GetGameLayer();
+		UILayer* uiLayer = gameScene->GetUILayer();
+
 		gameLayer->addChild(bullet);
 
 		sling->ShotComplete();

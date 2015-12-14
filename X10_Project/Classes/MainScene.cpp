@@ -60,7 +60,7 @@ bool MainScene::init()
 	paulScene->setPosition(Vec2(origin.x + visibleSize.width - paulScene->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height*scale + paulScene->getContentSize().height/2));
 	
-	auto twScene = MenuItemFont::create("TW_SecretButton", CC_CALLBACK_1(MainScene::ChangeToTWScene, this));
+	auto twScene = MenuItemFont::create("TW", CC_CALLBACK_1(MainScene::ChangeToTWScene, this));
 	twScene->setScaleX(0.5);
 	twScene->setScaleY(0.5);
 	twScene->setPosition(Point(200, 10));

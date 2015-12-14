@@ -29,6 +29,8 @@ bool Bullet::init()
 	m_body = MakeBody();
 	addChild(m_body);
 
+	m_spr = Sprite::create(FileStuff::NORMAL_BULLET);
+
 	//Add debris to bullet
 	CallFunc* addDebris = CallFunc::create(CC_CALLBACK_0(Bullet::AddDebrisToParent, this));
 	Sequence* addDelay = Sequence::create(DelayTime::create(0.15f), addDebris, NULL);

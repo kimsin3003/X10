@@ -123,7 +123,7 @@ void StageScene::GotoStage(Ref* pSender, int stageNum)
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), gameScene->GetUILayer(), stageNum);
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 
 	Director::getInstance()->replaceScene(sceneWithEffect);

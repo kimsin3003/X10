@@ -57,4 +57,7 @@ namespace FileStuff
 	const string INTRO_02 = "res/event/intro_02.png";
 	const string INTRO_03 = "res/event/intro_03.png";
 	const string INTRO_04 = "res/event/intro_04.png";
+
+	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
+	const string CROSS_BULLET = "res/ui/cross_bullet.png";
 }

@@ -35,6 +35,8 @@ public:
 	bool IsActionStopped() { return m_isStopped; }
 	bool IsBullet() { return true; }
 
+	Sprite* GetSprite() { return m_spr; }
+
 protected:
 	void DecreaseLife();
 	Sprite* MakeBody();
@@ -42,6 +44,7 @@ protected:
 	void AddDebrisToParent();
 
 	Sprite* m_body;
+	Sprite* m_spr;
 	Vec2 m_direction;
 
 	float m_startSpeed;

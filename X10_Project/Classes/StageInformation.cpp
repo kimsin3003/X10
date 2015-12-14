@@ -7,7 +7,6 @@
 
 StageInformation::StageInformation(int stage)
 {
-	Size winSize = Director::getInstance()->getWinSize();
 	m_currentTargetIndex = 0;
 	m_currentBulletIndex = 0;
 
@@ -131,7 +130,6 @@ bool StageInformation::MakeJsonFileFromLayer(Layer* layer, string fileName)
 
 		m_targetInfoList.push_back(targetInfo);
 	}
-	
 	
 	//write to file
 	if (!cppson::toJson(m_targetInfoList, fileName))

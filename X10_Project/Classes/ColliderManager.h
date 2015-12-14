@@ -13,15 +13,16 @@ public:
 	void InitBullets(StageInformation* si);
 	void ResetBullets();
 	Bullet* GetBulletToShot(Sling* sling);
-
 	bool HasBulletToShot();
 	void AddExplosion(Collider* explosion);
 	void EraseDeadColliders(); 
 	bool HasCollider();
+	
 private:
 	Vector<Collider*> m_colliders;
 	int m_curBulletIndex;
-	int m_BulletNum;
-
+	int m_bulletNum;
+	int m_normalNum;
+	int m_crossNum;
 	friend class GameManager;
 };

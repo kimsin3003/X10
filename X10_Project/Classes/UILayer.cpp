@@ -132,6 +132,11 @@ void UILayer::MakeFailWidget(int m_stage)
 	this->addChild(menu);
 }
 
+void UILayer::AddCurrentBullets(int totalNum, int normalNum, int crossNum)
+{
+
+}
+
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
 	TransitionProgressOutIn* sceneWithEffect = TransitionProgressOutIn::create(0.75f, StageScene::createScene());
@@ -145,6 +150,6 @@ void UILayer::GotoStage(Ref* pSender, int stageNum)
 
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 	
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), gameScene->GetUILayer(), stageNum);
 	Director::getInstance()->replaceScene(sceneWithEffect);
 }

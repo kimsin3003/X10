@@ -3,11 +3,13 @@
 #include "CrossBullet.h"
 #include "Explosion.h"
 #include "CrossExplosion.h"
+#include "FileStuff.h"
 
 bool CrossBullet::init()
 {
 	Bullet::init();
 
+	m_spr = Sprite::create(FileStuff::CROSS_BULLET);
 	m_pattern = MOVE;
 
 	return true;

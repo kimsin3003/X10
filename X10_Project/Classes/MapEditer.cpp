@@ -50,6 +50,21 @@ bool MapEditer::init()
 	saveButton->setName("saveButton");
 	this->addChild(saveButton);
 
+	vector<TargetInfo> infoList;
+	string fileName = "files/target0.json";
+	//load from file
+	if (!cppson::loadFile(infoList, fileName))
+	{
+		CCLOG("Target Load Fail.");
+		return true;
+	}
+	else
+	{
+		for (TargetInfo targetInfo : infoList)
+		{
+			
+		}
+	}
 	return true;
 }
 

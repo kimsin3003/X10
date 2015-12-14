@@ -23,8 +23,6 @@ namespace FileStuff
 	const string NEXTBUTTON = "NextButton.png";
 	const string RETRYBUTTON = "RetryButton.png";
 	const string BACKBUTTON = "BackButton.png";
-	const string STAR_OFF = "res/star_off.png";
-	const string STAR_ON = "res/star_on.png";
 
 	const string LETTER = "res/collection/letter.png";
 	const string SHOES = "res/collection/shoes.png";
@@ -47,6 +45,8 @@ namespace FileStuff
 	const string SPECIAL_STAR = "res/button/special_star.png";
 	const string NORMAL_STAR = "res/button/normal_star.png";
 	const string TOGO_STAR = "res/button/togo_star.png";
+	const string STAR_OFF = "res/star_off.png";
+	const string STAR_ON = "res/button/star_on.png";
 
 	const string EDITING_FILENAME = "files/target0.json";
 	const string TEXT_BOX = "res/collection/text_box.png";

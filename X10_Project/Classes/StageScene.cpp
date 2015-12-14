@@ -406,7 +406,7 @@ MenuItemImage* StageScene::MakeStageButton(int stageNum, Point pos)
 		menuItem->setNormalImage(Sprite::create(FileStuff::NORMAL_STAR));
 	}
 	menuItem->setSelectedImage(Sprite::create(FileStuff::STAR_ON));
-	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2, 0.2));
+	//menuItem->getSelectedImage()->setAnchorPoint(Point(0.2, 0.2));
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stageNum));
 	menuItem->setPosition(pos);
 

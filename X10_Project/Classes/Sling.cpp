@@ -38,7 +38,7 @@ bool Sling::init()
 		Sprite* dot = Sprite::create(FileStuff::SLING_LINE_DOT);
 		m_expectLine.pushBack(dot);
 		float r = -((2.f / DOTNUM_OF_LINE)*(2.f / DOTNUM_OF_LINE) * (i*1.f - DOTNUM_OF_LINE / 2.f) * (i*1.f - DOTNUM_OF_LINE / 2.f)) +1;
-		dot->setOpacity(r*180);
+		dot->setOpacity(r*100);
 		dot->setScale(r*2);
 		dot->setVisible(false);
 		addChild(dot, 1.0);

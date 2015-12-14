@@ -13,7 +13,7 @@ StageInformation::StageInformation(int stage)
 
 	TargetInfo info;
 
-	if (stage <= 4 && stage >=0)
+	if (stage >=0)
 	{
 		/*load targets*/
 		char fileName[100];

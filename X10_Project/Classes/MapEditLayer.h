@@ -6,5 +6,5 @@ class MapEditLayer :
 public:
 	MapEditLayer();
 	~MapEditLayer();
-};
 
+};

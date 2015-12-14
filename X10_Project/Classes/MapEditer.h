@@ -9,6 +9,7 @@ public:
 
 	void SetCallBackFuncs();
 	CREATE_FUNC(MapEditer);
+	void GotoStage(Ref* pSender, int stageNum);
 
 private:
 	Layer* m_layer;

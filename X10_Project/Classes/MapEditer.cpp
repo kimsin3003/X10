@@ -6,6 +6,8 @@
 #include "FileStuff.h"
 #include "Sling.h"
 #include "MainScene.h"
+#include "GameScene.h"
+#include "GameManager.h"
 
 Scene* MapEditer::createScene()
 {
@@ -33,7 +35,7 @@ bool MapEditer::init()
 
 	Sling* sling = Sling::create();
 	this->addChild(sling);
-	
+
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseDown = CC_CALLBACK_1(MapEditer::onMouseDown, this);
 	_mouseListener->onMouseScroll = CC_CALLBACK_1(MapEditer::OnMouseScroll, this);
@@ -46,11 +48,32 @@ bool MapEditer::init()
 	m_pressedKey = static_cast<EventKeyboard::KeyCode>(-1);
 
 	MenuItemLabel* saveButton = MenuItemLabel::create(Label::create("Save", "res/NanumGothic.ttf", 20));
-	saveButton->setPosition(Director::getInstance()->getVisibleSize().width - saveButton->getContentSize().width , saveButton->getContentSize().height);
+	saveButton->setPosition(170, 10);
 	saveButton->setName("saveButton");
 	this->addChild(saveButton);
 
+	MenuItemLabel* playButton = MenuItemLabel::create(Label::create("Play", "res/NanumGothic.ttf", 20));
+	playButton->setPosition(210, 10);
+	playButton->setName("playButton");
+	this->addChild(playButton);
+
+	MenuItemLabel* backButton = MenuItemLabel::create(Label::create("Back", "res/NanumGothic.ttf", 20));
+	backButton->setPosition(250, 10);
+	backButton->setName("backButton");
+	this->addChild(backButton);
+
 	return true;
+}
+
+void MapEditer::GotoStage(Ref* pSender, int stageNum)
+{
+	Scene* scene = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
+
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), stageNum);
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
+
+	Director::getInstance()->pushScene(sceneWithEffect);
 }
 
 void MapEditer::LeftMouseDown(EventMouse* event)
@@ -59,6 +82,14 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 
 	if (this->getChildByName("saveButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
 		Save();
+	}
+
+	if (this->getChildByName("playButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
+		GotoStage(this, 0);
+	}
+
+	if (this->getChildByName("backButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
+		Director::getInstance()->replaceScene(MainScene::createScene());
 	}
 
 	switch (m_pressedKey){
@@ -98,7 +129,8 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 		break;
 	}
 
-	if (sprite){
+	if (sprite)
+	{
 		sprite->setPosition(event->getCursorX(), event->getCursorY());
 		m_layer->addChild(sprite);
 	}
@@ -137,7 +169,7 @@ void MapEditer::WheelDown(EventMouse* event)
 
 void MapEditer::onMouseDown(EventMouse* event)
 {
-	
+
 	if (event->getMouseButton() == 0)
 		LeftMouseDown(event);
 
@@ -146,7 +178,7 @@ void MapEditer::onMouseDown(EventMouse* event)
 
 	else if (event->getMouseButton() == 2)
 		WheelDown(event);
-	
+
 
 }
 
@@ -176,5 +208,4 @@ void MapEditer::Save()
 {
 	StageInformation* stInfo = new StageInformation(0);
 	stInfo->MakeJsonFileFromLayer(m_layer);
-	Director::getInstance()->replaceScene(MainScene::createScene());
 }

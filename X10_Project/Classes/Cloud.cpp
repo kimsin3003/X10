@@ -1,8 +1,5 @@
 #include "stdafx.h"
 #include "Target.h"
-#include "Collider.h"
-#include "Explosion.h"
-#include "Bullet.h"
 #include "Cloud.h"
 #include "FileStuff.h"
 
@@ -12,8 +9,6 @@ bool Cloud::init()
 	{
 		return false;
 	}
-
-	m_isEnemy = false;
 	m_spr = Sprite::create(FileStuff::CLOUD);
 	addChild(m_spr);
 

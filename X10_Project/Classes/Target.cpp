@@ -2,10 +2,7 @@
 #include "Collider.h"
 #include "Explosion.h"
 #include "Bullet.h"
-#include "TargetManager.h"
 #include "Target.h"
-
-//Base class of all Targets
 
 bool Target::init()
 {
@@ -13,7 +10,6 @@ bool Target::init()
 	{
 		return false;
 	}
-	m_isEnemy = false;
 	m_applyEffectToMe = true;
 	m_applyEffectToBullet = true;
 	m_toBeErased = false;

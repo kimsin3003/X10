@@ -22,6 +22,7 @@ private:
 	void ScarfExplanation();
 	void ShoesExplanation();
 	void EndLooking() { m_isLooking = false; }
+
 	enum CONFIG
 	{
 		TEXT_POS = 30,

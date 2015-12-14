@@ -13,7 +13,7 @@ StageInformation::StageInformation(int stage)
 
 	TargetInfo info;
 
-	if (stage >=0)
+	if (stage >= 0)
 	{
 		/*load targets*/
 		char fileName[100];
@@ -36,94 +36,6 @@ StageInformation::StageInformation(int stage)
 			return;
 		}
 	}
-	else
-	{	
-
-		/*******예전 stage 3*********/
-		/*
-		info = TargetInfo(TargetInfo::ENEMY, Point(160, 280), 0, 1.03f);
-		m_targetInfoList.push_back(info);
-
-		for (int j = 0; j <= 17; j++)
-		{
-			info = TargetInfo(TargetInfo::BUBBLE, Point(160 + j * 10, 100 + j * 15), 0, 2.5f / 2);
-			m_targetInfoList.push_back(info);
-		}
-
-		for (int j = 0; j <= 17; j++)
-		{
-			info = TargetInfo(TargetInfo::BUBBLE, Point(160 - j * 10, 100 + j * 15), 0, 2.5f / 2);
-			m_targetInfoList.push_back(info);
-		}
-
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j <= i * 2 - 1; j++)
-			{
-				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 175 + (i * 20)), i * 30 + j * 2, 2.0, 2.0);
-				m_targetInfoList.push_back(info);
-			}
-		}
-
-		for (int i = 0; i < 5; i++)
-		{
-			for (int j = 0; j <= i * 2 - 1; j++)
-			{
-				info = TargetInfo(TargetInfo::STAR, Point(180 + (j * 15) - (i * 20), 385 - (i * 20)), i * 30 + j * 2, 2.0, 2.0);
-				m_targetInfoList.push_back(info);
-			}
-		}
-
-		//Bullet 5개`
-		string bulletType = "Bullet";
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		m_bulletInfoList.push_back(bulletType);
-		*/
-
-
-		/********예전 스테이지 0,1,2**********/
-		/*
-		char fileName[100];
-		sprintf(fileName, "../Resources/files/target%d.txt", stage);
-		ifstream ifs(fileName);
-
-		while (!ifs.eof())
-		{
-			int type;
-			float posX, posY, rotation, scaleX, scaleY;
-			ifs >> type >> posX >> posY >> rotation >> scaleX >> scaleY;
-			info = TargetInfo(static_cast<TargetType>(type), Point(posX, posY), rotation, scaleX, scaleY);
-			m_targetInfoList.push_back(info);
-		}
-
-		sprintf(fileName, "../Resources/files/bullet%d.txt", stage);
-		ifs = ifstream(fileName);
-
-		while (!ifs.eof())
-		{
-			int crossnum, bulletnum;
-			ifs >> crossnum >> bulletnum;
-
-			string bulletType = "CrossBullet";
-			for (int i = 0; i < crossnum; i++)
-			{
-				m_bulletInfoList.push_back(bulletType);
-			}
-
-			bulletType = "Bullet";
-			for (int i = 0; i < bulletnum; i++)
-			{
-				m_bulletInfoList.push_back(bulletType);
-			}
-		}
-		*/
-	}
-	
-
-		return;
 }
 
 StageInformation::~StageInformation()

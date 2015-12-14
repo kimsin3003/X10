@@ -3,16 +3,12 @@
 #include "Bubble.h"
 #include "FileStuff.h"
 
-
-
 bool Bubble::init()
 {
 	if (!Target::init())
 	{
 		return false;
 	}
-
-	m_isEnemy = false;
 	m_spr = Sprite::create(FileStuff::BUBBLE);
 	addChild(m_spr);
 

@@ -1,11 +1,11 @@
 #include "stdafx.h"
 #include "Sling.h"
 #include "GameManager.h"
-#include "ColliderManager.h"
 #include "FileStuff.h"
 
 Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0), m_arm(nullptr)
 {
+
 }
 
 bool Sling::init()

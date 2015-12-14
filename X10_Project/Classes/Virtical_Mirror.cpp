@@ -1,7 +1,8 @@
 #include "stdafx.h"
+#include "Target.h"
 #include "Virtical_Mirror.h"
-#include "Bullet.h"
 #include "FileStuff.h"
+#include "Bullet.h"
 
 bool Virtical_Mirror::init()
 {
@@ -9,8 +10,6 @@ bool Virtical_Mirror::init()
 	{
 		return false;
 	}
-
-	m_isEnemy = false;
 	m_spr = Sprite::create(FileStuff::VIRTICAL_MIRROR);
 	addChild(m_spr);
 

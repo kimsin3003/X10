@@ -1,9 +1,8 @@
 #include "stdafx.h"
 #include "Target.h"
-#include "Bullet.h"
 #include "Gull.h"
 #include "FileStuff.h"
-
+#include "Bullet.h"
 
 bool Gull::init()
 {
@@ -11,8 +10,6 @@ bool Gull::init()
 	{
 		return false;
 	}
-
-	m_isEnemy = false; 
 	m_spr = Sprite::create(FileStuff::GULL);
 
 	Size winSize = Director::getInstance()->getWinSize();

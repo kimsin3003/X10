@@ -3,7 +3,6 @@
 class Sling : public Node
 {
 public:
-
 	const float FONT_SIZE	= 24;
 	const float PREDICT_LINE_TIME = 0.5;
 

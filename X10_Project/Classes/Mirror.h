@@ -1,5 +1,4 @@
 #pragma once
-#include "Target.h"
 
 class Mirror : public Target
 {
@@ -9,7 +8,6 @@ public:
 
 protected:
 	void ToBullet(Bullet* bullet);
-	virtual void ToSelf(const Bullet* bullet);
-	virtual void ToSelf(const Explosion* explosion);
-
+	void ToSelf(const Bullet* bullet);
+	void ToSelf(const Explosion* explosion);
 };

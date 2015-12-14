@@ -10,6 +10,4 @@ protected:
 	void ToBullet(Bullet* bullet);
 	void ToSelf(const Bullet* bullet);
 	void ToSelf(const Explosion* explosion);
-
-private:
 };

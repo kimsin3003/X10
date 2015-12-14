@@ -1,7 +1,5 @@
 #pragma once
 
-class ColliderManager;
-
 class Collider : public Node
 {
 public:

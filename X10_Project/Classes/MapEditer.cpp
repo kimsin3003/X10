@@ -57,17 +57,17 @@ bool MapEditer::init()
 	this->addChild(saveButton);
 
 	MenuItemLabel* playButton = MenuItemLabel::create(Label::create("Play", "res/NanumGothic.ttf", 20));
-	playButton->setPosition(210, 10);
+	playButton->setPosition(220, 10);
 	playButton->setName("playButton");
 	this->addChild(playButton);
 
 	MenuItemLabel* backButton = MenuItemLabel::create(Label::create("Back", "res/NanumGothic.ttf", 20));
-	backButton->setPosition(250, 10);
+	backButton->setPosition(270, 10);
 	backButton->setName("backButton");
 	this->addChild(backButton);
 
-	MenuItemLabel* warning = MenuItemLabel::create(Label::create("If complete making level\nCHANGE FILE NAME:\n target0.json in files folder", "res/NanumGothic.ttf", 12));
-	warning->setPosition(200, 30);
+	MenuItemLabel* warning = MenuItemLabel::create(Label::create("If complete making level\nCHANGE FILE NAME", "res/NanumGothic.ttf", 15));
+	warning->setPosition(200, 40);
 	warning->setName("warning");
 	this->addChild(warning);
 

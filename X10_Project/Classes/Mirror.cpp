@@ -1,12 +1,8 @@
 #include "stdafx.h"
 #include "Target.h"
-#include "Collider.h"
-#include "Explosion.h"
-#include "Bullet.h"
 #include "Mirror.h"
 #include "FileStuff.h"
-
-
+#include "Bullet.h"
 
 bool Mirror::init()
 {
@@ -14,8 +10,6 @@ bool Mirror::init()
 	{
 		return false;
 	}
-
-	m_isEnemy = false;
 	m_spr = Sprite::create(FileStuff::MIRROR);
 	addChild(m_spr);
 

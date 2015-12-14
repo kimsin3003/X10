@@ -49,6 +49,7 @@ namespace FileStuff
 
 	const string SPECIAL_STAR = "res/button/special_star.png";
 	const string NORMAL_STAR = "res/button/normal_star.png";
+	const string TOGO_STAR = "res/button/togo_star.png";
 
 	const string MAPEDITER_DEFAULT_FILE = "res/map_editer/temp.txt";
 
@@ -60,4 +61,5 @@ namespace FileStuff
 	const string INTRO_02 = "res/event/intro_02.png";
 	const string INTRO_03 = "res/event/intro_03.png";
 	const string INTRO_04 = "res/event/intro_04.png";
+
 }

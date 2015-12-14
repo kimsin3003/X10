@@ -85,77 +85,42 @@ bool MapEditer::init()
 		{
 			Sprite* sprite = nullptr;
 			Point point;
-			switch (targetInfo.m_name.get()){
+			switch (targetInfo.m_name.get())
+			{
 			case TargetInfo::BUBBLE:
 				sprite = Sprite::create(FileStuff::BUBBLE);
-				sprite->setTag(TargetInfo::BUBBLE);
-				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
-				sprite->setPosition(point);
-				sprite->setRotation(targetInfo.m_rotation.get());
-				sprite->setScaleX(targetInfo.m_scale.get().x.get());
-				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::CLOUD:
 				sprite = Sprite::create(FileStuff::CLOUD);
-				sprite->setTag(TargetInfo::CLOUD);
-				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
-				sprite->setPosition(point);
-				sprite->setRotation(targetInfo.m_rotation.get());
-				sprite->setScaleX(targetInfo.m_scale.get().x.get());
-				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::ENEMY:
 				sprite = Sprite::create(FileStuff::ENEMY);
-				sprite->setTag(TargetInfo::ENEMY);
-				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
-				sprite->setPosition(point);
-				sprite->setRotation(targetInfo.m_rotation.get());
-				sprite->setScaleX(targetInfo.m_scale.get().x.get());
-				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::MIRROR:
 				sprite = Sprite::create(FileStuff::MIRROR);
-				sprite->setTag(TargetInfo::MIRROR);
-				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
-				sprite->setPosition(point);
-				sprite->setRotation(targetInfo.m_rotation.get());
-				sprite->setScaleX(targetInfo.m_scale.get().x.get());
-				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::VIRTICAL_MIRROR:
 				sprite = Sprite::create(FileStuff::VIRTICAL_MIRROR);
-				sprite->setTag(TargetInfo::VIRTICAL_MIRROR);
-				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
-				sprite->setPosition(point);
-				sprite->setRotation(targetInfo.m_rotation.get());
-				sprite->setScaleX(targetInfo.m_scale.get().x.get());
-				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::GULL:
 				sprite = Sprite::create(FileStuff::GULL);
-				sprite->setTag(TargetInfo::GULL);
-				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
-				sprite->setPosition(point);
-				sprite->setRotation(targetInfo.m_rotation.get());
-				sprite->setScaleX(targetInfo.m_scale.get().x.get());
-				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 
 			case TargetInfo::STAR:
 				sprite = Sprite::create(FileStuff::STAR_SAD);
-				sprite->setTag(TargetInfo::STAR);
-				point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
-				sprite->setPosition(point);
-				sprite->setRotation(targetInfo.m_rotation.get());
-				sprite->setScaleX(targetInfo.m_scale.get().x.get());
-				sprite->setScaleY(targetInfo.m_scale.get().y.get());
 				break;
 			}
+			sprite->setTag(targetInfo.m_name.get());
+			point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
+			sprite->setPosition(point);
+			sprite->setRotation(targetInfo.m_rotation.get());
+			sprite->setScaleX(targetInfo.m_scale.get().x.get());
+			sprite->setScaleY(targetInfo.m_scale.get().y.get());
 			
 			if (sprite){
 				m_layer->addChild(sprite);

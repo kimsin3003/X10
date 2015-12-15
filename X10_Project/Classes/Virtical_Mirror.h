@@ -1,5 +1,6 @@
 #pragma once
 
+///# Vertical... typo??
 class Virtical_Mirror : public Target
 {
 public:

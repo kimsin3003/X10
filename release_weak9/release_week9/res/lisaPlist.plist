@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple Computer//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+    <dict>
+        <key>frames</key>
+        <dict>
+            <key>animSprite1.png</key>
+            <dict>
+                <key>frame</key>
+                <string>{{2,2},{372,386}}</string>
+                <key>offset</key>
+                <string>{0,-3}</string>
+                <key>rotated</key>
+                <false/>
+                <key>sourceColorRect</key>
+                <string>{{0,6},{372,386}}</string>
+                <key>sourceSize</key>
+                <string>{372,392}</string>
+            </dict>
+        </dict>
+        <key>metadata</key>
+        <dict>
+            <key>format</key>
+            <integer>2</integer>
+            <key>realTextureFileName</key>
+            <string>lisaPlist.png</string>
+            <key>size</key>
+            <string>{376,390}</string>
+            <key>smartupdate</key>
+            <string>$TexturePacker:SmartUpdate:a1ecb8d8ab32297c22bbd0dbb949a917:79a131a3c1bf445eacd090c7e232dd84:501ee7f544d8b7b97ef5d5c133578cbc$</string>
+            <key>textureFileName</key>
+            <string>lisaPlist.png</string>
+        </dict>
+    </dict>
+</plist>

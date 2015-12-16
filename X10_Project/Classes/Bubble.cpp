@@ -34,7 +34,7 @@ void Bubble::ToSelf(const Bullet* bullet)
 		*/
 
 		int frameCut = POP_FRAMES;
-		float frameTime = Director::getInstance()->getSecondsPerFrame()*5.0;
+		float frameTime = Director::getInstance()->getSecondsPerFrame()*10.0;
 
 		Vector<SpriteFrame*> animFrames;
 		animFrames.reserve(frameCut);

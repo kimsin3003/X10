@@ -63,4 +63,6 @@ namespace FileStuff
 
 	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
 	const string CROSS_BULLET = "res/ui/cross_bullet.png";
+
+	const string BRICK_DESTRUCT_ANI = "brick_destruct";
 }

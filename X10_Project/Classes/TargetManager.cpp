@@ -62,10 +62,9 @@ void TargetManager::ResetTargets()
 
 void TargetManager::EraseDeadTargets()
 {
-	Target* target = nullptr;
 	for (int i = 0; i < m_targets.size(); i++)
 	{
-		target = m_targets.at(i);
+		Target* target = m_targets.at(i);
 		if (target->ToBeErased())
 		{
 			target->removeAllChildrenWithCleanup(true);
@@ -77,10 +76,9 @@ void TargetManager::EraseDeadTargets()
 
 bool TargetManager::HasEnemy()
 {
-	Target* target;
 	for (int i = 0; i < m_targets.size(); i++)
 	{
-		target = m_targets.at(i);
+		Target* target = m_targets.at(i); ///# 습관의 문제
 		if (target->IsEnemy())
 		{
 			return true;
@@ -89,7 +87,7 @@ bool TargetManager::HasEnemy()
 	return false;
 }
 
-void TargetManager::SaveEnemyPosition(const Point pos)
+void TargetManager::SaveEnemyPosition(const Point& pos)
 {
 	m_enemyPosition = pos;
 }

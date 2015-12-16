@@ -3,8 +3,11 @@
 namespace FileStuff
 {
 	const string STAGESCENE_BACKGROUND = "res/starry_night.jpg";
+	
 	const string BUBBLE = "res/target/Bubble2.png";
 	const string BUBBLE_POP = "res/target/BubblePop.png";
+	const string BUBBLE_POP_ANI = "bubble_pop_ani";
+
 	const string BULLET = "res/firework.png";
 	const string DEBRIS = "res/debris.png";
 	const string CLOUD = "res/target/Cloud.png";

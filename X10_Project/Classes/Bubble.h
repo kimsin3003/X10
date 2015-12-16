@@ -6,6 +6,10 @@ public:
 	CREATE_FUNC(Bubble);
 	bool init();
 
+	enum{
+		POP_FRAMES = 10
+	};
+
 protected:
 	void ToBullet(Bullet* bullet);
 	void ToSelf(const Bullet* bullet);

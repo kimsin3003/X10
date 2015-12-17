@@ -12,7 +12,8 @@ bool Mirror::init()
 	}
 	m_spr = Sprite::create(FileStuff::MIRROR);
 	addChild(m_spr);
-
+	Size sizeSpr = m_spr->getContentSize();
+	Size sizeMain = this->getContentSize();
 	return true;
 }
 
@@ -25,16 +26,7 @@ void Mirror::ToBullet(Bullet* bullet)
 
 void Mirror::ToSelf(const Bullet* bullet)
 {
-	if (m_applyEffectToMe)
-	{
-		m_applyEffectToMe = false;
-
-		m_spr->removeFromParent();
-		m_spr = Sprite::create(FileStuff::MIRROR_ANGRY);
-		addChild(m_spr);
-		m_sprScaleRatio *= 1.1f;
-		m_spr->setScale(m_sprScaleRatio);
-	}
+	
 }
 
 void Mirror::ToSelf(const Explosion* explosion)

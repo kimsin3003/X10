@@ -236,7 +236,11 @@ void MapEditer::WheelDown(EventMouse* event)
 		Node* child = children.at(i);
 		if (child->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
 		{
-			child->setRotation(((int)child->getRotation() + 45) % 360);
+			int rotation = (int)child->getRotation() + 45;
+			//if (rotation >= 0)
+				child->setRotation(rotation % 360);
+// 			else
+// 				child->setRotation(rotation % 360 + 360);
 			break;
 		}
 	}

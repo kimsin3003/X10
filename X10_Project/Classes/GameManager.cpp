@@ -40,6 +40,7 @@ GameManager::GameManager()
 	m_colliderManager = new ColliderManager();
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
+	m_lastTarget = nullptr;
 }
 
 void GameManager::Reset()
@@ -50,6 +51,7 @@ void GameManager::Reset()
 	delete m_targetManager;
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
+	m_lastTarget = nullptr;
 }
 
 GameManager::~GameManager() {}
@@ -149,13 +151,14 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 {
-	static Target* lastTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
+	m_lastTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
 	bool collidingCheck = false; //현재 충돌중인 타겟이 있는지 체크. --> lastTarget을 유지할 필요가 있는지체크
 	for (Target* target : targets)
 	{
-		if (target == lastTarget)
+		if (target == m_lastTarget)
 		{
-			continue;
+			break;
+			collidingCheck = true;
 		}
 
 		if (target->IsEnemy())
@@ -171,7 +174,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
 			{
-				lastTarget = target;
+				m_lastTarget = target;
 				target->ApplyCollisionEffect(collider);
 				collidingCheck = true;
 			}
@@ -185,7 +188,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 			if ( targetBoundingBox.intersectsCircle( explosionPosition, explosionRadius) )
 			{
-				lastTarget = target;
 				target->ApplyCollisionEffect(explosion);
 			}
 		}
@@ -193,7 +195,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 	if (!collidingCheck)
 	{
-		lastTarget = nullptr;
+		m_lastTarget = nullptr;
 	}
 }
 

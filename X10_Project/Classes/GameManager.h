@@ -45,4 +45,5 @@ private:
 	
 	int m_stage;
 	bool m_isJudged;
+	Target* m_lastTarget;
 };

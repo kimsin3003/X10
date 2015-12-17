@@ -18,9 +18,18 @@ bool Mirror::init()
 
 void Mirror::ToBullet(Bullet* bullet)
 {
-	Vec2 curDir = bullet->GetDirection();
-	Vec2 reflect = Vec2(curDir.x * -1, curDir.y);
-	bullet->SetDirection(reflect);
+	//미러 기준의 입사각.
+	float m = this->getRotation();
+	float inci_angle = (-bullet->GetDirection()).getAngle() - this->getRotation();
+	if (inci_angle <= 180){
+		float ref_angle = (180 - inci_angle) + this->getRotation();
+		bullet->SetDirection(Vec2(cos(ref_angle), sin(ref_angle)));
+	}
+
+	else{
+		float ref_angle = (540 - inci_angle) + this->getRotation();
+		bullet->SetDirection(Vec2(cos(ref_angle), sin(ref_angle)));
+	}
 }
 
 void Mirror::ToSelf(const Bullet* bullet)

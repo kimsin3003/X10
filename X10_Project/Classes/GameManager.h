@@ -24,6 +24,7 @@ public:
 	void AppendBulletsToLayer(UILayer* uiLayer);
 	Sling* InitSling(GameLayer* gameLayer);
 	bool IsCollision(Target* target, Collider* collider);
+	void makeDebugPoint(Point p, Node* spr);
 
 private:
 	GameManager();

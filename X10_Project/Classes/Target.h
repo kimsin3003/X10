@@ -14,6 +14,7 @@ public:
 	void SetSprScaleRatio(float ratio) { m_sprScaleRatio = ratio; }
 	void SetSprScale() { m_spr->setScale(m_sprScaleRatio); }
 	bool ToBeErased() { return m_toBeErased; }
+	Sprite* m_spr;
 
 protected:
 	virtual void ToBullet(Bullet* bullet) = 0;
@@ -21,7 +22,6 @@ protected:
 	virtual void ToSelf(const Explosion* explosion) = 0;	
 	void EraseOn() { m_toBeErased = true; } //for call back
 
-	Sprite* m_spr;
 	float m_sprScaleRatio;
 
 	bool m_toBeErased;

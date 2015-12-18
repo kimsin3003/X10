@@ -58,4 +58,5 @@ private:
 	Sprite* m_arm;
 	float m_shotPower;
 	Vector<Sprite*> m_expectLine;
+	Vector<Sprite*> m_beforeLine;
 };

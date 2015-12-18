@@ -169,10 +169,8 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 		if (collider->IsBullet())
 		{
-			const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
-			const Rect targetBoundingBox = target->GetBoundingArea();
 
-			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
+			if (IsCollision(target, collider))
 			{
 				m_lastTarget = target;
 				target->ApplyCollisionEffect(collider);
@@ -325,4 +323,15 @@ void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 			FailProgress(uiLayer);
 		}
 	}
+}
+
+bool GameManager::IsCollision(Target* target, Collider* collider)
+{
+	const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
+	const Rect targetBoundingBox = target->GetBoundingArea();
+	//예전 사각형 충돌 판정	
+	if (targetBoundingBox.intersectsRect(colliderBoundingBox))
+		return true;
+
+	return false;
 }

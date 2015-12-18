@@ -23,6 +23,7 @@ public:
 	void AppendTargetsToLayer(GameLayer* gameLayer);
 	void AppendBulletsToLayer(UILayer* uiLayer);
 	Sling* InitSling(GameLayer* gameLayer);
+	bool IsCollision(Target* target, Collider* collider);
 
 private:
 	GameManager();

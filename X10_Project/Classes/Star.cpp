@@ -40,7 +40,6 @@ void Star::ToSelf(const Bullet* bullet)
 
 		Vector<SpriteFrame*> animFrames;
 		animFrames.reserve(frameCut);
-		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/target/x10.plist");
 
 		for (int i = 0; i < frameCut; i++)
 		{

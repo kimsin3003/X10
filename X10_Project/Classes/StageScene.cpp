@@ -16,6 +16,7 @@
 #include "FileStuff.h"
 //etc
 #include "Collection.h"
+#include "Sling.h"
 
 Scene* StageScene::createScene()
 {
@@ -56,7 +57,7 @@ bool StageScene::init()
 	addChild(background);
 
 	m_character = LoadCharacter();
-	background->addChild(m_character);
+	addChild(m_character, 2.0);
 
 
 	if (m_stageToPlay == m_maxStageNum) 
@@ -111,9 +112,8 @@ Sprite* StageScene::LoadBackground()
 
 Sprite* StageScene::LoadCharacter()
 {
-	Sprite* character = Sprite::create(FileStuff::CHARACTER_STANDING);
-	character->setPosition(40, 12);
-	character->setScale(0.3f);
+	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_STANDING);
+	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
 
 	return character;
 }

@@ -28,7 +28,7 @@ bool GameScene::init()
 	addChild(m_background);
 
 	m_character = loadCharacter();
-	m_background->addChild(m_character, 2.0);
+	addChild(m_character, 2.0);
 
 	m_gameLayer = GameLayer::create();
 	addChild(m_gameLayer);
@@ -61,8 +61,8 @@ Sprite* GameScene::loadBackground()
 
 Sprite* GameScene::loadCharacter()
 {
-	Sprite* character = Sprite::create(FileStuff::CHARACTER_HARDPIXEL);
-	character->setPosition(40, 12);
+	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
 	return character;
 }
 

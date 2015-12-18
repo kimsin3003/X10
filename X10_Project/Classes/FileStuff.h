@@ -2,6 +2,8 @@
 
 namespace FileStuff
 {
+	const string IMG_SOURCE = "res/target/x10.plist";
+
 	const string STAGESCENE_BACKGROUND = "res/starry_night.jpg";
 	
 	const string BUBBLE = "res/target/Bubble2.png";
@@ -33,10 +35,10 @@ namespace FileStuff
 	const string BOTTLE = "res/collection/bottle.png";
 	const string MONITOR = "res/collection/monitor.png";
 
-	const string CHARACTER = "res/character/boy.png";
-	const string CHARACTER_HARDPIXEL = "res/character/boy_hardpixel.png";
-	const string CHARACTER_STANDING = "res/character/boy_standing.png";
-	const string CHARACTER_ARM = "res/character/boy_arm.png";
+	const string CHARACTER = "black_man.png";
+	const string CHARACTER_HARDPIXEL = "black_man.png";
+	const string CHARACTER_STANDING = "black_man.png";
+	const string CHARACTER_ARM = "black_man_arm.png";
 	const string SLING_LINE_DOT = "res/character/dot.png";
 
 	const string BACKGROUND = "res/background2.png";

@@ -50,13 +50,12 @@ bool Sling::init()
 		addChild(dot, 1.0);
 	}
 
-	//add arm
-	Sprite* arm = Sprite::create(FileStuff::CHARACTER_ARM);
+	Sprite* arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
 	m_arm = arm;
-	m_arm->setAnchorPoint(Point(0.5, 0));
 	m_arm->setScale(SLING_SCALE);
 	m_arm->setRotation(DEFAULT_ARM);
-	addChild(m_arm);
+	m_arm->setAnchorPoint(Point(0.5, 0.4));
+	addChild(m_arm, 1.9);
 
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseUp = CC_CALLBACK_1(Sling::Shot, this);

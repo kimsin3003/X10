@@ -55,10 +55,10 @@ bool StageScene::init()
 
 	Sprite* background = LoadBackground();
 	addChild(background);
-
 	m_character = LoadCharacter();
 	addChild(m_character, 2.0);
-
+	Sprite* background_bottom = LoadBGBottom();
+	addChild(background_bottom, 2.5);
 
 	if (m_stageToPlay == m_maxStageNum) 
 	{
@@ -105,9 +105,16 @@ Sprite* StageScene::LoadBackground()
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);
-	background->setOpacity(140);
-
 	return background;
+}
+
+Sprite* StageScene::LoadBGBottom()
+{
+	Sprite * bottom = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (bottom->getContentSize().width);
+	bottom->setAnchorPoint(Point::ZERO);
+	bottom->setScale(scale);
+	return bottom;
 }
 
 Sprite* StageScene::LoadCharacter()

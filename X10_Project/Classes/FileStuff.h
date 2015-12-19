@@ -4,6 +4,15 @@ namespace FileStuff
 {
 	const string IMG_SOURCE = "res/target/x10.plist";
 
+	const string BACKGROUND = "res/background_base.png";
+	const string BACKGROUND_BOTTOM = "res/background_bottom.png";
+
+	const string CHARACTER = "black_man.png";
+	const string CHARACTER_HARDPIXEL = "black_man.png";
+	const string CHARACTER_STANDING = "black_man.png";
+	const string CHARACTER_ARM = "black_man_arm.png";
+	const string SLING_LINE_DOT = "res/character/dot.png";
+
 	const string STAGESCENE_BACKGROUND = "res/starry_night.jpg";
 	
 	const string BUBBLE = "res/target/Bubble2.png";
@@ -35,13 +44,6 @@ namespace FileStuff
 	const string BOTTLE = "res/collection/bottle.png";
 	const string MONITOR = "res/collection/monitor.png";
 
-	const string CHARACTER = "black_man.png";
-	const string CHARACTER_HARDPIXEL = "black_man.png";
-	const string CHARACTER_STANDING = "black_man.png";
-	const string CHARACTER_ARM = "black_man_arm.png";
-	const string SLING_LINE_DOT = "res/character/dot.png";
-
-	const string BACKGROUND = "res/background2.png";
 	const string START_IMG = "res/start.png";
 	const string STAGE_SELECT_IMG = "res/stage_select.png";
 	const string CLOSE_BUTTON = "closeButton.png";

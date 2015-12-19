@@ -36,6 +36,7 @@ private:
 
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
+	Sprite* LoadBGBottom();
 	MenuItemImage* MakeBackButton();
 	MenuItemImage* MakeStageButton(int stage, Point pos);
 	

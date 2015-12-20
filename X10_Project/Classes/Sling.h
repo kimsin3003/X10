@@ -40,7 +40,7 @@ public:
 		CLICK_RANGE = 30,
 		DOTNUM_OF_LINE = 10
 	};
-	const Point SLING_POSITION = Point(205, 63);
+	const Point SLING_POSITION = Point(205, 90);
 	const float DEFAULT_ARM = 0.f;
 	const float SLING_SCALE = 1.0f;
 

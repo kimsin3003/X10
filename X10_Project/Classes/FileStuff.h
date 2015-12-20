@@ -36,7 +36,7 @@ namespace FileStuff
 	const string CHARACTER_ARM = "res/character/boy_arm.png";
 	const string SLING_LINE_DOT = "res/character/dot.png";
 
-	const string BACKGROUND = "res/background2.png";
+	const string BACKGROUND = "res/highway.png";
 	const string START_IMG = "res/start.png";
 	const string STAGE_SELECT_IMG = "res/stage_select.png";
 	const string CLOSE_BUTTON = "closeButton.png";

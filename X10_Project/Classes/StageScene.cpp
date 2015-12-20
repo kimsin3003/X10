@@ -104,7 +104,6 @@ Sprite* StageScene::LoadBackground()
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);
-	background->setOpacity(140);
 
 	return background;
 }
@@ -133,7 +132,6 @@ void StageScene::ChangeToMainScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
-
 
 void StageScene::IntroEvent(float dt)
 {

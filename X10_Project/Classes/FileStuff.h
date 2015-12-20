@@ -44,6 +44,16 @@ namespace FileStuff
 	const string BOTTLE = "res/collection/bottle.png";
 	const string MONITOR = "res/collection/monitor.png";
 
+<<<<<<< HEAD
+	const string CHARACTER = "res/character/boy.png";
+	const string CHARACTER_HARDPIXEL = "res/character/boy_hardpixel.png";
+	const string CHARACTER_STANDING = "res/character/boy_standing.png";
+	const string CHARACTER_ARM = "res/character/boy_arm.png";
+	const string SLING_LINE_DOT = "res/character/dot.png";
+
+	const string BACKGROUND = "res/highway.png";
+=======
+>>>>>>> ada70e77929da683e649e3b34cc3a07323241406
 	const string START_IMG = "res/start.png";
 	const string STAGE_SELECT_IMG = "res/stage_select.png";
 	const string CLOSE_BUTTON = "closeButton.png";

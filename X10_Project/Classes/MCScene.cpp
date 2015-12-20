@@ -30,7 +30,7 @@ bool MCScene::init()
 		return false;
 	}
 
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 17);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 12);
 
 	//background color change
 	this->schedule(schedule_selector(MCScene::ChangeBackGroundColor), BG_CHANGE_INTERVAL);

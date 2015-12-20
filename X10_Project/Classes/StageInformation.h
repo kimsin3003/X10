@@ -59,7 +59,7 @@ public:
 	bool MakeJsonFileFromLayer(Layer* layer, string fileName = FileStuff::EDITING_FILENAME);
 
 private:
-	static const int m_maxStageNum = 18;
+	static const int m_maxStageNum = 12;
 	int m_currentTargetIndex;
 	int m_currentBulletIndex;
 

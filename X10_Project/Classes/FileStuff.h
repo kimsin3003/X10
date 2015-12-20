@@ -4,7 +4,7 @@ namespace FileStuff
 {
 	const string IMG_SOURCE = "res/target/x10.plist";
 
-	const string BACKGROUND = "res/background_base.png";
+	const string BACKGROUND_BASE = "res/background_base.png";
 	const string BACKGROUND_BOTTOM = "res/background_bottom.png";
 
 	const string CHARACTER = "res/target/black_man.png";

@@ -54,7 +54,7 @@ void GameScene::CleanUp()
 
 Sprite* GameScene::LoadBackground()
 {
-	Sprite* background = Sprite::create(FileStuff::BACKGROUND);
+	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BASE);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);

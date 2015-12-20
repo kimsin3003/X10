@@ -28,7 +28,7 @@ bool MapEditer::init()
 	m_layer = Layer::create();
 	this->addChild(m_layer, 1);
 
-	Sprite* background = Sprite::create(FileStuff::BACKGROUND);
+	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BASE);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);

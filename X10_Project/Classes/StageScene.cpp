@@ -17,6 +17,7 @@
 //etc
 #include "Collection.h"
 #include "Sling.h"
+#include <SimpleAudioEngine.h>
 
 Scene* StageScene::createScene()
 {
@@ -181,6 +182,11 @@ void StageScene::SetupLight()
 	case 13:
 		addChild(m_lightManager->GetLight(12));
 	case 12:
+		if (m_stageToPlay <= 14)
+		{
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("res/bgmusic/no_way....mp3", true);
+		}
 		addChild(m_lightManager->GetLight(11));
 	case 11:
 		addChild(m_lightManager->GetLight(10));
@@ -195,6 +201,11 @@ void StageScene::SetupLight()
 	case 6:
 		addChild(m_lightManager->GetLight(5));
 	case 5:
+		if (m_stageToPlay <= 5)
+		{
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("res/bgmusic/something's_wrong.mp3", true);
+		}
 		addChild(m_lightManager->GetLight(4));
 	case 4:
 		addChild(m_lightManager->GetLight(3));
@@ -261,6 +272,8 @@ void StageScene::IntroEvent(float dt)
 	//FadeIn Version	
 	Vec2 deltaPos = Vec2(0, 45.0f*1.75f);
 	Vec2 textPos = Vec2(160.0f, 360.0f);
+
+	
 
 	PrintIntroText("I got lost in a highway", textPos, 0.0f, 3.0f);
 	PrintIntroText("I hate staying in dark", textPos-=deltaPos, 4.5f, 3.0f);

@@ -31,21 +31,31 @@ bool Sling::init()
 	for (int i = 0; i < DOTNUM_OF_LINE; i++)
 	{
 		Sprite* dot = Sprite::create(FileStuff::SLING_LINE_DOT);
-		m_expectLine.pushBack(dot);
-		float r = -((2.f / DOTNUM_OF_LINE)*(2.f / DOTNUM_OF_LINE) * (i*1.f - DOTNUM_OF_LINE / 2.f) * (i*1.f - DOTNUM_OF_LINE / 2.f)) +1;
-		dot->setOpacity(r*100);
-		dot->setScale(r*2);
+		float r = -((2.f / DOTNUM_OF_LINE)*(2.f / DOTNUM_OF_LINE) * (i*1.f - DOTNUM_OF_LINE / 2.f) * (i*1.f - DOTNUM_OF_LINE / 2.f)) + 1;
+		dot->setOpacity(r * 100);
+		dot->setScale(r * 2);
 		dot->setVisible(false);
+		m_expectLine.pushBack(dot);
+		addChild(dot, 1.0);
+	}
+	/*Make Before line*/
+	for (int i = 0; i < DOTNUM_OF_LINE; i++)
+	{
+		Sprite* dot = Sprite::create(FileStuff::SLING_LINE_DOT);
+		float r = -((2.f / DOTNUM_OF_LINE)*(2.f / DOTNUM_OF_LINE) * (i*1.f - DOTNUM_OF_LINE / 2.f) * (i*1.f - DOTNUM_OF_LINE / 2.f)) + 1;
+		dot->setOpacity(r * 100 * 0.5);
+		dot->setScale(r * 2);
+		dot->setVisible(false);
+		m_beforeLine.pushBack(dot);
 		addChild(dot, 1.0);
 	}
 
-	//add arm
-	Sprite* arm = Sprite::create(FileStuff::CHARACTER_ARM);
+	Sprite* arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
 	m_arm = arm;
-	m_arm->setAnchorPoint(Point(0.5, 0));
 	m_arm->setScale(SLING_SCALE);
 	m_arm->setRotation(DEFAULT_ARM);
-	addChild(m_arm);
+	m_arm->setAnchorPoint(Point(0.5, 0.4));
+	addChild(m_arm, 1.9);
 
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseUp = CC_CALLBACK_1(Sling::Shot, this);
@@ -152,6 +162,14 @@ void Sling::Shot(Event* e)
 
 	//fix shot angle,power from last pointer position.
 	Pull(e);
+
+	/*Set Position before line */
+	for (int i = 0; i < m_beforeLine.size(); i++)
+	{
+		Sprite* dot = m_beforeLine.at(i);
+		dot->setPosition(m_shotAngle *m_shotPower / MAX_POWER * i);
+		dot->setVisible(true);
+	}
 
 	ChangeToShotted();
 	GameManager* gm = GameManager::GetInstance();

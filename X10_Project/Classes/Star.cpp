@@ -34,6 +34,33 @@ void Star::ToSelf(const Bullet* bullet)
 		m_spr = Sprite::create(FileStuff::STAR_HAPPY);
 		addChild(m_spr);
 		m_applyEffectToMe = false;
+
+		int frameCut = DESTRUCT_FRAMES;
+		float frameTime = Director::getInstance()->getSecondsPerFrame()*10.0;
+
+		Vector<SpriteFrame*> animFrames;
+		animFrames.reserve(frameCut);
+
+		for (int i = 0; i < frameCut; i++)
+		{
+			string frameNum = to_string(i+1); // from 10 -> to 1
+			string aniFileName = FileStuff::BRICK_DESTRUCT_ANI + frameNum + ".png";
+
+			SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(aniFileName);
+			animFrames.pushBack(frame);
+		}
+
+		Animation* animation = Animation::createWithSpriteFrames(animFrames, frameTime);
+		Animate* animate = Animate::create(animation);
+		m_spr->runAction(animate);
+
+		//remove self
+		Sequence* action = Sequence::create(
+			DelayTime::create(frameTime*frameCut),
+			CallFunc::create(CC_CALLBACK_0(Star::EraseOn, this)),
+			NULL);
+
+		m_spr->runAction(action);
 	}
 }
 

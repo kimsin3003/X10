@@ -41,7 +41,7 @@ public:
 class StageInformation
 {
 public:
-	StageInformation(int stage);
+	explicit StageInformation(int stage);
 	~StageInformation();
 	int GetTargetCount();//ÃÑ Å¸°Ù ¼ö¸¦ ¹ÝÈ¯
 	int GetBulletCount();//ÃÑ ºÒ·¿ ¼ö¸¦ ¹ÝÈ¯

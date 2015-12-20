@@ -24,11 +24,14 @@ bool GameScene::init()
 		return false;
 	}
 	
-	m_background = loadBackground();
+	m_background = LoadBackground();
 	addChild(m_background);
 
-	m_character = loadCharacter();
-	m_background->addChild(m_character, 2.0);
+	m_character = LoadCharacter();
+	addChild(m_character, 2.0);
+
+	Sprite* bgBottom = LoadBGBottom();
+	addChild(bgBottom, 2.5);
 
 	m_gameLayer = GameLayer::create();
 	addChild(m_gameLayer);
@@ -49,7 +52,7 @@ void GameScene::CleanUp()
 	removeFromParentAndCleanup(true);
 }
 
-Sprite* GameScene::loadBackground()
+Sprite* GameScene::LoadBackground()
 {
 	Sprite* background = Sprite::create(FileStuff::BACKGROUND);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
@@ -59,10 +62,20 @@ Sprite* GameScene::loadBackground()
 	return background;
 }
 
-Sprite* GameScene::loadCharacter()
+Sprite* GameScene::LoadBGBottom()
 {
-	Sprite* character = Sprite::create(FileStuff::CHARACTER_HARDPIXEL);
-	character->setPosition(40, 12);
+	Sprite * bottom = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (bottom->getContentSize().width);
+	bottom->setAnchorPoint(Point::ZERO);
+	bottom->setScale(scale);
+	return bottom;
+}
+
+
+Sprite* GameScene::LoadCharacter()
+{
+	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
 	return character;
 }
 

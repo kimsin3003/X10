@@ -17,8 +17,10 @@ public:
 	void CleanUp();
 
 private:
-	Sprite* loadBackground();
-	Sprite* loadCharacter();
+	Sprite* LoadBackground();
+	Sprite* LoadCharacter();
+	Sprite* LoadBGBottom();
+
 	Sprite* m_character;
 	Sprite* m_background;
 

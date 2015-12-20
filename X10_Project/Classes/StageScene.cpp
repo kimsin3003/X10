@@ -16,6 +16,7 @@
 #include "FileStuff.h"
 //etc
 #include "Collection.h"
+#include "Sling.h"
 
 Scene* StageScene::createScene()
 {
@@ -54,10 +55,10 @@ bool StageScene::init()
 
 	Sprite* background = LoadBackground();
 	addChild(background);
-
 	m_character = LoadCharacter();
-	background->addChild(m_character);
-
+	addChild(m_character, 2.0);
+	Sprite* background_bottom = LoadBGBottom();
+	addChild(background_bottom, 2.5);
 
 	if (m_stageToPlay == m_maxStageNum) 
 	{
@@ -108,11 +109,19 @@ Sprite* StageScene::LoadBackground()
 	return background;
 }
 
+Sprite* StageScene::LoadBGBottom()
+{
+	Sprite * bottom = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (bottom->getContentSize().width);
+	bottom->setAnchorPoint(Point::ZERO);
+	bottom->setScale(scale);
+	return bottom;
+}
+
 Sprite* StageScene::LoadCharacter()
 {
-	Sprite* character = Sprite::create(FileStuff::CHARACTER_STANDING);
-	character->setPosition(40, 12);
-	character->setScale(0.3f);
+	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_STANDING);
+	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
 
 	return character;
 }
@@ -177,7 +186,7 @@ void StageScene::IntroEvent(float dt)
 	runAction(seq);
 }
 
-void StageScene::PrintIntroPage(const string fileDir, float startTime, float keepTime)
+void StageScene::PrintIntroPage(const string& fileDir, float startTime, float keepTime)
 {
 	Sprite* page = Sprite::create(fileDir);
 	page->setPosition(Vec2(160, 240));
@@ -196,7 +205,7 @@ void StageScene::PrintIntroPage(const string fileDir, float startTime, float kee
 	page->runAction(seq);
 }
 
-void StageScene::PrintIntroText(const string message, const Vec2 pos, float startTime, float keepTime)
+void StageScene::PrintIntroText(const string& message, const Vec2 pos, float startTime, float keepTime)
 {
 	Label* text = Label::create(
 		message, FileStuff::FONT_ARIAL, 12.5f);

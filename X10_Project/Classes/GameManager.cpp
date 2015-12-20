@@ -40,6 +40,7 @@ GameManager::GameManager()
 	m_colliderManager = new ColliderManager();
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
+	m_lastTarget = nullptr;
 }
 
 void GameManager::Reset()
@@ -50,6 +51,7 @@ void GameManager::Reset()
 	delete m_targetManager;
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
+	m_lastTarget = nullptr;
 }
 
 GameManager::~GameManager() {}
@@ -149,13 +151,14 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 {
-	static Target* lastTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
+	m_lastTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
 	bool collidingCheck = false; //현재 충돌중인 타겟이 있는지 체크. --> lastTarget을 유지할 필요가 있는지체크
 	for (Target* target : targets)
 	{
-		if (target == lastTarget)
+		if (target == m_lastTarget)
 		{
-			continue;
+			break;
+			collidingCheck = true;
 		}
 
 		if (target->IsEnemy())
@@ -166,12 +169,10 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 		if (collider->IsBullet())
 		{
-			const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
-			const Rect targetBoundingBox = target->GetBoundingArea();
 
-			if (colliderBoundingBox.intersectsRect(targetBoundingBox))
+			if (IsCollision(target, collider))
 			{
-				lastTarget = target;
+				m_lastTarget = target;
 				target->ApplyCollisionEffect(collider);
 				collidingCheck = true;
 			}
@@ -185,7 +186,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 			if ( targetBoundingBox.intersectsCircle( explosionPosition, explosionRadius) )
 			{
-				lastTarget = target;
 				target->ApplyCollisionEffect(explosion);
 			}
 		}
@@ -193,7 +193,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 	if (!collidingCheck)
 	{
-		lastTarget = nullptr;
+		m_lastTarget = nullptr;
 	}
 }
 
@@ -323,4 +323,86 @@ void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 			FailProgress(uiLayer);
 		}
 	}
+}
+
+bool GameManager::IsCollision(Target* target, Collider* collider)
+{
+	
+	float rotation = target->getRotation();
+	const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
+	const Rect targetBoundingBox = target->GetBoundingArea();
+
+	if (rotation < 1 && rotation > -1){ //회전이 거의 없는 경우
+		//예전 사각형 충돌 판정	
+		if (targetBoundingBox.intersectsRect(colliderBoundingBox))
+			return true;
+
+		return false;
+	}
+
+	float colliderX = collider->getPosition().x;
+	float colliderY = collider->getPosition().y;
+
+	float minX = targetBoundingBox.getMinX(); // left margin
+	float maxX = targetBoundingBox.getMaxX(); // right margin
+	float minY = targetBoundingBox.getMinY(); // lower margin
+	float maxY = targetBoundingBox.getMaxY(); // upper margin
+	Point LL(minX, minY);
+	Point LU(minX, maxY);
+	Point RL(maxX, minY);
+	Point RU(maxX, maxY);
+
+	//회전사각형만들기
+	LL.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
+	LU.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
+	RL.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
+	RU.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
+	
+	// y = Ax + upperB
+	// y = Ax + lowerB
+	// y = -1/Ax + leftB
+	// y = -1/Ax + rightB
+	float a = (RU.y- LU.y) / (RU.x - LU.x); //기울기
+	
+	// RU.y = a * RU.x + upperB
+	float upperB = RU.y - a * (RU.x);
+	float lowerB = LL.y - a * (LL.x);
+	
+	// LL.y = (-1/a) * LL.x + leftB
+	float leftB = LL.y - (-1 / a) * LL.x;
+	float rightB = RU.y - (-1 / a) * RU.x;
+
+	// 네개의 수식 안에 있는지 체크.
+	// uppermargin 과 lowermargin 사이에 있는 X, Y 라면 (y-uppermargin) *(y-lowermargin) < 0 이 나옴
+	// left 와 right 도 마찬가지.
+	
+	//디버그용 dot
+	//makeDebugPoint(Point(colliderX, (colliderX * a + upperB)), target->getParent());
+	//makeDebugPoint(Point(colliderX, (colliderX * a + lowerB)), target->getParent());
+	//makeDebugPoint(Point(colliderX, (colliderX * (-1 / a) + rightB)), target->getParent());
+	//makeDebugPoint(Point(colliderX, (colliderX * (-1 / a) + leftB)), target->getParent());
+
+	if (
+		((colliderX * a + upperB) - colliderY) * ((colliderX * a + lowerB) - colliderY) < 0
+		&&
+		((colliderX * (-1 / a) + leftB) - colliderY) * ((colliderX * (-1 / a) + rightB) - colliderY) < 0
+		)
+	{
+		return true;
+	}
+	else 
+		return false;
+	
+}
+
+void GameManager::makeDebugPoint(Point p, Node* spr)
+{
+	Sprite* dot = Sprite::create(FileStuff::DEBRIS);
+	dot->setScale(2.);
+	spr->addChild(dot);
+	Point pos = spr->convertToWorldSpace(Point::ZERO);
+	dot->setPosition(p -  pos);
+
+	Sequence* action = Sequence::create(DelayTime::create(0.1), RemoveSelf::create(),NULL);
+	dot->runAction(action);
 }

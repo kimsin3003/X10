@@ -23,9 +23,6 @@ public:
 	float GetSpeed();
 	float GetRotationAngle();
 	
-private: 
-	Sling();
-	int m_status;
 	enum STATUS 
 	{ 
 		EMPTY, 
@@ -40,12 +37,16 @@ private:
 		HEIGHT = 50,
 		YPOS = 50,
 		MAX_POWER = 30,
-		CLICK_RANGE = 10,
+		CLICK_RANGE = 30,
 		DOTNUM_OF_LINE = 10
 	};
-	const Point SLING_POSITION = Point(205, 63);
-	const float DEFAULT_ARM = -40.f;
-	const float SLING_SCALE = 5.0;
+	const Point SLING_POSITION = Point(205, 90);
+	const float DEFAULT_ARM = 0.f;
+	const float SLING_SCALE = 1.0f;
+
+
+private: 
+	Sling();
 
 	void ChangeToLoaded();	//empty -> load
 	void ChangeToPulling(); //loaded -> pulling
@@ -53,9 +54,11 @@ private:
 	void ChangeToEmpty();	//shotted -> empty
 
 	Point GetStartLocation();
-
+	
+	int m_status;
 	Vec2 m_shotAngle;
 	Sprite* m_arm;
 	float m_shotPower;
 	Vector<Sprite*> m_expectLine;
+	Vector<Sprite*> m_beforeLine;
 };

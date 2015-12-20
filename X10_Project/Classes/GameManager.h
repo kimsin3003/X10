@@ -23,6 +23,8 @@ public:
 	void AppendTargetsToLayer(GameLayer* gameLayer);
 	void AppendBulletsToLayer(UILayer* uiLayer);
 	Sling* InitSling(GameLayer* gameLayer);
+	bool IsCollision(Target* target, Collider* collider);
+	void makeDebugPoint(Point p, Node* spr);
 
 private:
 	GameManager();
@@ -45,4 +47,5 @@ private:
 	
 	int m_stage;
 	bool m_isJudged;
+	Target* m_lastTarget;
 };

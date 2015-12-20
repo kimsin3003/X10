@@ -26,13 +26,36 @@ void Bubble::ToSelf(const Bullet* bullet)
 	{
 		m_applyEffectToMe = false;
 
-		m_spr->removeFromParent();
+		// before pop sprite
+		/*m_spr->removeFromParent();
 		m_spr = Sprite::create(FileStuff::BUBBLE_POP);
 		m_spr->setScale(m_sprScaleRatio);
 		addChild(m_spr);
+		*/
 
+		int frameCut = POP_FRAMES;
+		float frameTime = Director::getInstance()->getSecondsPerFrame()*10.0;
+
+		Vector<SpriteFrame*> animFrames;
+		animFrames.reserve(frameCut);
+		SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/target/x10.plist");
+
+		for (int i = 0; i < frameCut; i++)
+		{
+			string stageNum = to_string(frameCut - i); // from 10 -> to 1
+			string aniFileName = FileStuff::BUBBLE_POP_ANI + stageNum + ".png";
+			
+			SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(aniFileName);
+			animFrames.pushBack(frame);
+		}
+
+		Animation* animation = Animation::createWithSpriteFrames(animFrames, frameTime);
+		Animate* animate = Animate::create(animation);
+		m_spr->runAction(animate);
+
+		//remove self
 		Sequence* action = Sequence::create(
-			DelayTime::create(0.5f),
+			DelayTime::create(frameTime*frameCut),
 			CallFunc::create(CC_CALLBACK_0(Bubble::EraseOn, this)),
 			NULL);
 

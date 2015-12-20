@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "MapEditer.h"
-#include "MapEditLayer.h"
+
 #include "StageInformation.h"
 #include "Target.h"
 #include "FileStuff.h"
@@ -44,7 +44,7 @@ bool MapEditer::init()
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 
-	EventListenerKeyboard* _keyboardListener = EventListenerKeyboard::create();
+	EventListenerKeyboard* _keyboardListener = EventListenerKeyboard::create(); ///# 왜 로컬 변수 앞에 언더바를 붙이는가? _keyboardListener이름은 Layer클래스 멤버로도 있어서 가리기 효과 발생...
 	_keyboardListener->onKeyPressed = CC_CALLBACK_1(MapEditer::OnKeyPressed, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);
 	m_pressedKey = static_cast<EventKeyboard::KeyCode>(-1);
@@ -113,6 +113,8 @@ bool MapEditer::init()
 				sprite = Sprite::create(FileStuff::STAR_SAD);
 				break;
 			}
+			///# 만일에 sprite가 위의 case문 어느것에도 해당 안된다면??
+
 			sprite->setTag(targetInfo.m_name.get());
 			point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
 			sprite->setPosition(point);
@@ -234,7 +236,11 @@ void MapEditer::WheelDown(EventMouse* event)
 		Node* child = children.at(i);
 		if (child->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
 		{
-			child->setRotation(((int)child->getRotation() + 45) % 360);
+			int rotation = (int)child->getRotation() + 45;
+			//if (rotation >= 0)
+				child->setRotation(rotation % 360);
+// 			else
+// 				child->setRotation(rotation % 360 + 360);
 			break;
 		}
 	}
@@ -275,6 +281,7 @@ void MapEditer::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 
 	if (m_clicked_sprite)
 	{
+		int rotation = m_clicked_sprite->getRotation();
 		switch (keyCode)
 		{
 		case EventKeyboard::KeyCode::KEY_UP_ARROW:
@@ -291,6 +298,13 @@ void MapEditer::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 
 		case EventKeyboard::KeyCode::KEY_LEFT_ARROW:
 			m_clicked_sprite->setPosition(m_clicked_sprite->getPosition().x - 1, m_clicked_sprite->getPosition().y);
+			break;
+
+		case EventKeyboard::KeyCode::KEY_MINUS:
+			m_clicked_sprite->setRotation((rotation-5) % 360);
+			break;
+		case EventKeyboard::KeyCode::KEY_EQUAL:
+			m_clicked_sprite->setRotation((rotation+5) % 360);
 			break;
 
 		}

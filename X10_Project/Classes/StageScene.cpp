@@ -286,7 +286,7 @@ void StageScene::ClickCharacter(Ref* pSender, int stageNum)
 	//애니매이션 및 사운드 재생하는 부분
 	if (character)
 	{
-		float timeLength = 1.5f;
+		float timeLength = 2.f;
 		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/footsteps.mp3");
 		StageScene* tmp = StageScene::create();
 		Point finishPos = tmp->GetCharacterPosition(stageNum);

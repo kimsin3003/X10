@@ -96,8 +96,14 @@ namespace FileStuff
 
 	const string BRICK_DESTRUCT_ANI = "brick_destruct";
 
-	const string FIREWORK_EXPLOSION_SOUND = "res/sound_effects/firework_explosion3.mp3";
-	const string FIREWORK_FLYING_SOUND = "res/sound_effects/firework_flying.mp3";
-	const string FIREWORK_METAL_SOUND = "res/sound_effects/metal_ting.mp3";
+	extern const char* FIREWORK_EXPLOSION_SOUND;
+	extern const char* FIREWORK_FLYING_SOUND;
+	extern const char* FIREWORK_METAL_SOUND;
+	extern const char* STONE_BREAK_SOUND;
+
+	extern const char* MAIN_BACKGROUND_SOUND;
+	extern const char* INITIAL_BACKGROUND_SOUND;
+	extern const char* MIDDLE_PHASE_BACKGROUND_SOUND;
+	extern const char* BEFORE_ENDING_BACKGROUND_SOUND;
 	
 }

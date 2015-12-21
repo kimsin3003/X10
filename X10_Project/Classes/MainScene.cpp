@@ -12,6 +12,8 @@
 #include "MapEditer.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
+
+
 Scene* MainScene::createScene()
 {
     Scene* scene = Scene::create();
@@ -37,7 +39,7 @@ bool MainScene::init()
 	Point selectedAnchor = Point(selectedScale - 1.0, selectedScale - 1.0) / 2;
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
-		"res/bgmusic/Untold Sorrow - main_theme.wav", true);
+		FileStuff::MAIN_BACKGROUND_SOUND, true);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5f);
 
 	/*Game start Button*/
@@ -86,8 +88,7 @@ bool MainScene::init()
 void MainScene::ChangeToStageScene(Ref* pSender)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
-		"res/bgmusic/strange_night.mp3", true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::INITIAL_BACKGROUND_SOUND, true);
 	Director::getInstance()->replaceScene(StageScene::createScene());
 }
 

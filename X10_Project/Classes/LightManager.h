@@ -7,6 +7,7 @@ class LightManager
 public:
 	LightManager();
 	Sprite* GetLight(int stageNum);
+	Vec2 GetPosition(int stageNum);
 
 private:
 	void SetLights();

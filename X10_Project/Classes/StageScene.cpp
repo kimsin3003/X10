@@ -56,8 +56,7 @@ bool StageScene::init()
 
 	Sprite* background = LoadBackground();
 	addChild(background);
-//	m_character = LoadCharacter();
-//	addChild(m_character, 2.0);
+
 //	Sprite* background_bottom = LoadBGBottom();
 //	addChild(background_bottom, 2.5);
 
@@ -70,18 +69,17 @@ bool StageScene::init()
 	m_lightManager = new LightManager();
 	SetupLight();
 
-	SetupButtons();
+	SetupCharacter();
 //	SetupCollection();
 
 	return true;
 }
 
-void StageScene::SetupButtons()
+void StageScene::SetupCharacter()
 {
 	Vector<MenuItem*> menuList;
 
 	MenuItemImage* pauseButton = MakeBackButton();
-
 	menuList.pushBack(pauseButton);
 	
 	/*
@@ -92,17 +90,73 @@ void StageScene::SetupButtons()
 	*/
 
 	MenuItemImage* menuItem = MenuItemImage::create();
-
-	menuItem->setNormalImage(Sprite::create(FileStuff::CHARACTER));
-	menuItem->setSelectedImage(Sprite::create(FileStuff::CHARACTER));
-	menuItem->getSelectedImage()->setAnchorPoint(Point(0.2, 0.2));
-	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
-	menuItem->setPosition(Vec2(160,10));
-
+	menuItem->setNormalImage(
+		Sprite::createWithSpriteFrame(
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
+		)
+	);
+	menuItem->setSelectedImage(
+		Sprite::createWithSpriteFrame(
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
+		)
+	);
+	menuItem->setCallback(CC_CALLBACK_1(StageScene::ClickCharacter, this, m_stageToPlay));
+	menuItem->setPosition(GetCharacterPosition());
+	
 	menuList.pushBack(menuItem);
 	Menu* menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
 	addChild(menu);
+}
+
+Point StageScene::GetCharacterPosition()
+{
+	return  GetCharacterPosition(m_stageToPlay - 1);
+}
+
+Point StageScene::GetCharacterPosition(int stage)
+{
+	Size screenSize = Director::getInstance()->getVisibleSize();
+	if (stage == 0)
+	{
+		return Point(screenSize.width / 2 , 0);
+	}
+	LightManager mng;
+	int odd = stage % 2;
+	Vec2 lightPos = mng.GetPosition(stage);
+	float posRatio = 0.33f;
+	
+	return lightPos; //임시 리턴문
+	
+	/*
+	lightPos와 그 이전과의 lightPos , 가운데 중앙선 이 이루는 사다리 꼴에서
+	posRatio비율만큼의 대각선 거리. 짝수 탄에는 거기서 y축으로 절반만큼 간 거리.
+	*/
+
+	//첫 스테이지와 중앙선 사이의 사다리꼴 높이와 너비 계산
+	Vec2 frstUpPos = mng.GetPosition(3);
+	Vec2 frstDownPos = mng.GetPosition(1);
+	float frstHeigt = frstUpPos.y - frstDownPos.y;
+	float frstWidth = abs(screenSize.width - frstDownPos.x);
+	Vec2 frstDelta = Vec2(frstHeigt, frstWidth);
+
+	//마지막 스테이지와 중앙선 사이의 사다리꼴 높이와 너비 계산
+	Vec2 lastUpPos = mng.GetPosition(m_maxStageNum);
+	Vec2 lastDownPos = mng.GetPosition(m_maxStageNum - 2);
+	float lastHeight = lastUpPos.y - lastDownPos.y;
+	float lastWidth = abs(screenSize.width - lastUpPos.x);
+	Vec2 lastDelta = Vec2(-lastHeight, lastWidth);
+
+	Vec2 currentDelta = (stage / m_maxStageNum) * (frstDelta - lastDelta) + frstDelta;
+	
+	////미세조정
+	//currentDelta.x *= -2.5;
+	//currentDelta.x *= (odd)* (-1);
+	//currentDelta.x -= abs(currentDelta.x * 0.8);
+
+	//currentDelta.y *= (odd)* (-0.2);
+
+	return lightPos + posRatio * currentDelta;
 }
 
 void StageScene::SetupCollection()
@@ -226,8 +280,24 @@ Sprite* StageScene::LoadCharacter()
 	return character;
 }
 
+void StageScene::ClickCharacter(Ref* pSender, int stageNum)
+{
+	MenuItemImage* character = dynamic_cast<MenuItemImage*>(pSender);
+	//애니매이션 및 사운드 재생하는 부분
+	if (character)
+	{
+		StageScene* tmp = StageScene::create();
+		Point finishPos = tmp->GetCharacterPosition(stageNum);
+		MoveTo* action = MoveTo::create(1.5f, finishPos);
+		CallFuncN* goToNext = CallFuncN::create(CC_CALLBACK_0(StageScene::GotoStage, this, stageNum));
+		Sequence* seq = Sequence::create(action, goToNext, nullptr);
+		character->runAction(seq);
+	}
+}
+
 void StageScene::GotoStage(Ref* pSender, int stageNum)
 {
+	//씬 전환 하는 부분
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 

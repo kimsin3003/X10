@@ -2,7 +2,6 @@
 #include "AppDelegate.h"
 #include "MainScene.h"
 
-
 static cocos2d::Size designResolutionSize = cocos2d::Size(320, 480);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
 static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);

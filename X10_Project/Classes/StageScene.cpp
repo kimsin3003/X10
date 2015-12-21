@@ -9,13 +9,11 @@
 #include "LightManager.h"
 #include "StageInformation.h"
 //manager
-#include "CollectionManager.h"
 #include "GameManager.h"
 //config
 #include "ConstVars.h"
 #include "FileStuff.h"
 //etc
-#include "Collection.h"
 #include "Sling.h"
 #include <SimpleAudioEngine.h>
 
@@ -34,6 +32,8 @@ Scene* StageScene::createScene()
 	return scene;
 }
 
+bool StageScene::m_hasCharacterMoved = false;
+
 bool StageScene::init()
 {
 	if (!LayerColor::initWithColor(Color4B::BLACK))
@@ -48,29 +48,26 @@ bool StageScene::init()
 
 	if (m_stageToPlay == 0)
 	{
-		this->scheduleOnce(schedule_selector(StageScene::IntroEvent), 0.0f);
+		scheduleOnce(schedule_selector(StageScene::IntroEvent), 0.0f);
 		return true;
 	}
 
-	Collection::m_isLooking = false;
 
 	Sprite* background = LoadBackground();
 	addChild(background);
 
-//	Sprite* background_bottom = LoadBGBottom();
-//	addChild(background_bottom, 2.5);
-
-	//if (m_stageToPlay == m_maxStageNum) 
-	//{
-	//	this->scheduleOnce(schedule_selector(StageScene::EndingEvent), 1.5f);
-	//	return true;
-	//}
-//	m_collectionManager = new CollectionManager();
 	m_lightManager = new LightManager();
+
+
+	if (m_stageToPlay == 13)
+	{
+		scheduleOnce(schedule_selector(StageScene::EndingEvent), 0.0f);
+		return true;
+	}
+
 	SetupLight();
 
 	SetupCharacter();
-//	SetupCollection();
 
 	return true;
 }
@@ -79,16 +76,9 @@ void StageScene::SetupCharacter()
 {
 	Vector<MenuItem*> menuList;
 
-	MenuItemImage* pauseButton = MakeBackButton();
-	menuList.pushBack(pauseButton);
+	MenuItemImage* backButton = MakeBackButton();
+	menuList.pushBack(backButton);
 	
-	/*
-	for (int i = 1; i <= m_stageToPlay; i++)
-	{
-		menuList.pushBack(MakeStageButton(i, m_stageButtonPosInfo->GetStageButtonPos(i)));
-	}
-	*/
-
 	MenuItemImage* menuItem = MenuItemImage::create();
 	menuItem->setNormalImage(
 		Sprite::createWithSpriteFrame(
@@ -100,18 +90,27 @@ void StageScene::SetupCharacter()
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
 		)
 	);
-	menuItem->setCallback(CC_CALLBACK_1(StageScene::ClickCharacter, this, m_stageToPlay));
-	menuItem->setPosition(GetCharacterPosition());
+
+	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/footsteps_short.mp3");
+
+	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
+
+	if (!m_hasCharacterMoved)
+	{
+		menuItem->setPosition(GetCharacterPosition(m_stageToPlay - 1));
+		MoveTo* action = MoveTo::create(1.5f, GetCharacterPosition(m_stageToPlay));
+		menuItem->runAction(action);
+		m_hasCharacterMoved = true;
+	}
+	else
+	{
+		menuItem->setPosition(GetCharacterPosition(m_stageToPlay));
+	}
 	
 	menuList.pushBack(menuItem);
 	Menu* menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
 	addChild(menu);
-}
-
-Point StageScene::GetCharacterPosition()
-{
-	return  GetCharacterPosition(m_stageToPlay - 1);
 }
 
 Point StageScene::GetCharacterPosition(int stage)
@@ -124,45 +123,18 @@ Point StageScene::GetCharacterPosition(int stage)
 	LightManager mng;
 	int odd = stage % 2;
 	Vec2 lightPos = mng.GetPosition(stage);
-	float posRatio = 0.33f;
-	
-	return lightPos; //임시 리턴문
+	float posRatio = 1.f;
 	
 	/*
 	lightPos와 그 이전과의 lightPos , 가운데 중앙선 이 이루는 사다리 꼴에서
 	posRatio비율만큼의 대각선 거리. 짝수 탄에는 거기서 y축으로 절반만큼 간 거리.
 	*/
 
-	//첫 스테이지와 중앙선 사이의 사다리꼴 높이와 너비 계산
-	Vec2 frstUpPos = mng.GetPosition(3);
-	Vec2 frstDownPos = mng.GetPosition(1);
-	float frstHeigt = frstUpPos.y - frstDownPos.y;
-	float frstWidth = abs(screenSize.width - frstDownPos.x);
-	Vec2 frstDelta = Vec2(frstHeigt, frstWidth);
-
-	//마지막 스테이지와 중앙선 사이의 사다리꼴 높이와 너비 계산
-	Vec2 lastUpPos = mng.GetPosition(m_maxStageNum);
-	Vec2 lastDownPos = mng.GetPosition(m_maxStageNum - 2);
-	float lastHeight = lastUpPos.y - lastDownPos.y;
-	float lastWidth = abs(screenSize.width - lastUpPos.x);
-	Vec2 lastDelta = Vec2(-lastHeight, lastWidth);
-
-	Vec2 currentDelta = (stage / m_maxStageNum) * (frstDelta - lastDelta) + frstDelta;
-	
-	////미세조정
-	//currentDelta.x *= -2.5;
-	//currentDelta.x *= (odd)* (-1);
-	//currentDelta.x -= abs(currentDelta.x * 0.8);
-
-	//currentDelta.y *= (odd)* (-0.2);
+	Vec2 currentDelta = Vec2(-50, -50);
+	currentDelta.x *= -(odd);
+	currentDelta.x -= 20;
 
 	return lightPos + posRatio * currentDelta;
-}
-
-void StageScene::SetupCollection()
-{
-	m_collectionManager->InitCollections(m_stageToPlay-1);
-	m_collectionManager->AppendCollectionToLayer(this);
 }
 
 Sprite* StageScene::LoadBackground()
@@ -218,16 +190,6 @@ Sprite* StageScene::LoadBackground()
 	return background;
 }
 
-Sprite* StageScene::LoadBGBottom()
-{
-	Sprite* bottom = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
-	float scale = (Director::getInstance()->getVisibleSize().width) / (bottom->getContentSize().width);
-	bottom->setAnchorPoint(Point::ZERO);
-	bottom->setScale(scale);
-	return bottom;
-}
-
-//깨고 나면 켜지는 것
 void StageScene::SetupLight()
 {
 	switch (m_stageToPlay)
@@ -280,24 +242,22 @@ Sprite* StageScene::LoadCharacter()
 	return character;
 }
 
-void StageScene::ClickCharacter(Ref* pSender, int stageNum)
+void StageScene::MoveCharacter(Ref* pSender, int stageNum)
 {
 	MenuItemImage* character = dynamic_cast<MenuItemImage*>(pSender);
 	//애니매이션 및 사운드 재생하는 부분
 	if (character)
 	{
+		float timeLength = 2.5f;
 		StageScene* tmp = StageScene::create();
 		Point finishPos = tmp->GetCharacterPosition(stageNum);
-		MoveTo* action = MoveTo::create(1.5f, finishPos);
-		CallFuncN* goToNext = CallFuncN::create(CC_CALLBACK_0(StageScene::GotoStage, this, stageNum));
-		Sequence* seq = Sequence::create(action, goToNext, nullptr);
-		character->runAction(seq);
+		MoveTo* action = MoveTo::create(timeLength, finishPos);
+		character->runAction(action);
 	}
 }
 
 void StageScene::GotoStage(Ref* pSender, int stageNum)
 {
-	//씬 전환 하는 부분
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 
@@ -319,31 +279,9 @@ void StageScene::ChangeToStageScene(Ref* pSender)
 
 void StageScene::IntroEvent(float dt)
 {
-	//Covetous Version
-	/*
-	PrintIntroPage(FileStuff::INTRO_01, 0.0f, 8.0f);
-	PrintIntroPage(FileStuff::INTRO_02, 8.0f, 8.0f);
-	PrintIntroPage(FileStuff::INTRO_03, 16.0f, 3.0f);
-	PrintIntroPage(FileStuff::INTRO_04, 20.0f, 5.0f);
-	
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
-	
-	CallFuncN* callFuncN = CallFuncN::create(
-		CC_CALLBACK_0(StageScene::GotoStage, this, 1));
-
-	Sequence* seq = Sequence::create(
-		DelayTime::create(25.0f),
-		callFuncN,
-		nullptr);
-
-	runAction(seq);
-	*/
-
 	//FadeIn Version	
 	Vec2 deltaPos = Vec2(0, 45.0f*1.75f);
 	Vec2 textPos = Vec2(160.0f, 360.0f);
-
-	
 
 	PrintIntroText("I got lost in a highway", textPos, 0.0f, 3.0f);
 	PrintIntroText("I hate staying in dark", textPos-=deltaPos, 4.5f, 3.0f);
@@ -361,25 +299,6 @@ void StageScene::IntroEvent(float dt)
 		nullptr);
 
 	runAction(seq);
-}
-
-void StageScene::PrintIntroPage(const string& fileDir, float startTime, float keepTime)
-{
-	Sprite* page = Sprite::create(fileDir);
-	page->setPosition(Vec2(160, 240));
-	page->setAnchorPoint(Vec2::ANCHOR_MIDDLE);
-	page->setScale(1.5f);
-	page->setOpacity(0);
-	addChild(page);
-
-	Sequence* seq = Sequence::create(
-		DelayTime::create(startTime),
-		FadeIn::create(0.0f),
-		DelayTime::create(keepTime),
-		RemoveSelf::create(),
-		nullptr);
-
-	page->runAction(seq);
 }
 
 void StageScene::PrintIntroText(const string& message, const Vec2 pos, float startTime, float keepTime)
@@ -403,7 +322,47 @@ void StageScene::PrintIntroText(const string& message, const Vec2 pos, float sta
 
 void StageScene::EndingEvent(float dt)
 {
+	Sprite* character = Sprite::create(FileStuff::CHARACTER);
+	character->setPosition(GetCharacterPosition(12) - Vec2(40, 0));
+	addChild(character);
+	
+	for (int i = 1; i <= 11; i++)
+	{
+		addChild(m_lightManager->GetLight(i));
+	}
+	
 
+
+	Sequence* seq = Sequence::create(
+		DelayTime::create(2.5f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowLastLight, this)),
+		DelayTime::create(3.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadBody, this)),
+		DelayTime::create(1.0f),
+		FadeOut::create(0.0f),
+		nullptr);
+
+	runAction(seq);
+
+	//이후 태우형꺼 붙이기
+}
+
+void StageScene::ShowLastLight()
+{
+	Sprite* lastLight = Sprite::create(FileStuff::STAGE_LIGHTS_RIGHT_06);
+	lastLight->setPosition(m_lightManager->GetPosition(12));
+	addChild(lastLight);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/garo_ggambak.wav", false, 3.0f);
+	lastLight->runAction(Blink::create(3.0f, 4));
+}
+
+void StageScene::ShowDeadBody()
+{
+	Sprite* deadBody = Sprite::create(FileStuff::DEAD_BODY);
+	deadBody->setPosition(GetCharacterPosition(12) + Vec2(30, 0));
+	addChild(deadBody);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/shock.wav", true, 3.0f);
 }
 
 MenuItemImage* StageScene::MakeBackButton()
@@ -426,37 +385,4 @@ MenuItemImage* StageScene::MakeBackButton()
 		);
 
 	return button;
-}
-
-MenuItemImage* StageScene::MakeStageButton(int stageNum, Point pos)
-{
-	MenuItemImage* menuItem = MenuItemImage::create();
-	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
-
-	if (stageNum == lastStage)
-	{
-		menuItem->setNormalImage(Sprite::create(FileStuff::TOGO_STAR));
-	}
-	else if (stageNum == CollectionManager::SHOES ||
-		stageNum == CollectionManager::SCARF ||
-		stageNum == CollectionManager::BOTTLE ||
-		stageNum == CollectionManager::MONITOR ||
-		stageNum == CollectionManager::LETTER ||
-		stageNum == m_maxStageNum)
-	{
-		menuItem->setNormalImage(Sprite::create(FileStuff::SPECIAL_STAR));
-		menuItem->setScale(1.25f);
-	}
-	else
-	{
-		menuItem->setNormalImage(Sprite::create(FileStuff::NORMAL_STAR));
-	}
-	menuItem->setNormalImage(Sprite::create(FileStuff::TOGO_STAR));
-	menuItem->setSelectedImage(Sprite::create(FileStuff::STAR_ON));
-	//menuItem->getSelectedImage()->setAnchorPoint(Point(0.2, 0.2));
-	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, stageNum));
-	menuItem->setPosition(pos);
-
-	
-	return menuItem;
 }

@@ -78,7 +78,7 @@ bool TargetManager::HasEnemy()
 {
 	for (int i = 0; i < m_targets.size(); i++)
 	{
-		Target* target = m_targets.at(i); ///# 습관의 문제
+		Target* target = m_targets.at(i);
 		if (target->IsEnemy())
 		{
 			return true;

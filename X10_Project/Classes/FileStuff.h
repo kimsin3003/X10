@@ -106,4 +106,5 @@ namespace FileStuff
 	extern const char* MIDDLE_PHASE_BACKGROUND_SOUND;
 	extern const char* BEFORE_ENDING_BACKGROUND_SOUND;
 	
+	const string DEAD_BODY = "res/dead_body.png";
 }

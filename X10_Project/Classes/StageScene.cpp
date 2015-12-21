@@ -331,8 +331,6 @@ void StageScene::EndingEvent(float dt)
 		addChild(m_lightManager->GetLight(i));
 	}
 	
-
-
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowLastLight, this)),

@@ -31,8 +31,15 @@ bool MainScene::init()
 	{
 		return false;
 	}
+
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
 
+	m_garo = Sprite::create(FileStuff::GARO);
+	addChild(m_garo);
+
+	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	addChild(m_character);
+	
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	float selectedScale = 1.2;
@@ -43,10 +50,15 @@ bool MainScene::init()
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5f);
 
 	/*Game start Button*/
-	MenuItemImage* startGame = MenuItemImage::create(FileStuff::START_IMG, FileStuff::START_IMG, CC_CALLBACK_1(MainScene::ChangeToStageScene, this));
+	MenuItemImage* startGame = MenuItemImage::create(FileStuff::START_IMG, FileStuff::START_IMG, CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
 	startGame->getSelectedImage()->setAnchorPoint(selectedAnchor);
 	startGame->getSelectedImage()->setScale(selectedScale);
 	startGame->setPosition(visibleSize.width / 2, visibleSize.height / 2 + startGame->getContentSize().height * startGame->getScale());
+	
+
+	m_garo->setPosition(startGame->getPosition()+Vec2(-90, 30));
+	m_character->setPosition(m_garo->getPosition()+Vec2(30, -200));
+	m_garoPos = m_garo->getPosition();
 
 	/*MapEditer Button*/
 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 50), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
@@ -88,7 +100,31 @@ void MainScene::ChangeToStageScene(Ref* pSender)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::INITIAL_BACKGROUND_SOUND, true);
+
 	Director::getInstance()->replaceScene(StageScene::createScene());
+}
+
+void MainScene::ChangeToStageSceneEffect(Ref* pSender)
+{
+	m_character->runAction(MoveTo::create(2.0f, m_garo->getPosition() + Vec2(10, -40)));
+	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/footsteps_short.mp3");
+
+	Sequence* seq = Sequence::create(
+		DelayTime::create(2.5f),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::ShowGaro, this)),
+		DelayTime::create(1.0f),
+		CallFuncN::create(CC_CALLBACK_1(MainScene::ChangeToStageScene, this)),
+		nullptr);
+
+	runAction(seq);
+}
+
+void MainScene::ShowGaro()
+{
+	m_garo->removeFromParent();
+	m_garo = Sprite::create(FileStuff::GARO_ON);
+	addChild(m_garo);
+	m_garo->setPosition(m_garoPos);
 }
 
 void MainScene::ChangeToMapEditScene(Ref* pSender)
@@ -115,3 +151,4 @@ void MainScene::menuCloseCallback(Ref* pSender)
 {
     Director::getInstance()->end();
 }
+

@@ -82,13 +82,6 @@ void StageScene::SetupCharacter()
 	MenuItemImage* pauseButton = MakeBackButton();
 	menuList.pushBack(pauseButton);
 	
-	/*
-	for (int i = 1; i <= m_stageToPlay; i++)
-	{
-		menuList.pushBack(MakeStageButton(i, m_stageButtonPosInfo->GetStageButtonPos(i)));
-	}
-	*/
-
 	MenuItemImage* menuItem = MenuItemImage::create();
 	menuItem->setNormalImage(
 		Sprite::createWithSpriteFrame(
@@ -100,8 +93,14 @@ void StageScene::SetupCharacter()
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
 		)
 	);
-	menuItem->setCallback(CC_CALLBACK_1(StageScene::ClickCharacter, this, m_stageToPlay));
-	menuItem->setPosition(GetCharacterPosition());
+
+	//발자국 소리
+	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/footsteps_short.mp3");
+
+	menuItem->setPosition(GetCharacterPosition(m_stageToPlay - 1));
+	MoveTo* action = MoveTo::create(1.5f, GetCharacterPosition(m_stageToPlay));
+	menuItem->runAction(action);
+	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
 	
 	menuList.pushBack(menuItem);
 	Menu* menu = Menu::createWithArray(menuList);
@@ -109,10 +108,6 @@ void StageScene::SetupCharacter()
 	addChild(menu);
 }
 
-Point StageScene::GetCharacterPosition()
-{
-	return  GetCharacterPosition(m_stageToPlay - 1);
-}
 
 Point StageScene::GetCharacterPosition(int stage)
 {
@@ -124,37 +119,16 @@ Point StageScene::GetCharacterPosition(int stage)
 	LightManager mng;
 	int odd = stage % 2;
 	Vec2 lightPos = mng.GetPosition(stage);
-	float posRatio = 0.33f;
-	
-	return lightPos; //임시 리턴문
+	float posRatio = 1.f;
 	
 	/*
 	lightPos와 그 이전과의 lightPos , 가운데 중앙선 이 이루는 사다리 꼴에서
 	posRatio비율만큼의 대각선 거리. 짝수 탄에는 거기서 y축으로 절반만큼 간 거리.
 	*/
 
-	//첫 스테이지와 중앙선 사이의 사다리꼴 높이와 너비 계산
-	Vec2 frstUpPos = mng.GetPosition(3);
-	Vec2 frstDownPos = mng.GetPosition(1);
-	float frstHeigt = frstUpPos.y - frstDownPos.y;
-	float frstWidth = abs(screenSize.width - frstDownPos.x);
-	Vec2 frstDelta = Vec2(frstHeigt, frstWidth);
-
-	//마지막 스테이지와 중앙선 사이의 사다리꼴 높이와 너비 계산
-	Vec2 lastUpPos = mng.GetPosition(m_maxStageNum);
-	Vec2 lastDownPos = mng.GetPosition(m_maxStageNum - 2);
-	float lastHeight = lastUpPos.y - lastDownPos.y;
-	float lastWidth = abs(screenSize.width - lastUpPos.x);
-	Vec2 lastDelta = Vec2(-lastHeight, lastWidth);
-
-	Vec2 currentDelta = (stage / m_maxStageNum) * (frstDelta - lastDelta) + frstDelta;
-	
-	////미세조정
-	//currentDelta.x *= -2.5;
-	//currentDelta.x *= (odd)* (-1);
-	//currentDelta.x -= abs(currentDelta.x * 0.8);
-
-	//currentDelta.y *= (odd)* (-0.2);
+	Vec2 currentDelta = Vec2(-50, -50);
+	currentDelta.x *= -(odd);
+	currentDelta.x -= 20;
 
 	return lightPos + posRatio * currentDelta;
 }
@@ -280,22 +254,17 @@ Sprite* StageScene::LoadCharacter()
 	return character;
 }
 
-void StageScene::ClickCharacter(Ref* pSender, int stageNum)
+void StageScene::MoveCharacter(Ref* pSender, int stageNum)
 {
 	MenuItemImage* character = dynamic_cast<MenuItemImage*>(pSender);
 	//애니매이션 및 사운드 재생하는 부분
 	if (character)
 	{
-		float timeLength = 2.f;
-		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/footsteps.mp3");
+		float timeLength = 2.5f;
 		StageScene* tmp = StageScene::create();
 		Point finishPos = tmp->GetCharacterPosition(stageNum);
 		MoveTo* action = MoveTo::create(timeLength, finishPos);
-
-		CallFuncN* goToNext = CallFuncN::create(CC_CALLBACK_0(StageScene::GotoStage, this, stageNum));
-		Sequence* seq = Sequence::create(action, goToNext, nullptr);
-		character->runAction(seq);
-		
+		character->runAction(action);
 	}
 }
 

@@ -10,7 +10,7 @@ public:
 	CREATE_FUNC(StageScene);
 	virtual bool init();
 	static void GotoStage(Ref* pSender,int stageNum);
-	void ClickCharacter(Ref* character, int stageNum);
+	void MoveCharacter(Ref* character, int stageNum);
 
 private:
 	void SetupCharacter();
@@ -26,7 +26,6 @@ private:
 
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
-	Point GetCharacterPosition();
 	Point GetCharacterPosition(int stage);
 	Sprite* LoadBGBottom();
 	void SetupLight();

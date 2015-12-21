@@ -37,7 +37,7 @@ bool GameScene::init()
 	addChild(m_gameLayer);
 	
 	m_uiLayer = UILayer::create();
-	addChild(m_uiLayer);
+	addChild(m_uiLayer,10.0);
 	
 	m_gameManager = GameManager::GetInstance();
 

@@ -13,9 +13,16 @@ public:
 
 private:
 	void ChangeToStageScene(Ref* pSender);
+	void ChangeToStageSceneEffect(Ref* pSender);
+	void ShowGaro();
+	
 	void ChangeToMapEditScene(Ref* pSender);
 
 	void ChangeToJWScene(Ref* pSender);
 	void ChangeToMCScene(Ref* pSender);
 	void ChangeToTWScene(Ref* pSender);
+
+	Sprite* m_garo;
+	Sprite* m_character;
+	Vec2 m_garoPos;
 };

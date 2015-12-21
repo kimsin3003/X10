@@ -226,6 +226,7 @@ void MapEditer::RightMouseDown(EventMouse* event)
 			break;
 		}
 	}
+	m_clicked_sprite = nullptr;
 }
 
 void MapEditer::WheelDown(EventMouse* event)
@@ -300,12 +301,12 @@ void MapEditer::OnKeyPressed(EventKeyboard::KeyCode keyCode)
 			m_clicked_sprite->setPosition(m_clicked_sprite->getPosition().x - 1, m_clicked_sprite->getPosition().y);
 			break;
 
-		case EventKeyboard::KeyCode::KEY_MINUS:
-			m_clicked_sprite->setRotation((rotation-5) % 360);
-			break;
-		case EventKeyboard::KeyCode::KEY_EQUAL:
-			m_clicked_sprite->setRotation((rotation+5) % 360);
-			break;
+		//case EventKeyboard::KeyCode::KEY_MINUS:
+		//	m_clicked_sprite->setRotation((rotation-5) % 360);
+		//	break;
+		//case EventKeyboard::KeyCode::KEY_EQUAL:
+		//	m_clicked_sprite->setRotation((rotation+5) % 360);
+		//	break;
 
 		}
 	}

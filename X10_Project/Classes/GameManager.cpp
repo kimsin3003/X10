@@ -268,14 +268,15 @@ void GameManager::WinProgress(UILayer* uiLayer)
 		m_stage == CollectionManager::MONITOR ||
 		m_stage == CollectionManager::LETTER))
 	{
-		EarnCollectionEvent(uiLayer);
+		//EarnCollectionEvent(uiLayer);
 
-		DelayTime* waitEventTime = DelayTime::create(4.50f);
-		CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(
-			UILayer::MakeSuccessWidget, uiLayer, m_stage));
-		Sequence* waitAndshow = Sequence::create(waitEventTime, showWidget, NULL);
+		//DelayTime* waitEventTime = DelayTime::create(4.50f);
+		//CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(
+		//	UILayer::MakeSuccessWidget, uiLayer, m_stage));
+		//Sequence* waitAndshow = Sequence::create(waitEventTime, showWidget, NULL);
 
-		uiLayer->runAction(waitAndshow);
+		//uiLayer->runAction(waitAndshow);
+		uiLayer->MakeSuccessWidget(m_stage);
 	}
 	else
 	{

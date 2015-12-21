@@ -12,6 +12,7 @@ protected:
 	void ToSelf(const Explosion* explosion);
 
 private:
+	void Respawn();
 	Sprite* m_feather;
 
 	enum 

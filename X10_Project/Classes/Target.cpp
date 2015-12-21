@@ -28,6 +28,7 @@ void Target::ApplyCollisionEffect(Collider* collider)
 		ToSelf(static_cast<Explosion*>(collider));
 	}
 }
+
 const Rect Target::GetBoundingArea()
 { 
 	//Vector<Rect> areas;

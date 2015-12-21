@@ -31,21 +31,18 @@ private:
 	~GameManager();
 	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
 	void WinProgress(UILayer* uiLayer);
-	void EarnCollectionEvent(UILayer* uiLayer);
 	void FailProgress(UILayer* uiLayer);
 	void ControlWinFailProgress(UILayer* uiLayer);
 	void EnemyDyingEffect();
-	void SetCollectionPos(const Vec2& pos);
 	void Reset();
 
 	static GameManager* m_instance;
 	ColliderManager* m_colliderManager;
 	TargetManager* m_targetManager;
-	CollectionManager* m_collectionManager;
 	Sling* m_sling;
-	Sprite* m_curCollection;
 	
-	int m_stage;
+	int m_curStageNum;
 	bool m_isJudged;
 	Target* m_lastTarget;
+	Vector<Sprite*> m_bulletNumUI;
 };

@@ -178,7 +178,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\LightManager.cpp" />
     <ClCompile Include="..\Classes\StageInformation.cpp" />
     <ClCompile Include="..\Classes\StageScene.cpp" />
-    <ClCompile Include="..\Classes\Star.cpp" />
+    <ClCompile Include="..\Classes\Stone.cpp" />
     <ClCompile Include="..\Classes\stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
     </ClCompile>
@@ -221,7 +221,7 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\LightManager.h" />
     <ClInclude Include="..\Classes\StageInformation.h" />
     <ClInclude Include="..\Classes\StageScene.h" />
-    <ClInclude Include="..\Classes\Star.h" />
+    <ClInclude Include="..\Classes\Stone.h" />
     <ClInclude Include="..\Classes\stdafx.h" />
     <ClInclude Include="..\Classes\Target.h" />
     <ClInclude Include="..\Classes\TargetManager.h" />

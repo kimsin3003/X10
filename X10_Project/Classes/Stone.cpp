@@ -1,15 +1,17 @@
 #include "stdafx.h"
 #include "Target.h"
-#include "Star.h"
+#include "Stone.h"
 #include "FileStuff.h"
 #include "Bullet.h"
+#include <SimpleAudioEngine.h>
 
-bool Star::init()
+bool Stone::init()
 {
 	if (!Target::init())
 	{
 		return false;
 	}
+
 	m_spr = Sprite::create(FileStuff::STAR_SAD);
 	addChild(m_spr);
 	m_applyEffectToMe = true;
@@ -17,7 +19,7 @@ bool Star::init()
 	return true;
 }
 
-void Star::ToBullet(Bullet* bullet)
+void Stone::ToBullet(Bullet* bullet)
 {
 	if (m_applyEffectToBullet)
 	{
@@ -26,7 +28,7 @@ void Star::ToBullet(Bullet* bullet)
 	}
 }
 
-void Star::ToSelf(const Bullet* bullet)
+void Stone::ToSelf(const Bullet* bullet)
 {
 	if (m_applyEffectToMe)
 	{
@@ -34,6 +36,8 @@ void Star::ToSelf(const Bullet* bullet)
 		m_spr = Sprite::create(FileStuff::STAR_HAPPY);
 		addChild(m_spr);
 		m_applyEffectToMe = false;
+
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::STONE_BREAK_SOUND, false, 1, 0, 1);
 
 		int frameCut = DESTRUCT_FRAMES;
 		float frameTime = Director::getInstance()->getSecondsPerFrame()*10.0;
@@ -57,14 +61,14 @@ void Star::ToSelf(const Bullet* bullet)
 		//remove self
 		Sequence* action = Sequence::create(
 			DelayTime::create(frameTime*frameCut),
-			CallFunc::create(CC_CALLBACK_0(Star::EraseOn, this)),
+			CallFunc::create(CC_CALLBACK_0(Stone::EraseOn, this)),
 			NULL);
 
 		m_spr->runAction(action);
 	}
 }
 
-void Star::ToSelf(const Explosion* explosion)
+void Stone::ToSelf(const Explosion* explosion)
 {
 
 }

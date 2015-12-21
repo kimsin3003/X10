@@ -14,7 +14,6 @@ bool UILayer::init()
 		return false;
 	}
 
-
 	Director* dir = Director::getInstance();
 	Size visibleSize = dir->getVisibleSize();
 	Vec2 origin = dir->getVisibleOrigin();

@@ -18,7 +18,7 @@ public:
 
 private:
 	Sprite* LoadBackground();
-	Sprite* LoadCharacter();
+//	Sprite* LoadCharacter();
 	Sprite* LoadBGBottom();
 
 	Sprite* m_character;

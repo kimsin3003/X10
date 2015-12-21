@@ -1,9 +1,9 @@
 #pragma once
 
-class Star : public Target
+class Stone : public Target
 {
 public:
-	CREATE_FUNC(Star);
+	CREATE_FUNC(Stone);
 	bool init();
 
 	enum 

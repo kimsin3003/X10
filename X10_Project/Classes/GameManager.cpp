@@ -10,7 +10,6 @@
 #include "StageScene.h"
 #include "GameScene.h"
 //매니저
-#include "CollectionManager.h"
 #include "ColliderManager.h"
 #include "TargetManager.h"
 //컬라이더
@@ -65,7 +64,7 @@ void GameManager::SetStage(GameLayer* gameLayer, UILayer* uiLayer, int stageNum)
 	m_colliderManager->InitBullets(&stageInfo);
 	AppendBulletsToLayer(uiLayer);
 	m_sling = InitSling(gameLayer);
-	m_stage = stageNum;
+	m_curStageNum = stageNum;
 }
 
 Sling* GameManager::InitSling(GameLayer* gameLayer)
@@ -206,56 +205,6 @@ void GameManager::EnemyDyingEffect()
 	*/
 }
 
-void GameManager::SetCollectionPos(const Vec2& pos)
-{
-	const Vec2 compensateToParentPos = Vec2(160, 0);
-	m_curCollection->setPosition(pos + compensateToParentPos);
-}
-
-void GameManager::EarnCollectionEvent(UILayer* uiLayer)
-{
-	GameScene* gameScene = static_cast<GameScene*>(uiLayer->getParent());
-	const Point& enemyPos = m_targetManager->GetEnemyPosition();
-	const Vec2& aboveCharacterPos = gameScene->GetCharacterPos() + Vec2(0, 100);
-
-	m_curCollection = m_collectionManager->GetCollectionSprOfStage(m_stage);
-	m_curCollection->setPosition(enemyPos);
-	uiLayer->addChild(m_curCollection);
-
-	//part 1
-	MoveBy* moveBy_00 = MoveBy::create(1.50f, Point(0, -10));
-	MoveBy* moveBy_01 = MoveBy::create(1.00f, Point(0, -10));
-
-	Blink* blink_00 = Blink::create(1.50f, 5);
-	Blink* blink_01 = Blink::create(1.00f, 5);
-
-	FadeIn* fadeIn_00 = FadeIn::create(1.50f);
-	FadeOut* fadeOut_00 = FadeOut::create(1.00f);
-
-	Spawn* spawn_00 = Spawn::create(fadeIn_00, moveBy_00, blink_00, NULL);
-	Spawn* spawn_01 = Spawn::create(fadeOut_00, moveBy_01, blink_01, NULL);
-
-	//part 2
-	CallFuncN* callFuncN = CallFuncN::create(CC_CALLBACK_0
-		(GameManager::SetCollectionPos, this, aboveCharacterPos));
-
-	MoveBy* moveBy_02 = MoveBy::create(1.50f, Point(0, -30));
-	MoveBy* moveBy_03 = MoveBy::create(1.00f, Point(0, -20));
-
-	Blink* blink_02 = Blink::create(1.50f, 5);
-	Blink* blink_03 = Blink::create(1.00f, 5);
-
-	FadeIn* fadeIn_01 = FadeIn::create(0.01f);
-	FadeOut* fadeOut_01 = FadeOut::create(2.50f);
-
-	Spawn* spawn_02 = Spawn::create(fadeIn_01, moveBy_02, blink_02, NULL);
-	Spawn* spawn_03 = Spawn::create(fadeOut_01, moveBy_03, blink_03, NULL);
-
-	Sequence* sequence = Sequence::create(
-		spawn_00, spawn_01, callFuncN, spawn_02, spawn_03, NULL);
-
-	m_curCollection->runAction(sequence);
-}
 
 void GameManager::WinProgress(UILayer* uiLayer)
 {
@@ -263,50 +212,30 @@ void GameManager::WinProgress(UILayer* uiLayer)
 
 	StageScene::m_hasCharacterMoved = false;
 
-	if (m_stage == lastStage &&
-		(m_stage == CollectionManager::SHOES ||
-		m_stage == CollectionManager::SCARF ||
-		m_stage == CollectionManager::BOTTLE ||
-		m_stage == CollectionManager::MONITOR ||
-		m_stage == CollectionManager::LETTER))
-	{
-		//EarnCollectionEvent(uiLayer);
-
-		//DelayTime* waitEventTime = DelayTime::create(4.50f);
-		//CallFuncN* showWidget = CallFuncN::create(CC_CALLBACK_0(
-		//	UILayer::MakeSuccessWidget, uiLayer, m_stage));
-		//Sequence* waitAndshow = Sequence::create(waitEventTime, showWidget, NULL);
-
-		//uiLayer->runAction(waitAndshow);
-		uiLayer->MakeSuccessWidget(m_stage);
-	}
-	else
-	{
-		if (m_stage==0)
-		{
-			Director::getInstance()->popScene();
-		}
-		else
-		{
-			uiLayer->MakeSuccessWidget(m_stage);
-		}
-	}
-
-	if (lastStage == m_stage && m_stage + 1 <= StageInformation::GetMaxStageNum())
-	{
-		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_stage + 1);
-	}
-}
-
-void GameManager::FailProgress(UILayer* uiLayer)
-{
-	if (m_stage == 0)
+	if (m_curStageNum == 0)
 	{
 		Director::getInstance()->popScene();
 	}
 	else
 	{
-		uiLayer->MakeFailWidget(m_stage);
+		uiLayer->MakeSuccessWidget(m_curStageNum);
+	}
+
+	if (lastStage == m_curStageNum && m_curStageNum + 1 <= StageInformation::GetMaxStageNum())
+	{
+		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_curStageNum + 1);
+	}
+}
+
+void GameManager::FailProgress(UILayer* uiLayer)
+{
+	if (m_curStageNum == 0)
+	{
+		Director::getInstance()->popScene();
+	}
+	else
+	{
+		uiLayer->MakeFailWidget(m_curStageNum);
 	}
 }
 

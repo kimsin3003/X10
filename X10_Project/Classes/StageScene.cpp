@@ -201,7 +201,7 @@ void StageScene::SetupLight()
 		if (m_stageToPlay <= 14)
 		{
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("res/bgmusic/no_way....mp3", true);
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::BEFORE_ENDING_BACKGROUND_SOUND, true);
 		}
 		addChild(m_lightManager->GetLight(11));
 	case 11:
@@ -220,7 +220,7 @@ void StageScene::SetupLight()
 		if (m_stageToPlay <= 5)
 		{
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic("res/bgmusic/something's_wrong.mp3", true);
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::MIDDLE_PHASE_BACKGROUND_SOUND, true);
 		}
 		addChild(m_lightManager->GetLight(4));
 	case 4:

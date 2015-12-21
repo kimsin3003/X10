@@ -89,6 +89,7 @@ void GameManager::AppendBulletsToLayer(UILayer* uiLayer)
 	{
 		Bullet* bullet = static_cast<Bullet*>(m_colliderManager->m_colliders.at(i));
 		Sprite* bulletSpr = bullet->GetSprite();
+		m_bulletNumUI.pushBack(bulletSpr);
 		uiLayer->addChild(bulletSpr);
 		bulletSpr->setPosition(Vec2(45 + i*25, 50));
 	}
@@ -106,6 +107,9 @@ void GameManager::ShotBullet(Sling* sling)
 		UILayer* uiLayer = gameScene->GetUILayer();
 
 		gameLayer->addChild(bullet);
+
+		m_bulletNumUI.back()->removeFromParent();
+		m_bulletNumUI.popBack();
 
 		sling->ShotComplete();
 

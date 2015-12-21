@@ -11,6 +11,7 @@ public:
 	virtual bool init();
 	static void GotoStage(Ref* pSender,int stageNum);
 	void MoveCharacter(Ref* character, int stageNum);
+	static bool m_isStepPlayed;
 
 private:
 	void SetupCharacter();
@@ -39,4 +40,5 @@ private:
 
 	int m_maxStageNum;
 	int m_stageToPlay;
+
 };

@@ -34,6 +34,8 @@ Scene* StageScene::createScene()
 	return scene;
 }
 
+bool StageScene::m_isStepPlayed = false;
+
 bool StageScene::init()
 {
 	if (!LayerColor::initWithColor(Color4B::BLACK))
@@ -94,13 +96,23 @@ void StageScene::SetupCharacter()
 		)
 	);
 
+
 	//발자국 소리
 	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/footsteps_short.mp3");
 
-	menuItem->setPosition(GetCharacterPosition(m_stageToPlay - 1));
-	MoveTo* action = MoveTo::create(1.5f, GetCharacterPosition(m_stageToPlay));
-	menuItem->runAction(action);
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
+
+	if (!m_isStepPlayed)
+	{
+		menuItem->setPosition(GetCharacterPosition(m_stageToPlay - 1));
+		MoveTo* action = MoveTo::create(1.5f, GetCharacterPosition(m_stageToPlay));
+		menuItem->runAction(action);
+		m_isStepPlayed = true;
+	}
+	else
+	{
+		menuItem->setPosition(GetCharacterPosition(m_stageToPlay));
+	}
 	
 	menuList.pushBack(menuItem);
 	Menu* menu = Menu::createWithArray(menuList);

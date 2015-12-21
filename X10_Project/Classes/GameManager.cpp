@@ -261,6 +261,8 @@ void GameManager::WinProgress(UILayer* uiLayer)
 {
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
+	StageScene::m_isStepPlayed = false;
+
 	if (m_stage == lastStage &&
 		(m_stage == CollectionManager::SHOES ||
 		m_stage == CollectionManager::SCARF ||

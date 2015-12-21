@@ -52,16 +52,19 @@ bool StageScene::init()
 		return true;
 	}
 
+
+	Sprite* background = LoadBackground();
+	addChild(background);
+
+	m_lightManager = new LightManager();
+
+
 	if (m_stageToPlay == 13)
 	{
 		scheduleOnce(schedule_selector(StageScene::EndingEvent), 0.0f);
 		return true;
 	}
 
-	Sprite* background = LoadBackground();
-	addChild(background);
-
-	m_lightManager = new LightManager();
 	SetupLight();
 
 	SetupCharacter();
@@ -319,10 +322,47 @@ void StageScene::PrintIntroText(const string& message, const Vec2 pos, float sta
 
 void StageScene::EndingEvent(float dt)
 {
-	//불 켜질 때 확 켜지는 소리
-	//하얀 시체 
-	//텅 불꺼지는 소리(정신 나감)
-	//이후 태우 형꺼 이어붙이기
+	Sprite* character = Sprite::create(FileStuff::CHARACTER);
+	character->setPosition(GetCharacterPosition(12) - Vec2(40, 0));
+	addChild(character);
+	
+	for (int i = 1; i <= 11; i++)
+	{
+		addChild(m_lightManager->GetLight(i));
+	}
+	
+
+
+	Sequence* seq = Sequence::create(
+		DelayTime::create(2.5f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowLastLight, this)),
+		DelayTime::create(3.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadBody, this)),
+		DelayTime::create(1.0f),
+		FadeOut::create(0.0f),
+		nullptr);
+
+	runAction(seq);
+
+	//이후 태우형꺼 붙이기
+}
+
+void StageScene::ShowLastLight()
+{
+	Sprite* lastLight = Sprite::create(FileStuff::STAGE_LIGHTS_RIGHT_06);
+	lastLight->setPosition(m_lightManager->GetPosition(12));
+	addChild(lastLight);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/garo_ggambak.wav", false, 3.0f);
+	lastLight->runAction(Blink::create(3.0f, 4));
+}
+
+void StageScene::ShowDeadBody()
+{
+	Sprite* deadBody = Sprite::create(FileStuff::DEAD_BODY);
+	deadBody->setPosition(GetCharacterPosition(12) + Vec2(30, 0));
+	addChild(deadBody);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/shock.wav", true, 3.0f);
 }
 
 MenuItemImage* StageScene::MakeBackButton()

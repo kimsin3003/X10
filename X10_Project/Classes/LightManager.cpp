@@ -38,18 +38,18 @@ void LightManager::SetLights()
 void LightManager::InitPositions()
 {
 	m_positions.push_back(Vec2(0,0)); //dummy
-	m_positions.push_back(Vec2(50 + 15, 95 - 10));
+	m_positions.push_back(Vec2(50 + 15, 95 - 10)); //1
 	m_positions.push_back(Vec2(222+18, 94 - 7));
-	m_positions.push_back(Vec2(60 + 15, 201- 7));
+	m_positions.push_back(Vec2(60 + 15, 201- 7)); //2
 	m_positions.push_back(Vec2(217 + 15, 200 - 5));
-	m_positions.push_back(Vec2(86 + 10, 290 - 5));
+	m_positions.push_back(Vec2(86 + 10, 290 - 5)); //3
 	m_positions.push_back(Vec2(209 + 13, 290 - 5));
-	m_positions.push_back(Vec2(93 + 11, 356));
+	m_positions.push_back(Vec2(93 + 11, 356)); //4
 	m_positions.push_back(Vec2(204 + 10, 357 - 3));
-	m_positions.push_back(Vec2(102 + 10, 414-1));
+	m_positions.push_back(Vec2(102 + 10, 414-1)); //5
 	m_positions.push_back(Vec2(202 + 5, 416 - 3));
-	m_positions.push_back(Vec2(110 + 15, 467));
-	m_positions.push_back(Vec2(194 + 15, 468));
+	m_positions.push_back(Vec2(110 + 11, 470)); //6
+	m_positions.push_back(Vec2(194 + 11, 470));
 }
 
 Vec2 LightManager::GetPosition(int stageNum)

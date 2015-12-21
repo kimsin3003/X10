@@ -21,7 +21,8 @@ private:
 	void PrintIntroText(const string& message, const Vec2 pos, float startTime, float keepTime);
 	
 	void EndingEvent(float dt);
-
+	void ShowLastLight();
+	void ShowDeadBody();
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
 	Point GetCharacterPosition(int stage);

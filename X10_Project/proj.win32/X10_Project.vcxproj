@@ -168,7 +168,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\jsoncpp.cpp" />
     <ClCompile Include="..\Classes\JWScene.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
-    <ClCompile Include="..\Classes\MapEditLayer.cpp" />
     <ClCompile Include="..\Classes\MapEditer.cpp" />
     <ClCompile Include="..\Classes\MCScene.cpp" />
     <ClCompile Include="..\Classes\Mirror.cpp" />
@@ -211,7 +210,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\json\json.h" />
     <ClInclude Include="..\Classes\JWScene.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
-    <ClInclude Include="..\Classes\MapEditLayer.h" />
     <ClInclude Include="..\Classes\MapEditer.h" />
     <ClInclude Include="..\Classes\MCScene.h" />
     <ClInclude Include="..\Classes\Mirror.h" />

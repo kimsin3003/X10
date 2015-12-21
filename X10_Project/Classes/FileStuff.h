@@ -107,4 +107,5 @@ namespace FileStuff
 	extern const char* BEFORE_ENDING_BACKGROUND_SOUND;
 	
 	const string DEAD_BODY = "res/dead_body.png";
+	const string BEFORE_CRASHING_0 = "res/bg/car_crashing.jpg";
 }

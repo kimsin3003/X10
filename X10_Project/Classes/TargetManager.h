@@ -6,8 +6,6 @@ class StageInformation;
 class TargetManager
 {
 public:
-	///# 생성자는 어디? 멤버 초기화는 어디서?
-
 	~TargetManager() { m_targets.clear(); }
 	void InitTargets(StageInformation* si);
 	void ResetTargets();

@@ -23,7 +23,6 @@ bool GameScene::init()
 	{
 		return false;
 	}
-	
 	m_background = LoadBackground();
 	addChild(m_background);
 

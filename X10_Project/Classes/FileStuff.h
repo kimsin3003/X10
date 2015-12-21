@@ -8,6 +8,7 @@ namespace FileStuff
 	const string BACKGROUND_BOTTOM = "res/background_bottom.png";
 
 	const string CHARACTER = "res/target/black_man.png";
+	const string CHARACTER_SELECTED = "black_man_selected.png";
 	const string CHARACTER_HARDPIXEL = "black_man.png";
 	const string CHARACTER_STANDING = "black_man.png";
 	const string CHARACTER_ARM = "black_man_arm.png";

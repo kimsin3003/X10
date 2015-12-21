@@ -52,6 +52,11 @@ void LightManager::InitPositions()
 	m_positions.push_back(Vec2(194 + 15, 468));
 }
 
+Vec2 LightManager::GetPosition(int stageNum)
+{
+	return m_positions.at(stageNum);
+}
+
 Sprite* LightManager::MakeLight(string fileDir, int idx)
 {
 	Sprite* spr = Sprite::create(fileDir);

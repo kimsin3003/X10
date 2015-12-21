@@ -17,6 +17,7 @@ public:
 	void Pull(Event* e);
 	void Shot(Event* e);
 	
+	void RemoveDots();
 	bool IsShotted();
 	Vec2 GetDirection();
 	float GetAngleInRadian();
@@ -55,9 +56,12 @@ private:
 
 	Point GetStartLocation();
 	
+	Sprite* LoadCharacter();
+
 	int m_status;
 	Vec2 m_shotAngle;
 	Sprite* m_arm;
+	Sprite* m_character;
 	float m_shotPower;
 	Vector<Sprite*> m_expectLine;
 	Vector<Sprite*> m_beforeLine;

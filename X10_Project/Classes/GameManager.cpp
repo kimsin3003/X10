@@ -335,7 +335,10 @@ bool GameManager::IsCollision(Target* target, Collider* collider)
 	const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
 	const Rect targetBoundingBox = target->GetBoundingArea();
 
-	if (rotation < 1 && rotation > -1){ //회전이 거의 없는 경우
+	if (rotation< 3 && rotation > -3 
+		|| rotation< 93 && rotation > 87 
+		|| rotation< 183 && rotation > 177 
+		|| rotation< 273 && rotation > 267){ //회전이 거의 없는 경우
 		//예전 사각형 충돌 판정	
 		if (targetBoundingBox.intersectsRect(colliderBoundingBox))
 			return true;

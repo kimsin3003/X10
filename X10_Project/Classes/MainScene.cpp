@@ -42,7 +42,6 @@ bool MainScene::init()
 
 	/*Game start Button*/
 	MenuItemImage* startGame = MenuItemImage::create(FileStuff::START_IMG, FileStuff::START_IMG, CC_CALLBACK_1(MainScene::ChangeToStageScene, this));
-	startGame->setScale(4.0);
 	startGame->getSelectedImage()->setAnchorPoint(selectedAnchor);
 	startGame->getSelectedImage()->setScale(selectedScale);
 	startGame->setPosition(visibleSize.width / 2, visibleSize.height / 2 + startGame->getContentSize().height * startGame->getScale());

@@ -45,8 +45,13 @@ void UILayer::MakeSuccessWidget(int m_stage)
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	//성공 메시지
-	Label* successMessage = Label::createWithTTF("SUCCESS", "fonts/nanumgothic.ttf", 34);
-	successMessage->setPosition(visibleSize.width / 2, visibleSize.height / 2 + successMessage->getContentSize().height / 2);
+	//Label* successMessage = Label::createWithTTF("SUCCESS", "fonts/nanumgothic.ttf", 34);
+	//successMessage->setPosition(visibleSize.width / 2, visibleSize.height / 2 + successMessage->getContentSize().height / 2);
+
+	//성공 이미지
+	Sprite* successBoard = Sprite::create(FileStuff::SUCCESS_BOARD);
+	successBoard->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 50);
+	addChild(successBoard);
 
 	//재시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
@@ -78,10 +83,9 @@ void UILayer::MakeSuccessWidget(int m_stage)
 	stageSceneButton->setScale(stageSceneButtonScale);
 	stageSceneButton->setPosition(visibleSize.width / 2 + BUTTON_WIDTH, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
 
-	this->addChild(successMessage);
 	auto menu = Menu::create(retryButton, stageSceneButton, NULL);
 	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu);
+	addChild(menu);
 }
 
 //실패시 위젯을 띄운다.
@@ -91,8 +95,13 @@ void UILayer::MakeFailWidget(int m_stage)
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
 	//실패 메시지
-	Label* successMessage = Label::createWithTTF("Fail", "fonts/nanumgothic.ttf", 34);
-	successMessage->setPosition(visibleSize.width / 2, visibleSize.height / 2 + successMessage->getContentSize().height / 2);
+	//Label* successMessage = Label::createWithTTF("Fail", "fonts/nanumgothic.ttf", 34);
+	//successMessage->setPosition(visibleSize.width / 2, visibleSize.height / 2 + successMessage->getContentSize().height / 2);
+
+	//실패 이미지
+	Sprite* failBoard = Sprite::create(FileStuff::FAIL_BOARD);
+	failBoard->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 50);
+	addChild(failBoard);
 
 	//재시도 버튼
 	MenuItemImage* retryButton = MenuItemImage::create(
@@ -125,10 +134,9 @@ void UILayer::MakeFailWidget(int m_stage)
 	stageSceneButton->setScale(stageSceneButtonScale);
 	stageSceneButton->setPosition(visibleSize.width / 2 + BUTTON_WIDTH, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
 
-	this->addChild(successMessage);
 	auto menu = Menu::create(retryButton, stageSceneButton, NULL);
 	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu);
+	addChild(menu);
 }
 
 void UILayer::AddCurrentBullets(int totalNum, int normalNum, int crossNum)

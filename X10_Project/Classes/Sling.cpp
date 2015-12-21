@@ -2,6 +2,7 @@
 #include "Sling.h"
 #include "GameManager.h"
 #include "FileStuff.h"
+#include <SimpleAudioEngine.h>
 
 Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0), m_arm(nullptr)
 {
@@ -148,6 +149,7 @@ void Sling::Shot(Event* e)
 		return;
 	}
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("res/sound_effects/firework_flying2.mp3", false, 1.0f, 0, 0);
 	if (m_shotAngle.getAngle() <= Vec2::ZERO.getAngle())
 	{
 		m_shotAngle = Vec2::ZERO;

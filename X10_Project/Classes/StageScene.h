@@ -11,7 +11,7 @@ public:
 	virtual bool init();
 	static void GotoStage(Ref* pSender,int stageNum);
 	void MoveCharacter(Ref* character, int stageNum);
-	static bool m_isStepPlayed;
+	static bool m_hasCharacterMoved;
 
 private:
 	void SetupCharacter();

@@ -34,7 +34,7 @@ Scene* StageScene::createScene()
 	return scene;
 }
 
-bool StageScene::m_isStepPlayed = false;
+bool StageScene::m_hasCharacterMoved = false;
 
 bool StageScene::init()
 {
@@ -102,12 +102,12 @@ void StageScene::SetupCharacter()
 
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
 
-	if (!m_isStepPlayed)
+	if (!m_hasCharacterMoved)
 	{
 		menuItem->setPosition(GetCharacterPosition(m_stageToPlay - 1));
 		MoveTo* action = MoveTo::create(1.5f, GetCharacterPosition(m_stageToPlay));
 		menuItem->runAction(action);
-		m_isStepPlayed = true;
+		m_hasCharacterMoved = true;
 	}
 	else
 	{

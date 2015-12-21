@@ -15,17 +15,14 @@ bool Gull::init()
 
 	Size winSize = Director::getInstance()->getWinSize();
 	
-	setAnchorPoint(Vec2(0, 1));
-	setPosition(winSize.width, RandomHelper::random_real(200.0f, winSize.height));
-	m_spr->setAnchorPoint(Vec2(0, 0));
 	m_spr->setPosition(Point::ZERO);
 
 	addChild(m_spr);
-
+	
 	Sequence* act = Sequence::create(
-						DelayTime::create(RandomHelper::random_real(3.0f, 9.0f)),
-							MoveBy::create(3.0f, Point(-(winSize.width + BIRD_WIDTH*3), 0)),
-							//RemoveSelf::create(),
+		DelayTime::create(RandomHelper::random_real(3.0f, 6.0f)),
+							MoveBy::create(3.0f, Point(-1000, 0)),
+							CallFunc::create(CC_CALLBACK_0(Gull::Respawn, this)),
 							NULL);
 
 	runAction(act);
@@ -43,11 +40,11 @@ void Gull::ToBullet(Bullet* bullet)
 
 		bullet->StopAction();
 
-		bullet->setPosition(getPosition());
+		bullet->setPosition(Vec2::ZERO);
 		
 		Sequence* act = Sequence::create(
 			DelayTime::create(0.5f),
-			MoveBy::create(1.0f, Point(-winSize.width - 10, 0)),
+			MoveBy::create(3.0f, Point(-1000, 0)),
 			CallFunc::create(CC_CALLBACK_0(Bullet::EraseMe, bullet)),
 			NULL);
 
@@ -67,24 +64,25 @@ void Gull::ToSelf(const Bullet* bullet)
 
 		Sequence* act = Sequence::create(
 			DelayTime::create(0.5f),
-			MoveBy::create(1.0f, Point(-winSize.width - BIRD_WIDTH * 2, 0)),
+			MoveBy::create(2.0f, Point(-1000, 0)),
+			CallFunc::create(CC_CALLBACK_0(Gull::Respawn, this)),
 			NULL);
 
 		m_spr->runAction(act);
 
-		Sequence* act_00 = Sequence::create(
-			DelayTime::create(2.00f),
-			MoveBy::create(2.0f, Point(winSize.width / 2 + 100, -(getPosition().y))),
-			DelayTime::create(2.5f),
-			CallFunc::create(CC_CALLBACK_0(Gull::EraseOn, this)),
-			RemoveSelf::create(),
-			NULL);
+		//Sequence* act_00 = Sequence::create(
+		//	DelayTime::create(2.00f),
+		//	MoveBy::create(2.0f, Point(winSize.width / 2 + 100, -(getPosition().y))),
+		//	DelayTime::create(2.5f),
+		//	CallFunc::create(CC_CALLBACK_0(Gull::EraseOn, this)),
+		//	RemoveSelf::create(),
+		//	NULL);
 
-		m_feather = Sprite::create(FileStuff::FEATHER);
-		addChild(m_feather);
+		//m_feather = Sprite::create(FileStuff::FEATHER);
+		//addChild(m_feather);
 
-		m_feather->setPosition(-(getPosition().x+50), 0);
-		m_feather->runAction(act_00);
+		//m_feather->setPosition(-(getPosition().x+50), 0);
+		//m_feather->runAction(act_00);
 	}
 }
 
@@ -95,6 +93,22 @@ void Gull::ToSelf(const Explosion* explosion)
 		m_applyEffectToMe = false;
 		m_applyEffectToBullet = false;
 		removeFromParent();
-		m_toBeErased = true;
+		
+		init();
 	}
+}
+
+void Gull::Respawn()
+{
+	Size winSize = Director::getInstance()->getWinSize();
+
+	setPosition(400, getPosition().y);
+
+	Sequence* act = Sequence::create(
+		DelayTime::create(3.0f),
+		MoveBy::create(3.0f, Point(-1000, 0)),
+		CallFunc::create(CC_CALLBACK_0(Gull::Respawn, this)),
+		NULL);
+
+	runAction(act);
 }

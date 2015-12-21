@@ -10,9 +10,10 @@ public:
 	CREATE_FUNC(StageScene);
 	virtual bool init();
 	static void GotoStage(Ref* pSender,int stageNum);
+	void ClickCharacter(Ref* character, int stageNum);
 
 private:
-	void SetupButtons();
+	void SetupCharacter();
 	void SetupCollection();
 	void ChangeToMainScene(Ref* pSender);
 	void ChangeToStageScene(Ref* pSender);
@@ -25,6 +26,8 @@ private:
 
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
+	Point GetCharacterPosition();
+	Point GetCharacterPosition(int stage);
 	Sprite* LoadBGBottom();
 	void SetupLight();
 	MenuItemImage* MakeBackButton();

@@ -354,7 +354,7 @@ void StageScene::ShowLastLight()
 	lastLight->setPosition(m_lightManager->GetPosition(12));
 	addChild(lastLight);
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/garo_ggambak.wav", false, 3.0f);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/garo_ggambak.wav", true, 3.0f);
 	lastLight->runAction(Blink::create(3.0f, 4));
 }
 
@@ -363,7 +363,7 @@ void StageScene::ShowDeadBody()
 	Sprite* deadBody = Sprite::create(FileStuff::DEAD_BODY);
 	deadBody->setPosition(GetCharacterPosition(12) + Vec2(30, 0));
 	addChild(deadBody);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/shock.wav", true, 3.0f);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/shock.wav", false, 3.0f);
 }
 
 MenuItemImage* StageScene::MakeBackButton()

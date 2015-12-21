@@ -21,6 +21,8 @@
 #include "Target.h"
 //½½¸µ
 #include "Sling.h"
+//etc
+#include <SimpleAudioEngine.h>
 
 GameManager* GameManager::m_instance = nullptr;
 
@@ -89,6 +91,7 @@ void GameManager::AppendBulletsToLayer(UILayer* uiLayer)
 	{
 		Bullet* bullet = static_cast<Bullet*>(m_colliderManager->m_colliders.at(i));
 		Sprite* bulletSpr = bullet->GetSprite();
+		m_bulletNumUI.pushBack(bulletSpr);
 		uiLayer->addChild(bulletSpr);
 		bulletSpr->setPosition(Vec2(45 + i*25, 50));
 	}
@@ -107,6 +110,10 @@ void GameManager::ShotBullet(Sling* sling)
 
 		gameLayer->addChild(bullet);
 
+		m_bulletNumUI.back()->removeFromParent();
+		m_bulletNumUI.popBack();
+
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("res/sound_effects/firework_flying2.mp3", false, 1.0f, 0, 0);
 		sling->ShotComplete();
 
 		if (m_colliderManager->HasBulletToShot())

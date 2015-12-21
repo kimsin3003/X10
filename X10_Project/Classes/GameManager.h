@@ -44,4 +44,5 @@ private:
 	int m_curStageNum;
 	bool m_isJudged;
 	Target* m_lastTarget;
+	Vector<Sprite*> m_bulletNumUI;
 };

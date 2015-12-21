@@ -98,9 +98,6 @@ namespace FileStuff
 
 	const string FIREWORK_EXPLOSION_SOUND = "res/sound_effects/firework_explosion3.mp3";
 	const string FIREWORK_FLYING_SOUND = "res/sound_effects/firework_flying.mp3";
-	const string FIREWORK_EXPLOSION_SOUND = "res/sound_effects/metal_ting.mp3";
-	const string FIREWORK_EXPLOSION_SOUND = "res/sound_effects/firework_explosion3.mp3";
-	const string FIREWORK_EXPLOSION_SOUND = "res/sound_effects/firework_explosion3.mp3";
-	const string FIREWORK_EXPLOSION_SOUND = "res/sound_effects/firework_explosion3.mp3";
-	const string FIREWORK_EXPLOSION_SOUND = "res/sound_effects/firework_explosion3.mp3";
+	const string FIREWORK_METAL_SOUND = "res/sound_effects/metal_ting.mp3";
+	
 }

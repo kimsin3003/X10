@@ -32,6 +32,9 @@ namespace FileStuff
 	const string FEATHER = "res/target/Feather.png";
 	const string STAR_HAPPY = "res/target/brick_destruct.png";
 	const string STAR_SAD = "res/target/brick.png";
+
+	const string SUCCESS_BOARD = "res/ui/success.png";
+	const string FAIL_BOARD = "res/ui/fail.png";
 	const string PAUSEBUTTON = "backButton.png";
 	const string NEXTBUTTON = "NextButton.png";
 	const string RETRYBUTTON = "RetryButton.png";

@@ -286,12 +286,16 @@ void StageScene::ClickCharacter(Ref* pSender, int stageNum)
 	//애니매이션 및 사운드 재생하는 부분
 	if (character)
 	{
+		float timeLength = 2.f;
+		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/footsteps.mp3");
 		StageScene* tmp = StageScene::create();
 		Point finishPos = tmp->GetCharacterPosition(stageNum);
-		MoveTo* action = MoveTo::create(1.5f, finishPos);
+		MoveTo* action = MoveTo::create(timeLength, finishPos);
+
 		CallFuncN* goToNext = CallFuncN::create(CC_CALLBACK_0(StageScene::GotoStage, this, stageNum));
 		Sequence* seq = Sequence::create(action, goToNext, nullptr);
 		character->runAction(seq);
+		
 	}
 }
 

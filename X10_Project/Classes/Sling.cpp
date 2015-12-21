@@ -149,7 +149,6 @@ void Sling::Shot(Event* e)
 		return;
 	}
 
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("res/sound_effects/firework_flying2.mp3", false, 1.0f, 0, 0);
 	if (m_shotAngle.getAngle() <= Vec2::ZERO.getAngle())
 	{
 		m_shotAngle = Vec2::ZERO;

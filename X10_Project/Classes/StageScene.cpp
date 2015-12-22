@@ -301,7 +301,7 @@ void StageScene::IntroEvent(float dt)
 	runAction(seq);
 }
 
-void StageScene::PrintIntroText(const string& message, const Vec2 pos, float startTime, float keepTime)
+void StageScene::PrintIntroText(const string& message, const Vec2& pos, float startTime, float keepTime)
 {
 	Label* text = Label::create(
 		message, FileStuff::FONT_ARIAL, 12.5f);

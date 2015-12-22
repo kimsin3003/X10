@@ -6,6 +6,7 @@
 
 Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0), m_arm(nullptr), m_character(nullptr)
 {
+	///# 생성자를 이왕 선언했으면 모든 멤버 초기화를 책임져야 한다. (추후에 다른 함수에서 값을 초기화 하더라도..)
 
 }
 

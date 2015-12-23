@@ -283,11 +283,11 @@ void StageScene::IntroEvent(float dt)
 	Vec2 deltaPos = Vec2(0, 45.0f*1.75f);
 	Vec2 textPos = Vec2(160.0f, 360.0f);
 
-	PrintIntroText("I got lost in a highway", textPos, 0.0f, 3.0f);
-	PrintIntroText("I hate staying in dark", textPos-=deltaPos, 4.5f, 3.0f);
-	PrintIntroText("Let's turn on a light and take a step", textPos-=deltaPos, 9.0f, 3.0f);
-	PrintIntroText("I can get out of here", textPos -= deltaPos, 14.0f, 3.0f);
-
+	PrintIntroText("Maybe I got lost in a road.", textPos, 0.0f, 3.0f);
+	PrintIntroText("I hate staying in the dark...", textPos-=deltaPos, 4.5f, 3.0f);
+	PrintIntroText("I should get out of here.", textPos -= deltaPos, 14.0f, 3.0f);
+	PrintIntroText("Let's turn on lights and move on...", textPos -= deltaPos, 9.0f, 3.0f);
+	
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 
 	CallFuncN* callFuncN = CallFuncN::create(

@@ -7,6 +7,7 @@
 
 StageInformation::StageInformation(int stage)
 {
+	///# 생성자를 사용하면 모든 멤버 초기화를 해줘야 하는데, m_currentTarget 초기화 안하네~~ 누구는 하고 누구는 안하면 그게 곧 버그로 돌아옴
 	m_currentTargetIndex = 0;
 	m_currentBulletIndex = 0;
 
@@ -106,7 +107,7 @@ string StageInformation::GetCurrentBulletInfo() //지금 불렛의 타입을 반환
 	return m_currentBullet;
 }
 
-bool StageInformation::MakeJsonFileFromLayer(Layer* layer, string fileName)
+bool StageInformation::MakeJsonFileFromLayer(Layer* layer, const string& fileName)
 {
 	//stageInformaition 객체를 이용해 filename에 Json 파일로 남김.
 	m_targetInfoList.clear();

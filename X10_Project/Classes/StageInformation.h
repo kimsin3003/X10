@@ -56,7 +56,7 @@ public:
 	string GetCurrentBulletInfo(); //지금 불렛의 타입을 반환
 	static int GetMaxStageNum(){ return m_maxStageNum; }
 
-	bool MakeJsonFileFromLayer(Layer* layer, string fileName = FileStuff::EDITING_FILENAME);
+	bool MakeJsonFileFromLayer(Layer* layer, const string& fileName = FileStuff::EDITING_FILENAME);
 
 private:
 	static const int m_maxStageNum = 13;

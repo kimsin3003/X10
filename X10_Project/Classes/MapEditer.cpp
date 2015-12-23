@@ -44,6 +44,7 @@ bool MapEditer::init()
 
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
 
+	///# 지난주 피드백 아직 수정 안했네?
 	EventListenerKeyboard* _keyboardListener = EventListenerKeyboard::create(); ///# 왜 로컬 변수 앞에 언더바를 붙이는가? _keyboardListener이름은 Layer클래스 멤버로도 있어서 가리기 효과 발생...
 	_keyboardListener->onKeyPressed = CC_CALLBACK_1(MapEditer::OnKeyPressed, this);
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);
@@ -113,7 +114,7 @@ bool MapEditer::init()
 				sprite = Sprite::create(FileStuff::STAR_SAD);
 				break;
 			}
-			///# 만일에 sprite가 위의 case문 어느것에도 해당 안된다면??
+			///# 만일에 sprite가 위의 case문 어느것에도 해당 안된다면?? ///# 아직 그대로...
 
 			sprite->setTag(targetInfo.m_name.get());
 			point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());

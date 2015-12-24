@@ -91,9 +91,6 @@
     <ClCompile Include="..\Classes\StageInformation.cpp">
       <Filter>GameObject\Information</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MapEditLayer.cpp">
-      <Filter>Layer</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\MapEditer.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -203,9 +200,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\StageInformation.h">
       <Filter>GameObject\Information</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\MapEditLayer.h">
-      <Filter>Layer</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\MapEditer.h">
       <Filter>Scene</Filter>

@@ -23,6 +23,8 @@ private:
 	void EndingEvent(float dt);
 	void ShowLastLight();
 	void ShowDeadBody();
+	void ShowCrashingScene();
+
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
 	Point GetCharacterPosition(int stage);

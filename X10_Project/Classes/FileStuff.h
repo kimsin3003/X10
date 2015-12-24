@@ -12,7 +12,7 @@ namespace FileStuff
 	const string CHARACTER_HARDPIXEL = "black_man.png";
 	const string CHARACTER_STANDING = "black_man.png";
 	const string CHARACTER_ARM = "black_man_arm.png";
-	const string SLING_LINE_DOT = "res/dot.png";
+	const string SLING_LINE_DOT = "res/character/dot.png";
 
 	const string BUBBLE = "res/target/Bubble2.png";
 	const string BUBBLE_POP = "res/target/BubblePop.png";
@@ -33,6 +33,7 @@ namespace FileStuff
 	const string STAR_HAPPY = "res/target/brick_destruct.png";
 	const string STAR_SAD = "res/target/brick.png";
 
+	
 	const string SUCCESS_BOARD = "res/ui/success.png";
 	const string FAIL_BOARD = "res/ui/fail.png";
 	const string PAUSEBUTTON = "backButton.png";
@@ -115,4 +116,5 @@ namespace FileStuff
 	const string GARO = "res/ui/garo.png";
 	const string GARO_ON = "res/ui/garo_on.png";
 
+	const string BEFORE_CRASHING_0 = "res/bg/car_crashing.jpg";
 }

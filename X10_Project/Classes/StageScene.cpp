@@ -338,6 +338,7 @@ void StageScene::EndingEvent(float dt)
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadBody, this)),
 		DelayTime::create(1.0f),
 		FadeOut::create(0.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)),
 		nullptr);
 
 	runAction(seq);
@@ -383,4 +384,22 @@ MenuItemImage* StageScene::MakeBackButton()
 		);
 
 	return button;
+}
+
+void StageScene::ShowCrashingScene()
+{
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+	Vector<Node*> childs = getChildren();
+
+	for (int i = 0; i < childs.size(); i++)
+	{
+		childs.at(i)->removeFromParent();
+	}
+	Sprite* background = Sprite::create(FileStuff::BEFORE_CRASHING_0);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
+	background->setAnchorPoint(Point::ZERO);
+	background->setScale(scale);
+	background->setOpacity(140);
+	addChild(background);
 }

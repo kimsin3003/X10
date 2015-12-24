@@ -91,7 +91,7 @@ void StageScene::SetupCharacter()
 		)
 	);
 
-	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/footsteps_short.mp3");
+	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::STEP_SOUND);
 
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
 

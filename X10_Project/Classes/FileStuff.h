@@ -108,7 +108,9 @@ namespace FileStuff
 	extern const char* INITIAL_BACKGROUND_SOUND;
 	extern const char* MIDDLE_PHASE_BACKGROUND_SOUND;
 	extern const char* BEFORE_ENDING_BACKGROUND_SOUND;
-	
+	extern const char* STEP_SOUND;
+
+
 	const string DEAD_BODY = "res/dead_body.png";
 	const string GARO = "res/ui/garo.png";
 	const string GARO_ON = "res/ui/garo_on.png";

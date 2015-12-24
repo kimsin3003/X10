@@ -107,7 +107,7 @@ void MainScene::ChangeToStageScene(Ref* pSender)
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 {
 	m_character->runAction(MoveTo::create(2.0f, m_garo->getPosition() + Vec2(10, -40)));
-	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/footsteps_short.mp3");
+	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::STEP_SOUND);
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),

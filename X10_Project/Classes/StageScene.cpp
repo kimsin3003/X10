@@ -285,8 +285,8 @@ void StageScene::IntroEvent(float dt)
 
 	PrintIntroText("Maybe I got lost in a road.", textPos, 0.0f, 3.0f);
 	PrintIntroText("I hate staying in the dark...", textPos-=deltaPos, 4.5f, 3.0f);
-	PrintIntroText("I should get out of here.", textPos -= deltaPos, 14.0f, 3.0f);
-	PrintIntroText("Let's turn on lights and move on...", textPos -= deltaPos, 9.0f, 3.0f);
+	PrintIntroText("I should get out of here.", textPos -= deltaPos, 9.0f, 3.0f);
+	PrintIntroText("Let's turn on lights and move on...", textPos -= deltaPos, 14.0f, 3.0f);
 	
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 

@@ -12,7 +12,7 @@ public:
 private:
 	void SetLights();
 	void InitPositions();
-	Sprite* MakeLight(string fileDir, int idx);
+	Sprite* MakeLight(const string& fileDir, int idx);
 	Vector<Sprite*> m_lights;
 	vector<Vec2> m_positions;
 };

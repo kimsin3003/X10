@@ -17,6 +17,7 @@ public:
 	void Pull(Event* e);
 	void Shot(Event* e);
 	
+	void RemoveDots();
 	bool IsShotted();
 	Vec2 GetDirection();
 	float GetAngleInRadian();
@@ -55,9 +56,12 @@ private:
 
 	Point GetStartLocation();
 	
-	int m_status;
+	Sprite* LoadCharacter();
+
+	int m_status; ///# 요놈은 왜 생성자에서 초기화 안하노?
 	Vec2 m_shotAngle;
 	Sprite* m_arm;
+	Sprite* m_character;
 	float m_shotPower;
 	Vector<Sprite*> m_expectLine;
 	Vector<Sprite*> m_beforeLine;

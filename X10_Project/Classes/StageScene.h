@@ -18,7 +18,7 @@ private:
 	void ChangeToStageScene(Ref* pSender);
 
 	void IntroEvent(float dt);
-	void PrintIntroText(const string& message, const Vec2 pos, float startTime, float keepTime);
+	void PrintIntroText(const string& message, const Vec2& pos, float startTime, float keepTime);
 	
 	void EndingEvent(float dt);
 	void ShowLastLight();

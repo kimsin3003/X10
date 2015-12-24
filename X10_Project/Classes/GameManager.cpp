@@ -254,13 +254,13 @@ void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 		{
 			m_isJudged = true;
 			m_sling->ShotComplete();
-			m_sling->removeAllChildrenWithCleanup(true);
+			m_sling->RemoveDots();
 			WinProgress(uiLayer);
 		}
 		else if (!m_colliderManager->HasCollider()){
 			m_isJudged = true;
 			m_sling->ShotComplete();
-			m_sling->removeAllChildrenWithCleanup(true);
+			m_sling->RemoveDots();
 			FailProgress(uiLayer);
 		}
 	}

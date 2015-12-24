@@ -4,8 +4,9 @@
 #include "FileStuff.h"
 #include <SimpleAudioEngine.h>
 
-Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0), m_arm(nullptr)
+Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0), m_arm(nullptr), m_character(nullptr)
 {
+	///# 생성자를 이왕 선언했으면 모든 멤버 초기화를 책임져야 한다. (추후에 다른 함수에서 값을 초기화 하더라도..)
 
 }
 
@@ -51,12 +52,15 @@ bool Sling::init()
 		addChild(dot, 1.0);
 	}
 
-	Sprite* arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
-	m_arm = arm;
+	m_arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
 	m_arm->setScale(SLING_SCALE);
 	m_arm->setRotation(DEFAULT_ARM);
 	m_arm->setAnchorPoint(Point(0.5, 0.4));
-	addChild(m_arm, 1.9);
+	m_arm->setPosition(Vec2(0, 10));
+	addChild(m_arm, 1);
+
+	m_character = LoadCharacter();
+	addChild(m_character, 2);
 
 	EventListenerMouse* _mouseListener = EventListenerMouse::create();
 	_mouseListener->onMouseUp = CC_CALLBACK_1(Sling::Shot, this);
@@ -67,7 +71,7 @@ bool Sling::init()
 	return true;
 }
 
-void Sling::Reset() // --> 매스테이지마다 리셋. 매개변수는 미정.
+void Sling::Reset()
 {
 	ChangeToEmpty();
 }
@@ -87,6 +91,13 @@ Point Sling::GetStartLocation()
 	return getPosition();
 }
 
+Sprite* Sling::LoadCharacter()
+{
+	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	character->setPosition(Vec2::ZERO);
+	return character;
+}
+
 void Sling::PullStart(Event* e)
 {
 	if (m_status != STATUS::LOADED)
@@ -101,8 +112,14 @@ void Sling::PullStart(Event* e)
 	float distance = startLocation.getDistance(mouseLocation);
 
 	if (distance > CLICK_RANGE)
+	{
 		return;
-	
+	}
+
+	m_character->removeFromParent();
+	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_SELECTED);
+	addChild(m_character, 2);
+
 	ChangeToPulling();
 }
 
@@ -175,7 +192,25 @@ void Sling::Shot(Event* e)
 	ChangeToShotted();
 	GameManager* gm = GameManager::GetInstance();
 	gm->ShotBullet(this);
-	
+
+	m_character->removeFromParent();
+	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	addChild(m_character, 2);
+}
+
+void Sling::RemoveDots()
+{
+	for (Sprite* dot : m_expectLine)
+	{
+		dot->removeFromParent();
+	}
+
+	for (Sprite* dot : m_beforeLine)
+	{
+		dot->removeFromParent();
+	}
+
+
 }
 
 Vec2 Sling::GetDirection()

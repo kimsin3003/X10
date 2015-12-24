@@ -32,6 +32,10 @@ namespace FileStuff
 	const string FEATHER = "res/target/Feather.png";
 	const string STAR_HAPPY = "res/target/brick_destruct.png";
 	const string STAR_SAD = "res/target/brick.png";
+
+	
+	const string SUCCESS_BOARD = "res/ui/success.png";
+	const string FAIL_BOARD = "res/ui/fail.png";
 	const string PAUSEBUTTON = "backButton.png";
 	const string NEXTBUTTON = "NextButton.png";
 	const string RETRYBUTTON = "RetryButton.png";
@@ -107,5 +111,8 @@ namespace FileStuff
 	extern const char* BEFORE_ENDING_BACKGROUND_SOUND;
 	
 	const string DEAD_BODY = "res/dead_body.png";
+	const string GARO = "res/ui/garo.png";
+	const string GARO_ON = "res/ui/garo_on.png";
+
 	const string BEFORE_CRASHING_0 = "res/bg/car_crashing.jpg";
 }

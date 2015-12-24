@@ -390,6 +390,14 @@ MenuItemImage* StageScene::MakeBackButton()
 
 void StageScene::ShowCrashingScene()
 {
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+	Vector<Node*> childs = getChildren();
+
+	for (int i = 0; i < childs.size(); i++)
+	{
+		childs.at(i)->removeFromParent();
+	}
 	Sprite* background = Sprite::create(FileStuff::BEFORE_CRASHING_0);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);

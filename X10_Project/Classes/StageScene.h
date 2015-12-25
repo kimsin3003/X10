@@ -9,7 +9,7 @@ public:
 	CREATE_FUNC(StageScene);
 	virtual bool init();
 	static void GotoStage(Ref* pSender,int stageNum);
-	void MoveCharacter(Ref* character, int stageNum);
+	MenuItemImage* MoveCharacter(MenuItemImage* character, int stageNum);
 	static bool m_hasCharacterMoved;
 
 private:

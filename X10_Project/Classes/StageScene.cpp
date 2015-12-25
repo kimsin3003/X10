@@ -91,22 +91,28 @@ void StageScene::SetupCharacter()
 		)
 	);
 
-	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::STEP_SOUND);
-
+	
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
-
+	
+	menuItem = MoveCharacter(menuItem, m_stageToPlay);
+	/*
 	if (!m_hasCharacterMoved)
 	{
 		menuItem->setPosition(GetCharacterPosition(m_stageToPlay - 1));
-		MoveTo* action = MoveTo::create(1.5f, GetCharacterPosition(m_stageToPlay));
+		DelayTime* delay = DelayTime::create(0.1);
+		MoveTo* move = MoveTo::create(1.5f, GetCharacterPosition(m_stageToPlay));
+		Sequence* action = Sequence::create(delay, move, NULL);
 		menuItem->runAction(action);
 		m_hasCharacterMoved = true;
+
+		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::STEP_SOUND);
 	}
 	else
 	{
 		menuItem->setPosition(GetCharacterPosition(m_stageToPlay));
 	}
-	
+	*/
+
 	menuList.pushBack(menuItem);
 	Menu* menu = Menu::createWithArray(menuList);
 	menu->setPosition(Vec2::ZERO);
@@ -242,18 +248,44 @@ Sprite* StageScene::LoadCharacter()
 	return character;
 }
 
-void StageScene::MoveCharacter(Ref* pSender, int stageNum)
+MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 {
-	MenuItemImage* character = dynamic_cast<MenuItemImage*>(pSender);
+	//MenuItemImage* character = dynamic_cast<MenuItemImage*>(pSender);
 	//애니매이션 및 사운드 재생하는 부분
-	if (character)
+	Point finishPos = GetCharacterPosition(stageNum);
+	Point startPos = GetCharacterPosition(m_stageToPlay - 1);
+	Size screenSize = Director::getInstance()->getVisibleSize();
+	float startScale = character->getScale()* (1 - startPos.y / (screenSize.height * 2.0));
+	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 2.0));
+	float timeLength = 2.0f;
+
+	if (!m_hasCharacterMoved)
 	{
-		float timeLength = 2.5f;
-		StageScene* tmp = StageScene::create();
-		Point finishPos = tmp->GetCharacterPosition(stageNum);
-		MoveTo* action = MoveTo::create(timeLength, finishPos);
+
+		//소리
+		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::STEP_SOUND);
+
+		//이동
+		character->setPosition(startPos);
+		DelayTime* delay = DelayTime::create(0.1);
+		MoveTo* move = MoveTo::create(timeLength, finishPos);
+		Sequence* action = Sequence::create(delay, move, NULL);
 		character->runAction(action);
+
+		//크기변화
+		character->setScale(startScale);
+		ScaleTo* scaleAction = ScaleTo::create(timeLength, finishScale);
+		character->runAction(scaleAction);
+
+		m_hasCharacterMoved = true;
 	}
+	else
+	{
+		character->setPosition(finishPos);
+		character->setScale(startScale);
+	}
+
+	return character;
 }
 
 void StageScene::GotoStage(Ref* pSender, int stageNum)

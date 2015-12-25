@@ -12,7 +12,7 @@ namespace FileStuff
 	const string CHARACTER_HARDPIXEL = "black_man.png";
 	const string CHARACTER_STANDING = "black_man.png";
 	const string CHARACTER_ARM = "black_man_arm.png";
-	const string SLING_LINE_DOT = "res/character/dot.png";
+	const string SLING_LINE_DOT = "res/dot.png";
 
 	const string BUBBLE = "res/target/Bubble2.png";
 	const string BUBBLE_POP = "res/target/BubblePop.png";

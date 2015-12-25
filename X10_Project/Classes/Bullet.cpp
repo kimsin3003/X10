@@ -13,7 +13,7 @@ bool Bullet::init()
 	m_screen = director->getVisibleSize();
 
 	m_speed = 0.0f;
-	m_speedSetRatio = 0.01f;
+	m_speedSetRatio = 0.003f;
 	m_speedDecreaseRatio = 1 - (10.0f / BULLET_REDUCTION_SPEED_TIME) / director->getFrameRate();
 	m_direction = Vec2::ZERO;
 	
@@ -33,7 +33,7 @@ bool Bullet::init()
 
 	//Add debris to bullet
 	CallFunc* addDebris = CallFunc::create(CC_CALLBACK_0(Bullet::AddDebrisToParent, this));
-	Sequence* addDelay = Sequence::create(DelayTime::create(0.15f), addDebris, NULL);
+	Sequence* addDelay = Sequence::create(DelayTime::create(0.3f), addDebris, NULL);
 	RepeatForever* DebrisEffect = RepeatForever::create(addDelay);
 	runAction(DebrisEffect);
 

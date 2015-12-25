@@ -38,7 +38,7 @@ public:
 		HEIGHT = 50,
 		YPOS = 50,
 		MAX_POWER = 30,
-		CLICK_RANGE = 30,
+		CLICK_RANGE = 300,
 		DOTNUM_OF_LINE = 10
 	};
 	const Point SLING_POSITION = Point(200, 84);

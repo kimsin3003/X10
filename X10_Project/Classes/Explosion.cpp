@@ -14,7 +14,7 @@ bool Explosion::init()
 	m_radius = 0;
 	m_maxRadius = DEFAULT_RADIUS;
 
-	m_lifeTime = 2.0f;
+	m_lifeTime = 4.0f;
 	m_lifeDecrease = Director::getInstance()->getDeltaTime();
 	m_isFlying = true;
 	m_toBeErased = false;
@@ -23,7 +23,7 @@ bool Explosion::init()
 	m_explosion->setColor(Color3B());
 	m_explosion->setEmitterMode(kCCParticleModeGravity);
 	m_explosion->setEmissionRate(400);
-	m_explosion->setDuration(m_lifeTime/10);
+	m_explosion->setDuration(m_lifeTime/15);
 	m_explosion->setLife(m_lifeTime);
 	m_explosion->setEndSize(10);
 	m_explosion->setStartSize(10);

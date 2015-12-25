@@ -23,15 +23,19 @@ namespace FileStuff
 	const string CLOUD = "res/target/Cloud.png";
 	const string CLOUD_LEFT = "res/target/CloudLeft.png";
 	const string CLOUD_RIGHT = "res/target/CloudRight.png";
+	
 	const string ENEMY = "res/target/ufo.png";
-	const string ENEMY_DEAD = "res/enemy_dead.png";
+	const string ENEMY_DESTRUCT_ANI = "ufo_break";
+
 	const string MIRROR = "res/target/Mirror.png";
 	const string MIRROR_ANGRY = "res/target/MirrorAngry.png";
 	const string VIRTICAL_MIRROR = "res/target/flat_mirror.png";
 	const string GULL = "res/target/seagull.png";
 	const string FEATHER = "res/target/Feather.png";
+	
 	const string STAR_HAPPY = "res/target/brick_destruct.png";
 	const string STAR_SAD = "res/target/brick.png";
+	const string BRICK_DESTRUCT_ANI = "brick_destruct";
 
 	
 	const string SUCCESS_BOARD = "res/ui/success.png";
@@ -98,7 +102,6 @@ namespace FileStuff
 	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
 	const string CROSS_BULLET = "res/ui/cross_bullet.png";
 
-	const string BRICK_DESTRUCT_ANI = "brick_destruct";
 
 	extern const char* FIREWORK_EXPLOSION_SOUND;
 	extern const char* FIREWORK_FLYING_SOUND;

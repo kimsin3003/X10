@@ -164,13 +164,12 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 		if (target == m_lastTarget)
 		{
 			break;
-			collidingCheck = true;
+			collidingCheck = true; // <-????
 		}
 
 		if (target->IsEnemy())
 		{
 			m_targetManager->SaveEnemyPosition(target->getPosition());
-			EnemyDyingEffect();
 		}
 
 		if (collider->IsBullet())
@@ -202,16 +201,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 		m_lastTarget = nullptr;
 	}
 }
-
-void GameManager::EnemyDyingEffect()
-{
-	/*
-	ParticleSmoke* enemyDyingEffect = ParticleSmoke::create();
-	enemyDyingEffect->setPosition(enemyPos);
-	gameLayer->addChild(enemyDyingEffect);
-	*/
-}
-
 
 void GameManager::WinProgress(UILayer* uiLayer)
 {

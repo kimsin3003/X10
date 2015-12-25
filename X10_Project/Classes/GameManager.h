@@ -33,7 +33,6 @@ private:
 	void WinProgress(UILayer* uiLayer);
 	void FailProgress(UILayer* uiLayer);
 	void ControlWinFailProgress(UILayer* uiLayer);
-	void EnemyDyingEffect();
 	void Reset();
 
 	static GameManager* m_instance;

@@ -32,9 +32,11 @@ void Stone::ToSelf(const Bullet* bullet)
 {
 	if (m_applyEffectToMe)
 	{
+		float scale = m_spr->getScale();
 		m_spr->removeFromParent();
 		m_spr = Sprite::create(FileStuff::STAR_HAPPY);
 		addChild(m_spr);
+		m_spr->setScale(scale);
 		m_applyEffectToMe = false;
 
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::STONE_BREAK_SOUND, false, 1, 0, 1);

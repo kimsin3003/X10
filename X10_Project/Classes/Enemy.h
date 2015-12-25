@@ -13,4 +13,9 @@ protected:
 	void ToBullet(Bullet* bullet);
 	void ToSelf(const Bullet* bullet);
 	void ToSelf(const Explosion* explosion);
+
+	enum
+	{
+		DESTRUCT_FRAMES = 23
+	};
 };

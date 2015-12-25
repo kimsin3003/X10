@@ -134,7 +134,7 @@ void Sling::Pull(Event* e)
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	
-	m_shotAngle = startLocation - mouseLocation;
+	m_shotAngle = mouseLocation - startLocation;
 	if (m_shotAngle.getAngle() <= Vec2::ZERO.getAngle())
 	{
 		m_shotAngle = Vec2::ZERO;

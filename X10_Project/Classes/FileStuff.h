@@ -50,6 +50,10 @@ namespace FileStuff
 	const string STAGE_BACKGROUND_10 = "res/highway/highway10.png";
 	const string STAGE_BACKGROUND_11 = "res/highway/highway11.png";
 	const string STAGE_BACKGROUND_12 = "res/highway/highway12.png";
+	const string STAGE_BACKGROUND_13ON = "res/highway/highway13ON.png";
+	const string STAGE_BACKGROUND_13OFF = "res/highway/highway13OFF.png";
+	const string STAGE_BACKGROUND_13APP = "res/highway/highway13APPEAR.png";
+	const string WHITE = "res/highway/White.png";
 
 	const string STAGE_LIGHTS_LEGT_01 = "res/lights/left0.png";
 	const string STAGE_LIGHTS_LEGT_02 = "res/lights/left1.png";
@@ -100,4 +104,6 @@ namespace FileStuff
 	extern const char* SOUND_FOOTSTEP;
 	extern const char* SOUND_SHOCKED;
 	extern const char* SOUND_STREETLIGHTS;
+	extern const char* SOUND_EAR_RINGING;
+
 }

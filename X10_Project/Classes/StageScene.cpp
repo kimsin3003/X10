@@ -53,8 +53,8 @@ bool StageScene::init()
 	}
 
 
-	Sprite* background = LoadBackground();
-	addChild(background);
+	m_background = LoadBackground();
+	addChild(m_background);
 
 	m_lightManager = new LightManager();
 
@@ -91,27 +91,9 @@ void StageScene::SetupCharacter()
 		)
 	);
 
-	
 	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
 	
 	menuItem = MoveCharacter(menuItem, m_stageToPlay);
-	/*
-	if (!m_hasCharacterMoved)
-	{
-		menuItem->setPosition(GetCharacterPosition(m_stageToPlay - 1));
-		DelayTime* delay = DelayTime::create(0.1);
-		MoveTo* move = MoveTo::create(1.5f, GetCharacterPosition(m_stageToPlay));
-		Sequence* action = Sequence::create(delay, move, NULL);
-		menuItem->runAction(action);
-		m_hasCharacterMoved = true;
-
-		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::STEP_SOUND);
-	}
-	else
-	{
-		menuItem->setPosition(GetCharacterPosition(m_stageToPlay));
-	}
-	*/
 
 	menuList.pushBack(menuItem);
 	Menu* menu = Menu::createWithArray(menuList);
@@ -184,8 +166,8 @@ Sprite* StageScene::LoadBackground()
 	case 12:
 		background = Sprite::create(FileStuff::STAGE_BACKGROUND_12);
 		break;
-	default:
-		background = Sprite::create(FileStuff::STAGE_BACKGROUND_12);
+	case 13:
+		background = Sprite::create(FileStuff::STAGE_BACKGROUND_13OFF);
 		break;
 	}
 
@@ -358,48 +340,100 @@ void StageScene::PrintIntroText(const string& message, const Vec2& pos, float st
 
 void StageScene::EndingEvent(float dt)
 {
-	Sprite* character = Sprite::create(FileStuff::CHARACTER);
-	character->setPosition(GetCharacterPosition(12) - Vec2(40, 0));
-	addChild(character);
-	
-	for (int i = 1; i <= 11; i++)
-	{
-		addChild(m_lightManager->GetLight(i));
-	}
-	
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowLastLight, this)),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingGaro, this)),
+		DelayTime::create(4.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
 		DelayTime::create(3.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadBody, this)),
-		DelayTime::create(1.0f),
-		FadeOut::create(0.0f),
-		DelayTime::create(1.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
+		DelayTime::create(3.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)), //효과음 바로 - 끼이이이익 -> 쾅!!!
 		nullptr);
 
 	runAction(seq);
-
-	//이후 태우형꺼 붙이기
 }
 
-void StageScene::ShowLastLight()
+void StageScene::ShowWhiteScene()
 {
-	Sprite* lastLight = Sprite::create(FileStuff::STAGE_LIGHTS_RIGHT_06);
-	lastLight->setPosition(m_lightManager->GetPosition(12));
-	addChild(lastLight);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_EAR_RINGING, false, 3.0f);
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS, false, 3.0f);
-
-	lastLight->runAction(Blink::create(3.0f, 4));
+	Sprite* white = Sprite::create(FileStuff::WHITE);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (white->getContentSize().width);
+	white->setAnchorPoint(Point::ZERO);
+	white->setScale(scale);	
+	addChild(white);
 }
 
-void StageScene::ShowDeadBody()
+void StageScene::ShowDeadbody()
 {
-	Sprite* deadBody = Sprite::create(FileStuff::DEAD_BODY);
-	deadBody->setPosition(GetCharacterPosition(12) + Vec2(30, 0));
-	addChild(deadBody);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/shock.wav", false, 3.0f);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false, 3.0f);
+
+	m_background->removeFromParent();
+	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13APP);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setAnchorPoint(Point::ZERO);
+	m_background->setScale(scale);
+	addChild(m_background);
+}
+
+void StageScene::GaroOn()
+{
+	m_background->removeFromParent();
+	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13ON);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setAnchorPoint(Point::ZERO);
+	m_background->setScale(scale);
+	addChild(m_background);
+}
+
+void StageScene::GaroOff()
+{
+	m_background->removeFromParent();
+	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13OFF);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setAnchorPoint(Point::ZERO);
+	m_background->setScale(scale);
+	addChild(m_background);
+}
+
+void StageScene::ShowBlinkingGaro()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_STREETLIGHTS);
+
+	CallFunc* garoOff = CallFunc::create(CC_CALLBACK_0(StageScene::GaroOff, this));
+	CallFunc* garoOn = CallFunc::create(CC_CALLBACK_0(StageScene::GaroOn, this));
+
+	Sequence* seq = Sequence::create(
+		garoOn,
+		DelayTime::create(0.25f),
+		garoOff,
+		DelayTime::create(1.0f),
+		garoOn,
+		DelayTime::create(0.2f),
+		garoOff,
+		DelayTime::create(0.2f),
+		garoOn,
+		nullptr);
+
+	runAction(seq);
+}
+
+void StageScene::ShowCrashingScene()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+	Vector<Node*> childs = getChildren();
+
+	for (int i = 0; i < childs.size(); i++)
+	{
+		childs.at(i)->removeFromParent();
+	}
+	Sprite* background = Sprite::create(FileStuff::BEFORE_CRASHING_0);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
+	background->setAnchorPoint(Point::ZERO);
+	background->setScale(scale);
+	background->setOpacity(140);
+	addChild(background);
 }
 
 MenuItemImage* StageScene::MakeBackButton()
@@ -422,22 +456,4 @@ MenuItemImage* StageScene::MakeBackButton()
 		);
 
 	return button;
-}
-
-void StageScene::ShowCrashingScene()
-{
-
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-	Vector<Node*> childs = getChildren();
-
-	for (int i = 0; i < childs.size(); i++)
-	{
-		childs.at(i)->removeFromParent();
-	}
-	Sprite* background = Sprite::create(FileStuff::BEFORE_CRASHING_0);
-	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
-	background->setAnchorPoint(Point::ZERO);
-	background->setScale(scale);
-	background->setOpacity(140);
-	addChild(background);
 }

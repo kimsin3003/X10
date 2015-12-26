@@ -21,8 +21,8 @@ private:
 	void PrintIntroText(const string& message, const Vec2& pos, float startTime, float textScale);
 	
 	void EndingEvent(float dt);
-	void ShowLastLight();
-	void ShowDeadBody();
+	void ShowWhiteScene();
+	void ShowDeadbody();
 	void ShowCrashingScene();
 
 	Sprite* LoadBackground();
@@ -30,9 +30,13 @@ private:
 	Point GetCharacterPosition(int stage);
 	void SetupLight();
 	MenuItemImage* MakeBackButton();
-	
+	void GaroOn();
+	void GaroOff();
+	void ShowBlinkingGaro();
+
 	LightManager* m_lightManager;
 
+	Sprite* m_background;
 	int m_maxStageNum;
 	int m_stageToPlay;
 };

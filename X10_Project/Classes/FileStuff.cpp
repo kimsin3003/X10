@@ -14,3 +14,5 @@ const char* FileStuff::SOUND_FOOTSTEP = "res/sound_effects/footsteps_short.mp3";
 
 const char* FileStuff::SOUND_STREETLIGHTS = "res/sound_effects/garo_ggambak.wav";
 const char* FileStuff::SOUND_SHOCKED = "res/sound_effects/shock.wav";
+
+const char* FileStuff::SOUND_EAR_RINGING = "res/sound_effects/ear_ringing.wav";

@@ -35,11 +35,10 @@ bool MainScene::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
 
 	m_garo = Sprite::create(FileStuff::GARO_OFF);
+	m_garo->setPosition(Vec2(110, 320));
+	m_garoPos = m_garo->getPosition();
 	addChild(m_garo);
 
-	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
-	addChild(m_character, 2);
-	
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	float selectedScale = 1.2;
@@ -50,14 +49,22 @@ bool MainScene::init()
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5f);
 
 	/*Game start Button*/
-	MenuItemImage* startGame = MenuItemImage::create(FileStuff::START_IMG, FileStuff::START_IMG, CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
-	startGame->getSelectedImage()->setAnchorPoint(selectedAnchor);
-	startGame->getSelectedImage()->setScale(selectedScale);
-	startGame->setPosition(visibleSize.width / 2, visibleSize.height / 2 + startGame->getContentSize().height * startGame->getScale());
+	MenuItemImage* startGame = MenuItemImage::create();
 
-	m_garo->setPosition(startGame->getPosition()+Vec2(-90, 30));
-	m_character->setPosition(m_garo->getPosition()+Vec2(30, -200));
-	m_garoPos = m_garo->getPosition();
+	startGame->setNormalImage(Sprite::createWithSpriteFrame(
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
+		)
+		);
+	
+	startGame->setSelectedImage(
+		Sprite::createWithSpriteFrame(
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
+		)
+		);
+
+	startGame->setCallback(CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
+
+	startGame->setPosition(m_garoPos + Vec2(30, -200));
 
 	/*MapEditer Button*/
 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 50), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
@@ -108,6 +115,10 @@ void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 {
 	removeChildByName("Buttons");
 
+	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	addChild(m_character, 2);
+
+	m_character->setPosition(m_garoPos + Vec2(30, -200));
 	m_character->runAction(MoveTo::create(2.0f, m_garo->getPosition() + Vec2(9, -45)));
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP, false, 2.0f);
 

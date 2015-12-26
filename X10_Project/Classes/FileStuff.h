@@ -82,8 +82,9 @@ namespace FileStuff
 	const string CROSS_BULLET = "res/ui/cross_bullet.png";
 
 	const string DEAD_BODY = "res/dead_body.png";
-	const string GARO = "res/ui/garo.png";
+	const string GARO_OFF = "res/ui/garo.png";
 	const string GARO_ON = "res/ui/garo_on.png";
+	const string LIGHT_BEAM = "res/ui/lightbeam.png";
 
 	const string BEFORE_CRASHING_0 = "res/bg/car_crashing.jpg";
 

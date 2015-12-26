@@ -319,7 +319,7 @@ void StageScene::IntroEvent(float dt)
 	PrintIntroText("Hmm.. and what are these in my pockets?", textPos-=deltaPos, 6.5f, 1.0f);
 	PrintIntroText("Oh my, what are those above the sky?", textPos -= deltaPos*6, 10.5f, 1.25f);
 	PrintIntroText("Wait, here's a note", textPos -= deltaPos * 2, 14.0f, 1.0f);
-	PrintIntroText("\"Kill them and I'll let you go\"", textPos -= deltaPos * 4, 18.0f, 1.60f);
+	PrintIntroText("\"Kill them, then I'll let you go\"", textPos -= deltaPos * 4, 18.0f, 1.60f);
 	PrintIntroText("Who is doing this fuck to me...?", textPos -= deltaPos * 2, 23.0f, 1.0f);
 	PrintIntroText("I'll find you and I'll kill you", textPos -= deltaPos * 2, 27.0f, 1.0f);
 

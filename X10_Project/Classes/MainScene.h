@@ -14,8 +14,11 @@ public:
 private:
 	void ChangeToStageScene(Ref* pSender);
 	void ChangeToStageSceneEffect(Ref* pSender);
-	void ShowGaro();
-	
+	void GaroOn();
+	void GaroOff();
+	void BlinkGaro();
+	void TurnGaro();
+
 	void ChangeToMapEditScene(Ref* pSender);
 
 	void ChangeToJWScene(Ref* pSender);

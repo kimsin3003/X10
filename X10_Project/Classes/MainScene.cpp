@@ -34,11 +34,11 @@ bool MainScene::init()
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
 
-	m_garo = Sprite::create(FileStuff::GARO);
+	m_garo = Sprite::create(FileStuff::GARO_OFF);
 	addChild(m_garo);
 
 	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
-	addChild(m_character);
+	addChild(m_character, 2);
 	
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
@@ -54,7 +54,6 @@ bool MainScene::init()
 	startGame->getSelectedImage()->setAnchorPoint(selectedAnchor);
 	startGame->getSelectedImage()->setScale(selectedScale);
 	startGame->setPosition(visibleSize.width / 2, visibleSize.height / 2 + startGame->getContentSize().height * startGame->getScale());
-	
 
 	m_garo->setPosition(startGame->getPosition()+Vec2(-90, 30));
 	m_character->setPosition(m_garo->getPosition()+Vec2(30, -200));
@@ -91,7 +90,8 @@ bool MainScene::init()
 
 	auto menu = Menu::create(startGame, mapEditer, closeItem, twScene, paulScene, jwScene, NULL);
 	menu->setPosition(Vec2::ZERO);
-	this->addChild(menu, 1);
+	menu->setName("Buttons");
+	addChild(menu, 1);
 
 	return true;
 }
@@ -106,26 +106,23 @@ void MainScene::ChangeToStageScene(Ref* pSender)
 
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 {
-	m_character->runAction(MoveTo::create(2.0f, m_garo->getPosition() + Vec2(10, -40)));
-	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
+	removeChildByName("Buttons");
+
+	m_character->runAction(MoveTo::create(2.0f, m_garo->getPosition() + Vec2(9, -45)));
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP, false, 2.0f);
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),
-		CallFuncN::create(CC_CALLBACK_0(MainScene::ShowGaro, this)),
-		DelayTime::create(1.0f),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkGaro, this)),
+		DelayTime::create(2.0f),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::TurnGaro, this)),
+		DelayTime::create(2.0f),
 		CallFuncN::create(CC_CALLBACK_1(MainScene::ChangeToStageScene, this)),
 		nullptr);
 
 	runAction(seq);
 }
 
-void MainScene::ShowGaro()
-{
-	m_garo->removeFromParent();
-	m_garo = Sprite::create(FileStuff::GARO_ON);
-	addChild(m_garo);
-	m_garo->setPosition(m_garoPos);
-}
 
 void MainScene::ChangeToMapEditScene(Ref* pSender)
 {
@@ -152,3 +149,48 @@ void MainScene::menuCloseCallback(Ref* pSender)
     Director::getInstance()->end();
 }
 
+void MainScene::BlinkGaro()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_STREETLIGHTS);
+
+	CallFunc* garoOff =  CallFunc::create(CC_CALLBACK_0(MainScene::GaroOff, this));
+	CallFunc* garoOn = CallFunc::create(CC_CALLBACK_0(MainScene::GaroOn, this));
+
+	Sequence* seq =  Sequence::create(
+		garoOn,
+		DelayTime::create(0.25f),
+		garoOff,
+		DelayTime::create(1.0f),
+		garoOn,
+		DelayTime::create(0.2f),
+		garoOff,
+		DelayTime::create(0.2f),
+		garoOn,
+		nullptr);
+
+	runAction(seq);
+}
+
+void MainScene::GaroOff()
+{
+	m_garo->removeFromParent();
+	m_garo = Sprite::create(FileStuff::GARO_OFF);
+	addChild(m_garo);
+	m_garo->setPosition(m_garoPos);
+}
+
+void MainScene::GaroOn()
+{
+	m_garo->removeFromParent();
+	m_garo = Sprite::create(FileStuff::GARO_ON);
+	addChild(m_garo);
+	m_garo->setPosition(m_garoPos);
+}
+
+void MainScene::TurnGaro()
+{
+	Sprite* light_beam = Sprite::create(FileStuff::LIGHT_BEAM);
+	light_beam->setPosition(Vec2(3, -3));
+	light_beam->setAnchorPoint(Vec2(0, 0));
+	m_garo->addChild(light_beam, -1);
+}

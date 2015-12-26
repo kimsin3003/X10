@@ -46,7 +46,7 @@ void Mirror::ToBullet(Bullet* bullet)
 
 void Mirror::ToSelf(const Bullet* bullet)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("res/sound_effects/metal_ting.mp3", false, 1.0f, 0, 0);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_MIRROR, false, 1.0f, 0, 0);
 }
 
 void Mirror::ToSelf(const Explosion* explosion)

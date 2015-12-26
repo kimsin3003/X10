@@ -112,7 +112,8 @@ void GameManager::ShotBullet(Sling* sling)
 		m_bulletNumUI.back()->removeFromParent();
 		m_bulletNumUI.popBack();
 
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("res/sound_effects/firework_flying2.mp3", false, 1.0f, 0, 0);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_FLYING, false, 1.0f, 0, 0);
+		
 		sling->ShotComplete();
 
 		if (m_colliderManager->HasBulletToShot())
@@ -145,6 +146,14 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 				Explosion* explosion = bullet->GetExplosion();
 				m_colliderManager->AddExplosion(explosion);
 				gameLayer->addChild(explosion);
+				if (m_curStageNum == 12)
+				{
+					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_CAR_CRASH, false, 1.0f, 0, 0);
+				}
+				else 
+				{
+					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_EXPLOSION, false, 1.0f, 0, 0);
+				}
 			}
 		}
 	}

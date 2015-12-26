@@ -345,7 +345,7 @@ void StageScene::EndingEvent(float dt)
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingGaro, this)),
 		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
-		DelayTime::create(3.0f),
+		DelayTime::create(2.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
 		DelayTime::create(3.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)), //효과음 바로 - 끼이이이익 -> 쾅!!!

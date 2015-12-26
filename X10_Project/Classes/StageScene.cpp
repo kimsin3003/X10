@@ -312,41 +312,45 @@ void StageScene::ChangeToStageScene(Ref* pSender)
 void StageScene::IntroEvent(float dt)
 {
 	//FadeIn Version	
-	Vec2 deltaPos = Vec2(0, 45.0f*1.75f);
-	Vec2 textPos = Vec2(160.0f, 360.0f);
+	Vec2 deltaPos = Vec2(0, 16.5f);
+	Vec2 textPos = Vec2(0.0f, 480.0f);
 
-	PrintIntroText("Maybe I got lost in a road.", textPos, 0.0f, 3.0f);
-	PrintIntroText("I hate staying in the dark...", textPos-=deltaPos, 4.5f, 3.0f);
-	PrintIntroText("I should get out of here.", textPos -= deltaPos, 9.0f, 3.0f);
-	PrintIntroText("Let's turn on lights and move on...", textPos -= deltaPos, 14.0f, 3.0f);
-	
+	PrintIntroText("Why am I standing on a highway?", textPos, 2.0f, 1.0f);
+	PrintIntroText("Hmm.. and what are these in my pockets?", textPos-=deltaPos, 6.5f, 1.0f);
+	PrintIntroText("Oh my, what are those above the sky?", textPos -= deltaPos*6, 10.5f, 1.25f);
+	PrintIntroText("Wait, here's a note", textPos -= deltaPos * 2, 14.0f, 1.0f);
+	PrintIntroText("\"Kill them and I'll let you go\"", textPos -= deltaPos * 4, 18.0f, 1.60f);
+	PrintIntroText("Who is doing this fuck to me...?", textPos -= deltaPos * 2, 23.0f, 1.0f);
+	PrintIntroText("I'll find you and I'll kill you", textPos -= deltaPos * 2, 27.0f, 1.0f);
+
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 
 	CallFuncN* callFuncN = CallFuncN::create(
 		CC_CALLBACK_1(StageScene::ChangeToStageScene, this));
 
 	Sequence* seq = Sequence::create(
-		DelayTime::create(18.0f),
+		DelayTime::create(30.0f),
 		callFuncN,
 		nullptr);
 
 	runAction(seq);
 }
 
-void StageScene::PrintIntroText(const string& message, const Vec2& pos, float startTime, float keepTime)
+void StageScene::PrintIntroText(const string& message, const Vec2& pos, float startTime, float textScale)
 {
 	Label* text = Label::create(
-		message, FileStuff::FONT_ARIAL, 12.5f);
-	text->setAlignment(TextHAlignment::CENTER);
-	text->setScale(1.75f);
+		message, FileStuff::FONT_ARIAL, 14.5f);
+
+	text->setAlignment(TextHAlignment::LEFT);
+	text->setScale(1.00f * textScale);
 	text->setOpacity(0);
-	text->setAnchorPoint(Vec2(0.5, 0.5));
+	text->setAnchorPoint(Vec2(0, 1));
 	text->setPosition(pos);
 	addChild(text);
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(startTime),
-		FadeIn::create(keepTime-1.0f),
+		FadeIn::create(0),
 		NULL);
 
 	text->runAction(seq);

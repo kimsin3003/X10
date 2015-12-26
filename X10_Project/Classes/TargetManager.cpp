@@ -4,10 +4,8 @@
 #include "Enemy.h"
 #include "Mirror.h"
 #include "Virtical_Mirror.h"
-#include "Cloud.h"
 #include "Bubble.h"
 #include "Stone.h"
-#include "Gull.h"
 //Stage Information
 #include "StageInformation.h"
 #include <unordered_map>
@@ -27,10 +25,8 @@ void TargetManager::InitTargets(StageInformation* si)
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::ENEMY, Enemy::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::MIRROR, Mirror::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::VIRTICAL_MIRROR, Virtical_Mirror::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::CLOUD, Cloud::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::BUBBLE, Bubble::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::STAR, Stone::create));
-	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::GULL, Gull::create));
 
 	while (si->HasNextTarget())
 	{

@@ -4,7 +4,6 @@
 //collider
 #include "Collider.h"
 #include "Bullet.h"
-#include "CrossBullet.h"
 //Stage Information
 #include "StageInformation.h"
 #include <unordered_map>
@@ -23,7 +22,6 @@ void ColliderManager::InitBullets(StageInformation* si)
 	typedef unordered_map<string, function<Bullet*()>> BulletInfoMap;
 	BulletInfoMap bulletTypeInfo; //string에 타입 이름.
 	bulletTypeInfo.insert(BulletInfoMap::value_type("Bullet", Bullet::create));
-	bulletTypeInfo.insert(BulletInfoMap::value_type("CrossBullet", CrossBullet::create));
 
 	while (si->HasNextBullet())
 	{

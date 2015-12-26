@@ -39,7 +39,7 @@ void Stone::ToSelf(const Bullet* bullet)
 		m_spr->setScale(scale);
 		m_applyEffectToMe = false;
 
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::STONE_BREAK_SOUND, false, 1, 0, 1);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_STONE_BREAK, false, 1, 0, 1);
 
 		int frameCut = DESTRUCT_FRAMES;
 		float frameTime = Director::getInstance()->getSecondsPerFrame()*10.0;

@@ -150,15 +150,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\AppDelegate.cpp" />
     <ClCompile Include="..\Classes\Bubble.cpp" />
     <ClCompile Include="..\Classes\Bullet.cpp" />
-    <ClCompile Include="..\Classes\Cloud.cpp" />
-    <ClCompile Include="..\Classes\Collection.cpp" />
-    <ClCompile Include="..\Classes\CollectionManager.cpp" />
     <ClCompile Include="..\Classes\Collider.cpp" />
     <ClCompile Include="..\Classes\ColliderManager.cpp" />
     <ClCompile Include="..\Classes\ConstVars.cpp" />
     <ClCompile Include="..\Classes\cppson.cpp" />
-    <ClCompile Include="..\Classes\CrossBullet.cpp" />
-    <ClCompile Include="..\Classes\CrossExplosion.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
     <ClCompile Include="..\Classes\Explosion.cpp" />
     <ClCompile Include="..\Classes\FileStuff.cpp" />
@@ -172,7 +167,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\MCScene.cpp" />
     <ClCompile Include="..\Classes\Mirror.cpp" />
     <ClCompile Include="..\Classes\Virtical_Mirror.cpp" />
-    <ClCompile Include="..\Classes\Gull.cpp" />
     <ClCompile Include="..\Classes\Sling.cpp" />
     <ClCompile Include="..\Classes\LightManager.cpp" />
     <ClCompile Include="..\Classes\StageInformation.cpp" />
@@ -191,15 +185,10 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\AppDelegate.h" />
     <ClInclude Include="..\Classes\Bubble.h" />
     <ClInclude Include="..\Classes\Bullet.h" />
-    <ClInclude Include="..\Classes\Cloud.h" />
-    <ClInclude Include="..\Classes\Collection.h" />
-    <ClInclude Include="..\Classes\CollectionManager.h" />
     <ClInclude Include="..\Classes\Collider.h" />
     <ClInclude Include="..\Classes\ColliderManager.h" />
     <ClInclude Include="..\Classes\ConstVars.h" />
     <ClInclude Include="..\Classes\cppson.h" />
-    <ClInclude Include="..\Classes\CrossBullet.h" />
-    <ClInclude Include="..\Classes\CrossExplosion.h" />
     <ClInclude Include="..\Classes\Enemy.h" />
     <ClInclude Include="..\Classes\Explosion.h" />
     <ClInclude Include="..\Classes\FileStuff.h" />
@@ -214,7 +203,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\MCScene.h" />
     <ClInclude Include="..\Classes\Mirror.h" />
     <ClInclude Include="..\Classes\Virtical_Mirror.h" />
-    <ClInclude Include="..\Classes\Gull.h" />
     <ClInclude Include="..\Classes\Sling.h" />
     <ClInclude Include="..\Classes\LightManager.h" />
     <ClInclude Include="..\Classes\StageInformation.h" />

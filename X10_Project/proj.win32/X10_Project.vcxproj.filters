@@ -49,20 +49,11 @@
     <ClCompile Include="..\Classes\Explosion.cpp">
       <Filter>GameObject\Explosions</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\Cloud.cpp">
-      <Filter>GameObject\Targets</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\Bubble.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\JWScene.cpp">
       <Filter>OldNTest</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CrossExplosion.cpp">
-      <Filter>GameObject\Explosions</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\CrossBullet.cpp">
-      <Filter>GameObject\Bullets</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\StageScene.cpp">
       <Filter>Scene</Filter>
@@ -82,20 +73,11 @@
     <ClCompile Include="..\Classes\cppson.cpp">
       <Filter>JsonParser</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\CollectionManager.cpp">
-      <Filter>Manager</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Collection.cpp">
-      <Filter>GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\StageInformation.cpp">
       <Filter>GameObject\Information</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\MapEditer.cpp">
       <Filter>Scene</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\Gull.cpp">
-      <Filter>GameObject\Targets</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\Virtical_Mirror.cpp">
       <Filter>GameObject\Targets</Filter>
@@ -153,9 +135,6 @@
     <ClInclude Include="..\Classes\Explosion.h">
       <Filter>GameObject\Explosions</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\Cloud.h">
-      <Filter>GameObject\Targets</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\Bubble.h">
       <Filter>GameObject\Targets</Filter>
     </ClInclude>
@@ -164,12 +143,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Target.h">
       <Filter>GameObject\Targets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CrossExplosion.h">
-      <Filter>GameObject\Explosions</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CrossBullet.h">
-      <Filter>GameObject\Bullets</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StageScene.h">
       <Filter>Scene</Filter>
@@ -182,12 +155,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\FileStuff.h">
       <Filter>Namspace</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\CollectionManager.h">
-      <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Collection.h">
-      <Filter>GameObject</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\json\json.h">
       <Filter>JsonParser</Filter>
@@ -203,9 +170,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\MapEditer.h">
       <Filter>Scene</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\Gull.h">
-      <Filter>GameObject\Targets</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Virtical_Mirror.h">
       <Filter>GameObject\Targets</Filter>

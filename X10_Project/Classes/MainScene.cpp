@@ -46,7 +46,7 @@ bool MainScene::init()
 	Point selectedAnchor = Point(selectedScale - 1.0, selectedScale - 1.0) / 2;
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
-		FileStuff::MAIN_BACKGROUND_SOUND, true);
+		FileStuff::SOUND_MAIN_BACKGROUND, true);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5f);
 
 	/*Game start Button*/
@@ -99,7 +99,7 @@ bool MainScene::init()
 void MainScene::ChangeToStageScene(Ref* pSender)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::INITIAL_BACKGROUND_SOUND, true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_INITIAL_BACKGROUND, true);
 
 	Director::getInstance()->replaceScene(StageScene::createScene());
 }
@@ -107,7 +107,7 @@ void MainScene::ChangeToStageScene(Ref* pSender)
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 {
 	m_character->runAction(MoveTo::create(2.0f, m_garo->getPosition() + Vec2(10, -40)));
-	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::STEP_SOUND);
+	int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),

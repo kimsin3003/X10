@@ -90,10 +90,6 @@ bool MapEditer::init()
 				sprite = Sprite::create(FileStuff::BUBBLE);
 				break;
 
-			case TargetInfo::CLOUD:
-				sprite = Sprite::create(FileStuff::CLOUD);
-				break;
-
 			case TargetInfo::ENEMY:
 				sprite = Sprite::create(FileStuff::ENEMY);
 				break;
@@ -104,10 +100,6 @@ bool MapEditer::init()
 
 			case TargetInfo::VIRTICAL_MIRROR:
 				sprite = Sprite::create(FileStuff::VIRTICAL_MIRROR);
-				break;
-
-			case TargetInfo::GULL:
-				sprite = Sprite::create(FileStuff::GULL);
 				break;
 
 			case TargetInfo::STAR:
@@ -176,11 +168,6 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 		sprite->setTag(TargetInfo::BUBBLE);
 		break;
 
-	case EventKeyboard::KeyCode::KEY_C:
-		sprite = Sprite::create(FileStuff::CLOUD);
-		sprite->setTag(TargetInfo::CLOUD);
-		break;
-
 	case EventKeyboard::KeyCode::KEY_E:
 		sprite = Sprite::create(FileStuff::ENEMY);
 		sprite->setTag(TargetInfo::ENEMY);
@@ -194,11 +181,6 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 	case EventKeyboard::KeyCode::KEY_V:
 		sprite = Sprite::create(FileStuff::VIRTICAL_MIRROR);
 		sprite->setTag(TargetInfo::VIRTICAL_MIRROR);
-		break;
-
-	case EventKeyboard::KeyCode::KEY_G:
-		sprite = Sprite::create(FileStuff::GULL);
-		sprite->setTag(TargetInfo::GULL);
 		break;
 
 	case EventKeyboard::KeyCode::KEY_S:

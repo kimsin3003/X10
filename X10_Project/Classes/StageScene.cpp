@@ -207,7 +207,7 @@ void StageScene::SetupLight()
 		if (m_stageToPlay <= 14)
 		{
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::BEFORE_ENDING_BACKGROUND_SOUND, true);
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND, true);
 		}
 		addChild(m_lightManager->GetLight(11));
 	case 11:
@@ -226,7 +226,7 @@ void StageScene::SetupLight()
 		if (m_stageToPlay <= 5)
 		{
 			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::MIDDLE_PHASE_BACKGROUND_SOUND, true);
+			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MIDDLE_PHASE_BACKGROUND, true);
 		}
 		addChild(m_lightManager->GetLight(4));
 	case 4:
@@ -263,7 +263,7 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 	{
 
 		//소리
-		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::STEP_SOUND);
+		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
 
 		//이동
 		character->setPosition(startPos);
@@ -374,6 +374,7 @@ void StageScene::EndingEvent(float dt)
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadBody, this)),
 		DelayTime::create(1.0f),
 		FadeOut::create(0.0f),
+		DelayTime::create(1.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)),
 		nullptr);
 
@@ -388,7 +389,8 @@ void StageScene::ShowLastLight()
 	lastLight->setPosition(m_lightManager->GetPosition(12));
 	addChild(lastLight);
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect("res/sound_effects/garo_ggambak.wav", true, 3.0f);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS, false, 3.0f);
+
 	lastLight->runAction(Blink::create(3.0f, 4));
 }
 

@@ -90,7 +90,10 @@ namespace FileStuff
 	const string GARO_ON = "res/ui/garo_on.png";
 	const string LIGHT_BEAM = "res/ui/lightbeam.png";
 
-	const string BEFORE_CRASHING_0 = "res/bg/car_crashing.jpg";
+	const string BEFORE_CRASHING_0 = "res/bg/riding.jpg";
+	const string BEFORE_CRASHING_1 = "res/bg/seeing_people.jpg";
+	const string BEFORE_CRASHING_2 = "res/bg/turning_handle.jpg";
+	const string BLACKOUT = "res/bg/blackout.jpg";
 
 	extern const char* SOUND_FIREWORK_EXPLOSION;
 	extern const char* SOUND_FIREWORK_FLYING;
@@ -105,5 +108,7 @@ namespace FileStuff
 	extern const char* SOUND_SHOCKED;
 	extern const char* SOUND_STREETLIGHTS;
 	extern const char* SOUND_EAR_RINGING;
+	extern const char* SOUND_RIDING;
+	extern const char* SOUND_CRASH;
 
 }

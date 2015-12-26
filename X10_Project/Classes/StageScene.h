@@ -27,6 +27,8 @@ private:
 
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
+	void ChangeBackgroundImg(string bgImg);
+	void ChangeSoundEffect(const char* sound);
 	Point GetCharacterPosition(int stage);
 	void SetupLight();
 	MenuItemImage* MakeBackButton();

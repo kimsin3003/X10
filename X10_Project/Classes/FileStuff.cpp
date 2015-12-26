@@ -16,3 +16,5 @@ const char* FileStuff::SOUND_STREETLIGHTS = "res/sound_effects/garo_ggambak.wav"
 const char* FileStuff::SOUND_SHOCKED = "res/sound_effects/shock.wav";
 
 const char* FileStuff::SOUND_EAR_RINGING = "res/sound_effects/ear_ringing.wav";
+const char* FileStuff::SOUND_RIDING = "res/sound_effects/riding.mp3";
+const char* FileStuff::SOUND_CRASH = "res/sound_effects/crash1.mp3";

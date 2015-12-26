@@ -341,13 +341,13 @@ void StageScene::PrintIntroText(const string& message, const Vec2& pos, float st
 void StageScene::EndingEvent(float dt)
 {
 	Sequence* seq = Sequence::create(
-		DelayTime::create(2.5f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingGaro, this)),
-		DelayTime::create(4.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
-		DelayTime::create(3.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		DelayTime::create(3.0f),
+		//DelayTime::create(2.5f),
+		//CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingGaro, this)),
+		//DelayTime::create(4.0f),
+		//CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
+		//DelayTime::create(3.0f),
+		//CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
+		//DelayTime::create(3.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)), //효과음 바로 - 끼이이이익 -> 쾅!!!
 		nullptr);
 
@@ -419,6 +419,29 @@ void StageScene::ShowBlinkingGaro()
 	runAction(seq);
 }
 
+void StageScene::ChangeBackgroundImg(string bgImg)
+{
+	Vector<Node*> childs = getChildren();
+
+	for (int i = 0; i < childs.size(); i++)
+	{
+		childs.at(i)->removeFromParent();
+	}
+
+	Sprite* backgroundImg = Sprite::create(bgImg);
+
+	float scale = (Director::getInstance()->getVisibleSize().width) / (backgroundImg->getContentSize().width);
+	backgroundImg->setAnchorPoint(Point::ZERO);
+	backgroundImg->setScale(scale);
+	backgroundImg->setOpacity(140);
+	addChild(backgroundImg);
+}
+
+void StageScene::ChangeSoundEffect(const char* sound)
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(sound, false);
+}
+
 void StageScene::ShowCrashingScene()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
@@ -428,12 +451,31 @@ void StageScene::ShowCrashingScene()
 	{
 		childs.at(i)->removeFromParent();
 	}
-	Sprite* background = Sprite::create(FileStuff::BEFORE_CRASHING_0);
-	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
-	background->setAnchorPoint(Point::ZERO);
-	background->setScale(scale);
-	background->setOpacity(140);
-	addChild(background);
+
+	CallFunc* crashing0 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_0));
+	CallFunc* ridingSound = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeSoundEffect, this, FileStuff::SOUND_RIDING));
+	CallFunc* crashing1 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_1));
+	CallFunc* crashingSound = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeSoundEffect, this, FileStuff::SOUND_CRASH));
+	CallFunc* crashing2 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_2));
+	CallFunc* blackout = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BLACKOUT));
+
+
+
+	Sequence* seq = Sequence::create(
+		crashing0,
+		ridingSound,
+		DelayTime::create(2.0f),
+		crashing1,
+		crashingSound,
+		DelayTime::create(1.0f),
+		crashing2,
+		DelayTime::create(0.2f),
+		blackout,
+		nullptr
+	);
+
+	runAction(seq);
+
 }
 
 MenuItemImage* StageScene::MakeBackButton()

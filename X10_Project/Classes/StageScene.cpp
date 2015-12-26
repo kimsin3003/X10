@@ -341,13 +341,13 @@ void StageScene::PrintIntroText(const string& message, const Vec2& pos, float st
 void StageScene::EndingEvent(float dt)
 {
 	Sequence* seq = Sequence::create(
-		//DelayTime::create(2.5f),
-		//CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingGaro, this)),
-		//DelayTime::create(4.0f),
-		//CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
-		//DelayTime::create(3.0f),
-		//CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		//DelayTime::create(3.0f),
+		DelayTime::create(2.5f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingGaro, this)),
+		DelayTime::create(4.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
+		DelayTime::create(2.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
+		DelayTime::create(3.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)), //효과음 바로 - 끼이이이익 -> 쾅!!!
 		nullptr);
 
@@ -453,9 +453,8 @@ void StageScene::ShowCrashingScene()
 	}
 
 	CallFunc* crashing0 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_0));
-	CallFunc* ridingSound = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeSoundEffect, this, FileStuff::SOUND_RIDING));
-	CallFunc* crashing1 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_1));
 	CallFunc* crashingSound = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeSoundEffect, this, FileStuff::SOUND_CRASH));
+	CallFunc* crashing1 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_1));
 	CallFunc* crashing2 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_2));
 	CallFunc* blackout = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BLACKOUT));
 
@@ -463,13 +462,12 @@ void StageScene::ShowCrashingScene()
 
 	Sequence* seq = Sequence::create(
 		crashing0,
-		ridingSound,
-		DelayTime::create(2.0f),
-		crashing1,
 		crashingSound,
-		DelayTime::create(1.0f),
-		crashing2,
+		DelayTime::create(1.7f),
+		crashing1,
 		DelayTime::create(0.2f),
+		crashing2,
+		DelayTime::create(1.2f),
 		blackout,
 		nullptr
 	);

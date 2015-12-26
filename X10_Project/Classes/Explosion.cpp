@@ -32,7 +32,6 @@ bool Explosion::init()
 	m_explosion->setSpeedVar(0);
 	m_explosion->setSpeed(m_maxRadius / m_lifeTime);
 	m_explosion->setPosition(Point::ZERO);
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect("res/sound_effects/firework_explosion3.mp3", false, 1.0f, 0, 0);
 	this->addChild(m_explosion);
 	
 	return true;

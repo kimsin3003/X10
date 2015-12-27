@@ -35,6 +35,7 @@ private:
 	void GaroOn();
 	void GaroOff();
 	void ShowBlinkingGaro();
+	void ShowAfterCrash();
 
 	LightManager* m_lightManager;
 

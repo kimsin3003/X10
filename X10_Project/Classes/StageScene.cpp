@@ -297,7 +297,7 @@ void StageScene::IntroEvent(float dt)
 	Vec2 deltaPos = Vec2(0, 16.5f);
 	Vec2 textPos = Vec2(0.0f, 480.0f);
 
-	PrintIntroText("Why am I standing on a highway?", textPos, 2.0f, 1.0f);
+	PrintIntroText("Why am I standing on a road?", textPos, 2.0f, 1.0f);
 	PrintIntroText("Hmm.. and what are these in my pockets?", textPos-=deltaPos, 6.5f, 1.0f);
 	PrintIntroText("Oh my, what are those above the sky?", textPos -= deltaPos*6, 10.5f, 1.25f);
 	PrintIntroText("Wait, here's a note", textPos -= deltaPos * 2, 14.0f, 1.0f);
@@ -347,8 +347,15 @@ void StageScene::EndingEvent(float dt)
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
 		DelayTime::create(2.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		DelayTime::create(3.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)), //효과음 바로 - 끼이이이익 -> 쾅!!!
+		DelayTime::create(0.5f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)),
+		DelayTime::create(7.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
+		DelayTime::create(1.0f), 
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowAfterCrash, this)),
+		DelayTime::create(5.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
+		DelayTime::create(2.5f),
 		nullptr);
 
 	runAction(seq);
@@ -419,6 +426,17 @@ void StageScene::ShowBlinkingGaro()
 	runAction(seq);
 }
 
+void StageScene::ShowAfterCrash()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+	
+	m_background = Sprite::create(FileStuff::AFTER_CRASHED);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setAnchorPoint(Point::ZERO);
+	m_background->setScale(scale);
+	addChild(m_background);
+}
+
 void StageScene::ChangeBackgroundImg(string bgImg)
 {
 	Vector<Node*> childs = getChildren();
@@ -445,20 +463,14 @@ void StageScene::ChangeSoundEffect(const char* sound)
 void StageScene::ShowCrashingScene()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-	Vector<Node*> childs = getChildren();
 
-	for (int i = 0; i < childs.size(); i++)
-	{
-		childs.at(i)->removeFromParent();
-	}
+	removeAllChildrenWithCleanup(true);
 
 	CallFunc* crashing0 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_0));
 	CallFunc* crashingSound = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeSoundEffect, this, FileStuff::SOUND_CRASH));
 	CallFunc* crashing1 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_1));
 	CallFunc* crashing2 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_2));
 	CallFunc* blackout = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BLACKOUT));
-
-
 
 	Sequence* seq = Sequence::create(
 		crashing0,

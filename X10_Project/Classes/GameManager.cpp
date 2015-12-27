@@ -40,7 +40,6 @@ GameManager::GameManager()
 	m_colliderManager = new ColliderManager();
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
-	m_lastTarget = nullptr;
 }
 
 void GameManager::Reset()
@@ -51,7 +50,6 @@ void GameManager::Reset()
 	delete m_targetManager;
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
-	m_lastTarget = nullptr;
 }
 
 GameManager::~GameManager() {}
@@ -165,15 +163,18 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 {
-	m_lastTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
+	Target* currentCollidingTarget;
+	currentCollidingTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
+	//위 주석의 내용이 틀림... 이것은 한 콜라이더에 대해서 한 프레임내에 여러충돌이 있는지 검사하는 코드임.
+
 	bool collidingCheck = false; //현재 충돌중인 타겟이 있는지 체크. --> lastTarget을 유지할 필요가 있는지체크
 	for (Target* target : targets)
 	{
-		if (target == m_lastTarget)
-		{
-			break;
-			collidingCheck = true; // <-????
-		}
+		//if (target == currentCollidingTarget)
+		//{
+		//	collidingCheck = true;
+		//	break;
+		//}
 
 		if (target->IsEnemy())
 		{
@@ -182,12 +183,19 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 		if (collider->IsBullet())
 		{
-
 			if (IsCollision(target, collider))
 			{
-				m_lastTarget = target;
+				// 충돌중인 타겟이면 넘어감
+				Bullet* bullet = static_cast<Bullet*>(collider);
+				if (bullet->m_currentCollidingTarget == target)
+				{
+					collidingCheck = true;
+					continue;
+				}
+				currentCollidingTarget = target;
 				target->ApplyCollisionEffect(collider);
 				collidingCheck = true;
+				bullet->m_currentCollidingTarget = target;
 			}
 		}
 		else
@@ -206,7 +214,12 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 	if (!collidingCheck)
 	{
-		m_lastTarget = nullptr;
+		currentCollidingTarget = nullptr;
+		Bullet* bullet = dynamic_cast<Bullet*>(collider);
+		if (bullet != nullptr)
+		{
+			bullet->m_currentCollidingTarget = nullptr;
+		}
 	}
 }
 

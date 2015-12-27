@@ -21,6 +21,7 @@ bool Bullet::init()
 	m_isToExplode = false;
 	m_toBeErased = false;
 	m_isStopped = false;
+	m_currentCollidingTarget = nullptr;
 
 	m_lifeTime = BULLET_LIFETIME;
 	m_startLife = m_lifeTime;

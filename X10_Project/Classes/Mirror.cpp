@@ -19,17 +19,19 @@ bool Mirror::init()
 void Mirror::ToBullet(Bullet* bullet)
 {
 	float mirrorAngle = getRotation(); //거울이 수평선에서 기울어진 정도 (시계방향)
-	Vec2 bulletDir = bullet->GetDirection(); // 불렛의 속도벡터
+	Vec2 bulletDir = bullet->GetDirection();// 불렛의 방향 벡터
 	
 	float mirrorRadian = CC_DEGREES_TO_RADIANS(mirrorAngle);
 	bulletDir.rotate(Vec2::ZERO, mirrorRadian); // 벡터를 수평 죄표계로 회전 (거울이 수직일 경우로 계산하기 위해...)
 	
 	bulletDir.x = -bulletDir.x; //가상의 수직 거울에 반사
 	bulletDir.rotate(Vec2::ZERO, -mirrorRadian); // 원래 좌표계뢰 다시 회전
-	
-	bullet->SetDirection(bulletDir);
-	getBoundingBox();
 
+	Vec2 afterVec = bulletDir; // 반사후 방향
+	bullet->SetDirection(bulletDir);
+
+	float mirrorWidth = m_spr->getContentSize().width * getScale(); // 거울의 두께
+	
 	//미러 기준의 입사각.
 	/*float m = this->getRotation();
 	float inci_angle = (-bullet->GetDirection()).getAngle() - this->getRotation();

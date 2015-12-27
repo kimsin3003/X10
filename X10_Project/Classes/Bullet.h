@@ -3,6 +3,8 @@
 #include "Collider.h"
 #include "Explosion.h"
 
+class Target; //전방선언
+
 class Bullet : public Collider
 {
 public:
@@ -34,9 +36,10 @@ public:
 	bool IsToExplode() { return m_isToExplode; }
 	bool IsActionStopped() { return m_isStopped; }
 	bool IsBullet() { return true; }
+	Target* m_currentCollidingTarget;
 
 	Sprite* GetSprite() { return m_spr; }
-
+	
 protected:
 	void DecreaseLife();
 	Sprite* MakeBody();

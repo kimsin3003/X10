@@ -103,10 +103,11 @@ bool MapEditer::init()
 				break;
 
 			case TargetInfo::STAR:
-				sprite = Sprite::create(FileStuff::STAR_SAD);
+				sprite = Sprite::create(FileStuff::START_IMG);
 				break;
+			default:
+				sprite = Sprite::create(FileStuff::ENEMY); //default sprite
 			}
-			///# 만일에 sprite가 위의 case문 어느것에도 해당 안된다면?? ///# 아직 그대로...
 
 			sprite->setTag(targetInfo.m_name.get());
 			point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
@@ -139,16 +140,22 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 {
 	Sprite* sprite = nullptr;
 
-	if (this->getChildByName("saveButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
+	if (this->getChildByName("saveButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
+	{
 		Save();
+		return;
 	}
 
-	if (this->getChildByName("playButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
+	if (this->getChildByName("playButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
+	{
 		GotoStage(this, 0);
+		return;
 	}
 
-	if (this->getChildByName("backButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY()))){
+	if (this->getChildByName("backButton")->getBoundingBox().containsPoint(Vec2(event->getCursorX(), event->getCursorY())))
+	{
 		Director::getInstance()->replaceScene(MainScene::createScene());
+		return;
 	}
 
 	Vector<Node*>& children = m_layer->getChildren();

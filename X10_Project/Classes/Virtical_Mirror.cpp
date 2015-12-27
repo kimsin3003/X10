@@ -25,15 +25,17 @@ void Virtical_Mirror::ToBullet(Bullet* bullet)
 	float d = (2 * M_PI + (-bullet->GetDirection()).getAngle());
 	float inci_angle = (2 * M_PI + (-bullet->GetDirection()).getAngle()) - mirror_angle;
 
-	if (inci_angle <= M_PI){
+	if (inci_angle <= M_PI)
+	{
 		float ref_angle = (M_PI - inci_angle) + mirror_angle;
 		bullet->SetDirection(bullet->GetDirection().length() * Vec2(cos(ref_angle), sin(ref_angle)));
 	}
-
-	else{
+	else
+	{
 		float ref_angle = (3 * M_PI - inci_angle) + mirror_angle;
 		bullet->SetDirection(bullet->GetDirection().length() * Vec2(cos(ref_angle), sin(ref_angle)));
 	}
+
 }
 
 void Virtical_Mirror::ToSelf(const Bullet* bullet)

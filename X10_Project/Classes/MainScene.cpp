@@ -32,6 +32,7 @@ bool MainScene::init()
 		return false;
 	}
 
+
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
 
 	m_garo = Sprite::create(FileStuff::GARO_OFF);
@@ -113,6 +114,8 @@ void MainScene::ChangeToStageScene(Ref* pSender)
 
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 {
+	Director::getInstance()->setDisplayStats(false);
+
 	removeChildByName("Buttons");
 
 	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);

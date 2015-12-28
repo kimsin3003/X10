@@ -66,6 +66,5 @@ void Enemy::ToSelf(const Bullet* bullet)
 
 void Enemy::ToSelf(const Explosion* explosion)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_UFO_EXPLODE, false, 1.0f, 0, 0);
 	ToSelf(static_cast<Bullet*>(NULL));
 }

@@ -6,7 +6,7 @@ const char* FileStuff::SOUND_FIREWORK_FLYING = "res/sound_effects/firework_flyin
 const char* FileStuff::SOUND_STONE_BREAK = "res/sound_effects/stone_break.mp3";
 const char* FileStuff::SOUND_UFO_EXPLODE = "res/sound_effects/ufo_explode.mp3";
 const char* FileStuff::SOUND_MIRROR = "res/sound_effects/metal_ting.mp3";
-
+const char* FileStuff::SOUND_BUBBLE_POP = "res/sound_effects/pop.mp3";
 
 const char* FileStuff::SOUND_MAIN_BACKGROUND = "res/bgmusic/Untold Sorrow - main_theme.wav";
 const char* FileStuff::SOUND_INITIAL_BACKGROUND = "res/bgmusic/strange_night.mp3";

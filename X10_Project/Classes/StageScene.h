@@ -28,6 +28,7 @@ private:
 	void ShowAfterCrash();
 	void ShowHospital();
 	Sprite* LoadBackground();
+	void SetBGM();
 	Sprite* LoadCharacter();
 	void ChangeBackgroundImg(string bgImg);
 	void ChangeSoundEffect(const char* sound);

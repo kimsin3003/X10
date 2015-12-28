@@ -46,7 +46,6 @@ bool MainScene::init()
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
 		FileStuff::SOUND_MAIN_BACKGROUND, true);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->setBackgroundMusicVolume(0.5f);
 
 	/*Game start Button*/
 	MenuItemImage* startGame = MenuItemImage::create();
@@ -105,9 +104,6 @@ bool MainScene::init()
 
 void MainScene::ChangeToStageScene(Ref* pSender)
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_INITIAL_BACKGROUND, true);
-
 	Director::getInstance()->replaceScene(StageScene::createScene());
 }
 
@@ -162,7 +158,7 @@ void MainScene::menuCloseCallback(Ref* pSender)
 
 void MainScene::BlinkGaro()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_STREETLIGHTS);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS);
 
 	CallFunc* garoOff =  CallFunc::create(CC_CALLBACK_0(MainScene::GaroOff, this));
 	CallFunc* garoOn = CallFunc::create(CC_CALLBACK_0(MainScene::GaroOn, this));

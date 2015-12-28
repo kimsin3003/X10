@@ -56,6 +56,7 @@ namespace FileStuff
 	const string WHITE = "res/highway/White.png";
 
 	const string AFTER_CRASHED = "res/bg/after_crashed.png";
+	const string HOSPITAL = "res/bg/hospital.png";
 
 	const string STAGE_LIGHTS_LEGT_01 = "res/lights/left0.png";
 	const string STAGE_LIGHTS_LEGT_02 = "res/lights/left1.png";

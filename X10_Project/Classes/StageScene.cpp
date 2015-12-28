@@ -345,11 +345,12 @@ void StageScene::EndingEvent(float dt)
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)),
 		DelayTime::create(7.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		DelayTime::create(1.0f), 
+		DelayTime::create(1.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowAfterCrash, this)),
 		DelayTime::create(5.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
 		DelayTime::create(2.5f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowHospital, this)),
 		nullptr);
 
 	runAction(seq);
@@ -431,6 +432,19 @@ void StageScene::ShowAfterCrash()
 	addChild(m_background);
 }
 
+void StageScene::ShowHospital()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+
+	removeAllChildrenWithCleanup(true);
+
+	m_background = Sprite::create(FileStuff::HOSPITAL);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setAnchorPoint(Point::ZERO);
+	m_background->setScale(scale);
+	addChild(m_background);
+}
+
 void StageScene::ChangeBackgroundImg(string bgImg)
 {
 	Vector<Node*> childs = getChildren();
@@ -479,7 +493,6 @@ void StageScene::ShowCrashingScene()
 	);
 
 	runAction(seq);
-
 }
 
 MenuItemImage* StageScene::MakeBackButton()

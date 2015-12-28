@@ -24,7 +24,9 @@ private:
 	void ShowWhiteScene();
 	void ShowDeadbody();
 	void ShowCrashingScene();
-
+	void ShowBlinkingGaro();
+	void ShowAfterCrash();
+	void ShowHospital();
 	Sprite* LoadBackground();
 	Sprite* LoadCharacter();
 	void ChangeBackgroundImg(string bgImg);
@@ -34,8 +36,6 @@ private:
 	MenuItemImage* MakeBackButton();
 	void GaroOn();
 	void GaroOff();
-	void ShowBlinkingGaro();
-	void ShowAfterCrash();
 
 	LightManager* m_lightManager;
 

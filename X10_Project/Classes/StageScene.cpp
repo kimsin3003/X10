@@ -290,7 +290,7 @@ void StageScene::IntroEvent(float dt)
 	//FadeIn Version	
 	Vec2 deltaPos = Vec2(0, 16.5f);
 	Vec2 textPos = Vec2(0.0f, 480.0f);
-
+	/*
 	PrintIntroText("Why am I standing on a road?", textPos, 2.0f, 1.0f);
 	PrintIntroText("Hmm.. and what are these in my pockets?", textPos-=deltaPos, 6.5f, 1.0f);
 	PrintIntroText("Oh my, what are those above the sky?", textPos -= deltaPos*6, 10.5f, 1.25f);
@@ -298,14 +298,14 @@ void StageScene::IntroEvent(float dt)
 	PrintIntroText("\"Kill them, then I'll let you go\"", textPos -= deltaPos * 4, 18.0f, 1.60f);
 	PrintIntroText("Who is doing this fuck to me...?", textPos -= deltaPos * 2, 23.0f, 1.0f);
 	PrintIntroText("I'll find you and I'll kill you", textPos -= deltaPos * 2, 27.0f, 1.0f);
-
+	*/
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 
 	CallFuncN* callFuncN = CallFuncN::create(
 		CC_CALLBACK_1(StageScene::ChangeToStageScene, this));
 
 	Sequence* seq = Sequence::create(
-		DelayTime::create(30.0f),
+//		DelayTime::create(30.0f),
 		callFuncN,
 		nullptr);
 

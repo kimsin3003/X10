@@ -34,12 +34,10 @@ GameManager* GameManager::GetInstance()
 	return m_instance;
 }
 
-GameManager::GameManager()
+GameManager::GameManager() : m_sling(nullptr), m_isJudged(false), m_curStageNum(0)
 {
-	m_sling = nullptr;
 	m_colliderManager = new ColliderManager();
 	m_targetManager = new TargetManager();
-	m_isJudged = false;
 }
 
 void GameManager::Reset()

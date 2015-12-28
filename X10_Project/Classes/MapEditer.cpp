@@ -37,17 +37,16 @@ bool MapEditer::init()
 	Sling* sling = Sling::create();
 	this->addChild(sling);
 
-	EventListenerMouse* _mouseListener = EventListenerMouse::create();
-	_mouseListener->onMouseDown = CC_CALLBACK_1(MapEditer::onMouseDown, this);
-	_mouseListener->onMouseScroll = CC_CALLBACK_1(MapEditer::OnMouseScroll, this);
+	EventListenerMouse* mouseListener = EventListenerMouse::create();
+	mouseListener->onMouseDown = CC_CALLBACK_1(MapEditer::onMouseDown, this);
+	mouseListener->onMouseScroll = CC_CALLBACK_1(MapEditer::OnMouseScroll, this);
 	m_clicked_sprite = nullptr;
 
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 
-	///# 지난주 피드백 아직 수정 안했네?
-	EventListenerKeyboard* _keyboardListener = EventListenerKeyboard::create(); ///# 왜 로컬 변수 앞에 언더바를 붙이는가? _keyboardListener이름은 Layer클래스 멤버로도 있어서 가리기 효과 발생...
-	_keyboardListener->onKeyPressed = CC_CALLBACK_1(MapEditer::OnKeyPressed, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(_keyboardListener, this);
+	EventListenerKeyboard* keyboardListener = EventListenerKeyboard::create();
+	keyboardListener->onKeyPressed = CC_CALLBACK_1(MapEditer::OnKeyPressed, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 	m_pressedKey = static_cast<EventKeyboard::KeyCode>(-1);
 
 	MenuItemLabel* saveButton = MenuItemLabel::create(Label::create("Save", "res/NanumGothic.ttf", 20));
@@ -72,6 +71,7 @@ bool MapEditer::init()
 
 	vector<TargetInfo> infoList;
 	string fileName = FileStuff::EDITING_FILENAME;
+	
 	//load from file
 	if (!cppson::loadFile(infoList, fileName))
 	{

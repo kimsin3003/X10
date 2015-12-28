@@ -4,10 +4,12 @@
 #include "FileStuff.h"
 #include <SimpleAudioEngine.h>
 
-Sling::Sling() : m_expectLine(), m_shotAngle(Vec2(0, 0)), m_shotPower(0), m_arm(nullptr), m_character(nullptr)
+Sling::Sling() : m_shotAngle(Vec2::ZERO), m_shotPower(0), 
+				 m_arm(nullptr), m_character(nullptr), 
+				 m_status(STATUS::EMPTY) 
 {
-	///# 생성자를 이왕 선언했으면 모든 멤버 초기화를 책임져야 한다. (추후에 다른 함수에서 값을 초기화 하더라도..)
-
+	m_expectLine.reserve(DOTNUM_OF_LINE);
+	m_beforeLine.reserve(DOTNUM_OF_LINE);
 }
 
 bool Sling::init()
@@ -62,11 +64,11 @@ bool Sling::init()
 	m_character = LoadCharacter();
 	addChild(m_character, 2);
 
-	EventListenerMouse* _mouseListener = EventListenerMouse::create();
-	_mouseListener->onMouseUp = CC_CALLBACK_1(Sling::Shot, this);
-	_mouseListener->onMouseDown = CC_CALLBACK_1(Sling::PullStart, this);
-	_mouseListener->onMouseMove = CC_CALLBACK_1(Sling::Pull, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(_mouseListener, this);
+	EventListenerMouse* mouseListener = EventListenerMouse::create();
+	mouseListener->onMouseUp = CC_CALLBACK_1(Sling::Shot, this);
+	mouseListener->onMouseDown = CC_CALLBACK_1(Sling::PullStart, this);
+	mouseListener->onMouseMove = CC_CALLBACK_1(Sling::Pull, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
 
 	return true;
 }

@@ -58,7 +58,7 @@ private:
 	
 	Sprite* LoadCharacter();
 
-	int m_status; ///# 요놈은 왜 생성자에서 초기화 안하노?
+	int m_status;
 	Vec2 m_shotAngle;
 	Sprite* m_arm;
 	Sprite* m_character;

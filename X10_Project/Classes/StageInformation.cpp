@@ -5,12 +5,10 @@
 #include <string>
 #include <json/json.h>
 
-StageInformation::StageInformation(int stage)
+StageInformation::StageInformation(int stage) : 
+m_currentTargetIndex(0), m_currentBulletIndex(0),
+m_currentTarget(), m_currentBullet()
 {
-	///# 생성자를 사용하면 모든 멤버 초기화를 해줘야 하는데, m_currentTarget 초기화 안하네~~ 누구는 하고 누구는 안하면 그게 곧 버그로 돌아옴
-	m_currentTargetIndex = 0;
-	m_currentBulletIndex = 0;
-
 	TargetInfo info;
 
 	if (stage >= 0)
@@ -55,7 +53,7 @@ int StageInformation::GetBulletCount()
 }
 
 bool StageInformation::HasNextTarget()
-{//다음 타겠이 있는지 검사
+{//다음 타겟이 있는지 검사
 	if (m_currentTargetIndex < GetTargetCount())
 	{
 		m_currentTarget = m_targetInfoList.at(m_currentTargetIndex);

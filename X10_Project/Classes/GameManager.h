@@ -40,7 +40,7 @@ private:
 	TargetManager* m_targetManager;
 	Sling* m_sling;
 	
-	int m_curStageNum; ///# 생성자가 있던데.. 요놈은 왜 초기화 안하노?
+	int m_curStageNum;
 	bool m_isJudged;
 	Vector<Sprite*> m_bulletNumUI;
 };

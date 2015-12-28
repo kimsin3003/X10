@@ -23,35 +23,24 @@ bool GameScene::init()
 	{
 		return false;
 	}
+	
 	m_background = LoadBackground();
 	addChild(m_background);
 
-//	m_character = LoadCharacter();
-//	addChild(m_character, 2.0);
-	m_character = Sprite::create();
-	m_character->setPosition(Point(200, 84) - Point(0, 15));
-
-	///# 아래 addChild 인자에서 zOrder가 소수점 지원하나? int아닌가?
 	Sprite* bgBottom = LoadBGBottom();
-	addChild(bgBottom, 2.5);
+	addChild(bgBottom, 2);
 
 	m_gameLayer = GameLayer::create();
 	addChild(m_gameLayer);
 	
 	m_uiLayer = UILayer::create();
-	addChild(m_uiLayer,10.0);
+	addChild(m_uiLayer, 10);
 	
 	m_gameManager = GameManager::GetInstance();
 
 	scheduleUpdate();
 
 	return true;
-}
-
-void GameScene::CleanUp()
-{
-	removeAllChildrenWithCleanup(true);
-	removeFromParentAndCleanup(true);
 }
 
 Sprite* GameScene::LoadBackground()
@@ -72,14 +61,6 @@ Sprite* GameScene::LoadBGBottom()
 	bottom->setScale(scale);
 	return bottom;
 }
-
-//
-//Sprite* GameScene::LoadCharacter()
-//{
-//	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
-//	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
-//	return character;
-//}
 
 void GameScene::update(float dt)
 {

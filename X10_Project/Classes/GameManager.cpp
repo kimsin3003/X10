@@ -110,8 +110,14 @@ void GameManager::ShotBullet(Sling* sling)
 		m_bulletNumUI.back()->removeFromParent();
 		m_bulletNumUI.popBack();
 
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_FLYING, false, 1.0f, 0, 0);
-		
+		if (m_curStageNum == 12)
+		{
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_CAR_BREAK, false, 1.0f, 0, 0);
+		}
+		else
+		{
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_FLYING, false, 1.0f, 0, 0);
+		}
 		sling->ShotComplete();
 
 		if (m_colliderManager->HasBulletToShot())

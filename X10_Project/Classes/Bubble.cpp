@@ -25,7 +25,7 @@ void Bubble::ToSelf(const Bullet* bullet)
 {
 	if (m_applyEffectToMe)
 	{
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::BUBBLE_POP, false, 1.0f, 0, 0);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_BUBBLE_POP, false, 1.0f, 0, 0);
 		m_applyEffectToMe = false;
 
 		// before pop sprite

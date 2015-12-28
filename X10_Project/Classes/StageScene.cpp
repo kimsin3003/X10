@@ -201,7 +201,8 @@ void StageScene::SetBGM()
 
 void StageScene::SetupLight()
 {
-	for (int i = 2; i < m_maxStageNum && i <= m_stageToPlay; i++){
+	for (int i = 2; i < m_maxStageNum && i <= m_stageToPlay; i++)
+	{
 		addChild(m_lightManager->GetLight(i - 1));
 	}
 }
@@ -322,6 +323,7 @@ void StageScene::PrintIntroText(const string& message, const Vec2& pos, float st
 	text->runAction(seq);
 }
 
+
 void StageScene::EndingEvent(float dt)
 {
 	Sequence* seq = Sequence::create(
@@ -329,17 +331,17 @@ void StageScene::EndingEvent(float dt)
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingGaro, this)),
 		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
-		DelayTime::create(2.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		DelayTime::create(0.5f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)),
-		DelayTime::create(7.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
 		DelayTime::create(1.0f),
+		//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
+		//		DelayTime::create(0.5f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)),
+		DelayTime::create(4.0f),
+		//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
+		//		DelayTime::create(1.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowAfterCrash, this)),
 		DelayTime::create(5.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		DelayTime::create(2.5f),
+		//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
+		//		DelayTime::create(2.5f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowHospital, this)),
 		nullptr);
 
@@ -360,6 +362,8 @@ void StageScene::ShowWhiteScene()
 void StageScene::ShowDeadbody()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false, 3.0f);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_CRASH);
 
 	m_background->removeFromParent();
 	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13APP);
@@ -391,7 +395,7 @@ void StageScene::GaroOff()
 
 void StageScene::ShowBlinkingGaro()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_STREETLIGHTS);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS);
 
 	CallFunc* garoOff = CallFunc::create(CC_CALLBACK_0(StageScene::GaroOff, this));
 	CallFunc* garoOn = CallFunc::create(CC_CALLBACK_0(StageScene::GaroOn, this));
@@ -425,6 +429,7 @@ void StageScene::ShowAfterCrash()
 void StageScene::ShowHospital()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_EAR_RINGING, false, 3.0f);
 
 	removeAllChildrenWithCleanup(true);
 
@@ -433,6 +438,27 @@ void StageScene::ShowHospital()
 	m_background->setAnchorPoint(Point::ZERO);
 	m_background->setScale(scale);
 	addChild(m_background);
+	m_background->setOpacity(0);
+	
+	m_background->runAction(
+		Sequence::create(
+		DelayTime::create(10.0f),
+		FadeIn::create(5.0f),
+		nullptr)
+	);
+
+	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
+	addChild(monitor);
+	
+	monitor->setScale(55.0f);
+	monitor->setPosition(Vec2(130, 335));
+
+	monitor->runAction(
+		Sequence::create(
+		DelayTime::create(2.0f),
+		ScaleTo::create(7.0f, 2.0f),
+		nullptr)
+	);
 }
 
 void StageScene::ChangeBackgroundImg(string bgImg)
@@ -460,19 +486,19 @@ void StageScene::ChangeSoundEffect(const char* sound)
 
 void StageScene::ShowCrashingScene()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
+//	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 
 	removeAllChildrenWithCleanup(true);
 
 	CallFunc* crashing0 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_0));
-	CallFunc* crashingSound = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeSoundEffect, this, FileStuff::SOUND_CRASH));
+//	CallFunc* crashingSound = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeSoundEffect, this, FileStuff::SOUND_CRASH));
 	CallFunc* crashing1 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_1));
 	CallFunc* crashing2 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_2));
 	CallFunc* blackout = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BLACKOUT));
 
 	Sequence* seq = Sequence::create(
 		crashing0,
-		crashingSound,
+//		crashingSound,
 		DelayTime::create(1.7f),
 		crashing1,
 		DelayTime::create(0.2f),
@@ -480,7 +506,7 @@ void StageScene::ShowCrashingScene()
 		DelayTime::create(1.2f),
 		blackout,
 		nullptr
-	);
+		);
 
 	runAction(seq);
 }

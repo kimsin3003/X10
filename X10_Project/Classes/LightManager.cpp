@@ -48,7 +48,7 @@ void LightManager::InitPositions()
 	m_positions.push_back(Vec2(204 + 10, 357 - 3));
 	m_positions.push_back(Vec2(102 + 10, 414-1)); //5
 	m_positions.push_back(Vec2(202 + 5, 416 - 3));
-	m_positions.push_back(Vec2(110 + 11, 470)); //6
+	m_positions.push_back(Vec2(110 + 7, 468)); //6
 	m_positions.push_back(Vec2(194 + 11, 470));
 }
 

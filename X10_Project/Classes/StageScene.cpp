@@ -186,17 +186,14 @@ void StageScene::SetupLight()
 	case 13:
 		addChild(m_lightManager->GetLight(12));
 	case 12:
-		if (m_stageToPlay <= 14)
-		{
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND, true);
-		}
 		addChild(m_lightManager->GetLight(11));
 	case 11:
 		addChild(m_lightManager->GetLight(10));
 	case 10:
 		addChild(m_lightManager->GetLight(9));
 	case 9:
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND, true);
 		addChild(m_lightManager->GetLight(8));
 	case 8:
 		addChild(m_lightManager->GetLight(7));
@@ -205,11 +202,8 @@ void StageScene::SetupLight()
 	case 6:
 		addChild(m_lightManager->GetLight(5));
 	case 5:
-		if (m_stageToPlay <= 5)
-		{
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-			CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MIDDLE_PHASE_BACKGROUND, true);
-		}
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MIDDLE_PHASE_BACKGROUND, true);
 		addChild(m_lightManager->GetLight(4));
 	case 4:
 		addChild(m_lightManager->GetLight(3));

@@ -98,6 +98,9 @@ namespace FileStuff
 	const string BEFORE_CRASHING_2 = "res/bg/turning_handle.jpg";
 	const string BLACKOUT = "res/bg/blackout.jpg";
 
+	const string MONITOR = "res/object/monitor.png";
+	const string BOTTLE = "res/object/bottle.png";
+
 	extern const char* SOUND_FIREWORK_EXPLOSION;
 	extern const char* SOUND_FIREWORK_FLYING;
 	extern const char* SOUND_FIREWORK_METAL;

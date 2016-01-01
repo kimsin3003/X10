@@ -37,10 +37,9 @@ public:
 		WIDTH = 20,
 		HEIGHT = 50,
 		YPOS = 50,
-		MAX_POWER = 300,
+		MAX_POWER = 120,
 		CLICK_RANGE = 300,
-		DOTNUM_OF_LINE = 10,
-		MAX_EXPECTLINE_LENGTH = 300
+		DOTNUM_OF_LINE = 10
 	};
 	const Point SLING_POSITION = Point(200, 84);
 	const float DEFAULT_ARM = 0.f;

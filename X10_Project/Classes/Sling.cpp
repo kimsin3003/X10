@@ -40,7 +40,7 @@ bool Sling::init()
 		dot->setScale(r * 2);
 		dot->setVisible(false);
 		m_expectLine.pushBack(dot);
-		addChild(dot, 1.0);
+		addChild(dot, 1);
 	}
 	/*Make Before line*/
 	for (int i = 0; i < DOTNUM_OF_LINE; i++)
@@ -51,7 +51,7 @@ bool Sling::init()
 		dot->setScale(r * 2);
 		dot->setVisible(false);
 		m_beforeLine.pushBack(dot);
-		addChild(dot, 1.0);
+		addChild(dot, 1);
 	}
 
 	m_arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
@@ -136,25 +136,28 @@ void Sling::Pull(Event* e)
 	Point mouseLocation = evMouse->getLocationInView();
 	Point startLocation = GetStartLocation();
 	
-	m_shotAngle = mouseLocation - startLocation;
+	m_shotPower = startLocation.getDistance(mouseLocation);
+	m_shotAngle = (mouseLocation - startLocation) / m_shotPower;
+	
+	//power가 일정 이상이면 max로 고정
+	if (m_shotPower > MAX_POWER)
+	{
+		m_shotPower = MAX_POWER;
+	}
+
+	//angle 이 밑으로 내려가는경우에는 취소.
 	if (m_shotAngle.getAngle() <= Vec2::ZERO.getAngle())
 	{
 		m_shotAngle = Vec2::ZERO;
 		return;
 	}
 
-	m_shotPower = startLocation.getDistance(mouseLocation);
-	if (m_shotPower > MAX_POWER)
-	{	
-		m_shotAngle = m_shotAngle / (m_shotPower / MAX_POWER);
-		m_shotPower = MAX_POWER;
-	}
-
 	/*Set Position expect line */
 	for (int i = 0; i < m_expectLine.size(); i++)
 	{
 		Sprite* dot = m_expectLine.at(i);
-		dot->setPosition(m_shotAngle *m_shotPower/MAX_POWER * i);
+		float dot_interval = m_shotPower / m_expectLine.size() / getScale();
+		dot->setPosition(m_shotAngle * dot_interval * (i+1));
 	}
 	// set rotation arm angle
 	m_arm->setRotation(-m_shotAngle.getAngle()*60 + 90);
@@ -187,7 +190,8 @@ void Sling::Shot(Event* e)
 	for (int i = 0; i < m_beforeLine.size(); i++)
 	{
 		Sprite* dot = m_beforeLine.at(i);
-		dot->setPosition(m_shotAngle *m_shotPower / MAX_POWER * i);
+		float dot_interval = m_shotPower / m_expectLine.size() / getScale();
+		dot->setPosition(m_shotAngle * dot_interval * (i + 1));
 		dot->setVisible(true);
 	}
 

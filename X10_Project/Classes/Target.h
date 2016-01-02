@@ -15,7 +15,7 @@ public:
 	void SetSprScale() { m_spr->setScale(m_sprScaleRatio); }
 	bool ToBeErased() { return m_toBeErased; }
 	Sprite* m_spr;
-
+	bool IsApplyable() const { return m_applyEffectToMe; };
 protected:
 	virtual void ToBullet(Bullet* bullet) = 0;
 	virtual void ToSelf(const Bullet* bullet) = 0;

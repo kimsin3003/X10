@@ -18,6 +18,9 @@
 #include "Explosion.h"
 //타깃
 #include "Target.h"
+#include "Mirror.h"
+#include "Virtical_Mirror.h"
+
 //슬링
 #include "Sling.h"
 //etc
@@ -196,10 +199,17 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 					collidingCheck = true;
 					continue;
 				}
+
 				currentCollidingTarget = target;
 				target->ApplyCollisionEffect(collider);
 				collidingCheck = true;
 				bullet->m_currentCollidingTarget = target;
+
+				//미러에 충돌했다면, 다른 충돌 검사를 하지 않음. 
+				if (dynamic_cast<Mirror*>(target) || dynamic_cast<Virtical_Mirror*>(target))
+				{
+					break;
+				}
 			}
 		}
 		else

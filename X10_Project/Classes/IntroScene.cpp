@@ -15,8 +15,8 @@ Scene* IntroScene::createScene()
 
 bool IntroScene::init()
 {
-	//FadeIn Version	
-
+	if (!Layer::init())
+		return false;
 
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 

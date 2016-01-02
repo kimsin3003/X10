@@ -18,31 +18,22 @@ private:
 	void ChangeToStageScene(Ref* pSender);
 
 	void IntroEvent(float dt);
-	void PrintIntroText(const string& message, const Vec2& pos, float startTime, float textScale);
 	
 	void EndingEvent(float dt);
-	void ShowWhiteScene();
+	void ChangeToEndingScene();
 	void ShowDeadbody();
-	void ShowCrashingScene();
-	void ShowBlinkingGaro();
-	void ShowAfterCrash();
-	void ShowHospital();
+	void ShowBlinkingLight();
 	Sprite* LoadBackground();
 	void SetBGM();
 	Sprite* LoadCharacter();
-	void ChangeBackgroundImg(string bgImg);
-	void ChangeSoundEffect(const char* sound);
 	Point GetCharacterPosition(int stage);
 	void SetupLight();
 	MenuItemImage* MakeBackButton();
-	void GaroOn();
-	void GaroOff();
+	void SetStreetLight(int isOn);
+
 
 	LightManager* m_lightManager;
-
-
 	Sprite* m_background;
-	bool m_intro_over;
 	int m_maxStageNum;
 	int m_stageToPlay;
 };

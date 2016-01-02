@@ -3,6 +3,7 @@
 #include "StageScene.h"
 #include "MainScene.h"
 #include "GameScene.h"
+#include "IntroScene.h"
 //layer
 #include "UILayer.h"
 //info
@@ -24,6 +25,7 @@ Scene* StageScene::createScene()
 	scene->setPosition(Vec2::ZERO);
 
 	Layer* layer = StageScene::create();
+	layer->setName("stageScene");
 	layer->setAnchorPoint(Vec2::ZERO);
 	layer->setPosition(Vec2::ZERO);
 
@@ -45,13 +47,6 @@ bool StageScene::init()
 
 	m_stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 	m_maxStageNum = StageInformation::GetMaxStageNum();
-
-	if (m_stageToPlay == 0)
-	{
-		scheduleOnce(schedule_selector(StageScene::IntroEvent), 0.0f);
-		return true;
-	}
-
 
 	m_background = LoadBackground();
 	addChild(m_background);
@@ -275,33 +270,40 @@ void StageScene::ChangeToStageScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(StageScene::createScene());
 }
-
-void StageScene::IntroEvent(float dt)
-{
-	//FadeIn Version	
-	Vec2 deltaPos = Vec2(0, 16.5f);
-	Vec2 textPos = Vec2(0.0f, 480.0f);
-	/*
-	PrintIntroText("Why am I standing on a road?", textPos, 2.0f, 1.0f);
-	PrintIntroText("Hmm.. and what are these in my pockets?", textPos-=deltaPos, 6.5f, 1.0f);
-	PrintIntroText("Oh my, what are those above the sky?", textPos -= deltaPos*6, 10.5f, 1.25f);
-	PrintIntroText("Wait, here's a note", textPos -= deltaPos * 2, 14.0f, 1.0f);
-	PrintIntroText("\"Kill them, then I'll let you go\"", textPos -= deltaPos * 4, 18.0f, 1.60f);
-	PrintIntroText("Who is doing this fuck to me...?", textPos -= deltaPos * 2, 23.0f, 1.0f);
-	PrintIntroText("I'll find you and I'll kill you", textPos -= deltaPos * 2, 27.0f, 1.0f);
-	*/
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
-
-	CallFuncN* callFuncN = CallFuncN::create(
-		CC_CALLBACK_1(StageScene::ChangeToStageScene, this));
-
-	Sequence* seq = Sequence::create(
-//		DelayTime::create(30.0f),
-		callFuncN,
-		nullptr);
-
-	runAction(seq);
-}
+// 
+// void StageScene::IntroEvent(float dt)
+// {
+// 	//FadeIn Version	
+// 	Vec2 deltaPos = Vec2(0, 16.5f);
+// 	Vec2 textPos = Vec2(50.0f, 400.0f);
+// 	
+// 	PrintIntroText("Why am I standing on a road?", textPos, 2.0f, 1.25f);
+// 	PrintIntroText("Hmm.. and what are these in my pockets?", textPos - deltaPos * 6, 6.5f, 1.25f);
+// 
+// 	
+// 	PrintIntroText("Oh my, what are those above the sky?", textPos, 10.5f, 1.25f);
+// 	PrintIntroText("I've got to get out out of here!", textPos - deltaPos * 6, 10.5f, 1.25f);
+// // 	PrintIntroText("Wait, here's a note", textPos -= deltaPos * 2, 14.0f, 1.0f);
+// // 	PrintIntroText("\"Kill them, then I'll let you go\"", textPos -= deltaPos * 4, 18.0f, 1.60f);
+// // 	PrintIntroText("Who is doing this fuck to me...?", textPos -= deltaPos * 2, 23.0f, 1.0f);
+// // 	PrintIntroText("I'll find you and I'll kill you", textPos -= deltaPos * 2, 27.0f, 1.0f);
+// 	
+// 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+// 
+// 
+// 	CallFuncN* toStageScene = CallFuncN::create(
+// 		CC_CALLBACK_1(Node::removeAllChildren(), this));
+// 
+// 	CallFuncN* toStageScene = CallFuncN::create(
+// 		CC_CALLBACK_1(StageScene::ChangeToStageScene, this));
+// 
+// 	Sequence* seq = Sequence::create(
+// 		DelayTime::create(30.0f),
+// 		toStageScene,
+// 		nullptr);
+// 
+// 	runAction(seq);
+// }
 
 void StageScene::PrintIntroText(const string& message, const Vec2& pos, float startTime, float textScale)
 {

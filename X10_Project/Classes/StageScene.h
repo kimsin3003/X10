@@ -40,7 +40,9 @@ private:
 
 	LightManager* m_lightManager;
 
+
 	Sprite* m_background;
+	bool m_intro_over;
 	int m_maxStageNum;
 	int m_stageToPlay;
 };

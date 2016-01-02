@@ -12,6 +12,7 @@
 #include "MapEditer.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
+#include "IntroScene.h"
 
 
 Scene* MainScene::createScene()
@@ -105,7 +106,11 @@ bool MainScene::init()
 
 void MainScene::ChangeToStageScene(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(StageScene::createScene());
+	int stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+	if (stageToPlay == 0)
+		Director::getInstance()->replaceScene(IntroScene::createScene());
+	else
+		Director::getInstance()->replaceScene(StageScene::createScene());
 }
 
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)

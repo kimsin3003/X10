@@ -2,6 +2,7 @@
 
 namespace FileStuff
 {
+	//Target
 	const string IMG_SOURCE = "res/target/x10.plist";
 
 	const string BACKGROUND_BASE = "res/background_base.png";
@@ -38,6 +39,11 @@ namespace FileStuff
 	const string RETRYBUTTON = "RetryButton.png";
 	const string BACKBUTTON = "BackButton.png";
 
+	//bullet
+	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
+	const string CROSS_BULLET = "res/ui/cross_bullet.png";
+
+	//stage
 	const string STAGE_BACKGROUND_01 = "res/highway/highway1.png";
 	const string STAGE_BACKGROUND_02 = "res/highway/highway2.png";
 	const string STAGE_BACKGROUND_03 = "res/highway/highway3.png";
@@ -55,9 +61,6 @@ namespace FileStuff
 	const string STAGE_BACKGROUND_13APP = "res/highway/highway13APPEAR.png";
 	const string WHITE = "res/highway/White.png";
 
-	const string AFTER_CRASHED = "res/bg/after_crashed.png";
-	const string HOSPITAL = "res/bg/hospital.png";
-
 	const string STAGE_LIGHTS_LEFT_01 = "res/lights/left1.png";
 	const string STAGE_LIGHTS_LEFT_02 = "res/lights/left2.png";
 	const string STAGE_LIGHTS_LEFT_03 = "res/lights/left3.png";
@@ -72,6 +75,7 @@ namespace FileStuff
 	const string STAGE_LIGHTS_RIGHT_05 = "res/lights/right5.png";
 	const string STAGE_LIGHTS_RIGHT_06 = "res/lights/right6.png";
 
+	//buttons
 	const string START_IMG = "res/start.png";
 	const string STAGE_SELECT_IMG = "res/stage_select.png";
 	const string CLOSE_BUTTON = "closeButton.png";
@@ -80,14 +84,13 @@ namespace FileStuff
 
 	const string FONT_ARIAL = "res/fonts/arial.ttf";
 
+	//intro
 	const string INTRO_01 = "res/event/intro_01.png";
 	const string INTRO_02 = "res/event/intro_02.png";
 	const string INTRO_03 = "res/event/intro_03.png";
 	const string INTRO_04 = "res/event/intro_04.png";
 
-	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
-	const string CROSS_BULLET = "res/ui/cross_bullet.png";
-
+	//ending
 	const string DEAD_BODY = "res/dead_body.png";
 	const string GARO_OFF = "res/ui/garo.png";
 	const string GARO_ON = "res/ui/garo_on.png";
@@ -100,6 +103,12 @@ namespace FileStuff
 
 	const string MONITOR = "res/object/monitor.png";
 	const string BOTTLE = "res/object/bottle.png";
+	const string AFTER_CRASHED = "res/bg/after_crashed.png";
+	const string HOSPITAL_CLOSED_EYE = "res/bg/hospital_closed_eye1.jpg";
+	const string HOSPITAL_OPEN_EYE = "res/bg/hospital_open_eye1.jpg";
+	const string HOSPITAL_WAKING = "res/bg/hospital_waking1.jpg";
+	const string HOSPITAL_WAKED = "res/bg/hospital_waked1.jpg";
+
 
 	extern const char* SOUND_FIREWORK_EXPLOSION;
 	extern const char* SOUND_FIREWORK_FLYING;

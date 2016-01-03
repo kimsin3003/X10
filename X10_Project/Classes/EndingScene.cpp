@@ -25,12 +25,12 @@ bool EndingScene::init()
 	DelayTime::create(2.5f),
 	//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
 	//		DelayTime::create(0.5f),
-	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowCrashingScene, this)),
-	DelayTime::create(9.0f),
+//	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowCrashingScene, this)),
+	//DelayTime::create(9.0f),
 	//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
 	//		DelayTime::create(1.0f),
-	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowAfterCrash, this)),
-	DelayTime::create(5.0f),
+	//CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowAfterCrash, this)),
+	//DelayTime::create(5.0f),
 	//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
 	//		DelayTime::create(2.5f),
 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowHospital, this)),
@@ -74,20 +74,19 @@ void EndingScene::ChangeSoundEffect(const char* sound)
 
 void EndingScene::ChangeBackgroundImg(string bgImg)
 {
-	Vector<Node*> childs = getChildren();
+	removeAllChildren();
+	m_background = Sprite::create(bgImg);
 
-	for (int i = 0; i < childs.size(); i++)
-	{
-		childs.at(i)->removeFromParent();
-	}
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setAnchorPoint(Point::ZERO);
+	m_background->setScale(scale);
+	addChild(m_background);
 
-	Sprite* backgroundImg = Sprite::create(bgImg);
+	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
 
-	float scale = (Director::getInstance()->getVisibleSize().width) / (backgroundImg->getContentSize().width);
-	backgroundImg->setAnchorPoint(Point::ZERO);
-	backgroundImg->setScale(scale);
-	backgroundImg->setOpacity(140);
-	addChild(backgroundImg);
+	monitor->setPosition(Vec2(130, 335));
+	monitor->setScale(2.0f);
+	addChild(monitor);
 }
 
 
@@ -109,7 +108,7 @@ void EndingScene::ShowHospital()
 
 	removeAllChildrenWithCleanup(true);
 
-	m_background = Sprite::create(FileStuff::HOSPITAL);
+	m_background = Sprite::create(FileStuff::HOSPITAL_CLOSED_EYE);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
 	m_background->setAnchorPoint(Point::ZERO);
 	m_background->setScale(scale);
@@ -122,6 +121,19 @@ void EndingScene::ShowHospital()
 		FadeIn::create(5.0f),
 		nullptr)
 		);
+
+	Sequence* standing = Sequence::create(
+		DelayTime::create(18.0f),
+		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_OPEN_EYE)),
+		DelayTime::create(1.0f),
+		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKING)),
+		DelayTime::create(0.5f),
+		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKED)),
+		DelayTime::create(3.0f),
+		nullptr
+		);
+
+	runAction(standing);
 
 	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
 	addChild(monitor);

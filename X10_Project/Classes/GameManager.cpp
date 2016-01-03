@@ -371,6 +371,6 @@ void GameManager::makeDebugPoint(Point p, Node* spr)
 	Point pos = spr->convertToWorldSpace(Point::ZERO);
 	dot->setPosition(p -  pos);
 
-	Sequence* action = Sequence::create(DelayTime::create(0.1), RemoveSelf::create(),NULL);
+	Sequence* action = Sequence::create(DelayTime::create(0.1f), RemoveSelf::create(),NULL);
 	dot->runAction(action);
 }

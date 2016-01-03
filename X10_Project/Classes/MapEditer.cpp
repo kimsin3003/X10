@@ -103,7 +103,7 @@ bool MapEditer::init()
 				break;
 
 			case TargetInfo::STAR:
-				sprite = Sprite::create(FileStuff::START_IMG);
+				sprite = Sprite::create(FileStuff::STAR_SAD);
 				break;
 			default:
 				sprite = Sprite::create(FileStuff::ENEMY); //default sprite

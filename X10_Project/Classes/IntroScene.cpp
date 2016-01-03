@@ -3,6 +3,7 @@
 #include "ConstVars.h"
 #include "FileStuff.h"
 #include "StageScene.h"
+
 Scene* IntroScene::createScene()
 {
 	Scene* scene = Scene::create();

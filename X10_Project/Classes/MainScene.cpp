@@ -67,8 +67,8 @@ bool MainScene::init()
 	startGame->setPosition(m_garoPos + Vec2(30, -200));
 
 	/*MapEditer Button*/
-	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 50), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
-	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height / 2 - startGame->getContentSize().height - mapEditer->getContentSize().height);
+	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
+	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
 
 	/* End Button */
 	MenuItemImage* closeItem = MenuItemImage::create(

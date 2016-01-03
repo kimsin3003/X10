@@ -3,6 +3,8 @@
 #include "StageScene.h"
 #include "MainScene.h"
 #include "GameScene.h"
+#include "IntroScene.h"
+#include "EndingScene.h"
 //layer
 #include "UILayer.h"
 //info
@@ -24,6 +26,7 @@ Scene* StageScene::createScene()
 	scene->setPosition(Vec2::ZERO);
 
 	Layer* layer = StageScene::create();
+	layer->setName("stageScene");
 	layer->setAnchorPoint(Vec2::ZERO);
 	layer->setPosition(Vec2::ZERO);
 
@@ -45,13 +48,6 @@ bool StageScene::init()
 
 	m_stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 	m_maxStageNum = StageInformation::GetMaxStageNum();
-
-	if (m_stageToPlay == 0)
-	{
-		scheduleOnce(schedule_selector(StageScene::IntroEvent), 0.0f);
-		return true;
-	}
-
 
 	m_background = LoadBackground();
 	addChild(m_background);
@@ -255,115 +251,29 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 	return character;
 }
 
-void StageScene::GotoStage(Ref* pSender, int stageNum)
-{
-	Scene* scene = GameScene::createScene();
-	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
-
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), gameScene->GetUILayer(), stageNum);
-	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
-
-	Director::getInstance()->replaceScene(sceneWithEffect);
-}
-
-void StageScene::ChangeToMainScene(Ref* pSender)
-{
-	Director::getInstance()->replaceScene(MainScene::createScene());
-}
-
-void StageScene::ChangeToStageScene(Ref* pSender)
-{
-	Director::getInstance()->replaceScene(StageScene::createScene());
-}
-
-void StageScene::IntroEvent(float dt)
-{
-	//FadeIn Version	
-	Vec2 deltaPos = Vec2(0, 16.5f);
-	Vec2 textPos = Vec2(0.0f, 480.0f);
-	/*
-	PrintIntroText("Why am I standing on a road?", textPos, 2.0f, 1.0f);
-	PrintIntroText("Hmm.. and what are these in my pockets?", textPos-=deltaPos, 6.5f, 1.0f);
-	PrintIntroText("Oh my, what are those above the sky?", textPos -= deltaPos*6, 10.5f, 1.25f);
-	PrintIntroText("Wait, here's a note", textPos -= deltaPos * 2, 14.0f, 1.0f);
-	PrintIntroText("\"Kill them, then I'll let you go\"", textPos -= deltaPos * 4, 18.0f, 1.60f);
-	PrintIntroText("Who is doing this fuck to me...?", textPos -= deltaPos * 2, 23.0f, 1.0f);
-	PrintIntroText("I'll find you and I'll kill you", textPos -= deltaPos * 2, 27.0f, 1.0f);
-	*/
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
-
-	CallFuncN* callFuncN = CallFuncN::create(
-		CC_CALLBACK_1(StageScene::ChangeToStageScene, this));
-
-	Sequence* seq = Sequence::create(
-//		DelayTime::create(30.0f),
-		callFuncN,
-		nullptr);
-
-	runAction(seq);
-}
-
-void StageScene::PrintIntroText(const string& message, const Vec2& pos, float startTime, float textScale)
-{
-	Label* text = Label::create(
-		message, FileStuff::FONT_ARIAL, 14.5f);
-
-	text->setAlignment(TextHAlignment::LEFT);
-	text->setScale(1.00f * textScale);
-	text->setOpacity(0);
-	text->setAnchorPoint(Vec2(0, 1));
-	text->setPosition(pos);
-	addChild(text);
-
-	Sequence* seq = Sequence::create(
-		DelayTime::create(startTime),
-		FadeIn::create(0),
-		NULL);
-
-	text->runAction(seq);
-}
-
 
 void StageScene::EndingEvent(float dt)
 {
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingGaro, this)),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
 		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
-		DelayTime::create(1.0f),
-		//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		//		DelayTime::create(0.5f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowCrashingScene, this)),
-		DelayTime::create(4.0f),
-		//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		//		DelayTime::create(1.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowAfterCrash, this)),
-		DelayTime::create(5.0f),
-		//		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-		//		DelayTime::create(2.5f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowHospital, this)),
+		DelayTime::create(3.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ChangeToEndingScene, this)),
 		nullptr);
 
 	runAction(seq);
 }
 
-void StageScene::ShowWhiteScene()
+void StageScene::ChangeToEndingScene()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_EAR_RINGING, false, 3.0f);
-
-	Sprite* white = Sprite::create(FileStuff::WHITE);
-	float scale = (Director::getInstance()->getVisibleSize().width) / (white->getContentSize().width);
-	white->setAnchorPoint(Point::ZERO);
-	white->setScale(scale);	
-	addChild(white);
+	Director::getInstance()->replaceScene(EndingScene::createScene());
 }
 
 void StageScene::ShowDeadbody()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false, 3.0f);
-
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_CRASH);
 
 	m_background->removeFromParent();
 	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13APP);
@@ -373,140 +283,38 @@ void StageScene::ShowDeadbody()
 	addChild(m_background);
 }
 
-void StageScene::GaroOn()
+void StageScene::SetStreetLight(int isOn)
 {
 	m_background->removeFromParent();
-	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13ON);
+	if (isOn)
+		m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13ON);
+	else
+		m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13OFF);
+
 	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
 	m_background->setAnchorPoint(Point::ZERO);
 	m_background->setScale(scale);
 	addChild(m_background);
 }
 
-void StageScene::GaroOff()
-{
-	m_background->removeFromParent();
-	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13OFF);
-	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
-	m_background->setAnchorPoint(Point::ZERO);
-	m_background->setScale(scale);
-	addChild(m_background);
-}
-
-void StageScene::ShowBlinkingGaro()
+void StageScene::ShowBlinkingLight()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS);
 
-	CallFunc* garoOff = CallFunc::create(CC_CALLBACK_0(StageScene::GaroOff, this));
-	CallFunc* garoOn = CallFunc::create(CC_CALLBACK_0(StageScene::GaroOn, this));
+	CallFunc* lightOff = CallFunc::create(CC_CALLBACK_0(StageScene::SetStreetLight, this, false));
+	CallFunc* lightOn = CallFunc::create(CC_CALLBACK_0(StageScene::SetStreetLight, this, true));
 
 	Sequence* seq = Sequence::create(
-		garoOn,
+		lightOn,
 		DelayTime::create(0.25f),
-		garoOff,
+		lightOff,
 		DelayTime::create(1.0f),
-		garoOn,
+		lightOn,
 		DelayTime::create(0.2f),
-		garoOff,
+		lightOff,
 		DelayTime::create(0.2f),
-		garoOn,
+		lightOn,
 		nullptr);
-
-	runAction(seq);
-}
-
-void StageScene::ShowAfterCrash()
-{
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-	
-	m_background = Sprite::create(FileStuff::AFTER_CRASHED);
-	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
-	m_background->setAnchorPoint(Point::ZERO);
-	m_background->setScale(scale);
-	addChild(m_background);
-}
-
-void StageScene::ShowHospital()
-{
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_EAR_RINGING, false, 3.0f);
-
-	removeAllChildrenWithCleanup(true);
-
-	m_background = Sprite::create(FileStuff::HOSPITAL);
-	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
-	m_background->setAnchorPoint(Point::ZERO);
-	m_background->setScale(scale);
-	addChild(m_background);
-	m_background->setOpacity(0);
-	
-	m_background->runAction(
-		Sequence::create(
-		DelayTime::create(10.0f),
-		FadeIn::create(5.0f),
-		nullptr)
-	);
-
-	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
-	addChild(monitor);
-	
-	monitor->setScale(55.0f);
-	monitor->setPosition(Vec2(130, 335));
-
-	monitor->runAction(
-		Sequence::create(
-		DelayTime::create(2.0f),
-		ScaleTo::create(7.0f, 2.0f),
-		nullptr)
-	);
-}
-
-void StageScene::ChangeBackgroundImg(string bgImg)
-{
-	Vector<Node*> childs = getChildren();
-
-	for (int i = 0; i < childs.size(); i++)
-	{
-		childs.at(i)->removeFromParent();
-	}
-
-	Sprite* backgroundImg = Sprite::create(bgImg);
-
-	float scale = (Director::getInstance()->getVisibleSize().width) / (backgroundImg->getContentSize().width);
-	backgroundImg->setAnchorPoint(Point::ZERO);
-	backgroundImg->setScale(scale);
-	backgroundImg->setOpacity(140);
-	addChild(backgroundImg);
-}
-
-void StageScene::ChangeSoundEffect(const char* sound)
-{
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(sound, false);
-}
-
-void StageScene::ShowCrashingScene()
-{
-//	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-
-	removeAllChildrenWithCleanup(true);
-
-	CallFunc* crashing0 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_0));
-//	CallFunc* crashingSound = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeSoundEffect, this, FileStuff::SOUND_CRASH));
-	CallFunc* crashing1 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_1));
-	CallFunc* crashing2 = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_2));
-	CallFunc* blackout = CallFunc::create(CC_CALLBACK_0(StageScene::ChangeBackgroundImg, this, FileStuff::BLACKOUT));
-
-	Sequence* seq = Sequence::create(
-		crashing0,
-//		crashingSound,
-		DelayTime::create(1.7f),
-		crashing1,
-		DelayTime::create(0.2f),
-		crashing2,
-		DelayTime::create(1.2f),
-		blackout,
-		nullptr
-		);
 
 	runAction(seq);
 }
@@ -531,4 +339,26 @@ MenuItemImage* StageScene::MakeBackButton()
 		);
 
 	return button;
+}
+
+
+void StageScene::GotoStage(Ref* pSender, int stageNum)
+{
+	Scene* scene = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
+
+	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), gameScene->GetUILayer(), stageNum);
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
+
+	Director::getInstance()->replaceScene(sceneWithEffect);
+}
+
+void StageScene::ChangeToMainScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(MainScene::createScene());
+}
+
+void StageScene::ChangeToStageScene(Ref* pSender)
+{
+	Director::getInstance()->replaceScene(StageScene::createScene());
 }

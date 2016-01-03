@@ -88,6 +88,12 @@
     <ClCompile Include="..\Classes\Stone.cpp">
       <Filter>GameObject\Targets</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\IntroScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Classes\EndingScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -179,6 +185,12 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Stone.h">
       <Filter>GameObject\Targets</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\IntroScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\EndingScene.h">
+      <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>

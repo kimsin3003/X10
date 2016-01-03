@@ -58,19 +58,19 @@ namespace FileStuff
 	const string AFTER_CRASHED = "res/bg/after_crashed.png";
 	const string HOSPITAL = "res/bg/hospital.png";
 
-	const string STAGE_LIGHTS_LEGT_01 = "res/lights/left0.png";
-	const string STAGE_LIGHTS_LEGT_02 = "res/lights/left1.png";
-	const string STAGE_LIGHTS_LEGT_03 = "res/lights/left2.png";
-	const string STAGE_LIGHTS_LEGT_04 = "res/lights/left3.png";
-	const string STAGE_LIGHTS_LEGT_05 = "res/lights/left4.png";
-	const string STAGE_LIGHTS_LEGT_06 = "res/lights/left5.png";
+	const string STAGE_LIGHTS_LEFT_01 = "res/lights/left1.png";
+	const string STAGE_LIGHTS_LEFT_02 = "res/lights/left2.png";
+	const string STAGE_LIGHTS_LEFT_03 = "res/lights/left3.png";
+	const string STAGE_LIGHTS_LEFT_04 = "res/lights/left4.png";
+	const string STAGE_LIGHTS_LEFT_05 = "res/lights/left5.png";
+	const string STAGE_LIGHTS_LEFT_06 = "res/lights/left6.png";
 
-	const string STAGE_LIGHTS_RIGHT_01 = "res/lights/right0.png";
-	const string STAGE_LIGHTS_RIGHT_02 = "res/lights/right1.png";
-	const string STAGE_LIGHTS_RIGHT_03 = "res/lights/right2.png";
-	const string STAGE_LIGHTS_RIGHT_04 = "res/lights/right3.png";
-	const string STAGE_LIGHTS_RIGHT_05 = "res/lights/right4.png";
-	const string STAGE_LIGHTS_RIGHT_06 = "res/lights/right5.png";
+	const string STAGE_LIGHTS_RIGHT_01 = "res/lights/right1.png";
+	const string STAGE_LIGHTS_RIGHT_02 = "res/lights/right2.png";
+	const string STAGE_LIGHTS_RIGHT_03 = "res/lights/right3.png";
+	const string STAGE_LIGHTS_RIGHT_04 = "res/lights/right4.png";
+	const string STAGE_LIGHTS_RIGHT_05 = "res/lights/right5.png";
+	const string STAGE_LIGHTS_RIGHT_06 = "res/lights/right6.png";
 
 	const string START_IMG = "res/start.png";
 	const string STAGE_SELECT_IMG = "res/stage_select.png";

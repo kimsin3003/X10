@@ -12,6 +12,7 @@ Sprite* LightManager::GetLight(int stageNum)
 {
 	if (stageNum <= 0 || stageNum > StageInformation::GetMaxStageNum())
 	{
+		//wrong input
 		return Sprite::create(FileStuff::ENEMY);
 	}
 
@@ -21,17 +22,17 @@ Sprite* LightManager::GetLight(int stageNum)
 void LightManager::SetLights()
 {
 	m_lights.pushBack(Sprite::create(FileStuff::ENEMY)); //dummy
-	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEGT_01, 1));
+	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEFT_01, 1));
 	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_RIGHT_01, 2));
-	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEGT_02, 3));
+	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEFT_02, 3));
 	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_RIGHT_02, 4));
-	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEGT_03, 5));
+	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEFT_03, 5));
 	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_RIGHT_03, 6));
-	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEGT_04, 7));
+	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEFT_04, 7));
 	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_RIGHT_04, 8));
-	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEGT_05, 9));
+	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEFT_05, 9));
 	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_RIGHT_05, 10));
-	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEGT_06, 11));
+	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_LEFT_06, 11));
 	m_lights.pushBack(MakeLight(FileStuff::STAGE_LIGHTS_RIGHT_06, 12));
 }
 

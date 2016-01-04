@@ -185,7 +185,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 		if (target->IsEnemy())
 		{
-			m_targetManager->SaveEnemyPosition(target->getPosition());
+			
 		}
 
 		if (collider->IsBullet())

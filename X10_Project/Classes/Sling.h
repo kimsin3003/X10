@@ -45,7 +45,6 @@ public:
 	const float DEFAULT_ARM = 0.f;
 	const float SLING_SCALE = 1.0f;
 
-
 private: 
 	Sling();
 

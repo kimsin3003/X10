@@ -20,7 +20,6 @@
 #include "Target.h"
 #include "Mirror.h"
 #include "Virtical_Mirror.h"
-
 //슬링
 #include "Sling.h"
 //etc
@@ -55,43 +54,43 @@ void GameManager::Reset()
 
 GameManager::~GameManager() {}
 
-void GameManager::SetStage(GameLayer* gameLayer, UILayer* uiLayer, int stageNum)
+void GameManager::SetStage(int stageNum)
 {	
 	Reset();
 	StageInformation stageInfo(stageNum);
 	m_targetManager->InitTargets(&stageInfo);
-	AppendTargetsToLayer(gameLayer);
+	AppendTargetsToLayer();
 	m_colliderManager->InitBullets(&stageInfo);
-	AppendBulletsToLayer(uiLayer);
-	m_sling = InitSling(gameLayer);
+	AppendBulletsToLayer();
+	m_sling = InitSling();
 	m_curStageNum = stageNum;
 }
 
-Sling* GameManager::InitSling(GameLayer* gameLayer)
+Sling* GameManager::InitSling()
 {
 	Sling* sling = Sling::create();
-	gameLayer->addChild(sling);
+	m_gameLayer->addChild(sling);
 	sling->LoadBullet();
 	return sling;
 }
 
-void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
+void GameManager::AppendTargetsToLayer()
 {
 	for (Target* target : m_targetManager->m_targets)
 	{
-		gameLayer->addChild(target);
+		m_gameLayer->addChild(target);
 	}
 }
 
-void GameManager::AppendBulletsToLayer(UILayer* uiLayer)
+void GameManager::AppendBulletsToLayer()
 {
 	for (int i = 0; i < m_colliderManager->m_bulletNum; i++)
 	{
 		Bullet* bullet = static_cast<Bullet*>(m_colliderManager->m_colliders.at(i));
 		Sprite* bulletSpr = bullet->GetSprite();
 		m_bulletNumUI.pushBack(bulletSpr);
-		uiLayer->addChild(bulletSpr);
-		bulletSpr->setPosition(Vec2(45 + i*25, 50));
+		m_uiLayer->addChild(bulletSpr);
+		bulletSpr->setPosition(Vec2(45 + i * 25, 50));
 	}
 }
 
@@ -101,12 +100,7 @@ void GameManager::ShotBullet(Sling* sling)
 	
 	if (bullet)
 	{
-		Scene* currentScene = Director::getInstance()->getRunningScene();
-		GameScene* gameScene = static_cast<GameScene*>(currentScene->getChildByName("GameScene"));
-		GameLayer* gameLayer = gameScene->GetGameLayer();
-		UILayer* uiLayer = gameScene->GetUILayer();
-
-		gameLayer->addChild(bullet);
+		m_gameLayer->addChild(bullet);
 
 		m_bulletNumUI.back()->removeFromParent();
 		m_bulletNumUI.popBack();
@@ -119,6 +113,7 @@ void GameManager::ShotBullet(Sling* sling)
 		{
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_FLYING, false, 1.0f, 0, 0);
 		}
+
 		sling->ShotComplete();
 
 		if (m_colliderManager->HasBulletToShot())
@@ -128,7 +123,7 @@ void GameManager::ShotBullet(Sling* sling)
 	}
 }
 
-void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
+void GameManager::Play()
 {
 	Vector<Collider*>& colliders = m_colliderManager->m_colliders;
 	Vector<Target*>& targets = m_targetManager->m_targets;
@@ -150,7 +145,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			{
 				Explosion* explosion = bullet->GetExplosion();
 				m_colliderManager->AddExplosion(explosion);
-				gameLayer->addChild(explosion);
+				m_gameLayer->addChild(explosion);
 				if (m_curStageNum == 12)
 				{
 					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_CAR_CRASH, false, 1.0f, 0, 0);
@@ -165,50 +160,48 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	m_colliderManager->EraseDeadColliders();
 	m_targetManager->EraseDeadTargets();
-	ControlWinFailProgress(uiLayer);
+	ControlWinFailProgress();
 }
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 {
-	Target* currentCollidingTarget;
-	currentCollidingTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
-	//위 주석의 내용이 틀림... 이것은 한 콜라이더에 대해서 한 프레임내에 여러충돌이 있는지 검사하는 코드임.
+	bool isCollisionChecked = false; //현재 충돌중인 타겟이 있는지 체크 -> lastTarget을 유지할 필요가 있는지 체크
 
-	bool collidingCheck = false; //현재 충돌중인 타겟이 있는지 체크. --> lastTarget을 유지할 필요가 있는지체크
 	for (Target* target : targets)
 	{
-		//if (target == currentCollidingTarget)
-		//{
-		//	collidingCheck = true;
-		//	break;
-		//}
-
-		if (target->IsEnemy())
-		{
-			m_targetManager->SaveEnemyPosition(target->getPosition());
-		}
-
 		if (collider->IsBullet())
 		{
-			if (IsCollision(target, collider))
+			Bullet* bullet = static_cast<Bullet*>(collider);
+			
+			if (IsCollision(target, bullet))
 			{
-				// 충돌중인 타겟이면 넘어감
-				Bullet* bullet = static_cast<Bullet*>(collider);
+				isCollisionChecked = true;
+
 				if (bullet->m_currentCollidingTarget == target)
 				{
-					collidingCheck = true;
 					continue;
 				}
 
-				currentCollidingTarget = target;
 				target->ApplyCollisionEffect(collider);
-				collidingCheck = true;
 				bullet->m_currentCollidingTarget = target;
 
-				//미러에 충돌했다면, 다른 충돌 검사를 하지 않음. 
-				if (dynamic_cast<Mirror*>(target) || dynamic_cast<Virtical_Mirror*>(target))
+				if (target->IsMirror())
 				{
 					break;
+				}
+
+				if (target->IsEnemy())
+				{
+					if (m_curStageNum >= 9)
+					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+							FileStuff::SOUND_UFO_EXPLODE_GIRL, false, 1.0f, 0, 0);
+					}
+					else
+					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
+					}
 				}
 			}
 		}
@@ -221,44 +214,58 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 			if ( targetBoundingBox.intersectsCircle( explosionPosition, explosionRadius) )
 			{
+				if (target->IsEnemy())
+				{
+					if (m_curStageNum >= 9)
+					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+							FileStuff::SOUND_UFO_EXPLODE_GIRL, false, 1.0f, 0, 0);
+					}
+					else
+					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
+					}
+				}
+
 				target->ApplyCollisionEffect(explosion);
 			}
 		}
-	}
+	} //for문 끝
 
-	if (!collidingCheck)
+	if (!isCollisionChecked)
 	{
-		currentCollidingTarget = nullptr;
-		Bullet* bullet = dynamic_cast<Bullet*>(collider);
-		if (bullet != nullptr)
+		if (collider->IsBullet())
 		{
-			bullet->m_currentCollidingTarget = nullptr;
+			Bullet* bullet = static_cast<Bullet*>(collider);
+			if (bullet != nullptr)
+			{
+				bullet->m_currentCollidingTarget = nullptr;
+			}
 		}
 	}
 }
 
-void GameManager::WinProgress(UILayer* uiLayer)
+void GameManager::WinProgress()
 {
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
-	StageScene::m_hasCharacterMoved = false;
-
 	if (m_curStageNum == 0)
 	{
 		Director::getInstance()->popScene();
 	}
 	else
 	{
-		uiLayer->MakeSuccessWidget(m_curStageNum);
-	}
+		if (lastStage == m_curStageNum && m_curStageNum + 1 <= StageInformation::GetMaxStageNum())
+		{
+			UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_curStageNum + 1);
+		}
 
-	if (lastStage == m_curStageNum && m_curStageNum + 1 <= StageInformation::GetMaxStageNum())
-	{
-		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_curStageNum + 1);
+		m_uiLayer->MakeSuccessWidget(m_curStageNum);
 	}
 }
 
-void GameManager::FailProgress(UILayer* uiLayer)
+void GameManager::FailProgress()
 {
 	if (m_curStageNum == 0)
 	{
@@ -266,11 +273,11 @@ void GameManager::FailProgress(UILayer* uiLayer)
 	}
 	else
 	{
-		uiLayer->MakeFailWidget(m_curStageNum);
+		m_uiLayer->MakeFailWidget(m_curStageNum);
 	}
 }
 
-void GameManager::ControlWinFailProgress(UILayer* uiLayer)
+void GameManager::ControlWinFailProgress()
 {
 	if (!m_isJudged)
 	{
@@ -279,28 +286,28 @@ void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 			m_isJudged = true;
 			m_sling->ShotComplete();
 			m_sling->RemoveDots();
-			WinProgress(uiLayer);
+			WinProgress();
 		}
-		else if (!m_colliderManager->HasCollider()){
+		else if (!m_colliderManager->HasCollider())
+		{
 			m_isJudged = true;
 			m_sling->ShotComplete();
 			m_sling->RemoveDots();
-			FailProgress(uiLayer);
+			FailProgress();
 		}
 	}
 }
 
 bool GameManager::IsCollision(Target* target, Collider* collider)
 {
-	
 	float rotation = target->getRotation();
 	const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
 	const Rect targetBoundingBox = target->GetBoundingArea();
 
-	if (rotation< 3 && rotation > -3 
-		|| rotation< 93 && rotation > 87 
-		|| rotation< 183 && rotation > 177 
-		|| rotation< 273 && rotation > 267){ //회전이 거의 없는 경우
+	if (rotation< 3 && rotation > -3
+		|| rotation < 93 && rotation > 87
+		|| rotation < 183 && rotation > 177
+		|| rotation < 273 && rotation > 267){ //회전이 거의 없는 경우
 		//예전 사각형 충돌 판정	
 		if (targetBoundingBox.intersectsRect(colliderBoundingBox))
 			return true;
@@ -325,30 +332,20 @@ bool GameManager::IsCollision(Target* target, Collider* collider)
 	LU.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
 	RL.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
 	RU.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
-	
+
 	// y = Ax + upperB
 	// y = Ax + lowerB
 	// y = -1/Ax + leftB
 	// y = -1/Ax + rightB
-	float a = (RU.y- LU.y) / (RU.x - LU.x); //기울기
-	
+	float a = (RU.y - LU.y) / (RU.x - LU.x); //기울기
+
 	// RU.y = a * RU.x + upperB
 	float upperB = RU.y - a * (RU.x);
 	float lowerB = LL.y - a * (LL.x);
-	
+
 	// LL.y = (-1/a) * LL.x + leftB
 	float leftB = LL.y - (-1 / a) * LL.x;
 	float rightB = RU.y - (-1 / a) * RU.x;
-
-	// 네개의 수식 안에 있는지 체크.
-	// uppermargin 과 lowermargin 사이에 있는 X, Y 라면 (y-uppermargin) *(y-lowermargin) < 0 이 나옴
-	// left 와 right 도 마찬가지.
-	
-	//디버그용 dot
-	//makeDebugPoint(Point(colliderX, (colliderX * a + upperB)), target->getParent());
-	//makeDebugPoint(Point(colliderX, (colliderX * a + lowerB)), target->getParent());
-	//makeDebugPoint(Point(colliderX, (colliderX * (-1 / a) + rightB)), target->getParent());
-	//makeDebugPoint(Point(colliderX, (colliderX * (-1 / a) + leftB)), target->getParent());
 
 	if (
 		((colliderX * a + upperB) - colliderY) * ((colliderX * a + lowerB) - colliderY) < 0
@@ -358,9 +355,10 @@ bool GameManager::IsCollision(Target* target, Collider* collider)
 	{
 		return true;
 	}
-	else 
+	else
+	{
 		return false;
-	
+	}
 }
 
 void GameManager::makeDebugPoint(Point p, Node* spr)

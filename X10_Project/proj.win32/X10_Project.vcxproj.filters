@@ -13,9 +13,6 @@
     <ClCompile Include="..\Classes\TargetManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\TWScene.cpp">
-      <Filter>OldNTest</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\GameScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
@@ -107,9 +104,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\TargetManager.h">
       <Filter>Manager</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\TWScene.h">
-      <Filter>OldNTest</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\GameScene.h">
       <Filter>Scene</Filter>

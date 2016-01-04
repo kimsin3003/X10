@@ -16,7 +16,6 @@ public:
 
 private:
 	Sprite* LoadBackground();
-	Sprite* LoadBGBottom();
 
 	Sprite* m_background;
 	GameLayer* m_gameLayer;

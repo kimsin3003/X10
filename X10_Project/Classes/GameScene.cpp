@@ -23,12 +23,6 @@ bool GameScene::init()
 	{
 		return false;
 	}
-	
-	m_background = LoadBackground();
-	addChild(m_background);
-
-	Sprite* bgBottom = LoadBGBottom();
-	addChild(bgBottom, 2);
 
 	m_gameLayer = GameLayer::create();
 	addChild(m_gameLayer);
@@ -36,6 +30,9 @@ bool GameScene::init()
 	m_uiLayer = UILayer::create();
 	addChild(m_uiLayer, 10);
 	
+	m_background = LoadBackground();
+	addChild(m_background);
+
 	m_gameManager = GameManager::GetInstance();
 
 	scheduleUpdate();
@@ -45,17 +42,7 @@ bool GameScene::init()
 
 Sprite* GameScene::LoadBackground()
 {
-	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BASE);
-	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
-	background->setAnchorPoint(Point::ZERO);
-	background->setScale(scale);
-	background->setOpacity(140);
-	return background;
-}
-
-Sprite* GameScene::LoadBGBottom()
-{
-	Sprite * bottom = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
+	Sprite* bottom = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (bottom->getContentSize().width);
 	bottom->setAnchorPoint(Point::ZERO);
 	bottom->setScale(scale);
@@ -64,5 +51,5 @@ Sprite* GameScene::LoadBGBottom()
 
 void GameScene::update(float dt)
 {
-	m_gameManager->Play(m_gameLayer, m_uiLayer);
+	m_gameManager->Play();
 }

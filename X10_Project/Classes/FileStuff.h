@@ -5,7 +5,6 @@ namespace FileStuff
 	//Target
 	const string IMG_SOURCE = "res/target/x10.plist";
 
-	const string BACKGROUND_BASE = "res/background_base.png";
 	const string BACKGROUND_BOTTOM = "res/background_bottom.png";
 
 	const string CHARACTER = "res/target/black_man.png";
@@ -115,7 +114,9 @@ namespace FileStuff
 	extern const char* SOUND_FIREWORK_METAL;
 	extern const char* SOUND_STONE_BREAK;
 	extern const char* SOUND_MIRROR;
-	extern const char* SOUND_UFO_EXPLODE;
+	extern const char* SOUND_UFO_EXPLODE_DEFAULT;
+	extern const char* SOUND_UFO_EXPLODE_GIRL;
+
 	extern const char* SOUND_BUBBLE_POP;
 
 	extern const char* SOUND_MAIN_BACKGROUND;
@@ -132,4 +133,5 @@ namespace FileStuff
 	extern const char* SOUND_CAR_CRASH;
 	extern const char* SOUND_CAR_BREAK;
 
+	extern const char* SOUND_LIGHT_ON;
 }

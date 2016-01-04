@@ -53,6 +53,7 @@ void TargetManager::ResetTargets()
 	{
 		delete target;
 	}
+
 	m_targets.clear();
 }
 
@@ -81,9 +82,4 @@ bool TargetManager::HasEnemy()
 		}
 	}
 	return false;
-}
-
-void TargetManager::SaveEnemyPosition(const Point& pos)
-{
-	m_enemyPosition = pos;
 }

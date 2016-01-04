@@ -15,25 +15,28 @@ class GameManager
 public:
 	static GameManager* GetInstance();
 
-	void Play(GameLayer* gameLayer, UILayer* uiLayer);
+	void Play();
 	void ShotBullet(Sling* sling);
 
-	void SetStage(GameLayer* gameLayer, UILayer* uiLayer, int StageNumber);
+	void SetStage(int StageNumber);
 
-	void AppendTargetsToLayer(GameLayer* gameLayer);
-	void AppendBulletsToLayer(UILayer* uiLayer);
-	Sling* InitSling(GameLayer* gameLayer);
+	void AppendTargetsToLayer();
+	void AppendBulletsToLayer();
+	Sling* InitSling();
 	bool IsCollision(Target* target, Collider* collider);
-	void makeDebugPoint(Point p, Node* spr);
+
+	void SetUILayer(UILayer* uiLayer) { m_uiLayer = uiLayer; }
+	void SetGameLayer(GameLayer* gameLayer) { m_gameLayer = gameLayer; }
 
 private:
 	GameManager();
 	~GameManager();
 	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
-	void WinProgress(UILayer* uiLayer);
-	void FailProgress(UILayer* uiLayer);
-	void ControlWinFailProgress(UILayer* uiLayer);
+	void WinProgress();
+	void FailProgress();
+	void ControlWinFailProgress();
 	void Reset();
+	void makeDebugPoint(Point p, Node* spr);
 
 	static GameManager* m_instance;
 	ColliderManager* m_colliderManager;
@@ -42,5 +45,9 @@ private:
 	
 	int m_curStageNum;
 	bool m_isJudged;
+	
+	UILayer* m_uiLayer;
+	GameLayer* m_gameLayer;
+
 	Vector<Sprite*> m_bulletNumUI;
 };

@@ -57,10 +57,6 @@ void UILayer::MakeSuccessWidget(int stage)
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
-	//성공 메시지
-	//Label* successMessage = Label::createWithTTF("SUCCESS", "fonts/nanumgothic.ttf", 34);
-	//successMessage->setPosition(visibleSize.width / 2, visibleSize.height / 2 + successMessage->getContentSize().height / 2);
-
 	//성공 이미지
 	Sprite* successBoard = Sprite::create(FileStuff::SUCCESS_BOARD);
 	successBoard->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 50);
@@ -107,10 +103,6 @@ void UILayer::MakeFailWidget(int m_stage)
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 
-	//실패 메시지
-	//Label* successMessage = Label::createWithTTF("Fail", "fonts/nanumgothic.ttf", 34);
-	//successMessage->setPosition(visibleSize.width / 2, visibleSize.height / 2 + successMessage->getContentSize().height / 2);
-
 	//실패 이미지
 	Sprite* failBoard = Sprite::create(FileStuff::FAIL_BOARD);
 	failBoard->setPosition(visibleSize.width / 2, visibleSize.height / 2 + 50);
@@ -130,7 +122,6 @@ void UILayer::MakeFailWidget(int m_stage)
 
 	retryButton->setScale(retryButtonScale);
 	retryButton->setPosition(visibleSize.width / 2 - BUTTON_WIDTH, visibleSize.height / 2 - BUTTON_HEIGHT / 2);
-
 
 	//스테이지 선택화면 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
@@ -159,6 +150,8 @@ void UILayer::AddCurrentBullets(int totalNum, int normalNum, int crossNum)
 
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
+	StageScene::m_hasCharacterMoved = false;
+
 	TransitionProgressOutIn* sceneWithEffect = TransitionProgressOutIn::create(0.75f, StageScene::createScene());
 	Director::getInstance()->replaceScene(sceneWithEffect);
 }
@@ -166,10 +159,9 @@ void UILayer::ChangeToStageScene(Ref* pSender)
 void UILayer::GotoStage(Ref* pSender, int stageNum)
 {
 	Scene* scene = GameScene::createScene();
-	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 	
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), gameScene->GetUILayer(), stageNum);
+	GameManager::GetInstance()->SetStage(stageNum);
 	Director::getInstance()->replaceScene(sceneWithEffect);
 }

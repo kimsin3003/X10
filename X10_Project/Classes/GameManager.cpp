@@ -33,16 +33,17 @@ GameManager* GameManager::GetInstance()
 	{
 		m_instance = new GameManager();
 	}
+
 	return m_instance;
 }
 
-GameManager::GameManager() : m_sling(nullptr), m_isJudged(false), m_curStageNum(0)
+GameManager::GameManager() 
 {
-	m_colliderManager = new ColliderManager();
 	m_targetManager = new TargetManager();
+	m_colliderManager = new ColliderManager();
 }
 
-void GameManager::Reset()
+void GameManager::Init()
 {
 	m_sling = nullptr;
 	delete m_colliderManager;
@@ -64,14 +65,14 @@ GameManager::~GameManager() {}
 
 void GameManager::SetStage(int stageNum)
 {	
-	Reset();
+	Init();
+	m_curStageNum = stageNum;
 	StageInformation stageInfo(stageNum);
 	m_targetManager->InitTargets(&stageInfo);
 	AppendTargetsToLayer();
 	m_colliderManager->InitBullets(&stageInfo);
 	AppendBulletsToLayer();
 	m_sling = InitSling();
-	m_curStageNum = stageNum;
 }
 
 Sling* GameManager::InitSling()
@@ -102,9 +103,9 @@ void GameManager::AppendBulletsToLayer()
 	}
 }
 
-void GameManager::ShotBullet(Sling* sling)
+void GameManager::ShotBullet()
 {
-	Bullet* bullet = m_colliderManager->GetBulletToShot(sling);
+	Bullet* bullet = m_colliderManager->GetBulletToShot(m_sling);
 	
 	if (bullet)
 	{
@@ -122,11 +123,11 @@ void GameManager::ShotBullet(Sling* sling)
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_FLYING, false, 1.0f, 0, 0);
 		}
 
-		sling->ShotComplete();
+		m_sling->ShotComplete();
 
 		if (m_colliderManager->HasBulletToShot())
 		{
-			sling->LoadBullet();
+			m_sling->LoadBullet();
 		}
 	}
 }

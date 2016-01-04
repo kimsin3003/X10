@@ -4,11 +4,6 @@
 
 bool Bullet::init()
 {
-	if (!Node::init())
-	{
-		return false;
-	}
-
 	Director* director = Director::getInstance();
 	m_screen = director->getVisibleSize();
 

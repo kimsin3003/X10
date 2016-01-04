@@ -159,9 +159,14 @@ void UILayer::ChangeToStageScene(Ref* pSender)
 void UILayer::GotoStage(Ref* pSender, int stageNum)
 {
 	Scene* scene = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
+
+	GameManager* gameManager = GameManager::GetInstance();
+	gameManager->SetUILayer(gameScene->GetUILayer());
+	gameManager->SetGameLayer(gameScene->GetGameLayer());
+	gameManager->SetStage(stageNum);
 
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
-	
-	GameManager::GetInstance()->SetStage(stageNum);
+
 	Director::getInstance()->replaceScene(sceneWithEffect);
 }

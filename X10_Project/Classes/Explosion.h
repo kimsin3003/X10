@@ -6,14 +6,13 @@ class Explosion : public Collider
 {
 public:
 	CREATE_FUNC(Explosion);
-	virtual bool init();
+	bool init();
 
 	void Act();
 	bool IsBullet() { return false; }
 	const float& GetBoundingRadius();
 
 protected:
-	Explosion();
 	void RemoveSelf();
 
 	ParticleExplosion* m_explosion;

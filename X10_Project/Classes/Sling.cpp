@@ -123,6 +123,7 @@ void Sling::PullStart(Event* e)
 	addChild(m_character, 2);
 
 	ChangeToPulling();
+	Pull(e);
 }
 
 void Sling::Pull(Event* e)
@@ -196,8 +197,9 @@ void Sling::Shot(Event* e)
 	}
 
 	ChangeToShotted();
+
 	GameManager* gm = GameManager::GetInstance();
-	gm->ShotBullet(this);
+	gm->ShotBullet();
 
 	m_character->removeFromParent();
 	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
@@ -215,8 +217,6 @@ void Sling::RemoveDots()
 	{
 		dot->removeFromParent();
 	}
-
-
 }
 
 Vec2 Sling::GetDirection()

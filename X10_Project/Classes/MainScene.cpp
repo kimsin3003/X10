@@ -70,6 +70,11 @@ bool MainScene::init()
 	/*MapEditer Button*/
 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
 	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
+
+#else
+	Action* action = CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false));
+	runAction(action);
+
 #endif
 
 	/* End Button */
@@ -86,23 +91,23 @@ bool MainScene::init()
 	paulScene->setScale(0.5f);
 	paulScene->setPosition(Vec2(origin.x + visibleSize.width - paulScene->getContentSize().width / 2,
 		origin.y + closeItem->getContentSize().height*scale + paulScene->getContentSize().height/2));
-	
-	auto twScene = MenuItemFont::create("TW", CC_CALLBACK_1(MainScene::ChangeToTWScene, this));
-	twScene->setScaleX(0.5);
-	twScene->setScaleY(0.5);
-	twScene->setPosition(Point(200, 10));
 
 	auto jwScene = MenuItemFont::create("RESET GAME", CC_CALLBACK_1(MainScene::ChangeToJWScene, this));
 	jwScene->setScaleX(0.5);
 	jwScene->setScaleY(0.5);
 	jwScene->setPosition(Point(110, 10));
 
-	auto menu = Menu::create(startGame, mapEditer, closeItem, twScene, paulScene, jwScene, NULL);
+	auto menu = Menu::create(startGame, mapEditer, closeItem, paulScene, jwScene, NULL);
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");
 	addChild(menu, 1);
 
 	return true;
+}
+
+void MainScene::SetDisplayStat(bool isOn)
+{
+	Director::getInstance()->setDisplayStats(isOn);
 }
 
 void MainScene::ChangeToStageScene(Ref* pSender)
@@ -116,7 +121,6 @@ void MainScene::ChangeToStageScene(Ref* pSender)
 
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 {
-	Director::getInstance()->setDisplayStats(false);
 
 	removeChildByName("Buttons");
 

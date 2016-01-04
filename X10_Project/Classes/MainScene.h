@@ -7,13 +7,14 @@ public:
 
     virtual bool init();
 	
-    void menuCloseCallback(cocos2d::Ref* pSender);
+	void menuCloseCallback(cocos2d::Ref* pSender);
 	
     CREATE_FUNC(MainScene);
 
 private:
 	void ChangeToStageScene(Ref* pSender);
 	void ChangeToStageSceneEffect(Ref* pSender);
+	void SetDisplayStat(bool isOn);
 	void StreetLightOn();
 	void StreetLightOff();
 	void BlinkStreetLight();

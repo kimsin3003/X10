@@ -22,8 +22,8 @@ private:
 
 	void ChangeToMapEditScene(Ref* pSender);
 
-	void ChangeToJWScene(Ref* pSender);
-	void ChangeToMCScene(Ref* pSender);
+	void SetToIntro(Ref* pSender);
+	void SetToEnding(Ref* pSender);
 
 	Sprite* m_StreetLight;
 	Sprite* m_character;

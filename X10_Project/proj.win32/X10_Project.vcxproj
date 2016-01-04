@@ -163,10 +163,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\GameScene.cpp" />
     <ClCompile Include="..\Classes\IntroScene.cpp" />
     <ClCompile Include="..\Classes\jsoncpp.cpp" />
-    <ClCompile Include="..\Classes\JWScene.cpp" />
     <ClCompile Include="..\Classes\MainScene.cpp" />
     <ClCompile Include="..\Classes\MapEditer.cpp" />
-    <ClCompile Include="..\Classes\MCScene.cpp" />
     <ClCompile Include="..\Classes\Mirror.cpp" />
     <ClCompile Include="..\Classes\Virtical_Mirror.cpp" />
     <ClCompile Include="..\Classes\Sling.cpp" />
@@ -200,10 +198,8 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\IntroScene.h" />
     <ClInclude Include="..\Classes\json\json-forwards.h" />
     <ClInclude Include="..\Classes\json\json.h" />
-    <ClInclude Include="..\Classes\JWScene.h" />
     <ClInclude Include="..\Classes\MainScene.h" />
     <ClInclude Include="..\Classes\MapEditer.h" />
-    <ClInclude Include="..\Classes\MCScene.h" />
     <ClInclude Include="..\Classes\Mirror.h" />
     <ClInclude Include="..\Classes\Virtical_Mirror.h" />
     <ClInclude Include="..\Classes\Sling.h" />

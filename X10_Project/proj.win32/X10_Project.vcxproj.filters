@@ -7,9 +7,6 @@
     <ClCompile Include="..\Classes\GameManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\MCScene.cpp">
-      <Filter>OldNTest</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\TargetManager.cpp">
       <Filter>Manager</Filter>
     </ClCompile>
@@ -48,9 +45,6 @@
     </ClCompile>
     <ClCompile Include="..\Classes\Bubble.cpp">
       <Filter>GameObject\Targets</Filter>
-    </ClCompile>
-    <ClCompile Include="..\Classes\JWScene.cpp">
-      <Filter>OldNTest</Filter>
     </ClCompile>
     <ClCompile Include="..\Classes\StageScene.cpp">
       <Filter>Scene</Filter>
@@ -99,9 +93,6 @@
     <ClInclude Include="..\Classes\GameManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
-    <ClInclude Include="..\Classes\MCScene.h">
-      <Filter>OldNTest</Filter>
-    </ClInclude>
     <ClInclude Include="..\Classes\TargetManager.h">
       <Filter>Manager</Filter>
     </ClInclude>
@@ -137,9 +128,6 @@
     </ClInclude>
     <ClInclude Include="..\Classes\Bubble.h">
       <Filter>GameObject\Targets</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\JWScene.h">
-      <Filter>OldNTest</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\Target.h">
       <Filter>GameObject\Targets</Filter>
@@ -211,9 +199,6 @@
     </Filter>
     <Filter Include="GameObject\Explosions">
       <UniqueIdentifier>{1b7770de-3bed-4d50-85ad-e7028b484aad}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="OldNTest">
-      <UniqueIdentifier>{65107cc2-2ca7-4692-90bb-48572cff323b}</UniqueIdentifier>
     </Filter>
     <Filter Include="Namspace">
       <UniqueIdentifier>{22db0e7a-d753-4f2e-8857-0cabf3429c31}</UniqueIdentifier>

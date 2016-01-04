@@ -1,13 +1,12 @@
 #include "stdafx.h"
 #include "MainScene.h"
-#include "MCScene.h"
-#include "JWScene.h"
 #include "GameScene.h"
 #include "Sling.h"
 #include "GameManager.h"
 #include "StageScene.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
+
 #include "MapEditer.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
@@ -43,8 +42,7 @@ bool MainScene::init()
 	float selectedScale = 1.2;
 	Point selectedAnchor = Point(selectedScale - 1.0, selectedScale - 1.0) / 2;
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
-		FileStuff::SOUND_MAIN_BACKGROUND, true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MAIN_BACKGROUND, true);
 
 	Vector<MenuItem*> menuItems;
 
@@ -65,13 +63,16 @@ bool MainScene::init()
 	startGame->setCallback(CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
 	startGame->setPosition(m_StreetLightPos + Vec2(100, -100));
 
-	menuItems.pushBack(startGame);
+	menuItems.pushBack(startGame); 
+	Action* action = CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false));
+	runAction(action);
 #ifdef _DEBUG
-	/*MapEditer Button*/
-	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
-	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
 
-	menuItems.pushBack(mapEditer);
+	/*MapEditer Button*/
+ 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
+ 	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
+ 
+ 	menuItems.pushBack(mapEditer);
 
 #else
 	Action* action = CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false));
@@ -91,19 +92,21 @@ bool MainScene::init()
 
 	menuItems.pushBack(closeItem);
 
-	auto paulScene = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::BLACKOUT, CC_CALLBACK_1(MainScene::ChangeToMCScene, this));
-	paulScene->setScale(0.5f);
-	paulScene->setPosition(320, 480);
+	MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
+		CC_CALLBACK_1(MainScene::SetToEnding, this));
+	setToEnding->setScale(0.5f);
+	setToEnding->setPosition(320, 480);
 
-	menuItems.pushBack(paulScene);
+	menuItems.pushBack(setToEnding);
 
-	auto jwScene = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::BLACKOUT, CC_CALLBACK_1(MainScene::ChangeToJWScene, this));
-	jwScene->setScale(0.5f);
-	paulScene->setPosition(320, 0);
+	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
+		CC_CALLBACK_1(MainScene::SetToIntro, this));
+	setToIntro->setScale(0.5f);
+	setToEnding->setPosition(320, 0);
 
-	menuItems.pushBack(jwScene);
+	menuItems.pushBack(setToIntro);
 
-	auto menu = Menu::createWithArray(menuItems);
+	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");
 	addChild(menu, 1);
@@ -119,10 +122,15 @@ void MainScene::SetDisplayStat(bool isOn)
 void MainScene::ChangeToStageScene(Ref* pSender)
 {
 	int stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+
 	if (stageToPlay == 0)
+	{
 		Director::getInstance()->replaceScene(IntroScene::createScene());
+	}
 	else
+	{
 		Director::getInstance()->replaceScene(StageScene::createScene());
+	}
 }
 
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)
@@ -153,20 +161,19 @@ void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 	runAction(seq);
 }
 
-
 void MainScene::ChangeToMapEditScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MapEditer::createScene());
 }
 
-void MainScene::ChangeToMCScene(Ref* pSender)
+void MainScene::SetToEnding(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(MCScene::createScene());
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 12);
 }
 
-void MainScene::ChangeToJWScene(Ref* pSender)
+void MainScene::SetToIntro(Ref* pSender)
 {
-	Director::getInstance()->replaceScene(JWScene::createScene());
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
 }
 
 void MainScene::menuCloseCallback(Ref* pSender)

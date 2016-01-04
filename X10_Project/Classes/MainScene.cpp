@@ -13,7 +13,6 @@
 #include <SimpleAudioEngine.h>
 #include "IntroScene.h"
 
-
 Scene* MainScene::createScene()
 {
     Scene* scene = Scene::create();

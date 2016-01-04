@@ -59,7 +59,6 @@ void GameManager::SetStage(int stageNum)
 {	
 	Init();
 	m_curStageNum = stageNum;
-
 	StageInformation stageInfo(stageNum);
 	m_targetManager->InitTargets(&stageInfo);
 	AppendTargetsToLayer();

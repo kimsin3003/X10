@@ -32,17 +32,16 @@ bool MainScene::init()
 	{
 		return false;
 	}
-
-
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
+	Size visibleSize = Director::getInstance()->getVisibleSize();
+	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	m_StreetLight = Sprite::create(FileStuff::GARO_OFF);
-	m_StreetLight->setPosition(Vec2(110, 320));
+	m_StreetLight->setPosition(Vec2(visibleSize.width /2 , visibleSize.height /2));
+	m_StreetLight->setOpacity(40); //처음엔 가로등 어둡게
 	m_StreetLightPos = m_StreetLight->getPosition();
 	addChild(m_StreetLight);
 
-	Size visibleSize = Director::getInstance()->getVisibleSize();
-	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	float selectedScale = 1.2;
 	Point selectedAnchor = Point(selectedScale - 1.0, selectedScale - 1.0) / 2;
 
@@ -65,7 +64,8 @@ bool MainScene::init()
 
 	startGame->setCallback(CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
 
-	startGame->setPosition(m_StreetLightPos + Vec2(30, -200));
+	startGame->setPosition(m_StreetLightPos + Vec2(0, -100));
+
 #ifdef _DEBUG
 	/*MapEditer Button*/
 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
@@ -121,15 +121,19 @@ void MainScene::ChangeToStageScene(Ref* pSender)
 
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 {
-
+	Vec2 characterPosition = static_cast<MenuItemImage*>(pSender)->getPosition(); //없애기 전에 위치 저장해놓음
 	removeChildByName("Buttons");
-
+	
+	//character 걸어가는 부분
 	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
 	addChild(m_character, 2);
 
-	m_character->setPosition(m_StreetLightPos + Vec2(30, -200));
+	m_character->setPosition(characterPosition);
 	m_character->runAction(MoveTo::create(2.0f, m_StreetLight->getPosition() + Vec2(9, -45)));
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP, false, 2.0f);
+
+	//가로등 서서히 fadein 하는 부분
+	m_StreetLight->runAction(FadeIn::create(2.5));
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),

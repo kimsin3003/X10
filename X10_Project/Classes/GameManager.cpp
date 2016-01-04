@@ -204,7 +204,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 					if (m_curStageNum >= 9)
 					{
 						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-							FileStuff::SOUND_UFO_EXPLODE_GIRL, false, 1.0f, 0, 0);
+							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
 					}
 					else
 					{
@@ -228,7 +228,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 					if (m_curStageNum >= 9)
 					{
 						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-							FileStuff::SOUND_UFO_EXPLODE_GIRL, false, 1.0f, 0, 0);
+							FileStuff::SOUND_CAR_CRASH, false, 1.0f, 0, 0);
 					}
 					else
 					{

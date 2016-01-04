@@ -49,6 +49,8 @@ bool MainScene::init()
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
 		FileStuff::SOUND_MAIN_BACKGROUND, true);
 
+	Vector<MenuItem*> menuItems;
+
 	/*Game start Button*/
 	MenuItemImage* startGame = MenuItemImage::create();
 
@@ -66,10 +68,15 @@ bool MainScene::init()
 	startGame->setCallback(CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
 
 	startGame->setPosition(m_StreetLightPos + Vec2(30, -200));
+
+	menuItems.pushBack(startGame);
 #ifdef _DEBUG
 	/*MapEditer Button*/
 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
 	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
+
+
+	menuItems.pushBack(mapEditer);
 
 #else
 	Action* action = CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false));
@@ -87,17 +94,23 @@ bool MainScene::init()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width * scale / 2,
 		closeItem->getContentSize().height * scale / 2));
 
-	auto paulScene = MenuItemFont::create("WATCH ENDING", CC_CALLBACK_1(MainScene::ChangeToMCScene,this));
+	menuItems.pushBack(closeItem);
+
+
+	auto paulScene = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::BLACKOUT, CC_CALLBACK_1(MainScene::ChangeToMCScene, this));
 	paulScene->setScale(0.5f);
-	paulScene->setPosition(Vec2(origin.x + visibleSize.width - paulScene->getContentSize().width / 2,
-		origin.y + closeItem->getContentSize().height*scale + paulScene->getContentSize().height/2));
+	paulScene->setPosition(320, 480);
 
-	auto jwScene = MenuItemFont::create("RESET GAME", CC_CALLBACK_1(MainScene::ChangeToJWScene, this));
-	jwScene->setScaleX(0.5);
-	jwScene->setScaleY(0.5);
-	jwScene->setPosition(Point(110, 10));
+	menuItems.pushBack(paulScene);
 
-	auto menu = Menu::create(startGame, mapEditer, closeItem, paulScene, jwScene, NULL);
+	auto jwScene = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::BLACKOUT, CC_CALLBACK_1(MainScene::ChangeToJWScene, this));
+	jwScene->setScale(0.5f);
+	paulScene->setPosition(320, 0);
+
+	menuItems.pushBack(jwScene);
+
+
+	auto menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");
 	addChild(menu, 1);

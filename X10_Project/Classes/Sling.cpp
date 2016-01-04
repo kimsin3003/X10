@@ -123,6 +123,7 @@ void Sling::PullStart(Event* e)
 	addChild(m_character, 2);
 
 	ChangeToPulling();
+	Pull(e);
 }
 
 void Sling::Pull(Event* e)

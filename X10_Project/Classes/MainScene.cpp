@@ -99,7 +99,7 @@ bool MainScene::init()
 
 	auto jwScene = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::BLACKOUT, CC_CALLBACK_1(MainScene::ChangeToJWScene, this));
 	jwScene->setScale(0.5f);
-	paulScene->setPosition(320, 0);
+	jwScene->setPosition(320, 0);
 
 	menuItems.pushBack(jwScene);
 

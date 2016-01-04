@@ -18,6 +18,7 @@ public:
 	void Play();
 	void ShotBullet(Sling* sling);
 
+	void ShotBullet();
 	void SetStage(int StageNumber);
 
 	void AppendTargetsToLayer();
@@ -30,6 +31,7 @@ public:
 
 private:
 	GameManager();
+	void Init();
 	~GameManager();
 	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
 	void WinProgress();

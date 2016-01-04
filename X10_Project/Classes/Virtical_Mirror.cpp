@@ -12,6 +12,7 @@ bool Virtical_Mirror::init()
 	{
 		return false;
 	}
+
 	m_spr = Sprite::create(FileStuff::VIRTICAL_MIRROR);
 	addChild(m_spr);
 
@@ -20,7 +21,6 @@ bool Virtical_Mirror::init()
 
 void Virtical_Mirror::ToBullet(Bullet* bullet)
 {
-	//미러 기준의 입사각 in radian.
 	float mirror_angle = (360 - this->getRotation()) * M_PI / 180;
 	float d = (2 * M_PI + (-bullet->GetDirection()).getAngle());
 	float inci_angle = (2 * M_PI + (-bullet->GetDirection()).getAngle()) - mirror_angle;
@@ -35,25 +35,15 @@ void Virtical_Mirror::ToBullet(Bullet* bullet)
 		float ref_angle = (3 * M_PI - inci_angle) + mirror_angle;
 		bullet->SetDirection(bullet->GetDirection().length() * Vec2(cos(ref_angle), sin(ref_angle)));
 	}
-
 }
 
 void Virtical_Mirror::ToSelf(const Bullet* bullet)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_MIRROR, false, 1.0f, 0, 0);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+		FileStuff::SOUND_MIRROR, false, 1.0f, 0, 0);
 }
 
 void Virtical_Mirror::ToSelf(const Explosion* explosion)
 {
 
 }
-
-// const Rect Virtical_Mirror::GetBoundingArea()
-// {
-// 	Vector<Rect> areas;
-// 	for (int i = 0; i < this->getScaleY() * m_spr->getContentSize().width; i++){
-// 		this->getRotation();
-// 		areas.pushBack(Rect(this->getPosition().x));
-// 	}
-// 	return 
-// }

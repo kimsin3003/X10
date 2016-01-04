@@ -11,8 +11,10 @@ bool Mirror::init()
 	{
 		return false;
 	}
+	
 	m_spr = Sprite::create(FileStuff::MIRROR);
 	addChild(m_spr);
+
 	return true;
 }
 
@@ -31,24 +33,12 @@ void Mirror::ToBullet(Bullet* bullet)
 	bullet->SetDirection(bulletDir);
 
 	float mirrorWidth = m_spr->getContentSize().width * getScale(); // 거울의 두께
-	
-	//미러 기준의 입사각.
-	/*float m = this->getRotation();
-	float inci_angle = (-bullet->GetDirection()).getAngle() - this->getRotation();
-	if (inci_angle <= 180){
-		float ref_angle = (180 - inci_angle) + this->getRotation();
-		bullet->SetDirection(Vec2(cos(ref_angle), sin(ref_angle)));
-	}
-
-	else{
-		float ref_angle = (540 - inci_angle) + this->getRotation();
-		bullet->SetDirection(Vec2(cos(ref_angle), sin(ref_angle)));
-	}*/
 }
 
 void Mirror::ToSelf(const Bullet* bullet)
 {
-	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_MIRROR, false, 1.0f, 0, 0);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+		FileStuff::SOUND_MIRROR, false, 1.0f, 0, 0);
 }
 
 void Mirror::ToSelf(const Explosion* explosion)

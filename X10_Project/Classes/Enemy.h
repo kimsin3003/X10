@@ -18,4 +18,7 @@ protected:
 	{
 		DESTRUCT_FRAMES = 23
 	};
+
+private:
+	Animate* m_destructAnimation;
 };

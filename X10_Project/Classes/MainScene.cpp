@@ -36,7 +36,7 @@ bool MainScene::init()
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	m_StreetLight = Sprite::create(FileStuff::GARO_OFF);
-	m_StreetLight->setPosition(Vec2(visibleSize.width /2 , visibleSize.height /2));
+	m_StreetLight->setPosition(Vec2(visibleSize.width / 2 - 50 , visibleSize.height /2 ));
 	m_StreetLight->setOpacity(40); //처음엔 가로등 어둡게
 	m_StreetLightPos = m_StreetLight->getPosition();
 	addChild(m_StreetLight);
@@ -64,14 +64,13 @@ bool MainScene::init()
 		);
 
 	startGame->setCallback(CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
-	startGame->setPosition(m_StreetLightPos + Vec2(0, -100));
+	startGame->setPosition(m_StreetLightPos + Vec2(100, -100));
 
 	menuItems.pushBack(startGame);
 #ifdef _DEBUG
 	/*MapEditer Button*/
 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
 	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
-
 
 	menuItems.pushBack(mapEditer);
 
@@ -137,7 +136,7 @@ void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 	addChild(m_character, 2);
 
 	m_character->setPosition(characterPosition);
-	m_character->runAction(MoveTo::create(2.0f, m_StreetLight->getPosition() + Vec2(9, -45)));
+	m_character->runAction(MoveTo::create(2.0f, m_StreetLight->getPosition() + Vec2(30, -45)));
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP, false, 2.0f);
 
 	//가로등 서서히 fadein 하는 부분
@@ -217,7 +216,13 @@ void MainScene::StreetLightOn()
 void MainScene::TurnStreetLight()
 {
 	Sprite* light_beam = Sprite::create(FileStuff::LIGHT_BEAM);
-	light_beam->setPosition(Vec2(3, -3));
+	
+	light_beam->setPosition(Vec2(3, -10));
 	light_beam->setAnchorPoint(Vec2(0, 0));
+
+	Sprite* fireWorks = Sprite::create(FileStuff::MAIN_BULLET);
+	fireWorks->setPosition(35, 25);
+	light_beam->addChild(fireWorks);
+
 	m_StreetLight->addChild(light_beam, -1);
 }

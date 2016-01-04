@@ -36,7 +36,7 @@ private:
 	void FailProgress();
 	void ControlWinFailProgress();
 	void Reset();
-	void makeDebugPoint(Point p, Node* spr);
+	void MakeDebugPoint(Point p, Node* spr);
 
 	static GameManager* m_instance;
 	ColliderManager* m_colliderManager;

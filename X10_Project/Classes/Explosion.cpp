@@ -3,12 +3,6 @@
 #include "Explosion.h"
 #include <SimpleAudioEngine.h>
 
-Explosion::Explosion() : m_explosion(nullptr),
-		m_lifeDecrease(-1), m_lifeTime(-1), m_radius(-1), m_maxRadius(-1)
-{
-
-}
-
 bool Explosion::init()
 {
 	m_radius = 0;

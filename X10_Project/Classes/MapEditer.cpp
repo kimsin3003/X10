@@ -28,7 +28,7 @@ bool MapEditer::init()
 	m_layer = Layer::create();
 	this->addChild(m_layer, 1);
 
-	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BASE);
+	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
 	background->setScale(scale);
@@ -116,7 +116,8 @@ bool MapEditer::init()
 			sprite->setScaleX(targetInfo.m_scale.get().x.get());
 			sprite->setScaleY(targetInfo.m_scale.get().y.get());
 			
-			if (sprite){
+			if (sprite)
+			{
 				m_layer->addChild(sprite);
 			}
 		}
@@ -130,7 +131,11 @@ void MapEditer::GotoStage(Ref* pSender, int stageNum)
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), gameScene->GetUILayer(), stageNum);
+	GameManager* gameManager = GameManager::GetInstance();
+	gameManager->SetUILayer(gameScene->GetUILayer());
+	gameManager->SetGameLayer(gameScene->GetGameLayer());
+	gameManager->SetStage(stageNum);
+
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 
 	Director::getInstance()->pushScene(sceneWithEffect);

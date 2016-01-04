@@ -54,17 +54,14 @@ bool StageScene::init()
 
 	m_lightManager = new LightManager();
 
-
 	if (m_stageToPlay == 13)
 	{
 		scheduleOnce(schedule_selector(StageScene::EndingEvent), 0.0f);
 		return true;
 	}
 
-
 	SetBGM();
 	SetupLight();
-
 	SetupCharacter();
 
 	return true;
@@ -83,6 +80,7 @@ void StageScene::SetupCharacter()
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
 		)
 	);
+
 	menuItem->setSelectedImage(
 		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
@@ -219,7 +217,6 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 
 	if (!m_hasCharacterMoved)
 	{
-
 		//¼Ò¸®
 		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
 
@@ -336,13 +333,16 @@ MenuItemImage* StageScene::MakeBackButton()
 	return button;
 }
 
-
 void StageScene::GotoStage(Ref* pSender, int stageNum)
 {
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 
-	GameManager::GetInstance()->SetStage(gameScene->GetGameLayer(), gameScene->GetUILayer(), stageNum);
+	GameManager* gameManager = GameManager::GetInstance();
+	gameManager->SetUILayer(gameScene->GetUILayer());
+	gameManager->SetGameLayer(gameScene->GetGameLayer());
+	gameManager->SetStage(stageNum);
+	
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 
 	Director::getInstance()->replaceScene(sceneWithEffect);

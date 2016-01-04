@@ -20,7 +20,6 @@
 #include "Target.h"
 #include "Mirror.h"
 #include "Virtical_Mirror.h"
-
 //½½¸µ
 #include "Sling.h"
 //etc
@@ -55,43 +54,43 @@ void GameManager::Reset()
 
 GameManager::~GameManager() {}
 
-void GameManager::SetStage(GameLayer* gameLayer, UILayer* uiLayer, int stageNum)
+void GameManager::SetStage(int stageNum)
 {	
 	Reset();
 	StageInformation stageInfo(stageNum);
 	m_targetManager->InitTargets(&stageInfo);
-	AppendTargetsToLayer(gameLayer);
+	AppendTargetsToLayer();
 	m_colliderManager->InitBullets(&stageInfo);
-	AppendBulletsToLayer(uiLayer);
-	m_sling = InitSling(gameLayer);
+	AppendBulletsToLayer();
+	m_sling = InitSling();
 	m_curStageNum = stageNum;
 }
 
-Sling* GameManager::InitSling(GameLayer* gameLayer)
+Sling* GameManager::InitSling()
 {
 	Sling* sling = Sling::create();
-	gameLayer->addChild(sling);
+	m_gameLayer->addChild(sling);
 	sling->LoadBullet();
 	return sling;
 }
 
-void GameManager::AppendTargetsToLayer(GameLayer* gameLayer)
+void GameManager::AppendTargetsToLayer()
 {
 	for (Target* target : m_targetManager->m_targets)
 	{
-		gameLayer->addChild(target);
+		m_gameLayer->addChild(target);
 	}
 }
 
-void GameManager::AppendBulletsToLayer(UILayer* uiLayer)
+void GameManager::AppendBulletsToLayer()
 {
 	for (int i = 0; i < m_colliderManager->m_bulletNum; i++)
 	{
 		Bullet* bullet = static_cast<Bullet*>(m_colliderManager->m_colliders.at(i));
 		Sprite* bulletSpr = bullet->GetSprite();
 		m_bulletNumUI.pushBack(bulletSpr);
-		uiLayer->addChild(bulletSpr);
-		bulletSpr->setPosition(Vec2(45 + i*25, 50));
+		m_uiLayer->addChild(bulletSpr);
+		bulletSpr->setPosition(Vec2(45 + i * 25, 50));
 	}
 }
 
@@ -101,10 +100,6 @@ void GameManager::ShotBullet(Sling* sling)
 	
 	if (bullet)
 	{
-		Scene* currentScene = Director::getInstance()->getRunningScene();
-		GameScene* gameScene = static_cast<GameScene*>(currentScene->getChildByName("GameScene"));
-		GameLayer* m_gameLayer = gameScene->GetGameLayer();
-
 		m_gameLayer->addChild(bullet);
 
 		m_bulletNumUI.back()->removeFromParent();
@@ -128,7 +123,7 @@ void GameManager::ShotBullet(Sling* sling)
 	}
 }
 
-void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
+void GameManager::Play()
 {
 	Vector<Collider*>& colliders = m_colliderManager->m_colliders;
 	Vector<Target*>& targets = m_targetManager->m_targets;
@@ -150,7 +145,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 			{
 				Explosion* explosion = bullet->GetExplosion();
 				m_colliderManager->AddExplosion(explosion);
-				gameLayer->addChild(explosion);
+				m_gameLayer->addChild(explosion);
 				if (m_curStageNum == 12)
 				{
 					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_CAR_CRASH, false, 1.0f, 0, 0);
@@ -165,7 +160,7 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 	m_colliderManager->EraseDeadColliders();
 	m_targetManager->EraseDeadTargets();
-	ControlWinFailProgress(uiLayer);
+	ControlWinFailProgress();
 }
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
@@ -251,7 +246,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 	}
 }
 
-void GameManager::WinProgress(UILayer* uiLayer)
+void GameManager::WinProgress()
 {
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
@@ -266,11 +261,11 @@ void GameManager::WinProgress(UILayer* uiLayer)
 			UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_curStageNum + 1);
 		}
 
-		uiLayer->MakeSuccessWidget(m_curStageNum);
+		m_uiLayer->MakeSuccessWidget(m_curStageNum);
 	}
 }
 
-void GameManager::FailProgress(UILayer* uiLayer)
+void GameManager::FailProgress()
 {
 	if (m_curStageNum == 0)
 	{
@@ -278,11 +273,11 @@ void GameManager::FailProgress(UILayer* uiLayer)
 	}
 	else
 	{
-		uiLayer->MakeFailWidget(m_curStageNum);
+		m_uiLayer->MakeFailWidget(m_curStageNum);
 	}
 }
 
-void GameManager::ControlWinFailProgress(UILayer* uiLayer)
+void GameManager::ControlWinFailProgress()
 {
 	if (!m_isJudged)
 	{
@@ -291,14 +286,14 @@ void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 			m_isJudged = true;
 			m_sling->ShotComplete();
 			m_sling->RemoveDots();
-			WinProgress(uiLayer);
+			WinProgress();
 		}
 		else if (!m_colliderManager->HasCollider())
 		{
 			m_isJudged = true;
 			m_sling->ShotComplete();
 			m_sling->RemoveDots();
-			FailProgress(uiLayer);
+			FailProgress();
 		}
 	}
 }

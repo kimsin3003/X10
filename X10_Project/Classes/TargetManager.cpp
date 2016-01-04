@@ -53,6 +53,7 @@ void TargetManager::ResetTargets()
 	{
 		delete target;
 	}
+
 	m_targets.clear();
 }
 

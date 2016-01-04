@@ -98,7 +98,7 @@ bool MainScene::init()
 	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
 		CC_CALLBACK_0(MainScene::SetToIntro, this));
 	setToIntro->setScale(0.5f);
-	setToEnding->setPosition(Vec2(0.0f, 320.0f));
+	setToEnding->setPosition(Vec2(0.0f, 480.0f));
 
 	menuItems.pushBack(setToIntro);
 

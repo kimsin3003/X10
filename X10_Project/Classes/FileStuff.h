@@ -41,7 +41,7 @@ namespace FileStuff
 
 	//bullet
 	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
-	const string CROSS_BULLET = "res/ui/cross_bullet.png";
+	const string MAIN_BULLET = "res/ui/main_bullet.png";
 
 	//stage
 	const string STAGE_BACKGROUND_01 = "res/highway/highway1.png";

@@ -23,3 +23,5 @@ const char* FileStuff::SOUND_CRASH = "res/sound_effects/crash3.mp3";
 
 const char* FileStuff::SOUND_CAR_CRASH = "res/sound_effects/car_crashed.mp3";
 const char* FileStuff::SOUND_CAR_BREAK = "res/sound_effects/car_break.mp3";
+
+const char* FileStuff::SOUND_LIGHT_ON = "res/sound_effects/light_on.mp3";

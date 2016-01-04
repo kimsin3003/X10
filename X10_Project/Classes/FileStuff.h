@@ -132,4 +132,5 @@ namespace FileStuff
 	extern const char* SOUND_CAR_CRASH;
 	extern const char* SOUND_CAR_BREAK;
 
+	extern const char* SOUND_LIGHT_ON;
 }

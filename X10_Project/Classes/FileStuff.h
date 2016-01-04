@@ -31,12 +31,14 @@ namespace FileStuff
 	const string STAR_SAD = "res/target/brick.png";
 	const string BRICK_DESTRUCT_ANI = "brick_destruct";
 
+	//buttons
+	const string CLOSE_BUTTON = "res/ui/closeButton.png";
 	const string SUCCESS_BOARD = "res/ui/success.png";
 	const string FAIL_BOARD = "res/ui/fail.png";
-	const string PAUSEBUTTON = "backButton.png";
-	const string NEXTBUTTON = "NextButton.png";
-	const string RETRYBUTTON = "RetryButton.png";
-	const string BACKBUTTON = "BackButton.png";
+	const string PAUSEBUTTON = "res/ui/backButton.png";
+	const string NEXTBUTTON = "res/ui/NextButton.png";
+	const string RETRYBUTTON = "res/ui/RetryButton.png";
+	const string BACKBUTTON = "res/ui/BackButton.png";
 
 	//bullet
 	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
@@ -74,20 +76,10 @@ namespace FileStuff
 	const string STAGE_LIGHTS_RIGHT_05 = "res/lights/right5.png";
 	const string STAGE_LIGHTS_RIGHT_06 = "res/lights/right6.png";
 
-	//buttons
-	const string START_IMG = "res/start.png";
-	const string STAGE_SELECT_IMG = "res/stage_select.png";
-	const string CLOSE_BUTTON = "closeButton.png";
 
 	const string EDITING_FILENAME = "files/target0.json";
 
 	const string FONT_ARIAL = "res/fonts/arial.ttf";
-
-	//intro
-	const string INTRO_01 = "res/event/intro_01.png";
-	const string INTRO_02 = "res/event/intro_02.png";
-	const string INTRO_03 = "res/event/intro_03.png";
-	const string INTRO_04 = "res/event/intro_04.png";
 
 	//ending
 	const string DEAD_BODY = "res/dead_body.png";

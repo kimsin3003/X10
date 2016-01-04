@@ -170,33 +170,31 @@ void GameManager::Play(GameLayer* gameLayer, UILayer* uiLayer)
 
 void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 {
-	Target* currentCollidingTarget;
-	currentCollidingTarget = nullptr; // 한번 충돌한 타겟에 대해 충돌 중 영역을 벗어날 때까지 여러번 충돌체크가 되지 않도록 함.
-	//위 주석의 내용이 틀림... 이것은 한 콜라이더에 대해서 한 프레임내에 여러충돌이 있는지 검사하는 코드임.
+	bool isCollisionChecked = false; //현재 충돌중인 타겟이 있는지 체크 -> lastTarget을 유지할 필요가 있는지 체크
 
-	bool collidingCheck = false; //현재 충돌중인 타겟이 있는지 체크. --> lastTarget을 유지할 필요가 있는지체크
 	for (Target* target : targets)
 	{
-		//if (target == currentCollidingTarget)
-		//{
-		//	collidingCheck = true;
-		//	break;
-		//}
-
 		if (collider->IsBullet())
 		{
-			if (IsCollision(target, collider))
+			Bullet* bullet = static_cast<Bullet*>(collider);
+			
+			if (IsCollision(target, bullet))
 			{
-				Bullet* bullet = static_cast<Bullet*>(collider);
+				isCollisionChecked = true;
+
 				if (bullet->m_currentCollidingTarget == target)
 				{
-					collidingCheck = true;
 					continue;
 				}
 
-				currentCollidingTarget = target;
 				target->ApplyCollisionEffect(collider);
-				
+				bullet->m_currentCollidingTarget = target;
+
+				if (target->IsMirror())
+				{
+					break;
+				}
+
 				if (target->IsEnemy())
 				{
 					if (m_curStageNum >= 9)
@@ -209,14 +207,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
 							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
 					}
-				}
-
-				collidingCheck = true;
-				bullet->m_currentCollidingTarget = target;
-
-				if (target->IsMirror())
-				{
-					break;
 				}
 			}
 		}
@@ -246,15 +236,17 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 				target->ApplyCollisionEffect(explosion);
 			}
 		}
-	}
+	} //for문 끝
 
-	if (!collidingCheck)
+	if (!isCollisionChecked)
 	{
-		currentCollidingTarget = nullptr;
-		Bullet* bullet = dynamic_cast<Bullet*>(collider);
-		if (bullet != nullptr)
+		if (collider->IsBullet())
 		{
-			bullet->m_currentCollidingTarget = nullptr;
+			Bullet* bullet = static_cast<Bullet*>(collider);
+			if (bullet != nullptr)
+			{
+				bullet->m_currentCollidingTarget = nullptr;
+			}
 		}
 	}
 }

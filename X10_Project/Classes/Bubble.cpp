@@ -20,7 +20,7 @@ bool Bubble::init()
 	Vector<SpriteFrame*> animFrames;
 	animFrames.reserve(frameCut);
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/target/x10.plist");
-
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_BUBBLE_POP);
 	for (int i = 0; i < frameCut; i++)
 	{
 		string stageNum = to_string(frameCut - i);

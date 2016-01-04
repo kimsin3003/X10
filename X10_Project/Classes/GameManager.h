@@ -16,8 +16,9 @@ public:
 	static GameManager* GetInstance();
 
 	void Play();
-	void ShotBullet();
+	void ShotBullet(Sling* sling);
 
+	void ShotBullet();
 	void SetStage(int StageNumber);
 
 	void AppendTargetsToLayer();
@@ -30,13 +31,14 @@ public:
 
 private:
 	GameManager();
+	void Init();
 	~GameManager();
 	void CheckCollide(Collider* bullet, Vector<Target*>& targets);
 	void WinProgress();
 	void FailProgress();
 	void ControlWinFailProgress();
-	void Init();
-	void makeDebugPoint(Point p, Node* spr);
+	void Reset();
+	void MakeDebugPoint(Point p, Node* spr);
 
 	static GameManager* m_instance;
 	ColliderManager* m_colliderManager;

@@ -51,6 +51,14 @@ void GameManager::Init()
 	delete m_targetManager;
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
+
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_CAR_BREAK);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_CAR_CRASH);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_FIREWORK_FLYING);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_FIREWORK_EXPLOSION);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_UFO_EXPLODE_GIRL);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_UFO_EXPLODE_DEFAULT);
+
 }
 
 GameManager::~GameManager() {}
@@ -362,7 +370,7 @@ bool GameManager::IsCollision(Target* target, Collider* collider)
 	}
 }
 
-void GameManager::makeDebugPoint(Point p, Node* spr)
+void GameManager::MakeDebugPoint(Point p, Node* spr)
 {
 	Sprite* dot = Sprite::create(FileStuff::DEBRIS);
 	dot->setScale(2.);

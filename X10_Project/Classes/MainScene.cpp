@@ -52,32 +52,28 @@ bool MainScene::init()
 	startGame->setNormalImage(Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
 		)
-		);
+	);
 	
 	startGame->setSelectedImage(
 		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
 		)
-		);
+	);
 
 	startGame->setCallback(CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
 	startGame->setPosition(m_StreetLightPos + Vec2(100, -100));
 
 	menuItems.pushBack(startGame); 
-	Action* action = CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false));
-	runAction(action);
+
 #ifdef _DEBUG
-
 	/*MapEditer Button*/
- 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
+ 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), 
+		CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
+
  	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
- 
  	menuItems.pushBack(mapEditer);
-
 #else
-	Action* action = CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false));
-	runAction(action);
-
+	runAction(CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false)));
 #endif
 
 	/* End Button */
@@ -93,16 +89,16 @@ bool MainScene::init()
 	menuItems.pushBack(closeItem);
 
 	MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
-		CC_CALLBACK_1(MainScene::SetToEnding, this));
+		CC_CALLBACK_0(MainScene::SetToEnding, this));
 	setToEnding->setScale(0.5f);
-	setToEnding->setPosition(320, 480);
+	setToEnding->setPosition(Vec2(0.0f, 0.0f));
 
 	menuItems.pushBack(setToEnding);
 
 	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
-		CC_CALLBACK_1(MainScene::SetToIntro, this));
+		CC_CALLBACK_0(MainScene::SetToIntro, this));
 	setToIntro->setScale(0.5f);
-	setToEnding->setPosition(320, 0);
+	setToEnding->setPosition(Vec2(0.0f, 320.0f));
 
 	menuItems.pushBack(setToIntro);
 
@@ -166,12 +162,12 @@ void MainScene::ChangeToMapEditScene(Ref* pSender)
 	Director::getInstance()->replaceScene(MapEditer::createScene());
 }
 
-void MainScene::SetToEnding(Ref* pSender)
+void MainScene::SetToEnding()
 {
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 12);
 }
 
-void MainScene::SetToIntro(Ref* pSender)
+void MainScene::SetToIntro()
 {
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
 }

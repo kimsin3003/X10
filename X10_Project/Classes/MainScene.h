@@ -22,8 +22,8 @@ private:
 
 	void ChangeToMapEditScene(Ref* pSender);
 
-	void SetToIntro(Ref* pSender);
-	void SetToEnding(Ref* pSender);
+	void SetToIntro();
+	void SetToEnding();
 
 	Sprite* m_StreetLight;
 	Sprite* m_character;

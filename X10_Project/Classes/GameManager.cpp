@@ -183,11 +183,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 		//	break;
 		//}
 
-		if (target->IsEnemy())
-		{
-			
-		}
-
 		if (collider->IsBullet())
 		{
 			if (IsCollision(target, collider))
@@ -202,6 +197,20 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 				currentCollidingTarget = target;
 				target->ApplyCollisionEffect(collider);
+				if (target->IsEnemy())
+				{
+					if (m_curStageNum >= 9)
+					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+							FileStuff::SOUND_UFO_EXPLODE_GIRL, false, 1.0f, 0, 0);
+					}
+					else
+					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
+					}
+				}
+
 				collidingCheck = true;
 				bullet->m_currentCollidingTarget = target;
 
@@ -221,6 +230,20 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 			if ( targetBoundingBox.intersectsCircle( explosionPosition, explosionRadius) )
 			{
+				if (target->IsEnemy())
+				{
+					if (m_curStageNum >= 9)
+					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+							FileStuff::SOUND_UFO_EXPLODE_GIRL, false, 1.0f, 0, 0);
+					}
+					else
+					{
+						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
+					}
+				}
+
 				target->ApplyCollisionEffect(explosion);
 			}
 		}
@@ -292,7 +315,6 @@ void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 
 bool GameManager::IsCollision(Target* target, Collider* collider)
 {
-	
 	float rotation = target->getRotation();
 	const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
 	const Rect targetBoundingBox = target->GetBoundingArea();

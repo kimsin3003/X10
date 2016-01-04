@@ -25,7 +25,6 @@ void Enemy::ToSelf(const Bullet* bullet)
 {
 	if (m_applyEffectToMe)
 	{
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
 		m_applyEffectToMe = false;
 		float scale = m_spr->getScale();
 		m_spr->removeFromParent();

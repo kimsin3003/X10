@@ -76,7 +76,6 @@ namespace FileStuff
 	const string STAGE_LIGHTS_RIGHT_05 = "res/lights/right5.png";
 	const string STAGE_LIGHTS_RIGHT_06 = "res/lights/right6.png";
 
-
 	const string EDITING_FILENAME = "files/target0.json";
 
 	const string FONT_ARIAL = "res/fonts/arial.ttf";
@@ -99,7 +98,6 @@ namespace FileStuff
 	const string HOSPITAL_OPEN_EYE = "res/bg/hospital_open_eye1.jpg";
 	const string HOSPITAL_WAKING = "res/bg/hospital_waking1.jpg";
 	const string HOSPITAL_WAKED = "res/bg/hospital_waked1.jpg";
-
 
 	extern const char* SOUND_FIREWORK_EXPLOSION;
 	extern const char* SOUND_FIREWORK_FLYING;

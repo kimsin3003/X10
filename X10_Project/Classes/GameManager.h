@@ -24,7 +24,6 @@ public:
 	void AppendBulletsToLayer(UILayer* uiLayer);
 	Sling* InitSling(GameLayer* gameLayer);
 	bool IsCollision(Target* target, Collider* collider);
-	void makeDebugPoint(Point p, Node* spr);
 
 private:
 	GameManager();
@@ -34,6 +33,7 @@ private:
 	void FailProgress(UILayer* uiLayer);
 	void ControlWinFailProgress(UILayer* uiLayer);
 	void Reset();
+	void makeDebugPoint(Point p, Node* spr);
 
 	static GameManager* m_instance;
 	ColliderManager* m_colliderManager;

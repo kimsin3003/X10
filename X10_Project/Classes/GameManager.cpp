@@ -103,10 +103,9 @@ void GameManager::ShotBullet(Sling* sling)
 	{
 		Scene* currentScene = Director::getInstance()->getRunningScene();
 		GameScene* gameScene = static_cast<GameScene*>(currentScene->getChildByName("GameScene"));
-		GameLayer* gameLayer = gameScene->GetGameLayer();
-		UILayer* uiLayer = gameScene->GetUILayer();
+		GameLayer* m_gameLayer = gameScene->GetGameLayer();
 
-		gameLayer->addChild(bullet);
+		m_gameLayer->addChild(bullet);
 
 		m_bulletNumUI.back()->removeFromParent();
 		m_bulletNumUI.popBack();
@@ -119,6 +118,7 @@ void GameManager::ShotBullet(Sling* sling)
 		{
 			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_FLYING, false, 1.0f, 0, 0);
 		}
+
 		sling->ShotComplete();
 
 		if (m_colliderManager->HasBulletToShot())
@@ -187,7 +187,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 		{
 			if (IsCollision(target, collider))
 			{
-				// 충돌중인 타겟이면 넘어감
 				Bullet* bullet = static_cast<Bullet*>(collider);
 				if (bullet->m_currentCollidingTarget == target)
 				{
@@ -197,6 +196,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 				currentCollidingTarget = target;
 				target->ApplyCollisionEffect(collider);
+				
 				if (target->IsEnemy())
 				{
 					if (m_curStageNum >= 9)
@@ -214,8 +214,7 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 				collidingCheck = true;
 				bullet->m_currentCollidingTarget = target;
 
-				//미러에 충돌했다면, 다른 충돌 검사를 하지 않음. 
-				if (dynamic_cast<Mirror*>(target) || dynamic_cast<Virtical_Mirror*>(target))
+				if (target->IsMirror())
 				{
 					break;
 				}
@@ -264,20 +263,18 @@ void GameManager::WinProgress(UILayer* uiLayer)
 {
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
-	StageScene::m_hasCharacterMoved = false;
-
 	if (m_curStageNum == 0)
 	{
 		Director::getInstance()->popScene();
 	}
 	else
 	{
-		uiLayer->MakeSuccessWidget(m_curStageNum);
-	}
+		if (lastStage == m_curStageNum && m_curStageNum + 1 <= StageInformation::GetMaxStageNum())
+		{
+			UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_curStageNum + 1);
+		}
 
-	if (lastStage == m_curStageNum && m_curStageNum + 1 <= StageInformation::GetMaxStageNum())
-	{
-		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, m_curStageNum + 1);
+		uiLayer->MakeSuccessWidget(m_curStageNum);
 	}
 }
 
@@ -304,7 +301,8 @@ void GameManager::ControlWinFailProgress(UILayer* uiLayer)
 			m_sling->RemoveDots();
 			WinProgress(uiLayer);
 		}
-		else if (!m_colliderManager->HasCollider()){
+		else if (!m_colliderManager->HasCollider())
+		{
 			m_isJudged = true;
 			m_sling->ShotComplete();
 			m_sling->RemoveDots();
@@ -319,10 +317,10 @@ bool GameManager::IsCollision(Target* target, Collider* collider)
 	const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
 	const Rect targetBoundingBox = target->GetBoundingArea();
 
-	if (rotation< 3 && rotation > -3 
-		|| rotation< 93 && rotation > 87 
-		|| rotation< 183 && rotation > 177 
-		|| rotation< 273 && rotation > 267){ //회전이 거의 없는 경우
+	if (rotation< 3 && rotation > -3
+		|| rotation < 93 && rotation > 87
+		|| rotation < 183 && rotation > 177
+		|| rotation < 273 && rotation > 267){ //회전이 거의 없는 경우
 		//예전 사각형 충돌 판정	
 		if (targetBoundingBox.intersectsRect(colliderBoundingBox))
 			return true;
@@ -347,30 +345,20 @@ bool GameManager::IsCollision(Target* target, Collider* collider)
 	LU.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
 	RL.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
 	RU.rotate(target->getPosition(), -CC_DEGREES_TO_RADIANS(target->getRotation()));
-	
+
 	// y = Ax + upperB
 	// y = Ax + lowerB
 	// y = -1/Ax + leftB
 	// y = -1/Ax + rightB
-	float a = (RU.y- LU.y) / (RU.x - LU.x); //기울기
-	
+	float a = (RU.y - LU.y) / (RU.x - LU.x); //기울기
+
 	// RU.y = a * RU.x + upperB
 	float upperB = RU.y - a * (RU.x);
 	float lowerB = LL.y - a * (LL.x);
-	
+
 	// LL.y = (-1/a) * LL.x + leftB
 	float leftB = LL.y - (-1 / a) * LL.x;
 	float rightB = RU.y - (-1 / a) * RU.x;
-
-	// 네개의 수식 안에 있는지 체크.
-	// uppermargin 과 lowermargin 사이에 있는 X, Y 라면 (y-uppermargin) *(y-lowermargin) < 0 이 나옴
-	// left 와 right 도 마찬가지.
-	
-	//디버그용 dot
-	//makeDebugPoint(Point(colliderX, (colliderX * a + upperB)), target->getParent());
-	//makeDebugPoint(Point(colliderX, (colliderX * a + lowerB)), target->getParent());
-	//makeDebugPoint(Point(colliderX, (colliderX * (-1 / a) + rightB)), target->getParent());
-	//makeDebugPoint(Point(colliderX, (colliderX * (-1 / a) + leftB)), target->getParent());
 
 	if (
 		((colliderX * a + upperB) - colliderY) * ((colliderX * a + lowerB) - colliderY) < 0
@@ -380,9 +368,10 @@ bool GameManager::IsCollision(Target* target, Collider* collider)
 	{
 		return true;
 	}
-	else 
+	else
+	{
 		return false;
-	
+	}
 }
 
 void GameManager::makeDebugPoint(Point p, Node* spr)

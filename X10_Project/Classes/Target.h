@@ -9,6 +9,7 @@ class Target : public Node
 public:
 	virtual bool init();
 	virtual bool IsEnemy() { return false; }
+	virtual bool IsMirror() { return false; }
 	void ApplyCollisionEffect(Collider* collider);
 	virtual const Rect GetBoundingArea();
 	void SetSprScaleRatio(float ratio) { m_sprScaleRatio = ratio; }

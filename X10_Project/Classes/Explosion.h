@@ -25,6 +25,6 @@ protected:
 
 	enum
 	{
-		DEFAULT_RADIUS = 50
+		DEFAULT_RADIUS = 40
 	};
 };

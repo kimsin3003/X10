@@ -16,7 +16,7 @@ public:
 	static GameManager* GetInstance();
 
 	void Play();
-	void ShotBullet(Sling* sling);
+	void ShotBullet();
 
 	void SetStage(int StageNumber);
 
@@ -35,7 +35,7 @@ private:
 	void WinProgress();
 	void FailProgress();
 	void ControlWinFailProgress();
-	void Reset();
+	void Init();
 	void makeDebugPoint(Point p, Node* spr);
 
 	static GameManager* m_instance;

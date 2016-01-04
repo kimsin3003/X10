@@ -24,7 +24,6 @@ private:
 
 	void ChangeToJWScene(Ref* pSender);
 	void ChangeToMCScene(Ref* pSender);
-	void ChangeToTWScene(Ref* pSender);
 
 	Sprite* m_StreetLight;
 	Sprite* m_character;

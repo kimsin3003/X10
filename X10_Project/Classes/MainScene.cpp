@@ -94,7 +94,6 @@ bool MainScene::init()
 
 	menuItems.pushBack(closeItem);
 
-
 	auto paulScene = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::BLACKOUT, CC_CALLBACK_1(MainScene::ChangeToMCScene, this));
 	paulScene->setScale(0.5f);
 	paulScene->setPosition(320, 480);
@@ -106,7 +105,6 @@ bool MainScene::init()
 	paulScene->setPosition(320, 0);
 
 	menuItems.pushBack(jwScene);
-
 
 	auto menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
@@ -167,11 +165,6 @@ void MainScene::ChangeToMapEditScene(Ref* pSender)
 void MainScene::ChangeToMCScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MCScene::createScene());
-}
-
-void MainScene::ChangeToTWScene(Ref* pSender)
-{
-	Director::getInstance()->replaceScene(TWScene::createScene());
 }
 
 void MainScene::ChangeToJWScene(Ref* pSender)

@@ -109,13 +109,9 @@ Point StageScene::GetCharacterPosition(int stage)
 	LightManager mng;
 	int odd = stage % 2;
 	Vec2 lightPos = mng.GetPosition(stage);
-	float posRatio = 1.f;
 	
-	/*
-	lightPos와 그 이전과의 lightPos , 가운데 중앙선 이 이루는 사다리 꼴에서
-	posRatio비율만큼의 대각선 거리. 짝수 탄에는 거기서 y축으로 절반만큼 간 거리.
-	*/
-
+	/*전등 위치에서 얼마나 떨어져 있을지 표시.*/
+	float posRatio = .7f ;
 	Vec2 currentDelta = Vec2(-50, -50);
 	currentDelta.x *= -(odd);
 	currentDelta.x -= 20;
@@ -213,13 +209,12 @@ Sprite* StageScene::LoadCharacter()
 
 MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 {
-	//MenuItemImage* character = dynamic_cast<MenuItemImage*>(pSender);
 	//애니매이션 및 사운드 재생하는 부분
 	Point finishPos = GetCharacterPosition(stageNum);
 	Point startPos = GetCharacterPosition(m_stageToPlay - 1);
 	Size screenSize = Director::getInstance()->getVisibleSize();
-	float startScale = character->getScale()* (1 - startPos.y / (screenSize.height * 2.0));
-	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 2.0));
+	float startScale = character->getScale()* (1 - startPos.y / (screenSize.height * 1.5));
+	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 1.5));
 	float timeLength = 2.0f;
 
 	if (!m_hasCharacterMoved)

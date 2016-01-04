@@ -32,22 +32,23 @@ bool MainScene::init()
 	{
 		return false;
 	}
-
-
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
-
-	m_garo = Sprite::create(FileStuff::GARO_OFF);
-	m_garo->setPosition(Vec2(110, 320));
-	m_garoPos = m_garo->getPosition();
-	addChild(m_garo);
-
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
+
+	m_StreetLight = Sprite::create(FileStuff::GARO_OFF);
+	m_StreetLight->setPosition(Vec2(visibleSize.width /2 , visibleSize.height /2));
+	m_StreetLight->setOpacity(40); //처음엔 가로등 어둡게
+	m_StreetLightPos = m_StreetLight->getPosition();
+	addChild(m_StreetLight);
+
 	float selectedScale = 1.2;
 	Point selectedAnchor = Point(selectedScale - 1.0, selectedScale - 1.0) / 2;
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(
 		FileStuff::SOUND_MAIN_BACKGROUND, true);
+
+	Vector<MenuItem*> menuItems;
 
 	/*Game start Button*/
 	MenuItemImage* startGame = MenuItemImage::create();
@@ -64,12 +65,22 @@ bool MainScene::init()
 		);
 
 	startGame->setCallback(CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
+	startGame->setPosition(m_StreetLightPos + Vec2(0, -100));
 
-	startGame->setPosition(m_garoPos + Vec2(30, -200));
-
+	menuItems.pushBack(startGame);
+#ifdef _DEBUG
 	/*MapEditer Button*/
 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
 	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
+
+
+	menuItems.pushBack(mapEditer);
+
+#else
+	Action* action = CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false));
+	runAction(action);
+
+#endif
 
 	/* End Button */
 	MenuItemImage* closeItem = MenuItemImage::create(
@@ -81,27 +92,33 @@ bool MainScene::init()
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width * scale / 2,
 		closeItem->getContentSize().height * scale / 2));
 
-	auto paulScene = MenuItemFont::create("WATCH ENDING", CC_CALLBACK_1(MainScene::ChangeToMCScene,this));
+	menuItems.pushBack(closeItem);
+
+
+	auto paulScene = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::BLACKOUT, CC_CALLBACK_1(MainScene::ChangeToMCScene, this));
 	paulScene->setScale(0.5f);
-	paulScene->setPosition(Vec2(origin.x + visibleSize.width - paulScene->getContentSize().width / 2,
-		origin.y + closeItem->getContentSize().height*scale + paulScene->getContentSize().height/2));
-	
-	auto twScene = MenuItemFont::create("TW", CC_CALLBACK_1(MainScene::ChangeToTWScene, this));
-	twScene->setScaleX(0.5);
-	twScene->setScaleY(0.5);
-	twScene->setPosition(Point(200, 10));
+	paulScene->setPosition(320, 480);
 
-	auto jwScene = MenuItemFont::create("RESET GAME", CC_CALLBACK_1(MainScene::ChangeToJWScene, this));
-	jwScene->setScaleX(0.5);
-	jwScene->setScaleY(0.5);
-	jwScene->setPosition(Point(110, 10));
+	menuItems.pushBack(paulScene);
 
-	auto menu = Menu::create(startGame, mapEditer, closeItem, twScene, paulScene, jwScene, NULL);
+	auto jwScene = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::BLACKOUT, CC_CALLBACK_1(MainScene::ChangeToJWScene, this));
+	jwScene->setScale(0.5f);
+	paulScene->setPosition(320, 0);
+
+	menuItems.pushBack(jwScene);
+
+
+	auto menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");
 	addChild(menu, 1);
 
 	return true;
+}
+
+void MainScene::SetDisplayStat(bool isOn)
+{
+	Director::getInstance()->setDisplayStats(isOn);
 }
 
 void MainScene::ChangeToStageScene(Ref* pSender)
@@ -115,22 +132,25 @@ void MainScene::ChangeToStageScene(Ref* pSender)
 
 void MainScene::ChangeToStageSceneEffect(Ref* pSender)
 {
-	Director::getInstance()->setDisplayStats(false);
-
+	Vec2 characterPosition = static_cast<MenuItemImage*>(pSender)->getPosition(); //없애기 전에 위치 저장해놓음
 	removeChildByName("Buttons");
-
+	
+	//character 걸어가는 부분
 	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
 	addChild(m_character, 2);
 
-	m_character->setPosition(m_garoPos + Vec2(30, -200));
-	m_character->runAction(MoveTo::create(2.0f, m_garo->getPosition() + Vec2(9, -45)));
+	m_character->setPosition(characterPosition);
+	m_character->runAction(MoveTo::create(2.0f, m_StreetLight->getPosition() + Vec2(9, -45)));
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP, false, 2.0f);
+
+	//가로등 서서히 fadein 하는 부분
+	m_StreetLight->runAction(FadeIn::create(2.5));
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),
-		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkGaro, this)),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
 		DelayTime::create(2.0f),
-		CallFuncN::create(CC_CALLBACK_0(MainScene::TurnGaro, this)),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::TurnStreetLight, this)),
 		DelayTime::create(2.0f),
 		CallFuncN::create(CC_CALLBACK_1(MainScene::ChangeToStageScene, this)),
 		nullptr);
@@ -164,48 +184,48 @@ void MainScene::menuCloseCallback(Ref* pSender)
     Director::getInstance()->end();
 }
 
-void MainScene::BlinkGaro()
+void MainScene::BlinkStreetLight()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS);
 
-	CallFunc* garoOff =  CallFunc::create(CC_CALLBACK_0(MainScene::GaroOff, this));
-	CallFunc* garoOn = CallFunc::create(CC_CALLBACK_0(MainScene::GaroOn, this));
+	CallFunc* StreetLightOff =  CallFunc::create(CC_CALLBACK_0(MainScene::StreetLightOff, this));
+	CallFunc* StreetLightOn = CallFunc::create(CC_CALLBACK_0(MainScene::StreetLightOn, this));
 
 	Sequence* seq =  Sequence::create(
-		garoOn,
+		StreetLightOn,
 		DelayTime::create(0.25f),
-		garoOff,
+		StreetLightOff,
 		DelayTime::create(1.0f),
-		garoOn,
+		StreetLightOn,
 		DelayTime::create(0.2f),
-		garoOff,
+		StreetLightOff,
 		DelayTime::create(0.2f),
-		garoOn,
+		StreetLightOn,
 		nullptr);
 
 	runAction(seq);
 }
 
-void MainScene::GaroOff()
+void MainScene::StreetLightOff()
 {
-	m_garo->removeFromParent();
-	m_garo = Sprite::create(FileStuff::GARO_OFF);
-	addChild(m_garo);
-	m_garo->setPosition(m_garoPos);
+	m_StreetLight->removeFromParent();
+	m_StreetLight = Sprite::create(FileStuff::GARO_OFF);
+	addChild(m_StreetLight);
+	m_StreetLight->setPosition(m_StreetLightPos);
 }
 
-void MainScene::GaroOn()
+void MainScene::StreetLightOn()
 {
-	m_garo->removeFromParent();
-	m_garo = Sprite::create(FileStuff::GARO_ON);
-	addChild(m_garo);
-	m_garo->setPosition(m_garoPos);
+	m_StreetLight->removeFromParent();
+	m_StreetLight = Sprite::create(FileStuff::GARO_ON);
+	addChild(m_StreetLight);
+	m_StreetLight->setPosition(m_StreetLightPos);
 }
 
-void MainScene::TurnGaro()
+void MainScene::TurnStreetLight()
 {
 	Sprite* light_beam = Sprite::create(FileStuff::LIGHT_BEAM);
 	light_beam->setPosition(Vec2(3, -3));
 	light_beam->setAnchorPoint(Vec2(0, 0));
-	m_garo->addChild(light_beam, -1);
+	m_StreetLight->addChild(light_beam, -1);
 }

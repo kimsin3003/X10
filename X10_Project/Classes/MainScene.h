@@ -7,17 +7,18 @@ public:
 
     virtual bool init();
 	
-    void menuCloseCallback(cocos2d::Ref* pSender);
+	void menuCloseCallback(cocos2d::Ref* pSender);
 	
     CREATE_FUNC(MainScene);
 
 private:
 	void ChangeToStageScene(Ref* pSender);
 	void ChangeToStageSceneEffect(Ref* pSender);
-	void GaroOn();
-	void GaroOff();
-	void BlinkGaro();
-	void TurnGaro();
+	void SetDisplayStat(bool isOn);
+	void StreetLightOn();
+	void StreetLightOff();
+	void BlinkStreetLight();
+	void TurnStreetLight();
 
 	void ChangeToMapEditScene(Ref* pSender);
 
@@ -25,7 +26,7 @@ private:
 	void ChangeToMCScene(Ref* pSender);
 	void ChangeToTWScene(Ref* pSender);
 
-	Sprite* m_garo;
+	Sprite* m_StreetLight;
 	Sprite* m_character;
-	Vec2 m_garoPos;
+	Vec2 m_StreetLightPos;
 };

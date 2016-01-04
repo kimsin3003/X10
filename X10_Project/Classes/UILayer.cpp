@@ -6,6 +6,7 @@
 #include "StageScene.h"
 #include "GameManager.h"
 #include "FileStuff.h"
+#include "ConstVars.h"
 
 bool UILayer::init()
 {
@@ -18,28 +19,40 @@ bool UILayer::init()
 	Size visibleSize = dir->getVisibleSize();
 	Vec2 origin = dir->getVisibleOrigin();
 
+	MenuItemImage* retryButton = MenuItemImage::create(
+		FileStuff::RETRYBUTTON,
+		FileStuff::RETRYBUTTON,
+		CC_CALLBACK_1(UILayer::GotoStage, this, UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE)));
+
+	Size buttonSize = retryButton->getContentSize();
+
+	float scale = MIN(
+		PAUSE_BUTTON_WIDTH / buttonSize.width,
+		PAUSE_BUTTON_HEIGHT / buttonSize.height);
+
+	retryButton->setScale(scale);
+	retryButton->setPosition(Vec2(origin.x + visibleSize.width - (buttonSize * scale).width / 2 - (buttonSize * scale).width,
+		origin.y + (buttonSize * scale).height / 2));
+
 	MenuItemImage* backButton = MenuItemImage::create(
 								FileStuff::PAUSEBUTTON,
 								FileStuff::PAUSEBUTTON,
 								CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 	
-	Size buttonSize = backButton->getContentSize();
-	float scale = MIN(
-		PAUSE_BUTTON_WIDTH / buttonSize.width,
-		PAUSE_BUTTON_HEIGHT / buttonSize.height);
+	
 	
 	backButton->setScale(scale);
 	backButton->setPosition(Vec2(origin.x + visibleSize.width - (buttonSize*scale).width / 2,
 							origin.y + (buttonSize*scale).height / 2));
 	
-	Menu* menu = Menu::create(backButton, NULL);
+	Menu* menu = Menu::create(retryButton, backButton, NULL);
 	menu->setPosition(Vec2::ZERO);
 	addChild(menu);
 
 	return true;
 }
 
-void UILayer::MakeSuccessWidget(int m_stage)
+void UILayer::MakeSuccessWidget(int stage)
 {
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -57,7 +70,7 @@ void UILayer::MakeSuccessWidget(int m_stage)
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON,
-		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
+		CC_CALLBACK_1(UILayer::GotoStage, this, stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
 

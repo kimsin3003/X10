@@ -115,7 +115,9 @@ namespace FileStuff
 	extern const char* SOUND_FIREWORK_METAL;
 	extern const char* SOUND_STONE_BREAK;
 	extern const char* SOUND_MIRROR;
-	extern const char* SOUND_UFO_EXPLODE;
+	extern const char* SOUND_UFO_EXPLODE_DEFAULT;
+	extern const char* SOUND_UFO_EXPLODE_GIRL;
+
 	extern const char* SOUND_BUBBLE_POP;
 
 	extern const char* SOUND_MAIN_BACKGROUND;

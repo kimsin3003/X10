@@ -23,10 +23,9 @@ void Enemy::ToBullet(Bullet* bullet)
 
 void Enemy::ToSelf(const Bullet* bullet)
 {
-	
 	if (m_applyEffectToMe)
 	{
-		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_UFO_EXPLODE, false, 1.0f, 0, 0);
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
 		m_applyEffectToMe = false;
 		float scale = m_spr->getScale();
 		m_spr->removeFromParent();
@@ -34,11 +33,8 @@ void Enemy::ToSelf(const Bullet* bullet)
 		addChild(m_spr);
 		m_spr->setScale(scale);
 
-		//사운드 추가할 부분
-		//CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(???);
-
 		int frameCut = DESTRUCT_FRAMES;
-		float frameTime = Director::getInstance()->getSecondsPerFrame()*40.0;
+		float frameTime = 0.1f;
 
 		Vector<SpriteFrame*> animFrames;
 		animFrames.reserve(frameCut);

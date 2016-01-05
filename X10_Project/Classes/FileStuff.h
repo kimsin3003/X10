@@ -2,7 +2,6 @@
 
 namespace FileStuff
 {
-
 	const string TITLE = "res/ui/title.png";
 
 	const string IMG_SOURCE = "res/target/x10.plist";
@@ -84,7 +83,8 @@ namespace FileStuff
 	const string GHOSTGIRL = "res/lights/girl.png";
 
 	const string EDITING_FILENAME = "files/target0.json";
-
+	
+	//font
 	const string FONT_ARIAL = "res/fonts/arial.ttf";
 
 	//ending
@@ -100,7 +100,6 @@ namespace FileStuff
 	const string BLACKOUT = "res/bg/blackout.jpg";
 
 	const string MONITOR = "res/object/monitor.png";
-	const string BOTTLE = "res/object/bottle.png";
 	const string AFTER_CRASHED = "res/bg/after_crashed.png";
 	const string HOSPITAL_CLOSED_EYE = "res/bg/hospital_closeEye.png";
 	const string HOSPITAL_OPEN_EYE = "res/bg/hospital_openEye.png";

@@ -113,13 +113,20 @@ void Sling::PullStart(Event* e)
 	Point startLocation = GetStartLocation();
 	float distance = startLocation.getDistance(mouseLocation);
 
+	
 	if (distance > CLICK_RANGE)
 	{
 		return;
 	}
 
+	Sprite* range = Sprite::create(FileStuff::SLING_RANGE);
+	range->setAnchorPoint(Vec2(0.5f, 0));
+	range->setName("range");
+	addChild(range, 0);
+
 	m_character->removeFromParent();
 	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_SELECTED);
+
 	addChild(m_character, 2);
 
 	ChangeToPulling();
@@ -171,6 +178,8 @@ void Sling::Shot(Event* e)
 	{
 		return;
 	}
+
+	getChildByName("range")->removeFromParent();
 
 	if (m_shotAngle.getAngle() <= Vec2::ZERO.getAngle())
 	{

@@ -29,6 +29,9 @@ bool MainScene::init()
 	{
 		return false;
 	}
+
+
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 9);
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();

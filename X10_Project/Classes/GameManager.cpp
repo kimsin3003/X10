@@ -201,16 +201,8 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 				if (target->IsEnemy())
 				{
-					if (m_curStageNum >= 9)
-					{
 						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
 							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
-					}
-					else
-					{
-						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
-					}
 				}
 			}
 		}
@@ -225,16 +217,8 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 			{
 				if (target->IsEnemy())
 				{
-					if (m_curStageNum >= 9)
-					{
-						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-							FileStuff::SOUND_CAR_CRASH, false, 1.0f, 0, 0);
-					}
-					else
-					{
 						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
 							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
-					}
 				}
 
 				target->ApplyCollisionEffect(explosion);

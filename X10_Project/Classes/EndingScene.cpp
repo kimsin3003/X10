@@ -59,7 +59,7 @@ void EndingScene::ShowCrashingScene()
 	CallFunc* crashingSound = CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeSoundEffect, this, FileStuff::SOUND_CRASH));
 	CallFunc* crashing1 = CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_2));
 	CallFunc* crashing2 = CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_3));
-	
+
 	Sequence* seq = Sequence::create(
 		crashingSound,
 		nodding1,
@@ -74,7 +74,6 @@ void EndingScene::ShowCrashingScene()
 		DelayTime::create(0.2f),
 		crashing2,
 		DelayTime::create(1.2f),
-//		blackout,
 		nullptr
 		);
 
@@ -176,8 +175,7 @@ void EndingScene::ShowHospital()
 
 	m_background->runAction(
 		Sequence::create(
-		DelayTime::create(5.0f),
-		FadeIn::create(5.0f),
+		FadeIn::create(12.0f),
 		nullptr)
 		);
 

@@ -64,8 +64,8 @@ bool StageScene::init()
 
 	MenuItemImage* backButton = MakeBackButton();
 	Menu* menu = Menu::create(backButton, nullptr);
+	menu->setPosition(Vec2::ZERO);
 	addChild(menu);
-
 
 	SetupLight();
 	SetupCharacter();
@@ -314,10 +314,9 @@ void StageScene::EndingEvent(float dt)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND);
+
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.3f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
-		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
 		DelayTime::create(3.0f),
  		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
@@ -327,7 +326,6 @@ void StageScene::EndingEvent(float dt)
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_SHOCKED);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_CRASH);
-
 
 	runAction(seq);
 }
@@ -390,7 +388,7 @@ MenuItemImage* StageScene::MakeBackButton()
 {
 	MenuItemImage* button = MenuItemImage::create(
 		FileStuff::PAUSEBUTTON,
-		FileStuff::PAUSEBUTTON,
+		FileStuff::PAUSEBUTTON_CLICKED,
 		CC_CALLBACK_1(StageScene::ChangeToMainScene, this));
 
 	Size buttonSize = button->getContentSize();
@@ -401,8 +399,8 @@ MenuItemImage* StageScene::MakeBackButton()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	button->setPosition(
-		origin.x + visibleSize.width - buttonSize.width*scale / 2,
-		origin.y + buttonSize.height*scale / 2
+		origin.x + visibleSize.width - buttonSize.width *scale / 2,
+		origin.y + buttonSize.height * scale / 2
 		);
 
 	return button;

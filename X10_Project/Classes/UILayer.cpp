@@ -143,14 +143,9 @@ void UILayer::MakeFailWidget(int stage)
 	addChild(menu);
 }
 
-void UILayer::AddCurrentBullets(int totalNum, int normalNum, int crossNum)
-{
-
-}
-
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
-	TransitionProgressOutIn* sceneWithEffect = TransitionProgressOutIn::create(0.75f, StageScene::createScene());
+	TransitionFade* sceneWithEffect = TransitionFade::create(0.75f, StageScene::createScene());
 	Director::getInstance()->replaceScene(sceneWithEffect);
 }
 

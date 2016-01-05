@@ -88,18 +88,19 @@ namespace FileStuff
 	const string GARO_ON = "res/ui/garo_on.png";
 	const string LIGHT_BEAM = "res/ui/lightbeam.png";
 	
-	const string BEFORE_CRASHING_0 = "res/bg/riding.jpg";
-	const string BEFORE_CRASHING_1 = "res/bg/seeing_people.jpg";
-	const string BEFORE_CRASHING_2 = "res/bg/turning_handle.jpg";
+	const string BEFORE_CRASHING_0 = "res/bg/nodding.jpg";
+	const string BEFORE_CRASHING_1 = "res/bg/riding.jpg";
+	const string BEFORE_CRASHING_2 = "res/bg/seeing_people.jpg";
+	const string BEFORE_CRASHING_3 = "res/bg/turning_handle.jpg";
 	const string BLACKOUT = "res/bg/blackout.jpg";
 
 	const string MONITOR = "res/object/monitor.png";
 	const string BOTTLE = "res/object/bottle.png";
 	const string AFTER_CRASHED = "res/bg/after_crashed.png";
-	const string HOSPITAL_CLOSED_EYE = "res/bg/hospital_closed_eye1.jpg";
-	const string HOSPITAL_OPEN_EYE = "res/bg/hospital_open_eye1.jpg";
-	const string HOSPITAL_WAKING = "res/bg/hospital_waking1.jpg";
-	const string HOSPITAL_WAKED = "res/bg/hospital_waked1.jpg";
+	const string HOSPITAL_CLOSED_EYE = "res/bg/hospital_closeEye.png";
+	const string HOSPITAL_OPEN_EYE = "res/bg/hospital_openEye.png";
+	const string HOSPITAL_WAKING = "res/bg/hospital_waking.png";
+	const string HOSPITAL_WAKED = "res/bg/hospital_waked.png";
 
 	extern const char* SOUND_FIREWORK_EXPLOSION;
 	extern const char* SOUND_FIREWORK_FLYING;

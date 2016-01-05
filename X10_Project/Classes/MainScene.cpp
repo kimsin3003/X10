@@ -6,7 +6,6 @@
 #include "StageScene.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
-
 #include "MapEditer.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
@@ -29,61 +28,58 @@ bool MainScene::init()
 	{
 		return false;
 	}
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MAIN_BACKGROUND, true);
 
-// 
-// 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 9);
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
-	m_StreetLight = Sprite::create(FileStuff::GARO_OFF);
-	m_StreetLight->setPosition(Vec2(visibleSize.width / 2 - 50 , visibleSize.height /2 ));
-	m_StreetLight->setOpacity(40); //처음엔 가로등 어둡게
-	m_StreetLightPos = m_StreetLight->getPosition();
-	addChild(m_StreetLight);
-
-	float selectedScale = 1.2;
-	Point selectedAnchor = Point(selectedScale - 1.0, selectedScale - 1.0) / 2;
-
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MAIN_BACKGROUND, true);
+	m_streetLight = Sprite::create(FileStuff::GARO_OFF);
+	m_streetLight->setPosition(Vec2(240, 360));
+	m_streetLight->setOpacity(40);
+	m_streetLight->setFlipX(true);
+	m_streetLight->setAnchorPoint(Vec2(0.5f, 0.5f));
+	m_StreetLightPos = m_streetLight->getPosition();
+	addChild(m_streetLight);
 
 	Vector<MenuItem*> menuItems;
 
-	/*Game start Button*/
-	MenuItemImage* startGame = MenuItemImage::create();
+	/*Character*/
+	MenuItemImage* character = MenuItemImage::create();
 
-	startGame->setNormalImage(Sprite::createWithSpriteFrame(
+	character->setNormalImage(
+		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
-		)
-	);
+		));
 	
-	startGame->setSelectedImage(
+	character->setSelectedImage(
 		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
 		)
 	);
 
-	startGame->setCallback(CC_CALLBACK_1(MainScene::ChangeToStageSceneEffect, this));
-	startGame->setPosition(m_StreetLightPos + Vec2(100, -100));
+	character->setCallback(CC_CALLBACK_0(MainScene::WalkToStreetLight, this));
+	character->setPosition(80, 120);
+	character->setAnchorPoint(Vec2(0.5f, 0.5f));
 
-	menuItems.pushBack(startGame); 
+	menuItems.pushBack(character); 
 
 #ifdef _DEBUG
-	/*MapEditer Button*/
+	/* MapEditer Button */
  	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), 
-		CC_CALLBACK_1(MainScene::ChangeToMapEditScene, this));
+		CC_CALLBACK_0(MainScene::ChangeToMapEditScene, this));
 
- 	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - startGame->getContentSize().height - mapEditer->getContentSize().height);
+ 	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - character->getContentSize().height - mapEditer->getContentSize().height);
  	menuItems.pushBack(mapEditer);
 #else
-	runAction(CallFunc::create(CC_CALLBACK_0(MainScene::SetDisplayStat, this, false)));
+	runAction(CallFunc::create(CC_CALLBACK_0(MainScene::TurnOffDisplayStat, this)));
 #endif
 
 	/* End Button */
 	MenuItemImage* closeItem = MenuItemImage::create(
 		FileStuff::CLOSE_BUTTON,
 		FileStuff::CLOSE_BUTTON,
-		CC_CALLBACK_1(MainScene::menuCloseCallback, this));
+		CC_CALLBACK_0(MainScene::ExitGame, this));
 	float scale = 2.0f;
 	closeItem->setScale(scale);
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width * scale / 2,
@@ -98,7 +94,7 @@ bool MainScene::init()
 	setToEnding->setPosition(Vec2(0.0f, 0.0f));
 
 	menuItems.pushBack(setToEnding);
-
+	
 	/*Intro mode button*/
 	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
 		CC_CALLBACK_0(MainScene::SetToIntro, this));
@@ -115,73 +111,30 @@ bool MainScene::init()
 	return true;
 }
 
-void MainScene::SetDisplayStat(bool isOn)
+void MainScene::WalkToStreetLight()
 {
-	Director::getInstance()->setDisplayStats(isOn);
-}
-
-void MainScene::ChangeToStageScene(Ref* pSender)
-{
-	int stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
-
-	if (stageToPlay == 0)
-	{
-		Director::getInstance()->replaceScene(IntroScene::createScene());
-	}
-	else
-	{
-		Director::getInstance()->replaceScene(StageScene::createScene());
-	}
-}
-
-void MainScene::ChangeToStageSceneEffect(Ref* pSender)
-{
-	Vec2 characterPosition = static_cast<MenuItemImage*>(pSender)->getPosition(); //없애기 전에 위치 저장해놓음
 	removeChildByName("Buttons");
 	
-	//character 걸어가는 부분
 	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
 	addChild(m_character, 2);
 
-	m_character->setPosition(characterPosition);
-	m_character->runAction(MoveTo::create(2.0f, m_StreetLight->getPosition() + Vec2(30, -45)));
+	m_character->setPosition(80, 120);
+	m_character->runAction(MoveTo::create(3.0f, m_streetLight->getPosition() + Vec2(-40, -45)));
+
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP, false, 2.0f);
 
-	//가로등 서서히 fadein 하는 부분
-	m_StreetLight->runAction(FadeIn::create(2.5));
+	m_streetLight->runAction(FadeIn::create(6.0f));
 
 	Sequence* seq = Sequence::create(
-		DelayTime::create(2.5f),
+		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
 		DelayTime::create(2.0f),
-		CallFuncN::create(CC_CALLBACK_0(MainScene::TurnStreetLight, this)),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
 		DelayTime::create(2.0f),
-		CallFuncN::create(CC_CALLBACK_1(MainScene::ChangeToStageScene, this)),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::ChangeToStageScene, this)),
 		nullptr);
 
 	runAction(seq);
-}
-
-void MainScene::ChangeToMapEditScene(Ref* pSender)
-{
-	Director::getInstance()->replaceScene(MapEditer::createScene());
-}
-
-void MainScene::SetToEnding()
-{
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 12);
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 12);
-}
-
-void MainScene::SetToIntro()
-{
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
-}
-
-void MainScene::menuCloseCallback(Ref* pSender)
-{
-    Director::getInstance()->end();
 }
 
 void MainScene::BlinkStreetLight()
@@ -208,30 +161,77 @@ void MainScene::BlinkStreetLight()
 
 void MainScene::StreetLightOff()
 {
-	m_StreetLight->removeFromParent();
-	m_StreetLight = Sprite::create(FileStuff::GARO_OFF);
-	addChild(m_StreetLight);
-	m_StreetLight->setPosition(m_StreetLightPos);
+	m_streetLight->removeFromParent();
+	m_streetLight = Sprite::create(FileStuff::GARO_OFF);
+	m_streetLight->setFlipX(true);
+	addChild(m_streetLight);
+	m_streetLight->setPosition(m_StreetLightPos);
 }
 
 void MainScene::StreetLightOn()
 {
-	m_StreetLight->removeFromParent();
-	m_StreetLight = Sprite::create(FileStuff::GARO_ON);
-	addChild(m_StreetLight);
-	m_StreetLight->setPosition(m_StreetLightPos);
+	m_streetLight->removeFromParent();
+	m_streetLight = Sprite::create(FileStuff::GARO_ON);
+	m_streetLight->setFlipX(true);
+	addChild(m_streetLight);
+	m_streetLight->setPosition(m_StreetLightPos);
 }
 
-void MainScene::TurnStreetLight()
+void MainScene::BrightenStreetLight()
 {
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_LIGHT_ON);
+
 	Sprite* light_beam = Sprite::create(FileStuff::LIGHT_BEAM);
 	
-	light_beam->setPosition(Vec2(3, -10));
+	light_beam->setFlipX(true);
+	light_beam->setPosition(Vec2(-7.0f, -10.0f));
 	light_beam->setAnchorPoint(Vec2(0, 0));
 
 	Sprite* fireWorks = Sprite::create(FileStuff::MAIN_BULLET);
-	fireWorks->setPosition(35, 25);
+	fireWorks->setPosition(25, 20);
 	light_beam->addChild(fireWorks);
 
-	m_StreetLight->addChild(light_beam, -1);
+	m_streetLight->addChild(light_beam, -1);
+}
+
+void MainScene::ChangeToStageScene()
+{
+	int stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+
+	if (stageToPlay == 0)
+	{
+		Scene* introscene = IntroScene::createScene();
+		Director::getInstance()->replaceScene(TransitionSlideInT::create(1.5f, introscene));
+	}
+	else
+	{
+		Director::getInstance()->replaceScene(StageScene::createScene());
+	}
+}
+
+void MainScene::ChangeToMapEditScene()
+{
+	Director::getInstance()->replaceScene(MapEditer::createScene());
+}
+
+void MainScene::SetToEnding()
+{
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 12);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 12);
+}
+
+void MainScene::SetToIntro()
+{
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
+}
+
+void MainScene::ExitGame()
+{
+	Director::getInstance()->end();
+}
+
+void MainScene::TurnOffDisplayStat()
+{
+	Director::getInstance()->setDisplayStats(false);
 }

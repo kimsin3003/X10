@@ -1,31 +1,26 @@
 #pragma once
 
-class MainScene : public cocos2d::Layer
+class MainScene : public Layer
 {
 public:
-    static cocos2d::Scene* createScene();
-
-    virtual bool init();
-	
-	void menuCloseCallback(cocos2d::Ref* pSender);
-	
+    static Scene* createScene();
+    bool init();
     CREATE_FUNC(MainScene);
 
 private:
-	void ChangeToStageScene(Ref* pSender);
-	void ChangeToStageSceneEffect(Ref* pSender);
-	void SetDisplayStat(bool isOn);
+	void ChangeToStageScene();
+	void ChangeToMapEditScene();
+	void ExitGame();
+	void SetToIntro();
+	void SetToEnding();
+	void TurnOffDisplayStat();
+	void WalkToStreetLight();
 	void StreetLightOn();
 	void StreetLightOff();
 	void BlinkStreetLight();
-	void TurnStreetLight();
+	void BrightenStreetLight();
 
-	void ChangeToMapEditScene(Ref* pSender);
-
-	void SetToIntro();
-	void SetToEnding();
-
-	Sprite* m_StreetLight;
+	Sprite* m_streetLight;
 	Sprite* m_character;
 	Vec2 m_StreetLightPos;
 };

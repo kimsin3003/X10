@@ -68,10 +68,10 @@ bool MainScene::init()
 	menuItems.pushBack(character); 
 
 #ifdef _DEBUG
-	/* MapEditer Button */
- 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), 
-		CC_CALLBACK_0(MainScene::ChangeToMapEditScene, this));
-
+//	/* MapEditer Button */
+// 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), 
+//		CC_CALLBACK_0(MainScene::ChangeToMapEditScene, this));
+//
 //  	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - character->getContentSize().height - mapEditer->getContentSize().height);
 //  	menuItems.pushBack(mapEditer);
 #else

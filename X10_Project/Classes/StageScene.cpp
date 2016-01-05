@@ -35,7 +35,7 @@ Scene* StageScene::createScene()
 	return scene;
 }
 
-bool StageScene::m_hasCharacterMoved = false;
+bool StageScene::m_justCleared = true;
 
 bool StageScene::init()
 {
@@ -215,7 +215,9 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 1.5));
 	float timeLength = 2.0f;
 
-	if (!m_hasCharacterMoved)
+	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+
+	if (last_played_stage != m_stageToPlay)
 	{
 		//¼Ò¸®
 		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
@@ -232,7 +234,7 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 		ScaleTo* scaleAction = ScaleTo::create(timeLength, finishScale);
 		character->runAction(scaleAction);
 
-		m_hasCharacterMoved = true;
+		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, m_stageToPlay);
 	}
 	else
 	{

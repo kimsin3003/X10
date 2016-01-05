@@ -87,7 +87,7 @@ bool IntroScene::init()
 	bullet->setOpacity(0);
 	addChild(bullet);
 
-	float timeLine = 1.0f;
+	float timeLine = 2.0f;
 
 	Sequence* moveArm = Sequence::create(
 		DelayTime::create(timeLine),
@@ -169,5 +169,6 @@ void IntroScene::PlayExplosion(const Vec2& pos)
 
 void IntroScene::ChangeToStageScene()
 {
+	removeAllChildrenWithCleanup(true);
 	Director::getInstance()->replaceScene(StageScene::createScene());
 }

@@ -21,18 +21,16 @@ bool EndingScene::init()
 	if (!Layer::init())
 		return false;
 		
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FileStuff::SOUND_ENDING_BACKGROUND);
+
 	Sequence* seq = Sequence::create(
 	DelayTime::create(2.5f),
-// 	CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-// 	DelayTime::create(0.5f),
-// 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowCrashingScene, this)),
-// 	DelayTime::create(9.0f),
-// // 	CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-// // 	DelayTime::create(1.0f),
-// 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowAfterCrash, this)),
-// 	DelayTime::create(5.0f),
-// 	CallFuncN::create(CC_CALLBACK_0(StageScene::ShowWhiteScene, this)),
-// 	DelayTime::create(2.5f),
+	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowCrashingScene, this)),
+	DelayTime::create(9.0f),
+	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowAfterCrash, this)),
+	DelayTime::create(5.0f),
 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowHospital, this)),
 nullptr);
 
@@ -104,7 +102,6 @@ void EndingScene::ChangeBackgroundImg(string bgImg)
 
 void EndingScene::AddMonitor()
 {
-
 	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
 
 	monitor->setPosition(Vec2(130, 335));
@@ -125,29 +122,41 @@ void EndingScene::FadeOut()
 	m_background->setScale(scale);
 	addChild(m_background);
 
-	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
-	addChild(monitor);
-
-	monitor->setScale(2.0f);
-	monitor->setPosition(Vec2(130, 335));
-
 	m_background->runAction(
 		Sequence::create(
 		FadeOut::create(5.0f),
 		nullptr
 		)
-	);
+		);
+
+	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
+
+	monitor->setScale(2.0f);
+	monitor->setPosition(Vec2(130, 335));
+	addChild(monitor);
 
 	monitor->runAction(
 		Sequence::create(
 		FadeOut::create(5.0f),
 		nullptr)
 		);
+
+	Sprite* ufo = Sprite::create(FileStuff::HOSPITAL_UFO);
+	ufo->setScale(1.7f);
+	ufo->setPosition(Vec2(230, 239));
+	ufo->runAction(Sequence::create(
+		DelayTime::create(3.0f),
+		RotateBy::create(5.0f, -90.0f),
+		FadeOut::create(3.0f),
+		nullptr
+		)
+	);
+	addChild(ufo);
+	
 }
 
 void EndingScene::ShowHospital()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_EAR_RINGING, false, 3.0f);
 
 	removeAllChildrenWithCleanup(true);
@@ -166,18 +175,17 @@ void EndingScene::ShowHospital()
 		nullptr)
 		);
 
-
 	Sequence* standing = Sequence::create(
-		DelayTime::create(12.0f),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_OPEN_EYE)),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
-		DelayTime::create(1.0f),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKING)),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
-		DelayTime::create(0.5f),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKED)),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
-		DelayTime::create(3.0f),
+// 		DelayTime::create(12.0f),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_OPEN_EYE)),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
+// 		DelayTime::create(1.0f),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKING)),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
+// 		DelayTime::create(0.5f),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKED)),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
+// 		DelayTime::create(3.0f),
 		CallFunc::create(CC_CALLBACK_0(EndingScene::FadeOut, this)),
 		nullptr
 		);
@@ -208,7 +216,6 @@ void EndingScene::ShowWhiteScene()
 	white->setScale(scale);
 	addChild(white);
 }
-
 
 void EndingScene::RemoveAllChildren(Ref* pSender)
 {

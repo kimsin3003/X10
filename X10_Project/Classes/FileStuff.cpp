@@ -14,6 +14,7 @@ const char* FileStuff::SOUND_MAIN_BACKGROUND = "res/bgmusic/Untold Sorrow - main
 const char* FileStuff::SOUND_INITIAL_BACKGROUND = "res/bgmusic/strange_night.mp3";
 const char* FileStuff::SOUND_MIDDLE_PHASE_BACKGROUND = "res/bgmusic/something's_wrong.mp3";
 const char* FileStuff::SOUND_BEFORE_ENDING_BACKGROUND = "res/bgmusic/no_way....mp3";
+const char* FileStuff::SOUND_ENDING_BACKGROUND = "res/bgmusic/acknowledgement.mp3";
 const char* FileStuff::SOUND_FOOTSTEP = "res/sound_effects/footsteps_short.mp3";
 
 const char* FileStuff::SOUND_STREETLIGHTS = "res/sound_effects/garo_ggambak.wav";

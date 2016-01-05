@@ -35,14 +35,20 @@ namespace FileStuff
 	const string STAR_SAD = "res/target/brick.png";
 	const string BRICK_DESTRUCT_ANI = "brick_destruct";
 
-	//buttons
-	const string CLOSE_BUTTON = "res/ui/closeButton.png";
+	//board
 	const string SUCCESS_BOARD = "res/ui/success.png";
 	const string FAIL_BOARD = "res/ui/fail.png";
-	const string PAUSEBUTTON = "res/ui/backButton.png";
+
+	//buttons
+	const string PAUSEBUTTON = "res/ui/BackButton.png";
 	const string NEXTBUTTON = "res/ui/NextButton.png";
 	const string RETRYBUTTON = "res/ui/RetryButton.png";
 	const string BACKBUTTON = "res/ui/BackButton.png";
+	const string PAUSEBUTTON_CLICKED = "res/ui/BackButton_clicked.png";
+	const string NEXTBUTTON_CLICKED = "res/ui/NextButton_clicked.png";
+	const string RETRYBUTTON_CLICKED = "res/ui/RetryButton_clicked.png";
+	const string BACKBUTTON_CLICKED = "res/ui/BackButton_clicked.png";
+	const string CLOSE_BUTTON = "res/ui/closeButton.png";
 
 	//bullet
 	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
@@ -104,6 +110,7 @@ namespace FileStuff
 	const string HOSPITAL_OPEN_EYE = "res/bg/hospital_openEye.png";
 	const string HOSPITAL_WAKING = "res/bg/hospital_waking.png";
 	const string HOSPITAL_WAKED = "res/bg/hospital_waked.png";
+	const string HOSPITAL_UFO = "res/bg/ufo.png";
 
 	extern const char* SOUND_FIREWORK_EXPLOSION;
 	extern const char* SOUND_FIREWORK_FLYING;
@@ -118,7 +125,8 @@ namespace FileStuff
 	extern const char* SOUND_MAIN_BACKGROUND;
 	extern const char* SOUND_INITIAL_BACKGROUND;
 	extern const char* SOUND_MIDDLE_PHASE_BACKGROUND;
-	extern const char* SOUND_BEFORE_ENDING_BACKGROUND;
+	extern const char* SOUND_BEFORE_ENDING_BACKGROUND; 
+	extern const char* SOUND_ENDING_BACKGROUND;
 	extern const char* SOUND_FOOTSTEP;
 	extern const char* SOUND_SHOCKED;
 	extern const char* SOUND_STREETLIGHTS;

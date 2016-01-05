@@ -2,37 +2,30 @@
 
 namespace FileStuff
 {
-
 	const string TITLE = "res/ui/title.png";
 
-	//Target
 	const string IMG_SOURCE = "res/target/x10.plist";
 
 	const string BACKGROUND_BOTTOM = "res/background_bottom.png";
 
 	const string CHARACTER = "res/target/black_man.png";
 	const string CHARACTER_SELECTED = "black_man_selected.png";
-	const string CHARACTER_HARDPIXEL = "black_man.png";
-	const string CHARACTER_STANDING = "black_man.png";
+	const string CHARACTER_CACHE = "black_man.png";
 	const string CHARACTER_ARM = "black_man_arm.png";
 	const string SLING_LINE_DOT = "res/dot.png";
 	const string SLING_RANGE = "res/ui/range.png";
 
-	const string BUBBLE = "res/target/Bubble2.png";
+	const string BUBBLE = "res/target/Bubble.png";
 	const string BUBBLE_POP = "res/target/BubblePop.png";
 	const string BUBBLE_POP_ANI = "bubble_pop_ani";
 
-	const string BULLET = "res/firework.png";
-	const string DEBRIS = "res/debris.png";
-	
 	const string ENEMY = "res/target/ufo.png";
 	const string ENEMY_DESTRUCT_ANI = "ufo_break";
 
 	const string MIRROR = "res/target/Mirror.png";
 	const string VIRTICAL_MIRROR = "res/target/flat_mirror.png";
 	
-	const string STAR_HAPPY = "res/target/brick_destruct.png";
-	const string STAR_SAD = "res/target/brick.png";
+	const string BRICK = "res/target/brick.png";
 	const string BRICK_DESTRUCT_ANI = "brick_destruct";
 
 	//board
@@ -53,6 +46,8 @@ namespace FileStuff
 	//bullet
 	const string NORMAL_BULLET = "res/ui/normal_bullet.png";
 	const string MAIN_BULLET = "res/ui/main_bullet.png";
+	const string BULLET = "res/firework.png";
+	const string DEBRIS = "res/debris.png";
 
 	//stage
 	const string STAGE_BACKGROUND_01 = "res/highway/highway1.png";
@@ -88,7 +83,8 @@ namespace FileStuff
 	const string GHOSTGIRL = "res/lights/girl.png";
 
 	const string EDITING_FILENAME = "files/target0.json";
-
+	
+	//font
 	const string FONT_ARIAL = "res/fonts/arial.ttf";
 
 	//ending
@@ -104,7 +100,6 @@ namespace FileStuff
 	const string BLACKOUT = "res/bg/blackout.jpg";
 
 	const string MONITOR = "res/object/monitor.png";
-	const string BOTTLE = "res/object/bottle.png";
 	const string AFTER_CRASHED = "res/bg/after_crashed.png";
 	const string HOSPITAL_CLOSED_EYE = "res/bg/hospital_closeEye.png";
 	const string HOSPITAL_OPEN_EYE = "res/bg/hospital_openEye.png";
@@ -118,7 +113,6 @@ namespace FileStuff
 	extern const char* SOUND_STONE_BREAK;
 	extern const char* SOUND_MIRROR;
 	extern const char* SOUND_UFO_EXPLODE_DEFAULT;
-	extern const char* SOUND_UFO_EXPLODE_GIRL;
 
 	extern const char* SOUND_BUBBLE_POP;
 

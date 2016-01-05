@@ -2,6 +2,7 @@
 #include "MainScene.h"
 #include "IntroScene.h"
 #include "GameScene.h"
+#include "CreditScene.h"
 #include "Sling.h"
 #include "GameManager.h"
 #include "StageScene.h"
@@ -31,6 +32,7 @@ bool MainScene::init()
 
 	setPosition(0, -20);
 
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MAIN_BACKGROUND, true);
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
@@ -52,7 +54,7 @@ bool MainScene::init()
 
 	character->setNormalImage(
 		Sprite::createWithSpriteFrame(
-		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_CACHE)
 		));
 	
 	character->setSelectedImage(
@@ -68,10 +70,10 @@ bool MainScene::init()
 	menuItems.pushBack(character); 
 
 #ifdef _DEBUG
-	/* MapEditer Button */
- 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), 
-		CC_CALLBACK_0(MainScene::ChangeToMapEditScene, this));
-
+//	/* MapEditer Button */
+// 	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), 
+//		CC_CALLBACK_0(MainScene::ChangeToMapEditScene, this));
+//
 //  	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - character->getContentSize().height - mapEditer->getContentSize().height);
 //  	menuItems.pushBack(mapEditer);
 #else
@@ -106,6 +108,12 @@ bool MainScene::init()
 
 	menuItems.pushBack(setToIntro);
 
+	/*ending credit*/
+	MenuItemLabel* creditButton = MenuItemLabel::create(Label::create("Credit", "arial", 20),
+		CC_CALLBACK_0(MainScene::ChangeToCreditScene, this));
+	creditButton->setPosition(200, 200);
+	menuItems.pushBack(creditButton);
+
 	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");
@@ -117,8 +125,8 @@ bool MainScene::init()
 void MainScene::WalkToStreetLight()
 {
 	removeChildByName("Buttons");
-	
-	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+
+	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_CACHE);
 	addChild(m_character, 2);
 
 	m_character->setPosition(80, 120);
@@ -215,6 +223,11 @@ void MainScene::ChangeToStageScene()
 	{
 		Director::getInstance()->replaceScene(StageScene::createScene());
 	}
+}
+
+void MainScene::ChangeToCreditScene()
+{
+	Director::getInstance()->replaceScene(CreditScene::createScene());
 }
 
 void MainScene::ChangeToMapEditScene()

@@ -85,6 +85,9 @@
     <ClCompile Include="..\Classes\EndingScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\CreditScene.cpp">
+      <Filter>Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -172,6 +175,9 @@
       <Filter>Scene</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\EndingScene.h">
+      <Filter>Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="..\Classes\CreditScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
   </ItemGroup>

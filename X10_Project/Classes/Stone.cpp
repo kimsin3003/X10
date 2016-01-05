@@ -12,7 +12,9 @@ bool Stone::init()
 		return false;
 	}
 
-	m_spr = Sprite::create(FileStuff::STAR_SAD);
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_STONE_BREAK);
+
+	m_spr = Sprite::create(FileStuff::BRICK);
 	addChild(m_spr);
 
 	int frameCut = DESTRUCT_FRAMES;

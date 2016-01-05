@@ -56,9 +56,6 @@ void GameManager::Init()
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_CAR_CRASH);
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_FIREWORK_FLYING);
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_FIREWORK_EXPLOSION);
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_UFO_EXPLODE_GIRL);
-	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_UFO_EXPLODE_DEFAULT);
-
 }
 
 GameManager::~GameManager() {}
@@ -96,7 +93,7 @@ void GameManager::AppendBulletsToLayer()
 	for (int i = 0; i < m_colliderManager->m_bulletNum; i++)
 	{
 		Bullet* bullet = static_cast<Bullet*>(m_colliderManager->m_colliders.at(i));
-		Sprite* bulletSpr = bullet->GetSprite();
+		Sprite* bulletSpr = bullet->GetUISprite();
 		m_bulletNumUI.pushBack(bulletSpr);
 		m_uiLayer->addChild(bulletSpr);
 		bulletSpr->setPosition(Vec2(45 + i * 25, 50));
@@ -198,12 +195,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 				{
 					break;
 				}
-
-				if (target->IsEnemy())
-				{
-						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
-				}
 			}
 		}
 		else
@@ -215,12 +206,6 @@ void GameManager::CheckCollide(Collider* collider, Vector<Target*>& targets)
 
 			if ( targetBoundingBox.intersectsCircle( explosionPosition, explosionRadius) )
 			{
-				if (target->IsEnemy())
-				{
-						CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-							FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);
-				}
-
 				target->ApplyCollisionEffect(explosion);
 			}
 		}

@@ -27,7 +27,8 @@ private:
 	MenuItemImage* MakeBackButton();
 	void SetStreetLight(int isOn);
 
-	void ChangeCharacterToButton(Point startPos);
+	void ChangeCharacterToButton(Point finalPos, float scale);
+	void PlaySound(const char* file);
 	static void GotoStage(Ref* pSender, int stageNum);
 	void MoveCharacter(Sprite* character, int stageNum);
 	static bool m_justCleared;

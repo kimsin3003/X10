@@ -11,11 +11,9 @@ public:
 
 	CREATE_FUNC(UILayer);
 	bool init();
-
 	void MakeSuccessWidget(int stage);
-	void MakeFailWidget(int m_stage);
-	void AddCurrentBullets(int totalNum, int normalNum, int crossNum);
-	void AddBulletSprite(Sprite* bullSpr);
+	void MakeFailWidget(int stage);
+
 private:
 	enum ButtonSize
 	{

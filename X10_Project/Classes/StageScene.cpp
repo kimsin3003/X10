@@ -54,6 +54,8 @@ bool StageScene::init()
 
 	m_lightManager = new LightManager();
 
+	SetBGM();
+
 	if (m_stageToPlay == 13)
 	{
 		scheduleOnce(schedule_selector(StageScene::EndingEvent), 0.0f);
@@ -65,7 +67,6 @@ bool StageScene::init()
 	addChild(menu);
 
 
-	SetBGM();
 	SetupLight();
 	SetupCharacter();
 
@@ -73,13 +74,13 @@ bool StageScene::init()
 }
 
 
-void StageScene::ChangeCharacterToButton(Point startPos)
+void StageScene::ChangeCharacterToButton(Point finalPos, float scale)
 {
 
 	MenuItemImage* character = MenuItemImage::create();
 	character->setNormalImage(
 		Sprite::createWithSpriteFrame(
-		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_CACHE)
 		)
 	);
 
@@ -89,12 +90,18 @@ void StageScene::ChangeCharacterToButton(Point startPos)
 		)
 	);
 
+	character->setScale(scale);
 	character->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
 
-	Menu* menu = Menu::create(character);
-	menu->setPosition(startPos);
+	Menu* menu = Menu::create(character, nullptr);
+	menu->setPosition(finalPos);
 	addChild(menu);
 
+}
+
+void StageScene::PlaySound(const char* file)
+{
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(file);
 }
 
 void StageScene::MoveCharacter(Sprite* character, int stageNum)
@@ -115,15 +122,14 @@ void StageScene::MoveCharacter(Sprite* character, int stageNum)
 	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
 	if (last_played_stage != m_stageToPlay)
 	{
-		//소리
-		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
 
 		//이동
 		character->setPosition(startPos);
 		character->runAction(Sequence::create(
 			DelayTime::create(standingTime), 
+			CallFunc::create(CC_CALLBACK_0(StageScene::PlaySound, this, FileStuff::SOUND_FOOTSTEP)),
 			MoveTo::create(timeLength, finishPos), 
-			CallFunc::create(CC_CALLBACK_0(StageScene::ChangeCharacterToButton, this, finishPos)),
+			CallFunc::create(CC_CALLBACK_0(StageScene::ChangeCharacterToButton, this, finishPos, finishScale)),
 			RemoveSelf::create(),
 			nullptr
 			)
@@ -142,8 +148,7 @@ void StageScene::MoveCharacter(Sprite* character, int stageNum)
 	}
 	else
 	{
-		character->setPosition(finishPos);
-		character->setScale(startScale);
+		ChangeCharacterToButton(finishPos, finishScale);
 	}
 
 }
@@ -153,8 +158,11 @@ void StageScene::SetupCharacter()
 {
 
 	Sprite* character = Sprite::createWithSpriteFrame(
-		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_CACHE)
 		);
+
+	addChild(character);
+
 	MoveCharacter(character, m_stageToPlay);
 
 }
@@ -234,17 +242,17 @@ Sprite* StageScene::LoadBackground()
 
 void StageScene::SetBGM()
 {
-	if (m_stageToPlay == 9)
+	if (m_stageToPlay >= 12)
 	{
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND, true);
 	}
-	else if (m_stageToPlay == 5)
+	else if (m_stageToPlay >= 5)
 	{
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MIDDLE_PHASE_BACKGROUND, true);
 	}
-	else if (m_stageToPlay == 1)
+	else if (m_stageToPlay >= 1)
 	{
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_INITIAL_BACKGROUND, true);
@@ -254,13 +262,17 @@ void StageScene::SetBGM()
 void StageScene::SetupLight()
 {
 	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+	if (last_played_stage == 0)
+	{
+		return;
+	}
+
 	if (last_played_stage != m_stageToPlay)
 	{
 		for (int i = 1; i <= m_maxStageNum && i < last_played_stage; i++)
 		{
 			addChild(m_lightManager->GetLight(i));
 		}
-
 		// 깼을때 나오는 효과
 		Sprite* lastLight = m_lightManager->GetLight(last_played_stage);
 		lastLight->setOpacity(0);
@@ -298,17 +310,24 @@ void StageScene::SetupLight()
 	}
 }
 
-
 void StageScene::EndingEvent(float dt)
 {
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND);
 	Sequence* seq = Sequence::create(
-		DelayTime::create(2.5f),
+		DelayTime::create(2.3f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
 		DelayTime::create(4.0f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
+		DelayTime::create(3.0f),
  		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
- 		DelayTime::create(3.0f),
+ 		DelayTime::create(2.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ChangeToEndingScene, this)),
 		nullptr);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_SHOCKED);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_CRASH);
+
 
 	runAction(seq);
 }
@@ -320,14 +339,15 @@ void StageScene::ChangeToEndingScene()
 
 void StageScene::ShowDeadbody()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false, 3.0f);
-
 	m_background->removeFromParent();
 	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13APP);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
 	m_background->setAnchorPoint(Point::ZERO);
 	m_background->setScale(scale);
 	addChild(m_background);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false, 3.0f);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_CRASH, false, 3.0f);
 }
 
 void StageScene::SetStreetLight(int isOn)

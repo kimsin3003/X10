@@ -13,6 +13,8 @@ bool Virtical_Mirror::init()
 		return false;
 	}
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_MIRROR);
+
 	m_spr = Sprite::create(FileStuff::VIRTICAL_MIRROR);
 	addChild(m_spr);
 

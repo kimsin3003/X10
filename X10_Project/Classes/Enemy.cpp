@@ -11,6 +11,8 @@ bool Enemy::init()
 		return false;
 	}
 	
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_UFO_EXPLODE_DEFAULT);
+
 	m_spr = Sprite::create(FileStuff::ENEMY);
 	addChild(m_spr);
 
@@ -45,7 +47,10 @@ void Enemy::ToSelf(const Bullet* bullet)
 	if (m_applyEffectToMe)
 	{
 		m_applyEffectToMe = false;
-
+	
+		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
+			FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);		
+	
 		m_spr->runAction(m_destructAnimation);
 
 		Sequence* removeAfterAnimation = Sequence::create(

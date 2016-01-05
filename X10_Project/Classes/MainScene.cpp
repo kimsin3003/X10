@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
+#include "IntroScene.h"
 #include "GameScene.h"
 #include "Sling.h"
 #include "GameManager.h"
@@ -9,7 +10,6 @@
 #include "MapEditer.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
-#include "IntroScene.h"
 
 Scene* MainScene::createScene()
 {
@@ -127,12 +127,12 @@ void MainScene::WalkToStreetLight()
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP, false, 2.0f);
 
-	m_streetLight->runAction(FadeIn::create(6.0f));
+	m_streetLight->runAction(FadeIn::create(7.0f));
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
-		DelayTime::create(2.0f),
+		DelayTime::create(3.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
 		DelayTime::create(2.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::ChangeToStageScene, this)),

@@ -35,8 +35,6 @@ Scene* StageScene::createScene()
 	return scene;
 }
 
-bool StageScene::m_justCleared = true;
-
 bool StageScene::init()
 {
 	if (!LayerColor::initWithColor(Color4B::BLACK))
@@ -227,7 +225,8 @@ void StageScene::SetupLight()
 			
 		}
 
-	}else
+	}
+	else
 	{
 		for (int i = 1; i <= m_maxStageNum && i < m_stageToPlay; i++)
 		{
@@ -235,14 +234,6 @@ void StageScene::SetupLight()
 		}
 	}
 }
-
-//Sprite* StageScene::LoadCharacter()
-//{
-//	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_STANDING);
-//	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
-//
-//	return character;
-//}
 
 MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 {
@@ -320,9 +311,10 @@ void StageScene::ShowDeadbody()
 	addChild(m_background);
 }
 
-void StageScene::SetStreetLight(int isOn)
+void StageScene::TurnStreetLight(int isOn)
 {
 	m_background->removeFromParent();
+
 	if (isOn)
 		m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13ON);
 	else
@@ -338,8 +330,8 @@ void StageScene::ShowBlinkingLight()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS);
 
-	CallFunc* lightOff = CallFunc::create(CC_CALLBACK_0(StageScene::SetStreetLight, this, false));
-	CallFunc* lightOn = CallFunc::create(CC_CALLBACK_0(StageScene::SetStreetLight, this, true));
+	CallFunc* lightOff = CallFunc::create(CC_CALLBACK_0(StageScene::TurnStreetLight, this, false));
+	CallFunc* lightOn = CallFunc::create(CC_CALLBACK_0(StageScene::TurnStreetLight, this, true));
 
 	Sequence* seq = Sequence::create(
 		lightOn,

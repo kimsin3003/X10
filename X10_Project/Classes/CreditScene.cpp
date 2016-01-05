@@ -114,7 +114,7 @@ bool CreditScene::init()
 	RepeatForever* action = RepeatForever::create(moveUp);
 	credit->runAction(action);
 
-	float endTime = 90.0f;
+	float endTime = 80.0f;
 	Sequence* seq = Sequence::create(
 		DelayTime::create(endTime),
 		CallFunc::create(CC_CALLBACK_0(CreditScene::EndScene, this)),

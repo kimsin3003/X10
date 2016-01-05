@@ -11,6 +11,7 @@ private:
 	void ShowCrashingScene();
 	void ChangeSoundEffect(const char* sound);
 	void ChangeBackgroundImg(string bgImg);
+	void ChangeToCreditScene();
 	void AddMonitor();
 	void FadeOut();
 	void ShowAfterCrash();

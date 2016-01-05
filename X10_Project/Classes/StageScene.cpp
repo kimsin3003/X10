@@ -64,8 +64,8 @@ bool StageScene::init()
 
 	MenuItemImage* backButton = MakeBackButton();
 	Menu* menu = Menu::create(backButton, nullptr);
+	menu->setPosition(Vec2::ZERO);
 	addChild(menu);
-
 
 	SetupLight();
 	SetupCharacter();
@@ -314,6 +314,7 @@ void StageScene::EndingEvent(float dt)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND);
+
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.3f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
@@ -327,7 +328,6 @@ void StageScene::EndingEvent(float dt)
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_SHOCKED);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_CRASH);
-
 
 	runAction(seq);
 }

@@ -75,6 +75,7 @@ namespace FileStuff
 	const string STAGE_LIGHTS_RIGHT_04 = "res/lights/right4.png";
 	const string STAGE_LIGHTS_RIGHT_05 = "res/lights/right5.png";
 	const string STAGE_LIGHTS_RIGHT_06 = "res/lights/right6.png";
+	const string GHOSTGIRL = "res/lights/girl.png";
 
 	const string EDITING_FILENAME = "files/target0.json";
 
@@ -85,7 +86,7 @@ namespace FileStuff
 	const string GARO_OFF = "res/ui/garo.png";
 	const string GARO_ON = "res/ui/garo_on.png";
 	const string LIGHT_BEAM = "res/ui/lightbeam.png";
-
+	
 	const string BEFORE_CRASHING_0 = "res/bg/riding.jpg";
 	const string BEFORE_CRASHING_1 = "res/bg/seeing_people.jpg";
 	const string BEFORE_CRASHING_2 = "res/bg/turning_handle.jpg";

@@ -25,7 +25,7 @@ private:
 	void ShowBlinkingLight();
 	Sprite* LoadBackground();
 	void SetBGM();
-	Sprite* LoadCharacter();
+	//Sprite* LoadCharacter();
 	Point GetCharacterPosition(int stage);
 	void SetupLight();
 	MenuItemImage* MakeBackButton();

@@ -104,7 +104,6 @@ void EndingScene::ChangeBackgroundImg(string bgImg)
 
 void EndingScene::AddMonitor()
 {
-
 	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
 
 	monitor->setPosition(Vec2(130, 335));
@@ -147,7 +146,6 @@ void EndingScene::FadeOut()
 
 void EndingScene::ShowHospital()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_EAR_RINGING, false, 3.0f);
 
 	removeAllChildrenWithCleanup(true);

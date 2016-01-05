@@ -169,5 +169,6 @@ void IntroScene::PlayExplosion(const Vec2& pos)
 
 void IntroScene::ChangeToStageScene()
 {
+	removeAllChildrenWithCleanup(true);
 	Director::getInstance()->replaceScene(StageScene::createScene());
 }

@@ -86,7 +86,7 @@ bool MainScene::init()
 	float scale = 2.0f;
 	closeItem->setScale(scale);
 	closeItem->setPosition(Vec2(origin.x + visibleSize.width - closeItem->getContentSize().width * scale / 2,
-		closeItem->getContentSize().height * scale / 2));
+		closeItem->getContentSize().height * scale / 2) + Vec2(0, 20));
 
 	menuItems.pushBack(closeItem);
 

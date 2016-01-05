@@ -318,8 +318,6 @@ void StageScene::EndingEvent(float dt)
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.3f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
-		DelayTime::create(4.0f),
-		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
 		DelayTime::create(3.0f),
  		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
  		DelayTime::create(2.0f),

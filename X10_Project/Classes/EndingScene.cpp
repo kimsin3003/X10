@@ -23,6 +23,9 @@ bool EndingScene::init()
 		return false;
 	}
 
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FileStuff::SOUND_ENDING_BACKGROUND);
+
 	Sequence* seq = Sequence::create(
 	DelayTime::create(2.0f),
 
@@ -124,24 +127,37 @@ void EndingScene::FadeOut()
 	m_background->setScale(scale);
 	addChild(m_background);
 
+	m_background->runAction(
+		Sequence::create(
+		FadeOut::create(5.0f),
+		nullptr
+		)
+		);
+
 	Sprite* monitor = Sprite::create(FileStuff::MONITOR);
-	addChild(monitor);
 
 	monitor->setScale(2.0f);
 	monitor->setPosition(Vec2(130, 335));
-
-	m_background->runAction(
-		Sequence::create(
-		FadeOut::create(12.0f),
-		nullptr
-		)
-	);
+	addChild(monitor);
 
 	monitor->runAction(
 		Sequence::create(
 		FadeOut::create(5.0f),
 		nullptr)
 		);
+
+	Sprite* ufo = Sprite::create(FileStuff::HOSPITAL_UFO);
+	ufo->setScale(1.7f);
+	ufo->setPosition(Vec2(230, 239));
+	ufo->runAction(Sequence::create(
+		DelayTime::create(3.0f),
+		RotateBy::create(5.0f, -90.0f),
+		FadeOut::create(3.0f),
+		nullptr
+		)
+	);
+	addChild(ufo);
+	
 }
 
 void EndingScene::ShowHospital()
@@ -163,16 +179,16 @@ void EndingScene::ShowHospital()
 		);
 
 	Sequence* standing = Sequence::create(
-		DelayTime::create(12.0f),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_OPEN_EYE)),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
-		DelayTime::create(1.0f),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKING)),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
-		DelayTime::create(0.5f),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKED)),
-		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
-		DelayTime::create(3.0f),
+// 		DelayTime::create(12.0f),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_OPEN_EYE)),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
+// 		DelayTime::create(1.0f),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKING)),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
+// 		DelayTime::create(0.5f),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_WAKED)),
+// 		CallFunc::create(CC_CALLBACK_0(EndingScene::AddMonitor, this)),
+// 		DelayTime::create(3.0f),
 		CallFunc::create(CC_CALLBACK_0(EndingScene::FadeOut, this)),
 		nullptr
 		);

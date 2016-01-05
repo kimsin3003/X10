@@ -8,8 +8,6 @@ public:
 	static Scene* createScene();
 	CREATE_FUNC(StageScene);
 	virtual bool init();
-	static void GotoStage(Ref* pSender,int stageNum);
-	MenuItemImage* MoveCharacter(MenuItemImage* character, int stageNum);
 
 private:
 	void SetupCharacter();
@@ -27,7 +25,13 @@ private:
 	Point GetCharacterPosition(int stage);
 	void SetupLight();
 	MenuItemImage* MakeBackButton();
-	void TurnStreetLight(int isOn);
+	void SetStreetLight(int isOn);
+
+	void ChangeCharacterToButton(Point finalPos, float scale);
+	void PlaySound(const char* file);
+	static void GotoStage(Ref* pSender, int stageNum);
+	void MoveCharacter(Sprite* character, int stageNum);
+	static bool m_justCleared;
 
 	LightManager* m_lightManager;
 	Sprite* m_background;

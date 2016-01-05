@@ -35,6 +35,8 @@ Scene* StageScene::createScene()
 	return scene;
 }
 
+bool StageScene::m_justCleared = true;
+
 bool StageScene::init()
 {
 	if (!LayerColor::initWithColor(Color4B::BLACK))
@@ -52,47 +54,117 @@ bool StageScene::init()
 
 	m_lightManager = new LightManager();
 
+	SetBGM();
+
 	if (m_stageToPlay == 13)
 	{
 		scheduleOnce(schedule_selector(StageScene::EndingEvent), 0.0f);
 		return true;
 	}
 
-	SetBGM();
+	MenuItemImage* backButton = MakeBackButton();
+	Menu* menu = Menu::create(backButton, nullptr);
+	addChild(menu);
+
+
 	SetupLight();
 	SetupCharacter();
 
 	return true;
 }
 
-void StageScene::SetupCharacter()
-{
-	Vector<MenuItem*> menuList;
 
-	MenuItemImage* backButton = MakeBackButton();
-	menuList.pushBack(backButton);
-	
-	MenuItemImage* menuItem = MenuItemImage::create();
-	menuItem->setNormalImage(
+void StageScene::ChangeCharacterToButton(Point finalPos, float scale)
+{
+
+	MenuItemImage* character = MenuItemImage::create();
+	character->setNormalImage(
 		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_CACHE)
 		)
 	);
 
-	menuItem->setSelectedImage(
+	character->setSelectedImage(
 		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
 		)
 	);
 
-	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
-	
-	menuItem = MoveCharacter(menuItem, m_stageToPlay);
+	character->setScale(scale);
+	character->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
 
-	menuList.pushBack(menuItem);
-	Menu* menu = Menu::createWithArray(menuList);
-	menu->setPosition(Vec2::ZERO);
+	Menu* menu = Menu::create(character, nullptr);
+	menu->setPosition(finalPos);
 	addChild(menu);
+
+}
+
+void StageScene::PlaySound(const char* file)
+{
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(file);
+}
+
+void StageScene::MoveCharacter(Sprite* character, int stageNum)
+{
+	//애니매이션 및 사운드 재생하는 부분
+	Point finishPos = GetCharacterPosition(stageNum);
+	Point startPos = GetCharacterPosition(m_stageToPlay - 1);
+	Size screenSize = Director::getInstance()->getVisibleSize();
+	float startScale = character->getScale()* (1 - startPos.y / (screenSize.height * 1.5));
+	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 1.5));
+	float timeLength = 2.0f;
+	float standingTime = 2.0f;
+	if (stageNum == 1)
+	{
+		standingTime = 0.1f;
+	}
+
+	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+	if (last_played_stage != m_stageToPlay)
+	{
+
+		//이동
+		character->setPosition(startPos);
+		character->runAction(Sequence::create(
+			DelayTime::create(standingTime), 
+			CallFunc::create(CC_CALLBACK_0(StageScene::PlaySound, this, FileStuff::SOUND_FOOTSTEP)),
+			MoveTo::create(timeLength, finishPos), 
+			CallFunc::create(CC_CALLBACK_0(StageScene::ChangeCharacterToButton, this, finishPos, finishScale)),
+			RemoveSelf::create(),
+			nullptr
+			)
+		);
+
+		//크기변화
+		character->setScale(startScale);
+		ScaleTo* scaleAction = ScaleTo::create(timeLength, finishScale);
+		character->runAction(Sequence::create(
+			DelayTime::create(standingTime),
+			ScaleTo::create(timeLength, finishScale),
+			nullptr)
+		);
+
+		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, m_stageToPlay);
+	}
+	else
+	{
+		ChangeCharacterToButton(finishPos, finishScale);
+	}
+
+}
+
+
+void StageScene::SetupCharacter()
+{
+
+	Sprite* character = Sprite::createWithSpriteFrame(
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_CACHE)
+		);
+
+	addChild(character);
+
+	MoveCharacter(character, m_stageToPlay);
+
 }
 
 Point StageScene::GetCharacterPosition(int stage)
@@ -170,17 +242,17 @@ Sprite* StageScene::LoadBackground()
 
 void StageScene::SetBGM()
 {
-	if (m_stageToPlay == 9)
+	if (m_stageToPlay >= 12)
 	{
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND, true);
 	}
-	else if (m_stageToPlay == 5)
+	else if (m_stageToPlay >= 5)
 	{
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MIDDLE_PHASE_BACKGROUND, true);
 	}
-	else if (m_stageToPlay == 1)
+	else if (m_stageToPlay >= 1)
 	{
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_INITIAL_BACKGROUND, true);
@@ -229,8 +301,7 @@ void StageScene::SetupLight()
 			
 		}
 
-	}
-	else
+	}else
 	{
 		for (int i = 1; i <= m_maxStageNum && i < m_stageToPlay; i++)
 		{
@@ -239,65 +310,24 @@ void StageScene::SetupLight()
 	}
 }
 
-MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
-{
-	Point finishPos = GetCharacterPosition(stageNum);
-	Point startPos = GetCharacterPosition(m_stageToPlay - 1);
-	Size screenSize = Director::getInstance()->getVisibleSize();
-	float startScale = character->getScale()* (1 - startPos.y / (screenSize.height * 1.5));
-	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 1.5));
-	float timeLength = 2.0f;
-	float standingTime = 2.0f;
-
-	if (stageNum == 1)
-	{
-		standingTime = 0.1f;
-	}
-	
-	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
-	if (last_played_stage != m_stageToPlay)
-	{
-		//소리
-		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
-
-		//이동
-		character->setPosition(startPos);
-		DelayTime* delay = DelayTime::create(standingTime); //잠시 멈춰 있다가
-		MoveTo* move = MoveTo::create(timeLength, finishPos);
-		Sequence* action = Sequence::create(delay, move, NULL);
-		character->runAction(action);
-
-		//크기변화
-		character->setScale(startScale);
-		ScaleTo* scaleAction = ScaleTo::create(timeLength, finishScale);
-		Sequence* delayAndScale = Sequence::create(delay, scaleAction, NULL);
-		character->runAction(delayAndScale);
-
-		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, m_stageToPlay);
-	}
-	else
-	{
-		character->setPosition(finishPos);
-		character->setScale(startScale);
-	}
-
-	return character;
-}
-
 void StageScene::EndingEvent(float dt)
 {
-
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_SHOCKED);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_CRASH);
-
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND);
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.3f),
+		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
+		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
 		DelayTime::create(3.0f),
  		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
  		DelayTime::create(2.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ChangeToEndingScene, this)),
 		nullptr);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_SHOCKED);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_CRASH);
+
 
 	runAction(seq);
 }
@@ -320,10 +350,9 @@ void StageScene::ShowDeadbody()
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_CRASH, false, 3.0f);
 }
 
-void StageScene::TurnStreetLight(int isOn)
+void StageScene::SetStreetLight(int isOn)
 {
 	m_background->removeFromParent();
-
 	if (isOn)
 		m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13ON);
 	else
@@ -339,8 +368,8 @@ void StageScene::ShowBlinkingLight()
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS);
 
-	CallFunc* lightOff = CallFunc::create(CC_CALLBACK_0(StageScene::TurnStreetLight, this, false));
-	CallFunc* lightOn = CallFunc::create(CC_CALLBACK_0(StageScene::TurnStreetLight, this, true));
+	CallFunc* lightOff = CallFunc::create(CC_CALLBACK_0(StageScene::SetStreetLight, this, false));
+	CallFunc* lightOn = CallFunc::create(CC_CALLBACK_0(StageScene::SetStreetLight, this, true));
 
 	Sequence* seq = Sequence::create(
 		lightOn,
@@ -361,7 +390,7 @@ MenuItemImage* StageScene::MakeBackButton()
 {
 	MenuItemImage* button = MenuItemImage::create(
 		FileStuff::PAUSEBUTTON,
-		FileStuff::PAUSEBUTTON_CLICKED,
+		FileStuff::PAUSEBUTTON,
 		CC_CALLBACK_1(StageScene::ChangeToMainScene, this));
 
 	Size buttonSize = button->getContentSize();

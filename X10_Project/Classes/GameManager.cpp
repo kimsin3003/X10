@@ -93,7 +93,7 @@ void GameManager::AppendBulletsToLayer()
 	for (int i = 0; i < m_colliderManager->m_bulletNum; i++)
 	{
 		Bullet* bullet = static_cast<Bullet*>(m_colliderManager->m_colliders.at(i));
-		Sprite* bulletSpr = bullet->GetSprite();
+		Sprite* bulletSpr = bullet->GetUISprite();
 		m_bulletNumUI.pushBack(bulletSpr);
 		m_uiLayer->addChild(bulletSpr);
 		bulletSpr->setPosition(Vec2(45 + i * 25, 50));

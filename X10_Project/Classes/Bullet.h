@@ -38,7 +38,7 @@ public:
 	bool IsBullet() { return true; }
 	Target* m_currentCollidingTarget;
 
-	Sprite* GetSprite() { return m_spr; }
+	Sprite* GetUISprite() { return m_uiSpr; }
 	
 protected:
 	void DecreaseLife();
@@ -47,7 +47,7 @@ protected:
 	void AddDebrisToParent();
 
 	Sprite* m_body;
-	Sprite* m_spr;
+	Sprite* m_uiSpr;
 	Vec2 m_direction;
 
 	float m_startSpeed;

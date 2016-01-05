@@ -190,13 +190,17 @@ void StageScene::SetBGM()
 void StageScene::SetupLight()
 {
 	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+	if (last_played_stage == 0)
+	{
+		return;
+	}
+
 	if (last_played_stage != m_stageToPlay)
 	{
 		for (int i = 1; i <= m_maxStageNum && i < last_played_stage; i++)
 		{
 			addChild(m_lightManager->GetLight(i));
 		}
-
 		// 깼을때 나오는 효과
 		Sprite* lastLight = m_lightManager->GetLight(last_played_stage);
 		lastLight->setOpacity(0);

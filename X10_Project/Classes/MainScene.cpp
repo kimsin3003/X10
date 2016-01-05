@@ -117,7 +117,7 @@ bool MainScene::init()
 void MainScene::WalkToStreetLight()
 {
 	removeChildByName("Buttons");
-	
+
 	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
 	addChild(m_character, 2);
 

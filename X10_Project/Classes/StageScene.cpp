@@ -237,7 +237,6 @@ void StageScene::SetupLight()
 
 MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 {
-	//애니매이션 및 사운드 재생하는 부분
 	Point finishPos = GetCharacterPosition(stageNum);
 	Point startPos = GetCharacterPosition(m_stageToPlay - 1);
 	Size screenSize = Director::getInstance()->getVisibleSize();
@@ -245,6 +244,7 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 1.5));
 	float timeLength = 2.0f;
 	float standingTime = 2.0f;
+
 	if (stageNum == 1)
 	{
 		standingTime = 0.1f;
@@ -282,12 +282,16 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 
 void StageScene::EndingEvent(float dt)
 {
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_SHOCKED);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->preloadEffect(FileStuff::SOUND_CRASH);
+
 	Sequence* seq = Sequence::create(
-		DelayTime::create(2.5f),
+		DelayTime::create(2.3f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowBlinkingLight, this)),
-		DelayTime::create(4.0f),
+		DelayTime::create(3.0f),
  		CallFuncN::create(CC_CALLBACK_0(StageScene::ShowDeadbody, this)),
- 		DelayTime::create(3.0f),
+ 		DelayTime::create(2.0f),
 		CallFuncN::create(CC_CALLBACK_0(StageScene::ChangeToEndingScene, this)),
 		nullptr);
 
@@ -301,14 +305,15 @@ void StageScene::ChangeToEndingScene()
 
 void StageScene::ShowDeadbody()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false, 3.0f);
-
 	m_background->removeFromParent();
 	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13APP);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
 	m_background->setAnchorPoint(Point::ZERO);
 	m_background->setScale(scale);
 	addChild(m_background);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false, 3.0f);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_CRASH, false, 3.0f);
 }
 
 void StageScene::TurnStreetLight(int isOn)

@@ -11,6 +11,8 @@ bool Enemy::init()
 		return false;
 	}
 	
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_UFO_EXPLODE_DEFAULT);
+
 	m_spr = Sprite::create(FileStuff::ENEMY);
 	addChild(m_spr);
 

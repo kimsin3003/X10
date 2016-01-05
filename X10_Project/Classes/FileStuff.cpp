@@ -9,7 +9,7 @@ const char* FileStuff::SOUND_UFO_EXPLODE_DEFAULT = "res/sound_effects/ufo_explod
 const char* FileStuff::SOUND_MIRROR = "res/sound_effects/metal_ting.mp3";
 const char* FileStuff::SOUND_BUBBLE_POP = "res/sound_effects/pop.mp3";
 
-const char* FileStuff::SOUND_MAIN_BACKGROUND = "res/bgmusic/Untold Sorrow - main_theme.wav";
+const char* FileStuff::SOUND_MAIN_BACKGROUND = "res/bgmusic/Untold Sorrow - main_theme.mp3";
 const char* FileStuff::SOUND_INITIAL_BACKGROUND = "res/bgmusic/strange_night.mp3";
 const char* FileStuff::SOUND_MIDDLE_PHASE_BACKGROUND = "res/bgmusic/something's_wrong.mp3";
 const char* FileStuff::SOUND_BEFORE_ENDING_BACKGROUND = "res/bgmusic/no_way....mp3";
@@ -18,7 +18,7 @@ const char* FileStuff::SOUND_FOOTSTEP = "res/sound_effects/footsteps_short.mp3";
 const char* FileStuff::SOUND_STREETLIGHTS = "res/sound_effects/garo_ggambak.wav";
 const char* FileStuff::SOUND_SHOCKED = "res/sound_effects/shock.wav";
 
-const char* FileStuff::SOUND_EAR_RINGING = "res/sound_effects/ear_ringing.wav";
+const char* FileStuff::SOUND_EAR_RINGING = "res/sound_effects/ear_ringing.mp3";
 const char* FileStuff::SOUND_RIDING = "res/sound_effects/riding.mp3";
 const char* FileStuff::SOUND_CRASH = "res/sound_effects/crash3.mp3";
 

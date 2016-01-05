@@ -12,6 +12,8 @@ bool Stone::init()
 		return false;
 	}
 
+	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_STONE_BREAK);
+
 	m_spr = Sprite::create(FileStuff::BRICK);
 	addChild(m_spr);
 

@@ -242,15 +242,10 @@ Sprite* StageScene::LoadBackground()
 
 void StageScene::SetBGM()
 {
-	if (m_stageToPlay >= 12)
+	if (m_stageToPlay >= 5)
 	{
 		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND, true);
-	}
-	else if (m_stageToPlay >= 5)
-	{
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
-		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MIDDLE_PHASE_BACKGROUND, true);
+		CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MIDDLE_BACKGROUND, true);
 	}
 	else if (m_stageToPlay >= 1)
 	{

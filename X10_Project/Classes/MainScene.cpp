@@ -2,6 +2,7 @@
 #include "MainScene.h"
 #include "IntroScene.h"
 #include "GameScene.h"
+#include "CreditScene.h"
 #include "Sling.h"
 #include "GameManager.h"
 #include "StageScene.h"
@@ -106,6 +107,12 @@ bool MainScene::init()
 	setToEnding->setPosition(Vec2(0.0f, 480.0f));
 
 	menuItems.pushBack(setToIntro);
+
+	/*ending credit*/
+	MenuItemLabel* creditButton = MenuItemLabel::create(Label::create("Credit", "arial", 20),
+		CC_CALLBACK_0(MainScene::ChangeToCreditScene, this));
+	creditButton->setPosition(200, 200);
+	menuItems.pushBack(creditButton);
 
 	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
@@ -216,6 +223,11 @@ void MainScene::ChangeToStageScene()
 	{
 		Director::getInstance()->replaceScene(StageScene::createScene());
 	}
+}
+
+void MainScene::ChangeToCreditScene()
+{
+	Director::getInstance()->replaceScene(CreditScene::createScene());
 }
 
 void MainScene::ChangeToMapEditScene()

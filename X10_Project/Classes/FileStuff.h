@@ -2,6 +2,9 @@
 
 namespace FileStuff
 {
+
+	const string TITLE = "res/ui/title.png";
+
 	//Target
 	const string IMG_SOURCE = "res/target/x10.plist";
 

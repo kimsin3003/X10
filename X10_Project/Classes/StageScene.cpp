@@ -35,7 +35,7 @@ Scene* StageScene::createScene()
 	return scene;
 }
 
-bool StageScene::m_hasCharacterMoved = false;
+bool StageScene::m_justCleared = true;
 
 bool StageScene::init()
 {
@@ -110,7 +110,7 @@ Point StageScene::GetCharacterPosition(int stage)
 	
 	/*전등 위치에서 얼마나 떨어져 있을지 표시.*/
 	float posRatio = .7f ;
-	Vec2 currentDelta = Vec2(-50, -50);
+	Vec2 currentDelta = Vec2(-50, -70);
 	currentDelta.x *= -(odd);
 	currentDelta.x -= 20;
 
@@ -191,19 +191,58 @@ void StageScene::SetBGM()
 
 void StageScene::SetupLight()
 {
-	for (int i = 2; i < m_maxStageNum && i <= m_stageToPlay; i++)
+	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+	if (last_played_stage != m_stageToPlay)
 	{
-		addChild(m_lightManager->GetLight(i - 1));
+		for (int i = 1; i <= m_maxStageNum && i < last_played_stage; i++)
+		{
+			addChild(m_lightManager->GetLight(i));
+		}
+
+		// 깼을때 나오는 효과
+		Sprite* lastLight = m_lightManager->GetLight(last_played_stage);
+		lastLight->setOpacity(0);
+		FadeIn* fadeIn = FadeIn::create(2.0f);
+		lastLight->runAction(fadeIn);
+		addChild(lastLight);
+
+		//9탄에 나오는 소녀
+		if (m_stageToPlay == 10){
+			Sprite* girlLikeGhost = Sprite::create(FileStuff::GHOSTGIRL);
+			girlLikeGhost->setOpacity(10);
+			girlLikeGhost->setScale(0.3f);
+			girlLikeGhost->setPosition(37, 45);
+			Sequence* seq = Sequence::create(DelayTime::create(0.5f),
+				DelayTime::create(0.5),
+				FadeTo::create(0.5f,100),
+				DelayTime::create(0.5f),
+				FadeOut::create(0.3f),
+				DelayTime::create(3.0f),
+				FadeTo::create(0.8f, 70),
+				FadeOut::create(0.9f),
+				nullptr
+				);
+			girlLikeGhost->runAction(seq);
+			lastLight->addChild(girlLikeGhost);
+			
+		}
+
+	}else
+	{
+		for (int i = 1; i <= m_maxStageNum && i < m_stageToPlay; i++)
+		{
+			addChild(m_lightManager->GetLight(i));
+		}
 	}
 }
 
-Sprite* StageScene::LoadCharacter()
-{
-	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_STANDING);
-	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
-
-	return character;
-}
+//Sprite* StageScene::LoadCharacter()
+//{
+//	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_STANDING);
+//	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
+//
+//	return character;
+//}
 
 MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 {
@@ -214,15 +253,21 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 	float startScale = character->getScale()* (1 - startPos.y / (screenSize.height * 1.5));
 	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 1.5));
 	float timeLength = 2.0f;
-
-	if (!m_hasCharacterMoved)
+	float standingTime = 2.0f;
+	if (stageNum == 1)
+	{
+		standingTime = 0.1f;
+	}
+	
+	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+	if (last_played_stage != m_stageToPlay)
 	{
 		//소리
 		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
 
 		//이동
 		character->setPosition(startPos);
-		DelayTime* delay = DelayTime::create(0.1);
+		DelayTime* delay = DelayTime::create(standingTime); //잠시 멈춰 있다가
 		MoveTo* move = MoveTo::create(timeLength, finishPos);
 		Sequence* action = Sequence::create(delay, move, NULL);
 		character->runAction(action);
@@ -230,9 +275,10 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 		//크기변화
 		character->setScale(startScale);
 		ScaleTo* scaleAction = ScaleTo::create(timeLength, finishScale);
-		character->runAction(scaleAction);
+		Sequence* delayAndScale = Sequence::create(delay, scaleAction, NULL);
+		character->runAction(delayAndScale);
 
-		m_hasCharacterMoved = true;
+		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, m_stageToPlay);
 	}
 	else
 	{

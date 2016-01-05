@@ -10,7 +10,7 @@ public:
 	virtual bool init();
 	static void GotoStage(Ref* pSender,int stageNum);
 	MenuItemImage* MoveCharacter(MenuItemImage* character, int stageNum);
-	static bool m_hasCharacterMoved;
+	static bool m_justCleared;
 
 private:
 	void SetupCharacter();
@@ -25,7 +25,7 @@ private:
 	void ShowBlinkingLight();
 	Sprite* LoadBackground();
 	void SetBGM();
-	Sprite* LoadCharacter();
+	//Sprite* LoadCharacter();
 	Point GetCharacterPosition(int stage);
 	void SetupLight();
 	MenuItemImage* MakeBackButton();

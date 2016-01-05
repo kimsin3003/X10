@@ -91,6 +91,7 @@ bool MainScene::init()
 
 	menuItems.pushBack(closeItem);
 
+	/*Ending mode button*/
 	MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
 		CC_CALLBACK_0(MainScene::SetToEnding, this));
 	setToEnding->setScale(0.5f);
@@ -98,6 +99,7 @@ bool MainScene::init()
 
 	menuItems.pushBack(setToEnding);
 
+	/*Intro mode button*/
 	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
 		CC_CALLBACK_0(MainScene::SetToIntro, this));
 	setToIntro->setScale(0.5f);
@@ -168,11 +170,13 @@ void MainScene::ChangeToMapEditScene(Ref* pSender)
 void MainScene::SetToEnding()
 {
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 12);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 12);
 }
 
 void MainScene::SetToIntro()
 {
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
 }
 
 void MainScene::menuCloseCallback(Ref* pSender)

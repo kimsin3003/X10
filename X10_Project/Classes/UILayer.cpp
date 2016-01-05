@@ -39,8 +39,6 @@ bool UILayer::init()
 								FileStuff::PAUSEBUTTON,
 								CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 	
-	
-	
 	backButton->setScale(scale);
 	backButton->setPosition(Vec2(origin.x + visibleSize.width - (buttonSize*scale).width / 2,
 							origin.y + (buttonSize*scale).height / 2));
@@ -63,10 +61,11 @@ void UILayer::MakeSuccessWidget(int stage)
 	addChild(successBoard);
 
 	//재시도 버튼
+	int current_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON,
-		CC_CALLBACK_1(UILayer::GotoStage, this, stage));
+		CC_CALLBACK_1(UILayer::GotoStage, this, current_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
 
@@ -98,7 +97,7 @@ void UILayer::MakeSuccessWidget(int stage)
 }
 
 //실패시 위젯을 띄운다.
-void UILayer::MakeFailWidget(int m_stage)
+void UILayer::MakeFailWidget(int stage)
 {
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	Size visibleSize = Director::getInstance()->getVisibleSize();
@@ -109,10 +108,11 @@ void UILayer::MakeFailWidget(int m_stage)
 	addChild(failBoard);
 
 	//재시도 버튼
+	int current_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON,
-		CC_CALLBACK_1(UILayer::GotoStage, this, m_stage));
+		CC_CALLBACK_1(UILayer::GotoStage, this, current_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
 
@@ -150,8 +150,6 @@ void UILayer::AddCurrentBullets(int totalNum, int normalNum, int crossNum)
 
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
-	StageScene::m_hasCharacterMoved = false;
-
 	TransitionProgressOutIn* sceneWithEffect = TransitionProgressOutIn::create(0.75f, StageScene::createScene());
 	Director::getInstance()->replaceScene(sceneWithEffect);
 }

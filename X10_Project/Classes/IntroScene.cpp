@@ -51,8 +51,9 @@ void IntroScene::Text1(Ref* pSender)
 	Vec2 deltaPos = Vec2(0, 16.5f);
 	Vec2 textPos = Vec2(20.0f, 400.0f);
 
-	PrintIntroText("Why am I standing on a road?", textPos, 1.0f, 1.25f);
-	PrintIntroText("Firework? In my Pocket!?", textPos -= deltaPos * 6, 5.5f, 1.25f);
+	PrintIntroText("Where am I ?", textPos, 1.0f, 1.25f);
+	PrintIntroText("Why am I standing on the road?", textPos, 1.0f, 1.25f);
+	PrintIntroText("Fireworks? In my Pocket?", textPos -= deltaPos * 6, 5.5f, 1.25f);
 	PrintIntroText("What the..", textPos -= deltaPos * 2, 8.5f, 1.25f);
 }
 
@@ -61,7 +62,7 @@ void IntroScene::Text2(Ref* pSender)
 	Vec2 deltaPos = Vec2(0, 16.5f);
 	Vec2 textPos = Vec2(20.0f, 400.0f);
 
-	PrintIntroText("Oh my, Aliens?", textPos, 2.0f, 1.25f);
+	PrintIntroText("Holy shit, Aliens?", textPos, 2.0f, 1.25f);
 	PrintIntroText("I've got to get out out of here!", textPos -= deltaPos * 6, 6.5f, 1.25f);
 }
 

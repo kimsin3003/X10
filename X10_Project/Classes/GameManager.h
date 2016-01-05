@@ -20,6 +20,7 @@ public:
 
 	void ShotBullet();
 	void SetStage(int StageNumber);
+	int GetStage(){ return m_curStageNum; }
 
 	void AppendTargetsToLayer();
 	void AppendBulletsToLayer();

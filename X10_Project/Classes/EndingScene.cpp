@@ -30,7 +30,7 @@ bool EndingScene::init()
  	DelayTime::create(9.0f),
 
  	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowAfterCrash, this)),
- 	DelayTime::create(4.5f),
+ 	DelayTime::create(7.0f),
 
 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowWhiteScene, this)),
 	DelayTime::create(3.0f),

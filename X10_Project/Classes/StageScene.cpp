@@ -390,7 +390,7 @@ MenuItemImage* StageScene::MakeBackButton()
 {
 	MenuItemImage* button = MenuItemImage::create(
 		FileStuff::PAUSEBUTTON,
-		FileStuff::PAUSEBUTTON,
+		FileStuff::PAUSEBUTTON_CLICKED,
 		CC_CALLBACK_1(StageScene::ChangeToMainScene, this));
 
 	Size buttonSize = button->getContentSize();
@@ -401,8 +401,8 @@ MenuItemImage* StageScene::MakeBackButton()
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 	button->setPosition(
-		origin.x + visibleSize.width - buttonSize.width*scale / 2,
-		origin.y + buttonSize.height*scale / 2
+		origin.x + visibleSize.width - buttonSize.width *scale / 2,
+		origin.y + buttonSize.height * scale / 2
 		);
 
 	return button;

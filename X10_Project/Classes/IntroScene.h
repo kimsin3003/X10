@@ -1,4 +1,5 @@
 #pragma once
+
 class IntroScene : public Layer
 {
 public:
@@ -6,10 +7,8 @@ public:
 	CREATE_FUNC(IntroScene);
 	bool init();
 
-	void Text1(Ref* pSender);
-	void Text2(Ref* pSender);
-	void RemoveAllChildren(Ref* pSender);
-	void ChangeToStageScene(Ref* pSender);
 private:
-	void PrintIntroText(const string& message, const Vec2& pos, float startTime, float textScale);
+	void PlaySoundEffect(const char* fileName);
+	void PlayExplosion(const Vec2& pos);
+	void ChangeToStageScene();
 };

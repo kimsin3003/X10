@@ -289,7 +289,6 @@ MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
 	return character;
 }
 
-
 void StageScene::EndingEvent(float dt)
 {
 	Sequence* seq = Sequence::create(

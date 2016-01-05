@@ -14,7 +14,6 @@ bool Enemy::init()
 	m_spr = Sprite::create(FileStuff::ENEMY);
 	addChild(m_spr);
 
-
 	int frameCut = DESTRUCT_FRAMES;
 	float frameTime = 0.1f;
 

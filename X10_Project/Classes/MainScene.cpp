@@ -204,8 +204,7 @@ void MainScene::ChangeToStageScene()
 
 	if (stageToPlay == 0)
 	{
-		Scene* introscene = IntroScene::createScene();
-		Director::getInstance()->replaceScene(TransitionSlideInT::create(1.5f, introscene));
+		Director::getInstance()->replaceScene(IntroScene::createScene());
 	}
 	else
 	{
@@ -226,7 +225,7 @@ void MainScene::SetToEnding()
 
 void MainScene::SetToIntro()
 {
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
 }
 

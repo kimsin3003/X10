@@ -72,8 +72,6 @@ bool CreditScene::init()
 	credit->addChild(createSentence("HY Nam", 20));
 	credit->addChild(createSentence(" ", 20));
 
-	credit->addChild(createSentence("Secdrip", 15));
-	credit->addChild(createSentence("JW Choi - Eumlan Magui", 20));
 	credit->addChild(createSentence("Game programming", 15));
 	credit->addChild(createSentence("TW Kim, MC Kim, JW Choi", 20));
 	credit->addChild(createSentence("Art work", 15));

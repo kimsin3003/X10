@@ -308,6 +308,7 @@ void StageScene::SetupLight()
 void StageScene::EndingEvent(float dt)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND);
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.3f),

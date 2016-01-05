@@ -40,7 +40,7 @@ bool EndingScene::init()
 	DelayTime::create(3.0f),
 
 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowHospital, this)),
-	DelayTime::create(27.0f),
+	DelayTime::create(29.0f),
 
 	CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeToCreditScene, this)),
 

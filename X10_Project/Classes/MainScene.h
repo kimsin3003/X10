@@ -8,6 +8,7 @@ public:
     CREATE_FUNC(MainScene);
 
 private:
+	void ChangeToCreditScene();
 	void ChangeToStageScene();
 	void ChangeToMapEditScene();
 	void ExitGame();

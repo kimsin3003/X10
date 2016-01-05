@@ -166,7 +166,6 @@ void EndingScene::ShowHospital()
 		nullptr)
 		);
 
-
 	Sequence* standing = Sequence::create(
 		DelayTime::create(12.0f),
 		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::HOSPITAL_OPEN_EYE)),
@@ -208,7 +207,6 @@ void EndingScene::ShowWhiteScene()
 	white->setScale(scale);
 	addChild(white);
 }
-
 
 void EndingScene::RemoveAllChildren(Ref* pSender)
 {

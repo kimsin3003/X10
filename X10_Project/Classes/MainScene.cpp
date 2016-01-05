@@ -28,6 +28,9 @@ bool MainScene::init()
 	{
 		return false;
 	}
+
+	setPosition(0, -20);
+
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MAIN_BACKGROUND, true);
 
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
@@ -35,7 +38,7 @@ bool MainScene::init()
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
 
 	m_streetLight = Sprite::create(FileStuff::GARO_OFF);
-	m_streetLight->setPosition(Vec2(240, 360));
+	m_streetLight->setPosition(Vec2(260, 360));
 	m_streetLight->setOpacity(40);
 	m_streetLight->setFlipX(true);
 	m_streetLight->setAnchorPoint(Vec2(0.5f, 0.5f));
@@ -64,10 +67,6 @@ bool MainScene::init()
 
 	menuItems.pushBack(character); 
 
-	Sprite* title = Sprite::create(FileStuff::TITLE);
-	title->setPosition(visibleSize.width / 2, visibleSize.height - character->getContentSize().height - title->getContentSize().height);
-
-	addChild(title);
 #ifdef _DEBUG
 	/* MapEditer Button */
  	MenuItemLabel* mapEditer = MenuItemLabel::create(Label::create("MapEditer", "res/NanumGothic.ttf", 20), 
@@ -123,18 +122,18 @@ void MainScene::WalkToStreetLight()
 	addChild(m_character, 2);
 
 	m_character->setPosition(80, 120);
-	m_character->runAction(MoveTo::create(3.0f, m_streetLight->getPosition() + Vec2(-40, -45)));
+	m_character->runAction(MoveTo::create(2.5f, m_streetLight->getPosition() + Vec2(-40, -45)));
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP, false, 2.0f);
 
-	m_streetLight->runAction(FadeIn::create(7.0f));
+	m_streetLight->runAction(FadeIn::create(3.0f));
 
 	Sequence* seq = Sequence::create(
-		DelayTime::create(4.0f),
+		DelayTime::create(3.5f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
 		DelayTime::create(3.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
-		DelayTime::create(2.0f),
+		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::ChangeToStageScene, this)),
 		nullptr);
 
@@ -191,11 +190,17 @@ void MainScene::BrightenStreetLight()
 	light_beam->setPosition(Vec2(-7.0f, -10.0f));
 	light_beam->setAnchorPoint(Vec2(0, 0));
 
-	Sprite* fireWorks = Sprite::create(FileStuff::MAIN_BULLET);
-	fireWorks->setPosition(25, 20);
-	light_beam->addChild(fireWorks);
+	Sprite* fireworks = Sprite::create(FileStuff::MAIN_BULLET);
+	fireworks->setPosition(25, 20);
+	light_beam->addChild(fireworks);
 
 	m_streetLight->addChild(light_beam, -1);
+
+	Sprite* title = Sprite::create(FileStuff::TITLE);
+	title->setPosition(light_beam->getPosition() + Vec2(-100, +120));
+	title->setScale(1.0f);
+	
+	light_beam->addChild(title);
 }
 
 void MainScene::ChangeToStageScene()

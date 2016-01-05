@@ -121,6 +121,7 @@ void Sling::PullStart(Event* e)
 
 	Sprite* range = Sprite::create(FileStuff::SLING_RANGE);
 	range->setAnchorPoint(Vec2(0.5f, 0));
+	range->setScale(1.3f);
 	range->setName("range");
 	addChild(range, 0);
 

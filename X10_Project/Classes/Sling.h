@@ -42,7 +42,7 @@ public:
 		DOTNUM_OF_LINE = 10
 	};
 	const Point SLING_POSITION = Point(200, 84);
-	const float DEFAULT_ARM = 0.f;
+	const float DEFAULT_ARM = 0.0f;
 	const float SLING_SCALE = 1.0f;
 
 private: 

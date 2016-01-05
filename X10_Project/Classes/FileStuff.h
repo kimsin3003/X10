@@ -123,7 +123,7 @@ namespace FileStuff
 
 	extern const char* SOUND_MAIN_BACKGROUND;
 	extern const char* SOUND_INITIAL_BACKGROUND;
-	extern const char* SOUND_MIDDLE_PHASE_BACKGROUND;
+	extern const char* SOUND_MID_PHASE_BACKGROUND;
 	extern const char* SOUND_BEFORE_ENDING_BACKGROUND; 
 	extern const char* SOUND_ENDING_BACKGROUND;
 

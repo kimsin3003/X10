@@ -357,7 +357,7 @@ MenuItemImage* StageScene::MakeBackButton()
 {
 	MenuItemImage* button = MenuItemImage::create(
 		FileStuff::PAUSEBUTTON,
-		FileStuff::PAUSEBUTTON,
+		FileStuff::PAUSEBUTTON_CLICKED,
 		CC_CALLBACK_1(StageScene::ChangeToMainScene, this));
 
 	Size buttonSize = button->getContentSize();

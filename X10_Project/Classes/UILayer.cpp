@@ -21,7 +21,7 @@ bool UILayer::init()
 
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
-		FileStuff::RETRYBUTTON,
+		FileStuff::RETRYBUTTON_CLICKED,
 		CC_CALLBACK_1(UILayer::GotoStage, this, UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE)));
 
 	Size buttonSize = retryButton->getContentSize();
@@ -36,7 +36,7 @@ bool UILayer::init()
 
 	MenuItemImage* backButton = MenuItemImage::create(
 								FileStuff::PAUSEBUTTON,
-								FileStuff::PAUSEBUTTON,
+								FileStuff::PAUSEBUTTON_CLICKED,
 								CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 	
 	backButton->setScale(scale);
@@ -64,7 +64,7 @@ void UILayer::MakeSuccessWidget(int stage)
 	int current_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
-		FileStuff::RETRYBUTTON,
+		FileStuff::RETRYBUTTON_CLICKED,
 		CC_CALLBACK_1(UILayer::GotoStage, this, current_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -79,7 +79,7 @@ void UILayer::MakeSuccessWidget(int stage)
 	//다음 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
 		FileStuff::NEXTBUTTON,
-		FileStuff::NEXTBUTTON,
+		FileStuff::NEXTBUTTON_CLICKED,
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();
@@ -111,7 +111,7 @@ void UILayer::MakeFailWidget(int stage)
 	int current_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
-		FileStuff::RETRYBUTTON,
+		FileStuff::RETRYBUTTON_CLICKED,
 		CC_CALLBACK_1(UILayer::GotoStage, this, current_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
@@ -126,7 +126,7 @@ void UILayer::MakeFailWidget(int stage)
 	//스테이지 선택화면 버튼
 	MenuItemImage* stageSceneButton = MenuItemImage::create(
 		FileStuff::BACKBUTTON,
-		FileStuff::BACKBUTTON,
+		FileStuff::BACKBUTTON_CLICKED,
 		CC_CALLBACK_1(UILayer::ChangeToStageScene, this));
 
 	Size stageSceneButtonSize = stageSceneButton->getContentSize();

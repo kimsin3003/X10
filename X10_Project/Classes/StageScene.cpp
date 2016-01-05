@@ -75,7 +75,7 @@ void StageScene::SetupCharacter()
 	MenuItemImage* menuItem = MenuItemImage::create();
 	menuItem->setNormalImage(
 		Sprite::createWithSpriteFrame(
-		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_CACHE)
 		)
 	);
 

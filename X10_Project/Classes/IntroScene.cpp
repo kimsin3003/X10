@@ -31,7 +31,7 @@ bool IntroScene::init()
 	background->setScale(scale);
 	addChild(background, 0);
 
-	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_CACHE);
 	character->setPosition(Point(200, 84));
 	addChild(character, 2);
 

@@ -49,22 +49,22 @@ bool MapEditer::init()
 	_eventDispatcher->addEventListenerWithSceneGraphPriority(keyboardListener, this);
 	m_pressedKey = static_cast<EventKeyboard::KeyCode>(-1);
 
-	MenuItemLabel* saveButton = MenuItemLabel::create(Label::create("Save", "res/NanumGothic.ttf", 20));
+	MenuItemLabel* saveButton = MenuItemLabel::create(Label::create("Save", FileStuff::FONT_ARIAL, 20));
 	saveButton->setPosition(170, 10);
 	saveButton->setName("saveButton");
 	this->addChild(saveButton);
 
-	MenuItemLabel* playButton = MenuItemLabel::create(Label::create("Play", "res/NanumGothic.ttf", 20));
+	MenuItemLabel* playButton = MenuItemLabel::create(Label::create("Play", FileStuff::FONT_ARIAL, 20));
 	playButton->setPosition(220, 10);
 	playButton->setName("playButton");
 	this->addChild(playButton);
 
-	MenuItemLabel* backButton = MenuItemLabel::create(Label::create("Back", "res/NanumGothic.ttf", 20));
+	MenuItemLabel* backButton = MenuItemLabel::create(Label::create("Back", FileStuff::FONT_ARIAL, 20));
 	backButton->setPosition(270, 10);
 	backButton->setName("backButton");
 	this->addChild(backButton);
 
-	MenuItemLabel* warning = MenuItemLabel::create(Label::create("If complete making level\nCHANGE FILE NAME", "res/NanumGothic.ttf", 15));
+	MenuItemLabel* warning = MenuItemLabel::create(Label::create("If complete making level\nCHANGE FILE NAME", FileStuff::FONT_ARIAL, 15));
 	warning->setPosition(200, 40);
 	warning->setName("warning");
 	this->addChild(warning);
@@ -103,7 +103,7 @@ bool MapEditer::init()
 				break;
 
 			case TargetInfo::STAR:
-				sprite = Sprite::create(FileStuff::STAR_SAD);
+				sprite = Sprite::create(FileStuff::BRICK);
 				break;
 			default:
 				sprite = Sprite::create(FileStuff::ENEMY); //default sprite
@@ -196,7 +196,7 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 		break;
 
 	case EventKeyboard::KeyCode::KEY_S:
-		sprite = Sprite::create(FileStuff::STAR_SAD);
+		sprite = Sprite::create(FileStuff::BRICK);
 		sprite->setTag(TargetInfo::STAR);
 		break;
 	}

@@ -88,9 +88,10 @@ namespace FileStuff
 	const string GARO_ON = "res/ui/garo_on.png";
 	const string LIGHT_BEAM = "res/ui/lightbeam.png";
 	
-	const string BEFORE_CRASHING_0 = "res/bg/riding.jpg";
-	const string BEFORE_CRASHING_1 = "res/bg/seeing_people.jpg";
-	const string BEFORE_CRASHING_2 = "res/bg/turning_handle.jpg";
+	const string BEFORE_CRASHING_0 = "res/bg/nodding.jpg";
+	const string BEFORE_CRASHING_1 = "res/bg/riding.jpg";
+	const string BEFORE_CRASHING_2 = "res/bg/seeing_people.jpg";
+	const string BEFORE_CRASHING_3 = "res/bg/turning_handle.jpg";
 	const string BLACKOUT = "res/bg/blackout.jpg";
 
 	const string MONITOR = "res/object/monitor.png";

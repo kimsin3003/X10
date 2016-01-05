@@ -10,6 +10,8 @@ private:
 	void ShowCrashingScene();
 	void ChangeSoundEffect(const char* sound);
 	void ChangeBackgroundImg(string bgImg);
+	void AddMonitor();
+	void FadeOut();
 	void ShowAfterCrash();
 	void ShowHospital();
 	void ShowWhiteScene();

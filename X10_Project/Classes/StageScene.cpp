@@ -60,6 +60,11 @@ bool StageScene::init()
 		return true;
 	}
 
+	MenuItemImage* backButton = MakeBackButton();
+	Menu* menu = Menu::create(backButton, nullptr);
+	addChild(menu);
+
+
 	SetBGM();
 	SetupLight();
 	SetupCharacter();
@@ -67,34 +72,91 @@ bool StageScene::init()
 	return true;
 }
 
-void StageScene::SetupCharacter()
-{
-	Vector<MenuItem*> menuList;
 
-	MenuItemImage* backButton = MakeBackButton();
-	menuList.pushBack(backButton);
-	
-	MenuItemImage* menuItem = MenuItemImage::create();
-	menuItem->setNormalImage(
+void StageScene::ChangeCharacterToButton(Point startPos)
+{
+
+	MenuItemImage* character = MenuItemImage::create();
+	character->setNormalImage(
 		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
 		)
 	);
 
-	menuItem->setSelectedImage(
+	character->setSelectedImage(
 		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_SELECTED)
 		)
 	);
 
-	menuItem->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
-	
-	menuItem = MoveCharacter(menuItem, m_stageToPlay);
+	character->setCallback(CC_CALLBACK_0(StageScene::GotoStage, this, m_stageToPlay));
 
-	menuList.pushBack(menuItem);
-	Menu* menu = Menu::createWithArray(menuList);
-	menu->setPosition(Vec2::ZERO);
+	Menu* menu = Menu::create(character);
+	menu->setPosition(startPos);
 	addChild(menu);
+
+}
+
+void StageScene::MoveCharacter(Sprite* character, int stageNum)
+{
+	//애니매이션 및 사운드 재생하는 부분
+	Point finishPos = GetCharacterPosition(stageNum);
+	Point startPos = GetCharacterPosition(m_stageToPlay - 1);
+	Size screenSize = Director::getInstance()->getVisibleSize();
+	float startScale = character->getScale()* (1 - startPos.y / (screenSize.height * 1.5));
+	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 1.5));
+	float timeLength = 2.0f;
+	float standingTime = 2.0f;
+	if (stageNum == 1)
+	{
+		standingTime = 0.1f;
+	}
+
+	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+	if (last_played_stage != m_stageToPlay)
+	{
+		//소리
+		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
+
+		//이동
+		character->setPosition(startPos);
+		character->runAction(Sequence::create(
+			DelayTime::create(standingTime), 
+			MoveTo::create(timeLength, finishPos), 
+			CallFunc::create(CC_CALLBACK_0(StageScene::ChangeCharacterToButton, this, finishPos)),
+			RemoveSelf::create(),
+			nullptr
+			)
+		);
+
+		//크기변화
+		character->setScale(startScale);
+		ScaleTo* scaleAction = ScaleTo::create(timeLength, finishScale);
+		character->runAction(Sequence::create(
+			DelayTime::create(standingTime),
+			ScaleTo::create(timeLength, finishScale),
+			nullptr)
+		);
+
+		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, m_stageToPlay);
+	}
+	else
+	{
+		character->setPosition(finishPos);
+		character->setScale(startScale);
+	}
+
+}
+
+
+void StageScene::SetupCharacter()
+{
+
+	Sprite* character = Sprite::createWithSpriteFrame(
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
+		);
+	MoveCharacter(character, m_stageToPlay);
+
 }
 
 Point StageScene::GetCharacterPosition(int stage)
@@ -236,58 +298,6 @@ void StageScene::SetupLight()
 	}
 }
 
-//Sprite* StageScene::LoadCharacter()
-//{
-//	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_STANDING);
-//	character->setPosition(Sling::create()->SLING_POSITION - Point(0, 15));
-//
-//	return character;
-//}
-
-MenuItemImage* StageScene::MoveCharacter(MenuItemImage* character, int stageNum)
-{
-	//애니매이션 및 사운드 재생하는 부분
-	Point finishPos = GetCharacterPosition(stageNum);
-	Point startPos = GetCharacterPosition(m_stageToPlay - 1);
-	Size screenSize = Director::getInstance()->getVisibleSize();
-	float startScale = character->getScale()* (1 - startPos.y / (screenSize.height * 1.5));
-	float finishScale = character->getScale() * (1 - finishPos.y / (screenSize.height * 1.5));
-	float timeLength = 2.0f;
-	float standingTime = 2.0f;
-	if (stageNum == 1)
-	{
-		standingTime = 0.1f;
-	}
-	
-	int last_played_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
-	if (last_played_stage != m_stageToPlay)
-	{
-		//소리
-		int stepsound = CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_FOOTSTEP);
-
-		//이동
-		character->setPosition(startPos);
-		DelayTime* delay = DelayTime::create(standingTime); //잠시 멈춰 있다가
-		MoveTo* move = MoveTo::create(timeLength, finishPos);
-		Sequence* action = Sequence::create(delay, move, NULL);
-		character->runAction(action);
-
-		//크기변화
-		character->setScale(startScale);
-		ScaleTo* scaleAction = ScaleTo::create(timeLength, finishScale);
-		Sequence* delayAndScale = Sequence::create(delay, scaleAction, NULL);
-		character->runAction(delayAndScale);
-
-		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, m_stageToPlay);
-	}
-	else
-	{
-		character->setPosition(finishPos);
-		character->setScale(startScale);
-	}
-
-	return character;
-}
 
 void StageScene::EndingEvent(float dt)
 {

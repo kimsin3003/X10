@@ -12,5 +12,4 @@ public:
 	void ChangeToStageScene(Ref* pSender);
 private:
 	void PrintIntroText(const string& message, const Vec2& pos, float startTime, float textScale);
-
 };

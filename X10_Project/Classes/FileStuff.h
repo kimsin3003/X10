@@ -13,6 +13,7 @@ namespace FileStuff
 	const string CHARACTER_STANDING = "black_man.png";
 	const string CHARACTER_ARM = "black_man_arm.png";
 	const string SLING_LINE_DOT = "res/dot.png";
+	const string SLING_RANGE = "res/ui/range.png";
 
 	const string BUBBLE = "res/target/Bubble2.png";
 	const string BUBBLE_POP = "res/target/BubblePop.png";
@@ -57,9 +58,9 @@ namespace FileStuff
 	const string STAGE_BACKGROUND_10 = "res/highway/highway10.png";
 	const string STAGE_BACKGROUND_11 = "res/highway/highway11.png";
 	const string STAGE_BACKGROUND_12 = "res/highway/highway12.png";
-	const string STAGE_BACKGROUND_13ON = "res/highway/highway13ON.png";
-	const string STAGE_BACKGROUND_13OFF = "res/highway/highway13OFF.png";
-	const string STAGE_BACKGROUND_13APP = "res/highway/highway13APPEAR.png";
+	const string STAGE_BACKGROUND_13ON = "res/highway/highway13ON1.png";
+	const string STAGE_BACKGROUND_13OFF = "res/highway/highway13OFF1.png";
+	const string STAGE_BACKGROUND_13APP = "res/highway/highway13APPEAR1.png";
 	const string WHITE = "res/highway/White.png";
 
 	const string STAGE_LIGHTS_LEFT_01 = "res/lights/left1.png";

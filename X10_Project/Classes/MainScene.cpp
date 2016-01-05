@@ -52,7 +52,7 @@ bool MainScene::init()
 
 	character->setNormalImage(
 		Sprite::createWithSpriteFrame(
-		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_STANDING)
+		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_CACHE)
 		));
 	
 	character->setSelectedImage(
@@ -118,7 +118,7 @@ void MainScene::WalkToStreetLight()
 {
 	removeChildByName("Buttons");
 
-	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_CACHE);
 	addChild(m_character, 2);
 
 	m_character->setPosition(80, 120);

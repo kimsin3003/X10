@@ -95,7 +95,7 @@ Point Sling::GetStartLocation()
 
 Sprite* Sling::LoadCharacter()
 {
-	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	Sprite* character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_CACHE);
 	character->setPosition(Vec2::ZERO);
 	return character;
 }
@@ -212,7 +212,7 @@ void Sling::Shot(Event* e)
 	gm->ShotBullet();
 
 	m_character->removeFromParent();
-	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_HARDPIXEL);
+	m_character = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_CACHE);
 	addChild(m_character, 2);
 }
 

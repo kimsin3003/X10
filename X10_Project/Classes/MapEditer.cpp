@@ -103,7 +103,7 @@ bool MapEditer::init()
 				break;
 
 			case TargetInfo::STAR:
-				sprite = Sprite::create(FileStuff::STAR_SAD);
+				sprite = Sprite::create(FileStuff::BRICK);
 				break;
 			default:
 				sprite = Sprite::create(FileStuff::ENEMY); //default sprite
@@ -196,7 +196,7 @@ void MapEditer::LeftMouseDown(EventMouse* event)
 		break;
 
 	case EventKeyboard::KeyCode::KEY_S:
-		sprite = Sprite::create(FileStuff::STAR_SAD);
+		sprite = Sprite::create(FileStuff::BRICK);
 		sprite->setTag(TargetInfo::STAR);
 		break;
 	}

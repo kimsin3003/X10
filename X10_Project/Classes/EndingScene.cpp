@@ -4,6 +4,7 @@
 #include "FileStuff.h"
 #include "StageScene.h"
 #include "SimpleAudioEngine.h"
+#include "CreditScene.h"
 
 Scene* EndingScene::createScene()
 {
@@ -23,7 +24,7 @@ bool EndingScene::init()
 		return false;
 	}
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
 	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FileStuff::SOUND_ENDING_BACKGROUND);
 
 	Sequence* seq = Sequence::create(
@@ -39,7 +40,10 @@ bool EndingScene::init()
 	DelayTime::create(3.0f),
 
 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowHospital, this)),
-	
+	DelayTime::create(29.0f),
+
+	CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeToCreditScene, this)),
+
 	nullptr);
 
 	runAction(seq);
@@ -218,4 +222,9 @@ void EndingScene::ShowWhiteScene()
 void EndingScene::RemoveAllChildren()
 {
 	removeAllChildren();
+}
+
+void EndingScene::ChangeToCreditScene()
+{
+	Director::getInstance()->replaceScene(CreditScene::createScene());
 }

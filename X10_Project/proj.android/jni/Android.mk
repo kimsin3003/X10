@@ -12,7 +12,35 @@ LOCAL_MODULE_FILENAME := libcocos2dcpp
 
 LOCAL_SRC_FILES := hellocpp/main.cpp \
                    ../../Classes/AppDelegate.cpp \
-                   ../../Classes/HelloWorldScene.cpp
+                   ../../Classes/Bubble.cpp \
+                   ../../Classes/Bullet.cpp \
+                   ../../Classes/ColliderManager.cpp \
+                   ../../Classes/ConstVars.cpp \
+                   ../../Classes/cppson.cpp \
+                   ../../Classes/CreditScene.cpp \
+                   ../../Classes/EndingScene.cpp \
+                   ../../Classes/Enemy.cpp \
+                   ../../Classes/Explosion.cpp \
+                   ../../Classes/FileStuff.cpp \
+                   ../../Classes/GameLayer.cpp \
+                   ../../Classes/GameManager.cpp \
+                   ../../Classes/GameScene.cpp \
+                   ../../Classes/IntroScene.cpp \
+                   ../../Classes/jsoncpp.cpp \
+                   ../../Classes/LightMangager.cpp \
+                   ../../Classes/MainScene.cpp\
+                   ../../Classes/MapEditer.cpp\
+                   ../../Classes/MapEditLayer.cpp\
+                   ../../Classes/Mirror.cpp\
+                   ../../Classes/Sling.cpp\
+                   ../../Classes/StageInformation.cpp\
+                   ../../Classes/StageScene.cpp\
+                   ../../Classes/stdafx.cpp\
+                   ../../Classes/Stone.cpp\
+                   ../../Classes/Target.cpp\
+                   ../../Classes/Targetmanager.cpp\
+                   ../../Classes/UILayer.cpp\
+                   ../../Classes/Virtical_Mirror.cpp
 
 LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 
@@ -20,7 +48,8 @@ LOCAL_C_INCLUDES := $(LOCAL_PATH)/../../Classes
 # _COCOS_HEADER_ANDROID_END
 
 
-LOCAL_STATIC_LIBRARIES := cocos2dx_static
+LOCAL_WHOLE_STATIC_LIBRARIES := cocos2dx_static
+LOCAL_WHOLE_STATIC_LIBRARIES += cocosdenshion_static
 
 # _COCOS_LIB_ANDROID_BEGIN
 # _COCOS_LIB_ANDROID_END

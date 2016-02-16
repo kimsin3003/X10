@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CPPSON_H
+#define CPPSON_H
+
 #include <string>
 #include <map>
 #include <sstream>
@@ -482,3 +484,5 @@ namespace cppson
 		return true;
 	}
 }
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COLLIDER_H
+#define COLLIDER_H
 
 class Collider : public Node
 {
@@ -12,3 +13,5 @@ protected:
 	bool m_isFlying;
 	bool m_toBeErased;
 };
+
+#endif

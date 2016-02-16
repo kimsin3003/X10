@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STONE_H
+#define STONE_H
 
 class Stone : public Target
 {
@@ -19,3 +20,5 @@ private:
 
 	Animate* m_animate;
 };
+
+#endif

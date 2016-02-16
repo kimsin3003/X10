@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BUBBLE_H
+#define BUBBLE_H
 
 class Bubble : public Target
 {
@@ -19,3 +20,6 @@ private:
 	
 	Animate* m_animate;
 };
+
+
+#endif

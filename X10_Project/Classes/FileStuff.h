@@ -1,4 +1,5 @@
-#pragma once
+#ifndef FILESTUFF_H
+#define FILESTUFF_H
 
 namespace FileStuff
 {
@@ -139,3 +140,5 @@ namespace FileStuff
 	extern const char* SOUND_CAR_CRASH;
 	extern const char* SOUND_CAR_BREAK;
 }
+
+#endif

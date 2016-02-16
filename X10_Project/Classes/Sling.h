@@ -1,4 +1,5 @@
-#pragma once
+#ifndef SLING_H
+#define SLING_H
 
 class Sling : public Node
 {
@@ -65,3 +66,5 @@ private:
 	Vector<Sprite*> m_expectLine;
 	Vector<Sprite*> m_beforeLine;
 };
+
+#endif

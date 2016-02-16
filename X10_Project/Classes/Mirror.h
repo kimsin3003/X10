@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MIRROR_H
+#define MIRROR_H
 
 class Mirror : public Target
 {
@@ -12,3 +13,5 @@ protected:
 	void ToSelf(const Bullet* bullet);
 	void ToSelf(const Explosion* explosion);
 };
+
+#endif

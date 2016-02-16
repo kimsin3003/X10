@@ -1,4 +1,5 @@
-#pragma once
+#ifndef BULLET_H
+#define BULLET_H
 
 #include "Collider.h"
 #include "Explosion.h"
@@ -76,3 +77,5 @@ protected:
 		BULLET_REDUCTION_SPEED_TIME = 3,
 	};
 };
+
+#endif

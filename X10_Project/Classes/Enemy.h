@@ -1,4 +1,5 @@
-#pragma once
+#ifndef ENEMY_H 
+#define ENEMY_H
 
 #include "Target.h"
 
@@ -22,3 +23,5 @@ protected:
 private:
 	Animate* m_destructAnimation;
 };
+
+#endif

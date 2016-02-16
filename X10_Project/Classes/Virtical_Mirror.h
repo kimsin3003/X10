@@ -1,4 +1,5 @@
-#pragma once
+#ifndef VMIRROR_H
+#define VMIRROR_H
 
 class Virtical_Mirror : public Target
 {
@@ -13,3 +14,4 @@ protected:
 	void ToSelf(const Explosion* explosion);
 };
 
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef INTROSCENE_H
+#define INTROSCENE_H
 
 class IntroScene : public Layer
 {
@@ -12,3 +13,5 @@ private:
 	void PlayExplosion(const Vec2& pos);
 	void ChangeToStageScene();
 };
+
+#endif

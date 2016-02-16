@@ -1,4 +1,5 @@
-#pragma once
+#ifndef STAGESCENE_H
+#define STAGESCENE_H
 
 class LightManager;
 
@@ -38,3 +39,5 @@ private:
 	int m_maxStageNum;
 	int m_stageToPlay;
 };
+
+#endif

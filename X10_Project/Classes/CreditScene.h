@@ -1,4 +1,6 @@
-#pragma once
+#ifndef CREDITSCENE_H
+#define CREDITSCENE_H
+
 class CreditScene : public Layer
 {
 public:
@@ -14,3 +16,4 @@ private:
 	void RemoveAllChildren();
 };
 
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TARGET_H
+#define TARGET_H
 
 class Bullet;
 class Explosion;
@@ -31,3 +32,5 @@ protected:
 	bool m_applyEffectToMe;
 	bool m_applyEffectToBullet;
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef CONST_H
+#define CONST_H
 
 namespace ConstVars
 {
@@ -6,3 +7,4 @@ namespace ConstVars
 	extern const char* LASTWALKSTAGE;
 }
 
+#endif

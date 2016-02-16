@@ -1,4 +1,6 @@
-#pragma once
+#ifndef GAMEMAN_H
+#define GAMEMAN_H
+
 #include "stdafx.h"
 class GameLayer;
 class UILayer;
@@ -54,3 +56,5 @@ private:
 
 	Vector<Sprite*> m_bulletNumUI;
 };
+
+#endif

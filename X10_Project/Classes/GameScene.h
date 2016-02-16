@@ -1,4 +1,5 @@
-#pragma once
+#ifndef GAMESCENE_H
+#define GAMESCENE_H
 
 class GameManager;
 class GameLayer;
@@ -22,3 +23,5 @@ private:
 	UILayer* m_uiLayer;
 	GameManager* m_gameManager;
 };
+
+#endif

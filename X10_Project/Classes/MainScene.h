@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MAINSCENE_H 
+#define MAINSCENE_H
 
 class MainScene : public Layer
 {
@@ -24,3 +25,5 @@ private:
 	Sprite* m_character;
 	Vec2 m_StreetLightPos;
 };
+
+#endif

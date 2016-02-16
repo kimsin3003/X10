@@ -1,4 +1,5 @@
-#pragma once
+#ifndef UILAYER_H
+#define UILAYER_H
 
 class UILayer : public Layer
 {
@@ -26,3 +27,5 @@ private:
 
 	Vector<Sprite*> m_bulletNumUI;
 };
+
+#endif

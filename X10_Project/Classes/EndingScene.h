@@ -1,4 +1,6 @@
-#pragma once
+#ifndef ENDING_H
+#define ENDING_H
+
 class EndingScene : public Layer
 {
 public:
@@ -22,3 +24,4 @@ private:
 	Sprite* m_background;
 };
 
+#endif

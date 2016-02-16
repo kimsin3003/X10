@@ -1,4 +1,5 @@
-#pragma once
+#ifndef COLLIMAN_H 
+#define COLLIMAN_H
 #include "Collider.h"
 class Target;
 class StageInformation;
@@ -26,3 +27,5 @@ private:
 	int m_crossNum;
 	friend class GameManager;
 };
+
+#endif

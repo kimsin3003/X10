@@ -1,4 +1,5 @@
-#pragma once
+#ifndef EXPLOSION_H 
+#define EXPLOSION_H 
 
 #include "Collider.h"
 
@@ -27,3 +28,5 @@ protected:
 		DEFAULT_RADIUS = 40
 	};
 };
+
+#endif

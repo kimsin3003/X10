@@ -1,4 +1,5 @@
-#pragma once
+#ifndef MAPEDITOR_H
+#define MAPEDITOR_H
 
 class MapEditer : public cocos2d::Layer
 {
@@ -23,3 +24,5 @@ private:
 	EventKeyboard::KeyCode m_pressedKey;
 	Node* m_clicked_sprite;
 };
+
+#endif

@@ -1,4 +1,5 @@
-#pragma once
+#ifndef TARGETMAN_H 
+#define TARGETMAN_H
 class Target;
 class GameManager;
 class StageInformation;
@@ -17,3 +18,5 @@ private:
 	int m_defaultTargetNumber;
 	friend class GameManager;
 };
+
+#endif

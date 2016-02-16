@@ -1,4 +1,6 @@
-#pragma once
+#ifndef STAGEINFO_H 
+#define STAGEINFO_H
+
 #include "cppson.h"
 #include "FileStuff.h"
 
@@ -71,3 +73,5 @@ private:
 };
 
 typedef TargetInfo::TargetType TargetType;
+
+#endif

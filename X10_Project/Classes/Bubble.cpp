@@ -24,8 +24,8 @@ bool Bubble::init()
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile("res/target/x10.plist");
 	for (int i = 0; i < frameCut; i++)
 	{
-		string stageNum = to_string(frameCut - i);
-		string aniFileName = FileStuff::BUBBLE_POP_ANI + stageNum + ".png";
+		string frameNum = to_string(frameCut - i);
+		string aniFileName = FileStuff::BUBBLE_POP_ANI + frameNum + ".png";
 
 		SpriteFrame* frame = SpriteFrameCache::getInstance()->getSpriteFrameByName(aniFileName);
 		animFrames.pushBack(frame);

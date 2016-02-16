@@ -3,6 +3,7 @@
 #include "Bubble.h"
 #include "FileStuff.h"
 #include <SimpleAudioEngine.h>
+#include <string>
 
 bool Bubble::init()
 {

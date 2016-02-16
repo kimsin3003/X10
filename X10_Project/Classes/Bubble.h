@@ -21,5 +21,4 @@ private:
 	Animate* m_animate;
 };
 
-
 #endif

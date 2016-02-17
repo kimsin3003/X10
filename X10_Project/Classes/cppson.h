@@ -73,6 +73,9 @@ Field_ ## name ## <type> name;
 namespace cppson
 {
 	template<typename T>
+	class Parsable;
+
+	template<typename T>
 	class JsonField
 	{
 	public:
@@ -136,7 +139,7 @@ namespace cppson
 		}
 
 		template<typename T,
-			typename = std::enable_if_t<std::is_enum<T>::value> >
+			typename std::enable_if<std::is_enum<T>::value>::type* = nullptr>
 			bool parse(T& val)
 		{
 			if (!isIntegral())
@@ -150,7 +153,7 @@ namespace cppson
 		}
 
 		template<typename T,
-			typename = std::enable_if_t<std::is_base_of<Parsable<T>, T>::value>,
+			typename std::enable_if<std::is_base_of<Parsable<T>, T>::value>::type* = nullptr,
 			typename = void>
 			bool parse(T& val)
 		{
@@ -196,7 +199,7 @@ namespace cppson
 			if (!isArray())
 				return false;
 
-			for (auto& v : arr)
+			for (auto& v : *this)
 			{
 				T p;
 				JsonValue& jsonVal = (JsonValue)v;
@@ -325,8 +328,8 @@ namespace cppson
 			return cppson::toJson(t, fileName);
 		}
 
-		using ReadMeta = std::map < std::string, std::function<bool(Type*, JsonValue&)> > ;
-		using WriteMeta = std::vector < std::function<std::string(const Type*)> > ;
+		using ReadMeta = std::map < std::string, std::function<bool(Type*, JsonValue&)> >;
+		using WriteMeta = std::vector < std::function<std::string(const Type*)> >;
 
 		static const ReadMeta& getReadMeta()
 		{
@@ -342,7 +345,6 @@ namespace cppson
 		static WriteMeta writeMeta;
 		static ReadMeta readMeta;
 	};
-
 
 	template<typename T>
 	bool loadFile(T& value, const std::string& fileName)
@@ -377,7 +379,7 @@ namespace cppson
 
 
 	template<typename T,
-		typename = std::enable_if_t<std::is_enum<T>::value> >
+		typename std::enable_if<std::is_enum<T>::value>::type* = nullptr>
 		std::string toJson(const T& value)
 	{
 		int v = static_cast<int>(value);
@@ -385,7 +387,7 @@ namespace cppson
 	}
 
 	template<typename T,
-		typename = std::enable_if_t<std::is_base_of<Parsable<T>, T>::value>,
+		typename std::enable_if<std::is_base_of<Parsable<T>, T>::value>::type* = nullptr ,
 		typename = void>
 		std::string toJson(const T& value)
 	{

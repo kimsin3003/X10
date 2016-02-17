@@ -1,5 +1,5 @@
 APP_STL := c++_static
-NDK_TOOLCHAIN := arm-linux-androideabi-clang3.5
+NDK_TOOLCHAIN := arm-linux-androideabi-clang3.6
 
 APP_CPPFLAGS := -frtti -DCC_ENABLE_CHIPMUNK_INTEGRATION=1 -std=c++11 -fsigned-char
 APP_LDFLAGS := -latomic

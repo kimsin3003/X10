@@ -1,8 +1,6 @@
 #ifndef LIGHTMAN_H
 #define LIGHTMAN_H
 
-#include "cocos2d/cocos/math/Vec2.h"
-
 class LightManager
 {
 public:

@@ -64,11 +64,12 @@ bool Sling::init()
 	m_character = LoadCharacter();
 	addChild(m_character, 2);
 
-	EventListenerMouse* mouseListener = EventListenerMouse::create();
-	mouseListener->onMouseUp = CC_CALLBACK_1(Sling::Shot, this);
-	mouseListener->onMouseDown = CC_CALLBACK_1(Sling::PullStart, this);
-	mouseListener->onMouseMove = CC_CALLBACK_1(Sling::Pull, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(mouseListener, this);
+	EventListenerTouchOneByOne* touchListener = EventListenerTouchOneByOne::create();
+ 	touchListener->setSwallowTouches(true);
+ 	touchListener->onTouchEnded = CC_CALLBACK_2(Sling::Shot, this);
+ 	touchListener->onTouchBegan = CC_CALLBACK_2(Sling::PullStart, this);
+ 	touchListener->onTouchMoved = CC_CALLBACK_2(Sling::Pull, this);
+ 	_eventDispatcher->addEventListenerWithSceneGraphPriority(touchListener, this);
 
 	return true;
 }
@@ -100,23 +101,22 @@ Sprite* Sling::LoadCharacter()
 	return character;
 }
 
-void Sling::PullStart(Event* e)
+bool Sling::PullStart(Touch* touch, Event* unused_event)
 {
 	if (m_status != STATUS::LOADED)
 	{
-		return;
+		return false;
 	}
 
 	/*Pull mouse 위치 거리 조건 설정 */
-	EventMouse* evMouse = static_cast<EventMouse*>(e);
-	Point mouseLocation = evMouse->getLocationInView();
+	Point touchLocation = touch->getLocationInView();
 	Point startLocation = GetStartLocation();
-	float distance = startLocation.getDistance(mouseLocation);
+	float distance = startLocation.getDistance(touchLocation);
 
 	
 	if (distance > CLICK_RANGE)
 	{
-		return;
+		return false;
 	}
 
 	Sprite* range = Sprite::create(FileStuff::SLING_RANGE);
@@ -131,22 +131,23 @@ void Sling::PullStart(Event* e)
 	addChild(m_character, 2);
 
 	ChangeToPulling();
-	Pull(e);
+	Pull(touch,unused_event);
+
+	return true;
 }
 
-void Sling::Pull(Event* e)
+void Sling::Pull(Touch* touch, Event* unused_event)
 {
 	if (m_status != STATUS::PULLING)
 	{
 		return;
 	}
 
-	EventMouse* evMouse = static_cast<EventMouse*>(e);
-	Point mouseLocation = evMouse->getLocationInView();
+	Point touchLocation = touch->getLocationInView();
 	Point startLocation = GetStartLocation();
 	
-	m_shotPower = startLocation.getDistance(mouseLocation);
-	m_shotAngle = (mouseLocation - startLocation) / m_shotPower;
+	m_shotPower = startLocation.getDistance(touchLocation);
+	m_shotAngle = (touchLocation - startLocation) / m_shotPower;
 	
 	//power가 일정 이상이면 max로 고정
 	if (m_shotPower > MAX_POWER)
@@ -173,7 +174,7 @@ void Sling::Pull(Event* e)
 }
 
 
-void Sling::Shot(Event* e)
+void Sling::Shot(Touch* touch, Event* unused_event)
 {
 	if (m_status != STATUS::PULLING)
 	{
@@ -195,7 +196,7 @@ void Sling::Shot(Event* e)
 	}
 
 	//fix shot angle,power from last pointer position.
-	Pull(e);
+	Pull(touch,unused_event);
 
 	/*Set Position before line */
 	for (int i = 0; i < m_beforeLine.size(); i++)

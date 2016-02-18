@@ -84,7 +84,7 @@ bool MapEditer::init()
 		{
 			Sprite* sprite = nullptr;
 			Point point;
-			switch (targetInfo.m_name.get())
+			switch (targetInfo.m_name)
 			{
 			case TargetInfo::BUBBLE:
 				sprite = Sprite::create(FileStuff::BUBBLE);
@@ -109,12 +109,12 @@ bool MapEditer::init()
 				sprite = Sprite::create(FileStuff::ENEMY); //default sprite
 			}
 
-			sprite->setTag(targetInfo.m_name.get());
-			point = Point(targetInfo.m_position.get().x.get(), targetInfo.m_position.get().y.get());
+			sprite->setTag(targetInfo.m_name);
+			point = Point(targetInfo.m_position.x, targetInfo.m_position.y);
 			sprite->setPosition(point);
-			sprite->setRotation(targetInfo.m_rotation.get());
-			sprite->setScaleX(targetInfo.m_scale.get().x.get());
-			sprite->setScaleY(targetInfo.m_scale.get().y.get());
+			sprite->setRotation(targetInfo.m_rotation);
+			sprite->setScaleX(targetInfo.m_scale.x);
+			sprite->setScaleY(targetInfo.m_scale.y);
 			
 			if (sprite)
 			{

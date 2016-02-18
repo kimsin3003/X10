@@ -12,6 +12,8 @@
 #ifndef OUT
 #define OUT
 #endif
+
+/*
 #define JSON_CLASS(name) class name final : public cppson::Parsable<name>
 
 #define FIELD(type, name) \
@@ -486,5 +488,5 @@ namespace cppson
 		return true;
 	}
 }
-
+*/
 #endif

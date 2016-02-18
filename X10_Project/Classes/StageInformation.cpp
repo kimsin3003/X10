@@ -5,6 +5,22 @@
 #include <string>
 #include <json/json.h>
 
+bool cppson::loadFile(vector<TargetInfo> infoList, string fileName)
+{
+	return true;
+}
+
+bool cppson::loadFile(vector<string> bulletList, string fileName)
+{
+	return true;
+}
+
+bool cppson::toJson(vector<TargetInfo> infoList, string fileName)
+{
+	return true;
+}
+
+
 StageInformation::StageInformation(int stage) : 
 m_currentTargetIndex(0), m_currentBulletIndex(0),
 m_currentTarget(), m_currentBullet()
@@ -83,7 +99,7 @@ float StageInformation::GetTargetRotation()
 
 float StageInformation::GetTargetScale()
 {
-	return (m_currentTarget.m_scale->x +m_currentTarget.m_scale->y)/2;
+	return (m_currentTarget.m_scale.x +m_currentTarget.m_scale.y)/2;
 }
 
 bool StageInformation::HasNextBullet() //더 넘길 불렛이 있는지 검사
@@ -114,18 +130,18 @@ bool StageInformation::MakeJsonFileFromLayer(Layer* layer, const string& fileNam
 	{
 		TargetInfo targetInfo;
 		
-		targetInfo.m_name.set(static_cast<TargetType>(child->getTag()));
-		targetInfo.m_rotation.set(child->getRotation());
+		targetInfo.m_name = static_cast<TargetType>(child->getTag());
+		targetInfo.m_rotation = child->getRotation();
 		TargetPoint scale;
-		scale.x.set(child->getScaleY());
-		scale.y.set(child->getScaleY());
+		scale.x = child->getScaleY();
+		scale.y = child->getScaleY();
 
-		targetInfo.m_scale.set(scale);
+		targetInfo.m_scale = scale;
 		
 		TargetPoint position;
-		position.x.set(child->getPositionX());
-		position.y.set(child->getPositionY());
-		targetInfo.m_position.set(position);
+		position.x = child->getPositionX();
+		position.y = child->getPositionY();
+		targetInfo.m_position = position;
 
 		m_targetInfoList.push_back(targetInfo);
 	}

@@ -7,7 +7,6 @@
 //Stage Information
 #include "StageInformation.h"
 #include <unordered_map>
-using namespace stdext;
 
 void ColliderManager::InitBullets(StageInformation* si)
 {

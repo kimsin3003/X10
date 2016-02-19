@@ -5,6 +5,7 @@
 #include <string>
 #include <json/json.h>
 
+
 bool cppson::loadFile(vector<TargetInfo> infoList, string fileName)
 {
 	return true;

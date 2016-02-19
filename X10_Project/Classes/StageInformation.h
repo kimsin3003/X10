@@ -2,6 +2,7 @@
 #define STAGEINFO_H
 
 #include "FileStuff.h"
+typedef int TargetType;
 
 struct TargetPoint
 {
@@ -27,26 +28,25 @@ struct TargetPoint
 struct TargetInfo //정보 묶음용 inner struct
 {
 public:
-	enum TargetType
-	{
-		ENEMY,
-		MIRROR,
-		VIRTICAL_MIRROR,
-		CLOUD,
-		BUBBLE,
-		STAR,
-		GULL
-	};
+	static const int	ENEMY = 0;
+	static const int	MIRROR = 1;
+	static const int	VIRTICAL_MIRROR = 2;
+	static const int	CLOUD = 3;
+	static const int	BUBBLE = 4;
+	static const int	STAR = 5;
+	static const int	GULL = 6;
 	
 	TargetType m_name;
 	TargetPoint m_position;
 	TargetPoint m_scale;
 	float m_rotation;
 	
-	TargetInfo() : TargetInfo(TargetType::ENEMY, TargetPoint()) {}
-	TargetInfo(TargetType name, TargetPoint p, float r = 0.0f, float scalex = 1.0f, float scaley = 1.0f)
+	TargetInfo() : TargetInfo( ENEMY, TargetPoint()) {}
+	TargetInfo(TargetType name, TargetPoint p, float r = 0.0f, 
+		float scalex = 1.0f, float scaley = 1.0f)
 		: m_name(name), m_position(p), m_rotation(r), m_scale(TargetPoint(scalex, scaley))
 	{}
+
 	~TargetInfo(){}
 	
 };
@@ -60,7 +60,7 @@ public:
 	int GetBulletCount();//총 불렛 수를 반환
 	
 	bool HasNextTarget(); // 더 넘길 타겟이 있는지 검사
-	TargetInfo::TargetType GetTargetType(); //타겟의 타입을 반환
+	TargetType GetTargetType(); //타겟의 타입을 반환
 	Point GetTargetPosition(); //타겟 위치 반환
 	float GetTargetRotation(); //타겟 돌아간 정도 반환
 	float GetTargetScale(); //타겟 스케일 반환
@@ -89,8 +89,6 @@ struct cppson
 	static bool loadFile(vector<string> bulletList, string fileName);
 	static bool toJson(vector<TargetInfo> infoList, string fileName);
 };
-
-typedef TargetInfo::TargetType TargetType;
 
 //
 //JSON_CLASS(TargetPoint)

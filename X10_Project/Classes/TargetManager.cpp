@@ -1,4 +1,5 @@
 #include "stdafx.h"
+#include "StageInformation.h"
 #include "TargetManager.h"
 //Targets
 #include "Enemy.h"
@@ -7,7 +8,6 @@
 #include "Bubble.h"
 #include "Stone.h"
 //Stage Information
-#include "StageInformation.h"
 #include <unordered_map>
 #include <functional>
 
@@ -19,7 +19,6 @@ void TargetManager::InitTargets(StageInformation* si)
 	m_targets.reserve(m_defaultTargetNumber);
 
 	//각각의 클래스에 맞는 함수포인터를 Target* 반환 형태로 unordered_map에 저장
-	typedef TargetInfo::TargetType TargetType;
 	typedef unordered_map<TargetType,std::function<Target*()>>  TargetInfoMap;
 	TargetInfoMap targetTypeInfo;
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::ENEMY, Enemy::create));

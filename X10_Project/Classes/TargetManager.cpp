@@ -19,7 +19,7 @@ void TargetManager::InitTargets(StageInformation* si)
 	m_targets.reserve(m_defaultTargetNumber);
 
 	//각각의 클래스에 맞는 함수포인터를 Target* 반환 형태로 unordered_map에 저장
-	typedef unordered_map<TargetType,std::function<Target*()>>  TargetInfoMap;
+	typedef unordered_map<int,std::function<Target*()>>  TargetInfoMap;
 	TargetInfoMap targetTypeInfo;
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::ENEMY, Enemy::create));
 	targetTypeInfo.insert(TargetInfoMap::value_type(TargetInfo::MIRROR, Mirror::create));

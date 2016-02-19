@@ -6,6 +6,7 @@
 *.user
 
 # Build results
+[Pp]roj.android/
 [Pp]roj.ios_mac/
 [Pp]roj.linux/
 [Pp]roj.wp8-xaml/

@@ -14,9 +14,9 @@ public:
 	void Reset(); // --> 매스테이지마다 리셋. 매개변수는 미정.
 	void LoadBullet();
 	void ShotComplete();
-	void PullStart(Event* e);
-	void Pull(Event* e);
-	void Shot(Event* e);
+	bool PullStart(Touch* touch, Event* unused_event);
+	void Pull(Touch* touch, Event* unused_event);
+	void Shot(Touch* touch, Event* unused_event);
 	
 	void RemoveDots();
 	bool IsShotted();
@@ -39,7 +39,7 @@ public:
 		HEIGHT = 50,
 		YPOS = 50,
 		MAX_POWER = 120,
-		CLICK_RANGE = 150,
+		CLICK_RANGE = 500,
 		DOTNUM_OF_LINE = 10
 	};
 	const Point SLING_POSITION = Point(200, 84);

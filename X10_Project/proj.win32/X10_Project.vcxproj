@@ -153,7 +153,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClCompile Include="..\Classes\Collider.cpp" />
     <ClCompile Include="..\Classes\ColliderManager.cpp" />
     <ClCompile Include="..\Classes\ConstVars.cpp" />
-    <ClCompile Include="..\Classes\cppson.cpp" />
     <ClCompile Include="..\Classes\CreditScene.cpp" />
     <ClCompile Include="..\Classes\EndingScene.cpp" />
     <ClCompile Include="..\Classes\Enemy.cpp" />
@@ -188,7 +187,6 @@ xcopy "$(ProjectDir)..\Resources" "$(OutDir)" /D /E /I /F /Y
     <ClInclude Include="..\Classes\Collider.h" />
     <ClInclude Include="..\Classes\ColliderManager.h" />
     <ClInclude Include="..\Classes\ConstVars.h" />
-    <ClInclude Include="..\Classes\cppson.h" />
     <ClInclude Include="..\Classes\CreditScene.h" />
     <ClInclude Include="..\Classes\EndingScene.h" />
     <ClInclude Include="..\Classes\Enemy.h" />

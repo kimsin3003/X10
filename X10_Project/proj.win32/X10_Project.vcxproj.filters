@@ -61,9 +61,6 @@
     <ClCompile Include="..\Classes\jsoncpp.cpp">
       <Filter>JsonParser</Filter>
     </ClCompile>
-    <ClCompile Include="..\Classes\cppson.cpp">
-      <Filter>JsonParser</Filter>
-    </ClCompile>
     <ClCompile Include="..\Classes\StageInformation.cpp">
       <Filter>GameObject\Information</Filter>
     </ClCompile>
@@ -151,9 +148,6 @@
       <Filter>JsonParser</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\json\json-forwards.h">
-      <Filter>JsonParser</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Classes\cppson.h">
       <Filter>JsonParser</Filter>
     </ClInclude>
     <ClInclude Include="..\Classes\StageInformation.h">

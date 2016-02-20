@@ -1,7 +1,7 @@
 #ifndef MAINSCENE_H 
 #define MAINSCENE_H
 
-class MainScene : public Layer
+class MainScene : public LayerColor
 {
 public:
     static Scene* createScene();

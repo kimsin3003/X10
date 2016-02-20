@@ -17,7 +17,7 @@ Scene* MainScene::createScene()
     Scene* scene = Scene::create();
     
     MainScene* layer = MainScene::create();
-
+	
     scene->addChild(layer);
 
     return scene;
@@ -25,7 +25,7 @@ Scene* MainScene::createScene()
 
 bool MainScene::init()
 {
-	if (!Layer::init())
+	if (!LayerColor::initWithColor(Color4B(0,0,0,0)))
 	{
 		return false;
 	}

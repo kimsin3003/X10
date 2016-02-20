@@ -6,17 +6,59 @@
 #include <json/json.h>
 
 
-bool cppson::loadFile(vector<TargetInfo> infoList, string fileName)
+bool cppson::loadFile(vector<TargetInfo>& infoList, string fileName)
 {
+	std::ifstream file(fileName);
+
+	if (!file.is_open())
+		return false;
+	std::string str((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+	Json::Reader reader;
+	Json::Value targets;
+	if (reader.parse(str, targets) == false)
+		return false;
+
+	for (int i = 0; i < targets.size(); i++)
+	{
+		Json::Value Target = targets[i];
+		TargetType targetType = static_cast<TargetType>(Target["type"].asInt());
+		float posx = Target["position"]["x"].asFloat();
+		float posy = Target["position"]["y"].asFloat();
+		float rotation = Target["rotation"].asFloat();
+		float scalex = Target["scale"]["x"].asFloat();
+		float scaley = Target["scale"]["y"].asFloat();
+		
+		TargetInfo targetInfo = TargetInfo(targetType, TargetPoint(posx, posy), rotation, scalex, scaley); 
+		infoList.push_back(targetInfo);
+	}
+	return true;
+}
+bool cppson::loadFile(vector<string>& bulletList, string fileName)
+{
+	// json 문서 읽기
+	std::ifstream file(fileName);
+
+	if (!file.is_open())
+		return false;
+
+	std::string str((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+
+	Json::Reader reader;
+	Json::Value bullets;
+	if (reader.parse(str, bullets) == false)
+		return false;
+
+	for (int i = 0; i < bullets.size(); i++)
+	{
+		string bulletType = bullets[i].asString();
+		bulletList.push_back(bulletType);
+	}
+
 	return true;
 }
 
-bool cppson::loadFile(vector<string> bulletList, string fileName)
-{
-	return true;
-}
-
-bool cppson::toJson(vector<TargetInfo> infoList, string fileName)
+bool cppson::toJson(vector<TargetInfo>& infoList, string fileName)
 {
 	return true;
 }

@@ -85,9 +85,10 @@ private:
 
 struct cppson
 {
-	static bool loadFile(vector<TargetInfo> infoList, string fileName);
-	static bool loadFile(vector<string> bulletList, string fileName);
-	static bool toJson(vector<TargetInfo> infoList, string fileName);
+	static bool loadFile(vector<TargetInfo>& infoList, string fileName);
+	static bool loadFile(vector<string>& bulletList, string fileName);
+	static bool toJson(vector<TargetInfo>& infoList, string fileName);
+	
 };
 
 typedef TargetInfo::TargetType TargetType;

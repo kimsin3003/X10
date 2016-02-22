@@ -23,6 +23,15 @@ bool IntroScene::init()
 		return false;
 	}
 
+	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(IntroScene::ChangeToStageScene, this));
+	skipButton->setPosition(Vec2(160, 440));
+	//addChild(skipButton);
+
+	Menu* menu = Menu::createWithItem(skipButton);
+	menu->setPosition(Vec2::ZERO);
+	menu->setName("Buttons");
+	addChild(menu, 1);
+
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 
 	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BOTTOM);

@@ -8,10 +8,11 @@ public:
 	CREATE_FUNC(CreditScene);
 	bool init();
 
-	void EndScene();
 	static float ypos;
 
 private:
+	void OnKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+	void EndScene();
 	Node* createSentence(string str, float fontSize);
 	void RemoveAllChildren();
 };

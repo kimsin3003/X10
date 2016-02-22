@@ -1,6 +1,7 @@
 #include "stdafx.h"
 #include "AppDelegate.h"
 #include "MainScene.h"
+#include "CreditScene.h"
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(320, 480);
 static cocos2d::Size smallResolutionSize = cocos2d::Size(320, 480);

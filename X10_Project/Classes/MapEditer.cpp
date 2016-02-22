@@ -73,7 +73,7 @@ bool MapEditer::init()
 	string fileName = FileStuff::EDITING_FILENAME;
 	
 	//load from file
-	if (!cppson::loadFile(infoList, fileName))
+	if (!StageInformation::loadFile(infoList, fileName))
 	{
 		CCLOG("Target Load Fail.");
 		return true;

@@ -68,7 +68,7 @@ bool CreditScene::init()
 	credit->addChild(createSentence("SB Kim", 20));
 	credit->addChild(createSentence(" ", 20));
 
-	credit->addChild(createSentence("cppson library", 15));
+	credit->addChild(createSentence("cpp-Json library", 15));
 	credit->addChild(createSentence("HY Nam", 20));
 	credit->addChild(createSentence(" ", 20));
 

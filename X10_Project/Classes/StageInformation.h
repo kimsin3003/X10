@@ -54,6 +54,11 @@ public:
 class StageInformation
 {
 public:
+
+	static bool loadFile(vector<TargetInfo>& infoList, string fileName);
+	static bool loadFile(vector<string>& bulletList, string fileName);
+	static bool toJson(vector<TargetInfo>& infoList, string fileName);
+
 	explicit StageInformation(int stage);
 	~StageInformation();
 	int GetTargetCount();//ÃÑ Å¸°Ù ¼ö¸¦ ¹ÝÈ¯
@@ -81,14 +86,6 @@ private:
 	string m_currentBullet;
 	vector<TargetInfo> m_targetInfoList;
 	vector<string> m_bulletInfoList;
-};
-
-struct cppson
-{
-	static bool loadFile(vector<TargetInfo>& infoList, string fileName);
-	static bool loadFile(vector<string>& bulletList, string fileName);
-	static bool toJson(vector<TargetInfo>& infoList, string fileName);
-	
 };
 
 typedef TargetInfo::TargetType TargetType;

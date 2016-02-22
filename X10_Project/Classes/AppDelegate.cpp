@@ -3,9 +3,9 @@
 #include "MainScene.h"
 
 static cocos2d::Size designResolutionSize = cocos2d::Size(320, 480);
-static cocos2d::Size smallResolutionSize = cocos2d::Size(480, 320);
-static cocos2d::Size mediumResolutionSize = cocos2d::Size(1024, 768);
-static cocos2d::Size largeResolutionSize = cocos2d::Size(2048, 1536);
+static cocos2d::Size smallResolutionSize = cocos2d::Size(320, 480);
+static cocos2d::Size mediumResolutionSize = cocos2d::Size(640, 960);
+static cocos2d::Size largeResolutionSize = cocos2d::Size(960, 1440);
 
 AppDelegate::AppDelegate() {}
 
@@ -35,7 +35,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-		glview = GLViewImpl::createWithRect("Quite Night", Rect(0, 0, 768, 1024));
+		glview = GLViewImpl::createWithRect("Quite Night", Rect(0, 0,480, 720));
 #else
 		glview = GLViewImpl::create("Quite Night");
 #endif
@@ -49,9 +49,13 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 	
     // Set the design resolution
-    glview->setDesignResolutionSize(designResolutionSize.width * 2, designResolutionSize.height * 2, ResolutionPolicy::EXACT_FIT);
-	Size frameSize = glview->getFrameSize();
-    
+    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::EXACT_FIT);
+
+	Director::getInstance()->setContentScaleFactor(1.5f);
+
+	//이부분은 해상도가 달라질때 화면에 배치되는 요소를 변경하고 싶을때 사용한다.
+// 	Size frameSize = glview->getFrameSize();
+//     
 // 	if (frameSize.height > mediumResolutionSize.height)
 // 	{
 // 		director->setContentScaleFactor(MIN(largeResolutionSize.height / designResolutionSize.height, largeResolutionSize.width / designResolutionSize.width));

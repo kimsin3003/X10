@@ -187,8 +187,8 @@ void MainScene::BrightenStreetLight()
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_LIGHT_ON);
 
 	Sprite* light_beam = Sprite::create(FileStuff::LIGHT_BEAM);
-	
-	light_beam->setFlipX(true);
+	/*
+	light_beam->setFlippedX(true);
 	light_beam->setPosition(Vec2(-7.0f, -10.0f));
 	light_beam->setAnchorPoint(Vec2(0, 0));
 
@@ -202,7 +202,7 @@ void MainScene::BrightenStreetLight()
 	title->setPosition(light_beam->getPosition() + Vec2(-100, +120));
 	title->setScale(1.0f);
 	
-	light_beam->addChild(title);
+	light_beam->addChild(title);*/
 }
 
 void MainScene::ChangeToStageScene()

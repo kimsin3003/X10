@@ -6,14 +6,11 @@
 #include <json/json.h>
 
 
-bool cppson::loadFile(vector<TargetInfo>& infoList, string fileName)
+bool StageInformation::loadFile(vector<TargetInfo>& infoList, string fileName)
 {
-	std::ifstream file(fileName);
-
-	if (!file.is_open())
-		return false;
-	std::string str((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
-
+	CCFileUtils* fileMan = CCFileUtils::getInstance();
+	string str = fileMan->getStringFromFile(fileName);
+	
 	Json::Reader reader;
 	Json::Value targets;
 	if (reader.parse(str, targets) == false)
@@ -34,15 +31,11 @@ bool cppson::loadFile(vector<TargetInfo>& infoList, string fileName)
 	}
 	return true;
 }
-bool cppson::loadFile(vector<string>& bulletList, string fileName)
+bool StageInformation::loadFile(vector<string>& bulletList, string fileName)
 {
 	// json 문서 읽기
-	std::ifstream file(fileName);
-
-	if (!file.is_open())
-		return false;
-
-	std::string str((std::istreambuf_iterator<char>(file)), std::istreambuf_iterator<char>());
+	CCFileUtils* fileMan = CCFileUtils::getInstance();
+	string str = fileMan->getStringFromFile(fileName);
 
 	Json::Reader reader;
 	Json::Value bullets;
@@ -58,7 +51,7 @@ bool cppson::loadFile(vector<string>& bulletList, string fileName)
 	return true;
 }
 
-bool cppson::toJson(vector<TargetInfo>& infoList, string fileName)
+bool StageInformation::toJson(vector<TargetInfo>& infoList, string fileName)
 {
 	return true;
 }
@@ -75,9 +68,9 @@ m_currentTarget(), m_currentBullet()
 		/*load targets*/
 		char fileName[100];
 		sprintf(fileName, "files/target%d.json", stage);
-
+		
 		//load from file
-		if (!cppson::loadFile(m_targetInfoList, fileName))
+		if (!loadFile(m_targetInfoList, fileName))
 		{
 			CCLOG("Target Load Fail.");
 			return;
@@ -87,7 +80,7 @@ m_currentTarget(), m_currentBullet()
 		sprintf(fileName, "files/bullet%d.json", stage);
 
 		//load from file
-		if (!cppson::loadFile(m_bulletInfoList, fileName))
+		if (!loadFile(m_bulletInfoList, fileName))
 		{
 			CCLOG("Target Load Fail.");
 			return;
@@ -190,7 +183,7 @@ bool StageInformation::MakeJsonFileFromLayer(Layer* layer, const string& fileNam
 	}
 	
 	//write to file
-	if (!cppson::toJson(m_targetInfoList, fileName))
+	if (!toJson(m_targetInfoList, fileName))
 	{
 		CCLOG("Target write Fail.");
 		return false;

@@ -3,7 +3,7 @@
 
 namespace FileStuff
 {
-	const string TITLE = "res/ui/title.png";
+	const string TITLE = "res/ui/Title.png";
 
 	const string IMG_SOURCE = "res/target/x10.plist";
 

@@ -187,25 +187,20 @@ void MainScene::BrightenStreetLight()
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_LIGHT_ON);
 
 	Sprite* light_beam = Sprite::create(FileStuff::LIGHT_BEAM);
-	//
-	//light_beam->setFlippedX(true);
-	//light_beam->setPosition(Vec2(-7.0f, -10.0f));
-	//light_beam->setAnchorPoint(Vec2(0, 0));
 
-	Sprite* fireworks = Sprite::create(FileStuff::MAIN_BULLET);
-	//fireworks->setPosition(25, 20);
-	//light_beam->addChild(fireworks);
+	light_beam->setFlippedX(true);
+	light_beam->setPosition(Vec2(-7.0f, -10.0f));
+	light_beam->setAnchorPoint(Vec2(0, 0));
 
-	//m_streetLight->addChild(light_beam, -1);
-
-	Sprite* title = Sprite::create(FileStuff::TITLE);
-//	title->setPosition(light_beam->getPosition() + Vec2(-100, +120));
-//	title->setScale(1.0f);
+	m_streetLight->addChild(light_beam, -1);
 	
-	Sprite* whatTheHellIsGoingOn = Sprite::create(FileStuff::DEAD_BODY);
-	whatTheHellIsGoingOn->setPosition(Vec2(111,111));
-	addChild(whatTheHellIsGoingOn);
-//	light_beam->addChild(title);
+	Sprite* fireworks = Sprite::create(FileStuff::MAIN_BULLET);
+	fireworks->setPosition(Vec2(25.0f, 20.0f));
+	light_beam->addChild(fireworks);
+	
+	Sprite* title = Sprite::create(FileStuff::TITLE);
+	title->setPosition(Vec2(-100.0f, +120.0f));
+	light_beam->addChild(title);
 }
 
 void MainScene::ChangeToStageScene()

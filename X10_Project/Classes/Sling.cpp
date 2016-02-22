@@ -109,7 +109,7 @@ bool Sling::PullStart(Touch* touch, Event* unused_event)
 	}
 
 	/*Pull mouse 위치 거리 조건 설정 */
-	Point touchLocation = touch->getLocationInView();
+	Point touchLocation = touch->getLocation();
 	Point startLocation = GetStartLocation();
 	float distance = startLocation.getDistance(touchLocation);
 
@@ -143,7 +143,7 @@ void Sling::Pull(Touch* touch, Event* unused_event)
 		return;
 	}
 
-	Point touchLocation = touch->getLocationInView();
+	Point touchLocation = touch->getLocation();
 	Point startLocation = GetStartLocation();
 	
 	m_shotPower = startLocation.getDistance(touchLocation);

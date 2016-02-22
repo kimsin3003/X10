@@ -60,7 +60,7 @@ Sprite* Bullet::MakeBody()
 	Sprite* body = Sprite::create();
 	
 	float scale = Director::getInstance()->getContentScaleFactor();
-	Size fireSize(BULLET_WIDTH /scale , BULLET_HEIGHT /scale); 
+	Size fireSize(BULLET_WIDTH /scale , BULLET_HEIGHT /scale);
 	
 	int frameCut = BULLET_FRAMES;
 	Vector<SpriteFrame*> animFrames;
@@ -75,7 +75,7 @@ Sprite* Bullet::MakeBody()
 	Animate* animate = Animate::create(animation);
 	RepeatForever *aniAction = RepeatForever::create(animate);
 	body->runAction(aniAction);
-	body->setScale(BULLET_RATIO);
+	body->setScale(scale);
 
 	return body;
 }

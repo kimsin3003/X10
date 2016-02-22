@@ -18,7 +18,7 @@ void AppDelegate::initGLContextAttrs()
     //set OpenGL context attributions,now can only set six attributions:
     //red,green,blue,alpha,depth,stencil
     GLContextAttrs glContextAttrs = {8, 8, 8, 8, 24, 8};
-
+	
     GLView::setGLContextAttrs(glContextAttrs);
 }
 
@@ -35,7 +35,7 @@ bool AppDelegate::applicationDidFinishLaunching() {
     auto glview = director->getOpenGLView();
     if(!glview) {
 #if (CC_TARGET_PLATFORM == CC_PLATFORM_WIN32) || (CC_TARGET_PLATFORM == CC_PLATFORM_MAC) || (CC_TARGET_PLATFORM == CC_PLATFORM_LINUX)
-		glview = GLViewImpl::createWithRect("Quite Night", Rect(0, 0, designResolutionSize.width, designResolutionSize.height));
+		glview = GLViewImpl::createWithRect("Quite Night", Rect(0, 0, 768, 1024));
 #else
 		glview = GLViewImpl::create("Quite Night");
 #endif
@@ -49,24 +49,23 @@ bool AppDelegate::applicationDidFinishLaunching() {
     director->setAnimationInterval(1.0 / 60);
 	
     // Set the design resolution
-    glview->setDesignResolutionSize(designResolutionSize.width, designResolutionSize.height, ResolutionPolicy::EXACT_FIT);
-    
+    glview->setDesignResolutionSize(designResolutionSize.width * 2, designResolutionSize.height * 2, ResolutionPolicy::EXACT_FIT);
 	Size frameSize = glview->getFrameSize();
     
-	if (frameSize.height > mediumResolutionSize.height)
-	{
-		director->setContentScaleFactor(MIN(largeResolutionSize.height / designResolutionSize.height, largeResolutionSize.width / designResolutionSize.width));
-	}
-	// if the frame's height is larger than the height of small size.
-	else if (frameSize.height > smallResolutionSize.height)
-	{
-		director->setContentScaleFactor(MIN(mediumResolutionSize.height / designResolutionSize.height, mediumResolutionSize.width / designResolutionSize.width));
-	}
-	// if the frame's height is smaller than the height of medium size.
-	else
-	{
-		director->setContentScaleFactor(MIN(smallResolutionSize.height / designResolutionSize.height, smallResolutionSize.width / designResolutionSize.width));
-	}
+// 	if (frameSize.height > mediumResolutionSize.height)
+// 	{
+// 		director->setContentScaleFactor(MIN(largeResolutionSize.height / designResolutionSize.height, largeResolutionSize.width / designResolutionSize.width));
+// 	}
+// 	// if the frame's height is larger than the height of small size.
+// 	else if (frameSize.height > smallResolutionSize.height)
+// 	{
+// 		director->setContentScaleFactor(MIN(mediumResolutionSize.height / designResolutionSize.height, mediumResolutionSize.width / designResolutionSize.width));
+// 	}
+// 	// if the frame's height is smaller than the height of medium size.
+// 	else
+// 	{
+// 		director->setContentScaleFactor(MIN(smallResolutionSize.height / designResolutionSize.height, smallResolutionSize.width / designResolutionSize.width));
+// 	}
 
     register_all_packages();
 

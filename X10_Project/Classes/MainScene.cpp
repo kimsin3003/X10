@@ -12,6 +12,7 @@
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
 
+
 Scene* MainScene::createScene()
 {
     Scene* scene = Scene::create();
@@ -34,11 +35,9 @@ bool MainScene::init()
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_MAIN_BACKGROUND, true);
-
 	SpriteFrameCache::getInstance()->addSpriteFramesWithFile(FileStuff::IMG_SOURCE);
 	Size visibleSize = Director::getInstance()->getVisibleSize();
 	Vec2 origin = Director::getInstance()->getVisibleOrigin();
-
 	m_streetLight = Sprite::create(FileStuff::GARO_OFF);
 	m_streetLight->setPosition(Vec2(260, 360));
 	m_streetLight->setOpacity(40);
@@ -168,6 +167,7 @@ void MainScene::StreetLightOff()
 {
 	m_streetLight->removeFromParent();
 	m_streetLight = Sprite::create(FileStuff::GARO_OFF);
+	//m_streetLight->setScale(Director::getInstance()->getContentScaleFactor());
 	m_streetLight->setFlipX(true);
 	addChild(m_streetLight);
 	m_streetLight->setPosition(m_StreetLightPos);
@@ -177,6 +177,7 @@ void MainScene::StreetLightOn()
 {
 	m_streetLight->removeFromParent();
 	m_streetLight = Sprite::create(FileStuff::GARO_ON);
+	//m_streetLight->setScale(Director::getInstance()->getContentScaleFactor());
 	m_streetLight->setFlipX(true);
 	addChild(m_streetLight);
 	m_streetLight->setPosition(m_StreetLightPos);

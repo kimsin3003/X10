@@ -48,6 +48,12 @@ bool MainScene::init()
 
 	Vector<MenuItem*> menuItems;
 
+	MenuItemImage* character = MenuItemImage::create();
+	character->setCallback(CC_CALLBACK_0(MainScene::WalkToStreetLight, this));
+	character->setPosition(80, 120);
+	character->setAnchorPoint(Vec2(0.5f, 0.5f));
+
+
 	/*Character*/
 	MenuItemImage* character = MenuItemImage::create();
 

@@ -25,7 +25,12 @@ bool IntroScene::init()
 
 	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(IntroScene::ChangeToStageScene, this));
 	skipButton->setPosition(Vec2(160, 440));
-	//addChild(skipButton);
+	FadeOut* fadeOut = FadeOut::create(1.0f);
+	FadeIn* fadeIn = FadeIn::create(1.0f);
+	Sequence* _blink = Sequence::createWithTwoActions(fadeOut, fadeIn);
+	RepeatForever* blink = RepeatForever::create(_blink);
+	skipButton->runAction(blink);
+
 
 	Menu* menu = Menu::createWithItem(skipButton);
 	menu->setPosition(Vec2::ZERO);

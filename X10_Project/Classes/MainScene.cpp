@@ -45,13 +45,47 @@ bool MainScene::init()
 	m_StreetLightPos = m_streetLight->getPosition();
 	addChild(m_streetLight);
 
+
+	
+
+
 	Vector<MenuItem*> menuItems;
 
-	MenuItemImage* character = MenuItemImage::create();
-	character->setCallback(CC_CALLBACK_0(MainScene::WalkToStreetLight, this));
-	character->setPosition(80, 120);
-	character->setAnchorPoint(Vec2(0.5f, 0.5f));
+	if ( UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE) > 1 ){
+		MenuItemImage* resetGameButton = MenuItemImage::create(FileStuff::RESET_GAME, FileStuff::RESET_GAME);
+		resetGameButton->setCallback(CC_CALLBACK_0(MainScene::SetToIntro, this));
+		resetGameButton->setPosition(160, 400);
+		resetGameButton->setScale(0.8);
+		resetGameButton->setAnchorPoint(Vec2(0.5f, 0.5f));
 
+		menuItems.pushBack(resetGameButton);
+
+		MenuItemImage* tutorialButton = MenuItemImage::create(FileStuff::TUTORIAL, FileStuff::TUTORIAL);
+		tutorialButton->setCallback(CC_CALLBACK_0(MainScene::ChangeToTutorialScene, this));
+		tutorialButton->setPosition(160, 350);
+		tutorialButton->setScale(0.8);
+		tutorialButton->setAnchorPoint(Vec2(0.5f, 0.5f));
+
+		menuItems.pushBack(tutorialButton);
+
+	}
+
+	if (UserDefault::getInstance()->getBoolForKey(ConstVars::CLEARED_ONCE)){
+
+		MenuItemImage* creditGameButton = MenuItemImage::create(FileStuff::CREDIT, FileStuff::CREDIT);
+		creditGameButton->setCallback(CC_CALLBACK_0(MainScene::SetToIntro, this));
+		creditGameButton->setPosition(160, 300);
+		creditGameButton->setScale(0.8);
+		creditGameButton->setAnchorPoint(Vec2(0.5f, 0.5f));
+
+		menuItems.pushBack(creditGameButton);
+	}
+	MenuItemImage* clickMe = MenuItemImage::create(FileStuff::CLICK_ME, FileStuff::CLICK_ME);
+	clickMe->setPosition(100, 180);
+	clickMe->setScale(0.8);
+	clickMe->setAnchorPoint(Vec2(0.5f, 0.5f));
+
+	menuItems.pushBack(clickMe);
 
 	/*Character*/
 	MenuItemImage* character = MenuItemImage::create();
@@ -100,7 +134,7 @@ bool MainScene::init()
 	MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
 		CC_CALLBACK_0(MainScene::SetToEnding, this));
 	setToEnding->setScale(0.5f);
-	setToEnding->setPosition(Vec2(0.0f, 0.0f));
+	setToEnding->setPosition(Vec2(0.0f, 480.0f));
 
 	menuItems.pushBack(setToEnding);
 	
@@ -108,7 +142,7 @@ bool MainScene::init()
 	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
 		CC_CALLBACK_0(MainScene::SetToIntro, this));
 	setToIntro->setScale(0.5f);
-	setToEnding->setPosition(Vec2(0.0f, 480.0f));
+	setToIntro->setPosition(Vec2(0.0f, 0.0f));
 
 	menuItems.pushBack(setToIntro);
 
@@ -135,11 +169,11 @@ void MainScene::WalkToStreetLight()
 	m_streetLight->runAction(FadeIn::create(3.0f));
 
 	Sequence* seq = Sequence::create(
-		//DelayTime::create(3.5f),
-		//CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
-		//DelayTime::create(3.0f),
-		//CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
-		//DelayTime::create(4.0f),
+		DelayTime::create(3.5f),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
+		DelayTime::create(3.0f),
+		CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
+		DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::ChangeToStageScene, this)),
 		nullptr);
 
@@ -214,6 +248,13 @@ void MainScene::ChangeToStageScene()
 	Director::getInstance()->replaceScene(StageScene::createScene());
 }
 
+
+void MainScene::ChangeToTutorialScene()
+{
+	Director::getInstance()->replaceScene(TutorialScene::createScene());
+}
+
+
 void MainScene::ChangeToMapEditScene()
 {
 	Director::getInstance()->replaceScene(MapEditer::createScene());
@@ -223,12 +264,15 @@ void MainScene::SetToEnding()
 {
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 12);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 12);
+	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, true);
 }
 
 void MainScene::SetToIntro()
 {
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 1);
+	//UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, false);
+	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 
 void MainScene::ExitGame()

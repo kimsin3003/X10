@@ -10,6 +10,7 @@ public:
 
 private:
 	void ChangeToStageScene();
+	void ChangeToTutorialScene();
 	void ChangeToMapEditScene();
 	void ExitGame();
 	void SetToIntro();
@@ -23,7 +24,8 @@ private:
 
 	Sprite* m_streetLight;
 	Sprite* m_character;
-	Vec2 m_StreetLightPos;
+	Vec2 m_StreetLightPos; 
+	
 };
 
 #endif

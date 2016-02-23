@@ -12,6 +12,7 @@ public:
 
 private:
 	void SetupCharacter();
+	void MakeWaitSign();
 	void ChangeToMainScene(Ref* pSender);
 
 	void IntroEvent(float dt);

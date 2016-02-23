@@ -6,6 +6,10 @@ namespace FileStuff
 	const string TITLE = "res/ui/Title.png";
 	const string SKIP_BUTTON = "res/ui/skip.png";
 	const string WAIT = "res/ui/wait.png";
+	const string RESET_GAME = "res/ui/resetGame.png";
+	const string CREDIT = "res/ui/credit.png";
+	const string TUTORIAL = "res/ui/tutorial.png";
+	const string CLICK_ME = "res/ui/clickMe.png";
 
 	const string IMG_SOURCE = "res/target/x10.plist";
 

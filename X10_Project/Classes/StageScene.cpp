@@ -68,14 +68,31 @@ bool StageScene::init()
 	addChild(menu);
 
 	SetupLight();
+	MakeWaitSign();
 	SetupCharacter();
+
 
 	return true;
 }
+void StageScene::MakeWaitSign()
+{
+	Sprite* wait = Sprite::create(FileStuff::WAIT);
+	wait->setPosition(Vec2(270, 460));
+	wait->setName("waitSign");
+	addChild(wait);
 
+	FadeOut* fadeOut = FadeOut::create(1.0f);
+	FadeIn* fadeIn = FadeIn::create(1.0f);
+	Sequence* _blink = Sequence::createWithTwoActions(fadeOut, fadeIn);
+	RepeatForever* blink = RepeatForever::create(_blink);
+	wait->runAction(blink);
+
+}
 
 void StageScene::ChangeCharacterToButton(Point finalPos, float scale)
 {
+
+	getChildByName("waitSign")->removeFromParent();
 	MenuItemImage* character = MenuItemImage::create();
 	character->setNormalImage(
 		Sprite::createWithSpriteFrame(

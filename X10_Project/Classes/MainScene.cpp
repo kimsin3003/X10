@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
-#include "IntroScene.h"
+#include "TutorialScene.h"
 #include "GameScene.h"
 #include "CreditScene.h"
 #include "Sling.h"
@@ -11,7 +11,6 @@
 #include "MapEditer.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
-
 
 Scene* MainScene::createScene()
 {
@@ -136,11 +135,11 @@ void MainScene::WalkToStreetLight()
 	m_streetLight->runAction(FadeIn::create(3.0f));
 
 	Sequence* seq = Sequence::create(
-		DelayTime::create(3.5f),
-		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
-		DelayTime::create(3.0f),
-		CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
-		DelayTime::create(4.0f),
+		//DelayTime::create(3.5f),
+		//CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
+		//DelayTime::create(3.0f),
+		//CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
+		//DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::ChangeToStageScene, this)),
 		nullptr);
 
@@ -212,17 +211,7 @@ void MainScene::BrightenStreetLight()
 
 void MainScene::ChangeToStageScene()
 {
-	int stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
-	//Director::getInstance()->replaceScene(CreditScene::createScene());
-
-	if (stageToPlay == 0)
-	{
-		Director::getInstance()->replaceScene(IntroScene::createScene());
-	}
-	else
-	{
-		Director::getInstance()->replaceScene(StageScene::createScene());
-	}
+	Director::getInstance()->replaceScene(StageScene::createScene());
 }
 
 void MainScene::ChangeToMapEditScene()
@@ -238,8 +227,8 @@ void MainScene::SetToEnding()
 
 void MainScene::SetToIntro()
 {
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 1);
 }
 
 void MainScene::ExitGame()

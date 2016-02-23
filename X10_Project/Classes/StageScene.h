@@ -13,7 +13,6 @@ public:
 private:
 	void SetupCharacter();
 	void ChangeToMainScene(Ref* pSender);
-	void ChangeToStageScene(Ref* pSender);
 
 	void IntroEvent(float dt);
 	

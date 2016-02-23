@@ -50,7 +50,8 @@ private:
 	
 	int m_curStageNum;
 	bool m_isJudged;
-	
+	Size m_winSize;
+
 	UILayer* m_uiLayer;
 	GameLayer* m_gameLayer;
 

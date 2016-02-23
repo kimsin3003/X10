@@ -12,7 +12,6 @@
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
 
-
 Scene* MainScene::createScene()
 {
     Scene* scene = Scene::create();
@@ -130,11 +129,11 @@ void MainScene::WalkToStreetLight()
 	m_streetLight->runAction(FadeIn::create(3.0f));
 
 	Sequence* seq = Sequence::create(
-		DelayTime::create(3.5f),
-		CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
-		DelayTime::create(3.0f),
-		CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
-		DelayTime::create(4.0f),
+		//DelayTime::create(3.5f),
+		//CallFuncN::create(CC_CALLBACK_0(MainScene::BlinkStreetLight, this)),
+		//DelayTime::create(3.0f),
+		//CallFuncN::create(CC_CALLBACK_0(MainScene::BrightenStreetLight, this)),
+		//DelayTime::create(4.0f),
 		CallFuncN::create(CC_CALLBACK_0(MainScene::ChangeToStageScene, this)),
 		nullptr);
 

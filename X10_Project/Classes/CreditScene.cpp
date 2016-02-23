@@ -27,7 +27,6 @@ bool CreditScene::init()
 	ypos = 0.0f;
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_INITIAL_BACKGROUND, true);
-	;
 
 	Sprite* credit = Sprite::create();
 	credit->addChild(createSentence(" ", 20));
@@ -101,7 +100,7 @@ bool CreditScene::init()
 
 	credit->addChild(createSentence(" ", 20));
 	credit->addChild(createSentence("Thank you for playing.", 30));
-	credit->addChild(createSentence("X10 - Quiet Night", 30));
+	credit->addChild(createSentence("X10 - Quite Night", 30));
 	credit->addChild(createSentence("NEXT INSTITUTE", 30));
 
 	addChild(credit);
@@ -119,8 +118,26 @@ bool CreditScene::init()
 		nullptr
 		);
 
+	auto keylistener = EventListenerKeyboard::create();
+	keylistener->onKeyPressed = CC_CALLBACK_2(CreditScene::OnKeyPressed, this);
+	_eventDispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
+
+
+	Label* skipLabel = Label::createWithTTF("Press BackButton\nTo Skip", FileStuff::FONT_ARIAL, 10);
+	skipLabel->setPosition(Vec2(260, 450));
+	addChild(skipLabel);
 	runAction(seq);
 	return true;
+}
+
+void CreditScene::OnKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+{
+	if (keyCode == EventKeyboard::KeyCode::KEY_BACKSPACE){
+		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
+		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
+		Director::getInstance()->replaceScene(MainScene::createScene());
+	}
+
 }
 
 void CreditScene::EndScene()

@@ -4,6 +4,7 @@
 namespace FileStuff
 {
 	const string TITLE = "res/ui/Title.png";
+	const string SKIP_BUTTON = "res/ui/PressToSkip.png";
 
 	const string IMG_SOURCE = "res/target/x10.plist";
 
@@ -111,7 +112,7 @@ namespace FileStuff
 	const string EDITING_FILENAME = "files/target0.json";
 	
 	//font
-	const string FONT_ARIAL = "res/fonts/arial.ttf";
+	const string FONT_ARIAL = "fonts/arial.ttf";
 
 	extern const char* SOUND_FIREWORK_EXPLOSION;
 	extern const char* SOUND_FIREWORK_FLYING;

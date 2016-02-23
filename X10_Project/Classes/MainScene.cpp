@@ -207,6 +207,7 @@ void MainScene::BrightenStreetLight()
 void MainScene::ChangeToStageScene()
 {
 	int stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+	//Director::getInstance()->replaceScene(CreditScene::createScene());
 
 	if (stageToPlay == 0)
 	{

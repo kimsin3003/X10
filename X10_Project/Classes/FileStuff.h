@@ -17,6 +17,7 @@ namespace FileStuff
 
 	const string SLING_LINE_DOT = "res/dot.png";
 	const string SLING_RANGE = "res/ui/range.png";
+	const string SLING_LINE = "res/Line.png";
 
 	const string BUBBLE = "res/target/Bubble.png";
 	const string BUBBLE_POP_ANI = "bubble_pop_ani";

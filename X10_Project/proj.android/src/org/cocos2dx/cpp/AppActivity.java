@@ -32,6 +32,7 @@ import java.lang.reflect.Method;
 
 import org.cocos2dx.lib.Cocos2dxActivity;
 
+import android.R;
 import android.annotation.TargetApi;
 import android.graphics.Color;
 import android.graphics.Point;
@@ -43,14 +44,16 @@ import android.view.WindowManager;
 import android.widget.LinearLayout;
 
 import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
+import com.google.android.gms.ads.InterstitialAd;
 
 public class AppActivity extends Cocos2dxActivity 
 {
 	
 	private static AppActivity _appActiviy;
-	private AdView adView;
+	private InterstitialAd mInterstitialAd;
 	private static final String AD_UNIT_ID = "ca-app-pub-1690383002847701/2009330075";
 	
 	// Helper get display screen to avoid deprecated function use
@@ -95,44 +98,52 @@ public class AppActivity extends Cocos2dxActivity
 	        return new Point(-4, -4);
 	    }
 	}
-	
-	
-	
+
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
+	
+		mInterstitialAd.setAdUnitId(AD_UNIT_ID);
+		mInterstitialAd.setAdListener(new AdListener(){
+			@Override
+			public void onAdClosed() {
+				requestNewInterstitial();
+			}
+		});
 		
-		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+		requestNewInterstitial();
 		
-		int width = getDisplaySize(getWindowManager().getDefaultDisplay()).x;
-		
-		
-		LinearLayout.LayoutParams adParams = new LinearLayout.LayoutParams(
-		width,
-		LinearLayout.LayoutParams.WRAP_CONTENT);
-		
-		
-		adView = new AdView(this);
-		adView.setAdSize(AdSize.MEDIUM_RECTANGLE);
-		adView.setAdUnitId(AD_UNIT_ID);
-		
-		
-		AdRequest adRequest = new AdRequest.Builder()
-		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
-		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
-		
-		.build();
-		
-		adView.loadAd(adRequest);
-		adView.setBackgroundColor(Color.BLACK);
-		adView.setBackgroundColor(0);
-		addContentView(adView,adParams);
-		
-		_appActiviy = this;
-		
+//		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+//		
+//		int width = getDisplaySize(getWindowManager().getDefaultDisplay()).x;
+//		
+//		
+//		LinearLayout.LayoutParams adParams = new LinearLayout.LayoutParams(
+//		width,
+//		LinearLayout.LayoutParams.WRAP_CONTENT);
+//		
+//		
+//		adView = new AdView(this);
+//		adView.setAdSize(AdSize.MEDIUM_RECTANGLE);
+//		adView.setAdUnitId(AD_UNIT_ID);
+//		
+//		
+//		AdRequest adRequest = new AdRequest.Builder()
+//		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
+//		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
+//		
+//		.build();
+//		
+//		adView.loadAd(adRequest);
+//		adView.setBackgroundColor(Color.BLACK);
+//		adView.setBackgroundColor(0);
+//		addContentView(adView,adParams);
+//		
+//		_appActiviy = this;
+//		
 	}
 	
 	
@@ -167,6 +178,17 @@ public class AppActivity extends Cocos2dxActivity
 	     });
 	}
 	
+	private void requestNewInterstitial() {
+        AdRequest adRequest = new AdRequest.Builder()
+        		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+        		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
+        		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
+        		.build();
+
+        mInterstitialAd.loadAd(adRequest);
+	}
+	
+
 	@Override
 	protected void onResume() 
 	{

@@ -52,10 +52,6 @@ bool MainScene::init()
 	character->setPosition(80, 120);
 	character->setAnchorPoint(Vec2(0.5f, 0.5f));
 
-
-	/*Character*/
-	MenuItemImage* character = MenuItemImage::create();
-
 	character->setNormalImage(
 		Sprite::createWithSpriteFrame(
 		SpriteFrameCache::getInstance()->getSpriteFrameByName(FileStuff::CHARACTER_CACHE)

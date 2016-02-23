@@ -85,6 +85,7 @@
     <ClCompile Include="..\Classes\TutorialScene.cpp">
       <Filter>Scene</Filter>
     </ClCompile>
+    <ClCompile Include="..\Classes\AdmobHelper.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\Classes\AppDelegate.h" />
@@ -174,6 +175,7 @@
     <ClInclude Include="..\Classes\TutorialScene.h">
       <Filter>Scene</Filter>
     </ClInclude>
+    <ClInclude Include="..\Classes\AdmobHelper.h" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Scene">

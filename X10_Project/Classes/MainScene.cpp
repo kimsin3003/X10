@@ -1,6 +1,6 @@
 #include "stdafx.h"
 #include "MainScene.h"
-#include "IntroScene.h"
+#include "TutorialScene.h"
 #include "GameScene.h"
 #include "CreditScene.h"
 #include "Sling.h"
@@ -205,17 +205,7 @@ void MainScene::BrightenStreetLight()
 
 void MainScene::ChangeToStageScene()
 {
-	int stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
-	//Director::getInstance()->replaceScene(CreditScene::createScene());
-
-	if (stageToPlay == 0)
-	{
-		Director::getInstance()->replaceScene(IntroScene::createScene());
-	}
-	else
-	{
-		Director::getInstance()->replaceScene(StageScene::createScene());
-	}
+	Director::getInstance()->replaceScene(StageScene::createScene());
 }
 
 void MainScene::ChangeToMapEditScene()
@@ -231,8 +221,8 @@ void MainScene::SetToEnding()
 
 void MainScene::SetToIntro()
 {
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 1);
 }
 
 void MainScene::ExitGame()

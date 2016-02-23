@@ -1,29 +1,30 @@
 #include "stdafx.h"
-#include "IntroScene.h"
+#include "TutorialScene.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
-#include "StageScene.h"
+#include "GameScene.h"
+#include "GameManager.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
 
-Scene* IntroScene::createScene()
+Scene* TutorialScene::createScene()
 {
 	Scene* scene = Scene::create();
 
-	Layer* layer = IntroScene::create();
+	Layer* layer = TutorialScene::create();
 	scene->addChild(layer);
 
 	return scene;
 }
 
-bool IntroScene::init()
+bool TutorialScene::init()
 {
 	if (!Layer::init())
 	{
 		return false;
 	}
 
-	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(IntroScene::ChangeToStageScene, this));
+	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(TutorialScene::ChangeToGameStageOneScene, this));
 	skipButton->setPosition(Vec2(160, 440));
 	//addChild(skipButton);
 
@@ -111,7 +112,7 @@ bool IntroScene::init()
 
 	Sequence* shootBullet = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_FLYING)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_FLYING)),
 		FadeIn::create(0.0f),
 		MoveTo::create(2.0f, ufo->getPosition() - Vec2(5, 25)),
 		DelayTime::create(0.15f),
@@ -122,15 +123,15 @@ bool IntroScene::init()
 
 	Sequence* explode = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_EXPLOSION)),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::PlayExplosion, this, ufo->getPosition() - Vec2(5, 25))),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_EXPLOSION)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlayExplosion, this, ufo->getPosition() - Vec2(5, 25))),
 		nullptr); // total: 0.5 sec
 
 	timeLine += 0.8f;
 
 	Sequence* destructUFO = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::PlaySoundEffect, this, FileStuff::SOUND_UFO_EXPLODE_DEFAULT)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlaySoundEffect, this, FileStuff::SOUND_UFO_EXPLODE_DEFAULT)),
 		destructAnimation,
 		removeAfterAnimation,
 		nullptr); // total: 2.5 sec
@@ -139,7 +140,7 @@ bool IntroScene::init()
 
 	Sequence* changeToStageScene = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::ChangeToStageScene, this)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::ChangeToGameStageOneScene, this)),
 		nullptr);
 
 	arm->runAction(moveArm);
@@ -152,12 +153,12 @@ bool IntroScene::init()
 	return true;
 }
 
-void IntroScene::PlaySoundEffect(const char* fileName)
+void TutorialScene::PlaySoundEffect(const char* fileName)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(fileName);
 }
 
-void IntroScene::PlayExplosion(const Vec2& pos)
+void TutorialScene::PlayExplosion(const Vec2& pos)
 {
 	ParticleExplosion* explosion = ParticleExplosion::create();
 	explosion->setColor(Color3B());
@@ -176,8 +177,17 @@ void IntroScene::PlayExplosion(const Vec2& pos)
 	addChild(explosion, 3);
 }
 
-void IntroScene::ChangeToStageScene()
+void TutorialScene::ChangeToGameStageOneScene()
 {
-	removeAllChildrenWithCleanup(true);
-	Director::getInstance()->replaceScene(StageScene::createScene());
+	Scene* scene = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
+	
+	GameManager* gameManager = GameManager::GetInstance();
+	gameManager->SetUILayer(gameScene->GetUILayer());
+	gameManager->SetGameLayer(gameScene->GetGameLayer());
+	gameManager->SetStage(1);
+
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
+
+	Director::getInstance()->replaceScene(sceneWithEffect);
 }

@@ -22,6 +22,7 @@ namespace FileStuff
 
 	const string SLING_LINE_DOT = "res/dot.png";
 	const string SLING_RANGE = "res/ui/range.png";
+	const string SLING_LINE = "res/Line.png";
 
 	const string BUBBLE = "res/target/Bubble.png";
 	const string BUBBLE_POP_ANI = "bubble_pop_ani";
@@ -133,7 +134,6 @@ namespace FileStuff
 
 	extern const char* SOUND_MID_PHASE_BACKGROUND;
 
-	extern const char* SOUND_MIDDLE_BACKGROUND;
 	extern const char* SOUND_BEFORE_ENDING_BACKGROUND; 
 	extern const char* SOUND_ENDING_BACKGROUND;
 

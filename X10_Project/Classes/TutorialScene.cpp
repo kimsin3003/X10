@@ -26,12 +26,12 @@ bool TutorialScene::init()
 
 	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(TutorialScene::ChangeToGameStageOneScene, this));
 	skipButton->setPosition(Vec2(160, 440));
+
 	FadeOut* fadeOut = FadeOut::create(1.0f);
 	FadeIn* fadeIn = FadeIn::create(1.0f);
 	Sequence* _blink = Sequence::createWithTwoActions(fadeOut, fadeIn);
 	RepeatForever* blink = RepeatForever::create(_blink);
 	skipButton->runAction(blink);
-
 
 	Menu* menu = Menu::createWithItem(skipButton);
 	menu->setPosition(Vec2::ZERO);
@@ -40,6 +40,7 @@ bool TutorialScene::init()
 
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 
+	/////////////////////////// sprites ///////////////////////////
 	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
@@ -50,6 +51,22 @@ bool TutorialScene::init()
 	character->setPosition(Point(200, 84));
 	addChild(character, 2);
 
+	Sprite* range = Sprite::create(FileStuff::SLING_RANGE);
+	range->setAnchorPoint(Vec2(0.5f, 0.0f));
+	range->setPosition(Vec2(10.0f, 40.0f));
+	character->addChild(range, -2);
+
+	Sprite* line = Sprite::create(FileStuff::SLING_LINE);
+	line->setAnchorPoint(Vec2(0.5f, 0.0f));
+	line->setPosition(Vec2(10, 40));
+	line->setOpacity(60);
+	character->addChild(line, -2);
+
+	Sprite* dot = Sprite::create(FileStuff::SLING_LINE_DOT);
+	dot->setPosition(Vec2(12, 120));
+	dot->setScale(3.0f);
+	character->addChild(dot, 3);
+
 	Sprite* arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
 	arm->setAnchorPoint(Point(0.5, 0.4));
 	arm->setPosition(Vec2(8.5f, 45.0f));
@@ -57,7 +74,8 @@ bool TutorialScene::init()
 
 	Sprite* ufo = Sprite::create(FileStuff::ENEMY);
 	ufo->setPosition(Vec2(160, 360));
-
+	
+	///////////////////////// animations ////////////////////////
 	int ufo_frameCut = 23;
 	float ufo_frameTime = 0.1f;
 
@@ -76,7 +94,7 @@ bool TutorialScene::init()
 	Animate* destructAnimation = Animate::create(ufo_animation);
 
 	Sequence* removeAfterAnimation = Sequence::create(
-		DelayTime::create(23 *0.1f),
+		DelayTime::create(23 * 0.1f),
 		RemoveSelf::create(true),
 		NULL);
 
@@ -97,23 +115,63 @@ bool TutorialScene::init()
 
 	Animation* bullet_animation = Animation::createWithSpriteFrames(bullet_animFrames, 0.1f);
 	Animate* bullet_animate = Animate::create(bullet_animation);
-	bullet->setPosition(character->getPosition() + Vec2(0.0f, 15.0f));
+	bullet->setPosition(character->getPosition() + Vec2(0.0f, 20.0f));
 	bullet->setScale(2.0f);
 	bullet->setOpacity(0);
 	addChild(bullet);
+	
+	////////////////////////// actions //////////////////////////
 
 	float timeLine = 2.0f;
 
-	Sequence* moveArm = Sequence::create(
+	Sequence* rotateArm = Sequence::create(
 		DelayTime::create(timeLine),
 		RotateBy::create(0.4f, -35),
 		DelayTime::create(0.2f),
 		RotateBy::create(0.4f, 65),
 		DelayTime::create(0.3f),
-		RotateBy::create(0.4f, -45),
-		nullptr); // total: 3.0 sec
+		RotateBy::create(0.4f, -40),
+		nullptr);
+
+	Sequence* rototeLine = rotateArm->clone();
+
+	Sequence* moveHorizontallyDot = Sequence::create(
+		DelayTime::create(timeLine),
+		MoveBy::create(0.4f, Vec2(-37, 0)),
+		DelayTime::create(0.2f),
+		MoveBy::create(0.4f, Vec2(62,0)),
+		DelayTime::create(0.3f),
+		MoveBy::create(0.4f, Vec2(-40,0)),
+		nullptr);
 
 	timeLine += 3.0f;
+
+	Sequence* shrinkLine = Sequence::create(
+		DelayTime::create(timeLine),
+		ScaleTo::create(0.4f, 0.7f),
+		DelayTime::create(0.2f),
+		ScaleTo::create(0.4f, 1.5f),
+		DelayTime::create(0.3f),
+		ScaleTo::create(0.4f, 1.0f),
+		nullptr);
+
+	Sequence* moveVerticallyDot = Sequence::create(
+		DelayTime::create(timeLine),
+		MoveBy::create(0.4f, Vec2(0, -20)),
+		DelayTime::create(0.2f),
+		MoveBy::create(0.4f, Vec2(0, 55)),
+		DelayTime::create(0.3f),
+		MoveBy::create(0.4f, Vec2(0, -35)),
+		nullptr);
+
+	timeLine += 3.0f;
+
+	Sequence* removeDot = Sequence::create(
+		DelayTime::create(timeLine),
+		RemoveSelf::create(),
+		nullptr);
+
+	Sequence* removeLine = removeDot->clone();
 
 	Sequence* shootBullet = Sequence::create(
 		DelayTime::create(timeLine),
@@ -122,7 +180,7 @@ bool TutorialScene::init()
 		MoveTo::create(2.0f, ufo->getPosition() - Vec2(5, 25)),
 		DelayTime::create(0.15f),
 		RemoveSelf::create(true),
-		nullptr); // total: 2.0 sec
+		nullptr);
 
 	timeLine += 2.15f;
 
@@ -130,7 +188,7 @@ bool TutorialScene::init()
 		DelayTime::create(timeLine),
 		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_EXPLOSION)),
 		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlayExplosion, this, ufo->getPosition() - Vec2(5, 25))),
-		nullptr); // total: 0.5 sec
+		nullptr);
 
 	timeLine += 0.8f;
 
@@ -139,7 +197,7 @@ bool TutorialScene::init()
 		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlaySoundEffect, this, FileStuff::SOUND_UFO_EXPLODE_DEFAULT)),
 		destructAnimation,
 		removeAfterAnimation,
-		nullptr); // total: 2.5 sec
+		nullptr);
 
 	timeLine += 4.0f;
 
@@ -148,12 +206,24 @@ bool TutorialScene::init()
 		CallFunc::create(CC_CALLBACK_0(TutorialScene::ChangeToGameStageOneScene, this)),
 		nullptr);
 
-	arm->runAction(moveArm);
+	arm->runAction(rotateArm);
+	line->runAction(rototeLine);
+	dot->runAction(moveHorizontallyDot);
+
+	line->runAction(shrinkLine);
+	dot->runAction(moveVerticallyDot);
+
+	line->runAction(removeLine);
+	dot->runAction(removeDot);
+
 	bullet->runAction(RepeatForever::create(bullet_animate));
 	bullet->runAction(shootBullet);
+	
 	runAction(explode);
+	
 	ufo->runAction(destructUFO);
-	this->runAction(changeToStageScene);
+	
+	runAction(changeToStageScene);
 
 	return true;
 }

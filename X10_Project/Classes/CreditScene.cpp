@@ -138,13 +138,16 @@ void CreditScene::SkipCredit()
 {
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
+	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, true);
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 
 void CreditScene::EndScene()
 {
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
+	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, true);
 	Director::getInstance()->replaceScene(MainScene::createScene());
-	return;
 }
 
 Node* CreditScene::createSentence(string str, float fontSize)

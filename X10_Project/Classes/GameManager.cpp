@@ -9,6 +9,7 @@
 #include "StageInformation.h"
 #include "StageScene.h"
 #include "GameScene.h"
+#include "MainScene.h"
 //매니저
 #include "ColliderManager.h"
 #include "TargetManager.h"
@@ -282,15 +283,37 @@ bool GameManager::IsCollision(Target* target, Collider* collider)
 	const Rect colliderBoundingBox = static_cast<Bullet*>(collider)->GetBoundingArea();
 	const Rect targetBoundingBox = target->GetBoundingArea();
 
-	if (rotation< 3 && rotation > -3
-		|| rotation < 93 && rotation > 87
-		|| rotation < 183 && rotation > 177
-		|| rotation < 273 && rotation > 267){ //회전이 거의 없는 경우
+	if (rotation< 4.0f && rotation > -4.0f
+		|| rotation < 94.0f && rotation > 86.0f
+		|| rotation < 184.0f && rotation > 176.0f
+		|| rotation < 274.0f && rotation > 266.0f){ //회전이 거의 없는 경우
 		//예전 사각형 충돌 판정	
-		if (targetBoundingBox.intersectsRect(colliderBoundingBox))
-			return true;
+		Point pos = target->getPosition();
+		//Size targetSize = targetBoundingBox.size;
 
-		return false;
+		float minX = targetBoundingBox.getMinX();// -targetSize.width / 2; // left margin
+		float maxX = targetBoundingBox.getMaxX();// +targetSize.width / 2; // right margin
+		float minY = targetBoundingBox.getMinY();// -targetSize.height / 2; // lower margin
+		float maxY = targetBoundingBox.getMaxY();// +targetSize.height / 2; // upper margin
+
+		if (collider->getPosition().x < maxX && collider->getPosition().x > minX
+			&& collider->getPosition().y < maxY && collider->getPosition().y > minY
+			)
+		{
+			return true;
+		}
+		else {
+			return false;
+		}
+		
+		/*if (targetBoundingBox.intersectsRect(colliderBoundingBox))
+		{
+			return true;
+		}
+		else
+		{
+			return false;
+		}*/
 	}
 
 	float colliderX = collider->getPosition().x;

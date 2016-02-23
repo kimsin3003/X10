@@ -4,7 +4,8 @@
 namespace FileStuff
 {
 	const string TITLE = "res/ui/Title.png";
-	const string SKIP_BUTTON = "res/ui/PressToSkip.png";
+	const string SKIP_BUTTON = "res/ui/skip.png";
+	const string WAIT = "res/ui/wait.png";
 
 	const string IMG_SOURCE = "res/target/x10.plist";
 

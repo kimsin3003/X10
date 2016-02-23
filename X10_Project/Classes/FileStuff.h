@@ -4,7 +4,8 @@
 namespace FileStuff
 {
 	const string TITLE = "res/ui/Title.png";
-	const string SKIP_BUTTON = "res/ui/PressToSkip.png";
+	const string SKIP_BUTTON = "res/ui/skip.png";
+	const string WAIT = "res/ui/wait.png";
 
 	const string IMG_SOURCE = "res/target/x10.plist";
 
@@ -17,6 +18,7 @@ namespace FileStuff
 
 	const string SLING_LINE_DOT = "res/dot.png";
 	const string SLING_RANGE = "res/ui/range.png";
+	const string SLING_LINE = "res/Line.png";
 
 	const string BUBBLE = "res/target/Bubble.png";
 	const string BUBBLE_POP_ANI = "bubble_pop_ani";

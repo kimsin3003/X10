@@ -11,7 +11,7 @@ public:
 	static float ypos;
 
 private:
-	void OnKeyPressed(EventKeyboard::KeyCode keyCode, Event* event);
+	void SkipCredit();
 	void EndScene();
 	Node* createSentence(string str, float fontSize);
 	void RemoveAllChildren();

@@ -52,6 +52,8 @@ void GameManager::Init()
 	delete m_targetManager;
 	m_targetManager = new TargetManager();
 	m_isJudged = false;
+	Director* dir = Director::getInstance();
+	m_winSize = dir->getWinSize();
 
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_CAR_BREAK);
 	CocosDenshion::SimpleAudioEngine::getInstance()->preloadEffect(FileStuff::SOUND_CAR_CRASH);
@@ -148,6 +150,13 @@ void GameManager::Play()
 		if (collider->IsBullet())
 		{
 			Bullet* bullet = static_cast<Bullet*>(collider);
+
+			if (bullet->getPosition().y > m_winSize.height + Explosion::DEFAULT_RADIUS * 0.6f)
+			{
+				bullet->Explode();
+				bullet->Dead();
+			}
+
 			if (bullet->IsToExplode())
 			{
 				Explosion* explosion = bullet->GetExplosion();

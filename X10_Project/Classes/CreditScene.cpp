@@ -118,26 +118,27 @@ bool CreditScene::init()
 		nullptr
 		);
 
-	auto keylistener = EventListenerKeyboard::create();
-	keylistener->onKeyPressed = CC_CALLBACK_2(CreditScene::OnKeyPressed, this);
-	_eventDispatcher->addEventListenerWithSceneGraphPriority(keylistener, this);
+	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(CreditScene::SkipCredit, this));
+	skipButton->setPosition(Vec2(260, 450));
+	FadeOut* fadeOut = FadeOut::create(1.0f);
+	FadeIn* fadeIn = FadeIn::create(1.0f);
+	Sequence* _blink = Sequence::createWithTwoActions(fadeOut, fadeIn);
+	RepeatForever* blink = RepeatForever::create(_blink);
+	skipButton->runAction(blink);
 
+	Menu* menu = Menu::createWithItem(skipButton);
+	menu->setPosition(Vec2::ZERO);
+	addChild(menu, 1);
 
-	Label* skipLabel = Label::createWithTTF("Press BackButton\nTo Skip", FileStuff::FONT_ARIAL, 10);
-	skipLabel->setPosition(Vec2(260, 450));
-	addChild(skipLabel);
 	runAction(seq);
 	return true;
 }
 
-void CreditScene::OnKeyPressed(EventKeyboard::KeyCode keyCode, Event* event)
+void CreditScene::SkipCredit()
 {
-	if (keyCode == EventKeyboard::KeyCode::KEY_BACKSPACE){
-		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
-		UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
-		Director::getInstance()->replaceScene(MainScene::createScene());
-	}
-
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
+	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 
 void CreditScene::EndScene()

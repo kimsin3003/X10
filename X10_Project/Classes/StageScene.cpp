@@ -3,7 +3,7 @@
 #include "StageScene.h"
 #include "MainScene.h"
 #include "GameScene.h"
-#include "IntroScene.h"
+#include "TutorialScene.h"
 #include "EndingScene.h"
 //layer
 #include "UILayer.h"
@@ -76,7 +76,6 @@ bool StageScene::init()
 
 void StageScene::ChangeCharacterToButton(Point finalPos, float scale)
 {
-
 	MenuItemImage* character = MenuItemImage::create();
 	character->setNormalImage(
 		Sprite::createWithSpriteFrame(
@@ -408,9 +407,15 @@ MenuItemImage* StageScene::MakeBackButton()
 
 void StageScene::GotoStage(Ref* pSender, int stageNum)
 {
+	if (stageNum == 1)
+	{
+		Scene* tutorialScene = TutorialScene::createScene();
+		Director::getInstance()->replaceScene(tutorialScene);
+		return;
+	}
+
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
-
 	GameManager* gameManager = GameManager::GetInstance();
 	gameManager->SetUILayer(gameScene->GetUILayer());
 	gameManager->SetGameLayer(gameScene->GetGameLayer());
@@ -424,9 +429,4 @@ void StageScene::GotoStage(Ref* pSender, int stageNum)
 void StageScene::ChangeToMainScene(Ref* pSender)
 {
 	Director::getInstance()->replaceScene(MainScene::createScene());
-}
-
-void StageScene::ChangeToStageScene(Ref* pSender)
-{
-	Director::getInstance()->replaceScene(StageScene::createScene());
 }

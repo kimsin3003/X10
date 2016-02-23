@@ -13,6 +13,11 @@ public:
 	bool IsBullet() { return false; }
 	const float& GetBoundingRadius();
 
+	enum
+	{
+		DEFAULT_RADIUS = 40
+	};
+
 protected:
 	void RemoveSelf();
 
@@ -22,11 +27,6 @@ protected:
 	float m_lifeDecrease;
 	float m_radius;
 	float m_maxRadius;
-
-	enum
-	{
-		DEFAULT_RADIUS = 40
-	};
 };
 
 #endif

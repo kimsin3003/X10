@@ -1,31 +1,37 @@
 #include "stdafx.h"
-#include "IntroScene.h"
+#include "TutorialScene.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
-#include "StageScene.h"
+#include "GameScene.h"
+#include "GameManager.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
 
-Scene* IntroScene::createScene()
+Scene* TutorialScene::createScene()
 {
 	Scene* scene = Scene::create();
 
-	Layer* layer = IntroScene::create();
+	Layer* layer = TutorialScene::create();
 	scene->addChild(layer);
 
 	return scene;
 }
 
-bool IntroScene::init()
+bool TutorialScene::init()
 {
 	if (!Layer::init())
 	{
 		return false;
 	}
 
-	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(IntroScene::ChangeToStageScene, this));
+	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(TutorialScene::ChangeToGameStageOneScene, this));
 	skipButton->setPosition(Vec2(160, 440));
-	//addChild(skipButton);
+
+	FadeOut* fadeOut = FadeOut::create(1.0f);
+	FadeIn* fadeIn = FadeIn::create(1.0f);
+	Sequence* _blink = Sequence::createWithTwoActions(fadeOut, fadeIn);
+	RepeatForever* blink = RepeatForever::create(_blink);
+	skipButton->runAction(blink);
 
 	Menu* menu = Menu::createWithItem(skipButton);
 	menu->setPosition(Vec2::ZERO);
@@ -34,6 +40,7 @@ bool IntroScene::init()
 
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 
+	/////////////////////////// sprites ///////////////////////////
 	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (background->getContentSize().width);
 	background->setAnchorPoint(Point::ZERO);
@@ -44,6 +51,17 @@ bool IntroScene::init()
 	character->setPosition(Point(200, 84));
 	addChild(character, 2);
 
+	Sprite* range = Sprite::create(FileStuff::SLING_RANGE);
+	range->setAnchorPoint(Vec2(0.5f, 0.0f));
+	range->setPosition(Vec2(10.0f, 40.0f));
+	character->addChild(range, -2);
+
+	Sprite* line = Sprite::create(FileStuff::SLING_LINE);
+	line->setAnchorPoint(Vec2(0.5f, 0.0f));
+	line->setPosition(Vec2(10, 40));
+	line->setOpacity(60);
+	character->addChild(line, -2);
+
 	Sprite* arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
 	arm->setAnchorPoint(Point(0.5, 0.4));
 	arm->setPosition(Vec2(8.5f, 45.0f));
@@ -51,7 +69,8 @@ bool IntroScene::init()
 
 	Sprite* ufo = Sprite::create(FileStuff::ENEMY);
 	ufo->setPosition(Vec2(160, 360));
-
+	
+	///////////////////////// animations ////////////////////////
 	int ufo_frameCut = 23;
 	float ufo_frameTime = 0.1f;
 
@@ -70,7 +89,7 @@ bool IntroScene::init()
 	Animate* destructAnimation = Animate::create(ufo_animation);
 
 	Sequence* removeAfterAnimation = Sequence::create(
-		DelayTime::create(23 *0.1f),
+		DelayTime::create(23 * 0.1f),
 		RemoveSelf::create(true),
 		NULL);
 
@@ -95,23 +114,38 @@ bool IntroScene::init()
 	bullet->setScale(2.0f);
 	bullet->setOpacity(0);
 	addChild(bullet);
+	
+	////////////////////////// actions //////////////////////////
 
 	float timeLine = 2.0f;
 
-	Sequence* moveArm = Sequence::create(
+	Sequence* rotateArm = Sequence::create(
 		DelayTime::create(timeLine),
 		RotateBy::create(0.4f, -35),
 		DelayTime::create(0.2f),
 		RotateBy::create(0.4f, 65),
 		DelayTime::create(0.3f),
-		RotateBy::create(0.4f, -45),
+		RotateBy::create(0.4f, -40),
+		nullptr); // total: 3.0 sec
+
+	Sequence* rototeLine = rotateArm->clone();
+
+	timeLine += 3.0f;
+
+	Sequence* shrinkLine = Sequence::create(
+		DelayTime::create(timeLine),
+		ScaleTo::create(0.4f, 0.7f),
+		DelayTime::create(0.2f),
+		ScaleTo::create(0.4f, 1.5f),
+		DelayTime::create(0.3f),
+		ScaleTo::create(0.4f, 1.0f),
 		nullptr); // total: 3.0 sec
 
 	timeLine += 3.0f;
 
 	Sequence* shootBullet = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_FLYING)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_FLYING)),
 		FadeIn::create(0.0f),
 		MoveTo::create(2.0f, ufo->getPosition() - Vec2(5, 25)),
 		DelayTime::create(0.15f),
@@ -122,15 +156,15 @@ bool IntroScene::init()
 
 	Sequence* explode = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_EXPLOSION)),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::PlayExplosion, this, ufo->getPosition() - Vec2(5, 25))),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlaySoundEffect, this, FileStuff::SOUND_FIREWORK_EXPLOSION)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlayExplosion, this, ufo->getPosition() - Vec2(5, 25))),
 		nullptr); // total: 0.5 sec
 
 	timeLine += 0.8f;
 
 	Sequence* destructUFO = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::PlaySoundEffect, this, FileStuff::SOUND_UFO_EXPLODE_DEFAULT)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::PlaySoundEffect, this, FileStuff::SOUND_UFO_EXPLODE_DEFAULT)),
 		destructAnimation,
 		removeAfterAnimation,
 		nullptr); // total: 2.5 sec
@@ -139,25 +173,32 @@ bool IntroScene::init()
 
 	Sequence* changeToStageScene = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(IntroScene::ChangeToStageScene, this)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::ChangeToGameStageOneScene, this)),
 		nullptr);
 
-	arm->runAction(moveArm);
+	arm->runAction(rotateArm);
+	line->runAction(rototeLine);
+	
+	line->runAction(shrinkLine);
+	
 	bullet->runAction(RepeatForever::create(bullet_animate));
 	bullet->runAction(shootBullet);
+	
 	runAction(explode);
+	
 	ufo->runAction(destructUFO);
-	this->runAction(changeToStageScene);
+	
+	runAction(changeToStageScene);
 
 	return true;
 }
 
-void IntroScene::PlaySoundEffect(const char* fileName)
+void TutorialScene::PlaySoundEffect(const char* fileName)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(fileName);
 }
 
-void IntroScene::PlayExplosion(const Vec2& pos)
+void TutorialScene::PlayExplosion(const Vec2& pos)
 {
 	ParticleExplosion* explosion = ParticleExplosion::create();
 	explosion->setColor(Color3B());
@@ -176,8 +217,17 @@ void IntroScene::PlayExplosion(const Vec2& pos)
 	addChild(explosion, 3);
 }
 
-void IntroScene::ChangeToStageScene()
+void TutorialScene::ChangeToGameStageOneScene()
 {
-	removeAllChildrenWithCleanup(true);
-	Director::getInstance()->replaceScene(StageScene::createScene());
+	Scene* scene = GameScene::createScene();
+	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
+	
+	GameManager* gameManager = GameManager::GetInstance();
+	gameManager->SetUILayer(gameScene->GetUILayer());
+	gameManager->SetGameLayer(gameScene->GetGameLayer());
+	gameManager->SetStage(1);
+
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
+
+	Director::getInstance()->replaceScene(sceneWithEffect);
 }

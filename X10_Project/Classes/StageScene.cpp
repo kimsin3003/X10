@@ -89,8 +89,10 @@ void StageScene::MakeWaitSign()
 
 }
 
-void StageScene::ChangeCharacterToButton(Point finalPos, float scale)
+void StageScene::ChangeCharacterToButton(Sprite* characterSprite, Point finalPos, float scale)
 {
+	characterSprite->removeFromParent();
+
 
 	getChildByName("waitSign")->removeFromParent();
 	MenuItemImage* character = MenuItemImage::create();
@@ -145,7 +147,7 @@ void StageScene::MoveCharacter(Sprite* character, int stageNum)
 			DelayTime::create(standingTime), 
 			CallFunc::create(CC_CALLBACK_0(StageScene::PlaySound, this, FileStuff::SOUND_FOOTSTEP)),
 			MoveTo::create(timeLength, finishPos), 
-			CallFunc::create(CC_CALLBACK_0(StageScene::ChangeCharacterToButton, this, finishPos, finishScale)),
+			CallFunc::create(CC_CALLBACK_0(StageScene::ChangeCharacterToButton, this, character, finishPos, finishScale)),
 			RemoveSelf::create(),
 			nullptr
 			)
@@ -164,7 +166,7 @@ void StageScene::MoveCharacter(Sprite* character, int stageNum)
 	}
 	else
 	{
-		ChangeCharacterToButton(finishPos, finishScale);
+		ChangeCharacterToButton(character, finishPos, finishScale);
 	}
 
 }

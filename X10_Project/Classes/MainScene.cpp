@@ -9,6 +9,7 @@
 #include "ConstVars.h"
 #include "FileStuff.h"
 #include "MapEditer.h"
+#include "AdmobHelper.h"
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
 
@@ -147,6 +148,15 @@ bool MainScene::init()
 
 	menuItems.pushBack(setToIntro);
 
+	/* admob button*/
+	MenuItemImage* playAd = MenuItemImage::create(FileStuff::WHITE, FileStuff::BLACKOUT,
+		CC_CALLBACK_0(MainScene::PlayAd, this));
+	playAd->setScale(0.3f);
+	playAd->setPosition(Vec2(320.0f, 0.0f));
+
+	menuItems.pushBack(playAd);
+
+
 	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");
@@ -284,4 +294,13 @@ void MainScene::ExitGame()
 void MainScene::TurnOffDisplayStat()
 {
 	Director::getInstance()->setDisplayStats(false);
+}
+
+void MainScene::PlayAd()
+{
+	if (AdmobHelper::isAdShowing)
+		AdmobHelper::hideAd();
+	else
+		AdmobHelper::showAd();
+	return;
 }

@@ -8,6 +8,8 @@ public:
     bool init();
     CREATE_FUNC(MainScene);
 
+	void PlayAd();
+
 private:
 	void ChangeToStageScene();
 	void ChangeToTutorialScene();

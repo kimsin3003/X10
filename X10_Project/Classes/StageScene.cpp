@@ -47,6 +47,11 @@ bool StageScene::init()
 	setName("StageScene");
 
 	m_stageToPlay = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+	if (m_stageToPlay < 1 )
+	{
+		m_stageToPlay = 1;
+	}
+
 	m_maxStageNum = StageInformation::GetMaxStageNum();
 
 	m_background = LoadBackground();

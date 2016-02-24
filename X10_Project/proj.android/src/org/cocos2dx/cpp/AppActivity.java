@@ -51,8 +51,59 @@ import com.google.android.gms.ads.InterstitialAd;
 
 public class AppActivity extends Cocos2dxActivity 
 {
+	private static final String AD_UNIT_ID = "ca-app-pub-1690383002847701/2009330075";
+	private InterstitialAd mInterstitialAd;
+	private static AppActivity _appActivity;
+	private static AdRequest mAdReq;
 	
-//	private static AppActivity _appActiviy;
+	@Override
+	protected void onCreate(Bundle savedInstanceState)
+	{
+		super.onCreate(savedInstanceState);
+		
+		mInterstitialAd = new InterstitialAd(this);
+	    mInterstitialAd.setAdUnitId(AD_UNIT_ID);
+		
+
+	    AdRequest adRequest = new AdRequest.Builder()
+	    		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+	    		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
+	    		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
+	    		.build();
+	    mAdReq = adRequest;
+	    mInterstitialAd.loadAd(adRequest);
+	    
+	    mInterstitialAd.setAdListener(new AdListener(){
+			@Override
+			public void onAdClosed() {
+			    mInterstitialAd.loadAd(mAdReq);
+			}
+		});
+	    
+	    _appActivity = this;
+	    
+	} 
+	
+	public static void showAd()
+	{
+		_appActivity.runOnUiThread(new Runnable() {
+			
+			@Override
+			public void run() {
+				if(_appActivity.mInterstitialAd.isLoaded())
+					_appActivity.mInterstitialAd.show();
+				
+			}
+		});	
+	}
+	
+	public static void hideAd()
+	{
+		
+	}
+	
+	
+//	private static AppActivity _appActivity;
 //	private InterstitialAd mInterstitialAd;
 //	private static final String AD_UNIT_ID = "ca-app-pub-1690383002847701/2009330075";
 //
@@ -61,24 +112,34 @@ public class AppActivity extends Cocos2dxActivity
 //	protected void onCreate(Bundle savedInstanceState)
 //	{
 //		super.onCreate(savedInstanceState);
-//	
-//		mInterstitialAd.setAdUnitId(AD_UNIT_ID);
-//		mInterstitialAd.setAdListener(new AdListener(){
+//
+//		_appActivity.runOnUiThread(new Runnable() {	
 //			@Override
-//			public void onAdClosed() {
-//				requestNewInterstitial();
+//			public void run() {
+//				// TODO Auto-generated method stub
+//
+//				mInterstitialAd.setAdUnitId(AD_UNIT_ID);
+//				mInterstitialAd.setAdListener(new AdListener(){
+//					@Override
+//					public void onAdClosed() {
+//						requestNewInterstitial();
+//					}
+//				});
+//				
+//						
 //			}
 //		});
 //		
 //		requestNewInterstitial();
+//
+//		_appActivity = this;
 //		
-//		_appActiviy = this;
 //	}
 //	
 //	
-	public static void hideAd()
-	{
-//	     _appActiviy.runOnUiThread(new Runnable()
+//	public static void hideAd()    
+//	{
+//	     _appActivity.runOnUiThread(new Runnable()
 //	     {
 //		     @Override
 //		     public void run()
@@ -86,30 +147,37 @@ public class AppActivity extends Cocos2dxActivity
 //		    	 
 //		     }
 //	     });
-	}
-	
-	
-	public static void showAd()
-	{
-//		_appActiviy.runOnUiThread(new Runnable()
+//	}
+//	
+//	
+//	public static void showAd()
+//	{
+//		_appActivity.runOnUiThread(new Runnable()
 //		{
 //			 @Override
 //			 public void run()
 //			 {	
-//				if(_appActiviy.mInterstitialAd.isLoaded())
-//					_appActiviy.mInterstitialAd.show();	
+//				if(_appActivity.mInterstitialAd.isLoaded())
+//					_appActivity.mInterstitialAd.show();	
 //			 }
 //	     });
-	}
+//	}
 //	
 //	private void requestNewInterstitial() {
-//        AdRequest adRequest = new AdRequest.Builder()
-//        		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-//        		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
-//        		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
-//        		.build();
+//		_appActivity.runOnUiThread(new Runnable() {
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
 //
-//        mInterstitialAd.loadAd(adRequest);
+//		        AdRequest adRequest = new AdRequest.Builder()
+//		        		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//		        		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
+//		        		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
+//		        		.build();
+//
+//		        mInterstitialAd.loadAd(adRequest);
+//			}
+//		});			
 //	}
 //	
 //
@@ -138,5 +206,5 @@ public class AppActivity extends Cocos2dxActivity
 //    {
 //        super.onDestroy();
 //    }
-	
+//	
 }

@@ -54,7 +54,7 @@ void Stone::ToSelf(const Bullet* bullet)
 	if (m_applyEffectToMe)
 	{
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-			FileStuff::SOUND_STONE_BREAK, false, 1, 0, 1);
+			FileStuff::SOUND_STONE_BREAK);
 
 		m_spr->runAction(m_animate);
 

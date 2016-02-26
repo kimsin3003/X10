@@ -2,7 +2,6 @@
 #include "Sling.h"
 #include "GameManager.h"
 #include "FileStuff.h"
-#include <SimpleAudioEngine.h>
 
 Sling::Sling() : m_shotAngle(Vec2::ZERO), m_shotPower(0), 
 				 m_arm(nullptr), m_character(nullptr), 

@@ -74,7 +74,7 @@ bool MainScene::init()
 	if (UserDefault::getInstance()->getBoolForKey(ConstVars::CLEARED_ONCE)){
 
 		MenuItemImage* creditGameButton = MenuItemImage::create(FileStuff::CREDIT, FileStuff::CREDIT);
-		creditGameButton->setCallback(CC_CALLBACK_0(MainScene::SetToIntro, this));
+		creditGameButton->setCallback(CC_CALLBACK_0(MainScene::ChangeToCreditScene, this));
 		creditGameButton->setPosition(160, 300);
 		creditGameButton->setScale(0.8);
 		creditGameButton->setAnchorPoint(Vec2(0.5f, 0.5f));
@@ -244,6 +244,11 @@ void MainScene::BrightenStreetLight()
 	Sprite* title = Sprite::create(FileStuff::TITLE);
 	title->setPosition(Vec2(-100.0f, +120.0f));
 	light_beam->addChild(title);
+}
+
+void MainScene::ChangeToCreditScene()
+{
+	Director::getInstance()->replaceScene(CreditScene::createScene());
 }
 
 void MainScene::ChangeToStageScene()

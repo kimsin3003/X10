@@ -116,11 +116,11 @@ void GameManager::ShotBullet()
 
 		if (m_curStageNum == 12)
 		{
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_CAR_BREAK, false, 1.0f, 0, 0);
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_CAR_BREAK);
 		}
 		else
 		{
-			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_FLYING, false, 1.0f, 0, 0);
+			CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_FLYING);
 		}
 
 		m_sling->ShotComplete();
@@ -164,11 +164,11 @@ void GameManager::Play()
 				m_gameLayer->addChild(explosion);
 				if (m_curStageNum == 12)
 				{
-					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_CAR_CRASH, false, 1.0f, 0, 0);
+					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_CAR_CRASH);
 				}
 				else 
 				{
-					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_EXPLOSION, false, 1.0f, 0, 0);
+					CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_FIREWORK_EXPLOSION);
 				}
 			}
 		}

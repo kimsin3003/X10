@@ -11,6 +11,7 @@ public:
 	void PlayAd();
 
 private:
+	void ChangeToCreditScene();
 	void ChangeToStageScene();
 	void ChangeToTutorialScene();
 	void ChangeToMapEditScene();

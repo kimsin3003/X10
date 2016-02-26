@@ -7,6 +7,7 @@
 #include "GameManager.h"
 #include "FileStuff.h"
 #include "ConstVars.h"
+#include "AdScene.h"
 
 bool UILayer::init()
 {
@@ -22,7 +23,7 @@ bool UILayer::init()
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON_CLICKED,
-		CC_CALLBACK_1(UILayer::GotoStage, this, UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE)));
+		CC_CALLBACK_1(UILayer::Retry, this, UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE)));
 
 	Size buttonSize = retryButton->getContentSize();
 
@@ -65,7 +66,7 @@ void UILayer::MakeSuccessWidget(int stage)
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON_CLICKED,
-		CC_CALLBACK_1(UILayer::GotoStage, this, current_stage));
+		CC_CALLBACK_1(UILayer::Retry, this, current_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
 
@@ -112,7 +113,7 @@ void UILayer::MakeFailWidget(int stage)
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON_CLICKED,
-		CC_CALLBACK_1(UILayer::GotoStage, this, current_stage));
+		CC_CALLBACK_1(UILayer::Retry, this, current_stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
 
@@ -145,12 +146,17 @@ void UILayer::MakeFailWidget(int stage)
 
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
+	//count fail num
+	int failCount = UserDefault::getInstance()->getIntegerForKey(ConstVars::FAIL_COUNT, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::FAIL_COUNT, ++failCount);
+
 	TransitionFade* sceneWithEffect = TransitionFade::create(0.75f, StageScene::createScene());
 	Director::getInstance()->replaceScene(sceneWithEffect);
 }
 
 void UILayer::GotoStage(Ref* pSender, int stageNum)
 {
+
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 
@@ -159,7 +165,21 @@ void UILayer::GotoStage(Ref* pSender, int stageNum)
 	gameManager->SetGameLayer(gameScene->GetGameLayer());
 	gameManager->SetStage(stageNum);
 
-	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 	Director::getInstance()->replaceScene(sceneWithEffect);
+}
+
+void UILayer::Retry(Ref* pSender, int current_stage)
+{
+	int failCount = UserDefault::getInstance()->getIntegerForKey(ConstVars::FAIL_COUNT, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::FAIL_COUNT, ++failCount);
+
+	if (failCount % 3 == 0)
+	{
+		Director::getInstance()->replaceScene(AdScene::createScene());
+	}
+	else{
+		GotoStage(pSender, current_stage);
+	}
 }

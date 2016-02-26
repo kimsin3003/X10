@@ -5,6 +5,8 @@
 #include "UILayer.h"
 #include "Sling.h"
 #include "FileStuff.h"
+#include "ConstVars.h"
+#include "AdScene.h"
 
 Scene* GameScene::createScene()
 {
@@ -34,6 +36,9 @@ bool GameScene::init()
 	addChild(m_background);
 
 	m_gameManager = GameManager::GetInstance();
+
+	int playCount = UserDefault::getInstance()->getIntegerForKey(ConstVars::PLAY_COUNT, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::PLAY_COUNT, ++playCount);
 
 	scheduleUpdate();
 

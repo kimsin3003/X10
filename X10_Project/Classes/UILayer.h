@@ -22,6 +22,7 @@ private:
 		BUTTON_HEIGHT = 40
 	};
 
+	void Retry(Ref* pSender, int current_stage);
 	void ChangeToStageScene(Ref* pSender);
 	void GotoStage(Ref* pSender, int stageNum);
 

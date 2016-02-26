@@ -148,15 +148,7 @@ bool MainScene::init()
 
 	menuItems.pushBack(setToIntro);
 
-	/* admob button*/
-	MenuItemImage* playAd = MenuItemImage::create(FileStuff::WHITE, FileStuff::BLACKOUT,
-		CC_CALLBACK_0(MainScene::PlayAd, this));
-	playAd->setScale(0.3f);
-	playAd->setPosition(Vec2(160.0f, 0.0f));
-
-	menuItems.pushBack(playAd);
-
-
+	
 	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");

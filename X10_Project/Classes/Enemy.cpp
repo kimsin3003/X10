@@ -49,7 +49,7 @@ void Enemy::ToSelf(const Bullet* bullet)
 		m_applyEffectToMe = false;
 	
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-			FileStuff::SOUND_UFO_EXPLODE_DEFAULT, false, 1.0f, 0, 0);		
+			FileStuff::SOUND_UFO_EXPLODE_DEFAULT);		
 	
 		m_spr->runAction(m_destructAnimation);
 

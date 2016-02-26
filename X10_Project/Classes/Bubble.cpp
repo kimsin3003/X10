@@ -49,7 +49,7 @@ void Bubble::ToSelf(const Bullet* bullet)
 	if (m_applyEffectToMe)
 	{
 		CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-			FileStuff::SOUND_BUBBLE_POP, false, 1.0f, 0, 0);
+			FileStuff::SOUND_BUBBLE_POP);
 
 		m_applyEffectToMe = false;
 

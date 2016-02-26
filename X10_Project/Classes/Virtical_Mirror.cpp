@@ -42,7 +42,7 @@ void Virtical_Mirror::ToBullet(Bullet* bullet)
 void Virtical_Mirror::ToSelf(const Bullet* bullet)
 {
 	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(
-		FileStuff::SOUND_MIRROR, false, 1.0f, 0, 0);
+		FileStuff::SOUND_MIRROR);
 }
 
 void Virtical_Mirror::ToSelf(const Explosion* explosion)

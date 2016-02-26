@@ -82,7 +82,7 @@ void EndingScene::ShowCrashingScene()
 
 void EndingScene::ChangeSoundEffect(const char* sound)
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(sound, false);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(sound);
 }
 
 void EndingScene::ShowAfterCrash()

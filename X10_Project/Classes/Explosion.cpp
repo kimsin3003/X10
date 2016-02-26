@@ -1,7 +1,6 @@
 #include "stdafx.h"
 #include "Collider.h"
 #include "Explosion.h"
-#include <SimpleAudioEngine.h>
 
 bool Explosion::init()
 {

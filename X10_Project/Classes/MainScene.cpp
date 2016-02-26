@@ -152,7 +152,7 @@ bool MainScene::init()
 	MenuItemImage* playAd = MenuItemImage::create(FileStuff::WHITE, FileStuff::BLACKOUT,
 		CC_CALLBACK_0(MainScene::PlayAd, this));
 	playAd->setScale(0.3f);
-	playAd->setPosition(Vec2(320.0f, 0.0f));
+	playAd->setPosition(Vec2(160.0f, 0.0f));
 
 	menuItems.pushBack(playAd);
 

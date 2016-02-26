@@ -51,135 +51,160 @@ import com.google.android.gms.ads.InterstitialAd;
 
 public class AppActivity extends Cocos2dxActivity 
 {
-	
-	private static AppActivity _appActiviy;
-	private InterstitialAd mInterstitialAd;
 	private static final String AD_UNIT_ID = "ca-app-pub-1690383002847701/2009330075";
-	
-//	// Helper get display screen to avoid deprecated function use
-//	private Point getDisplaySize(Display d)
-//	{
-//	    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB)
-//	    {
-//	        return getDisplaySizeGE11(d);
-//	    }
-//	    return getDisplaySizeLT11(d);
-//	}
-//	
-//	@TargetApi(Build.VERSION_CODES.HONEYCOMB_MR2)
-//	private Point getDisplaySizeGE11(Display d)
-//	{
-//	    Point p = new Point(0, 0);
-//	    d.getSize(p);
-//	    return p;
-//	}
-//	private Point getDisplaySizeLT11(Display d)
-//	{
-//	    try
-//	    {
-//	        Method getWidth = Display.class.getMethod("getWidth", new Class[] {});
-//	        Method getHeight = Display.class.getMethod("getHeight", new Class[] {});
-//	        return new Point(((Integer) getWidth.invoke(d, (Object[]) null)).intValue(), ((Integer) getHeight.invoke(d, (Object[]) null)).intValue());
-//	    }
-//	    catch (NoSuchMethodException e2) // None of these exceptions should ever occur.
-//	    {
-//	        return new Point(-1, -1);
-//	    }
-//	    catch (IllegalArgumentException e2)
-//	    {
-//	        return new Point(-2, -2);
-//	    }
-//	    catch (IllegalAccessException e2)
-//	    {
-//	        return new Point(-3, -3);
-//	    }
-//	    catch (InvocationTargetException e2)
-//	    {
-//	        return new Point(-4, -4);
-//	    }
-//	}
-//
+	private InterstitialAd mInterstitialAd;
+	private static AppActivity _appActivity;
+	private static AdRequest mAdReq;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-	
-		mInterstitialAd.setAdUnitId(AD_UNIT_ID);
-		mInterstitialAd.setAdListener(new AdListener(){
+		
+		mInterstitialAd = new InterstitialAd(this);
+	    mInterstitialAd.setAdUnitId(AD_UNIT_ID);
+		
+
+	    AdRequest adRequest = new AdRequest.Builder()
+	    		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+	    		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
+	    		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
+	    		.build();
+	    mAdReq = adRequest;
+	    mInterstitialAd.loadAd(adRequest);
+	    
+	    mInterstitialAd.setAdListener(new AdListener(){
 			@Override
 			public void onAdClosed() {
-				requestNewInterstitial();
+			    mInterstitialAd.loadAd(mAdReq);
 			}
 		});
-		
-		requestNewInterstitial();
-		
-		_appActiviy = this;
-	}
-	
-	
-	public static void hideAd()
-	{
-	     _appActiviy.runOnUiThread(new Runnable()
-	     {
-		     @Override
-		     public void run()
-		     {
-		    	 
-		     }
-	     });
-	}
-	
+	    
+	    _appActivity = this;
+	    
+	} 
 	
 	public static void showAd()
 	{
-		_appActiviy.runOnUiThread(new Runnable()
-		{
-			 @Override
-			 public void run()
-			 {	
-				if(_appActiviy.mInterstitialAd.isLoaded())
-					_appActiviy.mInterstitialAd.show();	
-			 }
-	     });
-	}
-	
-	private void requestNewInterstitial() {
-        AdRequest adRequest = new AdRequest.Builder()
-        		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
-        		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
-        		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
-        		.build();
-
-        mInterstitialAd.loadAd(adRequest);
-	}
-	
-
-	@Override
-	protected void onResume() 
-	{
-		super.onResume();
-		if (mInterstitialAd != null) 
-		{
-
-		}
-	}
-	
-	@Override
-	protected void onPause() 
-	{
-		if (mInterstitialAd != null) 
-		{
+		_appActivity.runOnUiThread(new Runnable() {
 			
-		}
-		super.onPause();
+			@Override
+			public void run() {
+				if(_appActivity.mInterstitialAd.isLoaded())
+					_appActivity.mInterstitialAd.show();
+				
+			}
+		});	
 	}
 	
-    @Override
-    protected void onDestroy() 
-    {
-        super.onDestroy();
-    }
+	public static void hideAd()
+	{
+		
+	}
 	
+	
+//	private static AppActivity _appActivity;
+//	private InterstitialAd mInterstitialAd;
+//	private static final String AD_UNIT_ID = "ca-app-pub-1690383002847701/2009330075";
+//
+//	
+//	@Override
+//	protected void onCreate(Bundle savedInstanceState)
+//	{
+//		super.onCreate(savedInstanceState);
+//
+//		_appActivity.runOnUiThread(new Runnable() {	
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
+//
+//				mInterstitialAd.setAdUnitId(AD_UNIT_ID);
+//				mInterstitialAd.setAdListener(new AdListener(){
+//					@Override
+//					public void onAdClosed() {
+//						requestNewInterstitial();
+//					}
+//				});
+//				
+//						
+//			}
+//		});
+//		
+//		requestNewInterstitial();
+//
+//		_appActivity = this;
+//		
+//	}
+//	
+//	
+//	public static void hideAd()    
+//	{
+//	     _appActivity.runOnUiThread(new Runnable()
+//	     {
+//		     @Override
+//		     public void run()
+//		     {
+//		    	 
+//		     }
+//	     });
+//	}
+//	
+//	
+//	public static void showAd()
+//	{
+//		_appActivity.runOnUiThread(new Runnable()
+//		{
+//			 @Override
+//			 public void run()
+//			 {	
+//				if(_appActivity.mInterstitialAd.isLoaded())
+//					_appActivity.mInterstitialAd.show();	
+//			 }
+//	     });
+//	}
+//	
+//	private void requestNewInterstitial() {
+//		_appActivity.runOnUiThread(new Runnable() {
+//			@Override
+//			public void run() {
+//				// TODO Auto-generated method stub
+//
+//		        AdRequest adRequest = new AdRequest.Builder()
+//		        		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
+//		        		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
+//		        		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
+//		        		.build();
+//
+//		        mInterstitialAd.loadAd(adRequest);
+//			}
+//		});			
+//	}
+//	
+//
+//	@Override
+//	protected void onResume() 
+//	{
+//		super.onResume();
+//		if (mInterstitialAd != null) 
+//		{
+//
+//		}
+//	}
+//	
+//	@Override
+//	protected void onPause() 
+//	{
+//		if (mInterstitialAd != null) 
+//		{
+//			
+//		}
+//		super.onPause();
+//	}
+//	
+//    @Override
+//    protected void onDestroy() 
+//    {
+//        super.onDestroy();
+//    }
+//	
 }

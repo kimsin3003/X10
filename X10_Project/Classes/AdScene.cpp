@@ -47,4 +47,5 @@ void AdScene::ChangeToGameScene(Ref* pSender)
 	gameManager->SetStage(stageNum);
 
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
+	Director::getInstance()->replaceScene(sceneWithEffect);
 }

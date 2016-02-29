@@ -21,46 +21,30 @@ bool AdScene::init(){
 		return false;
 	}
 
-	//setColor(Color3B(30, 30, 40)); //change gray color
+	Sprite* testSpr = Sprite::create(FileStuff::LIGHT_BEAM);
+	addChild(testSpr);
 
-	Label* waitLabel = Label::create("It's Ad time.", "arial", 24);
-	Director* dir = Director::getInstance();
-	float width = dir->getVisibleSize().width;
-	float height = dir->getVisibleSize().height;
-	waitLabel->setPosition(Vec2(width / 2, height / 2));
-	addChild(waitLabel);
+	testSpr->runAction(MoveBy::create(3.0f, Vec2(150, 150)));
 
-	//PlayAd();
-	
-	lifeTime = 3.0;
-	scheduleUpdate();
+	Sequence* seq = Sequence::create(
+		DelayTime::create(3.0f),
+		CallFuncN::create(CC_CALLBACK_1(AdScene::ChangeToGameScene, this)),
+		nullptr);
+
+	runAction(seq);
 }
 
-void AdScene::PlayAd()
+void AdScene::ChangeToGameScene(Ref* pSender)
 {
-	AdmobHelper::showAd();
-}
+	int stageNum = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
 
-void AdScene::ExitScene()
-{
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
+
 	GameManager* gameManager = GameManager::GetInstance();
 	gameManager->SetUILayer(gameScene->GetUILayer());
 	gameManager->SetGameLayer(gameScene->GetGameLayer());
-	gameManager->SetStage(gameManager->GetStage());
+	gameManager->SetStage(stageNum);
 
-//	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
-
-	Director::getInstance()->replaceScene(scene);
-}
-
-void AdScene::update(float dt)
-{
-	lifeTime -= dt;
-
-	if (lifeTime < 0)
-	{
-		ExitScene();
-	}
+	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 }

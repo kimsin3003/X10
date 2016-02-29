@@ -11,13 +11,7 @@ public:
 	static Scene* createScene();
 	CREATE_FUNC(AdScene);
 	bool init();
-	void PlayAd();
-	void ExitScene();
-	void update(float dt);
-
-private:
-	float lifeTime;
-
+	void ChangeToGameScene(Ref* pSender);
 };
 
 #endif

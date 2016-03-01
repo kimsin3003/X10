@@ -9,7 +9,8 @@ public:
 	bool init();
 
 private:
-
+	void ShowDeadbody();
+	void ShowBlinkingLight();
 	void ShowCrashingScene();
 	void ChangeSoundEffect(const char* sound);
 	void ChangeBackgroundImg(string bgImg);
@@ -20,6 +21,7 @@ private:
 	void ShowHospital();
 	void ShowWhiteScene();
 	void RemoveAllChildren();
+	void SetStreetLight(int isOn);
 
 	Sprite* m_background;
 };

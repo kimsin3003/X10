@@ -18,41 +18,55 @@ Scene* EndingScene::createScene()
 
 bool EndingScene::init()
 {
-
 	if (!Layer::init())
 	{
 		return false;
 	}
+	
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic(true);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playBackgroundMusic(FileStuff::SOUND_BEFORE_ENDING_BACKGROUND);
 
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopAllEffects();
-	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FileStuff::SOUND_ENDING_BACKGROUND);
+	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13OFF);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setScale(scale);
+	m_background->setAnchorPoint(Vec2::ZERO);
+	addChild(m_background);
 
 	Sequence* seq = Sequence::create(
-	DelayTime::create(2.0f),
+		DelayTime::create(2.3f),
 
- 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowCrashingScene, this)),
- 	DelayTime::create(9.0f),
+		CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowBlinkingLight, this)),
+		DelayTime::create(3.0f),
 
- 	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowAfterCrash, this)),
- 	DelayTime::create(7.0f),
+		CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowDeadbody, this)),
+		DelayTime::create(3.3f),
 
-	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowWhiteScene, this)),
-	DelayTime::create(3.0f),
+		CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowCrashingScene, this)),
+		DelayTime::create(9.0f),
 
-	CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowHospital, this)),
-	DelayTime::create(29.0f),
+		CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowAfterCrash, this)),
+		DelayTime::create(7.0f),
 
-	CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeToCreditScene, this)),
+		CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowWhiteScene, this)),
+		DelayTime::create(3.0f),
 
-	nullptr);
+		CallFuncN::create(CC_CALLBACK_0(EndingScene::ShowHospital, this)),
+		DelayTime::create(29.0f),
+
+		CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeToCreditScene, this)),
+		nullptr);
 
 	runAction(seq);
+
 	return true;
 }
 
 void EndingScene::ShowCrashingScene()
 {
 	removeAllChildrenWithCleanup(true);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->stopBackgroundMusic();
+	CocosDenshion::SimpleAudioEngine::getInstance()->playBackgroundMusic(FileStuff::SOUND_ENDING_BACKGROUND);
 
 	CallFunc* nodding1 = CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_0));
 	CallFunc* nodding2 = CallFunc::create(CC_CALLBACK_0(EndingScene::ChangeBackgroundImg, this, FileStuff::BEFORE_CRASHING_1));
@@ -79,11 +93,60 @@ void EndingScene::ShowCrashingScene()
 
 	runAction(seq);
 }
+void EndingScene::ShowDeadbody()
+{
+	m_background->removeFromParent();
+	m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13APP);
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setAnchorPoint(Point::ZERO);
+	m_background->setScale(scale);
+	addChild(m_background);
+
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_CRASH, false);
+}
+
+void EndingScene::ShowBlinkingLight()
+{
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_STREETLIGHTS);
+
+	CallFunc* lightOff = CallFunc::create(CC_CALLBACK_0(EndingScene::SetStreetLight, this, false));
+	CallFunc* lightOn = CallFunc::create(CC_CALLBACK_0(EndingScene::SetStreetLight, this, true));
+
+	Sequence* seq = Sequence::create(
+		lightOn,
+		DelayTime::create(0.25f),
+		lightOff,
+		DelayTime::create(1.0f),
+		lightOn,
+		DelayTime::create(0.2f),
+		lightOff,
+		DelayTime::create(0.2f),
+		lightOn,
+		nullptr);
+
+	runAction(seq);
+}
 
 void EndingScene::ChangeSoundEffect(const char* sound)
 {
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(sound);
 }
+
+void EndingScene::SetStreetLight(int isOn)
+{
+	m_background->removeFromParent();
+	if (isOn)
+		m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13ON);
+	else
+		m_background = Sprite::create(FileStuff::STAGE_BACKGROUND_13OFF);
+
+	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);
+	m_background->setAnchorPoint(Point::ZERO);
+	m_background->setScale(scale);
+	addChild(m_background);
+}
+
 
 void EndingScene::ShowAfterCrash()
 {
@@ -104,7 +167,6 @@ void EndingScene::ChangeBackgroundImg(string bgImg)
 	m_background->setScale(scale);
 	m_background->setName("background");
 	addChild(m_background);
-
 }
 
 void EndingScene::AddMonitor()
@@ -164,7 +226,7 @@ void EndingScene::FadeOut()
 
 void EndingScene::ShowHospital()
 {
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_EAR_RINGING, false, 3.0f);
+	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_EAR_RINGING);
 
 	m_background = Sprite::create(FileStuff::HOSPITAL_CLOSED_EYE);
 	float scale = (Director::getInstance()->getVisibleSize().width) / (m_background->getContentSize().width);

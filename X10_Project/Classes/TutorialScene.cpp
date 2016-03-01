@@ -58,24 +58,24 @@ bool TutorialScene::init()
 
 	Sprite* line = Sprite::create(FileStuff::SLING_LINE);
 	line->setAnchorPoint(Vec2(0.5f, 0.0f));
-	line->setPosition(Vec2(10, 40));
+	line->setPosition(Vec2(29.5f, 40.0f));
 	line->setOpacity(60);
 	character->addChild(line, -2);
 
 	Sprite* dot = Sprite::create(FileStuff::SLING_LINE_DOT);
-	dot->setPosition(Vec2(12, 120));
+	dot->setPosition(Vec2(29.5f, 120.0f));
 	dot->setScale(3.0f);
 	character->addChild(dot, 3);
 
 	Sprite* arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
-	arm->setAnchorPoint(Point(0.5, 0.4));
-	arm->setPosition(Vec2(10.0f, 45.0f));
+	arm->setPosition(Vec2(29.5f, 45.0f));
+	arm->setAnchorPoint(Point(0.5f, 0.4f));
 	character->addChild(arm, -1);
 
 	Sprite* ufo = Sprite::create(FileStuff::ENEMY);
 	ufo->setPosition(Vec2(160, 360));
 	
-	///////////////////////// animations ////////////////////////
+	///////////////////////// animations //////////////////////////
 	int ufo_frameCut = 23;
 	float ufo_frameTime = 0.1f;
 

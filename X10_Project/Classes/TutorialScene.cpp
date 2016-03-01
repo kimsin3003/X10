@@ -69,7 +69,7 @@ bool TutorialScene::init()
 
 	Sprite* arm = Sprite::createWithSpriteFrameName(FileStuff::CHARACTER_ARM);
 	arm->setAnchorPoint(Point(0.5, 0.4));
-	arm->setPosition(Vec2(8.5f, 45.0f));
+	arm->setPosition(Vec2(10.0f, 45.0f));
 	character->addChild(arm, -1);
 
 	Sprite* ufo = Sprite::create(FileStuff::ENEMY);

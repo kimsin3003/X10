@@ -55,6 +55,11 @@ void LightManager::InitPositions()
 
 Vec2 LightManager::GetPosition(int stageNum)
 {
+	if (stageNum < 0 || stageNum > StageInformation::GetMaxStageNum())
+	{
+		return Vec2(0.0f, 0.0f);
+	}
+
 	return m_positions.at(stageNum);
 }
 

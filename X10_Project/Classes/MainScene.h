@@ -16,7 +16,7 @@ private:
 	void ChangeToTutorialScene();
 	void ChangeToMapEditScene();
 	void ExitGame();
-	void SetToIntro();
+	void ResetGame();
 	void SetToEnding();
 	void TurnOffDisplayStat();
 	void WalkToStreetLight();
@@ -27,8 +27,7 @@ private:
 
 	Sprite* m_streetLight;
 	Sprite* m_character;
-	Vec2 m_StreetLightPos; 
-	
+	Vec2 m_StreetLightPos; 	
 };
 
 #endif

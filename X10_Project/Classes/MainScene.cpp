@@ -46,15 +46,11 @@ bool MainScene::init()
 	m_StreetLightPos = m_streetLight->getPosition();
 	addChild(m_streetLight);
 
-
-	
-
-
 	Vector<MenuItem*> menuItems;
 
 	if ( UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE) > 1 ){
 		MenuItemImage* resetGameButton = MenuItemImage::create(FileStuff::RESET_GAME, FileStuff::RESET_GAME);
-		resetGameButton->setCallback(CC_CALLBACK_0(MainScene::SetToIntro, this));
+		resetGameButton->setCallback(CC_CALLBACK_0(MainScene::ResetGame, this));
 		resetGameButton->setPosition(160, 400);
 		resetGameButton->setScale(0.8);
 		resetGameButton->setAnchorPoint(Vec2(0.5f, 0.5f));
@@ -148,7 +144,6 @@ bool MainScene::init()
 
 	//menuItems.pushBack(setToIntro);
 
-	
 	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");
@@ -209,7 +204,6 @@ void MainScene::StreetLightOff()
 {
 	m_streetLight->removeFromParent();
 	m_streetLight = Sprite::create(FileStuff::GARO_OFF);
-	//m_streetLight->setScale(Director::getInstance()->getContentScaleFactor());
 	m_streetLight->setFlipX(true);
 	addChild(m_streetLight);
 	m_streetLight->setPosition(m_StreetLightPos);
@@ -219,7 +213,6 @@ void MainScene::StreetLightOn()
 {
 	m_streetLight->removeFromParent();
 	m_streetLight = Sprite::create(FileStuff::GARO_ON);
-	//m_streetLight->setScale(Director::getInstance()->getContentScaleFactor());
 	m_streetLight->setFlipX(true);
 	addChild(m_streetLight);
 	m_streetLight->setPosition(m_StreetLightPos);
@@ -262,7 +255,6 @@ void MainScene::ChangeToTutorialScene()
 	Director::getInstance()->replaceScene(TutorialScene::createScene());
 }
 
-
 void MainScene::ChangeToMapEditScene()
 {
 	Director::getInstance()->replaceScene(MapEditer::createScene());
@@ -271,18 +263,17 @@ void MainScene::ChangeToMapEditScene()
 void MainScene::SetToEnding()
 {
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 12);
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 12);
-	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, true);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 11);
+	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, false);
 }
 
-void MainScene::SetToIntro()
+void MainScene::ResetGame()
 {
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::FAIL_COUNT, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::PLAY_COUNT, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::THIS_PLAY_TIME, 0);
-	//UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, false);
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 
@@ -302,5 +293,4 @@ void MainScene::PlayAd()
 		AdmobHelper::hideAd();
 	else
 		AdmobHelper::showAd();
-	return;
 }

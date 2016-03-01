@@ -146,7 +146,7 @@ void UILayer::MakeFailWidget(int stage)
 
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
-	//count fail num
+	//count fail num ///성공했는데 실패횟수 올림. 의도가 잘 이해가지 않음
 	int failCount = UserDefault::getInstance()->getIntegerForKey(ConstVars::FAIL_COUNT, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::FAIL_COUNT, ++failCount);
 

@@ -11,22 +11,19 @@ public:
 	virtual bool init();
 
 private:
-	void SetupCharacter();
-	void MakeWaitSign();
+	void SetCharacter();
+	void SetWaitSign();
 	void ChangeToMainScene(Ref* pSender);
 
 	void IntroEvent(float dt);
 	
-	void EndingEvent(float dt);
-	void ChangeToEndingScene();
-	void ShowDeadbody();
-	void ShowBlinkingLight();
+	void ChangeToEndingScene(float dt);
+
 	Sprite* LoadBackground();
 	void SetBGM();
 	Point GetCharacterPosition(int stage);
-	void SetupLight();
+	void SetLight();
 	MenuItemImage* MakeBackButton();
-	void SetStreetLight(int isOn);
 
 	void ChangeCharacterToButton(Sprite* characterSprite, Point finalPos, float scale);
 	void PlaySound(const char* file);

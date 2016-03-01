@@ -21,17 +21,24 @@ bool AdScene::init(){
 		return false;
 	}
 
-	Sprite* testSpr = Sprite::create(FileStuff::LIGHT_BEAM);
-	addChild(testSpr);
+	Size screenSize = Director::getInstance()->getVisibleSize();
+	float width = screenSize.width;
+	float height = screenSize.height;
 
-	testSpr->runAction(MoveBy::create(3.0f, Vec2(150, 150)));
+	Label* adLabel = Label::create("Ad time. We're hungry", FileStuff::FONT_ARIAL, 24.0f);
+	adLabel->setPosition(width / 2.0f, height / 2.0f);
+	addChild(adLabel);
+
+	AdmobHelper::showAd();
 
 	Sequence* seq = Sequence::create(
-		DelayTime::create(3.0f),
+		DelayTime::create(1.0f),
 		CallFuncN::create(CC_CALLBACK_1(AdScene::ChangeToGameScene, this)),
 		nullptr);
 
 	runAction(seq);
+
+	return true;
 }
 
 void AdScene::ChangeToGameScene(Ref* pSender)
@@ -48,4 +55,6 @@ void AdScene::ChangeToGameScene(Ref* pSender)
 
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
 	Director::getInstance()->replaceScene(sceneWithEffect);
+
+	return;
 }

@@ -226,5 +226,7 @@ void EndingScene::RemoveAllChildren()
 
 void EndingScene::ChangeToCreditScene()
 {
+	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, true);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::PLAY_COUNT, 0);
 	Director::getInstance()->replaceScene(CreditScene::createScene());
 }

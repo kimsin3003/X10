@@ -31,9 +31,16 @@ bool CreditScene::init()
 	Sprite* credit = Sprite::create();
 	credit->addChild(createSentence(" ", 20));
 	credit->addChild(createSentence("Quite Night", 40));
+	
+	credit->addChild(createSentence(" ", 15));
+	
+	string playstring("Total play count : ");
+	playstring += to_string(UserDefault::getInstance()->getIntegerForKey(ConstVars::PLAY_COUNT));
+	credit->addChild(createSentence(playstring, 15));
+	
 	credit->addChild(createSentence(" ", 15));
 	credit->addChild(createSentence("NEXT INSTITUTE", 20));
-	credit->addChild(createSentence("GameDevelopment track", 20));
+	credit->addChild(createSentence("Game Development track", 20));
 	credit->addChild(createSentence("Experience project", 20));
 	
 	credit->addChild(createSentence(" ", 15));
@@ -68,7 +75,8 @@ bool CreditScene::init()
 	credit->addChild(createSentence(" ", 20));
 
 	credit->addChild(createSentence("cpp-Json library", 15));
-	credit->addChild(createSentence("HY Nam", 20));
+	credit->addChild(createSentence("HY Nam", 20)); 
+	credit->addChild(createSentence("But.. It doesn't work well...", 10));
 	credit->addChild(createSentence(" ", 20));
 
 	credit->addChild(createSentence("Game programming", 15));
@@ -81,7 +89,10 @@ bool CreditScene::init()
 	credit->addChild(createSentence("JW Choi, TW Kim, MC Kim", 20));
 	credit->addChild(createSentence("Sound effect", 15));
 	credit->addChild(createSentence("TW Kim, MC Kim, JW Choi", 20));
-	credit->addChild(createSentence("www.freesfx.co.uk", 20));
+	credit->addChild(createSentence("www.freesfx.co.uk", 15)); 
+	credit->addChild(createSentence("Main theme: Untold Sorrow,", 15)); 
+	credit->addChild(createSentence("composed by Christopher Pantelidis.", 15));
+	credit->addChild(createSentence("From: http ://youtube.com/user/Christophuloph", 15));
 
 	credit->addChild(createSentence(" ", 20));
 	credit->addChild(createSentence("Special Thanks to", 20));
@@ -93,10 +104,13 @@ bool CreditScene::init()
 	credit->addChild(createSentence("Visual Studio & Assist, Pain.NET,", 15));
 	credit->addChild(createSentence("Texture packer, Gold Wave,", 15));
 	credit->addChild(createSentence("Goolge", 15));
+	credit->addChild(createSentence("Jesus", 15));
+	credit->addChild(createSentence("Buddha", 15));
 	credit->addChild(createSentence(" ", 20));
 
 	credit->addChild(createSentence("Special Damn to", 15));
 	credit->addChild(createSentence("Git", 20));
+	credit->addChild(createSentence("Eclips", 20));
 
 	credit->addChild(createSentence(" ", 20));
 	credit->addChild(createSentence("Thank you for playing.", 30));
@@ -136,17 +150,11 @@ bool CreditScene::init()
 
 void CreditScene::SkipCredit()
 {
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
-	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, true);
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 
 void CreditScene::EndScene()
 {
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 0);
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
-	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, true);
 	Director::getInstance()->replaceScene(MainScene::createScene());
 }
 

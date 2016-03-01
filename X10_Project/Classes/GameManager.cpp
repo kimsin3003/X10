@@ -238,7 +238,7 @@ void GameManager::WinProgress()
 {
 	int lastStage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
-	if (m_curStageNum == 0)
+	if (m_curStageNum == 0) ////////map editor 용 나가기
 	{
 		Director::getInstance()->popScene();
 	}

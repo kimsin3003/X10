@@ -27,6 +27,8 @@ THE SOFTWARE.
 
 package org.cocos2dx.cpp;
 
+import java.util.GregorianCalendar;
+
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.os.Bundle;
@@ -55,6 +57,8 @@ public class AppActivity extends Cocos2dxActivity
 	    		.addTestDevice(AdRequest.DEVICE_ID_EMULATOR)
 	    		.addTestDevice("717495186B4955BDA7D6A6B644CB1D72") //MC's Luna phone
 	    		.addTestDevice("8F7E2107BC04D9292482870C9BC1CDB0") //JW's G2 phone
+	    		.setGender(AdRequest.GENDER_MALE)
+	    		.setBirthday(new GregorianCalendar(1994, 1, 1).getTime())
 	    		.build();
 	    mAdReq = adRequest;
 	    mInterstitialAd.loadAd(adRequest);

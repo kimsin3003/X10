@@ -15,6 +15,7 @@ private:
 	void ChangeToStageScene();
 	void ChangeToTutorialScene();
 	void ChangeToMapEditScene();
+	void SetToIntro();
 	void ExitGame();
 	void ResetGame();
 	void SetToEnding();

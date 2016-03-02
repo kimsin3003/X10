@@ -5,6 +5,7 @@
 #include "CreditScene.h"
 #include "Sling.h"
 #include "GameManager.h"
+#include "IntroScene.h"
 #include "StageScene.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
@@ -128,21 +129,21 @@ bool MainScene::init()
 
 	menuItems.pushBack(closeItem);
 
-	///*Ending mode button*/
-	//MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
-	//	CC_CALLBACK_0(MainScene::SetToEnding, this));
-	//setToEnding->setScale(0.5f);
-	//setToEnding->setPosition(Vec2(0.0f, 480.0f));
+/*Ending mode button*/
+MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
+	CC_CALLBACK_0(MainScene::SetToEnding, this));
+setToEnding->setScale(0.5f);
+setToEnding->setPosition(Vec2(0.0f, 480.0f));
 
-	//menuItems.pushBack(setToEnding);
-	//
-	///*Intro mode button*/
-	//MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
-	//	CC_CALLBACK_0(MainScene::SetToIntro, this));
-	//setToIntro->setScale(0.5f);
-	//setToIntro->setPosition(Vec2(0.0f, 0.0f));
+menuItems.pushBack(setToEnding);
 
-	//menuItems.pushBack(setToIntro);
+/*Intro mode button*/
+MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
+	CC_CALLBACK_0(MainScene::SetToIntro, this));
+setToIntro->setScale(0.5f);
+setToIntro->setPosition(Vec2(0.0f, 0.0f));
+
+menuItems.pushBack(setToIntro);
 
 	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
@@ -246,9 +247,11 @@ void MainScene::ChangeToCreditScene()
 
 void MainScene::ChangeToStageScene()
 {
-	Director::getInstance()->replaceScene(StageScene::createScene());
+	if (UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE) > 0)
+		Director::getInstance()->replaceScene(StageScene::createScene());
+	else
+		Director::getInstance()->replaceScene(IntroScene::createScene());
 }
-
 
 void MainScene::ChangeToTutorialScene()
 {
@@ -259,6 +262,15 @@ void MainScene::ChangeToMapEditScene()
 {
 	Director::getInstance()->replaceScene(MapEditer::createScene());
 }
+
+
+void MainScene::SetToIntro()
+{
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
+	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTWALKSTAGE, 0);
+	UserDefault::getInstance()->setBoolForKey(ConstVars::CLEARED_ONCE, false);
+}
+
 
 void MainScene::SetToEnding()
 {

@@ -43,7 +43,7 @@ bool AdScene::init(){
 
 void AdScene::ChangeToGameScene(Ref* pSender)
 {
-	int stageNum = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+	int stageNum = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
 
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));

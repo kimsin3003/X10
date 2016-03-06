@@ -247,7 +247,7 @@ void MainScene::ChangeToCreditScene()
 
 void MainScene::ChangeToStageScene()
 {
-	if (UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE) > 0)
+	if (UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE, 0) > 0)
 		Director::getInstance()->replaceScene(StageScene::createScene());
 	else
 		Director::getInstance()->replaceScene(IntroScene::createScene());

@@ -5,6 +5,7 @@
 #include "CreditScene.h"
 #include "Sling.h"
 #include "GameManager.h"
+#include "StageScene.h"
 #include "IntroScene.h"
 #include "ConstVars.h"
 #include "FileStuff.h"
@@ -32,16 +33,25 @@ bool IntroScene::init()
 	}
 
 	Sequence* seq = Sequence::create(
-		DelayTime::create(3.5f),
-		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("Emm..."), Point(160, 400))),
-		DelayTime::create(3.0f),
+		DelayTime::create(2.5f),
+		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("Mmm..."), Point(160, 400))),
+		DelayTime::create(5.0f),
 		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("Where am I?"), Point(160, 200))),
-		DelayTime::create(2.0f),
-		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("On the road...?"), Point(160, 400))),
-		DelayTime::create(2.0f),
+		DelayTime::create(5.0f),
+		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("...On the road?"), Point(160, 400))),
+		DelayTime::create(5.0f),
+		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("It's so quiet..."), Point(160, 200))),
+		DelayTime::create(5.0f), 
+		CallFuncN::create(CC_CALLBACK_0(IntroScene::ChangeToStageScene, this)),
 		nullptr);
 
 	runAction(seq);
+}
+
+
+void IntroScene::ChangeToStageScene()
+{
+	Director::getInstance()->replaceScene(StageScene::createScene());
 }
 
 void IntroScene::_FadeOut()

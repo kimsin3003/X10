@@ -11,6 +11,7 @@ public:
 	void PlayAd();
 
 private:
+	void ChangeToStageScene();
 	void WriteText(string text, Point position);
 	void _FadeOut();
 

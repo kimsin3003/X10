@@ -359,6 +359,7 @@ void StageScene::GotoStage(Ref* pSender, int stageNum)
 	if (stageNum == 1)
 	{
 		Scene* tutorialScene = TutorialScene::createScene();
+		TutorialScene::cameFromStageScene = true;
 		Director::getInstance()->replaceScene(tutorialScene);
 		return;
 	}

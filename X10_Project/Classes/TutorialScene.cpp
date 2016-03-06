@@ -7,6 +7,8 @@
 #include <AudioEngine.h>
 #include <SimpleAudioEngine.h>
 
+bool TutorialScene::cameFromStageScene = false;
+
 Scene* TutorialScene::createScene()
 {
 	Scene* scene = Scene::create();
@@ -24,7 +26,9 @@ bool TutorialScene::init()
 		return false;
 	}
 
-	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(TutorialScene::ChangeToGameStageOneScene, this));
+	cameFromStageScene = false;
+
+	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(TutorialScene::ChangeToProperScene, this));
 	skipButton->setPosition(Vec2(160, 440));
 
 	FadeOut* fadeOut = FadeOut::create(1.0f);
@@ -37,8 +41,6 @@ bool TutorialScene::init()
 	menu->setPosition(Vec2::ZERO);
 	menu->setName("Buttons");
 	addChild(menu, 1);
-
-	UserDefault::getInstance()->setIntegerForKey(ConstVars::LASTSTAGE, 1);
 
 	/////////////////////////// sprites ///////////////////////////
 	Sprite* background = Sprite::create(FileStuff::BACKGROUND_BOTTOM);
@@ -203,7 +205,7 @@ bool TutorialScene::init()
 
 	Sequence* changeToStageScene = Sequence::create(
 		DelayTime::create(timeLine),
-		CallFunc::create(CC_CALLBACK_0(TutorialScene::ChangeToGameStageOneScene, this)),
+		CallFunc::create(CC_CALLBACK_0(TutorialScene::ChangeToProperScene, this)),
 		nullptr);
 
 	arm->runAction(rotateArm);
@@ -252,8 +254,13 @@ void TutorialScene::PlayExplosion(const Vec2& pos)
 	addChild(explosion, 3);
 }
 
-void TutorialScene::ChangeToGameStageOneScene()
+void TutorialScene::ChangeToProperScene()
 {
+	if (!cameFromStageScene)
+	{
+		Director::getInstance()->popScene();
+		return;
+	}
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));
 	
@@ -263,6 +270,5 @@ void TutorialScene::ChangeToGameStageOneScene()
 	gameManager->SetStage(1);
 
 	TransitionFade* sceneWithEffect = TransitionFade::create(1.5f, scene);
-
-	Director::getInstance()->replaceScene(sceneWithEffect);
+	Director::getInstance()->replaceScene(scene);
 }

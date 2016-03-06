@@ -255,7 +255,7 @@ void MainScene::ChangeToStageScene()
 
 void MainScene::ChangeToTutorialScene()
 {
-	Director::getInstance()->replaceScene(TutorialScene::createScene());
+	Director::getInstance()->pushScene(TutorialScene::createScene());
 }
 
 void MainScene::ChangeToMapEditScene()

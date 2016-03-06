@@ -103,7 +103,6 @@ void EndingScene::ShowDeadbody()
 	addChild(m_background);
 
 	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_SHOCKED, false);
-	CocosDenshion::SimpleAudioEngine::sharedEngine()->playEffect(FileStuff::SOUND_CRASH, false);
 }
 
 void EndingScene::ShowBlinkingLight()

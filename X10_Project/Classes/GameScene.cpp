@@ -1,5 +1,6 @@
 #include "stdafx.h"
 #include "GameScene.h"
+#include "TutorialScene.h"
 #include "GameManager.h"
 #include "GameLayer.h"
 #include "UILayer.h"
@@ -39,6 +40,8 @@ bool GameScene::init()
 
 	int playCount = UserDefault::getInstance()->getIntegerForKey(ConstVars::PLAY_COUNT, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::PLAY_COUNT, ++playCount);
+	int i = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+	
 
 	scheduleUpdate();
 

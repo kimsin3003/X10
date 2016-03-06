@@ -12,6 +12,8 @@ public:
 	CREATE_FUNC(AdScene);
 	bool init();
 	void ChangeToGameScene(Ref* pSender);
+private:
+	int m_stageNum;
 };
 
 #endif

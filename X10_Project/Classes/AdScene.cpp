@@ -10,7 +10,6 @@ Scene* AdScene::createScene()
 
 	Layer* layer = AdScene::create();
 	scene->addChild(layer);
-
 	return scene;
 }
 
@@ -43,7 +42,7 @@ bool AdScene::init(){
 
 void AdScene::ChangeToGameScene(Ref* pSender)
 {
-	int stageNum = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
+	int stageNum = GameManager::GetInstance()->GetStage();
 
 	Scene* scene = GameScene::createScene();
 	GameScene* gameScene = static_cast<GameScene*>(scene->getChildByName("GameScene"));

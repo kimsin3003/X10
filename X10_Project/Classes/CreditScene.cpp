@@ -34,9 +34,9 @@ bool CreditScene::init()
 	
 	credit->addChild(createSentence(" ", 15));
 	
-	string playstring("Total play count : ");
-	playstring += to_string(UserDefault::getInstance()->getIntegerForKey(ConstVars::PLAY_COUNT));
-	credit->addChild(createSentence(playstring, 15));
+	string playString("Total play count : ");
+	playString += to_string(UserDefault::getInstance()->getIntegerForKey(ConstVars::PLAY_COUNT, 0));
+	credit->addChild(createSentence(playString, 15));
 	
 	credit->addChild(createSentence(" ", 15));
 	credit->addChild(createSentence("NEXT INSTITUTE", 20));

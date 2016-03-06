@@ -23,7 +23,7 @@ bool UILayer::init()
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON_CLICKED,
-		CC_CALLBACK_1(UILayer::Retry, this, UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE)));
+		CC_CALLBACK_1(UILayer::Retry, this, UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE)));
 
 	Size buttonSize = retryButton->getContentSize();
 
@@ -62,11 +62,10 @@ void UILayer::MakeSuccessWidget(int stage)
 	addChild(successBoard);
 
 	//재시도 버튼
-	int current_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON_CLICKED,
-		CC_CALLBACK_1(UILayer::Retry, this, current_stage));
+		CC_CALLBACK_1(UILayer::GotoStage, this, stage));
 
 	Size retryButtonSize = retryButton->getContentSize();
 
@@ -109,7 +108,7 @@ void UILayer::MakeFailWidget(int stage)
 	addChild(failBoard);
 
 	//재시도 버튼
-	int current_stage = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTWALKSTAGE);
+	int current_stage = stage;
 	MenuItemImage* retryButton = MenuItemImage::create(
 		FileStuff::RETRYBUTTON,
 		FileStuff::RETRYBUTTON_CLICKED,
@@ -146,7 +145,7 @@ void UILayer::MakeFailWidget(int stage)
 
 void UILayer::ChangeToStageScene(Ref* pSender)
 {
-	//count fail num ///성공했는데 실패횟수 올림. 의도가 잘 이해가지 않음
+	//count fail num
 	int failCount = UserDefault::getInstance()->getIntegerForKey(ConstVars::FAIL_COUNT, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::FAIL_COUNT, ++failCount);
 

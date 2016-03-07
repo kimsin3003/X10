@@ -32,6 +32,8 @@ import java.util.GregorianCalendar;
 import org.cocos2dx.lib.Cocos2dxActivity;
 
 import android.os.Bundle;
+import android.view.WindowManager;
+
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
@@ -48,7 +50,8 @@ public class AppActivity extends Cocos2dxActivity
 	protected void onCreate(Bundle savedInstanceState)
 	{
 		super.onCreate(savedInstanceState);
-		
+		getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
+	    
 		mInterstitialAd = new InterstitialAd(this);
 	    mInterstitialAd.setAdUnitId(AD_UNIT_ID);
 		

@@ -53,7 +53,7 @@ bool MainScene::init()
 		MenuItemImage* resetGameButton = MenuItemImage::create(FileStuff::RESET_GAME, FileStuff::RESET_GAME);
 		resetGameButton->setCallback(CC_CALLBACK_0(MainScene::ResetGame, this));
 		resetGameButton->setPosition(230, 180);
-		resetGameButton->setScale(0.55);
+		resetGameButton->setScale(0.55f);
 		resetGameButton->setAnchorPoint(Vec2(0.5f, 0.5f));
 
 		menuItems.pushBack(resetGameButton);
@@ -61,7 +61,7 @@ bool MainScene::init()
 		MenuItemImage* tutorialButton = MenuItemImage::create(FileStuff::TUTORIAL, FileStuff::TUTORIAL);
 		tutorialButton->setCallback(CC_CALLBACK_0(MainScene::ChangeToTutorialScene, this));
 		tutorialButton->setPosition(230, 140);
-		tutorialButton->setScale(0.6);
+		tutorialButton->setScale(0.6f);
 		tutorialButton->setAnchorPoint(Vec2(0.5f, 0.5f));
 
 		menuItems.pushBack(tutorialButton);
@@ -73,7 +73,7 @@ bool MainScene::init()
 		MenuItemImage* creditGameButton = MenuItemImage::create(FileStuff::CREDIT, FileStuff::CREDIT);
 		creditGameButton->setCallback(CC_CALLBACK_0(MainScene::ChangeToCreditScene, this));
 		creditGameButton->setPosition(230, 100);
-		creditGameButton->setScale(0.6);
+		creditGameButton->setScale(0.6f);
 		creditGameButton->setAnchorPoint(Vec2(0.5f, 0.5f));
 
 		menuItems.pushBack(creditGameButton);

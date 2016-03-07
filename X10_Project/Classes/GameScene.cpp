@@ -26,7 +26,7 @@ bool GameScene::init()
 	{
 		return false;
 	}
-
+	
 	m_gameLayer = GameLayer::create();
 	addChild(m_gameLayer);
 	
@@ -40,8 +40,6 @@ bool GameScene::init()
 
 	int playCount = UserDefault::getInstance()->getIntegerForKey(ConstVars::PLAY_COUNT, 0);
 	UserDefault::getInstance()->setIntegerForKey(ConstVars::PLAY_COUNT, ++playCount);
-	int i = UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE);
-	
 
 	scheduleUpdate();
 

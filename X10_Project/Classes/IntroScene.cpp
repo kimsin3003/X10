@@ -46,6 +46,8 @@ bool IntroScene::init()
 		nullptr);
 
 	runAction(seq);
+
+	return true;
 }
 
 

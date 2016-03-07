@@ -52,16 +52,16 @@ bool MainScene::init()
 	if ( UserDefault::getInstance()->getIntegerForKey(ConstVars::LASTSTAGE) > 1 ){
 		MenuItemImage* resetGameButton = MenuItemImage::create(FileStuff::RESET_GAME, FileStuff::RESET_GAME);
 		resetGameButton->setCallback(CC_CALLBACK_0(MainScene::ResetGame, this));
-		resetGameButton->setPosition(160, 400);
-		resetGameButton->setScale(0.8);
+		resetGameButton->setPosition(230, 180);
+		resetGameButton->setScale(0.55);
 		resetGameButton->setAnchorPoint(Vec2(0.5f, 0.5f));
 
 		menuItems.pushBack(resetGameButton);
 
 		MenuItemImage* tutorialButton = MenuItemImage::create(FileStuff::TUTORIAL, FileStuff::TUTORIAL);
 		tutorialButton->setCallback(CC_CALLBACK_0(MainScene::ChangeToTutorialScene, this));
-		tutorialButton->setPosition(160, 350);
-		tutorialButton->setScale(0.8);
+		tutorialButton->setPosition(230, 140);
+		tutorialButton->setScale(0.6);
 		tutorialButton->setAnchorPoint(Vec2(0.5f, 0.5f));
 
 		menuItems.pushBack(tutorialButton);
@@ -72,15 +72,15 @@ bool MainScene::init()
 
 		MenuItemImage* creditGameButton = MenuItemImage::create(FileStuff::CREDIT, FileStuff::CREDIT);
 		creditGameButton->setCallback(CC_CALLBACK_0(MainScene::ChangeToCreditScene, this));
-		creditGameButton->setPosition(160, 300);
-		creditGameButton->setScale(0.5);
+		creditGameButton->setPosition(230, 100);
+		creditGameButton->setScale(0.6);
 		creditGameButton->setAnchorPoint(Vec2(0.5f, 0.5f));
 
 		menuItems.pushBack(creditGameButton);
 	}
 
 	MenuItemImage* clickMe = MenuItemImage::create(FileStuff::CLICK_ME, FileStuff::CLICK_ME);
-	clickMe->setPosition(100, 180);
+	clickMe->setPosition(90, 190);
 	clickMe->setScale(0.8);
 	clickMe->setAnchorPoint(Vec2(0.5f, 0.5f));
 
@@ -129,21 +129,21 @@ bool MainScene::init()
 
 	menuItems.pushBack(closeItem);
 
-/*Ending mode button*/
-MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
-	CC_CALLBACK_0(MainScene::SetToEnding, this));
-setToEnding->setScale(0.5f);
-setToEnding->setPosition(Vec2(0.0f, 480.0f));
+	/*Ending mode button*/
+	MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
+		CC_CALLBACK_0(MainScene::SetToEnding, this));
+	setToEnding->setScale(0.5f);
+	setToEnding->setPosition(Vec2(0.0f, 480.0f));
 
-menuItems.pushBack(setToEnding);
+	menuItems.pushBack(setToEnding);
 
-/*Intro mode button*/
-MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
-	CC_CALLBACK_0(MainScene::SetToIntro, this));
-setToIntro->setScale(0.5f);
-setToIntro->setPosition(Vec2(0.0f, 0.0f));
+	/*Intro mode button*/
+	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
+		CC_CALLBACK_0(MainScene::SetToIntro, this));
+	setToIntro->setScale(0.5f);
+	setToIntro->setPosition(Vec2(0.0f, 0.0f));
 
-menuItems.pushBack(setToIntro);
+	menuItems.pushBack(setToIntro);
 
 	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);

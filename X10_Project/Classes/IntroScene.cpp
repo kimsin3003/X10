@@ -37,13 +37,13 @@ bool IntroScene::init()
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),
-		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("Mmm..."), Point(160, 400))),
+		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, FileStuff::INTRO_TEXT1, Point(160, 400))),
 		DelayTime::create(5.0f),
-		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("Where am I?"), Point(160, 200))),
+		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, FileStuff::INTRO_TEXT2, Point(160, 200))),
 		DelayTime::create(5.0f),
-		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("...On the road?"), Point(160, 400))),
+		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, FileStuff::INTRO_TEXT3, Point(160, 400))),
 		DelayTime::create(5.0f),
-		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, string("It's so quiet..."), Point(160, 200))),
+		CallFuncN::create(CC_CALLBACK_0(IntroScene::WriteText, this, FileStuff::INTRO_TEXT4, Point(160, 200))),
 		DelayTime::create(5.0f), 
 		CallFuncN::create(CC_CALLBACK_0(IntroScene::ChangeToStageScene, this)),
 		nullptr);
@@ -79,15 +79,15 @@ void IntroScene::_FadeIn()
 	runAction(fadeIn);
 }
 
-void IntroScene::WriteText(string text, Point position)
+void IntroScene::WriteText(string resource, Point position)
 {
-	Label* label = Label::createWithTTF(text, FileStuff::FONT_ARIAL, 35, Size(300, 200), TextHAlignment::CENTER, TextVAlignment::CENTER);
+	Sprite* text = Sprite::create(resource);
 
-	label->setPosition(position);
-	label->setOpacity(0.0f);
+	text->setPosition(position);
+	text->setOpacity(0.0f);
 	FadeIn* fadeIn = FadeIn::create(2.0f);
 	FadeOut* fadeOut = FadeOut::create(1.0f);
 	Sequence* _blink = Sequence::create(fadeIn,	DelayTime::create(1.0), fadeOut, nullptr);
-	addChild(label);
-	label->runAction(_blink);
+	addChild(text);
+	text->runAction(_blink);
 }

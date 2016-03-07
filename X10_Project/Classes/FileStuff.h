@@ -11,6 +11,11 @@ namespace FileStuff
 	const string TUTORIAL = "res/ui/tutorial.png";
 	const string CLICK_ME = "res/ui/clickMe.png";
 
+	const string INTRO_TEXT1 = "res/ui/intro1.png";
+	const string INTRO_TEXT2 = "res/ui/intro2.png";
+	const string INTRO_TEXT3 = "res/ui/intro3.png";
+	const string INTRO_TEXT4 = "res/ui/intro4.png";
+
 	const string IMG_SOURCE = "res/target/x10.plist";
 
 	const string BACKGROUND_BOTTOM = "res/background_bottom.png";

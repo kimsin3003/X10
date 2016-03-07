@@ -31,6 +31,9 @@ bool IntroScene::init()
 	{
 		return false;
 	}
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopBackgroundMusic(false);
+	CocosDenshion::SimpleAudioEngine::getInstance()->playEffect(FileStuff::SOUND_EAR_RINGING);
+
 
 	Sequence* seq = Sequence::create(
 		DelayTime::create(2.5f),
@@ -53,6 +56,7 @@ bool IntroScene::init()
 
 void IntroScene::ChangeToStageScene()
 {
+	CocosDenshion::SimpleAudioEngine::getInstance()->stopAllEffects();
 	Director::getInstance()->replaceScene(StageScene::createScene());
 }
 

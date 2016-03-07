@@ -29,13 +29,19 @@ bool TutorialScene::init()
 	cameFromStageScene = false;
 
 	MenuItemImage* skipButton = MenuItemImage::create(FileStuff::SKIP_BUTTON, FileStuff::SKIP_BUTTON, CC_CALLBACK_0(TutorialScene::ChangeToProperScene, this));
-	skipButton->setPosition(Vec2(160, 440));
+	skipButton->setPosition(Vec2(40, 90));
+	skipButton->setScale(0.5f); 
+	skipButton->setOpacity(0.0f);
 
 	FadeOut* fadeOut = FadeOut::create(1.0f);
 	FadeIn* fadeIn = FadeIn::create(1.0f);
-	Sequence* _blink = Sequence::createWithTwoActions(fadeOut, fadeIn);
-	RepeatForever* blink = RepeatForever::create(_blink);
-	skipButton->runAction(blink);
+	Sequence* _blink = Sequence::create(DelayTime::create(3.0f), fadeIn, fadeOut, fadeIn, fadeOut, fadeIn, fadeOut, fadeIn, fadeOut, fadeIn, fadeOut, fadeIn, fadeOut, fadeIn, NULL);
+	
+	//RepeatForever* blink = RepeatForever::create(_blink);
+
+	//Sequence* allAction = Sequence::create(DelayTime::create(3.0f), blink, NULL);
+
+	skipButton->runAction(_blink);
 
 	Menu* menu = Menu::createWithItem(skipButton);
 	menu->setPosition(Vec2::ZERO);
@@ -124,7 +130,7 @@ bool TutorialScene::init()
 	
 	////////////////////////// actions //////////////////////////
 
-	float timeLine = 2.0f;
+	float timeLine = 0.5f;
 
 	Sequence* rotateArm = Sequence::create(
 		DelayTime::create(timeLine),

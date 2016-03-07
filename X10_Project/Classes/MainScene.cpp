@@ -113,6 +113,21 @@ bool MainScene::init()
 //
 //  	mapEditer->setPosition(visibleSize.width / 2, visibleSize.height - character->getContentSize().height - mapEditer->getContentSize().height);
 //  	menuItems.pushBack(mapEditer);
+
+	/*Ending mode button*/
+	MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
+		CC_CALLBACK_0(MainScene::SetToEnding, this));
+	setToEnding->setScale(0.5f);
+	setToEnding->setPosition(Vec2(0.0f, 480.0f));
+
+	menuItems.pushBack(setToEnding);
+
+	/*Intro mode button*/
+	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
+		CC_CALLBACK_0(MainScene::SetToIntro, this));
+	setToIntro->setScale(0.5f);
+	setToIntro->setPosition(Vec2(0.0f, 0.0f));
+
 #else
 	runAction(CallFunc::create(CC_CALLBACK_0(MainScene::TurnOffDisplayStat, this)));
 #endif
@@ -128,20 +143,6 @@ bool MainScene::init()
 		closeItem->getContentSize().height * scale / 2) + Vec2(0, 20));
 
 	menuItems.pushBack(closeItem);
-
-	/*Ending mode button*/
-	MenuItemImage* setToEnding = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
-		CC_CALLBACK_0(MainScene::SetToEnding, this));
-	setToEnding->setScale(0.5f);
-	setToEnding->setPosition(Vec2(0.0f, 480.0f));
-
-	menuItems.pushBack(setToEnding);
-
-	/*Intro mode button*/
-	MenuItemImage* setToIntro = MenuItemImage::create(FileStuff::BLACKOUT, FileStuff::WHITE,
-		CC_CALLBACK_0(MainScene::SetToIntro, this));
-	setToIntro->setScale(0.5f);
-	setToIntro->setPosition(Vec2(0.0f, 0.0f));
 
 	menuItems.pushBack(setToIntro);
 

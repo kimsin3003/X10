@@ -300,16 +300,17 @@ void StageScene::SetLight()
 		if (m_stageToPlay == 10){
 			Sprite* girlLikeGhost = Sprite::create(FileStuff::GHOSTGIRL);
 			girlLikeGhost->setOpacity(10);
-			girlLikeGhost->setScale(0.3f);
+			girlLikeGhost->setScale(0.4f);
 			girlLikeGhost->setPosition(37, 45);
-			Sequence* seq = Sequence::create(DelayTime::create(0.5f),
-				DelayTime::create(0.5),
-				FadeTo::create(0.5f,100),
+			Sequence* seq = Sequence::create(
+				DelayTime::create(1.5f),
+				FadeTo::create(0.3f, 100),
 				DelayTime::create(0.5f),
-				FadeOut::create(0.3f),
-				DelayTime::create(3.0f),
-				FadeTo::create(0.8f, 70),
-				FadeOut::create(0.9f),
+				FadeOut::create(0.4f),
+				DelayTime::create(1.0f),
+				FadeTo::create(0.0f, 200),
+				DelayTime::create(0.15f),
+				FadeOut::create(0.0f),
 				nullptr
 				);
 			girlLikeGhost->runAction(seq);

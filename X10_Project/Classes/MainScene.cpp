@@ -128,6 +128,8 @@ bool MainScene::init()
 	setToIntro->setScale(0.5f);
 	setToIntro->setPosition(Vec2(0.0f, 0.0f));
 
+	menuItems.pushBack(setToIntro);
+
 #else
 	runAction(CallFunc::create(CC_CALLBACK_0(MainScene::TurnOffDisplayStat, this)));
 #endif
@@ -143,8 +145,6 @@ bool MainScene::init()
 		closeItem->getContentSize().height * scale / 2) + Vec2(0, 20));
 
 	menuItems.pushBack(closeItem);
-
-	menuItems.pushBack(setToIntro);
 
 	Menu* menu = Menu::createWithArray(menuItems);
 	menu->setPosition(Vec2::ZERO);
